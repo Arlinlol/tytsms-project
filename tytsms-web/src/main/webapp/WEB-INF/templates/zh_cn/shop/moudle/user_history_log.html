@@ -1,0 +1,19 @@
+﻿#if($!objs.size()>0)
+<ul class="im_history">
+#foreach($obj in $objs)   
+#if($!obj.user_id!="")
+<li class="im_his_me_name">$!obj.chatting.user_name &nbsp;&nbsp;$!CommUtil.formatLongDate($!obj.addTime)</li>
+<li class="im_his_main"><span  style="color:$!{obj.font_colour}; font-family:$!{obj.font}; font-size:$!{obj.font_size}px">$!CommUtil.htmlUnescape($!obj.content)</span></li>
+#end
+#if($!obj.store_id!="")
+<li class="im_his_other_name">$!{obj.chatting.config.kf_name} &nbsp;&nbsp;$!CommUtil.formatLongDate($!obj.addTime)</li>
+<li class="im_his_main"><span  style="color:$!{obj.font_colour}; font-family:$!{obj.font}; font-size:$!{obj.font_size}px">$!CommUtil.htmlUnescape($!obj.content)</span></li>
+#end
+#if(!$!obj.store_id && !$!obj.user_id)
+<li class="im_his_other_name">$!{obj.chatting.config.kf_name} &nbsp;&nbsp;$!CommUtil.formatLongDate($!obj.addTime)</li>
+<li class="im_his_main"><span  style="color:$!{obj.font_colour}; font-family:$!{obj.font}; font-size:$!{obj.font_size}px">$!CommUtil.htmlUnescape($!obj.content)</span></li>
+#end
+#end
+</ul>
+<div class="im_pages">$!gotoPageAjaxHTML</div>
+#end

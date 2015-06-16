@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessageText('member.buyer_complaint_seller.complaint_manage','') </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="main">$!httpInclude.include("/buyer/head.htm")
+  <div class="user_center">
+    <table width="1000" border="0" cellspacing="0" cellpadding="0" class="user_table">
+      <tr> $!httpInclude.include("/buyer/nav.htm?op=complaint")
+        <td id="centerbg" valign="top">
+        <div class="buyer_position"><div class="buyer_p_box"><a href="$!webPath/buyer/index.htm">#springMessageText('member.buyer_complaint_seller.buyer_center','')#springMessage("member.buyer_complaint_seller.buyer_center")<!-- 买家中心 --></a> > <span>#springMessageText('member.buyer_complaint_seller.by_complaint','')#springMessage("member.buyer_complaint_seller.by_complaint")<!-- 被投诉 --></span></div></div>
+        <div class="productmain">
+            <div class="ordernav">
+              <ul class="orderul">
+                <li><a href="$!webPath/buyer/complaint.htm">#springMessageText('member.buyer_complaint_seller.my_complaint','')</a></li>
+                <li class="this"><a href="$!webPath/buyer/complaint_seller.htm">#springMessageText('member.buyer_complaint_seller.by_complaint','')</a></li>
+              </ul>
+            </div>
+            <form action="$!webPath/buyer/complaint_seller.htm" method="post" id="ListForm">
+            <div class="ordercon">
+              <div class="ordersear">
+                <div class="right"> <span class="ordersel">
+                  <select name="status" id="status">
+                    <option value="">#springMessageText('member.buyer_complaint_seller.select_complaint_status','')</option>
+                    <option value="2">#springMessageText('member.buyer_complaint_seller.dialogue','')</option>
+                    <option value="3">#springMessageText('member.buyer_complaint_seller.arbitration','')</option>
+                    <option value="4">#springMessageText('member.buyer_complaint_seller.stocks','')</option>
+                  </select>
+                  </span> <span class="orderbtn">
+                  <input name="" type="submit" value="#springMessageText('member.buyer_complaint_seller.seek','')" style="cursor:pointer;" />
+                  </span> </div>
+              </div>
+              <div class="operation">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" >
+                  <tr id="opertitle">
+                    <td width="150">#springMessageText('member.buyer_complaint_seller.complaint_name','')</td>
+                    <td width="150">#springMessageText('member.buyer_complaint_seller.by_complaint_name','')</td>
+                    <td width="100">#springMessageText('member.buyer_complaint_seller.complaint_theme','')</td>
+                    <td width="150">#springMessageText('member.buyer_complaint_seller.complaint_time','')</td>
+                    <td width="100">#springMessageText('member.buyer_complaint_seller.complaint_status','')</td>
+                    <td align="center">#springMessageText('member.buyer_complaint_seller.operate','')</td>
+                  </tr>
+                  #foreach($obj in $objs)
+                  <tr>
+                    <td>$!obj.from_user.userName</td>
+                    <td>$!obj.to_user.userName</td>
+                    <td>$!obj.cs.title</td>
+                    <td>$!CommUtil.formatLongDate($!obj.addTime)</td>
+                    #if($!obj.status==0)
+                      #set($status="#springMessageText('member.buyer_complaint_seller.new_complaint','')")
+                    #end
+                    #if($!obj.status==1)
+                      #set($status="#springMessageText('member.buyer_complaint_seller.stay_complaint','')")
+                    #end
+                    #if($!obj.status==2)
+                      #set($status="#springMessageText('member.buyer_complaint_seller.dialogue','')")
+                    #end
+                    #if($!obj.status==3)
+                      #set($status="#springMessageText('member.buyer_complaint_seller.arbitration','')")
+                    #end
+                    #if($!obj.status==4)
+                      #set($status="#springMessageText('member.buyer_complaint_seller.stocks','')")
+                    #end
+                    <td>$!status</td>
+                    <td align="center"><span class="detailcancel"><a href="$!webPath/buyer/complaint_view.htm?id=$!obj.id" class="blue2"> #springMessageText('member.buyer_complaint_seller.detailed','')</a></span></td>
+                  </tr>
+                  #end
+                </table>
+              </div>
+              <div class="alldel">
+                <div  class="userfenye">
+                  <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+                  $!gotPageFormHTML</div>
+              </div>
+            </div>
+            </form>
+          </div></td>
+      </tr>
+    </table>
+  </div>
+   $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

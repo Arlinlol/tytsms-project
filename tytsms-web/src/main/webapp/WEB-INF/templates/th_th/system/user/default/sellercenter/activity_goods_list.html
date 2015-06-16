@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-活动商品-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center"> $!httpInclude.include("/seller/nav.htm?op=activity")
+    <div class="seller_right">
+      <div class="seller_position"><span><b>您当前所在位置</b>><b>促销推广</b> ><b>活动商品</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href='$!webPath/seller/activity.htm'><i></i>活动列表</a></li>
+            <li class="this"><a href='javascript:void(0);'><i></i>活动商品</a></li>
+          </ul>
+        </div>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/activity_goods_list.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="139">商品名称</th>
+                  <th width="125">开始时间</th>
+                  <th width="100">结束时间</th>
+                  <th width="100" align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                    #set($goods_url="$!webPath/goods_$!{obj.ag_goods.id}.htm")
+                    #if($!config.second_domain_open && $!obj.ag_goods.goods_type==1 && $!obj.ag_goods.goods_store.store_second_domain!="")
+                    #set($goods_url="http://$!{obj.ag_goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.ag_goods.id}.htm")
+                    #end 
+                <tr >
+                  <td align="center"><a href="$!goods_url" target="_blank">$!obj.ag_goods.goods_name</a></td>
+                  <td align="center">$!CommUtil.formatShortDate($!obj.act.ac_begin_time)</td>
+                  <td align="center">$!CommUtil.formatShortDate($!obj.act.ac_end_time)</td>
+                  #set($ag_status="等待审核")
+                  #if($!obj.ag_status==1)
+                  #set($ag_status="审核通过")
+                  #end
+                  #if($!obj.ag_status==-1)
+                  #set($ag_status="拒绝通过")
+                  #end
+                  <td align="center">$!ag_status</td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <input id="act_id" name="act_id" type="hidden" value="$!act_id"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

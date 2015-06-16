@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessageText('member.account.personal_details', '')-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/th_th/resources/js/ajaxfileupload.js"></script>
+<script>
+ jQuery(document).ready(function(){
+     jQuery('#birthday').datepicker({
+		    dateFormat:"yy-mm-dd",
+			yearRange:"1950:2020",
+			changeMonth: true,
+			changeYear: true
+		});
+	jQuery(":radio[value=$!user.sex]").attr("checked",true);
+	jQuery("#theForm").validate({
+			ignore: "",
+		rules:{
+	  	 email:{email:true},
+		 nickName:{required:true},
+		 mobile:{digits:true}
+		  },		 
+		messages:{
+		 email:{email:"#springMessageText('member.account.email_not_correct', '')"},
+		 nickName:{required:"#springMessageText('member.account.nickname_not_empty', '')"},
+		 mobile:{digits:"#springMessageText('member.account.must_be_numeric_format', '')"}		 
+			}   
+						});
+	//获取下级地区信息
+	  jQuery("select[id^=areas_]").change(function(){						   
+			var areaMark = jQuery(this).attr("areaMark");
+			var parent_id = jQuery("#areas_"+areaMark).val();									   
+			jQuery.post("$!webPath/buyer/account_getAreaChilds.htm",{
+						"parent_id":parent_id,
+						"areaMark":areaMark
+						},function(data){
+							if(areaMark=="province"){
+								jQuery("#area_id").html("<option>#springMessageText('member.account.please_choose', '')...</option>");	
+								jQuery("#areas_city").html(data);
+							}
+							if(areaMark=="city"){
+								jQuery("#areas_third").html(data);
+							}
+							<!--cty 修改时间2015-3-12 增加内容 -->
+							if(areaMark=="third"){
+							    jQuery("#area_id").html(data);
+							}	
+						},"text");										 
+	  });
+	  jQuery(".user_menu b").toggle(
+			function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+			},
+			function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+			});
+	  jQuery("#photo").live("change",function(){
+			jQuery.ajaxFileUpload({
+                 url:'$!webPath/buyer/ajax_img_upload.htm',
+                 fileElementId:'photo',      
+                 dataType: 'text',                
+                 success: function (data)
+                 {   if(data=="error"){
+					 alert("#springMessageText('member.account.image_not_correct', '')");
+					 }else{
+						 jQuery("#touxiang").attr("src",data);    
+						 }         
+				}
+			});
+											  });
+	  #if($!user.area)
+	  jQuery("#areas_province").val("$!user.area.parent.parent.parent.id"); 
+	  jQuery("#areas_city").html("<option>$!user.area.parent.parent.areaName</option>");
+	  <!--cty 修改时间2015-3-12 增加内容 -->
+	  jQuery("#areas_third").html("<option>$!user.area.parent.areaName</option>");
+	  jQuery("#area_id").html("<option>$!user.area.areaName</option>");
+	  #end
+	  #if($!user.month_income)
+	  jQuery("#month_income").val("$!user.month_income"); 
+	  #end
+ });
+function saveForm(){
+    jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=account")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>#springMessageText('member.account.account', '')</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li class="this"><i></i><a href="$!webPath/buyer/account.htm">#springMessageText('member.account.basic_information', '')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_password.htm">#springMessageText('member.account.modify_password', '')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_email.htm">#springMessageText('member.account.modify_email', '')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_mobile.htm">#springMessageText('member.account.modify_phone', '')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_avatar.htm">#springMessageText('member.account.modify_head', '')</a></li>
+          </ul>
+        </div>
+       
+        <div class="add_usercenter">
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_base_table">
+            <tr>
+              <td width="170" align="right" valign="top">#springMessageText('member.account.head', '')</td>
+              <td><input type="file" id="photo" name="my_photo" class="base_txt"/><i class="base_i">#springMessageText('member.account.image', '')$!config.imageSuffix,#springMessageText('member.account.measure', '')</i></td>
+            </tr>
+            <tr>
+              <td width="170" align="right" valign="top">&nbsp;</td>
+              <td><span class="base_img"><img src="#if($!user.photo)$!webPath/$!user.photo.path/$!user.photo.name #elseif($!SysConfig.memberIcon && !$!user.photo) $!webPath/$!SysConfig.memberIcon.path/$!SysConfig.memberIcon.name #else $!webPath/th_th/resources/style/system/manage/blue/images/default_user_photo.gif #end" width="110" height="110" id="touxiang" /></span></td>
+            </tr>
+          </table>         
+             <form action="$!webPath/buyer/account_save.htm" id="theForm" name="theForm" method="post">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_base_table">
+            <tr>
+              <td width="170" align="right"><strong class="redstr"></strong>#springMessageText('member.account.nickname', '')</td>
+              <td><input name="nickName" type="text" id="nickName" value="$!user.nickName" class="base_txt" /></td>
+            </tr>
+            <tr>
+              <td width="170" align="right"><strong class="redstr"></strong>#springMessageText('member.account.real_name', '')</td>
+              <td><input name="trueName" type="text" id="trueName" value="$!user.trueName" class="base_txt" /></td>
+            </tr>
+            <tr>
+              <td align="right"><strong class="redstr"></strong>#springMessageText('member.account.sex', '')</td>
+              <td><span class="base_sex">
+              <label>
+               <input type="radio" name="sex" id="radio" value="1" />
+                #springMessageText('member.account.man', '')</label></span><span class="base_sex">
+                <label>
+                <input type="radio" name="sex" id="radio" value="0" />
+                #springMessageText('member.account.woman', '')</label></span><span class="base_sex">
+                <label>
+                <input type="radio" name="sex" id="radio" value="-1" />
+                #springMessageText('member.account.secrecy', '')</label></span></td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.account.email', '')</td>
+              <td>#if($!user.email)$!user.email<span style="color:#F37103">[#springMessageText('member.account.binding', '')]</span><span style="color:#F37103"><a href="$!webPath/buyer/account_email.htm">[#springMessageText('member.account.modify', '')]</a></span>#else<b class="base_ba"><a href="$!webPath/buyer/account_email.htm">#springMessageText('member.account.now_binding', '')</a></b>#end</td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.account.phone', '')</td>
+              <td>#if($!user.mobile)$!user.mobile<span style="color:#F37103">[#springMessageText('member.account.binding', '')]</span><span style="color:#F37103"><a href="$!webPath/buyer/account_mobile.htm">[#springMessageText('member.account.modify', '')]</a></span>#else<b class="base_ba"><a href="$!webPath/buyer/account_mobile.htm">#springMessageText('member.account.now_binding', '')</a></b>#end</td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.account.identity_card', '')</td>
+              <td><input name="card" type="text" class="base_txt" value="$!user.card" id="card" />
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.account.date_of_birth', '')</td>
+              <td>   <input name="birthday" type="text" id="birthday" value="$!CommUtil.formatShortDate($!user.birthday)" readonly="true" class="base_txt"/></td>
+            </tr>
+            <tr>
+              <td  align="right" ><strong class="redstr"></strong>#springMessageText('member.account.monthly_income', '')</td>
+              <td><select name="month_income" id="month_income" class="base_select_check">
+                  <option value="0">#springMessage('member.account.no_income')</option>
+                  <option value="1">#springMessage('member.account.under')</option>
+                  <option value="2">2000-3999</option>
+                  <option value="3">4000-5999</option>
+                  <option value="4">6000-7999</option>
+                  <option value="5">#springMessage('member.account.above')</option>
+                </select></td>
+            </tr>
+            <tr>
+              <td align="right"><strong class="redstr"></strong>#springMessageText('member.account.residential_address', '')</td>
+              <td><span class="base_select">
+                <select id="areas_province" areaMark="province" class="base_select_check">
+                       <option>#springMessageText('member.account.please_choose', '')...</option>
+                       #foreach($area in $areas)
+                       <option value="$!area.id">$!area.areaName</option>
+                       #end
+                       </select>
+                         <select id="areas_city" areaMark="city"  class="base_select_check">
+                       <option value="">#springMessageText('member.account.please_choose', '')...</option>
+                       </select>
+                        <!--cty 修改时间2015-3-12 增加内容 -->
+                        <select id="areas_third" areaMark="third"  class="base_select_check"> 
+                       <option value="">#springMessageText('member.account.please_choose', '')...</option>
+                       </select>
+                       
+                        <select id="area_id" name="area_id"  class="base_select_check"> 
+                       <option value="">#springMessageText('member.account.please_choose', '')...</option>
+                       </select>
+                </span></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><input name="address" type="text" id="address" class="base_txt" placeholder="#springMessageText('member.account.detailed_address', '')"  value="$!user.address"/></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><input name="button" type="button" value="#springMessageText('member.account.save', '')" class="save" onclick="saveForm()" /></td>
+            </tr> 
+          </table>
+            </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

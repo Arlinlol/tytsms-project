@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js"></script>
+<script>
+//
+function ajax_update(id,fieldName,obj,value){
+		jQuery.post("$!webPath/admin/mobile_groupgoods_ajax.htm",{
+					"id":id,
+					"fieldName":fieldName
+					},function(data){
+					jQuery(obj).attr("src","$!webPath/th_th/resources/style/system/manage/blue/images/"+data+".png");	
+						},"text");
+}
+jQuery(document).ready(function(){
+#if($!mobile_recommend)
+jQuery("#mobile_recommend").val($!mobile_recommend);	
+#end
+});
+
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">手机团购管理</h1>
+  <div class="nav_list">
+    <ul>
+      <li> <a href="javascript:void(0);" class="this"><b>手机团购商品</b></a></li>
+    </ul>
+  </div>
+  <form method="post" id="ListForm" name="ListForm" >
+    <div class="search">
+      <ul>
+        <li> <span>商品名称</span> <span class="size150">
+          <input name="goods_name" type="text" id="goods_name"  value="$!goods_name" />
+          </span> <span>团购标题</span> <span class="size150">
+          <input name="gg_name" type="text" id="gg_name"  value="$!gg_name" />
+          </span> <span>是否推荐</span> <span>
+          <select name="mobile_recommend" id="mobile_recommend" >
+            <option value="">是否推荐</option>
+            <option value="1">是</option>
+            <option value="0">否</option>
+          </select>
+          </span> <span >
+          <input type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+          </span> </li>
+      </ul>
+    </div>
+    
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="30"></th>
+          <th width="30%"><span class="form_btna">团购商品</span></th>
+          <th width="25%"><span class="form_btna">所属团购</span></th>
+          <th width="10%" align="center"><span class="form_btna">开始时间</span></th>
+          <th align="center" width="10%"><span class="form_btna">结束时间</span></th>
+          <th align="center" width="10%"><span class="form_btna">推荐</span></th>
+          <th align="center"><span class="form_btna">操作</span></th>
+        </tr>
+        #foreach($obj in $objs)
+              #set($goods_url="$!webPath/goods_$!{obj.gg_goods.id}.htm")
+            #if($!config.second_domain_open && $!obj.gg_goods.goods_type==1 && $!obj.gg_goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{obj.gg_goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.gg_goods.id}.htm")
+            #end 
+        <tr>
+          <td></td>
+          <td ><span class="memimg"><img  src="$!webPath/$!obj.gg_img.path/$!obj.gg_img.name" width="45" height="49" /></span> <span class="mem_detail">
+            <ul style="width:400px; overflow:hidden">
+              <li>团购标题：<a href="$!webPath/group/view.htm?id=$!obj.id" target="_blank" title="$!obj.gg_name">$!CommUtil.substring("$!obj.gg_name",25)</a></i></li>
+              <li>商品名称：<a href="$!goods_url" target="_blank" title="$!obj.gg_goods.goods_name">$!CommUtil.substring("$!obj.gg_goods.goods_name",25)</a></li>
+              <li>所在店铺：$!CommUtil.substring("$!obj.gg_goods.goods_store.store_name",25)</li>
+            </ul>
+            </span></td>
+          <td align="center">$!obj.group.group_name</td>
+          <td align="center">$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!obj.beginTime)</td>
+          <td align="center">$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!obj.endTime)</td>
+           #set($mobile_hot="false")
+          #if($!obj.mobile_hot==1)
+          #set($mobile_hot="true")
+          #end
+          #set($mobile_recommend="false")
+          #if($!obj.mobile_recommend==1)
+          #set($mobile_recommend="true")
+          #end
+          <td  align="center" ><img onclick="ajax_update('$!obj.id','mobile_recommend',this,'$!obj.mobile_recommend')" src="$!webPath/th_th/resources/style/system/manage/blue/images/$!{mobile_recommend}.png" width="25" height="21" border="0" style="cursor:pointer;" title="推荐后在手机端首页显示"/></td>
+          <td  align="center" class="hui oprate_con"><a href="$!webPath/group/view.htm?id=$!obj.id" target="_blank" class="blue">查看</a></td>
+        </tr>
+        #end
+      </table>
+    </div>
+    <div class="operate_bar">
+      <div class="fenye">
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        $!gotoPageFormHTML</div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

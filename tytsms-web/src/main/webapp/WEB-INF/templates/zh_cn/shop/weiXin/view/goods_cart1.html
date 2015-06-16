@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+
+
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>微信商城 - 我的购物车</title>
+<link href="$!webPath/resources/style/weiXin/css/phone.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="$!webPath/resources/style/weiXin/css/public.css">
+<link rel="stylesheet" type="text/css" href="$!webPath/resources/style/weiXin/css/goods.css">
+<link rel="stylesheet" type="text/css" href="$!webPath/resources/style/system/front/default/css/good_cart.css">
+<link rel="stylesheet" type="text/css" href="$!webPath/resources/style/common/css/overlay.css">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+  function goods_count_adjust(gc_id,count){
+	  var gcs="";
+	  jQuery(":checkbox[id=id][checked=true]").each(function(){
+		   var id=jQuery(this).val();
+		   gcs=id+","+gcs;
+	  });
+	  if(gcs==""){
+	     gcs="-1";//为了和顶部的购物车计算总价区分开，如果gcs为空则会计算购物车所有商品总价，为-1则不会计算任何物品
+	  }
+	    jQuery.post("$!webPath/weiXin/cart_count_adjust.htm",{"gc_id":gc_id,"count":count,"gcs":gcs},function(data){
+   	//  jQuery.post("$!webPath/weiXin/cart_count_adjust.htm",{"gc_id":gc_id,"count":count,"gcs":gcs},function(data){
+		 if(data.code=="100"){																										
+	       jQuery("#goods_count_"+gc_id).val(data.count);
+		   jQuery("#goods_count_"+gc_id).attr("goods_count",data.count)
+		   jQuery("#gc_price"+gc_id).html("¥"+data.gc_price);
+		   jQuery("#total_price").html("¥"+data.total_price);
+		   jQuery("#top_total_price").html(data.all_price);
+		 }
+		 if(data.code=="200"){
+		   alert("库存不足，请重新选择数量！");
+		   jQuery("#goods_count_"+gc_id).val(data.count);
+		   jQuery("#goods_count_"+gc_id).attr("goods_count",data.count)
+		     jQuery("#total_price").html("¥"+data.total_price);
+		 }
+		 if(data.code=="300"){
+		   alert("团购库存不足，请重新选择数量！");
+		   jQuery("#goods_count_"+gc_id).val(data.count);
+		   jQuery("#goods_count_"+gc_id).attr("goods_count",data.count)
+		     jQuery("#total_price").html("¥"+data.total_price);
+		 }
+	   },"json");
+  }
+  function confirm_cart(){
+	  var carts_size = jQuery(":checkbox[id=id][checked=true]").length;
+	 if(carts_size>0){
+		   var gcs="";
+		  jQuery(":checkbox[id=id][checked=true]").each(function(){
+			   var id=jQuery(this).val();
+			   gcs=id+","+gcs;
+		  });
+		  jQuery("#cart_ids").val(gcs);
+		  window.location.href="$!webPath/weiXin/goods_cart2.htm?gcs="+gcs+"&cart_ids="+jQuery("#cart_ids").val();
+		 // jQuery("#cart_form").submit();		 
+		}	 
+  }  
+jQuery(document).ready(function(){
+jQuery("a[id^=favorite_]").click(function(){
+      	  var id=jQuery(this).attr("id").substring(9);
+	  jQuery.post("$!webPath/weiXin/add_goods_favorite.htm",{"id":id},function(data){
+		 if(data==0){
+		    alert("收藏成功!");
+		 }
+		 if(data==1){
+		    alert("您已经收藏过该商品!");
+		 }
+	  },"text");
+	    });								
+								
+//								
+  jQuery("a[id^=count_down]").click(function(){
+	var gc_id=jQuery(this).attr("gc_id");
+	var count=jQuery("#goods_count_"+gc_id).val();
+	if(count>1){
+	  count--;
+	  jQuery("#goods_count_"+gc_id).val(count);
+      goods_count_adjust(gc_id,count);
+	}
+  });
+  jQuery("a[id^=count_up]").click(function(){
+	var gc_id=jQuery(this).attr("gc_id");
+	var count=jQuery("#goods_count_"+gc_id).val();
+	if(count>0){
+	  count++;
+	  jQuery("#goods_count_"+gc_id).val(count);
+	  goods_count_adjust(gc_id,count);
+	}									 
+  });
+  jQuery("input[id^=goods_count_]").keyup(function(){
+	var gc_id=jQuery(this).attr("gc_id");	
+	var count=jQuery("#goods_count_"+gc_id).val().replace(/\D/g,'');
+	if(count==""){
+       count=1;
+	}	
+	if(count>0){
+	   goods_count_adjust(gc_id,count);
+	}
+	if(count==0){
+		var count=jQuery("#goods_count_"+gc_id).val(1);
+		goods_count_adjust(gc_id,1);
+	}
+  });
+  //
+  jQuery(":checkbox[id=id]").click(function(){
+	var carts_size = jQuery(":checkbox[id=id][checked=true]").length;
+	    if(carts_size<=0){
+		 jQuery("span.go_count a").css("background","#999");
+		}else{
+		  jQuery("span.go_count a").css("background","#7cb453");
+	     }										
+     var val=jQuery(this).attr("checked");
+	 if(val=="checked"){
+        jQuery(this).parent().parent().parent().addClass("this");
+		var gc_id=jQuery(this).val();
+		var count=jQuery("#goods_count_"+gc_id).val();
+		goods_count_adjust(gc_id,count);
+	 }else{
+	    jQuery(this).parent().parent().parent().removeClass("this");
+		var gc_id=jQuery(":checkbox[id=id][checked=true]:first").val();
+	    var count=jQuery("#goods_count_"+gc_id).val();
+	    goods_count_adjust(gc_id,count);
+	 }
+  });
+  //
+ // jQuery(":label[id=chooseIds]").click(function(){		
+jQuery(":checkbox[id=ids]").click(function(){										 
+  /*  var val=jQuery(":checkbox[id=ids]").attr("checked");
+    if(val=="checked"){
+    	jQuery(":checkbox[id=ids]").attr("checked","");
+    	val="";
+    }else {
+    	jQuery(":checkbox[id=ids]").attr("checked","checked");
+    	val="checked";
+    }
+    */
+      var val=jQuery(this).attr("checked");
+	if(val=="checked"){
+	  jQuery(":checkbox[id=id]").attr("checked","checked");
+	  jQuery(".shopping_table tr").addClass("this");
+	  var gc_id=jQuery(":checkbox[id=id]:first").val();
+	  var count=jQuery("#goods_count_"+gc_id).val();
+	  goods_count_adjust(gc_id,count);
+	}else{
+      jQuery(":checkbox[id=id]").attr("checked",false);
+	  jQuery(".shopping_table tr").removeClass("this");
+	   jQuery("#total_price").html("¥0.00");
+	}
+	var carts_size = jQuery(":checkbox[id=id][checked=true]").length;
+	    if(carts_size<=0){
+		 jQuery("span.go_count a").css("background","#999");
+		}else{
+		  jQuery("span.go_count a").css("background","#7cb453");
+	   }
+  });
+  //打开页面清除所有商品选择
+  jQuery(":checkbox").attr("checked",true);
+   jQuery("span.go_count a").css("background","#7cb453");
+  
+    jQuery("span.go_count a").hover(					  
+ 	function(){
+	 var carts_size = jQuery(":checkbox[id=id][checked=true]").length;
+	  if(carts_size<=0){
+		  jQuery(this).css({cursor:"url($!webPath/resources/style/common/images/refuse.cur),auto"})
+		}else{
+		  jQuery(this).css("cursor","pointer");
+	     }
+	 },
+	 function(){
+	 jQuery(this).css({cursor:"url(),auto"}
+	)
+ })
+  });
+</script>
+<style type="text/css">
+.policy{display:none;}
+.goodscar{ display:none;}
+.top_user{ position:absolute; right:0px;top:30px;}
+.head_search{ width:456px; margin-left:0px;}
+.head_seartxt .h_sear_txt{ width:370px;}
+</style>
+
+<!--点击收藏-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery(".top_pull").mouseover(function(){
+	jQuery(this).find("div").show();
+	jQuery(this).find("em").addClass("em_this");
+	jQuery(this).find("s").addClass("this");
+  	}).mouseleave(function(){
+    jQuery(this).find("div").hide();
+	jQuery(this).find("em").removeClass("em_this");
+	jQuery(this).find("s").removeClass("this");
+  });					
+								});
+var browserEvent = function (obj, url, title) {
+    var e = window.event || arguments.callee.caller.arguments[0];
+    var B = {
+        IE : /MSIE/.test(window.navigator.userAgent) && !window.opera
+        , FF : /Firefox/.test(window.navigator.userAgent)
+        , OP : !!window.opera
+    };
+    obj.onmousedown = null;
+    if (B.IE) {
+        obj.attachEvent("onmouseup", function () {
+            try {
+                window.external.AddFavorite(url, title);
+                window.event.returnValue = false;
+            } catch (exp) {}
+        });
+    } else {
+        if (B.FF || obj.nodeName.toLowerCase() == "a") {
+            obj.setAttribute("rel", "sidebar"), obj.title = title, obj.href = url;
+        } else if (B.OP) {
+            var a = document.createElement("a");
+            a.rel = "sidebar", a.title = title, a.href = url;
+            obj.parentNode.insertBefore(a, obj);
+            a.appendChild(obj);
+            a = null;
+        }
+    }
+};
+</script>
+
+<script>
+jQuery(document).ready(function(){
+	//鼠标经过用户中心
+   jQuery("#top_user_sp").mouseover(function(){
+		if(jQuery("#top_user_hb").size()==0){
+			jQuery.ajax({type:'POST',url:'$!webPath/head_ajax_usercenter.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#top_user_hid").html('<div class="top_user_hb" id="top_user_hb"><span class="top_user_loading"><img src="$!webPath/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#top_user_hid").show();
+							   },
+						  success:function(data){
+						     jQuery("#top_user_hid").empty();
+								 jQuery("#top_user_hid").html(data);
+							   }
+						});		
+		}else{
+			jQuery("#top_user_hid").show();
+			}
+	jQuery("#top_user_sp").addClass("top_user_sp_this");
+  	});
+   jQuery("#top_user").mouseleave(function(){
+    jQuery("#top_user_hid").hide();
+	jQuery("#top_user_sp").removeClass("top_user_sp_this");
+  });
+   
+   //鼠标经过购物车
+   jQuery("#goodscar_sp").mouseover(function(){
+			var gstatus =jQuery("#goodscar_con_box").attr("mark");
+			if(gstatus=="none")
+			  jQuery.ajax({type:'POST',url:'$!webPath/cart_menu_detail.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#goodscar_con_box").empty().html(' <div><span class="top_user_loading"><img src="$!webPath/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#goodscar_con_box").show();
+							   },
+						  success:function(data){
+							  jQuery("#goodscar_con_box").attr("mark","show");
+							     jQuery("#goodscar_con_box").empty();
+								 jQuery("#goodscar_con_box").html(data);
+							   }
+						});
+			  jQuery("#goodscar_sp").addClass("goodscar_sp_this");
+		   });
+		   jQuery("#goodscar").mouseleave(function(){
+			jQuery("#goodscar_con_box").attr("mark","none");
+			  jQuery("#goodscar_con_box").hide();
+			  jQuery("#goodscar_sp").removeClass("goodscar_sp_this");
+		   });
+});
+function search_form(){
+  var keyword=arguments[0];
+  var type=arguments[1];
+  if(keyword!=""&&keyword!=undefined){
+   jQuery("#keyword").val(keyword);
+  }
+  if(type!=""&&type!=undefined){
+    jQuery("#type").val(type);
+  }
+  jQuery("#searchForm").submit();	
+  jQuery("#keyword").val("");
+}
+		 var total_price=0;
+function cart_remove(id){
+	 	 var carts_size = jQuery(":checkbox[id=id]").length;
+	 	  var gcs="";
+			 if(carts_size>0){
+				  jQuery(":checkbox[id=id]").each(function(){
+					   var id=jQuery(this).val();
+					   gcs=id+","+gcs;
+			 	 });
+			  }
+           jQuery.post("$!webPath/weiXin/remove_goods_cart.htm",{"id":id,"car_ids":gcs},function(data){
+		   if(data.code=="100"){		
+		   jQuery("table[class=shopping_table] tr[id="+id+"]").remove();
+		   jQuery(".goodscar_list li[id="+id+"]").remove();
+           jQuery("#cart_goods_count_top").html(data.count);
+		   jQuery("#cart_goods_price_top").html(data.total_price);
+           jQuery("#total_price").html(data.total_price);
+		   if(data.count==0){//购物车页面没有商品
+		  	 jQuery("form[id=cart_form]").remove();
+			 jQuery(".goodscar_list").remove();
+			 jQuery(".shopping_car_none").show();//cart1-none-goods
+			 jQuery("#goodscar_con_box").html("<b class='goodscar_none'>购物车还没有商品!</b>");	
+		   }
+			}
+			 if(data.code=="200"){	
+			 alert("系统繁忙，请稍后重试！");
+			 }
+         
+         },"json");
+       }
+</script>
+<!--[if lt IE 9]>
+    <script src="$!webPath/resources/js/css3-mediaqueries.js"></script>
+<![endif]-->
+
+<script>
+jQuery(document).ready(function(){
+  jQuery("#navul li").each(function(){
+    var original_url=jQuery(this).attr("original_url");
+	if("/tytsms-web/goods_cart1.htm".indexOf(original_url)>=0){
+	   jQuery(this).addClass("this");	
+	}
+  });
+  //鼠标经过左侧分类							
+  jQuery(".left_menu_dl").mouseover(function(){								 
+	var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){
+	 var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).addClass("left_menu_this").removeClass("left_menu_dt");	
+     jQuery("#child_"+id).show();			
+	}
+  }).mouseleave(function(){ 
+	 var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){ 
+     var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).removeClass("left_menu_this").addClass("left_menu_dt");	
+     jQuery("#child_"+id).hide();
+	}
+  });
+  jQuery(".nav_left").mouseover(function(){
+	  jQuery("#other_menu").show();
+	  });
+  jQuery(".nav_left").mouseleave(function(){
+	  jQuery("#other_menu").hide();	  
+		  });	 
+});
+</script>
+
+<script>
+jQuery(document).ready(function() {
+
+  jQuery("a[id^=count_adjust_]").click(function(){
+	var count_type= jQuery(this).attr("count_type");
+	var goods_count=jQuery(this).parent().parent().find("input").val();
+	var cart_id = jQuery(this).parent().parent().find("input").attr("cart_id");
+	var store_id = jQuery(this).parent().parent().find("input").attr("store_id");
+	if(count_type=='cut'){
+		if(goods_count>=1){
+		goods_count = goods_count-1;
+		}	
+	}
+	else{
+	goods_count = goods_count-0+1;
+	}
+	if(goods_count>0){
+	  goods_count_adjust(cart_id,store_id,goods_count);
+	}	
+	});
+  
+  
+});
+//
+ 
+//
+function save_goods(obj_id){
+    jQuery.post("$!webPath/weiXin/goods_favorite_save.htm",{"goods_id":obj_id,user_id:"$!user_id"},function(data){
+		 if(data==0){
+			 jQuery("#error_goods_inventory").show().find("span").html("商品收藏成功！").parent().fadeOut(2000);
+		 }
+		 if(data==1){
+		 	jQuery("#error_goods_inventory").show().find("span").html("已经收藏该商品！").parent().fadeOut(3000);
+		 }
+	  },"text");
+	}
+//
+
+</script>
+</head>
+<body class="login_bg">
+<hgroup>
+  <h3 class="goods_car"><a href="javascript:history.go(-1);"><em></em></a><span><b>我的购物车</b></span></h3>
+</hgroup> 
+  
+  
+<div class="main"  style="width:100%">
+  <div>
+	#if($json_map.cart_list_size>0)
+    <form action="$!webPath/weiXin/goods_cart2.htm" id="cart_form" target="_self" name="cart_form" method="post">
+      <div class="shopping_list" style="width:100%">
+       <input type = "hidden" value = "" id ="cart_ids" name ="cart_ids"/>
+        <table cellspacing="0" cellpadding="0" border="0" width="100%" class="shopping_table">
+          <tbody>
+           #foreach($obj in $json_map.cart_list)                        
+           <tr id="$!obj.cart_id" goods_list="goods_info_$!obj.cart_id" class="this">
+            <td><span class="shopping_table_check1" style="width:40px;">
+              <input type="checkbox" checked="checked" id="id" value="$!obj.cart_id" name="id" style="width: 22px; height: 22px;margin:10px;">
+              </span></td>
+              
+               <td><dl class="shopping_goods">
+                <dt><a target="_blank" href="$!webPath/weiXin/goods.htm?id=$!obj.goods_id"><span class="img_cspan">
+                  <p><img width="60" height="60" src="$!obj.goods_main_photo"></p>
+                  </span></a></dt>
+               
+              </dl>
+              
+              </td>
+            <td><dl class="shopping_goods">
+                <dd>
+                  <h5><a target="_blank" href="$!webPath/weiXin/goods.htm?id=$!obj.goods_id">$!obj.goods_name </a></h5>
+                 	<p style="margin:5px;"><font color="red">¥$!obj.goods_price</font></p>
+                 	<p style="margin:5px;">
+                 	<span class="shop_count" style ="margin-left: 0px;">
+                 	<a class="shop_cut" gc_id="$!obj.cart_id" id="count_down_$!obj.cart_id" href="javascript:void(0);"></a>
+              <input type="text" class="shop_num" goods_count="$!obj.goods_count" gc_id="$!obj.cart_id" value="$!obj.goods_count" id="goods_count_$!obj.cart_id" name="goods_count_$!obj.cart_id">
+              <a class="shop_add" gc_id="$!obj.cart_id" id="count_up_$!obj.cart_id" href="javascript:void(0);">
+              </a></span>
+                 	</p>
+                 	<p>
+                 	<a class="cart_common" style ="margin-left: 0px;" id="favorite_$!obj.goods_id" href="javascript:void(0);">收藏</a>
+                 	<a class="cart_common" style ="margin-left: 30px;"  onclick="cart_remove('$!obj.cart_id');" href="javascript:void(0);">删除</a>
+                 	</p>
+                 </dd>
+              </dl>
+              
+              </td>
+           
+          </tr>
+           #end
+         </tbody></table>
+      </div>
+      <p>&nbsp;</p>
+      <div style="margin:10px;">
+      <label style="margin:4px;height:100%;" id ="chooseIds">
+      <input type="checkbox" checked="checked" id="ids" value="-1" name="ids" style="width: 22px; height: 22px;margin:10px;">   全选</label></span>
+      <span class="go_count"><b>商品总价（不含运费）：<strong id="total_price">¥$!json_map.cart_price</strong>元</b> 
+      <a class="go_price" onclick="confirm_cart()" href="javascript:void(0);" style="background: none repeat scroll 0% 0% rgb(153, 153, 153); cursor: url(&quot;&quot;), auto;">
+	  <input type="hidden" id="gcs" name="gcs" value="">去结算</a></span>
+	
+	<div style="clear:both"></div>
+	
+      </div>
+    </form>
+    #else
+    <div class="shopping_car_none" style ="width:100%;">
+      <div class="shopcar_none_box">
+        <dl>
+          <dt></dt>
+          <dd>
+            <h4>您的购物车还是空的，赶紧行动吧！</h4>
+            <span class="none_box_sp">您可以<a href="$!webPath/weiXin/buyer_order.htm">查看订单</a>，或者是<a href="$!webPath/weiXin/index.htm">随便看看</a></span></dd>
+        </dl>
+      </div>
+    </div>
+    #end
+  </div>
+</div>
+<script>
+jQuery(document).ready(function(e) {
+    	jQuery("div.nav_width").find('ul li').removeClass("this");
+	jQuery("div.nav_width").find('ul li[op="cart"]').addClass("this");
+	});
+
+</script>
+
+  <footer>
+  <ul>
+  </ul>
+</footer>
+
+  $!httpInclude.include("/weiXin/footer.htm")
+
+
+
+</body>
+
+</html>

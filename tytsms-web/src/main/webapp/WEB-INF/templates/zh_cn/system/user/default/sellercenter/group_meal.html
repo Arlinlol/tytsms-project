@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>团购套餐 -  $!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center"> $!httpInclude.include("/seller/nav.htm?op=group")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销推广</b> ><b>团购管理</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+           <li><a href='$!webPath/seller/group.htm'><i></i>商品类团购商品列表</a></li>
+            <li><a href='$!webPath/seller/group.htm?type=life'><i></i>生活类团购商品列表</a></li>
+            <li><a href='$!webPath/seller/group_add.htm?type=goods'><i></i>新增商品类团购</a></li>
+            <li><a href='$!webPath/seller/grouplife_selforder.htm'><i></i>生活购订单列表</a></li>
+            <li><a href='$!webPath/seller/group_add.htm?type=life'><i></i>新增生活类团购</a></li>
+            <li><a href='$!webPath/seller/grouplife_selfinfo.htm'><i></i>团购消费码列表</a></li>
+            <li class="this"><a href='$!webPath/seller/group_meal.htm'><i></i>团购套餐购买</a></li>
+          </ul>
+        </div>
+        <div class="add_usercenter">
+          <form action="$!webPath/seller/group_meal_save.htm" method="post" name="theForm" id="theForm">
+            <table width="705" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+             <tr>
+                <td align="right" valign="top"><span style="color:#F00">注：</span></td>
+                <td class="px10 message"><span style="color:#F00">同一个商品只能参加一个团购</span></td>
+              </tr>
+              <tr>
+                <td align="right" valign="top">当前剩余金币：</td>
+                <td class="px10 message"> $!user.gold </td>
+              </tr>
+              <tr>
+                <td align="right" valign="top">当前团购套餐到期日期：</td>
+                <td class="px10 message"> #if($!user.store.group_meal_endTime)
+                  $!CommUtil.formatShortDate($!user.store.group_meal_endTime)
+                  #else
+                  您尚未购买任何团购套餐
+                  #end </td>
+              </tr>
+              <tr>
+                <td align="right" valign="top">团购套餐：</td>
+                <td class="px10 message"> #set($meal1=$!{config.group_meal_gold}*3)
+                  #set($meal2=$!{config.group_meal_gold}*6)
+                  #set($meal3=$!{config.group_meal_gold}*12)
+                  <select name="meal_day" id="meal_day">
+                    <option value="30">$!{config.group_meal_gold}金币/30天</option>
+                    <option value="90">$!{meal1}金币/90天</option>
+                    <option value="180">$!{meal2}金币/180天</option>
+                    <option value="360">$!{meal3}金币/360天</option>
+                  </select></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="px10"><span class="setsub">
+                  <input name="提交" type="submit"  value="购买"  style="cursor:pointer;" class="seller_save"/>
+                  </span></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+        </div>
+    </div>
+  </div>
+</div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

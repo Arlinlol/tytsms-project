@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>微信商城 - 订单列表</title>
+<link href="$!webPath/th_th/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script>
+/*
+jQuery(document).ready(function() {
+	var beginCount =6;
+   jQuery("#loading_more").click(function(){
+	  jQuery.post("",
+		  {
+		  "order_status":jQuery("#order_status").val(),
+		  "beginCount":beginCount 
+		  },
+		  function(data){
+			  if(data){
+				  jQuery("#span_order_list").append(data)
+				  beginCount = beginCount +6;
+				  }else{
+					 jQuery(".index_load").hide();
+					 jQuery("#no_more").show();
+					  }
+			  },
+		  "text");	  
+		  });	  
+		  
+});
+*/
+
+function buyer_order_cofirm(url,id){
+	jQuery.post(url,function(data){
+		if(data.code == 100){
+			jQuery("#"+id).remove();
+		}
+			
+	},"json");
+	
+	
+	}
+
+</script>
+</head>
+<body>
+<div class="page_bottom">
+<hgroup>
+  <h3 class="goods_car"><a href="$!webPath/mobileWap/buyer/index.htm"><em></em></a><span><b>订单管理</b></span></h3>
+</hgroup>
+<hgroup>           <h5 class="hgroup_h5"><span>订单列表</span></h5>
+</hgroup>
+#if($!map.order_list_size>0)
+<span id="span_order_list">
+#foreach($obj in $map.order_list)
+
+ 		#if($!obj.order_status==0)
+              #set($status="已取消")
+              #end
+              #if($!obj.order_status==10)
+              #set($status="待付款")
+              #end
+              #if($!obj.order_status==15)
+              #set($status="线下支付待审核")
+              #end
+              #if($!obj.order_status==16)
+              #set($status="货到付款待发货")
+              #end
+              #if($!obj.order_status==20)
+              #set($status="已付款")
+              #end
+              #if($!obj.order_status==30)
+              #set($status="已发货")        
+              #end                
+              #if($!obj.order_status==40)
+              #set($status="已收货")
+              #end
+              #if($!obj.order_status==50)
+              #set($status="已完成,已评价")                                              
+              #end
+
+ <hgroup class="order_hgroup_h4">
+</hgroup>
+	#foreach($goods_info in $obj.goods_infos)
+     <section class="waitingpay_list"> <a href="$!webPath/mobileWap/buyer_order_view.htm?order_id=$obj.order_id">
+  <dl>
+    <dt><img src="$!goods_info.good_mainphoto_path" width="100" height="100"></dt>
+    <dd>
+      <p style="float:left;line-height:15px;overflow:hidden;width:90%">$!goods_info.goods_name</p>
+      <p><strong>¥$!goods_info.goods_price</strong>共$!goods_info.goods_count个宝贝</p>
+      <p style="text-align: right;width: 100%;">   #if($obj.order_status == 30)
+	<a id="a_id_$!obj.order_id" name="a_id_$!obj.order_id" onclick ="buyer_order_cofirm('$!webPath/mobileWap/buyer_order_cofirm.htm?order_id=$!obj.order_id','a_id_$!obj.order_id');" href="javascript:void(0);">
+	 <button class="waitingpay_red_btn right" style="margin-right: 30px;">确认收货</button>
+  	</a> 
+  #end</p>
+      <span> </span> </dd>
+  </dl>
+  </a> </section>
+  #end
+	 #foreach($goods_child_info in $obj.goods_child_infos)
+	     <section class="waitingpay_list"> <a href="$!webPath/mobileWap/buyer_order_view.htm?order_id=$!obj.order_id">
+	  <dl>
+	    <dt><img src="$!goods_child_info.good_mainphoto_path" width="100" height="100"></dt>
+	    <dd>
+	      <p style="float:left;line-height:15px;overflow:hidden;width:90%">$!goods_child_info.goods_name</p>
+	      <p><strong>¥$!goods_child_info.goods_price</strong>共$!goods_child_info.goods_count个宝贝</p>
+	       <p style="text-align: right;width: 100%;">#if($goods_child_info.order_status == 30)
+			<a id="a_id_$!goods_child_info.order_id" name="a_id_$!goods_child_info.order_id" onclick ="buyer_order_cofirm('$!webPath/mobileWap/buyer_order_cofirm.htm?order_id=$!goods_child_info.order_id','a_id_$!goods_child_info.order_id');" href="javascript:void(0);">
+			 <button class="waitingpay_red_btn right" style="margin-right: 30px;">确认收货</button>
+		  	</a> 
+		  #end</p>
+	      <span> </span> </dd>
+	  </dl>
+	  </a> </section>
+	  #end
+  
+<div class="order_totalprice"> <strong> 
+ #if($obj.order_status == 10)
+	<a href="$!webPath/mobileWap/payment.htm?order_id=$!obj.order_id">
+	 <button class="waitingpay_red_btn right">付款</button>
+  	</a> 
+  #end
+<!--
+   #if($obj.order_status == 40)
+	<a href="$!webPath/buyer/order_evaluate.htm?id=$!obj.order_id">
+	 <button class="waitingpay_red_btn right">我要评价</button>
+  	</a> 
+  #end
+  -->
+       </strong> <span>订单总额：$!obj.order_total_price &nbsp; &nbsp;&nbsp;&nbsp;$status &nbsp;&nbsp;&nbsp;&nbsp;#if($obj.order_status>10)$!obj.payType#end</span> </div>
+  
+  #end
+
+ </span>
+<input id="order_status" name="order_status" value="" type="hidden"/>
+<div class="index_load"><a href="javascript:void(0);" id="loading_more">加载更多</a></div>
+<div class="index_load" id="no_more" style="display: none"><a href="javascript:void(0);" style="color:#F00">没有更多数据了</a></div>
+</div>
+#else 
+<span class="goods_none"><img width="80" height="62" src="http://c2c.iskyshop.com/th_th/resources/style/system/front/default/images/sigh.jpg">
+<p>对不起，没有相应数据！</p>
+</span>
+#end
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>退货退款详情 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+      $!httpInclude.include("/buyer/nav.htm?op=return")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>服务单详情</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_ser_warning"><strong>服务单号：$!obj.return_service_id</strong>$!obj.goods_name</div>
+      </div>
+      <div class="user_service">
+        <h3>服务单收货详情</h3>
+        #if($!obj.self_address)
+        <div class="user_service_box" style="margin-top:10px">
+          <div class="user_ser_warning">
+            <ul>
+              <li>商家收货信息：</li>
+              <li>$!obj.self_address</li>
+            </ul>
+          </div>
+        </div>
+         #end
+        #if($!obj.return_content)
+        <div class="user_service_box">
+          <div class="user_ser_warning">
+            <ul>
+              <li>退货问题描述：</li>
+              <li>$!obj.return_content</li>
+            </ul>
+          </div>
+        </div>
+        #end
+      </div>
+      <div class="user_service">
+        <h3>退货商品信息详情</h3>
+      		<table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+              <tr>
+                <td width="100" align="right">商品名称：</td>
+                <td><span class="user_base_info">$!obj.goods_name</span>
+                	</td>
+              </tr>
+              <tr>
+                <td align="right">申请者：</td>
+                <td><span class="user_base_info">$!obj.user_name</span>
+                  </td>
+              </tr>
+              <tr>
+                <td align="right">退货数量：</td>
+                <td ><span class="user_base_info">$!obj.goods_count</span>
+                  </td>
+              </tr>
+              <tr>
+                <td align="right">商品价格：</td>
+                <td><span class="user_base_info">$!obj.goods_price</span>
+                	</td>
+              </tr>
+              <tr>
+                <td align="right">商品总价：</td>
+                <td><span class="user_base_info">$!obj.goods_all_price</span>
+                	</td>
+              </tr>
+              <tr>
+                <td align="right" valign="top" style=" line-height:34px">商品图片：</td>
+                <td>                	
+                	<span class="user_base_info"><img src="$!webPath/$!obj.goods_mainphoto_path" width="120" height="120" /></span>
+               		</td>
+              </tr>
+              #if($refund_img)
+               <tr>
+                <td align="right" valign="top" style=" line-height:34px">退货图片：</td>
+                <td>   
+                #foreach( $img in $refund_img)             	
+                	<span class="user_base_info"><a target="_blank" href="$!webPath/$!img"> <img src="$!webPath/$!img" width="120" height="120" /></a></span>
+                #end	
+               		</td>
+              </tr>
+              #end
+              #if($!obj.goods_return_status==7)
+              <tr>
+                <td align="right">快递名称：</td>
+                <td> <span class="user_base_info">$!express_company_name</span>
+                	</td>
+              </tr>
+              <tr>
+                <td align="right">快递号：</td>
+                <td><span class="user_base_info">$!obj.express_code</span>
+                	</td>
+              </tr>
+              #end
+            </table>
+         </div>
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>
+

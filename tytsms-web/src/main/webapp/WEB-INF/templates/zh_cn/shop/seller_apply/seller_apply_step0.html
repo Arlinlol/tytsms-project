@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>入驻协议 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/shop_into.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+function start(){
+	window.location.href="$!webPath/seller_apply.htm?step=1";
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="head">
+  <h1 class="logo" title=""> #if($!config.websiteLogo) <a href="$!webPath/index.htm"><img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" width="209" height="70"/></a> #else <a href="$!webPath/index.htm"><img src="$!webPath/resources/style/system/front/default/images/logo.jpg" width="209" height="70"/> </a> #end </h1>
+  <span class="head_into">商家入驻</span> <a href="$!webPath/doc.htm?mark=apply_help" target="_blank" class="head_help">入驻帮助</a> </div>
+<div class="nav_into">
+  <ul>
+    <li><a href="javascript:void(0)" class="this">入驻须知</a></li>
+    <li><a href="javascript:void(0)">公司信息提交</a></li>
+    <li><a href="javascript:void(0)">店铺信息提交</a></li>
+    <li><a href="javascript:void(0)">审核日志查询</a></li>
+  </ul>
+</div>
+<div class="main">
+  <div class="settled_box">
+    <h3><span class="settled_title">协议确定</span></h3>
+    <div class="settled_inbox">
+      <div class="settled_p"> $!doc.content </div>
+    </div>
+    <div class="settled_bottom"><span><b class="settled_b" style="display:none">
+      <input name="" type="checkbox" value="" />
+      我已仔细阅读并同意协议</b><a href="javascript:void(0)" onclick="start()" class="settled_btn"><b><em>同意以上协议，下一步</em></b></a></span></div>
+  </div>
+</div>
+</body>
+</html>

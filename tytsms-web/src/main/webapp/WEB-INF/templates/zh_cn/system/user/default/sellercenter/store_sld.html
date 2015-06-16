@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-二级域名申请-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+
+jQuery(document).ready(function(){
+//
+jQuery("#theForm").validate({
+	errorPlacement: function(error, element) {
+				element.parent().find("i").html("");
+					error.appendTo(element.parent().find("i"));
+				},
+    rules:{
+	  store_second_domain:{required :true, remote:{
+		    url: "$!webPath/seller/store_sld_verify.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "sld_name": function(){return jQuery("#store_second_domain").val();},
+				  "store_id":"$!store.id"
+		           }
+			    }
+			}
+	 },
+	messages:{
+	  store_second_domain:{required:"请填写二级域名",remote:"该二级域名已占用"}
+	}
+  });				
+});
+function save_form(){
+   jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    $!httpInclude.include("/seller/nav.htm?op=store_sld")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>我的店铺</b>><b>二级域名申请</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href="$!webPath/seller/store_sld.htm"><i></i>二级域名申请</a></li>          
+          </ul>
+        </div>
+        <div class="add_usercenter">
+         <form action="$!webPath/seller/store_sld_save.htm" method="post" enctype="multipart/form-data" id="theForm">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+           
+            #if($!store.store_second_domain!="")
+             <tr>
+              <td align="right">当前店铺二级域名： </td>
+              <td> $!{store_second_domain}.$!{serverName}</td>
+            </tr>
+            #else
+             <tr>
+              <td align="right">店铺默认二级域名： </td>
+              <td>$!{store_second_domain}.$!{serverName}</td>
+            </tr>
+            #end
+            <tr>
+             #set($remain=$!{config.domain_allow_count}-$!{store.domain_modify_count})
+              <td width="170" align="right"><strong class="redstr">*</strong>输入二级域名： </td>
+              <td> 
+              #if($!remain==0)
+              <span style="color:#F00">已经超过系统允许次数</span>
+              #else
+              <input name="store_second_domain" type="text" id="store_second_domain" value="$!store_second_domain" #if($!modity==0) readonly="readonly"#end class="base_txt"/>
+              <span style="float:left">.$!{serverName}</span>
+              
+                <i class="base_i">填写二级域名前缀即可，如iskyshop，剩余可修改$!{remain}次 </i>
+              #end
+              </td>
+            </tr>
+            <tr>
+              <td width="170" align="right">&nbsp;</td>
+              <td>
+                <input type="button"  value="申请绑定" style="cursor:pointer;" onclick="save_form();" class="seller_save"/>
+                </td>
+            </tr>
+          </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

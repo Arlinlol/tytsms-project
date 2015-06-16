@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.register.user_register")-$!config.title </title><!-- 用户注册 --> 
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/login.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script type="text/javascript">  
+/*-------------------------------------------*/  
+var InterValObj; //timer变量，控制时间  
+var count = 120; //间隔函数，1秒执行  
+var curCount;//当前剩余秒数  
+var code = ""; //验证码  
+var codeLength = 6;//验证码长度  
+function sendMessage() {  
+	var mobile = $('#mobile').val();
+	var reg= /^[1][358]\d{9}$/;
+
+    curCount = count;  
+    var ret = true;
+    var mobile = $("#mobile").val();//手机号码  
+    
+    if (mobile == "") {
+    	alert("#springMessage('sms.register.phone_not_null')");/* 手机号码不能为空 */
+    	return ;
+    } else if (!reg.test(jQuery("#mobile").val())) {
+    	alert("#springMessage('sms.seller_apply_step3.uncorrect_phone')");/* "手机号码格式不正确" */
+    	return ;
+    }
+    
+    jQuery.ajax({
+    	async:false,
+    	type:"POST",
+    	dataType:"json",
+    	data:"mobile="+mobile,
+    	url:"$!webPath/verify_mobile.htm",
+    	success:function(result) {
+    		if (result == true) {
+    			
+    		} else {
+    			ret = false;
+    		}
+    	}
+    });
+    if(ret == true){  
+        //产生验证码  
+        for (var i = 0; i < codeLength; i++) {  
+            code += parseInt(Math.random() * 9).toString();  
+        }  
+        //设置button效果，开始计时  
+        $("#btnSendCode").attr("disabled", "true");  
+        $("#btnSendCode").val(curCount + "#springMessage('sms.register.second_get')"); /*  秒后重新获取 */
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次  
+    //向后台发送处理数据  
+        jQuery.ajax({  
+            type: "POST", //用POST方式传输  
+            dataType: "json", //数据格式:JSON  
+            url: '$!webPath/sendMsg.htm', //目标地址  
+            data: "mobile=" + mobile, 
+            error: function (XMLHttpRequest, textStatus, errorThrown) { },  
+            success: function (msg){ }  
+        });  
+    }else{  
+        alert("#springMessage('sms.register.phone_aready_register')");  /* 手机号码已被注册 */
+    }
+}  
+//timer处理函数  
+function SetRemainTime() {  
+    if (curCount == 0) {                  
+        window.clearInterval(InterValObj);//停止计时器  
+        $("#btnSendCode").removeAttr("disabled");//启用按钮  
+        $("#btnSendCode").val("#springMessage('sms.register.send_again')"); /*  重新发送验证码 */
+        code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效      
+    }  
+    else {  
+        curCount--;  
+        $("#btnSendCode").val(curCount + "#springMessage('sms.register.second_get')"); /*  秒后重新获取 */
+    }  
+}  
+</script>  
+<script>
+jQuery(document).ready(function(){
+var mobileRet = false;
+var smsRet = false;
+	jQuery('#checkMobileButton').click(function(){
+		var mobile = $('#mobile').val();
+		var reg= /^[1][358]\d{9}$/;
+		if(!reg.test(jQuery("#mobile").val())) {
+			alert("#springMessage('sms.register.write_correct_num')");/* 请输入正确的手机号码 */
+		} else {
+			jQuery.ajax({
+				url : "$!webPath/sendMsg.htm",
+				data : {"mobile" : mobile},
+				type : "post"
+			});
+		}
+	});
+ //
+ jQuery.validator.addMethod("verify",function(value,element){
+	    var re =  /^([0-9a-zA-Z]|[\u4E00-\u9FA5])+$/;
+        if(re.test(jQuery("#userName").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }		  
+			  
+});
+
+ jQuery.validator.addMethod("mobile",function(value,element){
+	    var re =  /^[1][358]\d{9}$/;
+        if(re.test(jQuery("#mobile").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }		  
+			  
+});
+
+ jQuery.validator.addMethod("sms",function(value,element){
+	    var re =  /^[1][358]\d{9}$/;
+        if(re.test(jQuery("#sms").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }		  
+			  
+});
+
+jQuery.validator.addMethod("sms",function(value,element){
+	    var re =  /^[0-9]{6}$/;
+        if(re.test(jQuery("#sms").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }		  
+			  
+});
+
+ jQuery("#theForm").validate({				 
+	errorPlacement:function(error, element) {
+       error.appendTo(element.parent().parent());  
+      },
+	  rules:{
+	    sms:{
+	    	required:true,
+	  		 sms:true,
+	  		 remote:{
+	  		 	url:"$!webPath/verify_sms.htm",
+	  		 	type:"post",
+	  		 	dataType:"json",
+	  		 	data:{
+	  		 		"sms":function(){return jQuery("#sms").val();}
+	  		 	}
+	  		 }
+	    },
+	  	mobile:{
+	  		 required:true,
+	  		 mobile:true,
+	  		 remote:{
+	  		 	url:"$!webPath/verify_mobile.htm",
+	  		 	type:"post",
+	  		 	dataType:"json",
+	  		 	data:{
+	  		 		"mobile":function(){return jQuery("#mobile").val();}
+	  		 	}
+	  		 }
+	  	},
+	    userName:{
+		  required:true,
+		  verify:true,
+          remote:{
+		    url: "$!webPath/verify_username.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "userName": function(){return jQuery("#userName").val();}
+		     }
+			}
+		},
+        password:{
+		  required:true,
+		  minlength:6,
+		  maxlength:20  
+		},
+		repassword:{
+		  required:true,
+		  equalTo:"#password" 
+		},
+		
+		email:{
+		  required:true,
+		  email:true,
+		  remote:{
+		    url: "$!webPath/verify_email.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "email": function(){return jQuery("#email").val();}
+		     }
+		  }
+		},
+		agree:{
+		  required:true
+		}#if($!config.securityCodeRegister),
+		code:{
+		  required:true,
+		  remote:{
+		    url: "$!webPath/verify_code.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "code": function(){return jQuery("#code").val();}
+		     }
+		  }
+		}
+		#end
+	  },
+	  messages:{
+	  sms:{
+	  	  required:"#springMessage('sms.register.test_code_not_null')",/* 手机验证码不能为空 */
+		  sms:"#springMessage('sms.register.test_format')",/* 验证码格式错误 */
+		  remote:"#springMessage('sms.register.test_code_timeout')"/* 验证码错误或者失效 */
+	  	},
+	  	mobile:{
+	  	  required:"#springMessage('sms.register.phone_not_null')",/* 手机号码不能为空 */
+		  mobile:#springMessage("sms.seller_apply_step3.uncorrect_phone")/* "手机号码格式不正确" */,
+		  remote:"#springMessage('sms.register.this_phone_aready_register')"/* 此号码已被注册 */
+	  	},
+	    userName:{
+		  required:#springMessage("sms.register.user_name_not_null")/* "用户名不能为空" */,
+		  verify:#springMessage("sms.register.not_use_special_symbol")/* "不可使用特殊字符" */,
+		  remote:#springMessage("sms.register.user_name_aready_exist")/* "用户名已存在" */
+		},
+        password:{
+		  required:#springMessage("sms.register.password_not_null","")/* "密码不能为空" */,
+		  minlength:#springMessage("sms.register.password_less","6")/* "密码不能小于{0}个字符" */,
+		  maxlength:#springMessage("sms.register.password_more","20")/* "密码不能大于{0}个字符" */ 
+		},
+		repassword:{
+		  required:#springMessage("sms.register.repeat_password_not_null")/* "重复密码不能为空" */,
+		  equalTo:#springMessage("sms.register.password_different")/* "两次输入密码不一致" */
+		},
+		email:{
+		  required:#springMessage("sms.register.email_not_null")/* "email不能为空" */,
+		  email:#springMessage("sms.register.emial_format_uncorrect")/* "email格式不正确" */,
+		  remote:#springMessage("sms.register.emial_exist")/* "该email已经存在" */
+		},
+		agree:{
+		  required:#springMessage("sms.register.accept_protocol")/* "请接受用户协议" */
+		}#if($!config.securityCodeRegister),
+		code:{
+		  required:#springMessage("sms.register.security_code_not_null")/* "验证码不能为空" */,
+		  remote:#springMessage("sms.register.security_code_uncorrect")/* "验证码不正确" */
+		}
+		#end
+	  }
+	});
+ //
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="login_head">
+  <h1><span>#if($!config.websiteLogo) <a href="$!webPath/index.htm"> <img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" /> </a> #else <a href="$!webPath/index.htm"><img src="$!webPath/th_th/resources/style/system/front/default/images/logo.jpg"  /> </a> #end</span><strong>#springMessage("sms.register.user_register")<!-- 用户注册 --></strong></h1>
+</div>
+<div class="regist_box">
+  <div class="regist_box_tab"><span class="regist_login">#springMessage("sms.register.aready_register")<!-- 我已经注册，现在就 --><a href="$!webPath/user/login.htm">#springMessage("sms.register.login")<!-- 登录 --></a></span>
+    <ul class="regist_box_ul">
+      <li class="this">#springMessage("sms.register.person_user_register")<!-- 个人用户注册 --></li>
+    </ul>
+  </div>
+  <div class="regist_box_content">
+    <div class="regist_common">
+      <form action="$!httpsWebPath/register_finish.htm" method="post" name="theForm" id="theForm">
+        <table width="900" border="0" cellpadding="0" cellspacing="0" class="regist_common_table">
+          <tr>
+            <td width="120" align="right">#springMessage("sms.register.login_name")<!-- 账户名称： --></td>
+            <td><div class="regist_form_txt"><input name="userName" type="text" id="userName" class="regist_txt" /></div></td>
+          </tr>
+          <tr>
+            <td  align="right">#springMessage("sms.register.lgoin_password")<!-- 登录密码： --></td>
+            <td><div class="regist_form_txt"><input  name="password" type="password" id="password" class="regist_txt" /></div></td>
+          </tr>
+          <tr>
+            <td  align="right">#springMessage("sms.register.comfirm_password")<!-- 确认密码： --></td>
+            <td><div class="regist_form_txt"><input name="repassword" type="password" id="repassword"  class="regist_txt" /></div></td>
+          </tr>
+
+          
+           <!--手机验证-->   
+          <tr>
+            <td  align="right">#springMessage("sms.register.check_phone")<!-- 验证手机： --></td>
+            <td><div class="regist_form_txt"><input name="mobile" type="text" id="mobile"  class="regist_txt" /></div></td>
+          </tr>   
+             
+            <tr>
+            <td  align="right">#springMessage("sms.register.security_code")<!-- 验证码： --></td>
+            <td>
+            <div class="regist_form_txt"><input name="sms" type="text" class="phone_code" id="sms" /></div>
+                            
+                            <input id="btnSendCode" type="button" value="#springMessage('sms.register.send_code')" onClick="sendMessage()" class="phone_code_btn" />  
+                            </td>														<!-- 发送验证码 -->
+          </tr>
+          
+          #if($!config.securityCodeRegister)
+              <script>
+                 function refreshCode(){
+	                 jQuery("#code_img").attr("src","$!webPath/verify.htm?d"+new Date().getTime());
+                 }
+             </script>
+          
+          <tr>
+            <td  align="right">#springMessage("sms.register.security_code")<!-- 验证码： --></td>
+            <td>
+            <div class="regist_form_txt"><input name="code" type="text" class="regist_code" id="code" /></div>
+             #if($!config.securityCodeType=='voice')
+            <script>
+				   function readCode(id){
+                         var  s = "<embed id='sound_play' name='sound_play' src='$!webPath/th_th/resources/flash/soundPlayer.swf?" + (new Date().getTime()) + "' FlashVars='url=$!webPath"+ "' width='0'   height='0' allowScriptAccess='always' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' /></embed>";
+                    jQuery("#"+id).html(s);
+                    }
+			 </script>
+              <b class="regist_code_img"><img id="code_img" src="$!webPath/verify.htm" width="59" height="27" style="display:none;" /></b>
+              <a href="javascript:void(0);" onclick="readCode('player')" title="#springMessage('sms.login.speak_security_code')" class="code_speech"></a>
+              <a href="javascript:void(0);" onclick="refreshCode();"  class="code_refresh"></a>
+              <span id="player"></span>
+             #else
+               <b class="regist_code_img"><img id="code_img" src="$!webPath/verify.htm" width="59" height="27" /></b><a href="javascript:void(0);" onclick="refreshCode();" class="code_refresh"></a>
+             #end  
+               </td>
+          </tr>
+          #end
+          <tr>
+            <td>&nbsp;</td>
+            <td class="font12">
+            <div class="regist_form_txt">
+                <input name="agree" type="checkbox" class="regist_check" id="agree" value="true" checked="checked" />
+                <label for="agree">#springMessage("sms.register.read_agree")<!-- 我已阅读并同意 --> </label>
+              <a href="javascript:void(0);" onclick="jQuery('#agree_article').show();"  class="blue2">#springMessage("sms.register.shop_protocol")<!-- 《商城在线服务协议》 --></a></div>              
+              </td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><input name="" type="submit"  class="regist_btn" value="#springMessage('sms.register.register_immedicately')"/></td><!-- 立即注册 -->
+          </tr>
+        </table>
+      </form>
+    </div>
+    <div class="regist_common_right"><img src="$!webPath/th_th/resources/style/system/front/default/images/login/register.jpg" width="345" height="290" /></div>
+  </div>
+</div>
+<div style="display:none;" id="agree_article">
+  <div class="white_content" > </div>
+  <div class="white_content_box"> <a href="javascript:void(0);"  onclick="jQuery('#agree_article').hide();" class="white_close"><img src="$!webPath/th_th/resources/style/system/front/default/images/login/close.gif" width="16" height="16" /></a>
+    <div class="white_con">
+      <h3 class="white_title"><span>#springMessage("sms.register.user_register_protocol")<!-- 用户注册协议 --></span></h3>
+      <div class="white_box">
+        <div class="white_box_contant"> $!doc.content </div>
+      </div>
+      <div class="white_box_btn">
+        <input name="" type="button" value="#springMessage('sms.register.agree_continue')" onclick="jQuery('#agree_article').hide();" />
+      </div>
+    </div>
+  </div>
+  <div class="black_overlay"></div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+
+
+</body>
+</html>

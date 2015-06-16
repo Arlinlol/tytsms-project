@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script>
+ function integrallog_excel(){
+	 #if($!objs.size()>0)
+		 var userName = jQuery("#userName").val();
+	     var currentPage = jQuery("#currentPage").val();
+		 window.location.href="$!webPath/admin/integrallog_excel.htm?userName="+userName+"&currentPage="+currentPage;
+	 #else
+		 alert("当前没有可以导出的数据！"); 
+     #end
+ }
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">积分明细</h1>
+  <form action="$!webPath/admin/integrallog_list.htm" method="post">
+  <div class="search">
+    <ul>
+      <li>
+       <span>会员名</span>
+       <span class="size250">
+         <input name="userName" type="text" id="userName" value="$!userName"/>
+       </span>
+       <span>
+         <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+         <input name="" type="button"  value="导出excel" onclick="integrallog_excel()" style="cursor:pointer;" class="search_btn"/>
+       </span>
+       </li>
+    </ul>
+  </div>
+  </form>
+  <form name="ListForm" id="ListForm"  action="$!webPath/admin/integrallog_list.htm" method="post">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="15%"><span class="form_btna">会员名</span></th>
+        <th width="20%" ><span class="form_btna">操作管理员</span></th>
+        <th width="10%" ><span class="form_btna">积分值</span></th>
+        <th  width="15%"><span class="form_btna">操作时间</span></th>
+        <th width="12%"><span class="form_btna">获取途径</span></th>
+        <th ><span class="form_btna">描述</span></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td align="center">$!obj.integral_user.userName</td>
+        <td align="center">$!obj.operate_user.userName</td>
+        <td align="center">$!obj.integral</td>
+        <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+        #if($!obj.type=="system")
+		  #set($type="系统积分管理")
+		#end
+		#if($!obj.type=="reg")
+		  #set($type="用户注册")
+		#end
+        #if($!obj.type=="login")
+		  #set($type="用户登录")
+		#end
+        #if($!obj.type=="integral_order")
+		  #set($type="积分兑换")
+		#end
+        #if($!obj.type=="order")
+		  #set($type="订单操作")
+		#end
+        #if($!obj.type=="inviteRegister")
+		  #set($type="邀请用户注册")
+		#end
+        #if($!obj.type=="award")
+		  #set($type="用户抽奖")
+		#end
+        #if($!obj.type=="share")
+		  #set($type="用户分享")
+		#end
+		<td align="center">$!type</td>
+        <td align="center">$!obj.content</td>
+      </tr>
+      #end
+    </table>
+  </div>
+  
+  <div class="operate_bar">
+    <div class="fenye">
+      <input type="hidden" name="currentPage" id="currentPage" value="$!currentPage" />
+      <input type="hidden" name="userName" id="userName" value="$!userName"/>
+	  <input name="mulitId" type="hidden" id="mulitId" />
+	  $!gotoPageFormHTML
+	</div>         
+ </div>
+ </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                     <!-- 搜索结果 -->                                                                   <!-- 搜索商品 -->
+<title>#if($!keyword) $!{keyword} #springMessage("sms.search_goods_list.search_result") #else #springMessage("sms.search_goods_list.search_goods") #end </title>
+<meta name="keywords" content="$!gc.seo_keywords" />
+<meta name="description" content="$!gc.seo_description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.lazyload.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.cookie.js"></script>
+<script>
+jQuery(document).ready(function(){ 
+ 
+ <!--排序方式-->
+ jQuery(".list_bar_a a").click(function(){
+	 var orderBy = jQuery(this).attr("orderBy");
+	 var orderType = jQuery(this).attr("orderType");
+	 jQuery("#orderBy").val(orderBy);
+	 jQuery("#orderType").val(orderType);
+	 jQuery("#ListForm").submit(); 
+ });
+ #if($!orderBy)
+    jQuery(".list_bar_a a").removeClass("this").find("i").removeClass("this");
+    jQuery(".list_bar_a a[orderBy='$!orderBy']").addClass("this").find("i").addClass("this");
+   
+   #if($!orderBy=="goods_current_price"&& $!orderType=="asc")
+     jQuery(".list_bar_a a[orderBy='$!orderBy']").attr("orderType","desc").find("i").addClass("up");
+   #end
+   #if($!orderBy=="goods_current_price"&& $!orderType=="desc")
+     jQuery(".list_bar_a a[orderBy='$!orderBy']").attr("orderType","asc").find("i").addClass("down");
+   #end
+ #end
+  <!--移进移出-->
+  jQuery(".pro_list_one").mouseover(function(){
+    jQuery(".pro_list_one ul").removeClass("this");		
+	jQuery(".pro_list_shop").hide();
+	jQuery(".pro_list_evaluate").hide();
+    jQuery(this).find("ul").addClass("this");
+	jQuery(this).find(".pro_list_shop").show();
+	jQuery(this).find(".pro_list_evaluate").show();
+  }).mouseleave(function(){
+    jQuery(this).find("ul").removeClass("this");
+	jQuery(".pro_list_one ul").removeClass("this");		
+	jQuery(".pro_list_shop").hide();
+	jQuery(".pro_list_evaluate").hide();
+  });
+  <!--点击小图-->
+  jQuery(".pro_them_team b").mouseover(function(){
+      var img_id="#"+jQuery(this).attr("goods_id")+"_main_img";
+	  var middle_img=jQuery(this).attr("middle_img");
+	  jQuery(img_id).attr("src",middle_img);
+	  jQuery(this).parent().find("b").removeClass("this_b");
+	  jQuery(this).addClass("this_b");
+	  jQuery(this).parent().find(".team_san").hide();
+	  jQuery(this).find(".team_san").show();
+  });
+  <!--图片加载-->
+  jQuery(".img_cspan img").lazyload({effect:"fadeIn",width:210,height:210});
+  jQuery(".pro_them_team img").lazyload({effect:"fadeIn",width:30,height:30});
+  <!--库存和类型-->
+  jQuery(":radio[id=goods_inventory][value=$!goods_inventory]").attr("checked",true);
+  jQuery(":radio[id=goods_type][value=$!goods_type]").attr("checked",true);
+  jQuery(":radio[id=goods_inventory]").click(function(){
+    jQuery("#ListForm").submit();
+  });
+  jQuery(":radio[id=goods_type]").click(function(){
+    jQuery("#ListForm").submit();
+  });
+  jQuery(".img_a").click(function(){
+	if(jQuery(this).find("i").hasClass("this")){
+		jQuery(this).find("i").removeClass("this");		
+	}else{
+		jQuery(this).find("i").addClass("this");
+	}
+	if(jQuery(this).parent().next().attr("child_show")=="true"){
+		jQuery(this).parent().next().slideToggle();
+		jQuery(this).parent().next().attr("child_show","false");
+	}else{
+		jQuery(this).parent().next().slideToggle();
+		jQuery(this).parent().next().attr("child_show","true");
+	}
+	var gc_status="";
+	jQuery(".li_a").each(function(){
+			gc_status=gc_status+";"+jQuery(this).next().attr("id")+","+jQuery(this).next().attr("child_show");
+	});
+	jQuery.cookie("gc_status",gc_status);	
+  });
+  #if($!gc_id)
+   if(jQuery.cookie("gc_status")!=null){
+      var gc_status=jQuery.cookie("gc_status");
+	  jQuery.each(gc_status.split(";"), function(index,item){
+		 var list=item.split(",");
+		 jQuery("#"+list[0]).attr("child_show",list[1]);
+		 if(list[1]=="true"){
+	       jQuery("#"+list[0]).show();
+		   jQuery("#"+list[0]).parent().find("i").addClass("this");
+		 }
+	  });
+   }
+   jQuery("#gc_"+$!{gc_id}).addClass("word_red");
+   #else
+   jQuery.cookie("gc_status",null);	
+   #end
+});<!--end-->
+function search_gc_keyword(gc_id){
+	window.location.href="$!webPath/search.htm?keyword=$!{keyword}&&gc_id="+gc_id;
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="main_top">
+    <div class="main_left">
+    <div class="main_left_top_t">#springMessage("sms.search_goods_list.all_result")<!-- 全部结果 --> ><strong> "$!keyword"</strong></div>
+    <div class="main_left_top">
+    <h3><strong>#springMessage("sms.search_goods_list.all_type")<!-- 所有类目 --></strong></h3>
+    <div class="main_leftop">
+      <ul class="main_leftop_ul">
+      	#foreach($gc2 in $gcs)
+        <li><div class="li_a"><a class="img_a" href="javascript:void(0)"><i></i></a><a class="word_a" href="javascript:void(0)" onclick="search_gc_keyword('$!{gc2.id}')"><b id="gc_$!{gc2.id}">$!{gc2.className}</b></a></div>
+          <ul style="display:none" id="ul_$!{gc2.id}" child_show="false">
+          	#set($gcs3=$goodsViewTools.query_GC_third("$!gc2.id",$!list_gc))
+            #foreach($gc3 in $gcs3)
+            <li id="gc_$!{gc3.id}"><a href="javascript:void(0)" onclick="search_gc_keyword('$!{gc3.id}')">$!{gc3.className}</a></li>
+            #end
+          </ul>
+        </li>
+        #end
+      </ul>
+    </div>
+  </div>
+      #if($!$left_ztc_goods.size()>0)
+      <div class="left_buy">
+        <h3><strong>#springMessage("sms.search_goods_list.generalize_goods")<!-- 推广商品 --></strong></h3>
+        <div class="left_buy_box"> 
+        #foreach($goods in $left_ztc_goods)
+          #if($!goods.goods_main_photo)
+              #set($bigimg="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}")
+              #set($img="$!{bigimg}_middle.$!{goods.goods_main_photo.ext}")
+          #else
+          	  #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+          #end
+            
+            #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+            #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+            	#set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+            #end 
+          <ul>
+            <li class="buy_one_img"><span>
+              <p><a href="$!goods_url" target="_blank"><img src="$!img" width="150" height="150" /></a></p>
+              </span></li>
+            <li class="buy_one_name"><a href="$!goods_url" target="_blank">$!goods.goods_name</a></li>
+            <li class="buy_one_money">#springMessage("sms.search_goods_list.original_price")<!-- 原价： -->¥$!goods.goods_price</li>
+            <li class="buy_one_price">#springMessage("sms.search_goods_list.shop_price")<!-- 商城价： --><b>¥$!goods.goods_current_price</b></li>
+          </ul>
+         #end </div>
+      </div>
+      #end </div>
+    <form action="$!webPath/search.htm"  method="post" id="ListForm">
+      <div class="main_right">
+        <div class="main_right_top">
+          <div class="top_hotbuy">
+            <h3><strong>#springMessage("sms.search_goods_list.hot_recommend")<!-- 热卖推荐 --><i></i></strong></h3>
+            <div class="top_hotbuy_hid"> #foreach($top_goods in $top_ztc_goods)
+              #if($!top_goods.goods_main_photo)
+              #set($bigimg="$!imageWebServer/$!{top_goods.goods_main_photo.path}/$!{top_goods.goods_main_photo.name}")
+              #set($img="$!{bigimg}_middle.$!{top_goods.goods_main_photo.ext}")
+              #else
+              #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+              #end
+              
+            #set($goods_url="$!webPath/goods_$!{top_goods.id}.htm")
+            #if($!config.second_domain_open && $!top_goods.goods_type==1 && $!top_goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{top_goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{top_goods.id}.htm")
+            #end 
+              <dl class="top_hotbuy_dl">
+                <dt><a href="$!goods_url" target="_blank"><span>
+                  <p><img src="$!img" width="120" height="120" /></p>
+                  </span></a></dt>
+                <dd>
+                  <h4><a href="$!goods_url" target="_blank">$!top_goods.goods_name</a></h4>
+                  <i>#springMessage("sms.search_goods_list.reference_price")<!-- 参考价： -->¥$!top_goods.goods_price</i><em>#springMessage("sms.search_goods_list.rob_price")<!-- 抢购价： --><b>¥$!top_goods.goods_current_price</b></em><a class="panic" href="$!webPath/goods_$!{top_goods.id}.htm" target="_blank">#springMessage("sms.search_goods_list.immedicately_buy")<!-- 立即抢购 --></a></dd>
+              </dl>
+              #end </div>
+          </div>
+        </div>
+        <div class="main_list_box">
+          <div class="main_list_function">
+            <div class="main_list_bar"><span class="list_fenye"><b class="list_fenya_b">#springMessage("sms.search_goods_list.sum")<!-- 共 -->$!allCount#springMessage("sms.search_goods_list.piece_goos")<!-- 个商品 --></b></span> <b class="list_bar_px">#springMessage("sms.search_goods_list.sort")<!-- 排序： --></b> <b class="list_bar_a"> <a href="javascript:void(0);" orderBy="addTime"  orderType="desc">#springMessage("sms.search_goods_list.default")<!-- 默认 --><i class="this"></i></a> <a href="javascript:void(0);" orderBy="goods_salenum" orderType="desc">#springMessage("sms.search_goods_list.sale")<!-- 销量 --><i></i></a> <a href="javascript:void(0);" orderBy="goods_collect" orderType="desc">#springMessage("sms.search_goods_list.popularity")<!-- 人气 --><i></i></a> <a href="javascript:void(0);" orderBy="well_evaluate" orderType="desc">#springMessage("sms.search_goods_list.good")<!-- 好评 --><i></i></a> <a href="javascript:void(0);" orderBy="goods_current_price"  orderType="asc">#springMessage("sms.search_goods_list.price")<!-- 价格 --><i class="price"></i></a>
+              <!--price为默认状态,up为由低到高,down为由高到低-->
+              </b></div>
+            <div class="main_list_barb"> <i class="listbar_n_a">#springMessage("sms.search_goods_list.repertory")<!-- 库存： --></i> <b class="listbar_check"> <i>
+              <label style="cursor:pointer">
+                <input name="goods_inventory" type="radio" id="goods_inventory" value="-1" checked="checked" />
+                #springMessage("sms.search_goods_list.all")<!-- 全部 --> </label>
+              </i> <i>
+              <label style="cursor:pointer">
+                <input name="goods_inventory" type="radio" id="goods_inventory" value="0" />
+              #springMessage("sms.search_goods_list.display_have")<!--   仅显示有货  --></label>
+              </i> </b> <b class="listbar_class"> <i>#springMessage("sms.search_goods_list.goods_type")<!-- 商品类型： --></i> <i>
+              <label style="cursor:pointer">
+                <input name="goods_type" type="radio" id="goods_type" value="-1" checked="checked" />
+                #springMessage("sms.search_goods_list.all")<!-- 全部  --></label>
+              </i> 
+              <i>
+              <label style="cursor:pointer">
+              <input name="goods_type" id="goods_type" type="radio" value="0" />
+              #springMessage("sms.search_goods_list.shop_business")<!-- 商城自营 -->
+              </label style="cursor:pointer">
+              </i> <i>
+              <label style="cursor:pointer">
+                <input name="goods_type" id="goods_type" type="radio" value="1" />
+                #springMessage("sms.search_goods_list.shop_goods")<!-- 商家商品  --></label>
+              </i> </b> </div>
+          </div>
+          #if($!objs.size()>0)
+          <div class="pro_list">
+          	#foreach($obj in $objs)
+            <div class="pro_list_one">
+              <ul class="">
+                <li class="pro_list_img">                  
+                  #set($goods_url="$!webPath/goods_$!{obj.vo_id}.htm")
+                  #set($store=$!goodsViewTools.query_LuceneVo_goods_store("$!obj.vo_id"))
+          		  #if($!config.second_domain_open && $!obj.vo_goods_type==1 && $!store.store_second_domain!="")
+          		  	#set($goods_url="http://$!{store.store_second_domain}.$!{domainPath}/goods_$!{obj.vo_id}.htm")
+           		  #end 
+                  #if($!obj.vo_main_photo_url!='')
+                    	#set($main_photos_url=$!obj.vo_main_photo_url)
+                  #else
+                        #set($main_photos_url="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                  #end
+                  <a href="$!goods_url" target="_blank">
+                  	<span class="img_cspan"><p>
+                  		<img id="$!{obj.vo_id}_main_img" src="$!imageWebServer/th_th/resources/style/common/images/loader.gif" original="$!main_photos_url" onerror="this.src='$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}';" width="28" height="28" />
+                  </p></span>
+                  </a>
+                 </li>
+                <li class="pro_them">
+                  <div class="pro_them_team">
+                    <p style="position:absolute; width:700px; left:0px;display:block;">
+                    	<b class="pro_team_b this_b" goods_id="$!{obj.vo_id}" middle_img="$!imageWebServer/$!main_photos_url">
+                        <img src="$!imageWebServer/th_th/resources/style/common/images/loader.gif" original="$!imageWebServer/$!main_photos_url"  width="30" height="30"   onerror="this.src='$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}';"/>
+                        <i class="team_san"></i></b>
+                    #set($photos_url=$!goodsViewTools.query_LuceneVo_photos_url($obj.vo_photos_url)) 
+                    #foreach($img in $photos_url) 
+                    	<b class="pro_team_b" goods_id="$!{obj.vo_id}" middle_img="$!webPath/$!img">
+                        <img original="$!webPath/$!img" src="$!imageWebServer/th_th/resources/style/common/images/loader.gif"   onerror="this.src='$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}';" width="28" height="28" />
+                        <i class="team_san" style="display:none"></i></b> 
+                    #end
+                    </p>
+                  </div>
+                </li>
+                <li class="pro_list_name"><a href="$!goods_url" target="_blank">$!{obj.vo_title}</a></li>
+                <li class="pro_list_price"><b>¥$!{obj.vo_store_price}</b><i>#springMessage("sms.search_goods_list.fall")<!-- 直降 --></i></li>
+                <li class="pro_list_evaluate" style="display:none;">
+                  <dl>
+                    <dt>$!{obj.vo_goods_salenum}</dt>
+                    <dd>#springMessage("sms.search_goods_list.goods_sale_count")<!-- 商品销量 --></dd>
+                  </dl>
+                  <dl>
+                    <dt>$!{obj.vo_goods_evas}</dt>
+                    <dd>#springMessage("sms.search_goods_list.user_comment")<!-- 用户评论 --></dd>
+                  </dl>
+                  <dl style=" border-right:none;">
+                  #if($!obj.vo_goods_type==0)
+                    #if($!userTools.adminOnLine()=="true")
+                    <dt class="content"  #if(!$!user)dialog_uri="$!current_webPath/user_dialog_login.htm" dialog_title="#springMessage('sms.search_goods_list.member_login')" dialog_width="430" dialog_height="100" dialog_id="user_login" #else onclick="open_im('$!obj.id','$!webPath','user','plat','');" #end ></dt>
+                    <dd>#springMessage("sms.search_goods_list.inline_client")<!-- 在线客服 --></dd>
+                    #else
+                     <dt class="content_unonline" #if(!$!user)dialog_uri="$!current_webPath/user_dialog_login.htm" dialog_title="#springMessage('sms.search_goods_list.member_login')" dialog_width="430" dialog_height="100" dialog_id="user_login" #else onclick="open_im('$!obj.id','$!webPath','user','plat','');" #end ></dt>
+                     <dd>#springMessage("sms.search_goods_list.inline_client")<!-- 在线客服 --></dd> 
+                    #end
+                  #else
+                    #if($!userTools.userOnLine('$!obj.vo_store_userName')=="true")
+                    <dt class="content"  #if(!$!user)dialog_uri="$!current_webPath/user_dialog_login.htm" dialog_title="#springMessage('sms.search_goods_list.member_login')" dialog_width="430" dialog_height="100" dialog_id="user_login" #else onclick="open_im('$!obj.id','$!webPath','user','store','$!obj.goods_store.id');" #end ></dt>
+                    <dd>#springMessage("sms.search_goods_list.inline_client")<!-- 在线客服 --></dd>
+                    #else
+                     <dt class="content_unonline" #if(!$!user)dialog_uri="$!current_webPath/user_dialog_login.htm" dialog_title="#springMessage('sms.search_goods_list.member_login')" dialog_width="430" dialog_height="100" dialog_id="user_login" #else onclick="open_im('$!obj.id','$!webPath','user','store','$!obj.goods_store.id');" #end ></dt>
+                     <dd>#springMessage("sms.search_goods_list.inline_client")<!-- 在线客服 --></dd> 
+                    #end
+                  #end                    
+                  </dl>
+                </li>
+                <li class="pro_list_shop" style="display:none;"> 
+                #if($!obj.vo_goods_type==1)
+                	#set($store=$!goodsViewTools.query_LuceneVo_goods_store("$!obj.vo_id"))
+                	#set($store_url="$!webPath/store_"+$!store.id+".htm")
+               		#if($!config.second_domain_open)
+                		#set($store_url="http://$!{store.store_second_domain}.$!{domainPath}")
+                	#end
+                	<a href="$!store_url" target="_blank">$!{store.store_name}</a>
+                #else
+                	#springMessage("sms.search_goods_list.own_goods")<!-- 自营商品 -->
+                #end
+                </li>
+              </ul>
+            </div>
+            #end </div>
+          <div class="fenye"><span> $!gotoPageFormHTML</span></div>
+          #else
+          <div class="main_list_box">
+            <div class="main_list_none"> <span class="main_none_box"> <i></i>
+              <p>#springMessage("sms.search_goods_list.sorry")<!-- 抱歉，没有找到符合条件的商品！ --><a href="$!webPath/index.htm">#springMessage("sms.search_goods_list.search_all_goods")<!-- 查看全部商品 --></a></p>
+              </span></div>
+          </div>
+          #end </div>
+      </div>
+      <input name="keyword" type="hidden" id="keyword" value="$!keyword" />
+      <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      <input name="orderBy" type="hidden" id="orderBy" value="$!orderBy" />
+      <input name="orderType" type="hidden" id="orderType" value="$!orderType" />
+      <input name="gc_id" type="hidden" id="gc_id" value="$!gc_id" />
+    </form>
+  </div>
+  $!httpInclude.include("/goods_list_bottom.htm") 
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

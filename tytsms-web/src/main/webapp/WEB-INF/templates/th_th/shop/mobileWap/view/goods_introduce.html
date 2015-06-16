@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="$!webPath/th_th/resources/style/mobileWap/css/style.css">
+</head>
+<body style="background-image:none">
+
+<div class="goods_detail_top">
+	<div class="pd5">
+    	<ul>
+        	<li>商品编号：$!obj.goods_serial</li> 
+            #if($!obj.group_buy==2)
+            #foreach($gg in $obj.group_goods_list)
+            	#if($!gg.gg_goods.id==$!obj.id)
+                #set($group_price = $!gg.gg_price)
+                #end
+            #end
+             <li>特惠价格：￥<span>$!{group_price}</span></li>
+            #elseif($!obj.activity_status==2) 
+          	 #set($activity_price = $!obj.activity_price3)
+            <li>活动价格：￥<span>$!{activity_price}</span></li>
+            #else
+             <li>商品价格：￥<span>$!obj.goods_current_price</span></li>
+            #end
+            <li>参考价格：<b>￥$!obj.goods_price</b></li>
+        </ul>
+    </div>
+</div>
+
+
+#if($!propertities)
+<div class="goods_detail">
+    <div class="pd5">
+    	<h1>规格参数</h1>
+        <ul>
+        #foreach($map_pro in $propertities)
+        <li>$!map_pro.get('name')：$!map_pro.get('val')</li>
+        #end
+        </ul>
+    </div>
+</div>
+#end
+<div class="goods_detail">
+    <div class="pd5">
+        <h1>商品介绍</h1>
+        <div class="img_box">$!obj.goods_details</div>
+    </div>
+</div>
+</body>
+</html>

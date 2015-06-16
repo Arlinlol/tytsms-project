@@ -1,0 +1,16 @@
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+WeixinJSBridge.call('hideToolbar');
+});
+</script>
+<nav>
+<div class="nav_width">
+<ul>
+<li op="index"><a href="$!webPath/weiXin/index.htm"><b  class="nav_b"><img width = "65px" height = "50px" src="$!webPath/resources/style/weiXin/images/home.png"> </b></a></li>
+<li op="account"><a href="$!webPath/weiXin/buyer/index.htm"><b  class="nav_c"><img width = "65px" height = "50px" src="$!webPath/resources/style/weiXin/images/mine.png"></b></a></li>
+<li op="cart"><a href="$!webPath/weiXin/goods_cart1.htm"><b  class="nav_d"><img width = "65px" height = "50px" src="$!webPath/resources/style/weiXin/images/car.png"> #if($!carts_size>0)<em id = "footer_carts_size">$!carts_size</em>#end</b></a></li>
+<!--
+<li ><a href="javascript:void(0);"><b  class="nav_e"></b></a></li> -->
+</ul></div>
+<input type ="hidden" id ="footer_carts_size_value" value ="$!carts_size" >
+</nav>

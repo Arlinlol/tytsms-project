@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>店铺基本信息 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/shop_into.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.card.js" type="text/javascript"></script>
+<script src="$!webPath/resources/js/jquery.iskyshop.validate.js" type="text/javascript"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(e) {
+	if("$!store.area"){
+		jQuery("#aid2").val("$!store.area.id");
+		jQuery("#aid1").val("$!store.area.parent.id");
+		jQuery("#aid0").val("$!store.bank_area.parent.parent.id");
+		<!--cty 修改时间2015-3-12 增加内容 -->
+		jQuery("#aid").val("$!store.bank_area.parent.parent.parent.id");
+	}
+	jQuery("#storeGrades").val("$!store.grade.id");
+	jQuery("#storeGrades").change(function(){
+		var sg_id = jQuery(this).val();
+		jQuery("b[id^='settedtab_b_']").hide();
+		jQuery("#settedtab_b_"+sg_id).show();
+	});
+	jQuery("#gc_main_id").val("$!store.gc_main_id");
+   <!--表单验证-->
+	jQuery("#theForm").validate({		
+	ignore: "",
+	errorPlacement: function(error, element) {
+				element.parent().find("b").html("");
+					error.appendTo(element.parent().find("b"));
+	},						  
+     rules: {
+			store_name:{required:true,
+						remote:{
+						  url:"$!webPath/verify_storename.htm",
+						  type : "get",
+						  dataType:"json",
+						  data : {
+							  "store_name" : function(){return jQuery("#store_name").val();},"id":"$!store.id"
+						  }
+						 }},
+			store_ower:{required:true},
+			aid2:{required:true},
+			store_ower_card:{required:true,isIdCardNo:true},
+			store_address:{required:true},
+			store_zip:{required:true,isZipCode:true},
+			store_telephone:{required:true,isTel:true}
+			},
+     messages: {
+			store_name:{required:"请填写店铺名称",remote:"店铺名已经存在"},
+			store_ower:{required:"请填写店主真实姓名"},
+			aid2:{required:"店铺区域不能为空"},
+		  	store_ower_card:{required:"请填写店主的身份证号",isIdCardNo:"身份证号格式不对"},
+		  	store_address:{required:"请填写店铺的详细地址"},
+			store_zip:{required:"请填写店铺的邮编",isZipCode:"邮编格式不对"},
+			store_telephone:{required:"请填写店铺的联系电话",isTel:"电话号码格式不对"}
+		  }
+		 
+  });
+   <!--店铺所在地-->
+	jQuery("select[id^='aid']").live("change",function(){
+		var val = jQuery(this).val();
+		var aid = jQuery(this).attr("id");
+		if(val==""){
+			jQuery("#aid2").children(":not(':first')").remove();
+			jQuery("#aid1").children(":not(':first')").remove();
+			<!--cty 修改时间2015-3-12 增加内容 --> 
+			jQuery("#aid0").children(":not(':first')").remove();
+			return;
+		}
+		jQuery.ajax({type:'POST',
+	              	url:'$!webPath/seller_license_area.htm',
+				  	data:{"value":val,"type":"a"},
+				beforeSend:function(){
+				  
+				},
+			   	success:function(data){
+			   	    <!--cty 修改时间2015-3-12 增加内容 --> 
+					if(aid=="aid"){
+						jQuery("#aid1").children(":not(':first')").remove();
+						jQuery("#settled_select0").html(data);
+					}else if(aid=="aid0"){
+						jQuery("#aid2").children(":not(':first')").remove();
+						jQuery("#settled_select1").html(data);
+					}else if(aid=="aid1"){
+						jQuery("#settled_select2").html(data);
+					}    
+              }
+		});
+	}) 
+	jQuery('#validity').datepicker({
+		    dateFormat:"yy-mm-dd",
+			changeMonth: true,
+			changeYear: true,
+			minDate: new Date()
+  });
+});<!--end-->
+function saveForm(){
+	jQuery("#theForm").submit();
+}
+function backwards(step){
+	window.location.href="$!webPath/seller_apply.htm?op=back&step="+step;
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="head">
+  <h1 class="logo" title=""> #if($!config.websiteLogo) <a href="$!webPath/index.htm"><img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" width="209" height="70"/></a> #else <a href="$!webPath/index.htm"><img src="$!webPath/resources/style/system/front/default/images/logo.jpg" width="209" height="70"/> </a> #end </h1>
+  <span class="head_into">商家入驻</span> <a href="$!webPath/doc.htm?mark=apply_help" target="_blank" class="head_help">入驻帮助</a> </div>
+<div class="nav_into">
+  <ul>
+    <li><a href="javascript:void(0)" onclick="backwards(1)">入驻协议</a></li>
+    <li><a href="javascript:void(0)" onclick="backwards(3)">公司信息提交</a></li>
+    <li><a href="javascript:void(0)" class="this">店铺信息提交</a></li>
+    <li><a href="javascript:void(0)">审核日志查询</a></li>
+  </ul>
+</div>
+<div class="main">
+  <div class="settled_box">
+    <h3>
+      <div class="settled_step"><span><em class="setstep_light_blue"></em><b class="strong_light_two"></b><strong class="strong_blue">入驻须知</strong></span><span><em class="setstep_light_blue"></em><b class="light_blue_two"></b><strong class="strong_blue">公司信息认证</strong></span><span><em class="setstep_strong_blue"></em><b class="strong_blue_three"></b><strong class="grey">店铺信息认证</strong></span><span><em class="setstep_grey"></em><b class="strong_grey_four"></b><strong class="grey">等待审核</strong></span></div>
+      <span class="settled_title">店铺信息</span>
+      
+   </h3>
+    <div class="settled_white">
+      <div class="settled_white_box">
+        <div class="settled_form">
+          <h4>店铺基本信息<b></b></h4>
+          <Form action="$!webPath/seller_apply_step5_save.htm" method="post"  id="theForm"> 
+          <table width="760" border="0" cellpadding="0" cellspacing="0" class="settled_table">
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">
+                <input name="step" type="hidden" id="step" value="6" />
+                店铺名称：</span><strong class="sred">*</strong></td>
+              <td><input name="store_name" type="text"  class="size200" id="store_name" value="$!store.store_name"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">店主真实姓名：</span><strong class="sred">*</strong></td>
+              <td><input name="store_ower" type="text"  class="size200" id="store_ower" value="$!store.store_ower"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">店主身份证号：</span><strong class="sred">*</strong></td>
+              <td><input name="store_ower_card" type="text"  class="size200" id="store_ower_card"  value="$!store.store_ower_card"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">所在地区：</span><strong class="sred">*</strong></td>
+              <td>
+              #if($!store.area)
+             <!--cty 修改时间2015-3-12 增加内容 -->
+                <span class="settled_select" id="settled_select">
+                	<select name="aid" id="aid">
+                    	<option value="">国籍</option>
+                    	#foreach($area in $areas)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select0">
+                	<select name="aid0" id="aid0">
+                    	<option value="">省份</option>
+                    	#foreach($area in $areas.parent)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select1">
+                	<select name="aid1" id="aid1">
+                   	#foreach($aid1 in $store.area.parent.parent.childs)
+                    	<option value="$!aid1.id">$!aid1.areaName</option>
+                    #end
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select2">
+                	<select name="aid2" id="aid2">
+                    #foreach($aid2 in $store.area.parent.childs)
+                    	<option value="$!aid2.id">$!aid2.areaName</option>
+                    #end
+                	</select>
+                    <b class="settedtab_b"></b>
+                </span>
+                #else 
+                <!--cty 修改时间2015-3-12 增加内容 --> 
+                <span class="settled_select" id="settled_select">
+                	<select name="aid" id="aid">
+                    	<option value="">国籍</option>
+                    	#foreach($area in $areas)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+              	<span class="settled_select" id="settled_select0">
+                	<select name="aid0" id="aid0">
+                    	<option value="">省份</option>
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select1">
+                	<select name="aid1" id="lid1">
+                    	<option value="">城市</option>
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select2">
+                	<select name="aid2" id="aid2">
+                    	<option value="">州县</option>
+                	</select>
+                    <b class="settedtab_b"></b>
+                </span>
+              #end 
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">详细地址：</span><strong class="sred">*</strong></td>
+              <td><input name="store_address" type="text"  class="size200" id="store_address"  value="$!store.store_address"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">店铺邮编：</span><strong class="sred">*</strong></td>
+              <td><input name="store_zip" type="text"  class="size200" id="store_zip" value="$!store.store_zip"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">联系电话：</span><strong class="sred">*</strong></td>
+              <td><input name="store_telephone" type="text"  class="size200" id="store_telephone" value="$!store.store_telephone"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">联系QQ：</span></td>
+              <td><input name="store_qq" type="text"  class="size200" id="store_qq" value="$!store.store_qq"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">联系MSN：</span></td>
+              <td><input name="store_msn" type="text"  class="size200" id="store_msn" value="$!store.store_msn"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">阿里旺旺：</span></td>
+              <td><input name="store_ww" type="text"  class="size200" id="store_ww" value="$!store.store_ww"/>
+              		<b class="settedtab_b"></b>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+        <div class="settled_form">
+            <h4>选择店铺类型<b></b></h4>
+            <table width="760" border="0" cellpadding="0" cellspacing="0" class="settled_table">
+              <tr>
+                <td align="right" width="150" valign="top"><span class="sred_span">
+                期望店铺类型：</span><strong class="sred">*</strong></td>
+                <td><span class="settled_select">
+                  <select name="storeGrades" id="storeGrades">
+                  #foreach($storeGrade in $storeGrades)
+                  <option value="$!storeGrade.id" mark="$!{storeGrade.main_limit}" >$!storeGrade.gradeName</option>
+                  #end
+                  </select>
+                  #foreach($storeGrade in $storeGrades) <b class="settedtab_b" id="settedtab_b_$!storeGrade.id" #if($!velocityCount!=1) style="display:none" #end>$!storeGrade.content</b> #end </span></td>
+              </tr>
+              <tr>
+              	<td align="right" width="150" valign="top"><span class="sred_span">店铺有效期：</span><strong class="sred">*</strong></td>
+                <td><span class="settled_select"><input name="validity" type="text" id="validity" value="$!CommUtil.formatShortDate($!store.validity)"  class="size200" /></span></td>
+              </tr>
+              <tr id="main_gc">
+                  <td align="right" width="150" valign="top"><span class="sred_span">
+                    主营类目：</span><strong class="sred">*</strong></td>
+                    <td><span class="settled_select">
+                     <select name="gc_main_id"  id="gc_main_id">
+                        #foreach($gc in $goodsClass)	
+                        <option value="$!gc.id">$!gc.className</option>                    
+                        #end                  
+                      </select>
+               </tr>   
+            </table>
+          </div>
+         </Form>
+      <div class="settled_bottom"><span><a href="javascript:void(0)" class="up_step_btn" onclick="backwards(4)">上一步</a><a onclick="saveForm()" href="javascript:void(0)" class="settled_btn"><b><em>下一步，完善店铺类型与经营类目</em></b></a></span></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

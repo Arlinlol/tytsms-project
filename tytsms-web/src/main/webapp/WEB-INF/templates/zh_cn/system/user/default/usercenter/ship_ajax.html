@@ -1,0 +1,29 @@
+#foreach($transInfo in $transInfo_list)
+<div style=" width:100%; height:auto;">
+    #if($!transInfo.status==1)          
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="order_follow_table">
+      <tr>
+        <th align="left">处理时间</th>
+        <th align="left">处理信息</th>
+      </tr>
+      #foreach($info in $transInfo.data)
+      <tr>
+        <td>$!info.time</td>
+        <td>$!info.context</td>
+      </tr>
+      #end
+    </table>
+    <div class="order_follow_bottom"><span>物流公司：$!transInfo.express_company_name</span><span>物流单号：$!transInfo.express_ship_code</span></div>
+    #end
+    
+    #if($!transInfo.status==0)
+    <div class="order_follow_bottom"><span>物流公司：$!transInfo.express_company_name</span><span>物流单号：$!transInfo.express_ship_code</span></div>
+    <center>$!transInfo.message</center>
+    #end
+    
+    #if($!transInfo.status==2)
+    <div class="order_follow_bottom"><span>物流公司：$!transInfo.express_company_name</span><span>物流单号：$!transInfo.express_ship_code</span></div>
+    <center>$!transInfo.message</center>
+    #end
+</div>
+#end

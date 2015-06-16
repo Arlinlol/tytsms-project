@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<title></title>
+</head>
+<body>
+<div class="print_box">
+  <div class="print_left">
+    <h1>$!{store.store_name}</h1>
+    <ul>
+      <li>收货人：$!obj.receiver_Name</li>
+      <li>电话：$!{obj.receiver_telephone}</li>
+      <li>手机：$!{obj.receiver_mobile}</li>
+      <li>所在地：$!obj.receiver_area</li>
+      <li>地址：$!obj.receiver_area_info</li>
+      <li>邮编：$!{obj.receiver_zip}</li>
+      <li>订单号：$!obj.order_id</li>
+      <li>下单时间：$!CommUtil.formatLongDate($!obj.addTime)</li>
+      <li>发货单号：$!obj.shipCode</li>
+    </ul>
+    <div class="print_left_tb">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="7%" align="center">序号</td>
+          <td width="55%">商品名称</td>
+          <td width="11%" align="center">规格</td>
+          <td width="10%" align="center">单价（元）</td>
+          <td width="7%" align="center">数量</td>
+          <td width="10%" align="center">小计（元）</td>
+        </tr>
+        #set($allCount = 0)
+        #set($prices = 0)
+         #foreach($map in $!orderFormTools.queryGoodsInfo("$!obj.goods_info"))
+            #set($goods_id = "$!{map.get('goods_id')}")	
+            #set($goods_name = "$!{map.get('goods_name')}")
+            #set($goods_count = "$!{map.get('goods_count')}")
+            #set($goods_price = "$!{map.get('goods_price')}")
+            #set($goods_type = "$!{map.get('goods_type')}")
+            #set($goods_gsp_val = "$!{map.get('goods_gsp_val')}")
+            #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+            #set($img="$!webPath/$!{goods_mainphoto_path}")
+        #set($allCount = $!allCount + $!CommUtil.null2Int($!goods_count))
+        #set($prices = $!CommUtil.null2Int($!goods_count) * $!CommUtil.null2Double($!goods_price))
+        <tr>
+          <td height="38" align="center">$!velocityCount</td>
+          <td>$!{goods_name}#if($!goods_type=="group")<span style="color:#F00">(团购商品)</span>#end</td>
+          <td align="center">$!goods_gsp_val</td>
+          <td align="center">￥$!goods_price</td>
+          <td align="center">$!goods_count</td>
+          <td align="center"><strong style="color:#F90">¥#if($!goods_type=="group")$!{gc.goods.group_goods.gg_price}#else $!prices  #end</strong></td>
+        </tr>
+        #end
+        <tr>
+          <td height="38" colspan="4" bgcolor="#eeeeee" style="padding-left:20px;">合计 </td>
+          <td align="center" bgcolor="#eeeeee">$!allCount</td>
+          <td align="center" bgcolor="#eeeeee">￥$!obj.goods_amount</td>
+        </tr>
+        <tr>
+          <td colspan="6" height="60"><ul>
+              <li>商品总价:￥$!obj.goods_amount</li>
+              <li>运费:￥$!{obj.ship_price}</li>
+              <li>订单总额：￥$!{obj.totalPrice}</li>
+            </ul></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="print_right">
+    <h1><span><a href="javascript:void(0);" onclick="window.print()">打印</a></span></h1>
+    <p><img src="$!webPath/th_th/resources/style/system/manage/blue/images/print_02.jpg" /><em>Size:210mmx297mm</em><b>当打印设置选择A4纸张、纵向打印、无边距时每张A4打印纸可输出1页订单。</b> </p>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>JAVA代码内部国际化配置</comment>
+	<entry key="tytsms.login">我是{0}, 今年{1}岁, {2}{3}人!</entry>
+	<entry key="tytsms.login.captchaerror">验证码错误</entry>
+	<entry key="tytsms.login.usernamenotfound">用户名不存在</entry>
+	<entry key="tytsms.login.passworderror">密码不正确</entry>
+	<entry key="tytsms.login.loginfail">登录失败</entry>
+	
+</properties>

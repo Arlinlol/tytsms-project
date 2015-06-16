@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/blue/Template.css"  rel="stylesheet" type="text/css"/>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">店铺模板</h1>
+  <div class="nav_list">
+  
+  <ul>
+  <li><a href="$!webPath/admin/store_template.htm"  class="this"><b>模板预览</b></a> </li>
+  <li> <a href="$!webPath/admin/store_template_add.htm"><b>编辑</b></a></li>
+   </ul>
+ 
+    </div>
+  <div class="shop_level">
+    <div class="shop_level_list">
+      <ul class="shopul_level">
+        #foreach($info in $!CommUtil.str2list("$!config.templates"))
+        #if($!CommUtil.fileExist("$!{path}$!{separator}resources$!{separator}style$!{separator}shop$!{separator}$!{info}$!{separator}images$!{separator}thumb.jpg"))
+        <li><img src="$!webPath/resources/style/shop/$!{info}/images/thumb.jpg" width="240" height="202" /><span style="margin-left:3px; color:#999999">模板$!{info}</span></li>
+        #else
+		 <li><img src="$!webPath/resources/style/common/images/thumb.jpg" width="240" height="202" /><span>
+          <input name="" type="checkbox" value="$!info" />
+          <span style="margin-left:3px; color:#999999">模板$!{info}无效</span> </span></li>
+        #end
+        #end
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>

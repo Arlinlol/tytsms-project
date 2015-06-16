@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台 - 商家规格列表-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+function save_form(){
+   jQuery("#theForm").submit();
+};
+jQuery(document).ready(function(){
+ jQuery("#theForm").validate({		
+	ignore: "",						  
+     rules: {
+			 store_free_price:{
+				number:true,
+				range:[0,999999999],
+				maxlength:9
+			 }
+			},
+     messages: {
+			store_free_price:{
+				number:"运费只能是数字格式",
+				range:"运费额度必须在0~999999999之间",
+				maxlength:"金额不能超过9位"
+				}
+		  }
+		 
+  }); 
+  });
+</script>
+<style>
+.user_order_table{width:840px; border:1px solid #E6E6E6; border-top:0;}
+.user_order_table .table_left{ width:100px; float:left;margin-top: 10px; text-align:right;}
+.user_order_table .table_right{ width:740px;float:left; padding:10px 0;}
+.user_order_table .table_right i{ float:left;}
+</style>
+</head>
+
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    $!httpInclude.include("/seller/nav.htm?op=goods_spec_list")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>商品管理</b> > <b>规格列表</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href="$!webPath/seller/free_transport_value.htm"><i></i>免运费额度</a></li>
+          </ul>
+        </div>
+        <div class="user_list_box">
+           <form method="post" name="theForm" id="theForm" action="$!webPath/seller/free_transport_save.htm">
+            <div class="operation">
+             <!--   <table width="100%" style="border:1px solid #E6E6E6;" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr>
+                <td width="100" align="right" style="border-bottom:0;">免费额度(¥)：</td>
+                <td style="border-bottom:0;" colspan="2"><input name="store_free_price" type="text" id="store_free_price" value="$!store.store_free_price" class="base_txt"/><br/><i style=" display:inline-block;margin-left:-515px;margin-top:10px;">默认0，表示不设置免运费额度，大于0表示购买金额超出该值后将免运费</i></td>
+              </tr>
+              <tr>
+                <td colspan="2"><input type="button"  value="保 存" style="cursor:pointer;margin-left:111px; display:inline;" onclick="save_form();" class="seller_save"/></td>
+                <td></td>
+              </tr>
+              </table>
+              -->
+              <div class="user_order_table">
+              	<div class="table_left">免费额度(¥)：</div>
+              	<div class="table_right">
+              		<input name="store_free_price" type="text" id="store_free_price" value="$!store.store_free_price" class="base_txt" style="margin-right:5px;"/>
+              		<br/>
+              		<div style="float:left; margin:5px 0 10px 0; width:840px;">默认0，表示不设置免运费额度，大于0表示购买金额超出该值后将免运费</div>
+              		<div class="user_order_btn"><input type="button"  value="保 存" style="cursor:pointer;" onclick="save_form();" class="seller_save"/></div>
+              	</div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

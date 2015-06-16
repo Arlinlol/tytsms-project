@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>站内信 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery(".user_menu b").toggle(
+			function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+			},
+			function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+			});	
+  });
+</script>
+</head>
+<body>
+  $!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+    $!httpInclude.include("/buyer/nav.htm?op=message")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><span class="myorder_fright"></span><strong>系统消息</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+        <span class="user_list_t_btn"><a href="$!webPath/buyer/message_send.htm" class="newadd"><b><i class="newadd_i"></i>发送站内短信</b></a></span>
+          <ul class="user_title_ul">
+            <li #if($!type==1)class="this"#end><i></i><a href="$!webPath/buyer/message.htm">收到消息（<strong class="red">$!{user_msgs.size()}</strong>）</a></li>
+         	<li #if($!type==2)class="this"#end><i></i><a href="$!webPath/buyer/message.htm?from_user_id=$!user.id">已发送消息（<strong class="red">$!{reply_msgs.size()}</strong>）</a></li>
+            <li #if($!type==0)class="this"#end><i></i><a href="$!webPath/buyer/message.htm?type=0">系统消息（<strong class="red">$!{sys_msgs.size()}</strong>）</a></li>
+          </ul>
+        </div>
+        #if($!objs.size()>0)
+         <form method="post" name="ListForm" id="ListForm">
+        <div class="user_list_box">
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_order_table">
+            <tr>
+              <th width="4%"></th>
+              <th width="25%">发送人</th>
+              <th width="40%">内容</th>
+              <th width="20%">时间</th>
+              <th>操作</th>
+            </tr>
+            #foreach($obj in $objs)
+            <tr>
+              <td align="center"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+              <td align="center">              
+                      $!obj.fromUser.userName 
+                       #if($!obj.status==0)<span style="color:#FF0000;">[未读]</span>#end
+                       #if($!{obj.fromUser.id}==$!{user.id}&&$!obj.reply_status==1)<span style="color:#FF0000;">[新回复]</span>#end</td>
+              <td align="center">$!CommUtil.htmlUnescape($!CommUtil.substring("$!obj.content",50))</td>
+              <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+              <td align="center" class="del_a"><a href="$!webPath/buyer/message_info.htm?id=$!obj.id&type=$!type" class="bule">查看</a>|<a href="javascript:void(0);" onclick="if(confirm('是否确定删除短信?'))window.location.href='$!webPath/buyer/message_del.htm?mulitId=$!obj.id&type=$!type'" class="bule">删除</a></td>
+            </tr>
+            #end
+          </table>
+        </div>
+        <div class="userlist_allop">
+          <div class="user_list_page"><span class="user_page_sp">$!gotoPageFormHTML</span>
+            <p class="user_listoper_p"><i>
+              <input name="all1" type="checkbox" id="all" value="" onclick="selectAll(this);"/ style="margin-left: 1px">
+              <label for="all">全选</label></i><a href="javascript:void(0);" onclick="cmd('$!webPath/buyer/message_del.htm','')" class="user_oper_all"><em></em>批量删除</a></p>
+          </div>
+        </div>
+         <input name="mulitId" type="hidden" id="mulitId" />
+        </form>
+        #else
+          <div class="nothing">
+            <div class="nothing_left"><img src="$!webPath/resources/style/system/front/default/images/nothing.png" /></div>
+            <div class="nothing_right">您目前还没有收到站内短信！</div>
+          </div>
+          #end
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

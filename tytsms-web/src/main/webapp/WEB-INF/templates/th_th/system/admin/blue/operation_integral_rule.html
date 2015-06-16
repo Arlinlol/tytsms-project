@@ -1,0 +1,271 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    rules:{
+	  memberRegister:{
+	    number :true
+	  },
+	  memberDayLogin:{
+	    number :true
+	  },
+	  indentComment:{
+	    number :true
+	  },
+	  consumptionRatio:{
+	    number :true
+	  },
+	  everyIndentLimit:{
+	    number :true
+	  },
+	  inviteRegister:{
+		number :true
+	  },
+	  shareRegister:{
+		number :true
+		},
+	  luckDraw:{
+		  number :true  
+	  },
+	  awardOne:{
+		  number :true  
+	  },
+	  awardTwo:{
+		  number :true  
+	  },
+	  awardThree:{
+		  number :true  
+	  },
+	  awardFour:{
+		  number :true  
+	  },
+	  awardFive:{
+		  number :true  
+	  },
+	  awardSix:{
+		  number :true  
+	  },
+	  awardSeven:{
+		  number :true  
+	  },
+	  awardEight:{
+		  number :true  
+	  },
+	  awardNine:{
+		  number :true  
+	  }
+	 },
+	messages:{
+	  memberRegister:{
+	    number :"只能为数字"
+	  },
+	  memberDayLogin:{
+	    number :"只能为数字"
+	  },
+	  indentComment:{
+	    number :"只能为数字"
+	  },
+	  consumptionRatio:{
+	    number :"只能为数字"
+	  },
+	  everyIndentLimit:{
+	    number :"只能为数字"
+	  },
+	  inviteRegister:{
+		number :"只能为数字"
+	  },
+	  shareRegister:{
+		number :"只能为数字"
+	  },
+	  luckDraw:{
+		number :"只能为数字"
+	  },
+	  awardOne:{
+		number :"只能为数字"
+	  },
+	  awardTwo:{
+		number :"只能为数字"
+	  },
+	  awardThree:{
+		number :"只能为数字"
+	  },
+	  awardFour:{
+		number :"只能为数字"
+	  },
+	  awardFive:{
+		number :"只能为数字"
+	  },
+	  awardSix:{
+		number :"只能为数字"
+	  },
+	  awardSeven:{
+		number :"只能为数字"
+	  },
+	  awardEight:{
+		number :"只能为数字"
+	  },
+	  awardNine:{
+		number :"只能为数字"  
+	  }
+	}
+  });	
+});
+</script>
+</head>
+<body>
+<form action="$!webPath/admin/integral_rule_save.htm" method="post" name="theForm" id="theForm">
+<div class="cont">
+  <h1 class="seth">积分规则</h1>
+  
+  <div class="nav_list">
+  
+ 
+   <ul> 
+   <li><a href="#"  class="this"><b>积分规则</b></a></li>
+
+   </ul> 
+
+   
+   </span>
+    <input name="id" type="hidden" id="id" value="$!config.id" />
+    
+  </div>
+  <div class="paytable">
+    <div>积分规则如下：</div>
+     <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="15%"><span class="form_btna">项目赠送</span></th>
+        <th align="left"><span class="form_btna">赠送积分</span></th>
+      </tr>
+      <tr>
+        <td>会员注册</td>
+        <td ><span class="size200">
+          <input name="memberRegister" type="text" id="memberRegister" value="$!config.memberRegister" />
+          </span></td>
+      </tr>
+      <tr>
+        <td>会员每天登录</td>
+        <td ><span class="size200">
+          <input name="memberDayLogin" type="text" id="memberDayLogin" value="$!config.memberDayLogin" />
+          </span></td>
+      </tr>
+      <tr>
+        <td>订单商品评论</td>
+        <td ><span class="size200">
+          <input name="indentComment" type="text" id="indentComment" value="$!config.indentComment" />
+          </span></td>
+      </tr>
+      <tr>
+        <td>邀请注册</td>
+        <td ><span class="size200">
+          <input name="inviteRegister" type="text" id="inviteRegister" value="$!config.inviteRegister" />
+          </span></td>
+      </tr>
+      <tr>
+        <td>链接分享</td>
+        <td ><span class="size200">
+          <input name="shareRegister" type="text" id="shareRegister" value="$!config.shareRegister" />
+          </span></td>
+      </tr>
+      <tr>
+        <th colspan="2" align="left"><span class="form_btna">购物赠送</span></th>
+      </tr>
+      <tr>
+        <td>购物积分</td>
+        <td ><span class="size200">
+          <input name="consumptionRatio" type="text" id="consumptionRatio" value="$!config.consumptionRatio" />
+          订单金额：积分，如：10，表示10货币赠送1积分 </span></td>
+      </tr>
+      <tr>
+        <td>购物积分上限</td>
+        <td ><span class="size200">
+          <input name="everyIndentLimit" type="text" id="everyIndentLimit" value="$!config.everyIndentLimit" />
+          每个订单最多赠送积分数</span></td>
+      </tr>
+      <tr>
+        <th colspan="2" align="left"><span class="form_btna">积分抽奖活动奖品设置</span></th>
+      </tr>
+      <tr>
+        <td>抽奖积分扣减</td>
+        <td ><span class="size200">
+          <input name="luckDraw" type="text" id="luckDraw" value="$!config.luckDraw" />
+          每次抽奖扣除的积分数</span></td>
+      </tr>
+      <tr>
+        <td>奖品一</td>
+        <td ><span class="size200">
+          <input name="awardOne" type="text" id="awardOne" value="$!config.awardOne" />
+            抽奖活动一等奖奖品设置如：10000 表示10000积分</span></td>
+      </tr>
+      <tr>
+        <td>奖品二</td>
+        <td ><span class="size200">
+          <input name="awardTwo" type="text" id="awardTwo" value="$!config.awardTwo" />
+          抽奖活动二等奖奖品设置如：5000</span></td>
+      </tr>
+      <tr>
+        <td>奖品三</td>
+        <td ><span class="size200">
+          <input name="awardThree" type="text" id="awardThree" value="$!config.awardThree" />
+          抽奖活动三等奖奖品设置如：2000</span></td>
+      </tr>
+      <tr>
+        <td>奖品四</td>
+        <td ><span class="size200">
+          <input name="awardFour" type="text" id="awardFour" value="$!config.awardFour" />
+          抽奖活动四等奖奖品设置如：1000</span></td>
+      </tr>
+      <tr>
+        <td>奖品五</td>
+        <td ><span class="size200">
+          <input name="awardFive" type="text" id="awardFive" value="$!config.awardFive" />
+          抽奖活动五等奖奖品设置如：500</span></td>
+      </tr>
+      <tr>
+        <td>奖品六</td>
+        <td ><span class="size200">
+          <input name="awardSix" type="text" id="awardSix" value="$!config.awardSix" />
+          抽奖活动六等奖奖品设置如：300</span></td>
+      </tr>
+      <tr>
+        <td>奖品七</td>
+        <td ><span class="size200">
+          <input name="awardSeven" type="text" id="awardSeven" value="$!config.awardSeven" />
+          抽奖活动七等奖奖品设置如：100</span></td>
+      </tr>
+      <tr>
+        <td>奖品八</td>
+        <td ><span class="size200">
+          <input name="awardEight" type="text" id="awardEight" value="$!config.awardEight" />
+          抽奖活动八等奖奖品设置如：50</span></td>
+      </tr>
+      <tr>
+        <td>奖品九</td>
+        <td ><span class="size200">
+          <input name="awardNine" type="text" id="awardNine" value="$!config.awardNine" />
+          抽奖活动九等奖奖品设置如：10</span></td>
+      </tr>
+      <tr>
+        <td>奖品十</td>
+        <td ><span class="size200">
+          <input name="awardTen" type="text" id="awardTen" value="$!config.awardTen" />
+          抽奖活动十等奖奖品设置如：再接再厉</span></td>
+      </tr>
+    </table>
+    </div>
+  </div>
+  <div class="submit">
+    <input name="" type="submit" value="提交" />
+  </div>
+</div>
+</form>
+</body>
+</html>

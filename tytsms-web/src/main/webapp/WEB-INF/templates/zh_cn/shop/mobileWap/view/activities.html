@@ -1,0 +1,162 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+<link href="$!webPath/resources/style/mobileWap/css/style.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/platform.css" rel="stylesheet" type="text/css" />
+<title></title>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/TouchSlide.1.1.js"></script>
+<script>
+
+function iosFun(cmd,para)
+{ 
+    document.location="objc://"+cmd+":/"+para;  //cmd代表objective-c中的的方法名，parameter1自然就是参数了
+}
+</script>
+<script>
+function save_search(){
+	jQuery("#searchForm").submit();
+}
+
+
+function add_cart(id ,goods_price,gsp ) {
+    var add = true
+    var gsp = "";
+    var user_id = jQuery("#user_id").val();
+    if (add) {
+        jQuery.post("$!webPath/mobileWap/add_goods_cart.htm", {
+            "goods_id": id,
+            "count": 1,
+            "price": goods_price,
+            "gsp": gsp
+        },
+        function(data) {
+          	if (data.code == -100) {
+                window.location.href = "$!webPath/mobileWap/login.htm";
+            } else {
+                jQuery("div.nav_width ul li[op='cart']").find("em").html(data.count);
+	            //更新顶部购物车信息
+	            jQuery("#error_goods_inventory").show().find("span").html("添加购物车成功！<a href='$!webPath/mobileWap/goods_cart1.htm'> >>查看购物车</a>").parent().fadeOut(5000);
+            }
+          
+        },
+        "json");
+    } else {
+        jQuery("#error_goods_inventory").show().find("span").html("请选择商品属性!").parent().fadeOut(3000);
+    }
+}
+
+</script>
+</head>
+<body>
+
+ $!httpInclude.include("/mobileWap/h.htm")
+<div class="view-wp"> 
+ $!httpInclude.include("/mobileWap/advertInvoke.htm?advertPositionId=7")
+<div class="main_nav">
+  <ul>
+    <li><a href="$!webPath/mobileWap/goods_cart1.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_j.png"></a><span id="asd">购物车</span></li>
+    <li><a href="$!webPath/mobileWap/buyer/index.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_h.png"></a><span>用户中心</span></li>
+    <li><a href="#"><img src="$!webPath/resources/style/mobileWap/images/nav_t.png"></a><span>积分商城</span></li>
+    <li><a href="#"><img src="$!webPath/resources/style/mobileWap/images/nav_c.png"></a><span>推荐品牌</span></li>
+  </ul>
+</div>
+
+<!--热销商品 -->
+<div class="floor main-floor">
+<div class="hot_goods">
+<div class="hot_top"><img src="$!webPath/resources/style/mobileWap/images/hot_title.png"></div>
+			#set($i=0)
+ 				 #foreach($obj in $ac_goods)
+					 	#set($i=$i+1)
+					 	 #set($img="$!webPath/$!config.goodsImage.path/$!config.goodsImage.name")
+						      #if($!obj.goods_main_photo)
+						      #set($big="$!webPath/$!obj.goods_main_photo.path/$!obj.goods_main_photo.name")
+						      #set($img="$!{big}_middle.$!{obj.goods_main_photo.ext}")
+						      #end
+						      #if($i<3)
+						      	
+								#foreach($spec in $goodsViewTools.generic_spec("$!obj.id"))
+									$!{gsp.spec.id}
+								 #set($gsp = $!{gsp.spec.id})
+								#end
+						      
+						      <div class="hot_content">
+								<div class="hot_good_left fl"><a href="$!webPath/mobileWap/goods.htm?id=$!obj.id"><img src="$!{img}"></a></div>
+								<div class="hot_good_right fr">
+								<div class="hot_good_info">
+								<div class="hot_good_name">$!obj.goods_name</div>
+								<div class="hot_tips">促销价直降</div>
+								<span class="hot_good_price">¥$!obj.goods_current_price</span>
+								<span class="hot_good_pn">¥$!obj.goods_price</span>
+								<span class="hot_good_pd">¥$!obj.goods_salenum人</span>
+								</div>
+								<div class="hot_good_buycar" ><a href="javascript:void(0);"  onClick="add_cart('$!obj.id','$!obj.goods_current_price','$!gsp')"><img src="$!webPath/resources/style/mobileWap/images/buycar_btn.png"></a></div>
+								</div>
+								</div>
+								#if($i==1)
+								<div class="hot_hr"></div>
+								#end
+							#end
+			         #end
+
+</div>
+</div>
+<div class="center_box" id="error_goods_inventory"
+							style="display: none">
+							<span class="count_none"></span>
+						</div>
+<!--热销商品end -->
+
+<!--小横幅-->
+<div class="mlist-ad"><a><img src="$!webPath/resources/style/mobileWap/images/ad1.png"></a></div>
+
+<!--零食区 -->
+<div class="floor main-floor">
+<div class="snacks">
+	<div class="snacks_top"><img src="$!webPath/resources/style/mobileWap/images/snacks_title.png"></div>
+		<div class="snacks_content">
+			<ul class="gs_list">
+			 	#set($i=0)
+					 #foreach($obj in $ac_goods)
+					 	#set($i=$i+1)
+					 	 #set($img="$!webPath/$!config.goodsImage.path/$!config.goodsImage.name")
+						      #if($!obj.goods_main_photo)
+						      #set($big="$!webPath/$!obj.goods_main_photo.path/$!obj.goods_main_photo.name")
+						      #set($img="$!{big}_middle.$!{obj.goods_main_photo.ext}")
+						      #end
+						      #if($i>2)
+							      <li><a href="$!webPath/mobileWap/goods.htm?id=$!obj.id" class="gs_con">
+									<div class="gs_img"><img src="$!{img}"></div>
+									<div class="gs_name">$!obj.goods_name</div>
+									<div class="gs_price">¥$!obj.goods_current_price</div>
+									</a>
+								</li>
+							#end
+			         #end
+			
+			</ul>
+		</div>
+	</div>
+</div>
+
+<!--小横幅-->
+
+<div class="mlist-ad">
+$!httpInclude.include("/mobileWap/advertInvoke9.htm?advertPositionId=9")
+</div>
+
+</div>
+
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+
+</body>
+</html>
+
+

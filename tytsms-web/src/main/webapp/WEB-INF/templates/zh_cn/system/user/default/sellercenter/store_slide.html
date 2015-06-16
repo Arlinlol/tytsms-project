@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-店铺幻灯-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+
+jQuery(document).ready(function(){
+	jQuery("#theForm").validate({
+       rules: {
+		       acc1:{accept:"$!config.imageSuffix"},
+			   acc2:{accept:"$!config.imageSuffix"},
+			   acc3:{accept:"$!config.imageSuffix"},
+			   acc4:{accept:"$!config.imageSuffix"},
+			   acc5:{accept:"$!config.imageSuffix"}
+	          },
+		messages: {
+			   acc1:{accept:"幻灯格式不正确"},
+			   acc2:{accept:"幻灯格式不正确"},
+			   acc3:{accept:"幻灯格式不正确"},
+			   acc4:{accept:"幻灯格式不正确"},
+			   acc5:{accept:"幻灯格式不正确"}
+			 }
+  });			
+});
+function save_form(){
+   jQuery("#theForm").submit();
+}
+</script>
+</head>
+
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    $!httpInclude.include("/seller/nav.htm?op=store_set")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>我的店铺</b>><b>店铺幻灯</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href="$!webPath/seller/store_set.htm"><i></i>店铺设置</a></li>
+            <li class="this"><a href="$!webPath/seller/store_slide.htm"><i></i>店铺幻灯</a></li>
+          </ul>
+        </div>
+        <div class="add_usercenter">
+        <form action="$!webPath/seller/store_slide_save.htm" method="post" enctype="multipart/form-data" id="theForm">
+         <table width="705" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+                  <tr>
+                    <td width="98" align="right" valign="top">幻灯1：</td>
+                    <td width="607" valign="top">
+                        #if($!store.slides.size()>=1)
+                          #set($slide1=$!store.slides.get(0))
+                        #end
+                        #if($!slide1)
+                        <span class="base_shop_img"><img src="$!webPath/$!slide1.acc.path/$!slide1.acc.name" width="210" height="104" /></span>
+                        #end
+                        <span class="base_shop_sp">图片：
+                          <input name="acc1" type="file" id="acc1" size="30" />
+                        </span>
+                        <span class="base_shop_sp">
+                          URL：
+                            <input name="acc_url1" type="text" id="acc_url1" value="#if($!slide1.url!="")$!slide1.url#else$!webPath#end" size="40" />
+                        </span>
+                        <i class="base_i">此处为您的店铺首页幻灯，建议尺寸1920*450像素,URL格式为:www.xxxx.com</i>
+                      </td>
+                  </tr>
+                 <tr>
+                    <td width="98" align="right" valign="top">幻灯2：</td>
+                    <td width="607" valign="top">
+                        #if($!store.slides.size()>=2)
+                          #set($slide2=$!store.slides.get(1))
+                        #end
+                        #if($!slide2)
+                       <span class="base_shop_img"><img src="$!webPath/$!slide2.acc.path/$!slide2.acc.name" width="210" height="104" /></span>
+                        #end
+                         <span class="base_shop_sp">图片：
+                          <input name="acc2" type="file" id="acc2" size="30" />
+                        </span>
+                        <span class="base_shop_sp">
+                          URL：
+                            <input name="acc_url2" type="text" id="acc_url2" value="#if($!slide2.url!="")$!slide2.url#else$!webPath#end" size="40" />
+                        </span>
+                        <i class="base_i">此处为您的店铺首页幻灯，建议尺寸1920*450像素,URL格式为:www.xxxx.com</i>
+                      </td>
+                  </tr>
+                  <tr>
+                    <td width="98" align="right" valign="top">幻灯3：</td>
+                    <td width="607" valign="top">
+                        #if($!store.slides.size()>=3)
+                          #set($slide3=$!store.slides.get(2))
+                        #end
+                        #if($!slide3)
+                         <span class="base_shop_img"><img src="$!webPath/$!slide3.acc.path/$!slide3.acc.name" width="210" height="104" /></span>
+                        #end
+                        <span class="base_shop_sp">图片：
+                          <input name="acc3" type="file" id="acc3" size="30" />
+                        </span>
+                        <span class="base_shop_sp">
+                          URL：
+                            <input name="acc_url3" type="text" id="acc_url3" value="#if($!slide3.url!="")$!slide3.url#else$!webPath#end" size="40" />
+                        </span>
+                        <i class="base_i">此处为您的店铺首页幻灯，建议尺寸1920*450像素,URL格式为:www.xxxx.com</i>
+                      </ul></td>
+                  </tr>
+                  <tr>
+                    <td width="98" align="right" valign="top">幻灯4：</td>
+                    <td width="607" valign="top">
+                        #if($!store.slides.size()>=4)
+                          #set($slide4=$!store.slides.get(3))
+                        #end
+                        #if($!slide4)
+                        <span class="base_shop_img"><img src="$!webPath/$!slide4.acc.path/$!slide4.acc.name" width="210" height="104" /></span>
+                        #end
+                        <span class="base_shop_sp">图片：
+                          <input name="acc4" type="file" id="acc4" size="30" />
+                        </span>
+                        <span class="base_shop_sp">
+                          URL：
+                            <input name="acc_url4" type="text" id="acc_url4" value="#if($!slide4.url!="")$!slide4.url#else$!webPath#end" size="40" />
+                        </span>
+                        <i class="base_i">此处为您的店铺首页幻灯，建议尺寸1920*450像素,URL格式为:www.xxxx.com</i>
+                      </ul></td>
+                  </tr>
+                  <tr>
+                    <td width="98" align="right" valign="top">幻灯5：</td>
+                    <td width="607" valign="top">
+                        #if($!store.slides.size()>=5)
+                          #set($slide5=$!store.slides.get(4))
+                        #end
+                        #if($!slide5)
+                        <span class="base_shop_img"><img src="$!webPath/$!slide5.acc.path/$!slide5.acc.name" width="210" height="104" /></span>
+                        #end
+                         <span class="base_shop_sp">图片：
+                          <input name="acc5" type="file" id="acc5" size="30" />
+                        </span>
+                        <span class="base_shop_sp">
+                          URL：
+                            <input name="acc_url5" type="text" id="acc_url5" value="#if($!slide5.url!="")$!slide5.url#else$!webPath#end" size="40" />
+                        </span>
+                        <i class="base_i">此处为您的店铺首页幻灯，建议尺寸1920*450像素,URL格式为:www.xxxx.com</i>
+                      </ul></td>
+                  </tr>
+                  <tr>
+                    <td width="98" align="right">&nbsp;</td>
+                    <td style="padding-left:30px;"><span class="setsub">
+                      <input name="" type="submit"  value="提交" style="cursor:pointer;" class="seller_save"/>
+                      <input name="store_id" type="hidden" id="store_id" value="$!store.id" />
+                    </span></td>
+                  </tr>
+                </table>
+		</form>                
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

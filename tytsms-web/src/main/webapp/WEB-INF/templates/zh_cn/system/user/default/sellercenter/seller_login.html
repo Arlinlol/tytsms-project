@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-登录 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/login.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    errorPlacement: function(error, element){
+            var error_li = element.parent('li');
+            error_li.append(error);
+        },
+	rules: {
+			username: "required",
+			password: "required"#if($!config.securityCodeLogin),
+			code:"required"#end},
+		messages: {
+			username: "用户名不能为空",
+			password: "密码不能为空"#if($!config.securityCodeLogin),
+			code:"验证码不能为空"#end
+					}
+  });
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="seller_login">
+  <h1><span>#if($!config.websiteLogo) <a href="$!webPath/index.htm"> <img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" /> </a> #else <a href="$!webPath/index.htm"><img src="$!webPath/resources/style/system/front/default/images/logo.jpg"   /> </a> #end</span><strong>商家后台登录</strong></h1>
+  <form action="$!httpsWebPath/iskyshop_login.htm" method="post" name="theForm" id="theForm">
+  <div class="seller_login_bg">
+    <div class="seller_login_bg_double">
+      <div class="seller_login_box">
+        <div class="seller_login_left"><img src="$!webPath/resources/style/system/front/default/images/login/seller_bg_left.jpg" width="396" height="338" /></div>
+        <div class="seller_login_right">
+          <ul>
+            <li>
+              <h3>用户名</h3>
+              <span class="seller_login_user"></span>
+              <input name="username" type="text"  class="seller_log_input" id="username"/>
+            </li>
+            <li>
+              <h3>密码</h3>
+              <span class="seller_login_psd"></span>
+              <input name="password" type="password"  class="seller_log_input" id="password"/>
+            </li>
+            #if($!config.securityCodeLogin)
+             <script>
+                 function refreshCode(){
+	                 jQuery("#code_img").attr("src","$!webPath/verify.htm?d"+new Date().getTime());
+                 }
+             </script>
+            <li>
+              <h3>验证码</h3>
+              <input name="code" type="text" class="seller_log_code" id="code"/>
+               #if($!config.securityCodeType=='voice')
+            <script>
+				   function readCode(id){
+                         var  s = "<embed id='sound_play' name='sound_play' src='$!webPath/resources/flash/soundPlayer.swf?" + (new Date().getTime()) + "' FlashVars='url=$!webPath"+ "' width='0'   height='0' allowScriptAccess='always' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' /></embed>";
+                    jQuery("#"+id).html(s);
+                    }
+			 </script>
+              <b class="seller_code_img"><img id="code_img" src="$!webPath/verify.htm" width="59" height="27" style="display:none;" /></b>
+              <a href="javascript:void(0);" onclick="readCode('player')" title="朗读验证码" class="seller_code_sand"><img src="$!webPath/resources/style/system/front/default/images/login/seller_log_sand.jpg" width="29" height="26" /></a>
+              <a href="javascript:void(0);" onclick="refreshCode();"   class="seller_code_refresh"><img src="$!webPath/resources/style/system/front/default/images/login/seller_log_refresh.jpg" width="27" height="26" /></a>
+              <span id="player"></span>
+             #else
+              <b class="seller_code_img"><img id="code_img" src="$!webPath/verify.htm" width="59" height="27" /></b>
+              <a href="javascript:void(0);" onclick="refreshCode();" class="seller_code_refresh"><img src="$!webPath/resources/style/system/front/default/images/login/seller_log_refresh.jpg" width="27" height="26" /></a>
+             #end
+            </li>
+            #end
+          </ul>
+          <input name="" type="submit" class="seller_log_submit" value="登录" />
+          <input name="login_role" type="hidden" id="login_role" value="seller" />
+        </div>
+      </div>
+    </div>
+  </div>
+ </form> 
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

@@ -1,0 +1,14 @@
+﻿#if($!gcs.size()>0)
+<div class="class_settle">
+	<input type="hidden"  id="gc_detail_info" name="gc_detail_info" value='$!{gc_detail_info}'/>
+  <table width="200" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      #foreach($gc in $gcs)	
+      <td align="left" style="clear:both; float:left; width:200px; height:25px; line-height:25px;">$!{gc.parent.className}&nbsp;&nbsp;->&nbsp;&nbsp;$!{gc.className}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="javascript:void(0)" class="blue" onclick="delGC_details('$!{gc.id}')">删除</a></td>
+      #end
+    </tr>
+  </table>
+</div>
+#else
+无
+#end

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">竞价直通车</h1>
+  <div class="nav_list">
+
+  <ul>
+  <li><a href="$!webPath/admin/ztc_set.htm"><b>直通车设置</b></a></li>
+  <li><a href="$!webPath/admin/ztc_apply.htm" class="this"><b>直通车申请</b></a></li> 
+  <li><a href="$!webPath/admin/ztc_goods.htm"><b>直通车商品</b></a></li>
+  <li><a href="$!webPath/admin/ztc_gold_log.htm"><b>金币日志</b></a></li>
+  </ul>
+  </div>
+  <form method="post" id="queryForm">
+  <div class="search">
+    <ul>
+      <li><span>商品名称</span> <span class="size100">
+        <input name="goods_name" type="text" id="goods_name" />
+        </span>   <span>店铺名称</span> <span class="size100">
+        <input name="store_name" type="text" id="store_name" />
+        </span> <span>
+        <select name="ztc_status" id="ztc_status">
+          <option value="">审核状态</option>
+          <option value="1">等待审核</option>
+          <option value="2">审核通过</option>
+          <option value="-1">审核失败</option>
+        </select>
+        </span><span>
+        <select name="ztc_pay_status" id="ztc_pay_status">
+          <option value="">支付状态</option>
+          <option value="0">等待支付</option>
+          <option value="1">支付成功</option>
+        </select>
+        </span><span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+        </span> </li>
+    </ul>
+  </div>
+  </form>
+  <form method="post" id="ListForm">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="20%"><span class="form_btna">商品名称</span></th>
+        <th width="18%"><span class="form_btna">店铺名称</span></th>
+        <th width="15%" align="center"><span class="form_btna">消耗金币</span></th>
+        <th align="center" width="15%"><span class="form_btna">直通车价格（金币/天）</span></th>
+        <th  align="center" width="15%"><span class="form_btna">开始时间</span></th>
+        <th width="15%" align="center"><span class="form_btna">状态</span></th>
+        <th align="center" ><span class="form_btna">操作</span></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr>
+        <td><a href="$!webPath/goods_$!{obj.id}.htm" target="_blank">$!obj.goods_name</a></td>
+        <td align="center">$!obj.goods_store.store_name</td>
+        <td align="center">$!obj.ztc_gold</td>
+        <td align="center">$!obj.ztc_price</td>
+        <td align="center">$!CommUtil.formatShortDate($!obj.ztc_begin_time)</td>
+        #if($!obj.ztc_pay_status==1)
+          #set($pay_status="已支付")
+        #end
+        #if($!obj.ztc_pay_status==0)
+          #set($pay_status="未支付")
+       #end
+       #if($!obj.ztc_status==1)
+          #set($ztc_status="待审核")
+       #end
+       #if($!obj.ztc_status==2)
+          #set($ztc_status="审核通过")
+       #end
+       #if($!obj.ztc_status==-1)
+         #set($ztc_status="审核失败")
+       #end
+        <td align="center">$!{pay_status},$!{ztc_status}</td>
+        <td align="center" class="hui oprate_con">#if($!obj.ztc_status==1)<a href="$!webPath/admin/ztc_apply_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">编辑</a>#end <a href="$!webPath/admin/ztc_apply_view.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">查看</a></td>
+      </tr>
+      #end
+    </table>
+  </div>
+
+    
+    
+    <div class="operate_bar">
+    <div class="fenye"> <input name="ztc_pay_status" type="hidden" id="ztc_pay_status" value="$!ztc_pay_status" />
+    <input name="ztc_status" type="hidden" id="ztc_status" value="$!ztc_status" />
+    <input name="store_name" type="hidden" id="store_name" value="$!store_name" />
+    <input name="userName" type="hidden" id="userName" value="$!userName" />
+    <input name="goods_name" type="hidden" id="goods_name" value="$!goods_name" />
+    <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />$!gotoPageFormHTML</div> 
+    
+    
+             
+ </div>
+ 
+ 
+  </form>
+  
+</div>
+</body>
+</html>

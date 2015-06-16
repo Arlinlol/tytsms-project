@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+});
+function ajax_update(id,fieldName,obj){
+   var val=jQuery(obj).val();
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/activity_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/th_th/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }      
+              }
+	    });
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">团购管理</h1>
+  
+  <div class="nav_list">
+ 
+  <ul>
+  <li><a href="$!webPath/admin/group_list.htm" class="this"><b>团购列表</b></a> </li>
+  <li> <a href="$!webPath/admin/group_add.htm"><b>新增团购</b></a> </li>
+    <li><a href="$!webPath/admin/group_class_list.htm?type=goods" ><b>商品团购分类</b></a> </li>
+   <li><a href="$!webPath/admin/group_class_list.htm?type=life" ><b>生活团购分类</b></a> </li>
+  <li><a href="$!webPath/admin/group_class_add.htm?type=goods" ><b>新增商品类分类</b></a></li>
+   <li><a href="$!webPath/admin/group_class_add.htm?type=life" ><b>新增生活类分类</b></a></li>
+  <li><a href="$!webPath/admin/group_area_list.htm" ><b>团购区域</b></a> </li>
+  <li><a href="$!webPath/admin/group_area_add.htm"><b>新增区域</b></a> </li>
+  <li><a href="$!webPath/admin/group_price_list.htm" ><b>价格区间</b></a> </li>
+  <li><a href="$!webPath/admin/group_price_add.htm"><b>添加区间</b></a>  </li>
+  </ul>
+
+  </div>
+  
+  <div class="operation">
+    <h3>友情提示</h3>
+    <ul>
+      <li>团购活动需要添加团购分类与团购区域，商家方能参加团购活动</li>
+      <li>商品购、生活购在同一时间段只能存在一个，不允许多个</li>
+      <li>团购发布后就不可以修改，只能关闭，请慎重操作</li>
+    </ul>
+  </div>
+  <form method="post" id="ListForm" action="$!webPath/admin/activity_list.htm">
+    <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="6%"></td>
+        <th width="25%"><span class="form_btna">团购名称</span></th>
+          <th width="12%" align="center"><span class="form_btna">类型</span></th>
+        <th width="10%" align="center"><span class="form_btna">开始时间</span></th>
+        <th align="center" width="10%"><span class="form_btna">结束时间</span></td>
+        <th  align="center" width="10%"><span class="form_btna">报名截止日期</span></th>
+        <th  align="center" width="8%"><span class="form_btna">状态</span></th>
+        <th  align="center"><span class="form_btna">操作</span></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr id="column_$!{obj.id}">
+        <td class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+        <td>$!obj.group_name</td>
+        <td align="center">#if($!obj.group_type==0) 商品购 #else 生活购 #end</td>
+        <td align="center">$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!obj.beginTime)</td>
+        <td align="center">$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!obj.endTime)</td>
+        <td align="center">$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!obj.joinEndTime)</td>
+        #if($!obj.status==0)
+          #set($status="正常")
+        #end
+        #if($!obj.status==-1)
+          #set($status="关闭")
+        #end
+        #if($!obj.status==-2)
+          #set($status="已结束")
+        #end
+        #if($!obj.status==1)
+          #set($status="未开始")
+        #end
+        <td align="center">$!status</td>
+        #set($type = "goods")
+        #if($!obj.group_type==1)
+        #set($type = "life")
+        #end
+        <td  align="center" class="hui oprate_con"><a href="$!webPath/admin/group_goods_list.htm?group_id=$!obj.id&type=$!type" class="blue">申请列表</a>#if($!obj.status>=0)|<a href="javascript:void(0);" onclick="if(confirm('是否确认关闭该团购活动？'))window.location.href='$!webPath/admin/group_close.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="blue">关闭</a>#end|<a href="javascript:void(0);" onclick="if(confirm('删除后不可恢复，是否继续？'))window.location.href='$!webPath/admin/group_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="blue">删除</a></td>
+      </tr>
+      #end
+      
+    </table>
+    
+    <div class="operate_bar">
+    <div class="fenye">          <input name="endTime" type="hidden" id="endTime" value="$!endTime" />
+          <input name="beginTime" type="hidden" id="beginTime" value="$!beginTime" />
+          <input name="ac_status" type="hidden" id="ac_status" value="$!ac_status" />
+          <input name="q_ac_title" type="hidden" id="q_ac_title" value="$!q_ac_title" />
+          <input type="hidden" name="mulitId" id="mulitId" />
+          <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+          $!gotoPageFormHTML</div> 
+    
+    <div class="oper_sp"> <span class="oper_check"><input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部</span>
+           <span class="oper_del">  <input name="" type="button" value="删除" onclick="cmd('$!webPath/admin/group_del.htm');"/></span></div>
+             
+ </div>
+  </div>
+  </form>
+</div>
+</body>
+</html>

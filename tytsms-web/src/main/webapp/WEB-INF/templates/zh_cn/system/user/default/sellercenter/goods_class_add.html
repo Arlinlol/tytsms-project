@@ -1,0 +1,57 @@
+<script>
+jQuery(document).ready(function(){
+  //								
+ jQuery("#theForm").validate({
+	ignore: "",
+    rules:{
+	  className:{required :true}
+	 },
+	messages:{
+	  className:{required :"分类不能为空"}  
+	}
+  });
+ //
+ jQuery("#pid").val("$!obj.parent.id");
+ jQuery(":radio[id=display][value=$!obj.display]").attr("checked",true);;
+});
+</script>
+<form action="$!webPath/seller/goods_class_save.htm" method="post" id="theForm">
+
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+    <tr>
+      <td width="120" align="right"><input name="id" type="hidden" id="id" value="$!obj.id" />
+        <strong class="redstr">*</strong>分类名称:</td>
+      <td align="left"><span class="size200">
+        <input name="className" type="text" id="className" value="$!obj.className" />
+        </span></td>
+    </tr>
+    <tr>
+      <td width="120" align="right">上级分类:</td>
+      <td align="left"><select name="pid" id="pid">
+          <option value="">请选择上级分类</option>
+          #foreach($ugc in $ugcs)
+          <option value="$!ugc.id">$!ugc.className</option>
+		  #end
+        </select></td>
+    </tr>
+    <tr>
+      <td width="120" align="right" >分类排序:</td>
+      <td align="left"><span class="size200">
+        <input name="sequence" type="text" id="sequence" value="$!obj.sequence" />
+        </span></td>
+    </tr>
+    <tr>
+      <td width="120" align="right" >显示状态:</td>
+      <td align="left"><span class="base_sex"><input name="display" type="radio" id="display" value="true" checked="checked" />
+        &nbsp;是 &nbsp;</span>
+       <span class="base_sex"> <input type="radio" name="display" id="display" value="false" />
+        &nbsp;否</span></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><span class="inputbtn">
+        <input name="" type="submit" value="提交" class="white_btn" style="cursor:pointer;"/>
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        </span></td>
+    </tr>
+  </table>
+</form>

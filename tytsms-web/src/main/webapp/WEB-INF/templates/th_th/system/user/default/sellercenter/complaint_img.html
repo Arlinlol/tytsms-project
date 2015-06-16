@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-投诉图片- $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+   jQuery("#theForm").validate({
+	   rules:{
+		     to_user_content:{required:true},
+			 img1:{accept:"$!config.imageSuffix"},
+			 img2:{accept:"$!config.imageSuffix"},
+			 img3:{accept:"$!config.imageSuffix"}
+		   },
+	   messages:{
+		     to_user_content:{required:"申诉内容不能为空"},
+			 img1:{accept:"不允许的图片类型"},
+			 img2:{accept:"不允许的图片类型"},
+			 img3:{accept:"不允许的图片类型"}
+		   }
+	});
+   jQuery(".comp_poces b").removeClass("this2");
+   jQuery("#complaint_$!{obj.status}").addClass("this2");
+});
+function complaint_appeal(){
+  jQuery("#theForm").attr("action","$!webPath/seller/complaint_appeal.htm");
+  jQuery("#theForm").submit();
+}
+function complaint_arbitrate(){
+ if(confirm("确定提交仲裁吗？")){	
+  jQuery("#theForm").attr("action","$!webPath/seller/complaint_arbitrate.htm");
+  jQuery("#theForm").submit();
+ }
+}
+function complaint_talk(){
+   var talk_content=jQuery("#talk_content").val();
+  jQuery.post("$!webPath/seller/complaint_talk.htm",{"talk_content":talk_content,"id":"$!obj.id"},function(data){
+	  jQuery("#talk_content_detail").empty();	
+      jQuery.each(data, function(index,item){
+	      jQuery("#talk_content_detail").append("<li class='"+item.role+"'>"+item.content+"</li>");
+	  })
+  },"json");
+   jQuery("#talk_content").val("");
+   alert("发布对话成功！");
+}
+function complaint_talk_reload(){
+  jQuery.post("$!webPath/seller/complaint_talk.htm",{"talk_content":"","id":"$!obj.id"},function(data){
+	  jQuery("#talk_content_detail").empty();	
+      jQuery.each(data, function(index,item){
+	       jQuery("#talk_content_detail").append("<li class='"+item.role+"'>"+item.content+"</li>");
+	  })
+  },"json");
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<form method="post" enctype="multipart/form-data" id="theForm">
+  <input name="id" type="hidden" id="id" value="$!obj.id" />
+  <div class="main">
+    <div class="seller_center">
+      <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=complaint") </div>
+      <div class="seller_right">
+        <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>客户服务</b>><b>投诉管理</b></span></div>
+        <div class="seller_list">
+          <div class="seller_list_title">
+            <ul class="seller_title_ul">
+              <li><a href="$!webPath/seller/complaint.htm"><i></i>投诉列表</a></li>
+              <li class="this"><a href="javascript:void(0);"><i></i>投诉图片</a></li>
+            </ul>
+          </div>
+          <div class="user_list_box">
+            <div class="complaint_one">
+              <h1 class="complaint_h">投诉处理图片</h1>
+              <div class="comp_goodetails">
+                <ul class="comp_tousul">
+                  #if($!type=="seller") 
+                  #if($!obj.to_acc1)
+                  <li><span><img src="$!webPath/$!obj.to_acc1.path/$!obj.to_acc1.name" height="$!obj.to_acc1.height" width="$!obj.to_acc1.width" /><i class="comp_delall"> </i></span></li>
+                  #end
+                  #if($!obj.to_acc2)
+                  <li><span><img src="$!webPath/$!obj.to_acc2.path/$!obj.to_acc2.name" height="$!obj.to_acc2.height" width="$!obj.to_acc2.width" /><i class="comp_delall"> </i></span></li>
+                  #end
+                  #if($!obj.to_acc3)
+                  <li><span><img src="$!webPath/$!obj.to_acc3.path/$!obj.to_acc3.name" height="$!obj.to_acc3.height" width="$!obj.to_acc3.width" /><i class="comp_delall"> </i></span></li>
+                  #end
+                  #end
+                  #if($!type=="buyer") 
+                  #if($!obj.from_acc1)
+                  <li><span><img src="$!webPath/$!obj.from_acc1.path/$!obj.from_acc1.name" height="$!obj.from_acc1.height" width="$!obj.from_acc1.width" /><i class="comp_delall"> </i></span></li>
+                  #end
+                  #if($!obj.from_acc2)
+                  <li><span><img src="$!webPath/$!obj.from_acc1.path/$!obj.from_acc2.name" height="$!obj.from_acc2.height" width="$!obj.from_acc2.width" /><i class="comp_delall"> </i></span></li>
+                  #end
+                  #if($!obj.from_acc3)
+                  <li><span><img src="$!webPath/$!obj.from_acc1.path/$!obj.from_acc3.name" height="$!obj.from_acc3.height" width="$!obj.from_acc3.width" /><i class="comp_delall"> </i></span></li>
+                  #end
+                  #end
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function(){
+	 	//改变系统提示的样式
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });							
+	jQuery(".choose_right a[mark='$!config.payoff_count']").addClass("this");
+	 jQuery.post("$!webPath/admin/payofflog_set_ajax.htm",{
+						 "payoff_count":"$!config.payoff_count"
+						 },function(data){
+							jQuery(".calendar ul li").removeClass("this"); 
+							var se=data;
+						    var str  =  se.split(",");
+							var b = "";
+							for(i=0;i<str.length;i++){
+								jQuery(".calendar ul li[da="+str[i]+"]").addClass("this");
+								if(i+1==str.length){
+								b=b+"<b>"+str[i]+"日</b>";	
+								}else{
+								b=b+"<b>"+str[i]+"日、</b>";
+								}
+								}
+							jQuery(".calendar_day b").html(b);	
+						    },"text");
+	//
+	jQuery(".choose_right a").click(function(){
+	  var mark = jQuery(this).attr("mark");
+	  jQuery(".choose_right a").removeClass("this");
+	  jQuery(this).addClass("this");
+	  jQuery("#payoff_count").val(mark);
+	         jQuery.post("$!webPath/admin/payofflog_set_ajax.htm",{
+						 "payoff_count":mark
+						 },function(data){
+							jQuery(".calendar ul li").removeClass("this"); 
+							var se=data;
+						    var str  =  se.split(",");
+							var b = "";
+							var ms = "";
+							for(i=0;i<str.length;i++){
+								jQuery(".calendar ul li[da="+str[i]+"]").addClass("this");
+								if(i+1==str.length){
+								b=b+"<b>"+str[i]+"日</b>";	
+								ms = ms+str[i]+"日";
+								}else{
+								b=b+"<b>"+str[i]+"日、</b>";
+								ms = ms+str[i]+"日、";
+								}
+								}
+							jQuery("#payoff_mag_default").html("今天是$!{now}，本月的结算日期为"+ms+"，请于结算日申请结算。");	
+							jQuery(".calendar_day b").html(b);	
+						    },"text");
+	});
+	jQuery("input[name=payoff_mag_type]").click(function(){
+	 var val= jQuery(this).val();
+	 jQuery(".choose_right textarea").hide();
+	 if(val==0){
+		 jQuery("#payoff_mag_default").show();
+		 }else{
+	     jQuery("#payoff_mag_auto").show();		 
+		}
+	 });
+jQuery(".choose_right textarea").hide();
+#if($!config.payoff_mag_type==0)	 
+jQuery("#payoff_mag_default").show();
+#else	 
+jQuery("#payoff_mag_auto").show();		 
+#end
+	
+ });////
+
+function saveForm(){
+	jQuery("#theForm").submit();
+	}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">结算设置</h1>
+  <div class="operation">
+      <h3>友情提示</h3>
+      <ul>
+        <li>设置每个月结算次数，系统根据结算次数平均分配结算日期，最后一次结算均为当月的最后一天</li>
+      </ul>
+    </div>
+  <form name="theForm" id="theForm" action="$!webPath/admin/payofflog_set_save.htm" method="post">
+    <input name="id" id="id" type="hidden" value="$!config.id" />
+     <input name="payoff_count" id="payoff_count" type="hidden" value="$!config.payoff_count" />
+   <div class="edit">
+    <div class="editul setcont">
+    <ul class="set3">
+      <li>
+		<span class="choose_left" style="margin-left:10px;">月结算次数：</span>
+		<span class="choose_right">
+        <a mark="1" href="javascript:void(0);"><b>1次</b><i></i></a>
+        <a mark="2" href="javascript:void(0);"><b>2次</b><i></i></a>
+        <a mark="3" href="javascript:void(0);"><b>3次</b><i></i></a>
+        <a mark="4" href="javascript:void(0);"><b>4次</b><i></i></a>
+        </span>
+      </li>
+         
+    </ul>
+    <!--日历-->
+
+    <div class="calendar">
+    	<h1>$!{now}</h1>
+    	<ul>
+        #foreach($l in $list)
+        	<li da="$!{l}">$!l</li>
+    	#end
+        </ul>
+    </div>
+    <ul class="set3">
+    	<span class="choose_left" style="margin-left:10px;">&nbsp;</span>
+    	<span class="choose_right"><div class="calendar_day">本月的结算日期为：<b></b></div></span>
+    </ul>
+
+
+    <ul class="set3">
+      <li>
+		<span class="choose_left" style="margin-left:10px;">结算消息类型：</span>
+		<span>
+        <label>
+       <input  name="payoff_mag_type" type="radio" #if($!config.payoff_mag_type==0)checked="checked" #end value="0"> 默认消息
+       </label>
+       <label>
+       <input  name="payoff_mag_type" type="radio" #if($!config.payoff_mag_type==1)checked="checked" #end value="1">自定义
+       </label>
+        </span>
+        <span id="nothis"><strong class="q"></strong><strong class="w">将显示在商家结算管理列表顶部</strong><strong class="c"></strong></span>
+      </li>
+    </ul>
+       <ul class="set3">
+      <li>
+		<span class="choose_left" style="margin-left:10px;">结算消息通知：</span>
+		<span class="choose_right">
+        <textarea name="payoff_mag_default" id="payoff_mag_default"  cols="29" rows="5"  readonly="readonly">$!ms</textarea>
+        <textarea name="payoff_mag_auto" id="payoff_mag_auto" style="display:none" cols="29" rows="5" placeholder="可编辑自定义消息">$!config.payoff_mag_auto</textarea>
+        </span>
+      </li>
+    </ul>
+  
+
+  </div>
+    </div>
+    <div class="submit">
+      <input name="save" type="button" value="保存" onclick="saveForm()" />
+    </div>
+  </form>
+</div>
+</body>
+</html>

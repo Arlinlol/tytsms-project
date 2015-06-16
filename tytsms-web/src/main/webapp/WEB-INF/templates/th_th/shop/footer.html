@@ -1,0 +1,68 @@
+﻿<script>
+	jQuery(document).ready(function(){
+				//滚动条滚动事件
+		jQuery(window).scroll(function(){
+		var top = jQuery(document).scrollTop();
+		if(top==0){
+			  jQuery("#back_box").hide();
+			  jQuery(".back_box_x").hide();
+			}else{
+			  jQuery("#back_box").show();	
+		      jQuery(".back_box_x").show();
+			}
+		});	
+		//
+		jQuery("#toTop").click(function(){
+	       jQuery('body,html').animate({scrollTop:0},1000);
+	       return false;
+	    });
+	});
+	</script>
+	<div class="main">
+	  <div class="footer">
+	    <ul>
+	      #set($navs=$!navTools.queryNav(1,-1))
+	      #if($!navs.size()>0)
+	      <li>	       
+	       #foreach($nav in $navs)
+	       #set($title="$!article.title")
+	       #if($title.length()>12)
+			  #set($title=$title.substring(0,12))
+		   #end
+	       #if($!CommUtil.indexOf("$!nav.url","http://")>=0)
+	       #set($url="$!nav.url")
+	       #else
+	       #set($url="$!webPath/$!{nav.url}")
+	       #end 
+	        <a href="$!url" #if($!nav.new_win==1)target="_blank"#end>$!{title}</a>#if($!{velocityCount}<$navs.size())|#end
+	    #end 
+	    </li>
+	      #end
+	      <li class="hui2">	     
+	      $!{config.copyRight}	    
+	      </li>
+	      <li class="hui2">
+	      <img class="img " src="$!webPath/th_th/resources/style/system/front/default/images/u8_line.png" style="margin:5px;">
+	      $!{config.poweredby}
+	      <img class="img " src="$!webPath/th_th/resources/style/system/front/default/images/u8_line.png" style="margin:5px;">
+	      </li>
+	       <li class="hui2" style="margin-top:-7px;">
+                                     #springMessage("sms.footer.tyt_version")<!-- 广州泰易淘网络科技有限公司  版权所有 --> &nbsp;&nbsp;|<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254438980'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254438980' type='text/javascript'%3E%3C/script%3E"));</script>
+          </li>
+          <li style="margin-top:10px;">
+                <a href="https://search.szfw.org/cert/l/CX20141203005780006030" target="_blank">  <img id="u2_img" class="img " src="$!webPath/th_th/resources/style/system/front/default/images/u2.jpg" ></a>
+                <img id="u4_img" class="img " src="$!webPath/th_th/resources/style/system/front/default/images/u4.png" style="margin-left:5px;">
+                <img id="u6_img" class="img " src="$!webPath/th_th/resources/style/system/front/default/images/u6.png" style="margin-left:5px;">
+          </li>
+	      <li>$!config.codeStat</li>
+	    </ul>
+	  </div>
+	</div>
+	
+	<!--返回最顶部-->
+	<div id="back_box" style="position:fixed;width:40px; height:118px; float:left; left:50%; margin-left:630px; z-index:9999; display:none; bottom:150px; _position:absolute;/*兼容IE6的代码*/
+	_bottom:auto;/*兼容IE6的代码*/
+	_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));">
+	  <div class="back_index"><a href="$!webPath/index.htm" target="_blank"  title="#springMessage('sms.footer.return_home_page')"></a></div>
+	  <div class="back_top"><a id="toTop" href="#" bosszone="hometop" style="display: block;"  title="#springMessage('sms.footer.return_top')" target="_self" ></a></div>
+	</div>

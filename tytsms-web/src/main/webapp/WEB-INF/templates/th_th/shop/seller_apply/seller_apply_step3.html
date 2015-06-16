@@ -1,0 +1,801 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.seller_apply_step3.company_info") - $!config.title </title><!-- 公司信息 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/shop_into.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/swfupload.js"></script>
+<script src="$!webPath/th_th/resources/js/swfupload.queue.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/th_th/resources/js/jquery.card.js" type="text/javascript"></script>
+<script src="$!webPath/th_th/resources/js/jquery.iskyshop.validate.js" type="text/javascript"></script>
+<script>
+var idCard_swf_upload;
+var idCard_photo_count=0;
+var license_swf_upload;
+var license_photo_count=0;
+var organization_swf_upload;
+var organization_photo_count=0;
+jQuery(document).ready(function(e) {
+	<!--营业执照上的营业期限验证-->
+	jQuery.validator.methods.endTime = function(value, element, param) {
+	   var startDate = jQuery("#license_start_date").val();
+	   var date1=new Date(Date.parse(startDate));
+	   var date2=new Date(Date.parse(value));
+	   if(jQuery.browser.msie==true){
+		  date1 = new Date(Date.parse(startDate.replace("-", "/")));
+		  date2 = new Date(Date.parse(value.replace("-", "/")));
+	   }
+	   return date1 < date2;
+ 	};
+	<!--公司地点与营业执照所在地的下拉选定-->
+	if("$!store.license_area"){
+		jQuery("#lid2").val("$!store.license_area.id");
+		jQuery("#lid1").val("$!store.license_area.parent.id");
+		jQuery("#lid0").val("$!store.license_area.parent.parent.id");
+		<!--cty 修改时间2015-3-12 增加内容 -->
+		jQuery("#lid").val("$!store.license_area.parent.parent.parent.id");
+	}
+	if("$!store.license_c_area"){
+		jQuery("#cid2").val("$!store.license_c_area.id");
+		jQuery("#cid1").val("$!store.license_c_area.parent.id");
+		jQuery("#cid0").val("$!store.license_c_area.parent.parent.id");
+		<!--cty 修改时间2015-3-12 增加内容 -->
+		jQuery("#cid").val("$!store.license_area.parent.parent.parent.id");
+	}
+	<!--表单验证-->
+	jQuery("#theForm").validate({		
+	ignore: "",
+	errorPlacement: function(error, element) {
+				element.parent().find("b").html("");
+					error.appendTo(element.parent().find("b"));
+	},						  
+     rules: {
+	        license_c_name:{required:true},
+			license_num:{required:true},
+			license_address:{required:true},
+			license_establish_date:{required:true},
+			license_start_date:{required:true},
+			license_end_date:{required:true},
+			license_reg_capital:{required:true,digits:true},
+			license_business_scope:{required:true},
+			license_c_address:{required:true},
+			license_c_telephone:{required:true,isTel:true},
+			license_c_contact:{required:true},
+			license_c_mobile:{required:true,isPhone:true},
+			organization_code:{required:true},
+			license_start_date:{required:true},
+	 		license_end_date:{required:true,endTime:"#beginTime"},
+			lid2:{required:true},
+			cid2:{required:true},
+			idCard:{required:true},
+			license:{required:true},
+			organization:{required:true}
+			},
+     messages: {
+	        license_c_name:{required:"#springMessage('sms.seller_apply_step3.write_company_name')"},/* "请填写公司名称" */
+			license_num:{required:"#springMessage('sms.seller_apply_step3.write_register_number')"},/* "请填写注册号" */
+			license_address:{required:"#springMessage('sms.seller_apply_step3.write_business_license_address')"},/* "请填写营业执照详细地址" */
+			license_establish_date:{required:"#springMessage('sms.seller_apply_step3.establish_time')"},/* "请填写成立日期" */
+			license_start_date:{required:"#springMessage('sms.seller_apply_step3.write_business_license_limit')"},/* "请填写营业期限" */
+			license_end_date:{required:"#springMessage('sms.seller_apply_step3.write_business_license_limit')"},/* "请填写营业期限" */
+			license_reg_capital:{required:"#springMessage('sms.seller_apply_step3.write_register_money')",digits:"#springMessage('sms.seller_apply_step3.register_money_must_integer')"},/* "请填写注册资本" *//* "注册资本只能是整数" */
+			license_business_scope:{required:"#springMessage('sms.seller_apply_step3.write_business_scope')"},/* "请填写经营范围" */
+			license_c_address:{required:"#springMessage('sms.seller_apply_step3.company_detail_address')"},/* "请填写公司详细地址" */
+			license_c_telephone:{required:"#springMessage('sms.seller_apply_step3.company_phone')",isTel:"#springMessage('sms.seller_apply_step3.uncorrect_telephone')"},/* "请填写公司电话" *//* "电话号码格式不对" */
+			license_c_contact:{required:"#springMessage('sms.seller_apply_step3.urgency_contactor')"},/* "请填写紧急联系人" */
+			license_c_mobile:{required:"#springMessage('sms.seller_apply_step3.urgency_contactor_phone')",isPhone:"#springMessage('sms.seller_apply_step3.uncorrect_phone')"},/* "请填写紧急联系人手机" *//* "手机号码格式不正确" */
+			organization_code:{required:"#springMessage('sms.seller_apply_step3.organization_code')"},/* "请填写组织机构代码" */
+			license_start_date:{required:"#springMessage('sms.seller_apply_step3.select_business_limit_start_time')"},/* "请选择营业期限开始时间" */
+	 		license_end_date:{required:"#springMessage('sms.seller_apply_step3.select_business_limit_end_time')",endTime:"#springMessage('sms.seller_apply_step3.correct_business_license_limit')"},/* "请选择营业期限结束时间" *//* "请填写正确的营业期限" */
+			lid2:{required:"#springMessage('sms.seller_apply_step3.select_business_license_address')"},/* "请选择营业执照所在地" */
+			cid2:{required:"#springMessage('sms.seller_apply_step3.select_company_address')"},/* "请选择公司所在地" */
+			idCard:{required:"#springMessage('sms.seller_apply_step3.upload_corporate_ID_card')"},/* "请选择上传法人身份证" */
+			license:{required:"#springMessage('sms.seller_apply_step3.please_upload_business_license_electron')"},/* "请上传营业执照电子版" */
+			organization:{required:"#springMessage('sms.seller_apply_step3.upload_organization_code_electron')"}/* "请上传组织机构代码证电子版" */
+		  }
+		 
+  });
+	<!--身份证的swfupload上传插件实例化-->
+	var idCard_settings_object = {//定义参数配置对象
+        upload_url : "$!webPath/seller_apply_image_save.htm",
+        flash_url : "$!webPath/th_th/resources/flash/swfupload.swf",
+        file_post_name : "Filedata",
+        post_params : {
+			  "mark" : "idCard",
+			  "uid" : "$!{user.id}"
+        },
+		use_query_string : false,
+        requeue_on_error : false,
+		file_types : "*.tbi;*.png;*.bmp;*.jpeg;*.jpg;*.gif",
+		file_types_description:"#springMessage('sms.seller_apply_step3.identity_card_electron')" /* "身份证电子版" */,
+		file_size_limit : "1MB",
+		file_upload_limit : 1,
+		file_queue_limit : 1,
+		debug : false,
+        prevent_swf_caching : true,
+        preserve_relative_urls : false,
+     	button_placeholder_id : "idCard_swf_upload",
+        button_image_url : "$!webPath/th_th/resources/style/common/images/upload.jpg",
+		button_width : 160,
+		button_height : 28,
+        button_text :"<b></b> <span class='upload_text'>#springMessage('sms.seller_apply_step3.upload_identity_card_electron')</span>",/* 上传身份证电子版 */
+		button_text_style : ".upload_text { color: #666666;font-size:12px;margin-left:40px; }",
+		button_text_left_padding : 3,
+		button_text_top_padding : 5,
+        button_action : SWFUpload.BUTTON_ACTION.SELECT_FILES,
+		button_disabled : false,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		button_window_mode : SWFUpload.WINDOW_MODE.TRANSPARENT,
+		file_dialog_start_handler:fileDialogStart_idCard,//在文件选取窗口将要弹出时触发
+		file_dialog_complete_handler:fileDialogComplete_idCard,//添加到上传队列触发此事件
+		upload_success_handler:uploadSuccess_idCard,//文件上传成功后会触发该事件
+		upload_complete_handler:uploadComplete_idCard,//当一次文件上传的流程完成时会触发该事件
+		upload_progress_handler : upload_progress_idCard	
+    };   
+    idCard_swf_upload = new SWFUpload(idCard_settings_object);//实例化一个SWFUpload，传入参数配置对象
+	<!--营业执照的swfupload上传插件实例化-->
+	var license_settings_object = {//定义参数配置对象
+        upload_url : "$!webPath/seller_apply_image_save.htm",
+        flash_url : "$!webPath/th_th/resources/flash/swfupload.swf",
+        file_post_name : "Filedata",
+        post_params : {
+			  "mark" : "license",
+			   "uid" : "$!user.id"
+        },
+		use_query_string : false,
+        requeue_on_error : false,
+		file_types : "*.tbi;*.png;*.bmp;*.jpeg;*.jpg;*.gif",
+		file_types_description: "#springMessage('sms.seller_apply_step3.business_license_electron')"/* "营业执照电子版" */,
+		file_size_limit : "1MB",
+		file_upload_limit : 1,
+		file_queue_limit : 1,
+		debug : false,
+        prevent_swf_caching : true,
+        preserve_relative_urls : false,
+     	button_placeholder_id : "license_swf_upload",
+        button_image_url : "$!webPath/th_th/resources/style/common/images/upload.jpg",
+		button_width : 160,
+		button_height : 28,
+        button_text :"<b></b> <span class='upload_text'>#springMessage('sms.seller_apply_step3.upload_business_license_electron')</span>",/* 上传营业执照电子版 */
+		button_text_style : ".upload_text { color: #666666;font-size:12px;margin-left:40px; }",
+		button_text_left_padding : 3,
+		button_text_top_padding : 5,
+        button_action : SWFUpload.BUTTON_ACTION.SELECT_FILES,
+		button_disabled : false,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		button_window_mode : SWFUpload.WINDOW_MODE.TRANSPARENT,
+		file_dialog_start_handler:fileDialogStart_license,//在文件选取窗口将要弹出时触发
+		file_dialog_complete_handler:fileDialogComplete_license,//添加到上传队列触发此事件
+		upload_success_handler:uploadSuccess_license,//文件上传成功后会触发该事件
+		upload_complete_handler:uploadComplete_license,//当一次文件上传的流程完成时会触发该事件
+		upload_progress_handler : upload_progress_license	
+    };   
+    license_swf_upload = new SWFUpload(license_settings_object);//实例化一个SWFUpload，传入参数配置对象
+	<!--组织机构代码证的swfupload上传插件实例化-->
+	var organization_settings_object = {//定义参数配置对象
+        upload_url : "$!webPath/seller_apply_image_save.htm",
+        flash_url : "$!webPath/th_th/resources/flash/swfupload.swf",
+        file_post_name : "Filedata",
+        post_params : {
+			  "mark" : "organization",
+			  "uid" : "$!user.id"
+        },
+		use_query_string : false,
+        requeue_on_error : false,
+		file_types : "*.tbi;*.png;*.bmp;*.jpeg;*.jpg;*.gif",
+		file_types_description: "#springMessage('sms.seller_apply_step3.organization_code_electron')"/* "组织机构代码证电子版" */,
+		file_size_limit : "1MB",
+		file_upload_limit : 1,
+		file_queue_limit : 1,
+		debug : false,
+        prevent_swf_caching : true,
+        preserve_relative_urls : false,
+     	button_placeholder_id : "organization_swf_upload",
+        button_image_url : "$!webPath/th_th/resources/style/common/images/upload.jpg",
+		button_width : 160,
+		button_height : 28,
+        button_text :"<b></b> <span class='upload_text'>#springMessage('sms.seller_apply_step3.upload_organization_code')</span>",/* 上传组织机构代码证 */
+		button_text_style : ".upload_text { color: #666666;font-size:12px;margin-left:40px; }",
+		button_text_left_padding : 3,
+		button_text_top_padding : 5,
+        button_action : SWFUpload.BUTTON_ACTION.SELECT_FILES,
+		button_disabled : false,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		button_window_mode : SWFUpload.WINDOW_MODE.TRANSPARENT,
+		file_dialog_start_handler:fileDialogStart_organization,//在文件选取窗口将要弹出时触发
+		file_dialog_complete_handler:fileDialogComplete_organization,//添加到上传队列触发此事件
+		upload_success_handler:uploadSuccess_organization,//文件上传成功后会触发该事件
+		upload_complete_handler:uploadComplete_organization,//当一次文件上传的流程完成时会触发该事件
+		upload_progress_handler : upload_progress_organization	
+    };   
+    organization_swf_upload = new SWFUpload(organization_settings_object);//实例化一个SWFUpload，传入参数配置
+	<!--营业执照所在地-->
+	jQuery("select[id^='lid']").live("change",function(){
+		var val = jQuery(this).val();
+		var lid = jQuery(this).attr("id");
+		if(val==""){
+			jQuery("#lid2").children(":not(':first')").remove();
+			jQuery("#lid1").children(":not(':first')").remove();
+			<!--cty 修改时间2015-3-12 增加内容 -->
+			jQuery("#lid0").children(":not(':first')").remove();
+			return;
+		}
+		jQuery.ajax({type:'POST',
+	              	url:'$!webPath/seller_license_area.htm',
+				  	data:{"value":val,"type":"l"},
+				beforeSend:function(){
+				  
+				},
+			   	success:function(data){
+			   	    <!--cty 修改时间2015-3-12 增加内容 -->
+			   	    if(lid=="lid"){
+						jQuery("#lid1").children(":not(':first')").remove();
+						jQuery("#settled_select0").html(data);
+			   	    }else if(lid=="lid0"){
+						jQuery("#lid2").children(":not(':first')").remove();
+						jQuery("#settled_select1").html(data);
+					}else if(lid=="lid1"){
+						jQuery("#settled_select2").html(data);
+					}    
+              }
+		});
+	})
+	<!--公司所在地-->
+	jQuery("select[id^='cid']").live("change",function(){
+		var val = jQuery(this).val();
+		var cid = jQuery(this).attr("id");
+		if(val==""){
+		   <!--cty 修改时间2015-3-12 增加内容 -->
+			jQuery("#cid0").children(":not(':first')").remove();
+			jQuery("#cid1").children(":not(':first')").remove();
+			jQuery("#cid2").children(":not(':first')").remove();
+			return;
+		}
+		jQuery.ajax({type:'POST',
+	              	url:'$!webPath/seller_license_area.htm',
+				  	data:{"value":val,"type":"c"},
+				beforeSend:function(){
+				  
+				},
+			   	success:function(data){
+			   	   <!--cty 修改时间2015-3-12 增加内容 -->
+			   		if(cid=="cid"){
+						jQuery("#cid1").children(":not(':first')").remove();
+						jQuery("#select0").html(data);
+					}else if(cid=="cid0"){
+						jQuery("#cid2").children(":not(':first')").remove();
+						jQuery("#select1").html(data);
+					}else if(cid=="cid1"){
+						jQuery("#select2").html(data);
+					}    
+              }
+		});
+	})	
+	jQuery('#license_establish_date').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+ 	 });
+	 jQuery('#license_start_date').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+ 	 });
+	 jQuery('#license_end_date').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+ 	 });
+});<!--end-->
+<!--身份证的swfupload上传事件-->
+function fileDialogComplete_idCard(numFilesSelected, numFilesQueued) {
+	try {
+		if(numFilesSelected==0){
+			return;
+		}
+	    var upload=0;
+		var stats = this.getStats();
+		var select_count=1-idCard_photo_count;
+		if (select_count!=0&&numFilesSelected > select_count) {
+		    alert("#springMessage('sms.seller_apply_step3.aready_upload_ID_card')");	/* "您已经上传过身份证电子版照片了" */
+			this.cancelQueue();
+			upload=1;
+		}
+		if(stats.successful_uploads>=1){
+			alert("#springMessage('sms.seller_apply_step3.aready_upload_ID_card')");		/* "您已经上传过身份证电子版照片了" */
+			this.cancelQueue();
+			upload=1;
+		}
+		if(upload==0){
+		   this.startUpload();//进行上传     
+		}
+	} catch (ex)  {
+        this.debug(ex);
+	}
+    }
+function fileDialogStart_idCard(){
+	  var stats = this.getStats();
+	  stats.successful_uploads=idCard_photo_count;
+	  this.setStats(stats);
+}
+function uploadSuccess_idCard(file, serverData){//单个图片上传成功
+	  var obj=eval("("+serverData+")");
+	  idCard_photo_count++;
+	  var stats = this.getStats();
+	  jQuery(".setable_img1").show();
+	  jQuery("#idCard_show").attr("href",obj.url);
+	  jQuery("#idCard_img").attr("src","$!webPath/"+obj.url);
+	  jQuery("#idCard_upload_wait").hide(); 
+	  jQuery("#idCard").val(obj.id);
+}
+function uploadComplete_idCard(file) {
+	try {
+		if (this.getStats().files_queued == 0) {
+		} else {	
+		   if(this.getStats.successful_uploads>=1){
+			   this.cancelQueue();
+		   }else{
+			 
+		       this.startUpload();
+		   }
+		}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+function upload_progress_idCard(){
+	jQuery("#idCard_upload_wait").show();
+}
+<!--身份证的swfupload上传事件end-->	
+<!--营业执照的swfupload上传事件-->
+function fileDialogComplete_license(numFilesSelected, numFilesQueued) {
+	try {
+		if(numFilesSelected==0){
+			return;
+		}
+	    var upload=0;
+		var stats = this.getStats();
+		var select_count=1-license_photo_count;
+		if (select_count!=0&&numFilesSelected > select_count) {
+		    alert("#springMessage('sms.seller_apply_step3.aready_upload_business_license')");	/* "您已经上传过营业执照电子版了" */
+			this.cancelQueue();
+			upload=1;
+		}
+		if(stats.successful_uploads>=1){
+			alert("#springMessage('sms.seller_apply_step3.aready_upload_business_license')");		/* "您已经上传过营业执照电子版了" */
+			this.cancelQueue();
+			upload=1;
+		}
+		if(upload==0){
+		   this.startUpload();//进行上传
+		}
+	} catch (ex)  {
+        this.debug(ex);
+	}
+    }
+function fileDialogStart_license(){
+	  var stats = this.getStats();
+	  stats.successful_uploads=license_photo_count;
+	  this.setStats(stats);
+}
+function uploadSuccess_license(file, serverData){//单个图片上传成功
+	  var obj=eval("("+serverData+")");
+	  license_photo_count++;
+	  var stats = this.getStats();
+	  jQuery(".setable_img2").show();
+	  jQuery("#license_img").attr("src","$!webPath/"+obj.url);
+	  jQuery("#license_show").attr("href",obj.url);  
+	  jQuery("#license").val(obj.id);
+	  jQuery("#license_img_wait").hide();  
+}
+function uploadComplete_license(file) {
+	try {
+		if (this.getStats().files_queued == 0) {
+		} else {	
+		   if(this.getStats.successful_uploads>=1){
+			   this.cancelQueue();
+		   }else{
+		       this.startUpload();
+		   }
+		}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+function upload_progress_license(){
+	jQuery("#license_img_wait").show();
+}
+<!--营业执照的swfupload上传事件end-->
+<!--组织机构代码证的swfupload上传事件-->
+function fileDialogComplete_organization(numFilesSelected, numFilesQueued) {
+	try {
+		if(numFilesSelected==0){
+			return;
+		}
+	    var upload=0;
+		var stats = this.getStats();
+		var select_count=1-organization_photo_count;
+		if (select_count!=0&&numFilesSelected > select_count) {
+		    alert("#springMessage('sms.seller_apply_step3.aready_upload_organization_code')");	/* "您已经上传组织机构代码证了" */
+			this.cancelQueue();
+			upload=1;
+		}
+		if(stats.successful_uploads>=1){
+			alert("#springMessage('sms.seller_apply_step3.aready_upload_organization_code')");		/* "您已经上传过组织机构代码证了" */
+			this.cancelQueue();
+			upload=1;
+		}
+		if(upload==0){
+		   this.startUpload();//进行上传
+		}
+	} catch (ex)  {
+        this.debug(ex);
+	}
+    }
+function fileDialogStart_organization(){
+	  var stats = this.getStats();
+	  stats.successful_uploads=organization_photo_count;
+	  this.setStats(stats);
+}
+function uploadSuccess_organization(file, serverData){//单个图片上传成功
+	  var obj=eval("("+serverData+")");
+	  organization_photo_count++;
+	  var stats = this.getStats();
+	  jQuery(".setable_img3").show();
+	  jQuery("#organization_img").attr("src","$!webPath/"+obj.url);
+	  jQuery("#organization").val(obj.id);
+	  jQuery("#organization_show").attr("href",obj.url);      
+	  jQuery("#organization_img_wait").hide();
+}
+function uploadComplete_organization(file) {
+	try {
+		if (this.getStats().files_queued == 0) {
+		} else {	
+		   if(this.getStats.successful_uploads>=1){
+			   this.cancelQueue();
+		   }else{
+		       this.startUpload();
+		   }
+		}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+function upload_progress_organization(){
+	jQuery("#organization_img_wait").show();
+}
+<!--组织机构代码证的swfupload上传事件end-->	
+<!--照片删除-->
+function image_del(mark){
+	if(confirm("#springMessage('sms.seller_apply_step3.delete_is_continue')")){	/*  "删除后不可恢复，是否继续？" */
+	jQuery.post("$!webPath/seller_apply_image_del.htm",{"mark":mark,"uid":$!user.id},function(data){
+	    if(data.result==true){
+			if(mark=="idCard"){
+				 var stats = idCard_swf_upload.getStats();
+				 stats.successful_uploads--;
+		 		 idCard_swf_upload.setStats(stats);
+		  		 idCard_photo_count--;
+		  		 jQuery(".setable_img1").hide();
+				 jQuery("#idCard").val("");
+			}
+			if(mark=="license"){
+				 var stats = license_swf_upload.getStats();
+				 stats.successful_uploads--;
+		 		 license_swf_upload.setStats(stats);
+		  		 license_photo_count--;
+		  		 jQuery(".setable_img2").hide();
+				 jQuery("#license").val("");
+			}
+			if(mark=="organization"){
+				var stats = organization_swf_upload.getStats();
+				stats.successful_uploads--;
+				organization_swf_upload.setStats(stats);
+				organization_photo_count--;
+				jQuery(".setable_img3").hide();
+				jQuery("#organization").val("");
+			}
+		}else alert("#springMessage('sms.seller_apply_step3.delete_fail')");/* "删除失败，请重新删除！" */
+	},"json");
+  }
+}
+function saveForm(){
+	jQuery("#theForm").submit();
+}
+function backwards(step){
+	window.location.href="$!webPath/seller_apply.htm?op=back&step="+step;
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="head">
+  <h1 class="logo" title=""> #if($!config.websiteLogo) <a href="$!webPath/index.htm"><img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" width="209" height="70"/></a> #else <a href="$!webPath/index.htm"><img src="$!webPath/th_th/resources/style/system/front/default/images/logo.jpg" width="209" height="70"/> </a> #end </h1>
+  <span class="head_into">#springMessage("sms.seller_apply_step3.merchant_enter")<!-- 商家入驻 --></span> <a href="$!webPath/doc.htm?mark=apply_help" target="_blank" class="head_help">#springMessage("sms.seller_apply_step3.enter_help")<!-- 入驻帮助 --></a> </div>
+<div class="nav_into">
+  <ul>
+    <li><a href="javascript:void(0)" onclick="backwards(1)">#springMessage("sms.seller_apply_step3.enter_protocol")<!-- 入驻协议 --></a></li>
+    <li><a href="javascript:void(0)" class="this">#springMessage("sms.seller_apply_step3.company_info_commit")<!-- 公司信息提交 --></a></li>
+    <li><a href="javascript:void(0)">#springMessage("sms.seller_apply_step3.store_info_commit")<!-- 店铺信息提交 --></a></li>
+    <li><a href="javascript:void(0)">#springMessage("sms.seller_apply_step3.check_log")<!-- 审核日志查询 --></a></li>
+  </ul>
+</div>
+<div class="main">
+  <div class="settled_box">
+    <h3>
+      <div class="settled_step"><span><em class="setstep_light_blue"></em><b class="strong_light_two"></b><strong>#springMessage("sms.seller_apply_step3.enter_must_know")<!-- 入驻须知 --></strong></span><span><em class="setstep_strong_blue"></em><b class="strong_blue_two"></b><strong class="strong_blue">#springMessage("sms.seller_apply_step3.company_info_comfirm")<!-- 公司信息认证 --></strong></span><span><em class="setstep_grey"></em><b class="strong_grey_three"></b><strong class="grey">#springMessage("sms.seller_apply_step3.store_info_comfirm")<!-- 店铺信息认证 --></strong></span><span><em class="setstep_grey"></em><b class="strong_grey_four"></b><strong class="grey">#springMessage("sms.seller_apply_step3.waitting_check")<!-- 等待审核 --></strong></span></div>
+      <span class="settled_title">#springMessage("sms.seller_apply_step3.company_info_commit")<!-- 公司信息提交 --></span></h3>
+    <div class="settled_white">
+      <Form action="$!webPath/seller_apply_step3_save.htm" method="post" id="theForm" name="theForm">
+	<div class="settled_white_box">
+        <div class="settled_warning"><span>#springMessage("sms.seller_apply_step3.upload_resource")<!-- 以下所需要上传电子版资质仅支持JPG、GIF、PNG格式的图片，大小不超过1M，且必须加盖企业彩色公章。 --></span></div>
+        <div class="settled_form">
+          <h4>#springMessage("sms.seller_apply_step3.business_license_info")<!-- 营业执照信息 --></h4>
+          <table width="630" border="0" cellpadding="0" cellspacing="0" class="settled_table">
+            <tr>
+              <td align="right" width="240" valign="top"><span class="sred_span">
+                <input name="step" type="hidden" id="step" value="4" />
+                #springMessage("sms.goods_list.company_name")<!-- 公司名称： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_c_name" type="text"  class="size200" id="license_c_name" value="$!store.license_c_name"/><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.register_code")<!-- 注册号(营业执照号)： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_num" type="text"  class="size200" id="license_num" value="$!store.license_num"/><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.legal_ID_card_electron")<!-- 法人身份证电子版： --></span><strong class="sred">*</strong></td>
+              <td>
+              	<span class="setable_img1" #if(!$!store.license_legal_idCard_image)style="display:none"#end>
+                    <b class="setable_b">
+                        <a href="$!webPath/$!{store.license_legal_idCard_image.path}/$!{store.license_legal_idCard_image.name}" id="idCard_show" target="_blank">
+                        <img id="idCard_img" src="$!webPath/$!{store.license_legal_idCard_image.path}/$!{store.license_legal_idCard_image.name}" width="100" height="60" />
+                     #springMessage("sms.seller_apply_step3.check")  <!--  查看 -->
+                        </a>
+                        |<a href="javascript:void(0);" onclick="image_del('idCard')" id="idCard_del">#springMessage("sms.seller_apply_step3.delete")<!-- 删除 --></a>
+                    </b>
+                </span>
+                <span id="idCard_swf_upload" class="swf_upload"></span>
+                <b class="settedtab_b"><img style="display:none" id="idCard_upload_wait" src="$!wenPath/th_th/resources/style/system/manage/blue/images/photo/loader.gif" /></b>
+                <span>
+                <input type="hidden" name="idCard" id="idCard" value="$!{store.license_legal_idCard_image.id}" /><b class="settedtab_b"></b>	
+                </span>		
+              </td>
+            </tr>       
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.business_license_address_symbol")<!-- 营业执照所在地： --></span><strong class="sred">*</strong></td>
+              <td>
+              #if($!store.license_area)
+                <!--cty 修改时间2015-3-12 增加内容 -->
+              	<span class="settled_select" id="settled_select">
+                	<select name="lid" id="lid">
+                    	<option value="">#springMessage("sms.seller_apply_step3.country")<!-- 国籍 --></option>
+                    	#foreach($area in $areas)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+              	<span class="settled_select" id="settled_select0">
+                	<select name="lid0" id="lid0">
+                    	<option value="">#springMessage("sms.seller_apply_step3.province")<!-- 省份 --></option>
+                    	#foreach($area in $areas.parent)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select1">
+                	<select name="lid1" id="lid1">
+                     #foreach($lid1 in $store.license_area.parent.parent.childs)
+                    	<option value="$!lid1.id">$!lid1.areaName</option>
+                     #end   
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select2">
+                	<select name="lid2" id="lid2">
+                    #foreach($lid2 in $store.license_area.parent.childs)
+                    	<option value="$!lid2.id">$!lid2.areaName</option>
+                    #end
+                	</select>
+                    <b class="settedtab_b"></b>
+                </span>
+               #else
+                <!--cty 修改时间2015-3-12 增加内容 -->
+              	<span class="settled_select" id="settled_select">
+                	<select name="lid" id="lid">
+                    	<option value="">#springMessage("sms.seller_apply_step3.country")<!-- 国籍 --></option>
+                    	#foreach($area in $areas)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+               <span class="settled_select" id="settled_select0">
+                	<select name="lid0" id="lid0">
+                    	<option value="">#springMessage("sms.seller_apply_step3.province")<!-- 省份 --></option>
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select1">
+                	<select name="lid1" id="lid1">
+                    	<option value="">#springMessage("sms.seller_apply_step3.city")<!-- 城市 --></option>
+                	</select>
+                </span>
+                <span class="settled_select" id="settled_select2">
+                	<select name="lid2" id="lid2">
+                    	<option value="">#springMessage("sms.seller_apply_step3.zhou")<!-- 州县 --></option>
+                	</select>
+                    <b class="settedtab_b"></b>
+                </span>
+               #end
+               </td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.business_detail_address_symbol")<!-- 营业执照详细地址： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_address" type="text"  class="size200" id="license_address" value="$!store.license_address" /><b class="settedtab_b"></b></td>
+            </tr>
+             <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.establish_date")<!-- 成立日期： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_establish_date" type="text"  class="size100" id="license_establish_date" value="$!CommUtil.formatShortDate($!store.license_establish_date)"/><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.business_limit_symbol")<!-- 营业期限： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_start_date" type="text"  class="size100" id="license_start_date" value="$!CommUtil.formatShortDate($!store.license_start_date)" />--<input name="license_end_date" type="text"  class="size100" id="license_end_date"  value="$!CommUtil.formatShortDate($!store.license_end_date)"/><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.register_money_symbol")<!-- 注册资本： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_reg_capital" type="text"  class="size100" id="license_reg_capital" value="$!store.license_reg_capital"/>#springMessage("sms.seller_apply_step3.wan_yuan")<!-- 万元 --><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.business_scope_symbol")<!-- 经营范围： --></span><strong class="sred">*</strong></td>
+              <td><textarea name="license_business_scope" cols="" rows="" class="settled_text" id="license_business_scope">$!store.license_business_scope</textarea><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.business_license_copy")<!-- 营业执照副本电子版： --></span><strong class="sred">*</strong></td>
+              <td>
+               
+              	<span class="setable_img2" #if(!$!store.license_image)style="display:none"#end>
+                    <b class="setable_b">
+                        <a href="$!webPath/$!{store.license_image.path}/$!{store.license_image.name}" id="license_show" target="_blank">
+                        <img id="license_img" src="$!webPath/$!{store.license_image.path}/$!{store.license_image.name}" width="100" height="60">
+                        #springMessage("sms.seller_apply_step3.check")<!-- 查看 --></a>
+                        |<a href="javascript:void(0);" onclick="image_del('license')" id="license_del">#springMessage("sms.seller_apply_step3.delete")<!-- 删除 --></a>
+                    </b>
+                </span>
+                
+                <span id="license_swf_upload" class="swf_upload"></span>
+                <b class="settedtab_b"><img style="display:none" id="license_img_wait" src="$!wenPath/th_th/resources/style/system/manage/blue/images/photo/loader.gif" /></b>
+                <span>
+                <input type="hidden" value="$!{store.license_image.id}" name="license" id="license"/><b class="settedtab_b"></b>	
+                </span>
+              </td>
+            </tr>          
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.company_place")<!-- 公司所在地： --></span><strong class="sred">*</strong></td>
+              <td>
+              #if($!store.license_c_area)	
+             <!--cty 修改时间2015-3-12 增加内容 -->
+              <span class="settled_select" id="select">
+                	<select name="cid" id="cid">
+                    	<option value="">#springMessage("sms.seller_apply_step3.country")<!-- 国籍 --></option>
+                    	#foreach($area in $areas)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+              	<span class="settled_select" id="select0">
+                	<select name="cid0" id="cid0">
+                    	<option value="">#springMessage("sms.seller_apply_step3.province")<!-- 省份 --></option>
+                    	#foreach($area in $areas.parent)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+                <span class="settled_select" id="select1">
+                	<select name="cid1" id="cid1">
+                     #foreach($cid1 in $store.license_c_area.parent.parent.childs)
+                    	<option value="$!cid1.id">$!cid1.areaName</option>
+                     #end   
+                	</select>
+                </span>
+                <span class="settled_select" id="select2">
+                	<select name="cid2" id="cid2">
+                    #foreach($cid2 in $store.license_c_area.parent.childs)
+                    	<option value="$!cid2.id">$!cid2.areaName</option>
+                    #end
+                	</select>
+                    <b class="settedtab_b"></b>
+                </span>
+              #else
+              <!--cty 修改时间2015-3-12 增加内容 -->
+              <span class="settled_select" id="select">
+                	<select name="cid" id="cid">
+                    	<option value="">#springMessage("sms.seller_apply_step3.country")<!-- 国籍 --></option>
+                    	#foreach($area in $areas)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+              	<span class="settled_select"  id="select0">
+                	<select name="cid0" id="cid0">
+                    	<option value="">#springMessage("sms.seller_apply_step3.province")<!-- 省份 --></option>
+                	</select>
+                </span>
+                <span class="settled_select"  id="select1">
+                	<select name="cid1" id="cid1">
+                    	<option value="">#springMessage("sms.seller_apply_step3.city")<!-- 城市 --></option>
+                	</select>
+                </span>
+                <span class="settled_select"  id="select2">
+                	<select name="cid2" id="cid2">
+                    	<option value="">#springMessage("sms.seller_apply_step3.zhou")<!-- 州县 --></option>
+                	</select>
+                    <b class="settedtab_b"></b>
+                </span>
+               #end 
+               </td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.company_detail_address_symbol")<!-- 公司详细地址： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_c_address" type="text"  class="size200" id="license_c_address" value="$!store.license_c_address"/><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.company_phone_symbol")<!-- 公司电话： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_c_telephone" type="text"  class="size200" id="license_c_telephone" value="$!store.license_c_telephone"/><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.company_urgency_contactor")<!-- 公司紧急联系人： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_c_contact" type="text"  class="size200" id="license_c_contact" value="$!store.license_c_contact"/><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.company_urgency_contactor_phone")<!-- 公司紧急联系人手机： --></span><strong class="sred">*</strong></td>
+              <td><input name="license_c_mobile" type="text"  class="size200" id="license_c_mobile" value="$!store.license_c_mobile"/><b class="settedtab_b"></b></td>
+            </tr>
+          </table>
+          <span class="license"><b><a href="$!webPath/th_th/resources/style/system/front/default/images/0.jpg" target="_blank"><em><img src="$!webPath/th_th/resources/style/system/front/default/images/0.jpg"  width="310px" height="194"/></em>#springMessage("sms.seller_apply_step3.see_big_picture")<!-- 查看大图 --></a></b></span> 
+          
+          
+          <span class="license license_bottom"><b><a href="$!webPath/th_th/resources/style/system/front/default/images/1.jpg" target="_blank"><em><img src="$!webPath/th_th/resources/style/system/front/default/images/1.jpg"  width="310px" height="220px"/></em>#springMessage("sms.seller_apply_step3.see_big_picture")<!-- 查看大图 --></a></b></span>
+          </div>
+        <div class="settled_form">
+          <h4>#springMessage("sms.seller_apply_step3.organization_code_card")<!-- 组织结构代码证 --></h4>
+          <table width="630" border="0" cellpadding="0" cellspacing="0" class="settled_table">
+            <tr>
+              <td align="right" width="240" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.organization_code_symbol")<!-- 组织机构代码： --></span><strong class="sred">*</strong></td>
+              <td><input name="organization_code" type="text"  class="size200" id="organization_code" value="$!store.organization_code"/><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" valign="top"><span class="sred_span">#springMessage("sms.seller_apply_step3.organization_code_card_symbol")<!-- 组织机构代码证电子版： --></span><strong class="sred">*</strong></td>
+              <td>
+              	<span class="setable_img3" #if(!$!store.organization_image)style="display:none"#end>
+                    <b class="setable_b">
+                        <a href="$!webPath/$!{store.organization_image.path}/$!{store.organization_image.name}" id="organization_show" target="_blank">
+                        <img src="$!webPath/$!{store.organization_image.path}/$!{store.organization_image.name}" width="100" height="60" id="organization_img" />
+                      #springMessage("sms.seller_apply_step3.check")  <!-- 查看 --></a>
+                        |<a href="javascript:void(0);" onclick="image_del('organization')" id="organization_del">#springMessage("sms.seller_apply_step3.delete")<!-- 删除 --></a>
+                    </b>
+                </span>
+                <span id="organization_swf_upload" class="swf_upload"></span>
+                <b class="settedtab_b"><img style="display:none" id="organization_img_wait" src="$!wenPath/th_th/resources/style/system/manage/blue/images/photo/loader.gif" /></b>
+                <span>
+                <input type="hidden" value="$!store.organization_image.id" name="organization" id="organization"/><b class="settedtab_b"></b>	
+                </span>
+              </td>
+            </tr>
+            
+          </table>
+          <span class="license"><b><a href="$!webPath/th_th/resources/style/system/front/default/images/2.jpg" target="_blank"><em><img src="$!webPath/th_th/resources/style/system/front/default/images/2.jpg" width="310px" height="220px"/></em>#springMessage("sms.seller_apply_step3.see_big_picture")<!-- 查看大图 --></a></b></span> </div>
+      </div>
+      <div class="settled_bottom"><span><a href="javascript:void(0)" onclick="backwards(2)" class="up_step_btn">#springMessage("sms.seller_apply_step6.before")<!-- 上一步 --></a><a onclick="saveForm()" href="javascript:void(0)" class="settled_btn"><b><em>#springMessage("sms.seller_apply_step3.complete_tax")<!-- 下一步，完善税务及银行信息 --></em></b></a></span></div>
+      </Form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

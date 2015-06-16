@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>微信商城 - 我的收藏</title>
+<link href="$!webPath/th_th/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function() {
+   var beginCount =6;
+  jQuery("#loading_more").click(function(){
+	/*  jQuery.post("$!webPath/mobileWap/buyer_favorite_goods.htm",
+		  {
+		  "beginCount":beginCount	  
+		  },
+		  function(data){
+			  if(data){
+				  jQuery("#fav_goods_list").append(data)
+				  beginCount = beginCount +6;
+				   }else{
+					  jQuery(".index_load").hide();
+					 jQuery("#no_more").show();
+				   }
+			  },
+		  "text");	  
+		   */
+		  });  	  
+		 
+});
+</script>
+</head>
+<body>
+<div class="page_bottom">
+<hgroup>
+  <h3 class="goods_car"><a href="javascript:history.go(-1);"><em></em></a><span><b>我的收藏</b></span></h3>
+</hgroup>
+<span id="fav_goods_list">
+#foreach($obj in $json_map.favorite_goods_list)
+
+<dl class="goodsdl">
+<a href="$!webPath/mobileWap/goods.htm?id=$!obj.goods_id">
+  <dt> <span class="goodsimg"><img src="$!obj.goods_photo" width="50" height="50" /></span>
+    <p style="float:left;font-size:15px;width:250px;">$!obj.name</p>
+    </dt>
+    </a>
+  <dd><em>收藏时间：$!obj.addTime</em><i><strong>¥$!obj.price</strong></i></dd>
+</dl>
+  #end
+ </span> <div class="index_load"><a href="javascript:void(0);" id="loading_more">加载更多</a></div>
+<div class="index_load" id="no_more" style="display: none"><a href="javascript:void(0);" style="color:#F00">没有更多数据了</a></div>
+</div>
+
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+
+</body>

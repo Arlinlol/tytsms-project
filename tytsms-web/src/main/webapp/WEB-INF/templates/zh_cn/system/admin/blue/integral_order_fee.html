@@ -1,0 +1,40 @@
+<link href="$!webPath/resources/style/common/css/window.css" type="text/css" rel="stylesheet" />
+<script>
+jQuery(document).ready(function(){
+    jQuery("#theForm").validate({
+	   rules:{
+		   igo_trans_fee:{number:true,min:0}
+		   },
+	   messages:{
+	       igo_trans_fee:{number:"订单金额只能为数字",min:"不能小于0"}
+	   }
+	});
+});
+</script>
+<form action="$!webPath/admin/integral_order_fee_save.htm" method="post" id="theForm">
+
+  <div class="edit">
+      <div class="editul setcont" >
+      <ul class="set1">
+      <li class="set1_bg">兑换用户：</li>
+      <li>$!obj.igo_user.userName</li>
+      </ul>
+           <ul class="set1">
+      <li class="set1_bg">兑换单号：</li>
+      <li>$!obj.igo_order_sn</li>
+      </ul>
+       <ul class="set1">
+      <li class="set1_bg">运费金额：</li>
+      <li><span class="size150"><input name="igo_trans_fee" type="text" id="igo_trans_fee" value="$!obj.igo_trans_fee" /></span></li>
+      </ul>
+      
+      
+      </div>
+      </div>
+     <div class="submit">
+        <span class="pad120"><input name="" type="submit" value="提交" style="cursor:pointer;"/>
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        <input name="id" type="hidden" id="id" value="$!obj.id" /></span>
+      </div>
+
+</form>

@@ -1,0 +1,156 @@
+@charset "utf-8";
+/* CSS Document */
+textarea, select {
+	padding: 4px;
+}
+.head{ position:relative;}
+.head_into{ float:left; font-size:18px; margin-top:54px; color:#486e1c; font-weight:bold;}
+.head_help{ float:right; background:url(../images/shop_into/help.png) no-repeat; padding-left:25px; height:19px; line-height:19px; color:#999; font-size:14px; position:absolute; right:0px; bottom:10px}
+.nav_into{ background:#a6ca44; line-height:33px; width:100%; height:33px;}
+.nav_into ul{ margin-left:auto; margin-right:auto; width:1002px;}
+.nav_into ul li{ margin-right:10px; float:left; font-size:14px;} 
+.nav_into ul li a{ padding-left:20px; padding-right:20px; color:#486E1C; font-weight:bold; display:block;}
+.nav_into ul li .this,.nav_into ul li a:hover{ background:#486e1c; color:#fff;} 
+
+
+.settled_box{ width:1000px; margin-top:20px;overflow:hidden}
+.settled_box h3{ width:100%; margin-top:10px;line-height: 30px; overflow:hidden}
+.settled_box h3 .settled_title{ margin-top:10px; padding-left:10px; font-size:16px}
+.settled_inbox{ border:1px solid #ddd; background:#fff; width:958px; margin-top:10px; height:390px; overflow-x:hidden; overflow-y:auto; clear:both; margin:20px; margin-top:20px}
+.settled_p{ padding:10px; text-indent:2em;}
+.settled_bottom{ width:100%; margin-top:10px; padding-bottom:10px; overflow:hidden; clear:both}
+.settled_bottom span{ float:right; margin-top:20px;}
+.settled_btn{ background:#f78d1d; height:33px; display:block; color:#fff; line-height:33px; padding:0px 20px;float:left; margin-right:20px;cursor:pointer}
+.settled_btn b{}
+.settled_btn em{  font-style:normal;}
+.settled_btn:hover{ background:#ED6F0E; color:#fff;} 
+.settled_btn:hover b{}
+.settled_btn:hover em{}
+.settled_b{ float:left; margin-right:10px; margin-top:6px;}
+.settled_b input{ position:relative; top:2px;}
+
+.settled_step{ float:right; margin-top:10px; margin-right:10px; height:40px; _overflow:hidden}
+.settled_step span{float:left; width:135px; display:block; position:relative} 
+.settled_step em{width:135px; height:4px;float:left; overflow:hidden; display:block;}
+.settled_step strong{ width:135px; display:block; margin-top:10px;_margin-top:-5px;  font-weight:lighter; text-align:center; font-size:12px; float:left;}
+.settled_step b{width:20px; height:20px; z-index:2; left:50%; top:-8px;_top:-10px; margin-left:-10px; display:block; position:absolute; _position:relative;}
+
+.setstep_strong_blue{  background:#486E1C; }
+.strong_blue{color:#A6CA44; }
+.strong_blue_s{color:#486E1C; }
+.strong_blue_one{ background:url(../images/shop_into/intostep_this_1.png) no-repeat; }
+.setstep_grey{ background:#d2d2d2;}
+.grey{ color:#666;}
+.strong_grey_two{ background:url(../images/shop_into/intostep_2.png)}
+.strong_grey_three{ background:url(../images/shop_into/intostep_3.png)}
+.strong_grey_four{ background:url(../images/shop_into/intostep_4.png)}
+.strong_blue_two{ background:url(../images/shop_into/intostep_this_2.png) no-repeat}
+.setstep_light_blue{ background:#A6CA44;}
+.strong_light_two{ background:url(../images/shop_into/intostep_thised_1.png) no-repeat}
+.light_blue_two{ background:url(../images/shop_into/intostep_thised_2.png) no-repeat}
+.strong_blue_three{ background:url(../images/shop_into/intostep_this_3.png)}
+.light_blue_three{ background:url(../images/shop_into/intostep_thised_3.png) no-repeat}
+.strong_blue_four{ background:url(../images/shop_into/intostep_thised_4.png)}
+
+.settled_white{ background:#fff url(../images/shop_into/border_top.png) top center no-repeat; padding:10px; width:978px; clear:both; border:1px solid #ddd; margin-top:20px; overflow:hidden}
+.settled_white_box{ width:100%;}
+.settled_warning{ border:1px solid #eff5c7; background:#eff5c7 url(../images/shop_into/settled_warning.jpg) 10px 3px no-repeat; padding:10px 5px; clear:both; margin-top:10px;}
+.settled_warning em{ font-style:normal; padding-left:30px;}
+.settled_warning span{ display:block;line-height:20px; padding-left:40px;}
+.settled_warning b{ display:block; color:#888;}
+.settled_form{ width:100%; clear:both;}
+.settled_form h4{ width:100%; clear:both; height:30px; line-height:30px; margin-top:10px; padding-bottom:5px;}
+.settled_form h4 b{ color:#f37103; font-size:12px; padding-left:10px;}
+.settled_form h4 span{ margin-right:20px;}
+
+.license{ float:left; display:block}
+.license b{ padding-left:20px;  display:block;text-align:center}
+.license b em{ display:block; border:1px solid #ddd; padding:1px; margin-bottom:10px;}
+.license b a{ color:#06F; }
+.license_bottom{ margin-top:200px;}
+.settled_table{ float:left;}
+.settled_table td{ height:40px; line-height:40px; padding-left:10px;}
+.sred{ font-size:12px; color:#ff8500;  padding-right:10px; padding-top:3px; float:right;}
+.sred_span { float:right;}
+.size200{ width:200px; height:23px; line-height:23px; border:1px solid #ccc;}
+.size100{width:100px; height:23px; line-height:23px; border:1px solid #ccc;}
+.size250{width:250px; height:23px; line-height:23px; border:1px solid #ccc;}
+.size90{ width:90px; height:23px; line-height:23px; border:1px solid #ccc;}
+.settedtab_b{ padding-left:20px; color:#f37103;}
+.settedtab_b a{ color:#f37103; text-decoration:underline}
+.settled_text{ width:250px;border:1px solid #ccc; height:60px; margin-top:10px;}
+.settled_check{ margin-right:10px; margin-bottom:5px; white-space:nowrap; width:80px; overflow:hidden; overflow:hidden; text-overflow:ellipsis; display:block; float:left}
+.settled_check input{  position:relative; top:2px; margin-right:5px;}
+.settled_select{ margin-right:10px;}
+.setable_b{ color:#3484be}
+.setable_b a{ color:#3484be; margin-left:5px; margin-right:5px; }
+.setable_img{ float:left; margin-right:10px;}
+.setable_upload{ background:url(../images/shop_into/upload.jpg) no-repeat; width:73px; height:25px; display:block; text-align:center; color:#fff; line-height:25px; float:left}
+.up_step_btn{ background:#fff; width:86px; height:33px; display:block; text-align:center; color:#555; line-height:33px; float:left; margin-right:10px;border:1px solid #ccc;}
+.up_step_btn:hover{ border-color:#ED7B00; color:#ED7B00;}
+.swfupload{ margin-top:10px;}
+
+.settled_h4{ height:30px; line-height:30px; width:100%; clear:both}
+.settled_white_ul{ width:100%; clear:both; margin-bottom:10px; overflow:hidden;}
+.settled_white_ul li{ width:100%; margin-top:10px; float:left;}
+.settled_white_ul li span{ display:block; float:left;}
+.settled_white_ul li .settled_ul_dt{ width:110px; margin-right:10px; text-align:right; height:30px;}
+.settled_white_ul li .settled_ul_dd{ width:840px; }
+.settled_ul_select{ float:left; margin-right:10px;}
+.settled_ul_date{ float:left; margin-right:10px;}
+.settled_ul_check{ float:left}
+.settled_ul_check input{ position:relative; top:2px; margin-right:10px;}
+.setable_add { background:#F68D33; border-radius:3px; width:73px; height:25px; line-height:25px; text-align:center; display:block; color:#fff; float:left}
+.setable_add:hover{ color:#fff; background:#ED761B;} 
+.class_settle{ clear:both; padding-top:10px;}
+.class_settle_table{ border-collapse:collapse; border:1px solid #ddd; margin-right:auto; margin-left:auto; width:695px;}
+.class_settle_table th{ background:#eaeaea; border:1px solid #ddd; height:40px;}
+.class_settle_table td{ height:30px; padding-left:10px; padding-top:10px; border-bottom:1px dashed #ddd}
+.settled_sp{ padding-left:60px; margin-top:10px;}
+.settled_h4 b{ font-size:12px; padding-left:20px; color:#F90}
+.shop_settled_title{ display:block; border:1px solid #ddd; padding:10px; float:left; margin-bottom:10px;}
+.settled_title_h{ height:40px; line-height:40px; font-size:18px;}
+.settled_name_table{ clear:both;}
+.settled_name_table table { float:left; margin-top:10px; border:1px solid #ddd; padding-top:10px; padding-bottom:10px;}
+.settled_name_table table td{ padding-left:10px; height:30px;}
+.orange{ color:red;}
+
+.settled_left_step{ float:left;}
+.settled_gc{ float:left; width:380}
+.settled_check_ul{ clear:both;border:1px dashed #DDD; margin-bottom:10px; padding-left:10px; padding-top:5px; padding-bottom:5px; overflow:hidden}
+.settled_check_ul li{ width:100%; float:left;}
+.settled_li_bottom{ margin-top:5px;}
+
+.setable_img1{ display:block; clear:both; margin-bottom:10px;}
+.setable_img2{ display:block; clear:both; margin-bottom:10px;}
+.setable_img3{ display:block; clear:both; margin-bottom:10px;}
+.swf_upload{ display:block; clear:both;}
+
+/*弹出框*/
+.settled_box_pop{ width:300px; background:#fff; overflow:hidden; border:2px solid #bcced8; padding:10px; position:absolute; left:50%; top:40%; margin-left:-150px;}
+.settled_pop_close{ width:13px; height:13px; background:url(../images/shop_into/close_pop_shop.jpg) no-repeat; display:block; float:right;}
+.settled_pop_inbox{  padding-bottom:10px;}
+.settled_pop_btn{ text-align:center}
+.settled_pop_btn a{ margin-left:5px; margin-right:5px;}
+.settled_pop_btn span{ padding-left:60px; float:left;}
+.settled_pop_inbox table{ border-collapse:collapse; width:100%; margin-top:10px;}
+.settled_pop_inbox table td{ padding-bottom:15px; border-bottom:1px solid #ddd;border-collapse:collapse; padding-top:15px;}
+
+/*分类佣金*/
+.shop_clsmoney_table{ margin-right:auto; margin-left:auto; margin-top:20px;border-collapse:collapse;}
+.shop_clsmoney_table th{ background:#77b4e1; height:30px; line-height:30px; color:#fff; font-size:14px;}
+.shop_clsmoney_table td{ border-collapse:collapse;text-indent:1em;}
+.shop_clsmoney_table td .shop_csl_sp{ padding-top:7px; padding-bottom:7px; display:block; width:250px}
+.shop_csl_ul{ width:605px; float:left; overflow:hidden;border-bottom:1px solid #77b4e1; position:relative; top:1px;}
+.shop_csl_ul li{ width:175px; float:left; overflow:hidden; height:30px; text-indent:1em; white-space:nowrap; text-overflow:ellipsis; line-height:30px;border-left:1px solid #77b4e1; margin-left:-1px; text-align:center; color:#f00}
+.shop_csl_ul .shop_csl2{ width:250px; text-align:left; color:#555}
+
+.flow{margin-top:50px;}
+.flow ul {width:1000px; height:43px; margin-left:1px;}
+.flow ul li{float:left;width:150px; background:#ddd;height:40px; line-height:40px; border:1px solid #ccc; font-size:14px; text-align:center; position:relative; top:21px; cursor:pointer;}
+.flow ul li.selected{background:#fff; height:40px; border-bottom:1px solid #fff;border-top:2px solid #486e1c;}
+.settled_box{margin:0 auto;}
+.settled_step {float: right;margin-right: 10px; height: 40px;_overflow: hidden;position: absolute;top: 10px;*top:60px;right: 10px;}
+.apply_btn{width:182px;height:33px;background:url(../images/shop_into/apply_btn.jpg) no-repeat;  width: 182px;display: block;text-align: center;line-height: 33px;color: #fff;font-size: 14px;}
+.apply_btn:hover{color:#fff;}
+.apply{margin-left:160px; padding-top:10px;clear:both;}

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+<div class="cont">
+<h1 class="seth">竞价直通车</h1>
+<div class="nav_list">
+
+ <ul>
+ <li> <a href="$!webPath/admin/ztc_set.htm"><b>直通车设置</b></a> </li>
+  <li> <a href="$!webPath/admin/ztc_apply.htm"><b>直通车申请</b></a></li>
+   <li> <a href="$!webPath/admin/ztc_goods.htm" class="this"><b>直通车商品</b></a></li>
+    <li> <a href="$!webPath/admin/ztc_gold_log.htm"><b>金币日志</b></a> </li>
+    </ul> 
+   
+    
+    </div>
+<form method="post" id="queryForm">
+  <div class="search">
+      <span>商品名称</span>
+      <span class="size150">
+        <input name="goods_name" type="text" id="goods_name" />
+        </span>
+
+        <span>店铺名称</span> 
+        <span class="size150">
+        <input name="store_name" type="text" id="store_name" />
+        </span>
+        <span >
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;"  class="search_btn"/>
+        </span> 
+
+  </div>
+</form>
+<form method="post" id="ListForm">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr >
+        <th width="20%"><span class="form_btna">商品名称</span></th>
+        <th width="18%"><span class="form_btna">店铺名称</span></th>
+        <th width="15%" align="center"><span class="form_btna">剩余金币（枚）</span></th>
+        <th align="center" width="15%"><span class="form_btna">直通车价格（金币/天）</span></th>
+        <th align="center" width="15%"><span class="form_btna">开始时间</span></th>
+        <th align="center"  ><span class="form_btna">直通车浏览次数</span></th>
+        </tr>
+      #foreach($obj in $objs)
+      <tr>
+        <td><a href="$!webPath/goods_$!{obj.id}.htm" target="_blank">$!obj.goods_name</a></td>
+        <td align="center">$!obj.goods_store.store_name</td>
+        <td align="center">$!obj.ztc_gold</td>
+        <td align="center">$!obj.ztc_price</td>
+        <td align="center">$!CommUtil.formatShortDate($!obj.ztc_begin_time)</td>
+        <td align="center">$!obj.ztc_click_num</td>
+        </tr>
+      #end
+      
+    </table>
+  </div>
+  
+    
+    <div class="operate_bar">
+    <div class="fenye"> <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+    $!gotoPageFormHTML</div> 
+    
+    
+             
+ </div>
+  </form>
+</div>
+</body>
+</html>

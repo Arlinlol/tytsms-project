@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+function dele_ablum(mark,obj_id){
+	if(mark=="false"){
+		 if(confirm("删除相册将会影响到对应商品的显示图片，是否继续？")){
+		  window.location.href="$!webPath/admin/user_photo_del.htm?mulitId="+obj_id;
+		 }
+		}else{
+	      alert("默认相册不能删除");		
+			}
+	};
+	
+/* 
+系统通用方法，根据参数来决定处理的url和参数
+*/
+function cmd2(){
+	var url=arguments[0];
+	var mulitId="";
+	jQuery(":checkbox:checked").each(function(){
+	  if(jQuery(this).val()!=""){	  
+	    mulitId=mulitId+","+jQuery(this).val();
+	  }
+	});
+	if(mulitId!=""){
+	  jQuery("#ListForm #mulitId").val(mulitId);
+	  if(confirm("删除相册将会影响到对应商品的显示图片，是否继续？")){
+	     jQuery("#ListForm").attr("action",url);
+	     jQuery("#ListForm").submit();
+	  }
+	}else{
+       alert("至少选择一条数据记录");
+	}
+}	
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">物流工具</h3>
+  <div class="nav_list">
+    <ul>
+      <li><a href="javascript:void(0);" class="this"><b>运费模板列表</b></a></li>
+      <li><a href="$!webPath/admin/transport_add.htm" ><b>新增运费模板</b></a></li>
+    </ul>
+  </div>
+  <form id="ListForm" name="ListForm" action="$!webPath/admin/transport_list.htm" method="post">
+    <div class="fshoptb">
+     #foreach($obj in $objs)
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        #if($!obj.trans_type==0)
+        <tr>
+          <th   align="center"><span class="form_btna">配送方式</span></th>
+          <th align="center" width="35%"><span class="form_btna">配送区域</span></th>
+          <th   align="center"><span class="form_btna">首件(件)</span></th>
+          <th  align="center"><span class="form_btna">运费(¥)</span></th>
+          <th  align="center"><span class="form_btna">续件(件)</span></th>
+          <th  align="center"><b class="form_btnb">运费(¥)</b></th>
+        </tr>
+        #end
+        #if($!obj.trans_type==1)
+        <tr>
+          <th   align="center"><span class="form_btna">配送方式</span></th>
+          <th align="center" width="35%"><span class="form_btna">配送区域</span></th>
+          <th   align="center"><span class="form_btna">首重(kg)</span></th>
+          <th   align="center"><span class="form_btna">运费(¥)</span></th>
+          <th  align="center"><span class="form_btna">续重(kg)</span></th>
+          <th   align="center"><b class="form_btnb">运费(¥)</b></th>
+        </tr>
+        #end
+        #if($!obj.trans_type==2)
+        <tr>
+          <th align="center"><span class="form_btna">配送方式</span></th>
+          <th align="center" width="35%"><span class="form_btna">配送区域</span></th>
+          <th align="center"><span class="form_btna">首体积(m³)</span></th>
+          <th  align="center"><span class="form_btna">运费(¥)</span></th>
+          <th  align="center"><span class="form_btna">续体积(m³)</span></th>
+          <th  align="center"><b class="form_btnb">运费(¥)</b></th>
+        </tr>
+        #end
+        #foreach($info in $transportTools.query_all_transprot("$!obj.trans_mail_info",0))
+        <tr>
+          <td  align="center">平邮</td>
+          <td align="center">$!info.value("city_name")</td>
+          <td align="center">$!info.value("trans_weight")</td>
+          <td align="center">$!info.value("trans_fee")</td>
+          <td align="center">$!info.value("trans_add_weight")</td>
+          <td  align="center" class="hui oprate_con"> $!info.value("trans_add_fee") </td>
+        </tr>
+        #end
+        #foreach($info in $transportTools.query_all_transprot("$!obj.trans_express_info",0))
+        <tr>
+          <td  align="center">快递</td>
+          <td align="center">$!info.value("city_name")</td>
+          <td align="center">$!info.value("trans_weight")</td>
+          <td align="center">$!info.value("trans_fee")</td>
+          <td align="center">$!info.value("trans_add_weight")</td>
+          <td  align="center" class="hui oprate_con"> $!info.value("trans_add_fee") </td>
+        </tr>
+        #end
+        #foreach($info in $transportTools.query_all_transprot("$!obj.trans_ems_info",0))
+        <tr>
+          <td  align="center">EMS</td>
+          <td align="center">$!info.value("city_name")</td>
+          <td align="center">$!info.value("trans_weight")</td>
+          <td align="center">$!info.value("trans_fee")</td>
+          <td align="center">$!info.value("trans_add_weight")</td>
+          <td  align="center" class="hui oprate_con"> $!info.value("trans_add_fee") </td>
+        </tr>
+        #end
+      </table>
+      <div class="operate_bar">
+    <div class="oper_sp">
+    <span class="oper_check">$!{obj.trans_name} 最后编辑时间:$!CommUtil.formatLongDate($!obj.addTime)</span>
+    <span class="oper_del"><input name="" type="button"  value="复制"  onclick="window.location.href='$!webPath/admin/transport_copy.htm?id=$!obj.id'" style="cursor:pointer;"/></span>
+     <span class="oper_del"><input name="" type="button"  value="编辑" onclick="window.location.href='$!webPath/admin/transport_edit.htm?id=$!obj.id'" style="cursor:pointer;"/></span>
+      <span class="oper_del"><input name="" type="button"  value="删除"  onclick="if(confirm('删除后不可恢复，是否继续?'))window.location.href='$!webPath/admin/transport_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" style="cursor:pointer;"/></span>
+ </div>
+    </div>
+      #end 
+      <div class="fenye">
+        <input id="currentPage" name="currentPage" value="$!currentPage" type="hidden"/>
+        <input type="hidden" name="mulitId" id="mulitId" />
+        $!gotoPageFormHTML 
+        </div>
+     </div>
+  </form>
+</div>
+</body>
+</html>

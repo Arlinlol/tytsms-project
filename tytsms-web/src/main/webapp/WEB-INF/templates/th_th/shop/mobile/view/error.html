@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title></title>
+<link rel="stylesheet" type="text/css" href="$!webPath/th_th/resources/style/mobile/css/style.css">
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+</head>
+<body>
+<div class="main">
+  <div class="index" style="height:300px;">
+    <div style="height:280px;border:1px solid #CCCCCC;overflow:hidden; margin-left:auto; margin-right:auto; margin-top:10px;">
+      <div style="font-size:16px; color:#666666;margin-top:100px; padding-left:40%;">
+      <span style="float:left;">
+      <img src="$!webPath/th_th/resources/style/common/images/icon/error.png" />
+      </span>
+      <span style=" padding-top:10px; line-height:30px; float:left;">$!{op_title}！</span>
+      </div>
+    </div>
+  </div>
+  #if($!url)
+<script>
+	  var count=300;
+	  window.setInterval(go,1000);
+	  function go(){
+	    count--;
+	    if(count==0) window.location.href="$!url";
+	  }
+	</script>
+    #end
+</div>
+</body>
+</html>

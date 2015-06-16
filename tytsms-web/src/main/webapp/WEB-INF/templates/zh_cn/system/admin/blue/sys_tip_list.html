@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">系统提醒</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/sys_tip_list.htm"  class="this"><b>管理</b></a></li>
+    </ul>
+  </div>
+  <FORM name="ListForm" id="ListForm"  action="$!webPath/admin/sys_tip_list.htm" method="post">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="8%">&nbsp;</th>
+        <th width="10%"><span class="form_btna">提醒标题</span></th>
+        <th width="45%">提醒内容</th>
+        <th width="10%">提醒状态</th>
+        <th width="8%">提醒等级</th>
+        <th width="10%"><span class="form_btna">提醒时间</span></th>
+        <th><b class="form_btnb">操作</b></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+        <td>$!obj.st_title</td>
+        <td>$!obj.st_content</td>
+        <td>#if($!obj.st_status==0)等待处理#else 已经处理 #end</td>
+        <td align="center">$!obj.st_level</td>
+        <td>$!CommUtil.formatLongDate($!obj.addTime)</td>
+        <td class="hui oprate_con" align="center">
+        #if($!obj.st_status==0)
+        	<a href="javascript:void(0);" onclick="if(confirm('确认该提醒已经处理完毕？'))window.location.href='$!webPath/admin/sys_tip_do.htm?mulitId=$!obj.id&acurrentPage=$!currentPage'" class="blue">处理提醒</a> |
+        #end
+            <a  href="javascript:void(0);" onclick="if(confirm('确定删除该提醒？删除后不可恢复'))window.location.href='$!webPath/admin/sys_tip_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="blue">删除</a>
+        </td>
+      </tr>
+      #end
+    </table>
+ </div>
+ <div class="operate_bar">
+ 	<div class="oper_sp"> 
+    	<span class="oper_check"><label><input type="checkbox" name="all" id="all" onclick="selectAll(this)" value="" />全部</label></span>
+    	<span class="oper_del"><input name="" type="button" value="删除" style="cursor:pointer;" onclick="cmd('$!webPath/admin/sys_tip_del.htm')"/></span>
+    </div>
+    <div class="fenye">
+    	<input type="hidden" name="currentPage" id="currentPage" value="$!currentPage" />
+	  	<input name="mulitId" type="hidden" id="mulitId" />
+	  	$!gotoPageFormHTML
+    </div>       
+ </div>
+ </FORM>
+</div>
+</body>
+</html>

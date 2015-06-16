@@ -1,0 +1,53 @@
+<link href="$!webPath/resources/style/common/css/overlay_blue.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/window.css" type="text/css" rel="stylesheet" />
+<script>
+function checkeSubimt(){
+   var goods_reason = jQuery("#goods_reason").val().trim();
+   var id = jQuery("#id").val();
+   if(goods_reason == null || goods_reason == ""){
+	   alert("违规下架原因不能为空");
+   }else{
+	   jQuery.ajax({
+		   type:'POST',
+	       url:'$!webPath/admin/goods_ajax.htm',
+		   data:{"id":id,"fieldName":"goods_status","value":-2,"goods_reason":goods_reason},
+		   beforeSend:function(){
+			  
+		   },
+		   success:function(data){
+			 if(id!=undefined){
+			   //jQuery(obj.parentNode.parentNode).remove();
+			   window.location.href="$!webPath/admin/goods_list.htm";
+			 }
+	      }
+	 });
+   }
+}
+//end
+</script>
+<form action="#" method="post" id="theForm">
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    <tr>
+      <td  align="left" valign="top" >商品标题:</td>
+      <td  align="left" valign="top">$!obj.goods_name</td>
+    </tr>
+    
+    <tr>
+      <td  align="left" valign="top" >
+         <input name="id" type="hidden" id="id" value="$!obj.id" />
+      </td>
+    </tr> 
+    
+    <tr>
+      <td align="left" valign="top">违规下原因：</td>
+      <td align="left"><textarea name="goods_reason" id="goods_reason" cols="35" rows="5"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+         <span class="inputbtn">
+           <input name="" type="button" value="提交" onclick="checkeSubimt();" style="cursor:pointer;" class="white_btn"/>
+         </span>
+      </td>
+    </tr>
+  </table>
+</form>

@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessageText('member.buy_goods_finish.order_cancellation_record','') - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){
+	jQuery(".user_menu b").toggle(
+			function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+			},
+			function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+			});	
+								});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+    $!httpInclude.include("/buyer/nav.htm?op=buy_goods_finish")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><span class="myorder_fright"></span><strong></strong>#springMessageText('member.buy_goods_finish.have_bought_the_goods','')</h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title"> 
+          <ul class="user_title_ul">
+            <li class="this"><i></i><a href="$!webPath/buyer/order_cancel_listlog.htm">#springMessageText('member.buy_goods_finish.have_bought_the_goods','')</a></li>
+          </ul>
+        </div>
+         <form action="$!webPath/buyer/buy_goods_finish.htm" method="post" id="ListForm">
+        <div class="user_list_box">
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_order_table">
+            <tr>
+              <tr>
+             <th>#springMessageText('member.buy_goods_finish.goods_info','')</th>
+             <th></th>
+   			 <th>#springMessageText('member.buy_goods_finish.goods_price','')</th>
+   			 </tr>             
+            </tr>
+            #foreach($obj in $page_goods)
+            <tr>
+            #if($!obj.goods_main_photo)
+              #set($img="$!imageWebServer/$!{obj.goods_main_photo.path}/$!{obj.goods_main_photo.name}_small.$!{obj.goods_main_photo.ext}")
+              #else
+              #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+              #end
+              #set($goods_url="$!webPath/goods_$!{obj.id}.htm")
+              #if($!config.second_domain_open)
+              #set($goods_url="http://$!{obj.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.id}.htm")
+              #end
+              <td align="center"><b class="blue2"><a href="$!goods_url" target="_blank">$!obj.goods_name</a></b></td>
+              <td align="center"> 
+              <dl class="return_goods">
+                  <dt><a href="$!goods_url" target="_blank"><img src="$!img" width="55" height="55" /></a></dt>
+                </dl>
+                </td>
+              <td align="center">￥$!obj.store_price</td>
+            </tr>
+            #end
+          </table>
+        </div>
+        <div class="userlist_allop">
+          <div class="user_list_page"><span class="user_page_sp"><input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+          #set($prev = $!currentPage-1)
+          #set($next = $!currentPage+1)
+                  <a href="$!webPath/buyer/buy_goods_finish.htm?currentPage=$!{prev}">#springMessageText('member.buy_goods_finish.previous_page','')</a><a href="javascript:void(0);" class="this">$!currentPage</a><a href="$!webPath/buyer/buy_goods_finish.htm?currentPage=$!{next}">#springMessageText('member.buy_goods_finish.next_page','')</a></span>
+          </div>
+        </div>
+        </form>
+        <div class="user_explain">
+<h3>#springMessageText('member.buy_goods_finish.special_suggestion','')</h3>
+<div class="user_explain_box">
+#springMessageText('member.buy_goods_finish.recent_purchase_goods','')
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

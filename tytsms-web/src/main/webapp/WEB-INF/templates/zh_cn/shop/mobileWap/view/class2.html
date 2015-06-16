@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+<link href="$!webPath/resources/style/mobileWap/css/style.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/platform.css" rel="stylesheet" type="text/css" />
+<title></title>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/TouchSlide.1.1.js"></script>
+<script>
+
+function iosFun(cmd,para)
+{ 
+    document.location="objc://"+cmd+":/"+para;  //cmd代表objective-c中的的方法名，parameter1自然就是参数了
+}
+</script>
+<script>
+function save_search(){
+	jQuery("#searchForm").submit();
+}
+</script>
+<script>
+jQuery(function(){	
+	jQuery(".cg_botm p").toggle(
+			function(){
+				jQuery(this).parent().find(".subCon").show();
+				jQuery(this).find(".cg_dr").addClass("cg_dr_this")
+			},
+			function(){
+				jQuery(this).parent().find(".subCon").hide();
+				jQuery(this).find(".cg_dr").removeClass("cg_dr_this")
+			}
+	
+	);	
+})
+</script>
+</head>
+<body>
+<!--  
+<header>
+<form id="searchForm" name="searchForm" action="$!webPath/mobileWap/goods_list.htm" method="post">
+  <div class="main">
+    <div class="logo"><img src="$!webPath/resources/style/mobileWap/images/logo.png" /></div>
+    <input class="search" type="text" id="keyword" name="keyword" />
+    <div class="search_btn"><a href="javascript:void(0);" onClick="save_search()"></a></div>
+  </div>
+</form>  
+</header>
+-->
+<!--  
+ $!httpInclude.include("/mobileWap/advertInvoke.htm?advertPositionId=7")
+<div class="main_nav">
+  <ul>
+    <li><a href="$!webPath/mobileWap/goods_cart1.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_j.png"></a><span id="asd">购物车</span></li>
+    <li><a href="$!webPath/mobileWap/buyer/index.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_h.png"></a><span>用户中心</span></li>
+    <li><a href="#"><img src="$!webPath/resources/style/mobileWap/images/nav_t.png"></a><span>积分商城</span></li>
+    <li><a href="#"><img src="$!webPath/resources/style/mobileWap/images/nav_c.png"></a><span>推荐品牌</span></li>
+  </ul>
+</div>
+-->
+<header class="cg_header">
+<h2>商品分类</h2>
+</header>
+
+
+<!--热销商品 -->
+<div class="floor">
+<div class="cg_main">
+	#foreach($cgc0 in $!cgc.childs)
+    <div class="cg_botm">
+    <p>$!cgc0.className<i class="cg_dr"></i></p>
+    <div class="subCon">
+    	#foreach($cgc1 in $cgc0.childs)
+    		<a id ="$cgc1.id" href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=$cgc1.id">$cgc1.className</a>
+	    #end
+    </div>
+    </div>
+    #end
+</div>
+
+</div>
+
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+
+</body>
+</html>
+
+

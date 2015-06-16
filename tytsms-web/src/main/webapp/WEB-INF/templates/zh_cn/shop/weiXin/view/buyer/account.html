@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>微信商城 - 用户中心</title>
+<link href="$!webPath/resources/style/weiXin/css/phone.css" rel="stylesheet" type="text/css" />
+<script>
+	if(!$!map_list.ret){
+		 window.location.href="$!webPath/weiXin/login.htm";
+	}
+</script>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+</head>
+<body class="user_bg">
+<div class="page_bottom">
+<div class="user_center">
+  <section class="user_top">
+    <dl>
+      <dt class="user_topdt"><span>          <img src="$!map_list.photo_url" width="70" height="70"></span></dt>
+      <dd class="user_topdd">
+        <h3><span>$!map_list.name</span></h3>
+        <h3><span>$!map_list.level_name</span></h3>
+        <aside class="user_aside"> <span class="user_aside_left">
+        	<b>积分:<i>$!map_list.integral</i> &nbsp;&nbsp; 预存款:<i> 0</i></b></span>
+			<span class="user_aside_right">
+          <p><b></b><b>优惠券:<i>$!map_list.coupon</i></b></p>
+          </span> </aside>
+      </dd>
+    </dl>
+    <div class="user_bottom_oper"><b></b>
+      <center>
+        <span><a href="$!webPath/weiXin/buyer_order.htm?order_status=10"><i>待付款</i><strong>$!order_size_10</strong></a></span>
+        <span><a href="$!webPath/weiXin/buyer_order.htm?order_status=20"><i>待发货</i><strong>$!order_size_20</strong></a></span>
+        <span><a href="$!webPath/weiXin/buyer_order.htm?order_status=30"><i>待收货</i><strong>$!order_size_30</strong></a></span>
+       <!-- <span><a href="$!webPath/weiXin/buyer_order.htm?order_status=40"><i>待评价</i><strong>$!order_size_40</strong></a></span>-->
+      </center>
+    </div>
+  </section>
+</div>
+<div class="usercenter_menu">
+ 	<span><a href="$!webPath/weiXin/buyer_order.htm"><i class="all_order"></i><b>全部订单</b></a></span>
+  	<span><a href="$!webPath/weiXin/buyer_address.htm"><i class="address_goods"></i><b>收货地址</b></a></span>
+    <span><a href="$!webPath/weiXin/buyer_coupon.htm"><i class="collect_goods"></i><b>我的优惠券</b></a></span>
+    <span><a href="$!webPath/weiXin/buyer_favorite_goods.htm"><i class="collect_shop"></i><b>我的收藏</b></a></span>
+    </div>
+	<div style="clear:both"></div>
+  </div> 
+    <script>
+jQuery(document).ready(function(e) {
+    	jQuery("div.nav_width").find('ul li').removeClass("this");
+	jQuery("div.nav_width").find('ul li[op="account"]').addClass("this");
+	});
+
+</script>
+  $!httpInclude.include("/weiXin/footer.htm")
+
+
+
+</body>
+</html>

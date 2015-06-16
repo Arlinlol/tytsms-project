@@ -1,0 +1,449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta property="qc:admins" content="2340216471114176375" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!config.title</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}" />
+<meta name="copyright" content="$!{config.copyRight}" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+#set($store_second_url="$!webPath")
+#if($!second_domain_view)
+  #set($store_second_url="http://$!{store.store_second_domain}.$!{domainPath}")
+#end
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/index_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/active.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/jquery.jqzoom.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.lazyload.js"></script>
+<script src="$!webPath/resources/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="$!store_second_url/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.iskyshop.validate.js" type="text/javascript"></script>
+<style>
+@media screen and (-webkit-min-device-pixel-ratio:0) {body{margin-left:-1px;}} 
+*{margin:0; padding:0}
+.wrap{width:100%; min-width:1202px;background:#f3f8e4; overflow:hidden; margin: 0 auto;height:7202px;}
+.adv{width:100%; overflow:hidden; margin: 0 auto;}
+.adv0{height:910px;background:url($!webPath/resources/style/system/front/default/images/special/banner.jpg) center no-repeat;}
+.pro{width:1202px;-webkit-width:1203px; margin:0 auto; overflow:hidden;  }
+.pro_bg{ height:1140px;  position: relative;top: -444px;}
+.bg{height:443px;background:url($!webPath/resources/style/system/front/default/images/special/head.jpg) center no-repeat;}
+.good_name_0{  position: absolute;top: 388px;}
+.good_name_1 {  position: absolute;top: 491px;left: 255px;z-index:5;}
+.good_name_2 {  position: absolute;top: 149px;left: 377px;}
+.good_name_3{  position: absolute;top: 149px;right: 238px;}
+.good_name_4{  position: absolute;top: 563px;left: 447px;}
+.good_name_5{position: absolute; top: 607px;right: 270px;}
+.good_name_6{position: absolute; top: 443px;right: 20px;}
+ .good_name_7{position: absolute; top: 713px;left: 0;} 
+.good_name_8{  position: absolute;top: 819px;left: 288px;}
+.good_name_9{position: absolute; top: 655px;right: 269px;}
+.good_name_10{position: absolute; top: 841px;right: 51px;}
+.pro img{float:left;}
+.adv1{ height:194px; background:url($!webPath/resources/style/system/front/default/images/special/adv1.jpg) center no-repeat;}
+.adv2{height:150px;background:url($!webPath/resources/style/system/front/default/images/special/adv2.jpg) center no-repeat;}
+.adv3{ height:150px;background:url($!webPath/resources/style/system/front/default/images/special/adv3.jpg) center no-repeat;}
+.adv4{height:150px;background:url($!webPath/resources/style/system/front/default/images/special/adv4.jpg) center no-repeat;}
+.adv5{height:161px;background:url($!webPath/resources/style/system/front/default/images/special/adv5.jpg) center no-repeat;}
+.adv6 a{display:block; width:100%; height:470px;background:url($!webPath/resources/style/system/front/default/images/special/bottom.jpg) center no-repeat; cursor:pointer;}
+.nori{display:block;width:100%;height:748px; background:url($!webPath/resources/style/system/front/default/images/special/special_16.jpg) center no-repeat;}
+</style>
+<script>
+jQuery(document).ready(function(){
+  
+	jQuery(window).scroll(function(){
+		if(jQuery(window).scrollTop()>800){
+			jQuery('.scratch-box').show();
+		}else{
+			jQuery('.scratch-box').hide();
+		}
+		});
+	
+});
+</script>
+
+<script>
+jQuery(document).ready(function(){
+	//鼠标经过左侧分类							
+  jQuery(".left_menu_dl").mouseover(function(){		
+	var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){
+	 var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).addClass("left_menu_this").removeClass("left_menu_dt");	
+     jQuery("#child_"+id).show();			
+	}
+  }).mouseleave(function(){ 
+	 var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){ 
+     var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).removeClass("left_menu_this").addClass("left_menu_dt");	
+     jQuery("#child_"+id).hide();
+	}
+  });
+  
+  //鼠标经过推荐商品、猜你喜欢	
+  jQuery("#index_sale_tab ul li").mouseover(function(){	
+	jQuery(this).siblings().removeClass("this");
+	jQuery(this).addClass("this");
+	var i = jQuery(this).index();
+	jQuery("#index_sale_tab").siblings().hide();
+	jQuery("#index_sale_tab").siblings().eq(i).show();
+	if(i==0){
+	jQuery("#sale_change").attr("mark","recommend");
+	}else{
+		jQuery("#sale_change").attr("mark","like");
+		}
+  });
+  //鼠标经过楼层标题
+  jQuery(".storey_tab ul li").mouseover(function(){								 
+	jQuery(this).siblings().removeClass("this");
+	jQuery(this).addClass("this");
+	var i = jQuery(this).index();
+	jQuery(this).parent().parent().siblings().not(".hot_sell").hide();
+	jQuery(this).parent().parent().siblings().eq(i).show();
+	
+  });
+  var head_h=jQuery("#head_h").height();
+  jQuery("#head_unbomb").height(head_h);
+  jQuery(window).scroll(function(){
+	  var top = jQuery(document).scrollTop();
+	  //顶部搜索框跟随
+	  if(top==0){
+		  jQuery("#top").attr("style","");
+	  }else{
+		  jQuery("#top").attr("style","position:fixed;top:0px;width:100%");
+	  }
+	  if(top>head_h){
+		   jQuery("#head_h").addClass("head_fixd");
+	  }else{
+		   jQuery("#head_h").removeClass("head_fixd");
+	  }
+	  //楼层导航跟随
+	  jQuery("li[floor_id^=floor_] b").css("display","block");
+	  jQuery("div[id^=floor_]").each(function(){
+	     var floor_top=jQuery(this).offset().top-top;
+		 if(floor_top<=580&&floor_top>=0){
+		  var floor_id=jQuery(this).attr("id");
+		   jQuery("li[floor_id="+floor_id+"] b").css("display","none");
+		 }
+	  });
+  });	
+  //右上角公告切换
+  	jQuery(".top_mr_tab li").mouseover(function(){
+		jQuery(this).siblings().removeClass("this");
+		jQuery(this).addClass("this");
+		var i = jQuery(this).index();
+		jQuery(".top_mr_box").hide();		
+		jQuery(".top_mr_box").eq(i).show();										
+	});
+  
+  //用户登录、商家入驻tab页切换
+  jQuery("#top_mid_login_tab>li").css("cursor","pointer").mouseover(function(){
+      var id=jQuery(this).attr("id");
+	  jQuery("#top_mid_login_tab>li").removeClass("this");
+	  jQuery(this).addClass("this");
+	  if(id=="top_mid_login_tab_user"){
+	     jQuery("#top_mid_login_tab_seller_info").hide();
+		 jQuery("#top_mid_login_tab_user_info").show();
+	  }
+	  if(id=="top_mid_login_tab_seller"){
+	     jQuery("#top_mid_login_tab_user_info").hide();
+		 jQuery("#top_mid_login_tab_seller_info").show();
+	  }
+  });
+ 
+  
+  
+});
+</script>
+
+
+<script>
+//异步加载头部内容优化性能
+jQuery(document).ready(function(){
+	 jQuery.ajax({
+		 type:'POST',
+		 dataType: "json",
+		 url:'$!webPath/ajax_head.htm',
+		 data:"",
+		 success:function(result){
+			 var html = "";
+			 if(result!=null && result.user){
+				 html +="<span>"+result.user_userName+" 您好,欢迎来到泰易淘！" 
+				 if(result.user_userRole.indexOf("ADMIN")!=-1){
+					 html +="[<a href='$!webPath/admin/index.htm'>管理后台</a>] "
+				 }
+				 html +="[<a href='$!webPath/iskyshop_logout.htm'>退出商城</a>]"
+				 html +="</span> ";
+				 jQuery("#replace").replaceWith(html);
+				 if(result.user_userRole.indexOf("SELLER")!=-1){
+					 jQuery(".top_collect").after("<b class='top_b'>|</b> <span class='top_shop'><a href='$!webPath/seller/index.htm'>商家管理</a></span>"); 
+				 }
+				 //登录信息异步添加
+				jQuery("#islgin").val(result.user_userName);
+			  }else{
+				jQuery(".top_collect").after("<b class='top_b'>|</b><span class='top_shop'><a href='$!webPath/seller/login.htm'>商家登录</a></span> "); 
+			  }
+			}
+		 });
+		
+	});
+	
+
+	
+	
+</script>
+
+</head>
+<body>
+<!--点击收藏-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery(".top_pull").mouseover(function(){
+	jQuery(this).find("div").show();
+	jQuery(this).find("em").addClass("em_this");
+	jQuery(this).find("s").addClass("this");
+  	}).mouseleave(function(){
+    jQuery(this).find("div").hide();
+	jQuery(this).find("em").removeClass("em_this");
+	jQuery(this).find("s").removeClass("this");
+  });					
+});
+var browserEvent = function (obj, url, title) {
+    var e = window.event || arguments.callee.caller.arguments[0];
+    var B = {
+        IE : /MSIE/.test(window.navigator.userAgent) && !window.opera
+        , FF : /Firefox/.test(window.navigator.userAgent)
+        , OP : !!window.opera
+    };
+    obj.onmousedown = null;
+    if (B.IE) {
+        obj.attachEvent("onmouseup", function () {
+            try {
+                window.external.AddFavorite(url, title);
+                window.event.returnValue = false;
+            } catch (exp) {}
+        });
+    } else {
+        if (B.FF || obj.nodeName.toLowerCase() == "a") {
+            obj.setAttribute("rel", "sidebar"), obj.title = title, obj.href = url;
+        } else if (B.OP) {
+            var a = document.createElement("a");
+            a.rel = "sidebar", a.title = title, a.href = url;
+            obj.parentNode.insertBefore(a, obj);
+            a.appendChild(obj);
+            a = null;
+        }
+    }
+};
+</script>
+<div class="top" id="top">
+  <div class="top_page">
+    <div class="top_right">
+    	<span id="replace"> 您好，欢迎来到$!{config.websiteName}！[<a href="$!webPath/user/login.htm">登录商城</a>][<a href="$!webPath/register.htm">免费注册</a>]</span>
+    	<b>|</b> <span class="top_pull"> <a href="$!webPath/buyer/order.htm">我的订单</a> </span> <b>|</b> 
+    	#if($!config.weixin_store&&$!config.weixin_qr_img)
+			<span class="top_pull">
+			<!--加em_this和top_this-->
+			<em class=""><i>微信商城</i><s class="this"></s></em>
+			<div class="top_this" style="display:none">
+				<div class="top_this_box"><img src="$!webPath/$!config.weixin_qr_img.path/$!config.weixin_qr_img.name" width="77" height="77" /><i class="top_this_i">关注微信商城</i></div>
+			</div>
+			</span> <b>|</b> 
+		#end
+		
+		#if($!config.app_download==1) <span class="top_pull">
+        <!--加em_this和top_this-->
+			<em class=""><i>手机商城</i><s class="this"></s></em>
+			<div class="top_this" style="display:none;">
+			<div class="top_this_box">$!DISPALY_FILE
+			<div class="top_this_code"><img src="$!webPath/$!MIDDLE_NAME/app/app_dowload.png" width="77" height="77" /></div>
+			<i class="top_this_i"><a href="$!config.ios_download" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/app-store.png" width="111" height="37" /></a></i> <i class="top_this_i"><a href="$!config.android_download" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/android.png" width="111" height="37" /></a></i> </div>
+			</div>
+			</span> <b>|</b> 
+		#end 
+	  <span class="top_pull"> <em class="">客户服务<s  class="this"></s></em>
+      <div class="top_this" style="display:none;">
+        <ul class="top_pull_con_style2">
+          <li><a href="$!webPath/articlelist_help.htm" target="_blank">帮助中心</a></li>
+          <li><a href="$!webPath/doc_service.htm" target="_blank">售后服务</a></li>
+          <li><a href="$!webPath/doc_online.htm" target="_blank">在线客服</a></li>
+          <li><a href="$!webPath/doc_complaint.htm" target="_blank">投诉中心</a></li>
+          <li><a href="$!webPath/doc_email.htm" target="_blank">客服邮箱</a></li>
+          <li><a href="$!webPath/seller_apply.htm" target="_blank">商家入驻</a></li>
+        </ul>
+      </div>
+      </span> <b>|</b> #set($navs=$!navTools.queryNav(-1,-1))
+      #if($!navs.size()>0) <span class="top_pull"> <em class="">网站导航<s class=""></s></em>
+      <div class="top_this" style="display:none">
+        <div class="website">
+          <ul>
+            #foreach($nav in $navs)
+            <li><a href="$!nav.url"  #if($!{nav.new_win}==1)target="_blank"#end  rel="nofollow">$!nav.title</a></li>
+            #end
+          </ul>
+        </div>
+      </div>
+      </span> #end </div>
+    <span class="top_collect"><a href="javascript:void(0);" onclick="browserEvent(this, '$!webPath','$!{config.websiteName}')">收藏本站</a></span>
+    </div>
+</div>
+<div id="head_unbomb"> #parse("head.vm")</div>
+#parse("nav1.vm")
+
+ 
+<div class="wrap">
+	<div class="adv adv0"></div>
+		<!-- 产品图 蔬果干 -->
+			<div class="adv bg"></div>
+				<div class="pro pro_bg">
+					<a class="good_name_0" name="good_name_0"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_01.png" alt=""/></a>
+					<a class="good_name_1" name="good_name_1"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_02.png" alt=""/></a>
+					<a class="good_name_2" name="good_name_2"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_03.png" alt=""/></a>
+					<a class="good_name_3" name="good_name_3"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_04.png" alt=""/></a>
+					<a class="good_name_4" name="good_name_2"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_05.png" alt=""/></a>
+					<a class="good_name_5" name="good_name_3"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_06.png" alt=""/></a>
+					<a class="good_name_6" name="good_name_4"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_07.png" alt=""/></a>
+					<a class="good_name_7" name="good_name_5"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_08.png" alt=""/ ></a>
+					<a class="good_name_8" name="good_name_6"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_09.png" alt=""/ ></a>
+					<a class="good_name_9" name="good_name_7"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_10.png" alt=""/ ></a>
+					<a class="good_name_10" name="good_name_8"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/pic_11.png" alt=""/></a>
+				</div>
+			<div style="position:relative; top:-444px;">
+			<div class="adv adv1"></div>
+			
+			<!-- 产品图 辣酱 -->
+			<div class="pro">
+				<a name="good_name_9"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/special_10.jpg" alt=""/></a>
+			</div>	
+			<div class="adv adv2"></div>
+			<!-- 产品图 饮品 -->
+			<div class="pro">	
+				<a name="good_name_10"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/special_11.jpg" alt=""/></a>
+				<a name="good_name_11"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/special_12.jpg" alt=""/></a>
+				<a name="good_name_12"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/special_13.jpg" alt=""/></a>
+			</div>	
+			<div class="adv adv3"></div>
+			<!-- 产品图 蘑菇干 -->	
+			<div class="pro">
+				<a name="good_name_13"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/special_14.jpg" alt=""/></a>
+			</div>
+			<div class="adv adv4"></div>
+			<!-- 产品图 花生豆 -->	
+			<div class="pro">
+				<a name="good_name_14"  href="#" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/special/special_15.jpg" alt=""/ ></a>
+			</div>
+			<div class="adv adv5"></div>
+			<!-- 产品图 海苔 -->	
+				<a class="nori" name="good_name_15"  href="#" target="_blank"></a>
+			<div class="adv adv6">
+				<a href="javascript:scrollTo(0,0);"></a></div>
+		</div>
+	</div>
+<input type="hidden" name="islgin" id="islgin" value="$!user"> 
+
+<!--右边砸蛋与积分浮框-->
+<div class="scratch-box">
+<div class="zadan"><img class="adv_egg" src="#if($!eggCoupon)$!webPath/resources/style/system/front/default/images/active/egg2.png #else $!webPath/resources/style/system/front/default/images/active/egg.png #end" style="cursor:url('$!webPath/resources/style/system/front/default/images/active/hammer.ico'), default; width:170px;" #if(!$!eggCoupon)onClick="eggClick();"#end /></div>
+<div class="guajian"><a  class="slot" onClick="document.getElementById('scratch_hint').style.display='block';document.getElementById('fade').style.display='block';"><img src="$!webPath/resources/style/system/front/default/images/active/scratch_adv.png"/ style="width:160px;"></a></div>
+</div>
+
+
+<script>
+var dm_i=0;
+function dm_next() {
+	 dm_i++;
+	 if(dm_i>5){
+		 return;
+	 }
+	 
+	 var bg="url('$!webPath/resources/style/system/front/default/images/active/dm.png') 0px -"+(dm_i*500)+"px";
+     document.getElementById('div_egg').style.background = bg;
+     setTimeout(function () { dm_next(); }, 200);
+}
+function eggClick(){
+	var isl = jQuery("#islgin").val();	       
+    if(isl){ 
+        jQuery.ajax({  
+            url: "$!webPath/coupon_send_save.htm",  
+            type: 'POST',  
+		    dataType : 'json',
+            success: function (json) {  
+                var fasl = json.result;
+                if(fasl == "true"){                	
+					document.getElementById('div_egg').style.display='block';
+					document.getElementById('fade').style.display='block';
+					dm_next();
+			    }else{
+				     document.getElementById('scratch_hint').style.display='block';document.getElementById('fade').style.display='block';
+			        //jQuery(".adv_egg").attr("src","$!webPath/resources/style/system/front/default/images/active/egg2.png");
+			    }
+			}  
+        });  
+    }else{  
+        var url ="$!webPath/user_dialog_login.htm";
+ 	    dialogLogin(url);
+ 	   jQuery(".white_content").css({"position":"fixed","top":"30%","left":"50%","margin-left":"-200px"});
+    }
+}
+	
+</script>
+
+<div class="div_egg" id="div_egg">	
+   <img class="img_close" onClick="document.getElementById('div_egg').style.display='none';document.getElementById('fade').style.display='none';" src="$!webPath/resources/style/system/front/default/images/active/close.png" />
+</div>
+
+<div class="scratch_hint" id="scratch_hint">
+   <img class="img_close" onClick="document.getElementById('scratch_hint').style.display='none';document.getElementById('fade').style.display='none';" src="$!webPath/resources/style/system/front/default/images/active/close.png" />
+</div>
+
+<div id="fade" class="mt-black_overlay"></div> 
+<!--砸蛋与积分浮框 End-->
+
+  
+  <div class="footer_all">
+  	<div class="promise">
+		<div class="main" style="height: 50px;background: #85a737;">
+		<div class="promise_main">
+		<div class="promise_m"><i class="promise_1"></i><span class="pro_sp1">100%</span><span>正品保证</span></div>
+		<div class="promise_m"><i class="promise_2"></i><span class="pro_sp1">保税</span><span>仓库物流</span></div>
+		<div class="promise_m"><i class="promise_3"></i><span class="pro_sp1">便捷</span><span>安全支付</span></div>
+		<div class="promise_m"><i class="promise_4"></i><span class="pro_sp1">商家</span><span>权威认证</span></div>
+		</div>
+		</div>
+	</div>
+	
+	<div class="main" style="width:100%;"> 
+  	 <div class="footer_shopping">
+		 #parse("articleClass.vm")
+	 </div>
+	</div>
+    #parse("footer.vm")
+  
+  
+</div>
+</body>
+</html>
+
+<script>
+ 	#set($i = 0)  
+    #foreach( $good in $mouth_travel_goods)   
+	    jQuery("a[name='good_name_$i']").each(function(){ 
+	    	#if($!good.id)
+	        	jQuery(this).attr("href",'$!webPath/goods_$good.id' + '.htm');
+	        #end 
+   		 });
+   		#set($i = $i + 1)  
+    #end   
+    jQuery('#back_box').html("");
+   	  
+</script>

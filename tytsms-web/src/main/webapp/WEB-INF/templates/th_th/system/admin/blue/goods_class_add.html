@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+//设置默认状态以及判断初始显示状态
+	var state = jQuery("#display").val();
+	if(state==""){
+		jQuery("#display").val("true");
+		jQuery("#displayOff").hide();
+	}else{
+		 if(state=="true"){
+			jQuery("#displayOff").hide();
+		}else{
+			jQuery("#displayOn").hide();
+		}
+	}
+	
+	var state1 = jQuery("#recommend").val();
+	if(state1==""){
+		jQuery("#recommend").val("true");
+		jQuery("#recommendOff").hide();
+	}else{
+		 if(state1=="true"){
+			jQuery("#recommendOff").hide();
+		}else{
+			jQuery("#recommendOn").hide();
+		}	
+	}	
+//
+ 	//改变系统提示的样式
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+jQuery("#pid").val("$!obj.parent.id");
+jQuery("#goodsTypeId").val("$!obj.goodsType.id");
+//
+
+jQuery.validator.addMethod("verify",function(value,element){
+		var re =  /^([0-9a-zA-Z]|[\u4E00-\u9FA5]|[.]{1}[0-9])+$/;
+        if(re.test(jQuery("#commission_rate").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }		  
+});
+  jQuery("#theForm").validate({
+    rules:{
+	  className:{
+	    required :true,
+	     remote:{
+		    url: "$!webPath/admin/goods_class_verify.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "className": function(){return jQuery("#className").val();},
+				  "id":function(){return jQuery("#id").val()},
+				  "pid":function(){return jQuery("#pid").val()}
+		     }
+			}
+	  },
+	  commission_rate:{required:true,verify:true,max:0.99},
+	  guarantee:{digits:true}
+	 },
+	messages:{
+	  className:{required:"分类名称不能为空",remote:"该分类已经存在"},
+	  commission_rate:{required:"佣金比例不能为空",verify:"请正确输入佣金比例",max:"佣金比例请小于1"},
+	  guarantee:{digits:"请正确输入保证金"}
+	}
+  });
+  //图标
+  jQuery("#pid").change(function(){
+	 var val = jQuery(this).val();
+	  if(val==""){
+		 jQuery("#icon").show(); 
+		 jQuery("#icon_sys_ul").show();
+		  }else{  
+		 jQuery("#icon").hide();	
+		 jQuery("#icon_sys_ul").hide();  
+		 jQuery("#icon_acc_ul").hide(); 
+			  }
+	  });
+  jQuery("input[type='radio']").click(function(){
+	 var val = jQuery(this).attr("value");
+	  if(val==1){
+	  jQuery("#icon_sys_ul").hide();
+	  jQuery("#icon_acc_ul").show();	  
+	  }else{
+	  jQuery("#icon_sys_ul").show();
+	  jQuery("#icon_acc_ul").hide();		  
+	  }
+  });
+  jQuery(".icon_sys a").click(function(){
+	  jQuery("#icon_sys").val(jQuery(this).attr("icon"));
+	  jQuery(this).parent().find("a").removeClass("this");
+	  jQuery(this).addClass("this");
+	  });
+   jQuery("#icon_acc").change(function(){
+	 jQuery("#textfield1").val(jQuery("#icon_acc").val());
+   })
+     jQuery("#logoShow").mouseover(function(){
+	    jQuery("#logoImg").css('display','block');
+   }).mouseout(function(){
+		jQuery("#logoImg").css('display','none');
+	});
+#if($!obj.icon_type)	
+#if($!obj.icon_type==0)
+jQuery("#icon_sys_ul").show();
+jQuery("#icon_acc_ul").hide();
+jQuery(".icon_sys a").removeClass("this");
+jQuery(".icon_sys a[icon='$!obj.icon_sys']").addClass("this");
+#else
+jQuery("#icon_sys_ul").hide();
+jQuery("#icon_acc_ul").show();
+#end
+#end
+#if($!obj.parent.id)
+jQuery("#icon").hide();	
+jQuery("#icon_sys_ul").hide();  
+jQuery("#icon_acc_ul").hide();
+#end	
+});
+
+
+function saveForm(method){
+   jQuery("#theForm").submit();
+}
+
+//设置显示开关
+function displayState(){
+	var state = jQuery("#display").val();
+	if(state=="true"){
+		jQuery("#display").val("false");
+		jQuery("#displayOff").show();
+		jQuery("#displayOn").hide();
+	}else{
+		jQuery("#display").val("true");
+		jQuery("#displayOff").hide();
+		jQuery("#displayOn").show();
+	}
+}
+
+//设置推荐开关
+function recommendState(){
+	var state = jQuery("#recommend").val();
+	if(state=="true"){
+		jQuery("#recommend").val("false");
+		jQuery("#recommendOff").show();
+		jQuery("#recommendOn").hide();
+	}else{
+		jQuery("#recommend").val("true");
+		jQuery("#recommendOff").hide();
+		jQuery("#recommendOn").show();
+	}
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">商品分类</h1>
+  <div class="nav_list">
+  <ul>
+     
+      <li> <a href="$!webPath/admin/goods_class_list.htm"><b>管理</b></a> </li>
+      <li> <a href="$!webPath/admin/goods_class_add.htm"  #if(!$!edit) class="this" #end><b>新增</b></a></li>   
+       #if($!edit)
+	   <li><a href="javascript:void(0);" class="this"><b>编辑</b></a></li>
+	   #end
+      </ul>
+      </div>
+ <form name="theForm" id="theForm" action="$!webPath/admin/goods_class_save.htm" method="post" enctype="multipart/form-data">
+ <input name="id" type="hidden" id="id" value="$!obj.id" />
+  <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+  <input name="list_url" type="hidden" id="list_url" value="$!webPath/admin/goods_class_list.htm" />
+  <input name="add_url" type="hidden" id="add_url" value="$!webPath/admin/goods_class_add.htm" />
+ <div class="edit">
+  <div class="setcont editul">
+    <ul class="set1">
+      <li class="setcont_bg"><strong class="sred">*</strong>分类名称</li>
+      <li><span class="webname">
+        <input name="className" type="text" id="className" value="$!obj.className" size="40" />
+      </span></li>
+    </ul>
+    <!--鼠标未经过样式-->
+    <ul class="set1">
+      <li  class="setcont_bg">上级分类</li>
+      <li><span>
+        <select name="pid" id="pid">
+              <option value="">请选择上级商品分类...</option>
+			  #foreach($gc in $gcs)
+              #if($!gc.level && $!gc.level < $!level)
+              <option value="$!gc.id">$!gc.ClassName</option>
+              		  #foreach($child in $gc.childs)
+              		  	#if($!child.level && $!child.level < $!level)
+                      <option value="$!child.id">&nbsp;&nbsp;&nbsp;&nbsp;$!child.ClassName</option>
+                      			 #foreach($c in $child.childs)
+                      			  #if($!c.level && $!c.level < $!level)
+                                  <option value="$!c.id">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$!c.ClassName</option>
+ 			                      #end
+                                  #end
+                        #end
+                      #end
+               #end
+              #end
+         </select>
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">如果选择上级分类，那么新增的分类则为被选择上级分类的子分类</strong><strong class="c"></strong></span></li>
+    </ul>
+    
+    <ul class="set1" id="ul_commission">
+      <li class="setcont_bg"><strong class="sred">*</strong>佣金比例</li>
+      <li><span class="webname">
+        <input name="commission_rate" type="text" id="commission_rate" value="$!obj.commission_rate" size="40" />
+      </span><span class="use_code"><strong><label style="cursor:pointer"><input name="commission_link" type="checkbox" id="commission_link" value="true" />关联佣金比例到下级</label></strong></span><span id="nothis"><strong class="q"></strong><strong class="w">请填写佣金比例，如：该分类商品出售时返给平台的佣金为商品价格的10%，请填写0.1</strong><strong class="c"></strong></span></li>
+    </ul>
+   <ul class="set1" id="ul_commission">
+      <li class="setcont_bg">保证金</li>
+      <li><span class="webname">
+        <input name="guarantee" type="text" id="guarantee" value="$!obj.guarantee" size="40" />
+      </span><span class="use_code"><strong><label style="cursor:pointer"><input name="guarantee_link" type="checkbox" id="guarantee_link" value="true" />关联保证金到下级</label></strong></span><span id="nothis"><strong class="q"></strong><strong class="w">商家入驻成功后平台可以向商家收取一定的店铺保证金，该保证金需线下协商交易。</strong><strong class="c"></strong></span></li>
+    </ul>
+	<ul class="set1">
+      <li  class="setcont_bg">类型</li>
+	  <li>
+	  
+      <span>
+        <select name="goodsTypeId" id="goodsTypeId">
+		  <option value="">请选择...</option>
+		#foreach($gt in $!gts)
+          <option value="$!gt.id">$!gt.name</option>
+		#end  
+        </select>
+      </span><span class="use_code"><strong><label><input name="child_link" type="checkbox" id="child_link" value="true" />关联类型到下级</label></strong></span><span id="nothis"><strong class="q"></strong><strong class="w">如果当前下拉选项中没有适合的类型，可以去<a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/goods_type_list.htm','main_workspace','goods_type_op','about_goods')" style="color:#fff; background-color:#FF6600; padding:2px 4px; border-radius:4px 4px 4px 4px;">类型管理</a>功能中新增新的类型</strong></span>
+      <strong></strong></li>
+	</ul>
+	
+	<ul class="set1">
+      <li class="setcont_bg">显示</li>
+    <li class="webSwitch"> <input name="display" id="display" type="hidden" value="$!obj.display" />
+          <img src="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg" width="61" height="23" id="displayOn" onclick="displayState();" style="cursor:pointer"/> <img src="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg" width="61" height="23" id="displayOff" onclick="displayState();" style="cursor:pointer"/></li>
+    </ul>
+	<ul class="set1">
+      <li class="setcont_bg">推荐</li>
+       <li class="webSwitch"> <span>
+      <input name="recommend" id="recommend" type="hidden" value="$!obj.recommend" />
+          <img src="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg" width="61" height="23" id="recommendOn" onclick="recommendState();" style="cursor:pointer"/> <img src="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg" width="61" height="23" id="recommendOff" onclick="recommendState();" style="cursor:pointer"/></span><span id="nothis"><strong class="q"></strong><strong class="w">推荐商品分类将会在首页楼层显示</strong><strong class="c"></strong></span></li>
+    </ul>
+    <ul class="set1" id="icon">
+      <li class="setcont_bg">图标</li>
+       <li> <span>
+       
+       <input name="icon_type" id="type1"  type="radio" #if($!obj.icon_type==0 || !$!obj.icon_type) checked="checked" #end value="0"><label for="type1">系统图标</label></input>
+    
+       <input name="icon_type" id="type2"  type="radio"  #if($!obj.icon_type==1) checked="checked" #end value="1"><label for="type2">图标上传</label></input>
+           </span><span id="nothis"><strong class="q"></strong><strong class="w">商城分类图标只在一级分类旁显示，最佳尺寸为：18x20</strong><strong class="c"></strong></span></li>
+    </ul>
+     
+    <ul class="set1" id="icon_sys_ul" >
+      <li class="setcont_bg">系统图标</li>
+      <li>
+       <div class="icon_sys">
+       		<a href="javascript:void(0);" icon="" class="this"><img src="$!webPath/th_th/resources/style/common/images/icon/default_icon.png" /></a>
+ 			#foreach($count in [1..39])
+            <a href="javascript:void(0);" icon="$!count"><img src="$!webPath/th_th/resources/style/common/images/icon/icon_$!{count}.png" /></a>
+            #end
+       </div>
+     </li>
+       <input name="icon_sys" type="hidden" id="icon_sys"  />
+    </ul>   
+    <ul class="set1" id="icon_acc_ul" style="display:none" >
+        <li class="setcont_bg">图标上传</li>
+        <li> <span class="size13" >
+          <input name="textfield" type="text" id="textfield1" />
+          </span> <span class="filebtn">
+          <input name="button" type="button" id="button1" value=""/>
+          </span> <span style="float:left;" class="file">
+          <input name="icon_acc" type="file" id="icon_acc" class="file-text" size="30"/>
+          </span> <span class="preview"> <img src="$!webPath/th_th/resources/style/system/manage/blue/images/preview.jpg" width="25" height="25"  id="logoShow" style="cursor:help"/> </span>#if(!$!obj.icon_acc)<span id="nothis"><strong class="q"></strong><strong class="w">暂无图标</strong><strong class="c"></strong></span>#end
+          #if($!obj.icon_acc)
+          <div class="bigimgpre" id="logoImg" style="display:none;"><img src="$!webPath/$!obj.icon_acc.path/$!obj.icon_acc.name"  width="20" height="18" id="logoShow2"/> </div>
+          #end
+        </li>
+      </ul>   
+       
+    
+    <ul class="set1">
+      <li class="setcont_bg">排序</li>
+      <li><span class="webname">
+        <input name="sequence" type="text" id="sequence" value="$!obj.sequence" />
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">序号越小，分类显示越靠前</strong><strong class="c"></strong></span></li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">SEO关键字</li>
+      <li><span class="webname">
+        <textarea name="seo_keywords" cols="40" rows="6" id="seo_keywords">$!obj.seo_keywords</textarea>
+      </span></li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">SEO描述</li>
+      <li><span class="webname">
+        <textarea name="seo_description" cols="40" rows="6" id="seo_description">$!obj.seo_description</textarea>
+      </span></li>
+    </ul>
+    </div>
+    </div>
+  </form>
+  <div class="submit">
+   <span class="pad120"> <input name="save" type="button" value="提交" onclick="saveForm()" /></span>
+  </div>
+</div>
+</body>
+</html>

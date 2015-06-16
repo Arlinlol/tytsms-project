@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script>
+//
+jQuery(document).ready(function(){
+});
+function ajax_update(id,fieldName,obj,value){
+   var val;
+   if(value==undefined){
+	 val=jQuery(obj).val();
+   }else val=value; 
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/group_lifeself_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/th_th/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }    
+				 if(value!=undefined){
+				   jQuery(obj.parentNode.parentNode).remove();
+				 }
+              }
+	    });
+}
+
+function query_form(){
+jQuery("#ListForm").submit();
+	}
+</script>
+</head>
+<body scroll="yes">
+<div class="cont">
+  <h3 class="seth">团购管理</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/group_self.htm"><b>商品类团购列表</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_self.htm"><b>生活类团购列表</b></a></li>
+            <li><a href="$!webPath/admin/group_self_add.htm?type=goods"><b>新增商品类团购商品</b></a></li>
+            <li><a href="$!webPath/admin/group_self_add.htm?type=life"><b>新增生活类团购商品</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_selforder.htm" class="this"><b>生活购订单列表</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_selfinfo.htm"><b>团购消费码列表</b></a></li>
+        </ul>
+  </div>
+ <form name="ListForm" id="ListForm" action="" method="post">
+    <div class="search">
+      <span>订单编号</span> <span class="size100">
+          <input name="order_id" type="text" id="order_id" value="$!order_id" />
+          </span>
+          <span>订单状态</span><span><select name="status" id="status">
+          <option value="">请选择</option>
+          <option value="0" #if($!status==0) selected="selected" #end>已取消</option>
+            <option value="10" #if($!status==10) selected="selected" #end>待支付</option>
+              <option value="20" #if($!status==20) selected="selected" #end>已支付</option>
+          </select></span>
+          <span>
+          <input name="" type="button"  value="搜索" style="cursor:pointer;" onclick="query_form()" class="search_btn"/>
+        </span> 
+    </div>
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="15%"><span class="form_btna">订单编号</span></th>
+          <th width="15%"><span class="form_btna">订单商品</span></th>
+          <th width="15%"><span class="form_btna">购买数量</span></th>
+          <th width="15%"><span class="form_btna">商品单价</span></th>
+          <th width="15%"><span class="form_btna">下单时间</span></th>
+          <th width="15%"><span class="form_btna">订单状态</span></th>
+          <th align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+      #foreach($obj in $objs)
+        <tr>
+          <td align="center">$!obj.order_id</td>
+            #set($map = $!orderFormTools.queryGroupInfo("$!obj.group_info"))
+              #set($goods_id = "$!{map.get('goods_id')}")	
+              #set($goods_name = "$!{map.get('goods_name')}")	
+              #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+              #set($img = "$!webPath/$!{goods_mainphoto_path}")
+              #set($goods_count = "$!{map.get('goods_count')}")
+              #set($goods_price = "$!{map.get('goods_price')}")
+          <td align="center">$!goods_name</td>
+          <td align="center">$!goods_count</td>
+          <td align="center">$!goods_price</td>
+          <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+          <td align="center"> #if($!obj.order_status==0) 已取消 #end #if($!obj.order_status==10) 未支付 #end #if($!obj.order_status==20) 已支付 #end</td>
+          <td align="center">#if($!obj.order_status==0) 无法操作 #end #if($!obj.order_status==10)<a href="javascript:void(0);" onclick="if(confirm('是否确定使用编号为：$!obj.order_id 订单？'))window.location.href='$!webPath/admin/lifeorder_cancel.htm?id=$!obj.id'">取消</a> #end #if($!obj.order_status==20) <a href="$!webPath/admin/lifeorder_view.htm?id=$!obj.id">详情</a> #end</td>
+        </tr>
+     #end
+    </table>
+    </div>
+    <div class="operate_bar">
+        <div class="fenye">
+            <span id="queryCondition" style="display:none">
+            </span>
+            <input name="mulitId" type="hidden" id="mulitId" />
+        	<input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+       		$!gotoPageFormHTML      
+        </div>          
+ 	</div>
+  </form>
+</div>
+</body>
+</html>

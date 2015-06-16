@@ -1,0 +1,129 @@
+<link href="$!webPath/resources/style/common/css/window.css" type="text/css" rel="stylesheet" />
+<link href="../../../../resources/style/system/manage/blue/template.css"  rel="stylesheet" type="text/css"/>
+<script>
+jQuery(document).ready(function(){
+    jQuery("#theForm").validate({
+	   rules:{
+		   menu_name:{required:true},
+		   menu_url:{required:true},
+		   menu_key:{required:true,
+					 remote:{
+						url: "$!webPath/admin/weixin_menukey_verify.htm",     //后台处理程序
+						type: "post",               //数据发送方式
+						dataType: "json",           //接受数据格式   
+						data: {                     //要传递的数据
+							  "menu_key": function(){return jQuery("#menu_key").val();},
+							  "store_id":"$!store.id",
+							  "menu_id":function(){return jQuery("#menu_id").val();}
+						      }
+						     }
+			         }
+	   },
+	   messages:{
+	       menu_name:{required:"菜单名称不能为空"},
+		   menu_url:{required:"菜单URL不能为空"},
+		   menu_key:{required:"菜单Key不能为空",remote:"菜单Key已存在"}
+	   }
+	});
+	jQuery(":radio").click(function(){
+	   var menu_type=jQuery(this).val()
+	   if(menu_type=="click"){
+	     jQuery("#menu_key_info").show();
+		 jQuery("#tr_menu_key_content").show();
+		 jQuery("#menu_url_info").hide();
+	   }
+	   if(menu_type=="view"){
+	     jQuery("#menu_key_info").hide();
+		 jQuery("#tr_menu_key_content").hide();
+		 jQuery("#menu_url_info").show();	   
+	   }
+	});
+	#if($!obj.menu_type=="click")
+	     jQuery("#menu_key_info").show();
+		  jQuery("#tr_menu_key_content").show();
+		 jQuery("#menu_url_info").hide();	
+	#end
+	#if($!obj.menu_type=="view")
+	     jQuery("#menu_key_info").hide();
+		  jQuery("#tr_menu_key_content").hide();
+		 jQuery("#menu_url_info").show();	
+	#end	
+	jQuery(":radio[value=$!{obj.menu_type}]").attr("checked",true);
+});
+function menu_remove(){
+  if(confirm('删除菜单会同步删除下级，确定删除？')){
+     window.location.href='$!webPath/admin/weixin_menu_delete.htm?menu_id=$!obj.id';
+  }
+}
+
+function plat_menu_save(){
+	jQuery("#theForm").submit();
+}
+</script>
+<form action="$!webPath/admin/weixin_menu_save.htm" method="post" id="theForm">
+
+      <div class="edit">
+      <div class="editul setcont">
+      
+      <ul class="set1">
+      <li class="setcont_bg">菜单名称：</li>
+      <li><span class="size200">
+      <input name="menu_name" type="text" id="menu_name" value="$!obj.menu_name"  />
+      <input name="menu_id" type="hidden" id="menu_id" value="$!obj.id" />
+      <input name="pmenu_id" type="hidden" id="pmenu_id" value="$!pmenu_id" />
+      </span>
+      </li>
+      </ul>
+      
+            <ul class="set1">
+      <li class="setcont_bg">菜单序号：</li>
+      <li><span class="size200"><input name="menu_sequence" type="text" id="menu_sequence" value="$!obj.menu_sequence" style="width:200px;" /></span>
+        正序排列
+      </li>
+      </ul>
+      
+                  <ul class="set1">
+      <li class="setcont_bg">菜单类型：</li>
+      <li>
+        <label>
+        <span class="use_code"><strong><input name="menu_type" type="radio" id="menu_type" value="click" checked="checked" /></strong><strong class="usecode">
+        点击事件</strong></span>
+      </label>
+      <label>
+        <span class="use_code"><strong> <input type="radio" name="menu_type" id="menu_type" value="view" /></strong><strong class="usecode">
+        URL请求</strong></span>
+      </label>
+      </li>
+      </ul>
+      
+      
+                        <ul class="set1">
+      <li class="setcont_bg">菜单URL：</li>
+      <li><span class="size200">
+<input name="menu_url" type="text" id="menu_url" value="$!obj.menu_url"  /></span>
+      </li>
+      </ul>
+      
+                              <ul class="set1">
+      <li class="setcont_bg">菜单Key：</li>
+      <li><span class="size200">
+<input name="menu_key" type="text" id="menu_key" value="$!obj.menu_key" /></span>
+      </li>
+      </ul>
+      
+                                    <ul class="set1">
+      <li class="setcont_bg">菜单Key内容：</li>
+      <li>
+<textarea name="menu_key_content" type="text" id="menu_key_content"style="width:200px; height:80px" >$!obj.menu_key_content</textarea>
+      </li>
+      </ul>
+      
+<div class="submit"><span class="pad120">
+        <input type="button" onclick="plat_menu_save()" value="保存" style="cursor:pointer;"/> 
+
+        <input name="按钮" onclick="menu_remove();" type="button" style="cursor:pointer;" value="删除"/>
+      </span></div>
+
+  </div>
+  </div>
+</form>

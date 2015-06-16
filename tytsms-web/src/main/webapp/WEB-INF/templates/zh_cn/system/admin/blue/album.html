@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/manage/blue/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/swfupload.js"></script>
+<script src="$!webPath/resources/js/swfupload.queue.js"></script>
+</head>
+<body>
+<form action="" method="post" name="ListForm" id="ListForm">
+  <div class="cont">
+    <h1 class="seth">自营相册</h1>
+    <div class="nav_list">
+      <ul>
+        <li> <a href="$!webPath/admin/album.htm" class="this"><b>我的相册</b></a></li>
+        <li><a href="$!webPath/admin/watermark.htm"><b>水印管理</b></a> </li>
+      </ul>
+    </div>
+    <div class="photo_oper">
+      <div class="photo_creat"><a class="photo_creata" href="javascript:void(0);" dialog_uri="$!webPath/admin/album_add.htm?currentPage=$!currentPage" dialog_title="创建相册" dialog_width="400" dialog_height="100" dialog_id="album_add">创建相册</a></div>
+    </div>
+    <div class="photo_list"> #foreach($obj in $objs)
+      #if($!obj.album_cover)
+      #set($cover_img="$!webPath/$!obj.album_cover.path/$!obj.album_cover.name")
+      #else
+      #set($cover_img="$!webPath/resources/style/system/manage/blue/images/photo/photom.jpg")
+      #end
+      <ul class="photo_listul">
+        <li class="photo_bg"><span><a href="$!webPath/admin/album_image.htm?id=$!obj.id"><img src="$!cover_img" width="150" height="150"/></a></span><i><a href="javascript:void(0);" dialog_uri="$!webPath/admin/album_edit.htm?id=$!obj.id&currentPage=$!currentPage" dialog_title="编辑相册" dialog_width="400" dialog_height="100" dialog_id="album_edit"class="pens">编辑</a></i>#if(!$!obj.album_default)<i><a  href="javascript:void(0);" onclick="if(confirm('删除商品相册会同步删除相册里图片，可能影响商品显示，是否继续?'))window.location.href='$!webPath/admin/album_del.htm?mulitId=$!obj.id'" class="delp">删除</a>#end</i></li>
+        <li class="photo_name"><b style="float:right; margin-right:20px; font-weight:lighter;">共$!{albumViewTools.query_album("$!obj.id").size()}张</b><a href="$!webPath/admin/album_image.htm?id=$!obj.id">$!obj.album_name</a></li>
+        <li class="photo_de"><a href="javascript:void(0);" dialog_uri="$!webPath/admin/album_upload.htm?currentPage=$!currentPage&album_id=$!obj.id" dialog_title="上传相片" dialog_width="400" dialog_height="100" dialog_id="album_add" class="photos_upload">上传相片</a></li>
+      </ul>
+      #end </div>
+    <div class="operate_bar">
+      <div class="fenye">
+        <input name="mulitId" type="hidden" id="mulitId" />
+        <input type="hidden" name="currentPage" id="currentPage" value="$!currentPage" />
+        $!gotoPageHTML </div>
+    </div>
+  </div>
+</form>
+</body>
+</html>

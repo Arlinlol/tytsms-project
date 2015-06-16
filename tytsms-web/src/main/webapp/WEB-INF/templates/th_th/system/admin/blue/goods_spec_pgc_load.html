@@ -1,0 +1,6 @@
+﻿#if($!gcs.size()>0)
+<option value="">请选择...</option>
+#foreach($gc in $gcs)
+<option value="$!gc.id">$!gc.className</option>
+#end
+#end

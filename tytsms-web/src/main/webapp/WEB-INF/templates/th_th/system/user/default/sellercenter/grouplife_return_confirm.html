@@ -1,0 +1,22 @@
+<form action="$!webPath/seller/grouplife_return_confirm_save.htm" method="post" id="theForm">
+  <table style="float:left;" width="390" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    <tr>
+      <td align="left" valign="top" style=" padding-left:20px;">退款团购消费码： <span style="color:#393; font-size:16px">$!obj.group_sn</span></td>
+    </tr>
+    <tr>
+      <td align="left" valign="top" style=" padding-left:20px;padding-top: 10px;"><span>退款理由：</span><span style="color:#999; font-weight:normal;">$!obj.refund_reasion</span>
+</td>
+    </tr> 
+    <tr>
+      <td align="left" valign="top" style=" padding-left:20px;padding-top: 10px;"><span style="color:#F00">注意：</span><span style="color:#999; font-weight:normal;">确认退款后，该团购消费码将由平台向买家退款，以预存款的方式存入买家账户，款项到达时间约为5至7个工作日，请及时与买家沟通</span>
+</td>
+    </tr>
+    <tr>
+      <td align="center"><span class="inputbtn">
+       <input name="id" type="hidden" id="id" value="$!obj.id" />
+        <input type="submit" value="确认" style="cursor:pointer;" class="order_button" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      </span></td>
+    </tr>
+  </table>
+</form>

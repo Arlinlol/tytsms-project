@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商城品牌 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function(e) {
+     var brand_list_cls=jQuery(".brand_sear_bar").offset().top;
+  jQuery(window).scroll(function(){
+      var top= jQuery(".brand_sear_bar").offset().top;
+	  var scrolla=jQuery(window).scrollTop();
+	  var i=top-scrolla;
+	 if(i<=0){
+	 var height =jQuery("#float_box").css("height"); 
+	   jQuery("#remain_box").show().css("height",height);		 
+	   jQuery(".brand_sear_bar").addClass("brand_sear_bar_fix");  
+	 }
+	 if(scrolla<brand_list_cls){
+	    jQuery("#remain_box").hide().css("height","0px");
+	   jQuery(".brand_sear_bar").removeClass("brand_sear_bar_fix");
+	 }
+  });
+  
+  jQuery("a[id^=ReturnWord_]").click(function(){
+	var mark = jQuery(this).attr("mark");
+	var status = jQuery("#brand_"+mark).attr("status");
+	if(status=="0"){
+	  var t= jQuery(".brand_sear_bar").offset().top;
+	  var top = jQuery("#brand_"+mark).offset().top;
+	  var scrolla=jQuery(window).scrollTop();
+	  var i=t-scrolla;
+	 if(i>0){
+		 top = top-20;
+		 }
+	  var height =jQuery("#float_box").height(); 
+	  var i=top-height-30;
+	   jQuery(window).scrollTop(i);
+	  }
+	  });
+
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+ <div id="remain_box" style="display:none">
+       </div>
+  <div class="brand_list">
+    <div class="rec_brand_list">
+    <div class="title">
+      <h3>推荐品牌</h3>
+      </div>
+      <ul>
+        #foreach($gb in $gbs)
+        <li><a href="$!webPath/brand_goods_$!{gb.id}.htm"><em><img src="$!imageWebServer/$!gb.brandLogo.path/$!gb.brandLogo.name" width="142" height="66" /></em><b>$!gb.name</b></a></li>
+        #end
+      </ul>
+    </div>
+    <div class="brand_sear_bar" id="float_box">
+      <dl>
+        <dt>分类：</dt>
+        <dd>
+          <ul>
+           <li #if(!$!gbc_id) class="this" #end><a href="$!webPath/brand/index.htm">全部</a></li>
+              #foreach($gbc in $gbcs)
+            #if($!gbc.brands.size()>0)<li #if($!gbc_id==$!{gbc.id}) class="this" #end><a href="$!webPath/brand/index.htm?gbc_id=$!{gbc.id}">$!gbc.name</a></li>#end
+               #end 
+          </ul>
+        </dd>
+      </dl>
+      <dl>
+        <dt>字母：</dt>
+        <dd>
+          <ul>
+            #foreach($list in $all_list)<li> <a href="javascript:void(0);" id="ReturnWord_$!{list.id}" mark="$!{list.get('word')}">$!list.get("word")</a></li> #end 
+          </ul>
+        </dd>
+      </dl>
+    </div>
+    <div class="brand_list_box">
+     #foreach($list in $all_list)
+        #if($!list.get("brand_list").size()>0)
+      <h3 id="brand_$!{list.get('word')}" status="0">$!list.get("word")</h3>
+      <div class="brand_list_right">
+        <dl>
+          <dd>
+            <ul>
+            #foreach($gb in $!list.get("brand_list"))
+              <li><a href="$!webPath/brand_goods_$!{gb.id}.htm"><em><img src="$!webPath/$!gb.brandLogo.path/$!gb.brandLogo.name" width="142" height="66" /></em><b>$!gb.name</b></a></li>
+            #end
+            </ul>
+          </dd>
+        </dl>
+      </div>
+      #end
+        #end
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

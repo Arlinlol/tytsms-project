@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+                  <!-- 包含 -->                                                  <!-- 商品搜索结果 -->
+<title>#springMessage("sms.store_goods_search.contain")$!{keyword}#springMessage("sms.store_goods_search.goods_search_result") </title>
+<meta name="keywords" content="$!store.store_seo_keywords" />
+<meta name="description" content="$!store.store_seo_description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/shop/$!{store.template}/css/default.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.lazyload.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery(".smallgoods .goodsimgs img").lazyload({effect:"fadeIn",width:178,height:170});
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm") 
+$!httpInclude.include("/store_head.htm?store_id=$!{store.id}")
+  #set($banner="$!webPath/th_th/resources/style/shop/$!{store.template}/images/banner.jpg")
+  #if($!store.store_banner)
+    #set($banner="$!webPath/$!store.store_banner.path/$!store.store_banner.name")
+  #end
+<div class="banner_width">
+  <div class="shopbanner"><img src="$!banner"  width="1002" /></div>
+</div>
+<div class="nav_width">
+  <div class="main">
+  <div class="nav_bg">
+    <div class="shopnav">
+      $!httpInclude.include("/store_nav.htm?id=$!store.id&goods_list=true")
+      <div class="shopnavs"></div>
+    </div>
+    </div>
+  </div>
+  <div class="navbotm"></div>
+</div>
+<div class="main"> 
+  <div class="shop">
+    <div class="shop_index">
+      $!httpInclude.include("/store_left.htm?id=$!store.id")
+      <form method="post" id="ListForm">
+      <div class="shopindex_right">
+        <div class="regoods">
+          <h1>#springMessage("sms.store_goods_search.contain")<!-- 包含 -->“$!{keyword}”#springMessage("sms.store_goods_search.search_result")<!-- 搜索结果 --></h1>
+          #if($!objs.size()>0)
+          <div class="smallgoods"> 
+          #foreach($goods in $objs)
+            #if($!goods.goods_main_photo)
+            #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}")
+            #else
+            #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            #end
+              #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+		 #if($!config.second_domain_open && $!goods.goods_store.store_second_domain!="")
+     	  #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+     	  #end
+            
+            <ul>
+              <li class="goodsimgs"><a href="$!goods_url" target="_blank"><span class="goods_sp_span"><p><img src="$!imageWebServer/th_th/resources/style/common/images/loader.gif" original="$!img" onerror="this.src='$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}';" width="28" height="28"/></p></span></a></li>
+              <li class="goodslook"><a href="$!goods_url" target="_blank" class="look">#springMessage("sms.store_goods_search.detail")<!-- 查看详情 --></a><strong>¥$!goods.store_price</strong></li>
+              <li class="goodsnames"><a href="$!goods_url" target="_blank">$!CommUtil.substring("$!goods.goods_name",28)</a></li>
+              <li class="recentgoodsok">#springMessage("sms.store_goods_search.recent_record")<!-- 最近成交 --><strong>$!goods.goods_salenum</strong>笔</li>
+            </ul>
+            #end 
+           </div>
+           #else
+           <div class="sigh"> <span><img src="$!imageWebServer/th_th/resources/style/shop/$!{store.template}/images/sigh.jpg" width="120" height="109" /></span> <b>#springMessage("sms.store_goods_search.no_info")<!-- 对不起，没有对应商品信息！ --></b> </div>
+           #end
+          <div class="shop_page"><span>
+            <input name="store_id" type="hidden" id="store_id" value="$!{store.id}" />
+            <input name="keyword" type="hidden" id="keyword" value="$!keyword" />
+            <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+            $!gotoPageFormHTML</span> </div>
+        </div>
+      </div>
+      </form>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

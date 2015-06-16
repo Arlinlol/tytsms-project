@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+});
+
+</script>
+</head>
+<body>
+
+<div class="cont">
+  <h3 class="seth">店铺名称:$!{store_name} &nbsp;店铺结算明细</h3>
+  <h4 class="seth_total">店铺运营至今
+   <span>店铺总销售额：<b>#if($!{totalPrice})$!{totalPrice}#else 0 #end </b>元</span>
+   <span>店铺应该结算：<b>#if($!{total_amount})$!{total_amount}#else 0 #end </b>元</span>
+   <span>店铺实际结算：<b>#if($!{reality_amount})$!{reality_amount}#else 0 #end </b>元</span>
+   <span>店铺未结算<b> #if($!{total_amount_no})$!{total_amount_no}#else 0 #end</b> 元</span>
+   <span>店铺总销售佣金<b> #if($!{commission_amount})$!{commission_amount}#else 0 #end</b> 元</span>
+   
+   </h4> 
+  <div class="nav_list">
+  	<ul>
+   		<li><a href="$!webPath/admin/store_payofflog_list.htm?status=0&username=$!username" #if(!$!status || $!status==0) class="this" #end><b>未结算</b></a></li>
+    	<li><a href="$!webPath/admin/store_payofflog_list.htm?status=6&username=$!username" #if($!status==3) class="this" #end><b>已结算</b></a></li>
+    </ul>
+  </div>
+  
+  <form action="$!webPath/admin/store_payofflog_list.htm" method="post" name="ListForm" id="ListForm" >
+  <div class="search">
+    <ul>
+      <li> 
+      <span>时间</span>
+      <span class="size100">
+        <input name="beginTime" type="text" id="beginTime"  readonly="readonly" value="$!beginTime"/>
+      </span>
+      <span>—</span>
+      <span class="size100">
+        <input name="endTime" type="text" id="endTime" readonly="readonly" value="$!endTime"/>
+      </span> 
+      
+      <span >
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+      </span>
+      </li>
+    </ul>
+  </div>
+  <div class="fshoptb">
+   <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+     <tr>
+        <th width="12%"><span class="form_btna">账单流水号</span></th>
+        <th width="12%"><span class="form_btna">对应订单号</span></th>
+        <th width="12%"><span class="form_btna">账单说明</span></th>
+        #if(!$!status || $!status==0)
+        <th width="12%"><span class="form_btna">入账时间</span></th>
+        #end
+        #if($!status==6)
+        <th width="12%"><span class="form_btna">结算完成时间</span></th>
+        #end      
+        <th width="8%"><span class="form_btna">销售金额(元)</span></th>
+        <th width="8%"><span class="form_btna">销售佣金(元)</span></th>
+        <th width="8%"><span class="form_btna">结算金额(元)</span></th>
+        <th align="center"><b class="form_btnb">操作</b></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr #if($!obj.payoff_type==-1)style="color:#F00" #end>
+        <td align="center">$!obj.pl_sn</td>
+        <td align="center">$!obj.order_id</td>
+        <td align="center">$!obj.pl_info</td>
+        #if(!$!status || $!status==0)
+        <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+        #end
+        #if($!status == 6)
+        <td align="center">$!CommUtil.formatLongDate($!obj.complete_time)</td>
+        #end
+        <td align="center">$!obj.order_total_price</td>
+        <td align="center">$!obj.commission_amount</td>
+        <td align="center">$!obj.total_amount</td>
+        <td align="center" class="hui oprate_con">
+          <a href="$!webPath/admin/payofflog_view.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">详情</a>
+        </td>
+      </tr>
+     #end
+    </table>
+  </div>
+  <div class="operate_bar2">
+    <div class="fenye">
+        <input name="status" type="hidden" id="status" value="$!status" />
+        <input name="username" type="hidden" id="username" value="$!username"/>
+        <input name="store_name" type="hidden" id="store_name" value="$!store_name"/>
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        $!gotoPageFormHTML
+    </div>   
+  </div>
+  </form>
+</div>
+</body>
+</html>

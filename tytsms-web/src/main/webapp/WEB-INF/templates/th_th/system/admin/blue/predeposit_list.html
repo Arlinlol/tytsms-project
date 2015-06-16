@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+});
+</script>
+</head>
+<body>
+
+<div class="cont">
+  <h3 class="seth">预存款管理</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/predeposit_list.htm" class="this"><b>充值管理</b></a></li>
+        <li><a href="$!webPath/admin/predeposit_cash.htm"><b>提现管理</b></a></li>
+        <li><a href="$!webPath/admin/predeposit_modify.htm"><b>人工操作</b></a></li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/predeposit_list.htm" method="post" id="queryForm" >
+  <div class="search">
+    <ul>
+      <li> <span>支付方式</span><span>
+        <select name="pd_payment" id="pd_payment">
+          <option value="">支付方式</option>
+          <option value="alipay">支付宝</option>
+          <option value="chinabank">网银在线</option>
+          <option value="tenpay">财付通</option>
+          <option value="bill">快钱</option>
+          <option value="outline">线下支付</option>
+        </select>
+      </span><span>支付状态</span>
+      <span>
+      <select name="pd_pay_status" id="pd_pay_status">
+        <option value="">支付状态</option>
+        <option value="0">等待支付</option>
+        <option value="1">等待审核</option>
+        <option value="2">支付完成</option>
+      </select>
+      </span>
+      
+     <span>预存款状态</span><span>
+        <select name="pd_status" id="pd_status">
+          <option value="">预存款状态</option>
+          <option value="0">未完成</option>
+          <option value="1">已完成</option>
+          <option value="-1">已关闭</option>
+        </select>
+        </span>
+        
+        <span>会员名</span><span class="size150">
+        <input name="pd_userName" type="text" id="pd_userName" />
+        </span></li>
+      <li> <span>汇款时间</span><span class="size100">
+        <input name="beginTime" type="text" id="beginTime"  readonly="readonly"/>
+        </span><span>—</span><span class="size100">
+        <input name="endTime" type="text" id="endTime" readonly="readonly" />
+        </span> <span>汇款人</span><span class="size100">
+        <input name="pd_remittance_user" type="text" id="pd_remittance_user" />
+        </span><span>汇款银行</span><span class="size100">
+        <input name="pd_remittance_bank" type="text" id="pd_remittance_bank" />
+        </span> <span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn" />
+      </span> </li>
+    </ul>
+  </div>
+  </form>
+  <form action="$!webPath/admin/predeposit_list.htm" method="post" id="ListForm" >
+    <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="12%"><span class="form_btna">预存款编号</span></th>
+        <th width="12%"><span class="form_btna">会员名称</span></th>
+        <th width="12%"><span class="form_btna">提交时间</span></th>
+        <th align="center" width="12%"><span class="form_btna">支付方式</span></th>
+        <th align="center" width="12%"><span class="form_btna">充值金额（元）</span></th>
+        <th width="12%" align="center"><span class="form_btna">支付状态</span></th>
+        <th width="12%" align="center"><span class="form_btna">预存款状态</span></th>
+        <th width="12%" align="center" ><b class="form_btnb">操作</b></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr>
+        <td align="center">$!obj.pd_sn</td>
+        <td align="center">$!obj.pd_user.userName</td>
+        <td align="center">$!CommUtil.formatShortDate($!obj.addTime)</td>
+        #if($!obj.pd_payment=="outline")
+          #set($pd_payment_val="线下支付")
+        #end
+        #if($!obj.pd_payment=="alipay")
+          #set($pd_payment_val="支付宝")
+        #end
+        #if($!obj.pd_payment=="tenpay")
+          #set($pd_payment_val="财付通")
+        #end
+        #if($!obj.pd_payment=="bill")
+          #set($pd_payment_val="快钱")
+        #end
+        #if($!obj.pd_payment=="chinabank")
+          #set($pd_payment_val="网银在线")
+        #end
+        <td align="center">$!pd_payment_val</td>
+        <td align="center">$!obj.pd_amount</td>
+        #if($!obj.pd_pay_status==0)
+          #set($pd_pay_status_val="等待支付")
+        #end  
+        #if($!obj.pd_pay_status==1)
+          #set($pd_pay_status_val="等待审核")
+        #end       
+        #if($!obj.pd_pay_status==2)
+          #set($pd_pay_status_val="支付完成")
+        #end  
+        <td align="center">$!pd_pay_status_val</td>  
+        #if($!obj.pd_status==-1)
+          #set($pd_status_val="已关闭")
+        #end
+        #if($!obj.pd_status==0)
+          #set($pd_status_val="未完成")
+        #end
+        #if($!obj.pd_status==1)
+          #set($pd_status_val="已完成")
+        #end
+        <td align="center">$!pd_status_val</td>
+        <td align="center" class="hui oprate_con">
+        #if($!obj.pd_pay_status==1)
+        	<a href="$!webPath/admin/predeposit_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">编辑</a>
+        #end
+        	<a href="$!webPath/admin/predeposit_view.htm?id=$!obj.id" class="blue">查看</a>
+        </td>
+      </tr>
+     #end
+    </table>
+  </div>
+  <div class="operate_bar">
+    <div class="fenye">
+    	<input name="pd_payment" type="hidden" id="pd_payment" value="$!pd_payment" />
+        <input name="pd_pay_status" type="hidden" id="pd_pay_status" value="$!pd_pay_status" />
+        <input name="pd_status" type="hidden" id="pd_status" value="$!pd_status" />
+        <input name="pd_userName" type="hidden" id="pd_userName" value="$!pd_userName" />
+        <input name="beginTime" type="hidden" id="beginTime" value="$!beginTime" />
+        <input name="endTime" type="hidden" id="endTime" value="$!endTime" />
+        <input name="pd_remittance_user" type="hidden" id="pd_remittance_user" value="$!pd_remittance_user" />
+        <input name="pd_remittance_bank" type="hidden" id="pd_remittance_bank" value="$!pd_remittance_bank" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        $!gotoPageFormHTML
+    </div>   
+  </div>
+  </form>
+</div>
+</body>
+</html>

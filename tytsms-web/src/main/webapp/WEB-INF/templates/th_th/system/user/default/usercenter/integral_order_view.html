@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("member.integral_order_view.integral_situation")</title><!-- 积分兑换详情  -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(e) {
+    #if($!query_ship)
+	jQuery.ajax({
+		type:'POST',
+  		url: "$!webPath/buyer/integral_ship_ajax.htm",
+		data:{"order_id":"$!{obj.id}"},
+		beforeSend:function(){
+					 jQuery("#integral_ship").html("<div style='text-align:center;'> <img src='$!webPath/th_th/resources/style/common/images/loader.gif'/>	</div>");
+				  },
+  		success: function(data){
+   		 jQuery("#integral_ship").html(data);
+  	    }
+	});
+	#end
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="user_center">
+  $!httpInclude.include("/buyer/nav.htm?op=integral")  
+  </div>
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>#springMessage("member.integral_order_view.integral_conversion")<!-- 积分兑换 --></strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+          	<li><i></i><a href="$!webPath/buyer/integral_order_list.htm">#springMessage("member.integral_order_view.conversion_record")<!-- 兑换记录 --></a></li>
+            <li class="this"><i></i><a href="javascript:void(0)">#springMessage("member.gold_view.convert_details")<!-- 兑换详情 --></a></li>
+          </ul>
+        </div>
+        <div class="user_list_box">
+          <div class="complaint_one">
+            <h1 class="complaint_h">#springMessage("member.integral_order_view.conversion_info")<!-- 兑换信息 --></h1>
+            <div class="comp_goodetails">
+              <div class="comp_goodl">
+                  <ul class="comp_gdul">
+                    <li> #springMessage("member.integral_order_view.conversion_number")<!-- 兑换单号： --><strong style="color:orange">$!{obj.igo_order_sn}</strong></li>
+                    #if($!obj.igo_status==-1)
+                    #set($status="#springMessage('member.integral_order_list.not_cancel')")<!-- 已取消 -->
+                    #end
+                    #if($!obj.igo_status==0)
+                    #set($status="#springMessage('member.integral_order_list.wait_pay')")<!-- 待付款 -->
+                    #end
+                    #if($!obj.igo_status==10)
+                    #set($status="#springMessage('member.integral_order_list.offline_pay_pending')")<!-- 线下支付待审核 -->
+                    #end
+                    #if($!obj.igo_status==20)
+                    #set($status="#springMessage('member.integral_order_list.pay_deliver')")<!-- 已付款，待发货 -->
+                    #end
+                    #if($!obj.igo_status==30)
+                    #set($status="#springMessage('member.integral_order_list.delivered')")  <!--  已发货 -->     
+                    #end                
+                    #if($!obj.igo_status==40)
+                    #set($status="#springMessage('member.integral_order_list.receive_complete')")<!-- 已收货完成 -->
+                    #end 
+                    <li> #springMessage("member.order_view.status")<!-- 状态： --><b>$!status</b> </li>
+                    <li> 兑换积分：$!{obj.igo_total_integral}</li>
+                    <li> #springMessage("member.order_view.freight")<!-- 运费： -->$!{obj.igo_trans_fee}</li>
+                    <li> #springMessage("member.gold_view.convert_time")<!-- 兑换时间： -->$!CommUtil.formatShortDate($!obj.addTime)</li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+          <div class="complaint_one">
+            <h1 class="complaint_h">#springMessage("member.integral_order_view.member_info")<!-- 会员信息 --></h1>
+            <div class="comp_goodetails">
+              <div class="comp_goodl">
+                  <ul class="comp_gdul">
+                    <li>#springMessage("member.integral_order_view.member_name")<!--  会员名称： --><strong>$!{obj.igo_user.userName}</strong></li>
+                    <li> #springMessage("member.integral_order_view.member_star")<!-- 会员等级： -->$!integralViewTools.query_user_level_name("$!obj.igo_user.id") </li>
+                    <li> #springMessage("member.integral_order_view.member_email")<!-- 会员Email： -->$!{obj.igo_user.email}</li>
+                    <li> #springMessage("member.integral_order_view.conversion_Message")<!-- 兑换留言： -->#if($!{obj.igo_msg}!="")<em>$!{obj.igo_msg}</em>#else#springMessage("member.order_view.nothing")<!-- 无 -->#end</li>
+                  </ul>
+              </div>    
+            </div>
+          </div>
+          <div class="complaint_one">
+            <h1 class="complaint_h">#springMessage("member.integral_order_view.pay_info")<!-- 支付信息 --></h1>
+            <div class="comp_goodetails">
+            	<div class="comp_goodl">
+                  <ul class="comp_gdul">
+                    #if($!obj.igo_payment=="alipay")
+                    #set($payment="#springMessage('member.predeposit_list.alipay')")<!-- 支付宝 -->
+                    #end
+                    #if($!obj.igo_payment=="tenpay")
+                    #set($payment="#springMessage('member.predeposit_list.tenpay')")<!-- 财付通 -->
+                    #end
+                    #if($!obj.igo_payment=="bill")
+                    #set($payment="#springMessage('member.predeposit_list.quick_money')")<!-- 快钱 -->
+                    #end                 
+                    #if($!obj.igo_payment=="chinabank")
+                    #set($payment="#springMessage('member.predeposit_list.chinabank')")<!-- 网银在线 -->
+                    #end       
+                    #if($!obj.igo_payment=="outline")
+                    #set($payment="#springMessage('member.predeposit_list.offline_payment')")<!-- 线下支付 -->
+                    #end                  
+                    #if($!obj.igo_payment=="balance")
+                    #set($payment="#springMessage('member.recharge_order_view.advance_deposit_payment')")<!-- 预存款支付 -->
+                    #end 
+                    #if($!obj.igo_payment=="no_fee")
+                    #set($payment="#springMessage('member.integral_order_list.free_order')")<!-- 无运费订单 -->
+                    #end 
+                    #if(!$!obj.igo_payment)
+                    #set($payment="#springMessage('member.buyer_index.non_pay')")<!-- 未支付 -->
+                    #end
+                    <li> #springMessage("member.predeposit.mode_payment")<!-- 支付方式： -->$!payment</li>
+                    <li> #springMessage("member.order_view.pay_time")<!-- 支付时间： -->$!CommUtil.formatLongDate($!obj.igo_pay_time)</li>
+                    <li> #springMessage("member.integral_order_view.pay_Message")<!-- 支付留言： -->#if($!obj.igo_pay_msg!="")<em>$!obj.igo_pay_msg</em>#else#springMessage("member.order_view.nothing")<!-- 无 -->#end</li>
+                  </ul>
+                 </div> 
+            </div>
+          </div>
+          <div class="complaint_one">
+            <h1 class="complaint_h">#springMessage("member.order_view.shipping_info")<!-- 收货人信息 --></h1>
+            <div class="comp_goodetails">
+              <div class="comp_goodl">
+                  <ul class="comp_gdul">
+                    <li> #springMessage("member.order_view.shipping_name")<!-- 收货人： --><strong>$!{obj.receiver_Name}</strong></li>
+                    <li> #springMessage("member.address.region")<!-- 所在地区： -->$!obj.receiver_area </li>
+                    <li> #springMessage("member.address.zip_code")<!-- 邮政编码： -->$!{obj.receiver_zip}</li>
+                    <li> #springMessage("member.address_add.detailed_address")<!-- 详细地址： -->$!{obj.receiver_area_info}</li>
+                    <li> #springMessage("member.order_ship_view.phone")<!-- 电话号码： -->#if($!{obj.receiver_telephone}!="")$!{obj.receiver_telephone}#else#springMessage("member.address.not_filled")<!-- 未填写 -->#end</li>
+                    <li> #springMessage("member.order_ship_view.mobile_phone")<!-- 手机号码： -->#if($!{obj.receiver_mobile}!="")$!{obj.receiver_mobile}#else#springMessage("member.address.not_filled")<!-- 未填写 -->#end</li>
+                  </ul>
+              </div>    
+            </div>
+          </div>
+          #if($!{obj.igo_ship_code})
+          <div class="complaint_one">
+            <h1 class="complaint_h">#springMessage("member.order_returnlog_view.express_info")<!-- 物流信息 --></h1>
+            <div class="comp_goodetails">
+              <div class="comp_goodl">
+                  <ul class="comp_gdul">
+                    <li> #springMessage("member.order_ship_view.express_company")<!-- 物流公司： -->$!orderFormTools.queryExInfo($!obj.igo_express_info, "express_company_name")</li>
+                    <li> #springMessage("member.order_ship_view.express_code")<!-- 物流单号： --><strong>$!{obj.igo_ship_code}</strong></li>
+                    <li> #springMessage("member.integral_order_view.deliver_time")<!-- 发货时间： -->$!CommUtil.formatShortDate($!{obj.igo_ship_time})</li>
+                    <li>#springMessage("member.integral_order_view.deliver_message")<!--  发货说明： --> #if($!{obj.igo_ship_content}!="")<em>$!{obj.igo_ship_content}</em>#else#springMessage("member.order_view.nothing")<!-- 无 -->#end</li>
+                  </ul>
+              </div>    
+            </div>
+          </div>
+          <div class="complaint_one">
+            <h1 class="complaint_h">#springMessage("member.integral_order_view.logistics_tracking")<!-- 物流跟踪 --></h1>
+            <div class="ordercon">
+            <div class="exchange_w" id="integral_ship">
+              
+            </div>
+          </div>
+          </div>
+		  #end
+          <div class="complaint_one">
+            <h1 class="complaint_h">#springMessage("member.integral_order_view.prensent_info")<!-- 礼品信息 --></h1>  
+  	        <div class="ordercon">
+            <div class="exchange_w">
+              <table border="0" cellspacing="0" cellpadding="0" class="exchane_table">
+                <tr>
+                  <td width="100">&nbsp;</td>
+                  <td width="330">#springMessage("member.integral_order_view.present_name")<!-- 礼品名称 --></td>
+                  <td width="130" align="center">#springMessage("member.integral_order_view.integral_conversion")<!-- 兑换积分 --></td>
+                  <td width="130" align="center">#springMessage("member.integral_order_view.conversion_price")<!-- 兑换运费 --></td>
+                  <td align="center">#springMessage("member.integral_order_view.conversion_count")<!-- 兑换数量 --></td>
+                </tr>
+                #foreach($gc in $obj.igo_gcs)
+                <tr class="extable_trlist">
+                    #if($!gc.goods.ig_goods_img)
+#set($img="$!webPath/$!{gc.goods.ig_goods_img.path}/$!{gc.goods.ig_goods_img.name}_small.$!{gc.goods.ig_goods_img.ext}")
+                    #else
+                      #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                    #end
+                  <td align="center" valign="middle"><img src="$!img" width="60"  height="60"/></td>
+                  <td align="left" valign="middle"><a href="$!webPath/integral/view_$!{gc.goods.id}.htm" target="_blank" class="blue2">$!gc.goods.ig_goods_name</a></td>
+                  <td align="center">$!gc.integral</td>
+                  <td align="center">￥$!CommUtil.null2Double($!gc.trans_fee)</td>
+                  <td align="center">$!gc.count</td>
+                </tr>
+                #end
+              </table>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

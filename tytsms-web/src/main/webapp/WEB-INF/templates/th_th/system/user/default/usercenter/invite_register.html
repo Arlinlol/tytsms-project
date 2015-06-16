@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("member.invite_register.tyt_change_life")</title><!-- 泰易淘，改变你的生活！ -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type=text/css rel=stylesheet />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<style>
+	#bdshare{
+		background-color:#F7F7F7;
+		width:700px;
+		height:70px;	
+		margin-top:20px;	
+	}
+	#bdshare > a{
+		margin-left:20px;
+		margin-top:15px;
+	}
+	#bdshare > span{
+		margin-left:20px;
+		margin-top:15px;
+	}
+</style>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=invite_register")
+    <div class="usercenter_right">
+    <!--邀请-->
+    	<div class="yaoqing">
+		   	<div class="yaoqing_top"></div>
+		   	<div class="yaoqing_pt">
+		   		<div class="yaoqing_pt_title">#springMessage("member.invite_register.share_platform")<!-- NO.1 分享平台 --></div>
+		   		<div class="yaoqing_pt_content">
+		   			<div class="yaoqing_link">
+		   				<input type="text" name="" id="link" value="$!url" readonly="readonly"/>
+		   				<dl>
+		   					<dt>#springMessage("member.invite_register.share_to")<!-- 分享到： --></dt>
+		   					<dd>
+		   						<!-- 分享代码begin -->
+					            <div id="bdshare" class="bdshare_t bds_tools_32 get-codes-bdshare" 
+					            	data="{
+					            		  	'url':'$!url',
+					            		   	'bdDes':'#springMessage('member.invite_register.auto_share_abstract')',		//'请参考自定义分享摘要'
+										   	'text':'#springMessage('member.invite_register.auto_share_content')',		//'请参考自定义分享内容'
+										   	'title':'#springMessage('member.invite_register.auto_pop')',	//'请参考自定义pop窗口标题'
+											'pic':'#springMessage('member.invite_register.auto_pic')',	//'请参考自定义分享出去的图片'
+										   	'bdComment':'#springMessage('member.invite_register.auto_comment')'	//'请参考自定义分享评论'
+					            		    ">
+					    			<span class="bds_more">#springMessage("member.invite_register.more")<!-- 更多 --></span>
+					    			<a class="bds_tsina">#springMessage("member.invite_register.sina")<!-- 新浪 --></a>
+					    			<a class="bds_tqq">#springMessage("member.invite_register.tencent")<!-- 腾讯 --></a>
+					    			<a class="bds_renren">#springMessage("member.invite_register.people")<!-- 人人 --></a>
+					    			<a class="bds_qzone">QQ </a>
+								</div>
+								<script type="text/javascript" id="bdshare_js" data="type=tools" ></script>
+					    		<script type="text/javascript" id="bdshell_js"></script>
+					    		<script type="text/javascript">
+					    			var bds_config = {'bdText':'#springMessage("member.invite_register.invite_integral")'};/* 邀请好友注册，享多倍积分赠送。 */
+					        		document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+					    		</script>
+					    		<!-- 分享代码end -->
+		   					</dd>
+		   				</dl>
+		   				<p>#springMessage("member.invite_register.own_link")<!-- 将专属链接发给 --><strong>#springMessage("member.invite_register.platform_friends")<!-- QQ好友，人人等好友 --></strong>#springMessage("member.invite_register.you_can_get")<!-- ，每有一位好友通过专属链接注册成功，您即可得到 --><i></i></p>
+		   			</div>
+		   		</div>
+		   	</div>
+		   	<div class="yaoqing_mobile">
+		   		<div class="yaoqing_mobile_title">#springMessage("member.invite_register.phone_platform")<!-- NO.2 分享移动平台 --></div>	
+		   		<div class="ewm">
+		   			<img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/wechat.jpg"/>
+		   			<img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/weibo.jpg"/>
+		   		</div>
+		   		<div class="yaoqing_mobile_share">
+			   		<dl>
+			   			<dt>#springMessage("member.invite_register.share_to")<!-- 分享到： --></dt>
+			   				<dd>
+			   					<ul>
+			   						<li><a href="javascript:;"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/yaoqing_wx.png"/></a></li>
+			   						<li><a href="javascript:;"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/yaoqing_xl.png"/></a></li>
+			   					</ul>
+			   				</dd>
+			   		</dl>
+			   		<p>#springMessage("member.invite_register.sweep")<!-- 微信微博扫一扫，分享注册连接给好友，每有一位好友通过该连接成功注册可获得 --><strong>200#springMessage("member.buyer_index.integral")<!-- 积分 --></strong></p>
+			   	</div>	
+			   	<!--模态-->
+			   	<div class="motai"></div>
+			   	<span class="hold">#springMessage("member.invite_register.open_after")<!-- 稍后开放 --></span>
+		   	</div>		   	
+   		</div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-优惠劵发放-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(e) {
+   jQuery(":radio[id='type']").click(function(){
+      jQuery("#the_user_list").hide();
+	  jQuery("#the_order_list").hide();
+      var type=jQuery(":radio[id='type'][checked=true]").val();
+      jQuery("#"+type+"_list").show();
+  });
+   jQuery("#theForm").validate({
+	errorPlacement: function(error, element) {
+		element.parent().parent().find("i").html("");
+		error.appendTo(element.parent().parent().find("i"));
+    },						  
+    rules:{
+	   order_amount:{required:true,min:0},	
+	   users:{required:true},
+	 },
+    messages:{
+	 order_amount:{required:"请填写金额",min:"所填金额必须大于0"},	
+	   users:{required:"至少填写一个用户"},	
+	}
+  });
+});<!--end-->
+function saveForm(){
+	jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left">$!httpInclude.include("/seller/nav.htm?op=coupon") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销管理</b>><b>优惠券管理</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href="$!webPath/seller/coupon.htm"><i></i>优惠券列表</a></li>
+            <li><a href='$!webPath/seller/coupon_add.htm'><i></i>新增优惠券</a></li>
+            <li class="this"><a href="javascript:void(0)"><i></i>发放优惠券</a></li>
+          </ul>
+        </div>
+        <div class="add_usercenter">
+          <form action="$!webPath/seller/coupon_send_save.htm" method="post" name="theForm" id="theForm" enctype="multipart/form-data">
+            <input name="id" type="hidden" id="id"  value="$!obj.id"/>
+            <input name="currentPage" type="hidden" id="currentPage"  value="$!currentPage"/>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+            <tr>
+            <td colspan="2"> <h3 class="add_usercenter_h3">优惠劵信息</h3></td>
+            </tr>
+              <tr>
+                <td width="100" align="right">优惠券名称：</td>
+                <td>$!obj.coupon_name</td>
+              </tr>
+              <tr>
+                <td align="right">开始时间：</td>
+                <td>$!obj.coupon_begin_time</td>
+              </tr>
+              <tr>
+                <td align="right">结束时间：</td>
+                <td >$!obj.coupon_end_time</td>
+              </tr>
+              <tr>
+                <td align="right">优惠券数量：</td>
+                <td>$!obj.coupon_count</td>
+              </tr>
+              <tr>
+                <td align="right" valign="top" style=" line-height:34px">优惠券：</td>
+                <td>
+                	<div class="pre_view_show"><img src="$!webPath/$!obj.coupon_acc.path/$!obj.coupon_acc.name" width="235" height="103"/></div>
+                </td>
+              </tr>
+              <tr>
+                <td align="right" valign="top">优惠券金额：</td>
+                <td>$!obj.coupon_amount</td>
+              </tr>
+              <tr>
+                <td align="right">可使用订单金额：</td>
+                <td>$!obj.coupon_order_amount</td>
+              </tr>
+             <tr>
+            	<td colspan="2"> <h3 class="add_usercenter_h3">发放对象</h3></td>
+             </tr>
+             <tr>
+             	<td></td>
+             	<td>
+                	<span class="add_uc_sp"><label style="cursor:pointer"><input name="type" type="radio" id="type" value="all_user" checked="checked"/>所有会员</label></span>
+                	<span  class="add_uc_sp"><label style="cursor:pointer"><input name="type" id="type" type="radio" value="the_user" />指定会员</label></span>
+                	<span  class="add_uc_sp"><label style="cursor:pointer"><input name="type" id="type" type="radio" value="the_order"/>成交订单金额超过</label></span>
+                </td>
+             </tr>
+             <tr id="the_user_list" style="display:none">
+             	<td></td>
+                <td>
+                	<span class="add_uc_money"><textarea name="users" cols="40" rows="6" id="users"></textarea></span><i class="base_i">输入会员名，每行一个</i>
+                </td>
+             </tr>
+             <tr id="the_order_list" style="display:none">
+             	<td></td>
+                <td>
+                	<span class="add_uc_money"><input name="order_amount" id="order_amount" type="text" /></span><i class="base_i">在店铺成交订单金额超过该金额的用户</i>
+                </td>
+             </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><span class="setsub" style=" position:relative; left:-25px">
+                  <input type="button" onclick="saveForm()" value="发放" style="cursor:pointer;" class="seller_save"/><i class="base_i"></i>
+                  </span></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

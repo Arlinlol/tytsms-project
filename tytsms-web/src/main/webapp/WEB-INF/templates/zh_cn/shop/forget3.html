@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找回密码第三步 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/login.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(function(){
+  jQuery("#theForm").validate({
+    rules:{
+		  password:{required:true,minlength:6},
+		  password1:{required:true, equalTo:"#password"}
+		},
+	messages:{
+		 password:{required:"密码不能为空",minlength:"密码长度最小为6位字母"},
+		 password1:{required:"重复密码不能为空", equalTo:"两次输入密码不一致"}
+		}
+  });
+})
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="login_head"> #if($!config.websiteLogo)
+  #set($img="$!imageWebServer/$!{config.websiteLogo.path}/$!{config.websiteLogo.name}")
+  #else
+  #set($img="$!webPath/resources/style/system/front/default/images/logo.jpg")
+  #end
+  <h1><span><a href="$!webPath"><img src="$!img" width="209" height="70" /></a></span><strong>找回密码</strong></h1>
+</div>
+<div class="forget_page">
+  <h3><span>找回密码</span></h3>
+  <div class="forget_page_box">
+    <ul class="forget_step">
+      <li class="forget_thised_first">填写账户名</li>
+      <li class="forget_thised">验证身份</li>
+      <li class="this">设置新密码</li>
+      <li class="forget_last">完成</li>
+    </ul>
+    <form action="$!webPath/forget4.htm" method="post" id="theForm">
+    <div class="forget_common">
+      <table width="460" border="0" cellpadding="0" cellspacing="0" class="regist_common_table">
+        <tr>
+          <td width="200" align="right" valign="top" class="forget_tb">新密码：</td>
+          <td><input name="password" type="password" class="regist_txt" id="password" />
+           </td>
+        </tr>
+        <tr>
+          <td  align="right" valign="top" class="forget_tb">重复密码：</td>
+          <td><input name="password1" type="password" class="regist_txt" id="password1" />
+           </td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><input name="提交" type="submit"  class="forget_btn" value="修改密码"/>
+          <input name="userName" type="hidden" id="userName" value="$!userName" />
+          <input name="verify_session" type="hidden" id="verify_session" value="$!verify_session" /></td>
+        </tr>
+      </table>
+    </div>
+    </form>
+  </div>
+</div>
+<div class="main"> $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

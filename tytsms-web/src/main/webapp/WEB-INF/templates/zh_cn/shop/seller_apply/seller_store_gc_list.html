@@ -1,0 +1,16 @@
+<table width="695" border="0" cellpadding="0" cellspacing="0" class="class_settle_table">
+                <tr>
+                  <th align="center" valign="middle">序号</th>
+                  <th  align="center" valign="middle">一级类目</th>
+                  <th  align="center" valign="middle">二级类目</th>
+                  <th  align="center" valign="middle">操作</th>
+                </tr>
+                #foreach($gc_de in $details_gcs)
+                <tr id="gc_de_$!{gc_de.id}">
+                  <td  align="center">$!velocityCount</td>
+                  <td  align="center">$!gc_de.parent.className</td>
+                  <td  align="center">$!gc_de.className</td>
+                  <td  align="center"><a href="javascript:void(0)" class="blue" onclick="goodsclass_delete($!{gc_de.id})">删除</a></td>
+                </tr>
+                #end
+</table>

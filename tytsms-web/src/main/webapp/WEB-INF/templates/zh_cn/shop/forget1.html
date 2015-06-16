@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找回密码第一步 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/login.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+	rules: {
+			userName: {required:true},
+			code:{required:true,
+			      remote:{
+		             url: "$!webPath/verify_code.htm",     //后台处理程序
+                     type: "post",               //数据发送方式
+                     dataType: "json",           //接受数据格式   
+                     data: {                     //要传递的数据
+                           "code": function(){return jQuery("#code").val();}
+		              }
+		          }
+			}
+		 },
+		messages: {
+			userName: {required:"用户名不能为空"},
+			code:{required:"验证码不能为空",remote:"验证码不正确"}
+					}
+  });
+});
+ function refreshCode(){
+    jQuery("#code_img").attr("src","$!webPath/verify.htm?d"+new Date().getTime());
+ }
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="login_head"> #if($!config.websiteLogo)
+  #set($img="$!imageWebServer/$!{config.websiteLogo.path}/$!{config.websiteLogo.name}")
+  #else
+  #set($img="$!webPath/resources/style/system/front/default/images/logo.jpg")
+  #end
+  <h1><span><a href="$!webPath"><img src="$!img" width="209" height="70" /></a></span><strong>找回密码</strong></h1>
+</div>
+<div class="forget_page">
+  <h3><span>找回密码</span></h3>
+  <div class="forget_page_box">
+    <ul class="forget_step">
+      <li class="this">填写账户名</li>
+      <li>验证身份</li>
+      <li>设置新密码</li>
+      <li class="forget_last">完成</li>
+    </ul>
+    <div class="forget_common">
+      <form action="$!webPath/forget2.htm" method="post" name="theForm" id="theForm">
+        <table width="500" border="0" cellpadding="0" cellspacing="0" class="regist_common_table">
+          <tr>
+            <td width="70" align="right" valign="top" class="forget_tb">账户名称：</td>
+            <td><input name="userName" type="text" class="regist_txt" id="userName" placeholder="请输入用户名/邮箱/已验证手机号" /></td>
+          </tr>
+          <tr>
+            <td  align="right" valign="top" class="forget_tb">验证码：</td>
+            <td><input name="code" type="text" class="regist_code" id="code" />
+              <b class="regist_code_img"><img src="$!webPath/verify.htm" id="code_img" width="58" height="27" onclick="refreshCode();" /></b><a href="javascript:void(0);" onclick="refreshCode();" class="code_refresh"></a></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><input name="提交" type="submit"  class="forget_btn" value="下一步" /></td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="main"> $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

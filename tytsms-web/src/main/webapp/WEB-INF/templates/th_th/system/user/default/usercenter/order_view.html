@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("member.order_view.order_details")-$!{config.poweredby}</title><!-- 订单详情 -->
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function(){
+	jQuery(".order_follow_top li").click(function(){
+				jQuery(".order_follow_box").hide();
+				jQuery(".order_follow_top li").removeClass("this");
+				jQuery(this).addClass("this");
+				jQuery(".order_follow_box").eq(jQuery(this).index()).show();	
+	});		
+	#if($!query_ship)
+	jQuery.ajax({
+		type:'POST',
+  		url: "$!webPath/buyer/ship_ajax.htm",
+		data:{"order_id":"$!{obj.id}"},
+		beforeSend:function(){
+					 jQuery("#order_ship").html("<div style='text-align:center;'> <img src='$!webPath/th_th/resources/style/common/images/loader.gif'/>	</div>");
+				  },
+  		success: function(data){
+   		 jQuery("#order_ship").html(data);
+  	    }
+	});
+	#end
+});
+</script>
+</head>
+
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+<div class="position"><a href="$!webPath/index.htm"><b>#springMessage("member.order_view.home_page")<!-- 首页 --></b></a><i>></i><a href="$!webPath/buyer/order.htm">#springMessage("member.order_view.my_order")<!-- 我的订单 --></a><i>></i>$!obj.order_id</div>
+<div class="order_pay">
+
+<div class="order_pay_note">
+		#if($!obj.coupon_info)
+		   #set($coupon_map = $!orderFormTools.queryCouponInfo("$!obj.coupon_info"))
+           #set($coupon_total_amount=$coupon_map.get("coupon_amount"))
+		#end
+		#set($payment="#springMessage('member.buyer_index.unknown')")<!-- 未知 -->
+        #if($!obj.payment.mark=="alipay")
+        #set($payment="#springMessage('member.order_view.alipay')")<!-- 支付宝 -->
+        #end
+        #if($!obj.payment.mark=="wechatpay")
+        #set($payment="#springMessage('member.buyer_cash.weixin_payment')")<!-- 微信支付 -->
+        #end
+        #if($!obj.payment.mark=="alipay_wap")
+        #set($payment="#springMessage('member.order_view.mobile_web_alipay')")<!-- 手机网页支付宝 -->
+        #end
+         #if($!obj.payment.mark=="alipay_app")
+            #set($payment="#springMessage('member.order_view.mobile_alipay')")<!-- 手机支付宝APP -->
+            #end
+        #if($!obj.payment.mark=="bill")
+        #set($payment="#springMessage('member.order_view.quick_money')")<!-- 快钱 -->
+        #end                 
+        #if($!obj.payment.mark=="tenpay")
+        #set($payment="#springMessage('member.order_view.tenpay')")<!-- 财付通 -->
+        #end   
+        #if($!obj.payment.mark=="chinabank")
+        #set($payment="#springMessage('member.order_view.chinabank')")<!-- 网银在线 -->
+        #end       
+        #if($!obj.payment.mark=="outline")
+        #set($payment="#springMessage('member.order_view.offline_paymen')")<!-- 线下支付 -->
+        #end 
+        #if($!obj.payment.mark=="payafter")
+        #set($payment="#springMessage('member.order_view.pay_delivery')")<!-- 货到付款 -->
+        #end                  
+        #if($!obj.payment.mark=="balance")
+        #set($payment="#springMessage('member.order_view.deposit_payment ')")<!-- <!-- 预存款支付 --> -->
+        #end 
+        #if($!obj.payment.mark=="paypal")
+        #set($payment="paypal")
+        #end
+        #if($!obj.payment.mark=="allinpay")
+        #set($payment="#springMessage('member.buyer_index.communications_payment')")<!-- 通联支付 -->
+        #end
+			 #if($!obj.order_status==0)
+              #set($status="#springMessage('member.order_view.have_cancel')")<!-- 已取消 -->
+              #end
+              #if($!obj.order_status==10)
+              #set($status="#springMessage('member.order_view.obligation')")<!-- 待付款 -->
+              #end
+              #if($!obj.order_status==15)
+              #set($status="#springMessage('member.order_view.offline_payment_approval')")<!-- 线下支付待审核 -->
+              #end
+              #if($!obj.order_status==16)
+              #set($status="#springMessage('member.order_view.cod_momentum')")<!-- 货到付款待发货 -->
+              #end
+              #if($!obj.order_status==20)
+              #set($status="#springMessage('member.order_view.have_payment')")<!-- 已付款 -->
+              #end
+              #if($!obj.order_status==30)
+              #set($status="#springMessage('member.order_view.have_deliver')")     <!-- 已发货 -->   
+              #end                
+              #if($!obj.order_status==40)
+              #set($status="#springMessage('member.order_view.have_shipping')")<!-- 已收货 -->
+              #end
+              #if($!obj.order_status==50)
+              #set($status="#springMessage('member.order_view.have_finish')")         <!--  已完成,已评价 -->                                    
+              #end
+<h3><span>#springMessage("member.order_view.orderno")<!-- 订单号： -->$!obj.order_id</span><span>#springMessage("member.order_view.status")<!-- 状态： -->#if($!obj.order_status<20)<b style="color:#F37103;">$!status</b> #else <b style="color:#3C3;">$!status</b> #end</span>#if($!obj.order_status==10)<span><a href="$!webPath/order_pay_view.htm?id=$!obj.id" class="pay">#springMessage("member.order_view.payment")<!-- 支付 --></a></span>#end</h3>
+</div>
+<div class="order_step">
+    <div class="order_step_down"> <span class="order_sd_radius"></span> <b class="order_sd_blance"></b> <span class="order_sd_radius"></span> <b class="order_sd_blance"></b> <span class="order_sd_radius"></span> <b class="order_sd_blance"></b> <span class="order_sd_radius"></span> <b class="order_sd_blance"></b> <span class="order_sd_radius"></span> </div>
+    <div class="order_step_up"> 
+     <span class="order_su_radius #if($!obj.order_status>=10) this #end">#if($!obj.order_status<10) 1 #end<em #if($!obj.order_status==10) class="this" #end>#springMessage("member.order_view.photographed_goods")<!-- 拍下商品 --></em><i>$!CommUtil.formatLongDate($!obj.addTime)</i></span><b class="order_su_b #if($!obj.order_status>=20) this #end"></b> 
+
+     <span class="order_su_radius #if($!obj.order_status>=16) this #end">#if($!obj.order_status<16) 2 #end<em #if($!obj.order_status==20) class="this" #end>#springMessage("member.order_view.have_payment")<!-- 已付款 --></em><i>$!CommUtil.formatLongDate($!obj.payTime)</i></span> <b class="order_su_b #if($!obj.order_status>=30) this #end"></b>
+     #set($order_status=$!orderFormTools.query_order_status("$!obj.id","30"))
+     <span class="order_su_radius #if($!order_status>=30) this #end">#if($!order_status<30) 3 #end<em #if($!order_status==30) class="this" #end>#springMessage("member.order_view.seller_deliver")<!-- 商家发货 --></em><i>$!CommUtil.formatLongDate($!obj.shipTime)</i></span> <b class="order_su_b  #if($!obj.order_status>=40) this #end"></b> 
+     <span class="order_su_radius #if($!obj.order_status>=40) this #end">#if($!obj.order_status<40) 4 #end<em #if($!obj.order_status==40) class="this" #end>#springMessage("member.order_view.about_cinfirm_receipt")<!-- 确认收货 --></em><i>$!CommUtil.formatLongDate($!obj.confirmTime)</i></span> <b class="order_su_b  #if($!obj.order_status>=50) this #end"></b> 
+     <span class="order_su_radius #if($!obj.order_status>=50) this #end">#if($!obj.order_status<50) 5 #end<em #if($!obj.order_status==50) class="this" #end>#springMessage("member.order_view.finish")<!-- 完成 --></em><i>$!CommUtil.formatLongDate($!obj.finishTime)</i></span>
+     </div>
+  </div>
+  <div class="order_pay_tab">
+<h4>#springMessage("member.order_view.goods_detailed")<!-- 商品清单 --></h4>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="order_pay_table">
+  <tr>
+    <th width="100">#springMessage("member.order_view.goods_image")<!-- 商品图片 --></th>
+    <th>#springMessage("member.order_view.goods_name")<!-- 商品名称 --></th>
+    <th width="100">#springMessage("member.order_view.unit_price")<!-- 单价 --></th>
+    <th width="100">#springMessage("member.order_view.number")<!-- 数量 --></th>
+    <th width="100">#springMessage("member.order_view.standard")<!-- 规格 --></th>
+    <th width="100">#springMessage("member.order_view.total_price")<!-- 总价 --></th>
+  </tr>
+   #foreach($map in $!orderFormTools.queryGoodsInfo("$!obj.goods_info"))
+            #set($goods_id = "$!{map.get('goods_id')}")	
+            #set($goods_name = "$!{map.get('goods_name')}")
+            #set($goods_count = "$!{map.get('goods_count')}")
+            #set($goods_price = "$!{map.get('goods_price')}")
+            #set($goods_all_price = "$!{map.get('goods_all_price')}")
+            #set($goods_type = "$!{map.get('goods_type')}")
+            #set($goods_gsp_val = "$!{map.get('goods_gsp_val')}")
+            #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+            #set($img="$!webPath/$!{goods_mainphoto_path}")
+            #set($order_total_price=$!{obj.totalPrice})
+            #set($order_total_ship_price=$!{obj.ship_price})
+            #set($total_goods_amount=$!obj.goods_amount)
+            #set($order_transport_info="$!{obj.transport}")
+  <tr>
+    <td align="center"><a href="$!webPath/goods_$!{goods_id}.htm" target="_blank"><img src="$!img" width="62" height="62" /></a></td>
+    <td align="left"><a href="$!webPath/goods_$!{goods_id}.htm" class="blue" target="_blank"> $!{goods_name} </a> #if($!{goods_type}=="group") <span style="color:#F00">(#springMessage("member.order_view.group")<!-- 团购 -->)</span> #end
+                #if($!{goods_type}=="combin")
+                <div> <a href="javascript:void(0);" style="color:#F00;">#springMessage("member.order_view.group_goods")<!-- 【组合商品 】--></a> </div>
+                #end</td>
+    <td align="center"><b class="red">￥$!goods_price</b></td>
+    <td align="center">$!goods_count</td>
+    <td align="center">#if($!goods_gsp_val=="") #springMessage("member.order_view.nothing")<!-- 无 --> #else $!goods_gsp_val #end</td>
+    <td align="center">฿$!goods_all_price</td>
+  </tr>
+  #end
+   #if($!obj.child_order_detail)
+      #set($order_detail_maps=$!orderFormTools.queryGoodsInfo("$!obj.child_order_detail"))
+      #foreach($child_map in $order_detail_maps)
+             #set($child_order=$!orderFormTools.query_order("$!child_map.get('order_id')"))
+             #set($order_total_price=$order_total_price+$child_order.totalPrice)
+             #set($order_total_ship_price=$order_total_ship_price+$child_order.ship_price)
+             #set($total_goods_amount=$total_goods_amount+$child_order.goods_amount)
+             #if($!child_order.coupon_info)
+		        #set($coupon_map = $!orderFormTools.queryCouponInfo("$!child_order.coupon_info"))
+                #set($coupon_total_amount=$coupon_total_amount+$coupon_map.get("coupon_amount"))
+		    #end
+            #set($order_transport_info=$!order_transport_info+"--"+$!child_order.transport)
+          #foreach($map in $!orderFormTools.queryGoodsInfo("$!child_map.get('order_goods_info')"))
+            #set($goods_id = "$!{map.get('goods_id')}")	
+            #set($goods_name = "$!{map.get('goods_name')}")
+            #set($goods_count = $!{map.get('goods_count')})
+            #set($goods_price = $!{map.get('goods_price')})
+            #set($goods_all_price = $!{map.get('goods_all_price')})
+            #set($goods_gsp_val = "$!{map.get('goods_gsp_val')}")
+            #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+            #set($img="$!webPath/$!{goods_mainphoto_path}")            
+   <tr>
+    <td align="center"><a href="$!webPath/goods_$!{goods_id}.htm" target="_blank"><img src="$!img" width="62" height="62" /></a></td>
+    <td align="left"><a href="$!webPath/goods_$!{goods_id}.htm" class="blue" target="_blank"> $!{goods_name} </a> #if($!{goods_type}=="group") <span style="color:#F00">(#springMessage("member.order_view.group")<!-- 团购 -->)</span> #end
+                #if($!{goods_type}=="combin")
+                <div> <a href="javascript:void(0);" style="color:#F00;">#springMessage("member.order_view.group_goods")<!--【 组合商品】 --></a> </div>
+                #end</td>
+    <td align="center"><b class="red">￥$!goods_price</b></td>
+    <td align="center">$!goods_count</td>
+    <td align="center">#if($!goods_gsp_val=="") #springMessage("member.order_view.nothing")<!-- 无 --> #else $!goods_gsp_val #end</td>
+    <td align="center">฿$!goods_all_price</td>
+  </tr>
+         #end
+    #end
+    #if($order_detail_maps.size()>0)
+      #set($order_transport_info="<font style='color:#F00'>#springMessage('member.order_view.seller_shipping')<!--【 该订单由多个商家配送】 --></font>"+$!order_transport_info)
+    #end
+ #end
+</table>
+
+</div>
+<div class="order_follow">
+
+<ul class="order_follow_top">
+<li class="this" style="cursor:pointer">#springMessage("member.order_view.pay_info")<!-- 付款信息 --></li>
+<li style="cursor:pointer">#springMessage("member.order_view.order_log")<!-- 订单日志 --></li>
+#if($!query_ship)
+<li style="cursor:pointer" >#springMessage("member.order_view.order_tracking")<!-- 订单跟踪 --></li>
+#end
+</ul>
+
+<div class="order_follow_box">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="order_follow_table">
+  <tr>
+    <td colspan="2">#springMessage("member.order_view.pay_mode")<!-- 付款方式： -->$!payment</td>
+
+  </tr>
+  <tr>
+    <td width="280">#springMessage("member.order_view.goods_amount")<!-- 商品金额：￥ -->$!total_goods_amount</td>
+    <td>#springMessage("member.order_view.freight_amount")<!-- 运费金额：￥ -->$!order_total_ship_price</td>
+  </tr>
+    <tr>
+    <td>#springMessage("member.order_view.coupon_amount")<!-- 优惠金额：￥ -->#if($!coupon_total_amount)$!{coupon_total_amount} #else 0.00 #end</td>
+  </tr>
+    <tr>
+    <td>#springMessage("member.order_view.should_pay_amount")<!-- 应支付金额：￥ -->$!order_total_price</td>
+  </tr>
+</table>
+</div>
+<div class="order_follow_box" style="display:none">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="order_follow_table">
+  <tr>
+    <th align="left">#springMessage("member.order_view.log_info")<!-- 日志信息 --></th>
+    <th align="left">#springMessage("member.order_view.handlers")<!-- 操作者 --></th>
+     <th align="left">#springMessage("member.order_view.details")<!-- 详情 --></th>
+  </tr>
+  #foreach($log in $obj.ofls)
+  <tr>
+    <td>$!CommUtil.formatLongDate($!obj.addTime)  $!log.log_info</td>
+    <td>$!log.log_user.userName</td>
+    <td>$!log.state_info</td>
+  </tr>
+  #end
+</table>
+</div>
+<div class="order_follow_box" id="order_ship" style="display:none">
+
+</div>
+
+</div>
+<div class="order_pay_info">
+<h3>#springMessage("member.order_view.order_info")<!-- 订单信息 --></h3>
+<div class="order_pay_con">
+<div class="order_pcon_in">
+<h4>#springMessage("member.order_view.shipping_info")<!-- 收货人信息 --></h4>
+<ul class="order_pcon_ul">
+<li>#springMessage("member.order_view.shipping_name")<!-- 收货人： -->$!obj.receiver_Name</li>
+<li>#springMessage("member.order_view.shipping_address")<!-- 收货地址： -->$!obj.receiver_area $!obj.receiver_area_info</li>
+<li>#springMessage("member.order_view.zip_code")<!-- 邮政编码： -->$!{obj.receiver_zip}</li>
+<li>#springMessage("member.order_view.phone")<!-- 电话号码： -->$!{obj.receiver_telephone}</li>
+<li>#springMessage("member.order_view.mobile_phone")<!-- 手机号码： -->$!{obj.receiver_mobile}</li>
+</ul>
+</div>
+<div class="order_pcon_in">
+<h4>#springMessage("member.order_view.pay_shiping")<!-- 支付方式及配送方式 --></h4>
+<ul class="order_pcon_ul">
+
+<li>#springMessage("member.order_view.pay_mode")<!-- 支付方式： -->$!payment</li>
+#set($time="#springMessage('member.order_view.outstanding')")<!-- 尚未支付，无支付时间 -->
+#if($!obj.payTime)
+#set($time=$!CommUtil.formatLongDate($!obj.payTime))
+#end
+<li>#springMessage("member.order_view.pay_time")<!-- 支付时间： -->$!time</li>
+<li>#springMessage("member.order_view.freight")<!-- 运费：￥ -->$!order_total_ship_price</li>
+<li>#springMessage("member.order_view.payment_instructions")<!-- 支付说明： -->$!obj.pay_msg</li>
+<li>#springMessage("member.order_view.shipping_way")<!-- 配送方式： -->$!order_transport_info</li>
+<li>#springMessage("member.order_view.buyer_message")<!-- 买家留言： -->#if($!obj.msg) $!obj.msg #else#springMessage("member.order_view.not_available")<!--  暂无 --> #end</li>
+</ul>
+</div>
+#*<div class="order_pcon_in">
+<h4>#springMessage("member.order_view.invoice_info")<!-- 发票信息 --></h4>
+<ul class="order_pcon_ul">
+<li>#springMessage("member.order_view.invoice_tye")<!-- 发票类型： -->#if($!obj.invoiceType==0) #springMessage("member.order_view.plain_invoice")<!-- 普通发票 --> #else #springMessage("member.order_view.value_added_invoice")<!-- 增值税发票 --> #end </li>
+<li>#springMessage("member.order_view.invoice_title")<!-- 发票抬头： -->#if($!obj.invoice) $!obj.invoice #else #springMessage("member.order_view.not_available")<!-- 暂无 --> #end </li>
+</ul>
+</div>*#
+
+
+</div>
+
+<div class="order_pay_money">
+<ul>
+<li>#springMessage("member.order_view.total_amount_goods")<!-- 商品总金额：￥ -->$!total_goods_amount</li>
+<li> -#springMessage("member.order_view.coupon")<!-- <!-- 优惠：￥ --> -->#if($!coupon_total_amount)$!{coupon_total_amount} #else 0.00 #end </li>
+<li> +#springMessage("member.order_view.freight")<!-- 运费：￥ -->$!order_total_ship_price </li>
+<li><span>#springMessage("member.order_view.payable_amount")<!-- 应付金额： --><b>￥$!order_total_price</b></span></li>
+</ul>
+
+</div>
+</div>
+</div>
+
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

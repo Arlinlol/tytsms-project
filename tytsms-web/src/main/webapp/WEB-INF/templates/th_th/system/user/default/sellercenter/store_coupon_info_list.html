@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-优惠券发放列表- $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+</head>
+
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=coupon") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销管理</b>><b>优惠券管理</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li ><a href="$!webPath/seller/coupon.htm"><i></i>优惠券列表</a></li>
+            <li ><a href="$!webPath/seller/coupon_add.htm"><i></i>新增优惠券</a></li>
+            <li class="this"><a href="$!webPath/seller/coupon_info_list.htm"><i></i>发放列表</a></li>
+          </ul>
+        </div>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/coupon_info_list.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="200">优惠券编号</th>
+                  <th width="70">优惠券金额</th>
+                  <th width="70">发放用户</th>
+                  <th width="70">优惠券状态</th>
+                  <th width="80">发放时间</th>
+                </tr>
+                #foreach($obj in $objs)
+                <tr>
+                  <td align="center">$!obj.coupon_sn</td>
+                  <td align="center">$!obj.coupon.coupon_amount</td>
+                  <td align="center">$!obj.user.userName</td>
+                  <td align="center">#if($!obj.status==0)未使用#else 已使用#end</td>
+                  <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <input id="coupon_id" name="coupon_id" type="hidden" value="$!coupon_id"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

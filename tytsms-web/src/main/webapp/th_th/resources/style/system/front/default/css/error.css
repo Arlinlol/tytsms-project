@@ -1,0 +1,18 @@
+@charset "utf-8";
+/* CSS Document */
+.errorpage{ width:1002; margin-top:30px;}
+.error_page_mid{ width:710px; margin-left:auto; margin-right:auto}
+.error_left_a{ background:url(../images/error/error_left_a.jpg) no-repeat; width:172px; height:148px; display:block; float:left; margin-top:43px}
+.error_left_b{ background:url(../images/error/error_left_b.jpg) no-repeat; width:165px; height:227px; float:left; display:block}
+.error_right_a{ display:block; float:left; width:337px;}
+.error_right_a_top{ background:url(../images/error/error_right_a_top.jpg) no-repeat; display:block; width:337px; height:43px; float:left}
+.error_right_a_mid{ width:337px; float:left; height:148px;}
+.error_right_a_bottom{ background:url(../images/error/error_right_a_bottom.jpg) no-repeat; display:block; width:337px; height:13px; float:left}
+.error_right_b{ background:url(../images/error/error_right_b.jpg) no-repeat; width:36px; height:227px; display:block; float:left;}
+.error_right_a_mid ul{ width:100%; float:left}
+.error_right_a_mid ul li{ width:100%; float:left; margin-top:10px;}
+.error_right_a_mid ul .error_ul_top{ font-size:16px; color:#5684c0;margin-bottom:10px;}
+.error_right_a_mid ul .error_ul_mid{ font-size:14px; color:#444444; }
+.error_right_a_mid ul .error_ul_mid a{ margin-left:10px; margin-right:10px; color:#F00}  
+.error_right_a_mid ul .error_ul_bottom{font-size:14px; color:#444444}
+.error_right_a_mid ul .error_ul_bottom strong{ font-size:25px; color:#F00; margin-left:10px; margin-right:10px;}

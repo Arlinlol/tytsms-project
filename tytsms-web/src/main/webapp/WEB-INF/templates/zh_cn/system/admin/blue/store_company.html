@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+#macro ( genericTree $somelist ) 
+#foreach ( $some in $somelist )
+<option value="$!some.id">#if($!some.level>0)
+#foreach($count in [0..$!some.level])&nbsp;#end #end $!some.className</option>
+#genericTree($some.childs) 
+#end 
+#end
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+function store_info(){
+   window.location.href="$!webPath/admin/store_edit.htm?id=$!store.id";
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">店铺管理</h1>
+  <div class="nav_list">
+ 
+ <ul>
+   <li><a href="$!webPath/admin/store_list.htm" ><b>管理</b></a></li>
+   <li><a href="$!webPath/admin/store_add.htm"  ><b>新增</b></a></li>
+   <li><a href="javascript:void(0)" class="this"><b>公司信息</b></a></li>
+   </ul>
+   </div>
+    <input name="id" type="hidden" id="id" value="$!obj.id" />
+    <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+    <input name="list_url" type="hidden" id="list_url" value="$!webPath/admin/store_list.htm" />
+    <input name="add_url" type="hidden" id="add_url" value="$!webPath/admin/store_add.htm" />
+   <div class="edit">
+   
+    <div class="editul setcont">
+    <div class="reputh">入驻联系人信息</div>
+      <ul class="set1">
+        <li class="setcont_bg">入驻联系人姓名：</li>
+        <li><span class="webname">#if($!store.user.trueName!="")$!store.user.trueName#else暂未填写#end</span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg">入驻联系人电话：</li>
+        <li><span class="webname">#if($!store.user.telephone!="")$!store.user.telephone#else暂未填写#end</span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg">入驻联系人邮箱：</li>
+        <li><span class="webname">#if($!$!store.user.email!="")$!store.user.email#else暂未填写#end</span></li>
+      </ul>
+       <div class="reputh">营业执照信息</div>
+       #if($!store.license_c_name!="")
+       	<ul class="set1">
+        <li  class="setcont_bg">公司名称：</li>
+        <li><span class="webname">$!store.license_c_name</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">营业执照号：</li>
+        <li><span class="webname">$!store.license_num</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">法人身份证：</li>
+        <li><span class="webname"><img src="$!imageWebServer/$!store.license_legal_idCard_image.path/$!store.license_legal_idCard_image.name" height="250" width="400"/></span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">营业执照所在地：</li>
+        <li><span class="webname">$!license_area_info</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">营业执照详细地址：</li>
+        <li><span class="webname">$!store.license_address</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">公司成立时间：</li>
+        <li><span class="webname">$!CommUtil.formatShortDate($!store.license_establish_date)</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">公司营业期限：</li>
+        <li><span class="webname">$!CommUtil.formatShortDate($!store.license_start_date)至$!CommUtil.formatShortDate($!store.license_end_date)</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">公司注册资金：</li>
+        <li><span class="webname">$!store.license_reg_capital万元</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">公司经营范围：</li>
+        <li><span class="webname">$!store.license_business_scope</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">营业执照：</li>
+        <li><span class="webname"><img src="$!imageWebServer/$!store.license_image.path/$!store.license_image.name" height="500" width="800"/></span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">公司所在地：</li>
+        <li><span class="webname">$!license_c_area_info</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">公司详细地址：</li>
+        <li><span class="webname">$!store.license_c_address</span></li>
+      </ul>
+       <ul class="set1">
+        <li  class="setcont_bg">公司电话：</li>
+        <li><span class="webname">$!store.license_c_telephone</span></li>
+      </ul>
+       <ul class="set1">
+        <li  class="setcont_bg">公司紧急联系人：</li>
+        <li><span class="webname">$!store.license_c_contact</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">公司紧急联系人手机：</li>
+        <li><span class="webname">$!store.license_c_mobile</span></li>
+      </ul>
+       #else
+      	<ul class="set1">
+        	<li class="setcont_bg">暂未提交</li>
+        </ul>
+      #end
+      <div class="reputh">组织结构代码证信息</div>
+      #if($!store.organization_code!="")
+      <ul class="set1">
+        <li  class="setcont_bg">组织机构代码：</li>
+        <li><span class="webname">$!store.organization_code</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">组织结构代码证：</li>
+        <li><span class="webname"><img src="$!imageWebServer/$!store.organization_image.path/$!store.organization_image.name" height="500" width="800"/></span></li>
+      </ul>
+      #else
+      <ul class="set1">
+        <li class="setcont_bg">暂未提交</li>
+      </ul>
+      #end
+      <div class="reputh">税务登记证信息</div>
+      #if($!store.tax_code!="")
+      <ul class="set1">
+        <li  class="setcont_bg">纳税人识别号：</li>
+        <li><span class="webname">$!store.tax_code</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">纳税人类型：</li>
+        <li><span class="webname">$!store.tax_type</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">纳税类型税码：</li>
+        <li><span class="webname">$!store.tax_type_code</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">税务登记证：</li>
+        <li><span class="webname"><img src="$!imageWebServer/$!store.tax_reg_card.path/$!store.tax_reg_card.name" height="500" width="800"/></span></li>
+      </ul>
+      #if($!store.tax_general_card)
+      <ul class="set1">
+        <li  class="setcont_bg">一般纳税人资格证：</li>
+        <li><span class="webname"><img src="$!imageWebServer/$!store.tax_general_card.path/$!store.tax_general_card.name" height="500" width="800"/></span></li>
+      </ul>
+      #end
+      #else
+      	<ul class="set1">
+       	 <li  class="setcont_bg">暂未提交</li>
+    	</ul>
+      #end
+      <div class="reputh">开户银行许可证信息</div>
+      #if($!store.bank_account_name!="")
+      <ul class="set1">
+        <li  class="setcont_bg">银行开户名：</li>
+        <li><span class="webname">$!store.bank_account_name</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">公司银行账号：</li>
+        <li><span class="webname">$!store.bank_c_account</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">开户银行支行名称：</li>
+        <li><span class="webname">$!store.bank_name</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">开户行支行联行号：</li>
+        <li><span class="webname">$!store.bank_line_num</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">开户银行支行所在地：</li>
+        <li><span class="webname">$!bank_area_info</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg">银行开户许可证：</li>
+        <li><span class="webname"><img src="$!imageWebServer/$!store.bank_permit_image.path/$!store.bank_permit_image.name" height="500" width="800"/></span></li>
+      </ul>
+      #else
+          <ul class="set1">
+            <li class="setcont_bg">暂未提交</li>
+          </ul>
+      #end
+    </div>
+    </div>
+  <div class="submit">
+    <span class="pad120"><input name="save" type="button" value="店铺信息" onclick="store_info()" /></span>
+  </div>
+</div>
+</body>
+</html>

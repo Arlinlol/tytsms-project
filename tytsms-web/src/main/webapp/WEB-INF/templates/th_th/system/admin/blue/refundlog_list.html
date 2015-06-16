@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+});
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">退款日志</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/refund_list.htm"><b>商品退款</b></a></li>
+             <li><a href="$!webPath/admin/groupinfo_refund_list.htm"><b>消费码退款</b></a></li>
+            <li><a href="$!webPath/admin/refundlog_list.htm" class="this"><b>退款日志</b></a></li>
+        </ul>
+  </div>
+	<form name="queryForm" id="queryForm" action="$!webPath/admin/refundlog_list.htm" method="post">
+    <div class="search">
+      <span>退款编号</span> 
+  <span class="size150">
+          <input name="refund_id" type="text" id="refund_id" value="$!refund_id" /></span>
+          <span>服务单号</span> <span class="size150">
+          <input name="returnService_id" type="text" id="returnService_id" value="$!returnService_id" />
+          </span> <span>收款人</span> <span class="size150">
+          <input name="user_name" type="text" id="user_name" value="$!user_name" />
+          </span> 
+          <span>时间</span><span class="size100">
+        <input name="beginTime" type="text" id="beginTime"  readonly="readonly"/>
+        </span><span>—</span><span class="size100">
+        <input name="endTime" type="text" id="endTime" readonly="readonly" />
+        </span> 
+          <span>
+          <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn" />
+          </span> 
+ 
+    </div>
+  </form>
+  <form name="ListForm" id="ListForm" action="$!webPath/admin/refundlog_list.htm" method="post">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="18%"><span class="form_btna">退款编号</span></th>
+          <th width="18%"><span class="form_btna">服务单号</span></th>
+          <th width="9%"><span class="form_btna">收款人</span></th>
+          <th width="10%"><span class="form_btna">金额</span></th>
+          <th width="10%"><span class="form_btna">退款方式</span></th>
+          <th width="10%"><span class="form_btna">操作人</span></th>
+          <th  align="center"><b class="form_btnb">日志信息</b></th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td align="center"><span class="size70">$!obj.refund_id</span></td>
+          <td align="center"><span class="size70">$!obj.returnService_id</span></td>
+           <td align="center"><span class="size150">$!obj.returnLog_userName</span></td>
+           <td align="center"><span class="size70">$!obj.refund</span></td>       
+          <td align="center"><span class="size150">$!obj.refund_type</span></td>
+          <td align="center">
+        	$!obj.refund_user.userName
+          </td>
+          <td class="hui oprate_con" align="center">
+          		$!obj.refund_log
+                </td>
+        </tr>
+        #end
+    </table>
+    
+    <div class="operate_bar">
+        <div class="fenye" id="queryCondition">
+            <input name="mulitId" type="hidden" id="mulitId" />
+            <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+           $!gotoPageFormHTML
+        </div> 
+        <div class="oper_sp">
+        </div>         
+ 	</div>
+  </div>
+  </form>
+</div>
+</body>
+</html>

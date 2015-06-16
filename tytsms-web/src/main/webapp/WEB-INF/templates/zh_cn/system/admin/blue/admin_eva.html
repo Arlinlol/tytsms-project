@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+</head>
+<body>
+<form name="ListForm" id="ListForm" method="post" action="$!webPath/admin/admin_eva.htm">
+<div class="cont">
+  <h3 class="seth">管理员评价列表</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/admin_eva.htm"  class="this"><b>管理员评价列表</b></a></li>
+    </ul>
+  </div>
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>     
+        <th width="25%">
+          <span class="form_btna">用户名</span>
+        </th>
+        <th width="25%" align="center"><span class="form_btna">商品完整度评价</span></th>
+        <th width="25%" align="center"><span class="form_btna">服务评价</span></th>
+        <th align="center" width="25%"><b class="form_btnb">物流评价</b></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td align="center">
+          $!obj.userName
+        </td>
+        <td align="center">$!{obj.admin_sp.description_evaluate}分</td>
+        <td align="center">$!{obj.admin_sp.service_evaluate}分</td>
+        <td align="center">$!{obj.admin_sp.ship_evaluate}分</td>
+      </tr> 
+	  #end
+    </table>
+  </div>
+</div>
+
+<div class="operate_bar">
+ <div class="oper_sp">
+ </div>
+ <div class="fenye">
+	<input name="userRole" type="hidden" id="userRole" value="ADMIN" />
+    <input type="hidden" name="currentPage" id="currentPage" value="$!currentPage" />
+    <input name="mulitId" type="hidden" id="mulitId" />
+    $!gotoPageFormHTML 
+ </div>          
+</div>
+</form>
+</body>
+</html>

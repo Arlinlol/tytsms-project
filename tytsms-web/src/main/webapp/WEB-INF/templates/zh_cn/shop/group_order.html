@@ -1,0 +1,21 @@
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="group_table">
+  <tr>
+    <th width="20%" align="center">买家</th>
+    <th width="20%" align="center">商品价格</th>
+    <th width="20%" align="center">商品规格</th>
+    <th width="20%" align="center">购买数量</th>
+    <th align="center">成交时间</th>
+  </tr>
+   #foreach($obj in $objs)
+  <tr>
+    <td align="center">$!{obj.evaluate_user.userName}</td>
+    <td align="center">¥$!{obj.goods_price}</td>
+    <td align="center">$!obj.goods_spec</td>
+    <td align="center">$!obj.goods_num</td>
+    <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+  </tr>
+  #end
+</table>
+<div class="details_discus_page">
+  <span>$!gotoPageAjaxHTML</span>
+</div>

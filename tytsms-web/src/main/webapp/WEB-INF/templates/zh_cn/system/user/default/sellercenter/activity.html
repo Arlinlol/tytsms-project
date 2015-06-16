@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-活动管理-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+function actitity_apply(){
+	window.location.href="$!webPath/seller/activity_apply.htm?id="+jQuery("#id").val();	
+	}
+function activity_goods_list(){
+	window.location.href="$!webPath/seller/activity_goods_list.htm?act_id="+jQuery("#id").val();
+	}	
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center"> $!httpInclude.include("/seller/nav.htm?op=activity")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销推广</b> ><b>活动管理</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href='$!webPath/seller/activity.htm'><i></i>活动列表</a></li>
+          </ul>
+        </div>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/activity.htm">
+            #foreach($obj in $objs)
+            <input id="id" name="id" type="hidden" value="$!obj.id"/>
+            <div class="activity">
+              <h1>$!obj.ac_title</h1>
+              <h1 class="activity_time">活动时间：[ $!CommUtil.formatShortDate($!obj.ac_begin_time) 至 $!CommUtil.formatShortDate($!obj.ac_end_time)]</h1>
+              <div class="activity_box">
+                <div class="activity_pic"><img src="$!webPath/$!obj.ac_acc.path/$!obj.ac_acc.name" width="840"/></div>
+                <div class="activity_opacity"></div>
+                <div class="activity_detail">
+                  <h2>活动说明</h2>
+                  <p>$!obj.ac_content</p>
+                </div>
+                <div class="activity_rate">
+                	<ul>
+                    	<li><img src="$!webPath/resources/style/common/images/userlevel_0.png" width="20" height="30" /><span>$!CommUtil.mul($!{obj.ac_rebate},10)折</span></li>
+                        <li><img src="$!webPath/resources/style/common/images/userlevel_1.png" width="20" height="30" /><span>$!CommUtil.mul($!{obj.ac_rebate1},10)折</span></li>
+                        <li><img src="$!webPath/resources/style/common/images/userlevel_2.png" width="20" height="30" /><span>$!CommUtil.mul($!{obj.ac_rebate2},10)折</span></li>
+                        <li><img src="$!webPath/resources/style/common/images/userlevel_3.png" width="20" height="30" /><span>$!CommUtil.mul($!{obj.ac_rebate3},10)折</span></li>
+                    </ul>
+                </div>
+                
+              </div>
+              #if($!obj.ac_status==0)
+              <div class="add_activity"><a class="gray" href="javascript:void(0);">活动未开启</a></div>
+              #end
+              #if($!obj.ac_status==1)
+              <div class="add_activity"><a href="javascript:void(0);" onclick="actitity_apply()">参加活动</a> <a href="javascript:void(0);" onclick="activity_goods_list()">活动商品</a></div>
+              #end </div>
+            #end
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

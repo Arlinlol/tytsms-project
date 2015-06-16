@@ -1,0 +1,87 @@
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/charts/highcharts.js"></script>
+<script src="$!webPath/th_th/resources/js/charts/modules/exporting.js"></script>
+<script>
+jQuery(function(){ 
+  var chart;
+  chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: '$!stat_title',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '统计区间: $!CommUtil.formatShortDate($!{begin}) - $!CommUtil.formatShortDate($!{end})',
+                x: -20
+            },
+            xAxis: {
+                categories:$!{times}
+            },
+            yAxis: {
+                title: {
+                    text: '数量(个)/金额(元)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        this.x +': '+ this.y;
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [{
+                name: '订单总数',
+                data: $!order_counts
+            }, {
+                name: '已付款订单',
+                data: $!order_pay_counts
+            }, {
+                name: '已发货订单',
+                data: $!order_ship_counts
+            },{
+                name: '订单总金额',
+                data: $!order_amounts
+            }]
+        });
+})
+</script>
+<div  class="fshoptb" id="container">
+     
+  </div>
+ <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="15%"><span class="form_btna">统计日期</span></th>
+        <th width="15%"><span class="form_btna">订单总数</span></th>
+        <th width="10%">已付款订单</th>
+        <th  width="20%">已发货订单</th>
+        <th  width="9%"><span class="form_btna">订单总金额</span></th>
+      </tr>
+      #foreach($obj in $oss)
+      <tr>
+        <td align="center">$!CommUtil.formatShortDate($!obj.stat_time)</td>
+        <td align="center">$!obj.order_count</td>
+        <td align="center">$!obj.order_pay_count</td>
+        <td align="center">$!obj.order_ship_count</td>
+        <td align="center">$!obj.order_amount</td>       
+      </tr>
+     #end
+    </table>
+  </div>

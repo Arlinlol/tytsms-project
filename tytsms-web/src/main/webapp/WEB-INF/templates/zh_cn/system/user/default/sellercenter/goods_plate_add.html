@@ -1,0 +1,187 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-发布新商品</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay_blue.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js"  charset="utf-8"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+
+<script charset="utf-8" src="$!webPath/resources/editor/kindeditor.js"></script>
+<script charset="utf-8" src="$!webPath/resources/editor/lang/zh_CN.js"></script>
+<script src="$!webPath/resources/js/swfupload.js"></script>
+<script src="$!webPath/resources/js/swfupload.queue.js"></script>
+<script>
+ jQuery(document).ready(function(){
+ 	var options = {
+        cssPath : '$!webPath/resources/editor/plugins/code/prettify.css',
+        filterMode : true,
+		uploadJson:'$!webPath/upload.htm',
+		width : '700px',
+		height:'400px',
+		resizeType : 1,
+		allowImageUpload : true,
+		allowFlashUpload : false,
+		allowMediaUpload : false,
+		allowFileManager : false,
+		syncType:"form",
+		afterCreate : function() {
+							var self = this;
+							self.sync();
+						},
+		afterChange : function() {
+							var self = this;
+							self.sync();
+						},
+		afterBlur : function() {
+							var self = this;
+							self.sync();
+						},
+		items:['source', '|', 'fullscreen', 'undo', 'redo', 'print', 'cut', 'copy', 'paste',
+			'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
+			'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
+			'superscript', '|', 'selectall', 'clearhtml','quickformat','|',
+			'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
+			'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image','flash', 'media', 'table', 'hr', 'emoticons', 'link', 'unlink', '|', 'about']
+	}; 
+	editor = KindEditor.create('#plate_content',options); 
+	jQuery("#theForm").validate({
+		errorPlacement: function(error, element) {  
+   			 error.appendTo(element.parent());  
+		},
+        rules:{
+	  	  plate_name:{required :true},
+	  	  plate_position:{required :true}
+	  	 },
+	    messages:{
+	  	  plate_name:{required:"板式名称不能为空"},
+	  	  plate_position:{required:"板式位置不能为空"}
+	  	}
+     });
+	//
+	jQuery(":radio[value=$!obj.plate_position]").attr("checked",true);
+ });
+ function saveForm(){
+  editor.sync();//同步编辑器的数据到texterea
+  
+  jQuery("#theForm").submit();
+}
+
+ /*Ajax分页*/
+function ajaxPage(url,currentPage,obj){
+  var ajax_page=jQuery(obj).parent().attr("ajax_page");
+  if(ajax_page=="goods_img"){
+     var ajax_type=jQuery(obj).parent().attr("ajax_type");
+     var type=jQuery(obj).parent().attr("type");
+	 var album_id=jQuery(obj).parent().attr("album_id");
+     jQuery.post("$!webPath/seller/goods_img.htm",{"currentPage":currentPage,"type":type,"album_id":album_id},function(text){
+       jQuery(ajax_type).empty();
+	   jQuery(ajax_type).append(text);
+     },"text");
+
+  }else if(ajax_page=="goods_album"){
+	  var ajax_type=jQuery(obj).parent().attr("ajax_type");
+     jQuery.post("$!webPath/seller/goods_album.htm",{"currentPage":currentPage,"ajax_type":ajax_type},function(text){
+       jQuery(ajax_type).empty();
+	   jQuery(ajax_type).append(text);
+     },"text");
+  }
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=goods_plate_list") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>商品管理</b>><b>新增板式</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href="$!webPath/seller/goods_plate_list.htm"><i></i>板式列表</a></li>
+            <li #if(!$!edit)class="this"#end><a href='$!webPath/seller/goods_plate_add.htm'><i></i>新增板式</a></li>
+            #if($!edit)
+            <li class="this"><a href='$!webPath/seller/goods_plate_edit.htm?id=$!obj.id'><i></i>编辑板式</a></li>
+            #end
+          </ul>
+        </div>
+        <div class="add_usercenter">
+          <form action="$!webPath/seller/goods_plate_save.htm" method="post" name="theForm" id="theForm">
+            <input name="id" type="hidden" id="id"  value="$!obj.id"/>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+              <tr>
+                <td width="195" align="right"><strong class="redstr">*</strong>板式名称：</td>
+                <td width="510"><input name="plate_name" type="text" id="plate_name" value="$!obj.plate_name" class="base_txt"/>
+                <i class="base_i">请输入10个字符内的名称，方便商品发布 / 编辑时选择使用。</i></td>
+              </tr>
+                <td align="right"><strong class="redstr">*</strong>板式位置：</td>
+              <td><label><input name="plate_position" type="radio" id="plate_position" value="1" checked="checked"/>顶部 </label>
+                  <label><input type="radio" name="plate_position" id="plate_position" value="0" />底部</label>
+              </tr>
+              <tr>
+              <td align="right"></td>
+                <td><span class="base_i"> 选择广联版式插入到页面中的位置，选择“顶部”为商品详情上方内容，“底部”为商品详情下方内容。</span></td>
+                   	</td>
+              </tr>
+              <tr>
+                <td align="right" valign="top">板式内容：</td>
+                 <td><textarea name="plate_content"  #if($!store.grade.add_funciton) style="width:100%;height:400px;visibility:hidden;" #else cols="140" rows="25"  style="resize:none" #end id="plate_content">$!obj.plate_content</textarea>
+               <script>
+		           function switch_editor_photo(obj){
+					  var album_id = jQuery(obj).attr("album_id");
+						jQuery.post("$!webPath/seller/goods_img.htm",{"type":"goods_detail_album","album_id":album_id},function(text){
+						   jQuery(".editor_photo_detail").empty();																					  
+					  	   jQuery(".editor_photo_detail").append(text);
+					    },"text"); 
+						jQuery(".editor_photo_detail").show();
+				   }
+				   	function switch_editor_album(mark){
+						  var dis=jQuery(".editor_photo_detail").css("display");
+						  if(dis=="none" || mark=="album_list"){
+							jQuery.post("$!webPath/seller/goods_album.htm",{"type":"goods_detail_album","ajax_type":".editor_photo_detail"},function(text){
+							   jQuery(".editor_photo_detail").empty();																					  
+							   jQuery(".editor_photo_detail").append(text);
+							},"text"); 
+							jQuery(".editor_photo_detail").show();
+						  }else{
+							jQuery(".editor_photo_detail").hide();
+						  }		
+					 }
+           </script>
+            <div class="photoimg">
+              <div class="addphoto"><a href="javascript:void(0);" onclick="switch_editor_album('');">插入相册图片</a></div>
+              <div class="editor_photo_detail" style="display:none;"> </div>
+            </div>
+            </td>
+            </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="px10"><span class="setsub">
+                  <input type="button" value="保存" onclick="saveForm();"  style="cursor:pointer;" class="seller_save"/>
+                  </span></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

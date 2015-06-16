@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+
+<script type="text/javascript">
+
+//微信支付
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+	if (typeof WeixinJSBridge == "undefined"){
+        if( document.addEventListener ){
+            document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+        }else if (document.attachEvent){
+            document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+            document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+        }
+    }else{
+    	jsApiCall();
+    }
+});
+
+function jsApiCall(){
+	var str = window.navigator.userAgent;
+	var version = str.substring(8, 11);
+	if (version != "5.0") {
+		alert("微信浏览器系统版本过低，请将微信升级至5.0以上");
+	} else {
+		WeixinJSBridge.invoke('getBrandWCPayRequest', {
+					"appId" : "$!appId", 
+					"timeStamp" : "$!timeStamp", 
+					"nonceStr" : "$!nonceStr", 
+					"package" : "$!package",
+					"signType" : "$!signType", 
+					"paySign" : "$!paySign"
+				}, function(res) {
+						if (res.err_msg == "get_brand_wcpay_request:ok") {
+							window.location.href = "$!webPath/mobileWap/buyer_order.htm?order_status=20";
+						} else if (res.err_msg == "get_brand_wcpay_request:cancel") {
+							window.location.href = "$!webPath/mobileWap/buyer_order.htm?order_status=10";
+						} else if (res.err_msg == "get_brand_wcpay_request:fail") {
+							window.location.href = "$!webPath/mobileWap/buyer_order.htm?order_status=10";
+						}
+					});
+	}
+}
+</script>
+</head>
+<body>
+</body>
+</html>

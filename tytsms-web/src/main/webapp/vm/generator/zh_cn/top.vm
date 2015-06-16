@@ -1,0 +1,92 @@
+<!--点击收藏-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery(".top_pull").mouseover(function(){
+	jQuery(this).find("div").show();
+	jQuery(this).find("em").addClass("em_this");
+	jQuery(this).find("s").addClass("this");
+  	}).mouseleave(function(){
+    jQuery(this).find("div").hide();
+	jQuery(this).find("em").removeClass("em_this");
+	jQuery(this).find("s").removeClass("this");
+  });					
+								});
+var browserEvent = function (obj, url, title) {
+    var e = window.event || arguments.callee.caller.arguments[0];
+    var B = {
+        IE : /MSIE/.test(window.navigator.userAgent) && !window.opera
+        , FF : /Firefox/.test(window.navigator.userAgent)
+        , OP : !!window.opera
+    };
+    obj.onmousedown = null;
+    if (B.IE) {
+        obj.attachEvent("onmouseup", function () {
+            try {
+                window.external.AddFavorite(url, title);
+                window.event.returnValue = false;
+            } catch (exp) {}
+        });
+    } else {
+        if (B.FF || obj.nodeName.toLowerCase() == "a") {
+            obj.setAttribute("rel", "sidebar"), obj.title = title, obj.href = url;
+        } else if (B.OP) {
+            var a = document.createElement("a");
+            a.rel = "sidebar", a.title = title, a.href = url;
+            obj.parentNode.insertBefore(a, obj);
+            a.appendChild(obj);
+            a = null;
+        }
+    }
+};
+</script>
+
+
+
+<div class="top">
+  <div class="top_page">
+    <div class="top_right">
+		<span id="replace"> 您好，欢迎来到$!{config.websiteName}！[<a href="$!webPath/user/login.htm">登录商城</a>][<a href="$!webPath/register.htm">免费注册</a>]</span>
+    	<b>|</b> <span class="top_pull"> <a href="$!webPath/buyer/order.htm">我的订单</a> </span> <b>|</b> 
+    	#if($!config.weixin_store&&$!config.weixin_qr_img)
+		<span class="top_pull">
+      <!--加em_this和top_this-->
+      <em><i>微信商城</i><s class="this"></s></em>
+      <div class="top_this" style="display:none">
+        <div class="top_this_box"><img src="$!webPath/$!config.weixin_qr_img.path/$!config.weixin_qr_img.name" width="77" height="77" /><i class="top_this_i">关注微信商城</i></div>
+      </div>
+      </span> <b>|</b> #end
+      #if($!config.app_download==1) <span class="top_pull">
+      <!--加em_this和top_this-->
+      <em class=""><i>手机商城</i><s class="this"></s></em>
+      <div class="top_this" style="display:none;">
+        <div class="top_this_box">
+          <div class="top_this_code"><img src="$!webPath/$!MIDDLE_NAME/app/app_dowload.png" width="77" height="77" /></div>
+          <i class="top_this_i"><a href="$!config.ios_download" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/app-store.png" width="111" height="37" /></a></i> <i class="top_this_i"><a href="$!config.android_download" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/android.png" width="111" height="37" /></a></i> </div>
+      </div>
+      </span> <b>|</b> #end
+      <span class="top_pull"> <em class="">客户服务<s class="this"></s></em>
+      <div class="top_this" style="display:none;">
+        <ul class="top_pull_con_style2">
+          <li><a href="$!webPath/articlelist_help.htm" target="_blank">帮助中心</a></li>
+          <li><a href="$!webPath/doc_service.htm" target="_blank">售后服务</a></li>
+          <li><a href="$!webPath/doc_online.htm" target="_blank">在线客服</a></li>
+          <li><a href="$!webPath/doc_complaint.htm" target="_blank">投诉中心</a></li>
+          <li><a href="$!webPath/doc_email.htm" target="_blank">客服邮箱</a></li>
+          <li><a href="$!webPath/seller_apply.htm" target="_blank">商家入驻</a></li>
+        </ul>
+      </div>
+      </span> <b>|</b> #set($navs=$!navTools.queryNav(-1,-1))
+      #if($!navs.size()>0) <span class="top_pull"> <em class="">网站导航<s class=""></s></em>
+      <div class="top_this" style="display:none">
+        <div class="website">
+          <ul>
+            #foreach($nav in $navs)
+            <li><a href="$!nav.url"  #if($!{nav.new_win}==1)target="_blank"#end  rel="nofollow">$!nav.title</a></li>
+            #end
+          </ul>
+        </div>
+      </div>
+      </span> #end </div>
+	  <span class="top_collect"><a href="javascript:void(0);" onclick="browserEvent(this, '$!webPath','$!{config.websiteName}')">收藏本站</a></span>
+     </div>
+</div>

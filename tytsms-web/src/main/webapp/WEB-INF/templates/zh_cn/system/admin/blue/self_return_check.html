@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+ var w = jQuery(".cont").width();
+ var l_w = jQuery(".edit_left").width();
+ jQuery(".edit_right").width(w-l_w);
+ jQuery("#theForm").validate({
+	ignore: "",
+    rules:{
+	  self_address:{
+	    required :true
+	  }
+	 },
+	messages:{
+	  self_address:{required:"退货信息不能为空！"}
+	}
+  });
+});
+//改变系统提示的样式
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+function saveForm(){
+   jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">退货查看</h1>
+  <div class="nav_list">
+  <ul>
+   <li><a href="$!webPath/admin/self_return.htm"><b>自营退货</b></a></li>
+   <li ><a href="javascript:void(0);" class="this"><b>退货查看</b></a></li>
+   </ul>  
+   </div>
+   <div class="edit_left">
+  <form name="theForm" id="theForm" action="$!webPath/admin/self_return_check_save.htm" method="post">
+    <input name="id" type="hidden" id="id" value="$!obj.id" />
+    <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+    <input name="list_url" type="hidden" id="list_url" value="$!webPath/admin/self_return.htm" />
+   <div class="edit">
+    <div class="editul setcont">
+      <!--鼠标经过样式-->
+      <ul class="set1">
+        <li class="logistics_left"><strong class="sred"></strong>商品名称：</li>
+        <li class="logistics_right" ><span class="webname">
+          $!obj.goods_name
+        </span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>申请者：</li>
+        <li  class="logistics_right"><span class="webname">
+          $!obj.user_name
+        </span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>退货数量：</li>
+        <li  class="logistics_right"><span class="webname">
+          $!obj.goods_count
+        </span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>商品价格：</li>
+        <li  class="logistics_right"><span class="webname">
+          $!obj.goods_price
+        </span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>总价：</li>
+        <li  class="logistics_right"><span class="webname">
+          $!obj.goods_all_price
+        </span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>商品图片：</li>
+        <li  class="logistics_right"><span class="webname">
+         <img src="$!webPath/$!obj.goods_mainphoto_path" width="160" height="160" />
+        </span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>退货说明：</li>
+        <li  class="logistics_right"><span class="webname">
+          $!obj.return_content
+        </span></li>
+      </ul>
+      #if($!obj.goods_return_status==7)
+       <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>快递名称：</li>
+        <li  class="logistics_right"><span class="webname">
+          $!express_company_name
+        </span></li>
+      </ul>
+       <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>快递号：</li>
+        <li  class="logistics_right"><span class="webname">
+          $!obj.express_code
+        </span></li>
+      </ul>
+      #end
+      #if($!obj.goods_return_status==5)
+      <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>退货信息：</li>
+        <li  class="logistics_right"><span class="webname">
+          <textarea name="self_address" id="self_address" rows="8" cols="20"></textarea>
+        </span><span id="nothis" style=" width:160px; padding-left:10px;">此处请您详细填写：退货地址、收件人、联系电话、 买家通过此信息填</span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="logistics_left"><strong class="sred"></strong>审核：</li>
+        <li  class="logistics_right"><span class="use_code">
+          <label><input type="radio" name="goods_return_status" value="6" checked="checked" />审核通过可退货</label></span>
+          <span class="use_code"><label><input type="radio" name="goods_return_status" value="-1"  />审核未通过不可退货</label></span>
+        </li>
+      </ul>
+      #end
+    </div>
+    </div>
+  </form>
+  </div>
+  #if($!transInfo)
+  <div class="edit_right">
+		<div class="logistics">	
+        <ul>
+        #if($!transInfo.status==1)
+        #foreach($info in $transInfo.data)
+        #if($!VelocityCount==$!transInfo.data.size())
+        <li><b></b><span class="logistics_time">$!info.time</span><span class="logistics_over">$!info.context</span></li>
+        #else
+        <li><b></b><span class="logistics_time">$!info.time</span><span class="logistics_ads">$!info.context</span></li>
+        #end
+        #end
+        #end
+        #if($!transInfo.status==0)
+		<li class="this"><b></b><span class="logistics_time"></span><span class="logistics_over">$!transInfo.message</span></li>
+        #end 
+        #if($!transInfo.status==2)
+		<li class="this"><b></b><span class="logistics_time"></span><span class="logistics_over">$!transInfo.message</span></li>
+        #end     
+		</ul>
+	</div>
+  
+  </div>
+  #else
+  <div class="edit_right"><h3 style="font-size:18px; font-weight:lighter; margin-top:20px; padding-left:50px; float:left">暂时没有物流信息</h3></div>
+  #end
+  #if($!obj.goods_return_status==5)
+  <div class="submit">
+    <span class="pad80"><input name="save" type="button" value="提交" onclick="saveForm()" /></span>
+  </div>
+  #end
+</div>
+</body>
+</html>

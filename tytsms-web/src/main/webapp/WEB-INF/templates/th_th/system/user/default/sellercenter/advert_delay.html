@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-广告延时-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+       rules: {
+			month:{
+				   required:true,
+				   digits:true,
+			       remote:{
+                           url:"$!webPath/seller/advert_vefity.htm", 
+                           type:"post",
+                           dataType:"json",
+                           data: {month:function(){return jQuery("#month").val();},ap_id:"$!ap.id"}
+				          }
+				   }
+		  },
+	   messages: {
+			month:{required:"延时时间不能为空",digits:"延时时间只能为整数",remote:"您的金币不够,无法购买"}
+	     }
+  });
+  jQuery('#ad_begin_time').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true,
+	  minDate:0, maxDate: "+5D", 
+  });
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=advert") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>其他管理</b>><b>广告管理</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href="$!webPath/seller/advert_list.htm"><i></i>广告列表</a></li>
+            <li ><a href="$!webPath/seller/advert_my.htm"><i></i>我的广告</a></li>
+            <li ><a href="javascript:void(0);"><i></i>广告延时</a></li>
+          </ul>
+        </div>
+        <div class="add_usercenter">
+          <form action="$!webPath/seller/advert_apply_save.htm" method="post" enctype="multipart/form-data" name="theForm" id="theForm">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+              <tr>
+                <td width="195" align="right"> 广告名称：</td>
+                <td width="510">$!obj.ad_title</td>
+              </tr>
+              <tr>
+                <td width="195" align="right"> 所属广告位：</td>
+                <td width="510"> $!ap.ap_title</td>
+              </tr>
+              #if($!ap.ap_type=="img")
+              #set($type="图片")
+              #end
+              #if($!ap.ap_type=="scroll")
+              #set($type="滚动")
+              #end
+              #if($!ap.ap_type=="slide")
+              #set($type="幻灯")
+              #end
+              #if($!ap.ap_type=="text")
+              #set($type="文字")
+              #end
+              <tr>
+                <td width="195" align="right"> 广告类型：</td>
+                <td width="510">$!type</td>
+              </tr>
+              <tr>
+                <td width="195" align="right"> 广告价格：</td>
+                <td width="510">$!{ap.ap_price}金币/月</td>
+              </tr>
+              <tr>
+                <td width="195" align="right"> 我的金币：</td>
+                <td width="510"> $!{user.gold}金币</td>
+              </tr>
+              <tr>
+                <td width="195" align="right"> 开始时间：</td>
+                <td width="510"> #if(!$!obj)
+                  <input name="ad_begin_time" type="text" id="ad_begin_time" class="base_txt"/>
+                  #else $!obj.ad_begin_time #end</td>
+              </tr>
+              <tr>
+                <td width="195" align="right"> 结束时间：</td>
+                <td width="510"> $!obj.ad_end_time </td>
+              </tr>
+              
+             
+             
+              <tr>
+                <td align="right"><strong class="redstr">*</strong>延时月份：</td>
+                <td > <input name="month" type="text" id="month" /></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="px10"><span class="setsub">
+                  <input type="submit"  value="保存" style="cursor:pointer;" class="seller_save"/>
+                  </span></td>
+              </tr>
+            </table>
+            <input name="delay_session" type="hidden" id="delay_session" value="$!delay_session" />
+                        <input name="id" type="hidden" id="id" value="$!obj.id" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

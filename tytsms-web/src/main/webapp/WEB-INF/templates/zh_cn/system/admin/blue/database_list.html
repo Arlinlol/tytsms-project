@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script>
+  function selectData(){
+    var v=jQuery("#all").attr("checked");
+	if(v=="checked"){
+	  jQuery(":checkbox[id!=all]").attr("checked",true);
+	}else{
+	  jQuery(":checkbox[id!=all]").attr("checked",false);
+	}
+  }
+  function delete_data(){
+     var names="";
+	jQuery(":checkbox:checked[id!=all]").each(function(){
+	   names=jQuery(this).val()+","+names;
+	})
+	window.location.href="$!webPath/admin/database_del.htm?names="+names;
+  }
+</script>
+</head>
+<body>
+<form name="ListForm" id="ListForm" method="post" action="$!webPath/admin/user/admin_list.htm">
+<div class="cont">
+  <h3 class="seth">数据库恢复</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/database_add.htm"><b>备份</b></a></li>
+        <li><a href="$!webPath/admin/database_list.htm" class="this"><b>恢复</b></a></li>
+    </ul>
+  </div>
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="57">&nbsp;</th>
+        <th width="344"><span class="form_btna">备份名</span></th>
+        <th width="473" align="center"><span class="form_btna">备份时间</span></th>
+        <th width="154" align="center"><span class="form_btna">数据大小</span></th>
+        <th width="157" align="center"><span class="form_btna">分卷数</span></th>
+        <th  align="center" width="209"><b class="form_btnb">操作</b></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td class="check_position" ><input name="name" type="checkbox" id="name" value="$!obj.name" /></td>
+        <td width="344">$!obj.name</td>
+        <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+        <td align="center">$!{obj.size}KB</td>
+        <td align="center">$!obj.boundSize</td>
+        <td align="center" class="hui oprate_con">
+        	<a href="javascript:void(0);" onclick="if(confirm('数据备份删除后不可恢复，是否继续？'))window.location.href='$!webPath/admin/database_del.htm?names=$!obj.name'" class="blue">删除</a>
+        	| <a href="javascript:void(0);" onclick="if(confirm('导入数据时请关闭商城，确保商城无外部数据交互，同时导入数据将会覆盖当前所有数据，是否继续?'))window.location.href='$!webPath/admin/database_store.htm?name=$!obj.name'" class="blue">导入</a>
+        </td>
+      </tr>
+	  #end
+    </table>
+  </div>
+  <div class="operate_bar">
+  <div class="fenye">
+    	<input name="userRole" type="hidden" id="userRole" value="ADMIN" />
+        <input type="hidden" name="currentPage" id="currentPage" value="$!currentPage" />
+        <input name="mulitId" type="hidden" id="mulitId" />
+        $!gotoPageHTML
+    </div>
+  	<div class="oper_sp">
+    	<span class="oper_check"><input name="all" type="checkbox" id="all" onclick="selectData();" value="" />全部</span>
+        <span class="oper_del"><input name="" type="button"  value="删除" onclick="delete_data();" style="cursor:pointer;"/></span>
+    </div>
+                 
+ </div>
+</form>
+</body>
+</html>

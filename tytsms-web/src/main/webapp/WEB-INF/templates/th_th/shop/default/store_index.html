@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!store.store_name -$!config.title </title>
+<meta name="keywords" content="#if($!store.store_seo_keywords!="") $!store.store_seo_keywords #else $!config.keywords #end" />
+<meta name="description" content="#if($!store.store_seo_description!="") $!store.store_seo_description #else $!config.description #end" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/th_th/resources/style/shop/css/store.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(e) {
+	<!--收藏店铺-->
+	jQuery(".collection a").click(function(){
+    #if($!user)
+     #if($!user.id==$!store.user.id)
+	   alert(#springMessage("sms.store_index.cannot_collect_own_shop"));/* "不能收藏自己的店铺" */
+	 #else
+	   jQuery.post("$!current_webPath/add_store_favorite.htm",{"id":"$!store.id"},function(data){
+		 if(data==0){
+		     alert(#springMessage("sms.store_index.success_collect_shop"));/* "店铺收藏成功！" */
+		 }
+		 if(data==1){
+		    alert(#springMessage("sms.store_index.aready_collect_shop"));/* "该店铺已经被收藏！" */
+		 }
+	   },"text");
+	 #end
+   #end
+   });
+  //
+  jQuery(".twocoad").css("cursor","pointer").mouseover(function(){
+     jQuery(".shop_botmhbox").fadeIn('fast'); 
+  }).mouseleave(function(){
+     jQuery(".shop_botmhbox").fadeOut('fast'); 
+  });
+	jQuery("i[id^='i_']").click(function(){
+	  var str = jQuery(this).attr("id").substring(2);
+	  var child_show=jQuery(this).attr("child_show");
+	  if(child_show=="true"){
+	    jQuery(this).removeClass("i_cut");
+		jQuery(this).addClass("i_add");
+		jQuery(this).parent().next(".level_second").slideUp('normal');
+	    jQuery(this).attr("child_show","false");
+	  }else{
+	    jQuery(this).removeClass("i_add");
+		jQuery(this).addClass("i_cut");
+	   jQuery(this).parent().next(".level_second").slideDown('normal');
+	    jQuery(this).attr("child_show","true");
+	  }
+	});
+	<!--幻灯-->
+	var index = 0;
+	if($store.slides.size()>0){
+		var count = jQuery(".shopslider").children().length;
+	}else{
+		var count = 3;
+	}
+		var timer ;
+		 jQuery(".banner_circle a").click(function(){
+			index  = jQuery(".banner_circle a").index(this);
+			animateImg(index);
+		 }).eq(0).mouseover();
+		 
+		 jQuery(".banner_img").hover(function(){
+				 clearInterval(timer);
+			 },function(){
+				 timer = setInterval(function(){
+					animateImg(index)
+					index++;
+					if(index==count){index=0;}
+				  } , 4000);
+		 }).trigger("mouseleave");
+	 
+    jQuery("#store_head_box").mouseover(function(){
+		jQuery("#store_level").show();
+	})
+	jQuery("#store_head_box").mouseout(function(){
+		jQuery("#store_level").hide();
+	})
+});<!--end-->
+function animateImg(index){
+			jQuery(".shopslider").children().animate({opacity:"0"}).stop(true,false).eq(index).animate({opacity:"1"});
+			jQuery(".banner_circle a").removeClass("this")
+				.eq(index).addClass("this");
+			jQuery(".shopslider").children().eq(index).siblings().animate({opacity:"0"});
+}
+function ugc_goods_list(ugc_id){
+	window.location.href="$!current_webPath/goods_list.htm?store_id="+$!store.id+"&ugc_id="+ugc_id+"&orderBy=goods_salenum&orderType=desc"; 
+}
+</script>
+</head>
+
+
+<body>
+<!--顶部--> 
+$!httpInclude.include("/top.htm")
+<div class="shop_main">
+<!--店铺头部-->
+<div class="store_head">
+  <div class="store_top">
+    <div class="store_main">
+      <div class="store_head_right">
+        <ul>
+          <li class="head_a"></li>
+          <li class="head_middle">
+            <div class="store_head_box"  id="store_head_box">
+              <div class="store_name">$!store.store_name【$!store.grade.gradeName】</div>
+              <div class="scores"> <i class="smill"></i> 
+              <b class="scores_scroll"> 
+              <span class="scroll_gray"></span><span class="scroll_red" style="width:$!{result}%"></span> 
+              </b> 
+              </div>
+              <div class="store_level" style="display:none" id="store_level">
+                <table class="level_table" cellpadding="0" cellspacing="0" border="0">
+                  <tbody>
+                    <tr>
+                      <td colspan="2"><b>#springMessage("sms.store_index.grade_detail")<!-- 评分详细 --></b></td>
+                      <td colspan="2">#springMessage("sms.store_index.compareto_same_industry")<!-- 与同行业相比 --></td>
+                    </tr>
+                    <tr>
+                      <td width="200" class="hui2">#springMessage("sms.store_index.descript_coincide")<!-- 描述相符： --></td>
+                      <td width="80">#if(!$!{store.sp.description_evaluate})0 #else $!{store.sp.description_evaluate} #end#springMessage("sms.store_index.point")<!-- 分 --></td>
+                      <td width="20"><span class="level_arrow $!{description_css}"></span></td>
+                      <td class="$!{description_css}">$!description_result</td>
+                    </tr>
+                    <tr>
+                      <td class="hui2">#springMessage("sms.store_index.serve_attitude")<!-- 服务态度： --></td>
+                      <td>#if(!$!{store.sp.service_evaluate})0 #else $!{store.sp.service_evaluate} #end#springMessage("sms.store_index.point")<!-- 分 --></td>
+                      <td><span class="level_arrow $!{service_css}"></span></td>
+                      <td class="$!{service_css}">$!service_result</td>
+                    </tr>
+                    <tr>
+                      <td class="hui2">#springMessage("sms.store_index.deliver_speed")<!-- 发货速度： --></td>
+                      <td>#if(!$!{store.sp.ship_evaluate})0 #else $!{store.sp.ship_evaluate} #end#springMessage("sms.store_index.point")<!-- 分 --></td>
+                      <td><span class="level_arrow $!{ship_css}"></span></td>
+                      <td class="$!{ship_css}">$!ship_result</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="store_detail">
+                  <ul>
+                    <li><span class="company_name">#springMessage("sms.store_index.shop_name")<!-- 店铺名称： --></span><span class="red">$!store.store_name</span></li>
+                    <li><span class="company_name">#springMessage("sms.store_index.company_name")<!-- 公司名称： --></span><span class="company_r">$!store.license_c_name</span></li>
+                    <li><span class="company_name">#springMessage("sms.store_index.contact_number")<!-- 联系电话： --></span><span class="company_r">$!store.store_telephone</span></li>
+                    <li><span class="company_name">#springMessage("sms.store_index.shop_address")<!-- 店铺地址： --></span><span class="company_r">$!areaViewTools.generic_area_info("$!store.area.id")</span></li>
+                    <li><span class="company_name">#springMessage("sms.store_index.detail_address")<!-- 详细地址： --></span><span class="company_r">$!store.store_address</span></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            #if($!userTools.userOnLine($!store.user.userName)=="true")																			<!-- 会员登录 -->
+            <div class="service"><a href="javascript:void(0);" #if(!$!user)dialog_uri="$!current_webPath/user_dialog_login.htm" dialog_title="#springMessage('sms.store_index.member_login')" dialog_width="430" dialog_height="100" dialog_id="user_login" #else onclick="open_im('','$!webPath','user','store','$!store.id');" #end></a></div>
+            #else																																	<!-- 会员登录 -->
+            <div class="no_service"><a href="javascript:void(0);" #if(!$!user)dialog_uri="$!current_webPath/user_dialog_login.htm" dialog_title="#springMessage('sms.store_index.member_login')" dialog_width="430" dialog_height="100" dialog_id="user_login" #else onclick="if(confirm(#springMessage('sms.store_index.is_continue')))open_im('','$!webPath','user','store','$!store.id');" #end></a></div>
+            #end
+          </li>
+          <li class="head_b"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--logo行-->
+  #if($!store.store_banner)
+  #set($banner="$!webPath/$!store.store_banner.path/$!store.store_banner.name")
+  #else
+   #set($banner="$!webPath/th_th/resources/style/shop/images/store/banner.jpg")
+  #end
+  <div class="store_logo" style="background:url($!banner) no-repeat top center; ">
+  #set($logo="$!webPath/th_th/resources/style/shop/images/store/storeLogo.png")
+  #if($!config.storeImage)
+    #set($logo="$!webPath/$!config.storeImage.path/$!config.storeImage.name")
+  #end
+  #if($!store.store_logo)
+ 	#set($logo="$!webPath/$!store.store_logo.path/$!store.store_logo.name")
+  #end
+  <div class="main"><span style="clear:both;"><img src="$!logo" width="210" height="78" /></span></div></div>
+
+
+<!--导航-->
+<div class="store_nav_width">
+  <div class="main">
+    <div class="store_nav">
+      <ul>
+        <li class="this"><a href="javascript:void(0)">#springMessage("sms.store_index.shop_home_page")<!-- 店铺首页 --></a></li>
+        #foreach($nav in $navs)
+        	#set($url="$!webPath/store_url_$!{nav.id}.htm")
+    		#if($!{nav.url}&&$!{nav.url}!="") 
+      			#set($url="$!nav.url")
+    		#end
+        	<li><a href="$!url"#if($!nav.win_type=="new_win") target="_blank" #end>$!nav.title</a></li>
+        #end
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!--大幻灯-->
+<div class="banner_width" style="width:100%;">
+  <div class="banner_img"> 
+  #if($store.slides.size()>0)
+    <ul class="shopslider">
+      #foreach($slide in $store.slides)
+      <li #if($!velocityCount==1) style="opacity:1" #else style="opacity:0" #end>
+      <a style="text-align:center;" #if($!slide.url!='')href="http://$!slide.url" target="_blank" #else href="javascript:void(0)" #end > <img src="$!imageWebServer/$!slide.acc.path/$!slide.acc.name" /> </a>
+      </li>
+      #end
+    </ul>
+    <span class="banner_circle"> #foreach($slide in $store.slides) <a #if($!velocityCount==1) class="this" #end href="javascript:void(0);">$!{velocityCount}</a> #end </span>
+    #else
+    <ul class="shopslider">
+          <li style="opacity:1">
+          <a href="javascript:void(0)"><img src="$!imageWebServer/th_th/resources/style/shop/images/store/slides1.jpg" /> </a>
+          </li>
+    </ul>
+        <span class="banner_circle"><a class="this" href="javascript:void(0);">1</a></span>
+    #end 
+    </div>
+</div>
+
+<!--主体-->
+<div class="main"> 
+  
+  <!--人气单品-->
+  <div class="recommend rd_1">
+    <h1>#springMessage("sms.store_index.popularity_goods")<!-- 人气单品 --></h1>
+    <div class="recomm_list">
+    #foreach($goods_c in $goods_collect)
+      #if($!goods_c.goods_main_photo)
+      	#set($goods_c_photo="$!imageWebServer/$!goods_c.goods_main_photo.path/$!goods_c.goods_main_photo.name")
+      #else
+      	#set($goods_c_photo="$!imageWebServer/$!config.goodsImage.path/$!config.goodsImage.name")
+      #end
+      
+       #set($goods_url="$!webPath/goods_$!{goods_c.id}.htm")
+	 #if($!config.second_domain_open && $!goods_c.goods_store.store_second_domain!="")
+       #set($goods_url="http://$!{store.store_second_domain}.$!{domainPath}/goods_$!{goods_c.id}.htm")
+       #end
+      
+      <ul class="recomm_ul">
+        <li class="recomm_pic"><a href="$!goods_url" target="_blank"><img src="$!goods_c_photo" width="300" height="300" /></a></li>
+        <li class="recomm_name"><a href="$!goods_url" target="_blank" style="display:block;margin-left:auto;margin-right:auto;overflow:hidden;width:300px;">$!goods_c.goods_name</a></li>
+        <li class="recomm_bgred">
+          <div class="recomm_price"><span>#springMessage("sms.store_index.price")<!-- 价格： --><b>฿$!goods_c.store_price</b></span></div>
+          <div class="recomm_btn"><a href="$!goods_url" target="_blank">#springMessage("sms.store_index.immedicately_buy")<!-- 立即抢购 --></a></div>
+        </li>
+      </ul>
+    #end  
+    </div>
+  </div>
+  
+  <!--热门推荐-->
+  <div class="recommend rd_2">
+    <h1>#springMessage("sms.store_index.hot_recommend")<!-- 热门推荐 --></h1>
+    <div class="recomm_list">
+    #foreach($goods_r in $goods_recommend)
+      #if($!goods_r.goods_main_photo)
+      	#set($goods_r_photo="$!imageWebServer/$!goods_r.goods_main_photo.path/$!goods_r.goods_main_photo.name")
+      #else
+      	#set($goods_r_photo="$!imageWebServer/$!config.goodsImage.path/$!config.goodsImage.name")
+      #end
+      
+       #set($goods_url="$!webPath/goods_$!{goods_r.id}.htm")
+	   #if($!config.second_domain_open && $!goods_r.goods_store.store_second_domain!="")
+       #set($goods_url="http://$!{store.store_second_domain}.$!{domainPath}/goods_$!{goods_r.id}.htm")
+       #end
+      <ul class="recomm_ul">
+        <li class="recomm_pic"><a href="$!goods_url"><img src="$!goods_r_photo" width="300" height="300" /></a></li>
+        <li class="recomm_name"><a href="$!goods_url" target="_blank" style="display:block;margin-left:auto;margin-right:auto;overflow:hidden;width:300px;">$!goods_r.goods_name</a></li>
+        <li class="recomm_bgred">
+          <div class="recomm_price"><span>#springMessage("sms.store_index.price")<!-- 价格： --><b>฿$!goods_r.store_price</b></span></div>
+          <div class="recomm_btn"><a href="$!goods_url">#springMessage("sms.store_index.immedicately_buy")<!-- 立即抢购 --></a></div>
+        </li>
+      </ul>
+    #end  
+    </div>
+  </div>
+  <div class="store_main store_bottom">
+    <div class="store_left"> 
+      <!--店铺信息-->
+      <div class="store_left_box">
+        <h1>#springMessage("sms.store_index.store_info")<!-- 店铺信息 --></h1>
+        <div class="store_infor"> <span class="full_name">$!store.store_name</span>
+          <ul class="grade">
+            <li><span>#springMessage("sms.store_index.descript_coincide")<!-- 描述相符： --></span><b>#if(!$!{store.sp.description_evaluate})0 #else $!{store.sp.description_evaluate} #end分</b><em class="$!description_css1">$!description_type</em><i class="$!{description_css}">$!description_result</i></li>
+            <li><span>#springMessage("sms.store_index.serve_attitude")<!-- 服务态度： --></span><b>#if(!$!{store.sp.service_evaluate})0 #else $!{store.sp.service_evaluate} #end分</b><em class="$!service_css1">$!service_type</em><i class="$!{service_css}">$!service_result</i></li>
+            <li><span>#springMessage("sms.store_index.deliver_speed")<!-- 发货速度： --></span><b>#if(!$!{store.sp.ship_evaluate})0 #else $!{store.sp.ship_evaluate} #end分</b><em class="$!ship_css1">$!ship_type</em><i class="$!{ship_css}">$!ship_result</i></li>
+          </ul>
+          <ul class="information">
+            <li><span>#springMessage("sms.store_index.company_name")<!-- 公司名称： --></span><b>$!store.license_c_name</b></li>
+            <li><span>#springMessage("sms.store_index.in_the_place")<!-- 所在地： --></span><b>$!areaViewTools.generic_area_info("$!store.license_area.id")$!store.license_c_address</b></li>
+            <li><span>#springMessage("sms.store_index.contact_number")<!-- 联系电话： --></span><b>$!store.license_c_telephone</b></li>
+          </ul>
+          <div class="shop_botm_hid">
+      <ul class="shopboh">
+        <li class="collection"  style="border-right:0px;">																			<!-- 会员登录 -->
+        	<a href="javascript:void(0);" id="store_fav" #if(!$!user)dialog_uri="$!webPath/user_dialog_login.htm" dialog_title="#springMessage('sms.store_index.member_login')" dialog_width="450" dialog_height="100" dialog_id="user_login"#end><span>#springMessage("sms.store_index.collect_store")<!-- 收藏店铺 --></span></a>
+        </li>
+        
+      </ul>
+    </div>
+        </div>
+      </div>
+      <!--商品分类-->
+      <div class="classify">
+        <h1><span>#springMessage("sms.store_index.goods_classify")<!-- 商品分类 --></span></h1>
+        <div class="classify_list">
+          #foreach($ugc in $ugcs)<div class="level_li"> 
+            <div class="level_one"><i class="i_cut" id="i_$!{ugc.id}" child_show="true"></i><span onclick="ugc_goods_list($!ugc.id)" style="cursor:pointer">$!ugc.className</span></div>
+            <div class="level_second">
+              <ul>
+                #foreach($child in $ugc.childs)
+                <li><a href="javascript:void(0)" onclick="ugc_goods_list($!child.id)">$!child.className</a></li>
+                #end
+              </ul>
+            </div>
+             </div>#end
+        </div>
+      </div>
+      
+      <!--热销排行-->
+      <div class="classify">
+        <h1><span>#springMessage("sms.store_index.goods_classify")<!-- 热销排行 --></span></h1>
+        <div class="hot_rank"> 
+        #foreach($goods in $hotgoods)
+          #if($!goods.goods_main_photo)
+          #set($goods_photo="$!imageWebServer/$!goods.goods_main_photo.path/$!goods.goods_main_photo.name")
+          #else
+          #set($goods_photo="$!imageWebServer/$!config.goodsImage.path/$!config.goodsImage.name")
+          #end
+          
+            
+       #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+	   #if($!config.second_domain_open && $!goods.goods_store.store_second_domain!="")
+       #set($goods_url="http://$!{store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+       #end
+          <ul class="hot_rank_ul">
+            <li class="hot_img"><span><a href="$!goods_url" target="_blank"><img src="$!goods_photo" width="70" height="70"  /></a></span><i #if($!velocityCount>3) class="gray_arrow" #end>$!velocityCount</i></li>
+            <li class="hot_name"><b><a href="$!goods_url" target="_blank">$!goods.goods_name</a></b><span><strong>฿$!goods.store_price</strong></span></li>
+          </ul>
+         #end
+        </div>
+      </div>
+    </div>
+    <div class="store_right"> 
+      <!--产品列表-->
+      <div class="store_goods_list"> 
+      #foreach($obj in $objs)
+      	  #if($!obj.goods_main_photo)
+          #set($goods_main_photo="$!imageWebServer/$!obj.goods_main_photo.path/$!obj.goods_main_photo.name")
+          #else
+          #set($goods_main_photo="$!imageWebServer/$!config.goodsImage.path/$!config.goodsImage.name")
+          #end
+          
+            #set($goods_url="$!webPath/goods_$!{obj.id}.htm")
+	 #if($!config.second_domain_open && $!obj.goods_store.store_second_domain!="")
+       #set($goods_url="http://$!{store.store_second_domain}.$!{domainPath}/goods_$!{obj.id}.htm")
+       #end
+        <ul class="goods_box">
+          <li><a href="$!goods_url" target="_blank"><img src="$!goods_main_photo" width="229" height="229" /></a></li>
+          <li class="goods_name"><a href="$!goods_url" target="_blank">$!obj.goods_name</a></li>
+          <li class="goods_price"><b>฿$!obj.store_price</b><span>$!obj.evaluates.size()#springMessage("sms.store_index.evaluate_count")<!-- 条评价 --></span></li>
+        </ul>
+      #end
+      </div>
+      
+    </div>
+  </div>
+  <div class="img_bottom" ></div>
+  <!--底部-->
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

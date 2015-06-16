@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>支付结果 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+ $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="payfor_box">
+    <ul class="payfor_box_ul">
+      <li>订单编号：<i>$!{obj.order_id}</i></li>
+      #set($total_goods_amount=$!{obj.totalPrice})
+      #if($!obj.child_order_detail)
+        #set($order_detail_maps=$!orderFormTools.queryGoodsInfo("$!obj.child_order_detail"))
+         #foreach($child_map in $order_detail_maps)
+         #set($child_order=$!orderFormTools.query_order("$!child_map.get('order_id')"))
+           #set($total_goods_amount=$total_goods_amount+$child_order.goods_amount)
+         #end
+      #end
+      <li>应付金额：<b>¥$!{total_goods_amount}</b></li>
+      #if($!obj.order_status==0)
+      #set($status="已取消")
+      #end
+      #if($!obj.order_status==10)
+      #set($status="待付款")
+      #end
+      #if($!obj.order_status==15)
+      #set($status="线下支付待审核")
+      #end
+      #if($!obj.order_status==20)
+      #set($status="付款成功")
+      #end
+      #if($!obj.order_status==30)
+      #set($status="已发货")        
+      #end                
+      #if($!obj.order_status==40)
+      #set($status="已收货")
+      #end
+      #if($!obj.order_status==50)
+      #set($status="已完成,已评价")                                              
+      #end
+      #if($!obj.order_status==60)
+      #set($status="已结束")                                              
+      #end
+      <li>支付情况：<em>$!status</em></li>
+    </ul>
+    <span class="payfor_back">#if($!obj.order_status==10)<a href="$!webPath/order_pay_view.htm?id=$!obj.id" class="payfor_back_a"><i>返回重新支付</i></a> #end <a href="$!webPath/buyer/order_view.htm?id=$!obj.id" class="payfor_back_a"><i>查看订单信息</i></a></span> </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

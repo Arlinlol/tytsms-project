@@ -1,0 +1,296 @@
+<script src="$!webPath/th_th/resources/js/jquery.cookie.js"></script>
+<script>
+function open_im2(){
+  var goods_id=arguments[0];
+  var url=arguments[1];
+  var type=arguments[2];  //打开类型，user为用户打开，store为商家打开，plat为平台打开
+  if(type=="store"){
+  window.open (url+"/store_chatting.htm",'store','height=660,width=1000,top=200,left=400,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');	  
+	  }
+  if(type=="user"){
+  window.open (url+"/user_chatting.htm?gid="+goods_id,'','height=660,width=1000,top=200,left=400,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');		  
+	 }
+  if(type=="plat"){
+  window.open (url+"/admin/plat_chatting.htm",'plat','height=660,width=1000,top=200,left=400,toolbar=no,menubar=no,scrollbars=no, resizable=no,location=no, status=no');		  
+	 }
+}
+jQuery(document).ready(function(){
+   jQuery(".seller_ul>li>b").click(function(){
+	  var child_show=jQuery(this).parent().attr("child_show");
+	  if(child_show=="true"){
+	    jQuery(this).parent().find("img").attr("src","$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s2.gif");
+	    jQuery(this).parent().find("ul").slideUp('normal');
+	    jQuery(this).parent().attr("child_show","false");
+	  }else{
+	    jQuery(this).parent().find("img").attr("src","$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif");
+	    jQuery(this).parent().find("ul").slideDown('normal');
+	    jQuery(this).parent().attr("child_show","true");
+	  }
+	  var nav_status="";
+	  jQuery(".seller_ul>li").each(function(){
+		nav_status=nav_status+jQuery(this).attr("id")+","+jQuery(this).attr("child_show")+";";
+	  }); 
+	  jQuery.cookie("seller_nav",nav_status);
+	});	
+	
+   //
+	jQuery(".seller_ul li").removeClass("this");						
+	jQuery(".seller_ul li[op='$!{op}']").addClass("this");
+   
+   //
+   jQuery(".set_menu_img").click(function(){
+     jQuery(".set_menu_hid").show();
+   });
+   //
+   jQuery(".set_menu_close").click(function(){
+     jQuery(".set_menu_hid").hide();
+   });
+   jQuery(".set_menu_btn").click(function(){
+	 jQuery(".set_menu_hid").hide();
+	});
+   #if($!user.store_quick_menu)
+	    var menus = jQuery.parseJSON('$!{user.store_quick_menu}');
+		jQuery.each(menus,function(index,menu){
+			jQuery("input[name='menu'][value='"+menu.menu_name+"']").attr("checked",true);
+			jQuery("#nav_quick ul").append("<li><a href='$!webPath/seller/"+menu.menu_url+"'>"+menu.menu_name+"</a></li>");
+		});
+   #end   
+	
+   //快捷操作菜单
+   jQuery("input[name='menu']").change(function(){
+		var str = "";
+		jQuery("input[type='checkbox']:checked").each(function(index, element) {
+           str=str+';'+jQuery(element).val()+","+jQuery(element).attr("menu_url")
+		});
+		jQuery.ajax({type:'POST',
+	              	url:'$!webPath/seller/store_quick_menu_save.htm',
+				  	data:{"menus":str},
+			   	success:function(data){
+					var menus = jQuery.parseJSON(data);
+					jQuery("#nav_quick ul").empty();
+					jQuery.each(menus,function(index,menu){
+						jQuery("#nav_quick ul").append("<li><a href='$!webPath/seller/"+menu.menu_url+"'>"+menu.menu_name+"</a></li>");
+					}); 
+              }
+		});   
+   	
+   });
+   jQuery(".set_menu_cancel").click(function(){
+	    var str = "";
+		jQuery.ajax({type:'POST',
+	              	url:'$!webPath/seller/store_quick_menu_save.htm',
+				  	data:{"menus":str},
+			   	success:function(data){
+					var menus = jQuery.parseJSON(data);
+					jQuery("#nav_quick ul").empty();
+					jQuery.each(menus,function(index,menu){
+					jQuery("#nav_quick ul").append("<li><a href='$!webPath/seller/"+menu.menu_url+"'>"+menu.menu_name+"</a></li>"); 
+					}); 
+              }
+		});
+		jQuery("input[name='menu']").attr("checked",false); 
+   });
+   
+   if(jQuery.cookie("seller_nav")!=null){
+      var nav_status=jQuery.cookie("seller_nav");
+	  jQuery.each(nav_status.split(";"), function(index,item){
+	     var list=item.split(",");
+		 jQuery("#"+list[0]).attr("child_show",list[1]);
+		 if(list[1]=="true"){
+	       jQuery("#"+list[0]+" ul").show();
+		 }else{
+		   jQuery("#"+list[0]+" ul").hide(); 	 
+		 }
+	  });
+   }
+});<!--end-->
+
+</script>
+
+<div class="seller_center_left">
+  <h3><b>商家中心</b><i class="set_menu"><a href="javascript:void(0);" class="set_menu_img"></a>
+  	<form action="$!webPath/seller/store_quick_menu_save.htm"  method="post" id="store_quick_menu_form" name="store_quick_menu_form">
+    <div class="set_menu_hid" style="display:none;"><span class="set_mhid"></span>
+      <div class="set_menu_box"><a href="javascript:void(0);" class="set_menu_close"></a>
+        <h4>设置常用菜单</h4>
+        <div class="set_mid_box"> <span>
+          <h5>商品管理</h5>
+          <div style="width:470px; float:left;">
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="出售中的商品" menu_url="goods.htm"/>出售中的商品</label></em>
+           
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="发布新商品" menu_url="add_goods_first.htm"/>发布新商品</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="库存中的商品" menu_url="goods_storage.htm"/>仓库中的商品</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="违规下架的商品" menu_url="goods_out.htm"/>违规下架的商品</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="商品分类" menu_url="goods_class_list.htm"/>商品分类</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="品牌管理" menu_url="goods_brand_list.htm"/>品牌管理</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="规格管理" menu_url="goods_spec_list.htm"/>规格管理</label></em> 
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="关联板式" menu_url="goods_plate_list.htm"/>关联板式</label></em> 
+           <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="淘宝导入" menu_url="taobao.htm"/>淘宝导入</label></em> 
+          </div></span> 
+          
+           
+          
+          <span>
+          <h5>交易管理</h5>
+          <div style="width:470px; float:left;">
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="订单管理" menu_url="order.htm"/>订单管理</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="运费模板" menu_url="transport_list.htm"/>运费模板</label></em>
+          </div></span> 
+          
+          <span>
+          <h5>我的店铺</h5>
+          <div style="width:470px; float:left;">
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="店铺设置" menu_url="store_set.htm"/>店铺设置</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="店内公告" menu_url="store_notice.htm"/>店内公告</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="二级域名" menu_url="store_sld.htm"/>二级域名</label></em>
+           <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="二级域名" menu_url="sub_account_list.htm"/>子账户管理</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="店铺导航" menu_url="store_nav.htm"/>店铺导航</label></em>
+          </div></span>
+          
+          <span>
+          <h5>促销推广</h5>
+          <div style="width:470px; float:left;">
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="团购管理" menu_url="group.htm"/>团购管理</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="活动管理" menu_url="activity.htm"/>活动管理</label></em> 
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="竞价直通车" menu_url="ztc_apply.htm"/>竞价直通车</label></em>
+          
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="优惠券管理" menu_url="coupon.htm"/>优惠券管理</label></em>
+          </div></span>
+          
+          <span>
+          <h5>结算管理</h5>
+          <div style="width:470px; float:left;">
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="我的账单" menu_url="payofflog_list.htm"/>我的账单</label></em>
+          </div></span>
+          
+          <span>
+          <h5>客户服务</h5>
+          <div style="width:470px; float:left;">
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="退货管理" menu_url="return.htm"/>退货管理</label></em>
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="咨询管理" menu_url="consult.htm"/>咨询管理</label></em>
+            <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="投诉管理" menu_url="complaint.htm"/>投诉管理</label></em>
+          </div></span> 
+          
+          <span>
+          <h5>其他管理</h5>
+          <div style="width:470px; float:left;">
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="金币管理" menu_url="gold_record.htm"/>金币管理</label></em>
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="广告管理" menu_url="advert_list.htm"/>广告管理</label></em>
+          <em><label style="cursor:pointer">
+          <input name="menu" type="checkbox" value="图片空间" menu_url="album.htm"/>图片空间</label></em>
+          
+          </div></span>
+          </div>
+        <div class="set_mid_box_btn">
+          <input type="button" class="set_menu_btn" value="完成" />
+          <input type="button" class="set_menu_cancel" value="清空" />
+        </div>
+      </div>
+    </div>
+    </form>
+    </i></h3>
+  <div class="seller_center_box">
+    <ul class="seller_ul">
+      <li child_show="true" id="nav_quick"><b><a href="javascript:void(0);">快捷操作</a><s><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif" width="9" height="5" /></s></b>
+        <ul>
+          
+        </ul>
+      </li>
+      <li child_show="true" id="nav_goods"><b><a href="javascript:void(0);">商品管理</a><s><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif" width="9" height="5" /></s></b>
+        <ul>
+          <li op="goods"><a href="$!webPath/seller/goods.htm">出售中的商品</a></li>
+          <li><a href="$!webPath/seller/add_goods_first.htm" target="_blank">发布新商品</a></li>
+          <li op="goods_storage"><a href="$!webPath/seller/goods_storage.htm">仓库中的商品</a></li>
+          <li op="goods_out"><a href="$!webPath/seller/goods_out.htm">违规下架商品</a></li>
+          <li op="goods_class"><a href="$!webPath/seller/goods_class_list.htm">商品分类</a></li>
+          <li op="goods_brand"><a href="$!webPath/seller/goods_brand_list.htm">品牌申请</a></li>
+          <li op="goods_spec_list"><a href="$!webPath/seller/goods_spec_list.htm">规格管理</a></li>
+          <li op="goods_plate_list"><a href="$!webPath/seller/goods_plate_list.htm">关联板式</a></li>
+          <li op="taobao"><a href="$!webPath/seller/taobao.htm">淘宝导入</a></li>
+        </ul>
+      </li>
+      <li child_show="true" id="nav_order"><b><a href="javascript:void(0);">交易管理</a><s><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif" width="9" height="5" /></s></b>
+        <ul>
+          <li op="order"><a href="$!webPath/seller/order.htm">订单管理</a></li>        
+          <li op="transport"><a href="$!webPath/seller/transport_list.htm">运费模板</a></li>       
+        </ul>
+      </li>
+      <li child_show="true" id="nav_store"><b><a href="javascript:void(0);">我的店铺</a><s><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif" width="9" height="5" /></s></b>
+        <ul>
+          <li op="store_set"><a href="$!webPath/seller/store_set.htm">店铺设置</a></li>
+          <li op="store_notice"><a href="$!webPath/seller/store_notice.htm">店内公告</a></li>
+          <li op="store_sld"><a href="$!webPath/seller/store_sld.htm">二级域名</a></li>
+          <li op="sub_account_list"><a href="$!webPath/seller/sub_account_list.htm">子账户管理</a></li>
+          <li op="store_nav"><a href="$!webPath/seller/store_nav.htm">店铺导航</a></li>
+        </ul>
+      </li>
+      
+      <li child_show="true" id="nav_promotion"><b><a href="javascript:void(0);">促销推广</a><s><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif" width="9" height="5" /></s></b>
+        <ul>
+          <li op="group"><a href="$!webPath/seller/group.htm">团购管理</a></li>
+          <li op="activity"><a href="$!webPath/seller/activity.htm">商城活动</a></li>
+          <li op="ztc"><a href="$!webPath/seller/ztc_apply.htm">竞价直通车</a></li>
+          <li op="coupon"><a href="$!webPath/seller/coupon.htm">优惠劵管理</a></li>
+        </ul>
+      </li>
+      <li child_show="true" id="nav_settle"><b><a href="javascript:void(0);">结算管理</a><s><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif" width="9" height="5" /></s></b>
+        <ul>
+          <li op="payoff"><a href="$!webPath/seller/payofflog_list.htm">我的账单</a></li>
+        </ul>
+      </li>
+      <li child_show="true" id="nav_member"><b><a href="javascript:void(0);">客户服务</a><s><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif" width="9" height="5" /></s></b>
+        <ul>
+         <li op="return"><a href="$!webPath/seller/return.htm">退货管理</a></li> 
+         <li op="consult"><a href="$!webPath/seller/consult.htm">咨询管理</a></li> 
+         <li op="complaint"><a href="$!webPath/seller/complaint.htm">投诉管理</a></li> 
+         <li><a href="javascript:void(0);" onclick="open_im2('','$!webPath','store');">商家客服</a></li>
+        </ul>
+      </li>
+      <li child_show="true" id="nav_member"><b><a href="javascript:void(0);">其他管理</a><s><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/nav_s.gif" width="9" height="5" /></s></b>
+        <ul>
+          <li op="gold"><a href="$!webPath/seller/gold_record.htm">金币管理</a></li>
+          <li op="advert"><a href="$!webPath/seller/advert_list.htm">广告管理</a></li>
+          <li op="album"><a href="$!webPath/seller/album.htm">图片空间</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

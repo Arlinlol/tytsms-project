@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-活动申请-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+
+ });
+function ajaxPage(url,currentPage,obj){alert(url);	
+  jQuery.post(url,{"currentPage":currentPage},
+			      function(data){
+							  jQuery("#act_goods_info").empty().append(data);
+							 },"text");
+} 
+//load
+function act_goods(obj){ 
+     var goods_name=jQuery("#goods_name").val();
+    jQuery.ajax({type:'POST',url:'$!webPath/seller/activity_goods.htm',data:{"goods_name":goods_name},
+				 beforeSend:function(){
+					  jQuery(obj).parent().find("img").show();
+					 }, 
+				 success:function(data){
+					 if(data!=""){
+					  jQuery("#result").show();
+					  jQuery(obj).parent().find("img").hide();
+					  jQuery("#act_goods_info").empty().append(data);
+					 }else{
+					  jQuery("#result").show();
+					  jQuery(obj).parent().find("img").hide();
+					  jQuery("#act_goods_info").empty().append("没有可参加活动的商品数据");	 
+						 }
+				    }
+			   });		
+	}
+//delete
+function remove_act_goods(obj){
+   jQuery(obj).parent().parent().find("img").attr("src","$!webPath/resources/style/common/images/good.jpg");	 
+   jQuery(obj).parent().parent().find("i").html("活动商品信息");	
+   jQuery(obj).parent().parent().find("img").attr("goods_id","");
+   jQuery(obj).parent().parent().find("img").attr("act_goods_img","false");
+   var goods_ids = "";
+    jQuery("img[act_goods_img=true]").each(function(){
+	var temp_goods_id=jQuery(this).attr("goods_id");
+	goods_ids = goods_ids+","+temp_goods_id;
+    })
+	jQuery("#goods_ids").val(goods_ids);
+}
+	
+function saveForm(){
+var goods_ids =jQuery("#goods_ids").val();
+		if(goods_ids!=""){
+		jQuery("#theForm").submit();	
+		}else{
+			alert("请选择活动商品");
+		}
+	}
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center"> $!httpInclude.include("/seller/nav.htm?op=activity")
+    <div class="seller_right">
+      <div class="seller_position"><span><b>您当前所在位置</b>><b>促销推广</b> ><b>活动申请</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href='$!webPath/seller/activity.htm'><i></i>活动列表</a></li>
+            <li class="this"><a href='javascript:void(0);'><i></i>活动申请</a></li>
+          </ul>
+        </div>
+        <div class="add_usercenter">
+          <form action="$!webPath/seller/activity_apply_save.htm" method="post" name="theForm" id="theForm">
+            <input id="goods_ids" name="goods_ids" type="hidden" value=""/>
+            <input id="act_id" name="act_id" type="hidden" value="$!act.id"/>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+              <tr>
+                <td valign="top" align="right">活动标题：</td>
+                <td> $!act.ac_title </td>
+              </tr>
+              <tr>
+                <td valign="top" align="right">活动说明：</td>
+                <td> $!act.ac_content </td>
+              </tr>
+              <tr>
+                <td valign="top" align="right">活动商品：</td>
+                <td  class="px10"><div class="main_body">
+                    <ul>
+                      #foreach($count in [1..5])
+                      <li class="item"> <span> <img src="$!webPath/resources/style/common/images/good.jpg" goods_current_price="0" goods_id=""  act_goods_img="false" width="110" height="110" /></span> <i>活动商品信息</i>
+                        <div class="add_gp">
+                          <input type="button" value="删除商品" class="delete_ip" onclick="remove_act_goods(this);" />
+                        </div>
+                      </li>
+                      #end
+                    </ul>
+                  </div></td>
+              </tr>
+              <tr id="result" style="display:none">
+                <td valign="top" align="right">搜索结果：</td>
+                <td  class="px10" id="act_goods_info"></td>
+              </tr>
+              <tr>
+                <td width="141" align="right">搜索商品：</td>
+                <td width="651" class="px10"><span class="setinput">
+                  <input name="goods_name" type="text" id="goods_name" class="base_txt"/>
+                  <input name="search" type="button" class="seller_save" style="cursor:pointer;width:60px;"  value="搜索" onclick="act_goods(this);" />
+                  <input class="seller_save"  onclick='javascript: jQuery("#act_goods_info").empty();jQuery("#result").hide();'  style="cursor:pointer;width:60px;" type="button" name="button2" id="button"  value="关闭" />
+                  <img src="$!webPath/resources/style/common/images/wait.gif" style="display:none;" > </span></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="px10"><span class="setsub">
+                  <input type="button" onclick="saveForm()"  value="保存" style="cursor:pointer;" class="seller_save"/>
+                  </span></td>
+              </tr>
+            </table>
+            $!gotoPageAjaxHTML
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

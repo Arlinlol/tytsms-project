@@ -1,0 +1,45 @@
+@charset "utf-8";
+/* CSS Document */
+/*控制部分页面头部样式*/
+body{ background:#fff;}
+.head { width: 1002px; margin-left: auto; margin-right: auto;position: relative;z-index: 103;height: 100px;}
+.policy{display:none;}
+.head_width{width: 100%;background: #fff;}
+.top_user{ position:absolute; right:135px;top:30px;}
+.goodscar{position:absolute; right:0px;top:30px;}
+.head_search{ width:456px; margin-left:0px;}
+.head_seartxt .h_sear_txt{ width:370px;}
+
+.pw-box-hd {margin-bottom: 20px;}
+.pw-box-ft {height: 44px;padding: 8px 0 8px 125px;background: url(../images/icon-red.png) 50px 8px no-repeat #ff7674;}
+.p-w-box {float: left;width: 300px;margin-top: 20px;}
+.p-w-sidebar {float: left;width: 350px;height: 421px;padding-left: 50px;background: url(../images/phone-bg.png) 50px 0 no-repeat;}
+.pw-box-ft p {
+margin: 0;
+font-size: 14px;
+line-height: 22px;
+color: #fff;
+font-weight: 700;
+}
+.p-w-bd {
+padding-left: 60px;
+margin-bottom: 30px;
+}
+.white_content_wx {
+	position: absolute;
+	top: 50%;
+	left:40%;
+	margin-top:-60px;
+	width: 404px;
+	background-color:none;
+	z-index:10000000000;
+	overflow: auto;
+	 border: 8px solid rgba(0,0,0,0.3);  
+	  text-align: center;
+	   border-radius: 15px; 
+	    -moz-background-clip: padding-box;
+		 -webkit-background-clip: padding-box;
+		  -o-background-clip: padding-box;
+		   background-clip: padding-box;
+}
+.payf_wx{  width:100%; float:left; text-indent:2em; text-align:left; line-height:20px}

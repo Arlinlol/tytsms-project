@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-团购管理-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/th_th/resources/style/common/css/overlay_blue.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+function check_info(){
+	var val = jQuery("#info_id").val();
+	var id = $!{user.id};
+	jQuery.ajax({type:'POST',
+	              url:'$!webPath/seller/use_lifeinfo.htm',
+				  data:{"value":val},
+				success:function(data){
+	                if(data=="100"){
+						alert("消费码使用成功!");
+					 }
+					  if(data=="-30"){
+						alert("消费码已被使用!");
+					 }
+					 if(data=="-50"){
+						alert("消费码已过期!");
+					 }
+					 if(data=="-100"){
+						alert("消费码申请退款中，不可使用!");
+					 }
+					 if(data=="-150"){
+						alert("消费码平台退款中，不可使用!");
+					 }
+					 if(data=="-200"){
+						alert("消费码已退款，不可使用!");
+					 }
+					  if(data=="0"){
+						alert("该消费码不存在！");
+					 }
+              	}
+		});
+	}
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+  $!httpInclude.include("/seller/nav.htm?op=group")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销推广</b> ><b>团购管理</b></span></div>
+      <div class="seller_list">
+          <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href='$!webPath/seller/group.htm'><i></i>商品类团购商品列表</a></li>
+            <li><a href='$!webPath/seller/group.htm?type=life'><i></i>生活类团购商品列表</a></li>
+            <li><a href='$!webPath/seller/group_add.htm?type=goods'><i></i>新增商品类团购</a></li>
+            <li><a href='$!webPath/seller/grouplife_selforder.htm'><i></i>生活购订单列表</a></li>            
+            <li><a href='$!webPath/seller/group_add.htm?type=life'><i></i>新增生活类团购</a></li>
+            <li class="this"><a href='$!webPath/seller/grouplife_selfinfo.htm'><i></i>团购消费码列表</a></li>
+            <li><a href='$!webPath/seller/group_meal.htm'><i></i>团购套餐购买</a></li>
+          </ul>
+        </div>
+        <div class="user_sp_right"> <span class="user_title_sp">
+            <input name="info_id" type="text" class="user_title_txt" id="info_id" placeholder="消费码" value=""/>
+            <input name="" type="button" class="user_sear_btn" value="使用" onclick="check_info();"/>
+        </span> </div>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/grouplife_selfinfo.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                 <th width="25%"><span class="">团购名称</span></th>
+                <th width="20%"><span class="">团购消费码</span></th>
+         		 <th width="10%"><span class="">团购单价</span></th>
+         		 <th width="10%"><span class="">使用状态</span></th>
+          		<th width="18%"><span class="">到期时间</span></th>
+                <th ><span>操作</span></th>
+                </tr>
+                #foreach($obj in $objs)
+                <tr > 
+                <td align="center">$!obj.lifeGoods.gg_name</td>
+                   <td align="center">$!CommUtil.generic_star("$!obj.group_sn",2,12)</td>
+              <td align="center">$!obj.lifeGoods.group_price</td>
+              <td align="center">#if($!obj.status==0)未使用#end #if($!obj.status==1) 已使用 #end #if($!obj.status==-1) 已过期 #end #if($!obj.status==3)申请退款#end #if($!obj.status==5)退款中#end #if($!obj.status==7)退款完成#end</td>
+              <td align="center">$!CommUtil.formatLongDate($!obj.lifeGoods.endTime)</td>
+              <td align="center">#if($!obj.status==3)<a dialog_id="grouplife_return" dialog_height="100" dialog_top="300" dialog_width="420" 
+dialog_title="确认退款" dialog_uri="$!webPath/seller/grouplife_return_confirm.htm?id=$!obj.id" href="javascript:void(0);" 
+style="color:#06F">确认退款</a>#end  #if($!obj.status==5)平台退款中#end #if($!obj.status==7)退款完成#end</td>
+         		 </td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp">$!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/blue/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script>
+function ajax_update(id,fieldName,obj){
+   var val=jQuery(obj).val();
+    jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/store_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }      
+              }
+	    });
+}
+jQuery(document).ready(function(){
+	#if($!grade_id)
+		jQuery("#grade_id").val("$!grade_id");
+	#end
+	
+	#if($!store_status)
+		jQuery("#store_status").val("$!store_status");
+	#end
+	});
+
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">店铺管理</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/store_list.htm"  class="this"><b>管理</b></a></li>
+        <li><a href="$!webPath/admin/store_add.htm" ><b>新增</b></a></li>
+        <li><a href="$!webPath/admin/store_quickly.htm" ><b>快速入驻</b></a></li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/store_list.htm" method="post" name="ListForm" id="ListForm">
+  <div class="search">
+    <ul>
+      <li> <span>店铺名称</span> <span class="size150">
+        <input name="store_name" type="text" id="store_name"  value="$!store_name"/>
+        </span> <span>店铺等级</span> <span>
+        <select name="grade_id" id="grade_id">
+		  <option value="">请选择...</option>
+		  #foreach($!grade in $grades)
+		  <option value="$!grade.id">$!grade.gradeName</option>
+		  #end
+        </select>
+        </span> 
+        <span>店铺状态</span> <span>
+        <select name="store_status" id="store_status">
+		  <option value="">请选择...</option>
+          <option value="5">正在审核公司信息</option>
+          <option value="6">公司审核拒绝</option>
+          <option value="10">正在进行店铺审核</option>
+          <option value="11">店铺审核拒绝</option>
+          <option value="15">正常营业</option>
+          <option value="20">违规关闭</option>
+          <option value="25">到期关闭</option>
+        </select>
+        </span> 
+        <span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+        </span> </li>
+    </ul>
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th>&nbsp;</td>
+        <th width="20%" ><span class="form_btna">店铺名称</span></th>
+        <th width="16%"><span class="form_btna">店主用户名 | 店主姓名</span></th>
+        <th width="10%"><span class="form_btna">所在地</span></th>
+        <th width="10%"><span class="form_btna">店铺等级</span></th>
+        <th width="10%"><span class="form_btna">有效期至</span></th>
+        <th width="6%"><span class="form_btna">状态</span></th>
+        <th width="6%"><span class="form_btna">公司信息</span></th>
+        <th><b class="form_btnb">操作</b></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td class="check_position"><input type="checkbox" name="checkbox" id="checkbox" value="$!obj.id" /></td>
+        <td align="center">$!obj.store_name</td>
+        <td align="center">$!{obj.user.userName}&nbsp;&nbsp;|&nbsp;&nbsp;$!obj.store_ower</td>
+        <td align="center">#if($!obj.area!="")[$!obj.area.parent.parent.parent.areaName][$!obj.area.parent.areaName]$!obj.area.areaName#else暂未填写#end</td>
+        <td align="center">$!obj.grade.gradeName</td>
+		#if(!$!obj.validity)#set($validity="无限期")#else #set($validity=$!CommUtil.formatShortDate($!{obj.validity})) #end
+        <td align="center">$!validity</td>
+        #if($!obj.store_status==0)
+		  #set($store_status="未提交入驻申请")
+		#end
+        #if($!obj.store_status==5)
+		  #set($store_status="公司信息审核中")
+		#end
+        #if($!obj.store_status==6)
+		  #set($store_status="公司审核拒绝")
+		#end
+		#if($!obj.store_status==10)
+		  #set($store_status="店铺信息审核中")
+		#end
+        #if($!obj.store_status==11)
+		  #set($store_status="店铺审核拒绝")
+		#end
+		#if($!obj.store_status==15)
+		  #set($store_status="正常营业")
+		#end		
+		#if($!obj.store_status==20)
+		  #set($store_status="违规关闭")
+		#end
+        #if($!obj.store_status==25)
+		  #set($store_status="到期关闭")
+		#end
+		#if($!obj.store_status==30)
+		  #set($store_status="快速入驻审核中")
+		#end
+        
+         #set($store_url="$!webPath/store_$!{obj.id}.htm")
+        #if($!config.second_domain_open && $!obj.store_second_domain!="")
+           #set($store_url="http://$!{obj.store_second_domain}.$!{domainPath}")
+        #end
+        <td align="center">$!store_status</td>
+        <td align="center"><a href="$!webPath/admin/store_company.htm?id=$!obj.id" class="blue">查看</a></td>
+        <td class="hui oprate_con" align="center">
+        	<a href="$!webPath/admin/store_edit.htm?id=$!obj.id" class="blue">编辑</a> 
+            |<a href="javascript:void();" onclick="if(confirm('删除店铺将同步删除店铺对应的商品、订单，且不可恢复，是否继续？'))window.location.href='$!webPath/admin/store_del.htm?mulitId=$!obj.id'" class="blue">删除</a> 
+            |<a href="$!store_url" target="_blank" class="blue">查看店铺</a>
+        </td>
+      </tr>
+      #end
+    </table>
+  </div>
+  <div class="operate_bar">
+    <div class="fenye">
+    	<input type="hidden" name="mulitId" id="mulitId" />
+   		<input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+  		$!gotoPageFormHTML
+    </div>   
+    <div class="oper_sp">
+    	<span class="oper_check"><input type="checkbox" name="all" id="all" value="" onclick="selectAll(this);" />全部</span>
+        <span class="oper_del"><input name="" type="button" onclick="cmd('$!webPath/admin/store_del.htm','')" value="删除" style="cursor:pointer;" />
+        </span>
+    </div>     
+ </div>
+  </form>
+</div>
+</body>
+</html>

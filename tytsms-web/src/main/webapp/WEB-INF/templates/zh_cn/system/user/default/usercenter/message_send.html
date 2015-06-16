@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>站内信 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery(".user_menu b").toggle(
+			function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+			},
+			function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+			});	
+  jQuery("#theForm").validate({
+     rules: {
+			users:{
+			     required:true,
+				 remote:{
+		            url: "$!webPath/message_validate_user.htm",     //后台处理程序
+                    type: "post",               //数据发送方式
+                    dataType: "json",           //接受数据格式   
+                    data: {                     //要传递的数据
+                           "users": function(){return jQuery("#users").val();}
+		                  }
+			        }
+			    },
+			 content:{
+			    required:true
+			 }
+			},
+     messages: {
+			users:{
+			    required: "收件人不能为空",
+				remote:"用户不存在或包含自己名称"  
+			  },
+			content:{
+			    required:"短信内容不能为空"
+				}
+		  },
+	submitHandler:function(){
+	  var content=jQuery("#content").val();
+	  var users=jQuery("#users").val();
+	  jQuery.post("$!webPath/buyer/message_save.htm",{"users":users,"content":content},function(data){
+		  if(data=="true"){
+			  showDialog("msg_info","系统提示","站内信发送成功！",0,"succeed",3,function(){
+				      window.location.href="$!webPath/buyer/message.htm";
+		   });
+		 }
+	  },"text"); 
+	}			  
+  }); 
+  });
+</script>
+</head>
+<body>
+  $!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=message")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><span class="myorder_fright"></span><strong>系统消息</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+        <span class="user_list_t_btn"><a href="$!webPath/buyer/message_send.htm" class="newadd"><b><i class="newadd_i"></i>发送站内短信</b></a></span>
+          <ul class="user_title_ul">
+            <li #if($!type==1)class="this"#end><i></i><a href="$!webPath/buyer/message.htm">收到消息（<strong class="red">$!{user_msgs.size()}</strong>）</a></li>
+         	<li #if($!type==2)class="this"#end><i></i><a href="$!webPath/buyer/message.htm?from_user_id=$!user.id">已发送消息（<strong class="red">$!{reply_msgs.size()}</strong>）</a></li>
+            <li #if($!type==0)class="this"#end><i></i><a href="$!webPath/buyer/message.htm?type=0">系统消息（<strong class="red">$!{sys_msgs.size()}</strong>）</a></li>
+             <li class="this"><i></i>发送短信</li>
+          </ul>
+        </div>
+        <div class="add_usercenter">          
+             <form action="$!webPath/buyer/message_save.htm" method="post" name="theForm" id="theForm">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_base_table">
+            <tr>
+              <td width="170" align="right"><strong class="redstr">*</strong>收件人：</td>
+              <td><span style="color:#F00"><input name="users" type="text" id="users" value="$!userName" class="base_txt" /></span></td>
+            </tr>
+            <tr>
+              <td width="170" align="right"></td>
+                <td>多个收件人用逗号分开</td>
+            </tr>
+            <tr>
+              <td align="right"><strong class="redstr">*</strong>内容：</td>
+              <td><span style="color:#F00"> <textarea style="box-shadow:2px 0px 5px #CCC; border:1px solid #CCC;" name="content" cols="40" rows="6" id="content"></textarea></span>
+                </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><input name="button" type="submit" value="发送" class="save" /></td>
+            </tr> 
+          </table>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

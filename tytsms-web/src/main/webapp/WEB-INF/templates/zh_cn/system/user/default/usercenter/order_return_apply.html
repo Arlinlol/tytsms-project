@@ -1,0 +1,158 @@
+<link href="$!webPath/resources/style/common/css/window.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/ajaxfileupload.js"></script>
+<script>
+jQuery(document).ready(function(){
+
+  jQuery("#theForm").validate({
+	   rules:{
+		   return_goods_content:{required:true}
+		   },
+	   messages:{
+		   return_goods_content:{required:"请填写说明"}
+	   }
+	});
+	jQuery("#refund_img").live("change",function(){
+		jQuery.ajaxFileUpload({
+             url:'$!webPath/buyer/ajax_img_refund.htm',
+             fileElementId:'refund_img',      
+             dataType: 'json',               
+             success: function (data){   
+               if(data.error=="error"){
+				  alert("图片格式不正确");
+			   }else if(data.num == 6){
+			      alert("最多只能上传5张图片,如要修改请先删除图片！");
+			      return false;
+			   }else{
+			       jQuery(".order_return_img").html("");
+			       jQuery(".order_return_img").append(data.img_html);
+			    }      
+			    jQuery("#img_num").val(data.num);
+			 }
+		});
+	});
+    jQuery(".order_return_img").html("");
+    jQuery(".order_return_img").append("$!img_html");
+    
+   
+});
+function delete_return_img(id){
+   if(confirm("删除后不可恢复，是否继续？")){
+        jQuery.ajax({  
+            url: "$!webPath/buyer/refund_image_del.htm?image_id="+id,  
+            type: 'POST',  
+		    dataType : 'json',
+            success: function (data) {  
+				 if(data.result==true){
+				     jQuery(".order_return_img").html("");
+				     jQuery(".order_return_img").append(data.img_html);
+				     if(data.num == "0"){
+			            jQuery("#img_num").val("");
+				     }else{
+			            jQuery("#img_num").val(data.num);
+				     }
+				 }else{
+				     alert("删除失败，请重新删除！");
+				     return false;
+				 } 
+			}  
+        });  
+   }
+}
+</script>
+#if($!view)
+<form action="$!webPath/buyer/order_return_apply_cancel.htm" method="post" id="theForm">
+<h4 class="white_table_h4">提交申请后请及时与商家联系，商家同意退货后可填写退货物流信息  </h4>
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="">
+    #if($!goods.goods_main_photo)
+                  #set($img="$!webPath/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_middle.$!{goods.goods_main_photo.ext}")
+                  #else
+                  #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                  #end
+  <tr>
+      <td width="15%" align="right" valign="top">商品信息：
+      </td>
+      <style type="text/css">
+	  .return_apply_name { width:100%; line-height:24px; display:block;float:left;}
+	  .return_apply_num { width:100%; float:left; color:#999;}
+	  .return_apply_ul li { width:100%; float:left; margin-bottom:5px;}
+	  </style>
+      <td width="15%" align="left"><img width="70" height="70" src="$!img"/>
+      </td>
+      <td align="left" valign="top">
+      <span class="return_apply_num">名称：$!goods.goods_name</span>
+      </td>
+    </tr>
+<tr>
+      <td height="78" align="right" valign="center">退货说明：</td>
+      </td>
+      <td align="left" colspan="2">$!return_content</td>
+    </tr>
+    <tr>
+      <td height="50" align="center" colspan="3"><span class="inputbtn">
+        <input name="" type="submit" value="取消退货" style="cursor:pointer;" class="white_btn"/>      
+      </span></td>
+    </tr>
+  </table>
+        <input name="return_goods_count" type="hidden" value="$!return_count" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        <input type="hidden" value="$!goods_gsp_ids" name="goods_gsp_ids" />
+        <input name="id" type="hidden" id="id" value="$!oid" />
+        <input name="goods_id" type="hidden" id="goods_id" value="$!goods.id" /> 
+</form> 
+
+#else
+<form action="$!webPath/buyer/order_return_apply_save.htm" method="post" id="theForm">
+ <h4 class="white_table_h4">提交申请后请及时与商家联系，商家同意退货后可填写退货物流信息</h4>      
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="white_table">
+  				  #if($!goods.goods_main_photo)
+                  #set($img="$!webPath/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_middle.$!{goods.goods_main_photo.ext}")
+                  #else
+                  #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                  #end
+  <tr>
+      <td height="78" align="right" valign="top">商品名称：
+      </td>
+      <td align="left"><a href="$!webPath/goods_$!{goods.id}.htm">$!goods.goods_name</a></td>
+     <!--  
+      <td align="left"><img width="70" height="70" src="$!img"/><span style="display:block; margin-top:10px;"><a href="$!webPath/goods_$!{goods.id}.htm">$!goods.goods_name</a></span></td>
+      -->
+    </tr>
+    <tr>
+      <td height="78" align="right" valign="top">图片信息：
+      </td>
+      <td align="left">
+         <input name="refund_img" type="file" id="refund_img" class="upload_img_btn" value="上传图片"/>
+         <input type="hidden" id="img_num" name="img_num" class="img_num">
+         <br><i>为了帮助我们更好的解决问题，请您上传图片,最多可上传5张图片，</i><br><i>每张图片大小不超过5M，支持$!{config.imageSuffix}格式文件.</i></td>
+    </tr>
+     <tr>
+     <td height="78" align="right" valign="top">
+      </td>
+      <td align="left">
+        <ul class="order_return_img">
+        </ul>
+        </td>
+    </tr>
+    
+    <tr>
+      <td height="78" align="right" valign="top">申请说明:</td>
+      </td>
+      <td align="left"><textarea name="return_goods_content" cols="55" rows="10" id="return_goods_content"></textarea></td>
+    </tr>
+    <tr>
+      <td height="50" align="center" colspan="2"><span class="inputbtn">
+        <input name="" type="submit" value="提交" style="cursor:pointer;" class="white_btn"/>
+        <input name="return_goods_count" type="hidden" value="$!return_count" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        <input type="hidden" value="$!goods_gsp_ids" name="goods_gsp_ids" />
+        <input name="id" type="hidden" id="id" value="$!oid" />
+        <input name="original_id" type="hidden" value="$!original_id">
+        <input name="goods_id" type="hidden" id="goods_id" value="$!goods.id" />       
+      </span></td>
+    </tr>
+  </table>
+</form>
+#end

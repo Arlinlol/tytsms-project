@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/manage/blue/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+</head>
+<body>
+<form method="post" name="ListForm" id="ListForm">
+  <div class="cont">
+    <h1 class="seth">自营相册</h1>
+    <div class="nav_list">
+      <ul>
+        <li> <a href="$!webPath/admin/album.htm"><b>我的相册</b></a></li>
+        <li> <a href="javascript:void(0);" class="this"><b>图片列表</b></a></li>
+        <li><a href="$!webPath/admin/watermark.htm"><b>水印管理</b></a> </li>
+      </ul>
+    </div>
+    <div class="photo_oper">
+      <div class="photo_batch"><span class="batch_op">
+           <label>
+        <input name="all" id="all" type="checkbox" value="" onclick="selectAll(this)">
+        全选
+        </label>
+        <input name="mulitId" type="hidden" id="mulitId" value="" />
+        |<a href="javascript:void(0);" onclick="cmd('$!webPath/admin/album_img_del.htm')"> 删除</a>
+        <select name="to_album_id" id="to_album_id">
+          
+                    #foreach($album in $albums)
+                    
+          <option value="$!album.id">$!album.album_name</option>
+          
+                    #end 
+                    
+        </select>
+        <a href="javascript:void(0);" onclick="cmd('$!webPath/admin/album_transfer_save.htm')"> 转移相册</a>|<a href="javascript:void(0);" onclick="cmd('$!webPath/admin/album_watermark.htm')"> 添加水印</a> </span></div>
+      <input name="album_id" type="hidden" id="album_id" value="$!album.id" />
+    </div>
+    <div class="picture_opre"> #foreach($obj in $objs)
+      <div class="pictrue_one">
+        <i><span><a href="$!webPath/admin/image_slide.htm?id=$!{obj.id}&album_id=$!{album.id}"> <img src="$!webPath/$!obj.path/$!obj.name" width="125" height="103" /></a></span>
+        <b class="album_ck"><input   name="input" type="checkbox" value="$!obj.id" /></b></i>
+        <ul>
+          <li>上传时间::$!CommUtil.formatShortDate($!obj.addTime)</li>
+          <li>原图尺寸:$!{obj.width}X$!{obj.height}</li>
+          <li><a href="javascript:void(0);" dialog_uri="$!webPath/admin/album_transfer.htm?album_id=$!obj.album.id&id=$!obj.id&currentPage=$!currentPage" dialog_title="转移相册" dialog_width="400" dialog_height="100" dialog_id="album_add"> <b class="changepic"></b>转移相册</a></li>
+          <li><a href="$!webPath/admin/album_cover.htm?id=$!obj.id&album_id=$!obj.album.id&currentPage=$!currentPage"><b class="setm"></b>设为封面</a></li>
+          <li><a href="javascript:void(0);" onclick="if(confirm('删除图片后不可恢复，是否继续?'))window.location.href='$!webPath/admin/album_img_del.htm?mulitId=$!obj.id&album_id=$!album.id&currentPage=$!currentPage'"><b class="delpic"></b>删除图片</a></li>
+        </ul>
+      </div>
+      #end </div>
+    <div class="operate_bar">
+      <div class="fenye">
+        <input type="hidden" name="currentPage" id="currentPage" value="$!currentPage" />
+        $!gotoPageHTML </div>
+    </div>
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,100 @@
+#if($!obj.ap_type=="img")  
+ <div style='overflow:hidden;'>
+ <a href='$!webPath/advert_redirect.htm?url=$!obj.ap_acc_url&id=$!obj.adv_id' target='_blank'>
+ <img width='100%' src='$!webPath/$!obj.ap_acc.path/$!obj.ap_acc.name' style='border:none;' />
+ </a>
+ </div> 
+#end
+#if($!obj.ap_type=="slide")
+	 #if($!obj.ap_location=="Mobile")
+		 <div id='focus' class='focus'>
+		 	<div class='hd'><ul></ul></div>
+			 <div class='bd'>
+				 <ul>
+				  #foreach($adv in $obj.advs)
+				   <li><a  #if($!adv.ad_url) href='$!adv.ad_url'  #else href='javascript:void(0);' #end><img src='$!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name' width='$!obj.ap_width' height='$!obj.ap_height' /></a></li>
+				  #end
+				 </ul>
+			 </div>
+		 </div>
+		 <script>
+		 TouchSlide({slideCell:'#focus',titCell:'.hd ul',mainCell:'.bd ul',effect:'leftLoop',autoPlay:true,autoPage:true});
+		 </script>
+	 #else
+ <script>
+ jQuery('document').ready(function(){  
+ jQuery('.slideBox').slide({mainCell:'.bd ul',effect:'fold',autoPlay:true});
+ })
+ </script>
+ <div class='slideBox' id='iskyshop_advert'>  
+ <div class='hd'>
+ <ul style='z-index:0;'>
+  #foreach($adv in $obj.advs)
+   <li>$!{velocityCount}
+   </li>
+  #end
+ </ul>
+ </div>
+ <div class='bd'>
+ <ul style='z-index:0;'>
+  #foreach($adv in $obj.advs)
+   <li>
+   <a href='$!webPath/advert_redirect.htm?url=$!adv.ad_url&id=$!adv.id' target='_blank'><img src='$!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name' width='$!obj.ap_width' height='$!obj.ap_height' /></a>
+ </li>
+  #end
+ </ul>
+ </div>
+ </div>
+ #end
+#end
+#if($!obj.ap_type=="scroll")
+ #if($obj.advs.size()>0)
+ <script>
+ jQuery('document').ready(function(){  
+ jQuery('.picScroll').slide({ mainCell:'ul',autoPlay:true,effect:'left', vis:3, scroll:2, autoPage:true });
+ jQuery('.picScroll').mouseover(function(){jQuery('.picScroll .next').show();jQuery('.picScroll .prev').show();}).mouseleave(function(){jQuery('.picScroll .next').hide();jQuery('.picScroll .prev').hide();});
+ })
+ </script>
+ <div class='picScroll'> 
+ <ul>
+  #foreach($adv_list in $CommUtil.toRowChildList($obj.advs,3))
+  #foreach($adv in $adv_list)
+ <li>
+ <a href='$!webPath/advert_redirect.htm?url=$!adv.ad_url&id=$!adv.id' target='_blank'><span class='img_cspan'><p><img src='$!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name' width='$!obj.ap_width' height='$!obj.ap_width' /></p></span></a>
+ </li>
+  #end
+  #end
+ </ul>
+ <a href='javascript:void(0);' class='next' style='display:none;'></a>
+ <a href='javascript:void(0);' class='prev' style='display:none;'i></a>
+ </div>
+  #end
+#end
+#if($!obj.ap_type=="text")  
+ <div style='width='$!obj.ap_width';height='$!obj.ap_height';float:left;overflow:hidden;'>
+ <a href='$!webPath/advert_redirect.htm?url=$!obj.ap_acc_url&id=$!obj.adv_id' target='_blank'>
+ $!obj.ap_text
+ </a>
+ </div> 
+#end
+#if($!obj.ap_type=="bg_slide")
+ <script>
+ jQuery('document').ready(function(){  
+ jQuery('.top_mid_slide').slide({mainCell:'.top_mid_slider_ul',titCell:'.banner_top li',titOnClassName:'this',trigger:'mouseover',autoPlay:true});
+ })
+ </script>
+  <div class='top_mid_slide'>
+  <ul class='top_mid_slider_ul'>
+   #foreach($adv in $obj.advs)
+   <li class='top_mid_slider_ul_li'  style='background:url($!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name) no-repeat; background-position: 50% 0%;'><a style='width:1002px; height:325px; display:block; margin-left:20%;' href='$!webPath/advert_redirect.htm?url=$!adv.ad_url&id=$!adv.id'></a></li>
+   #end
+  </ul>
+  <div class='banner_top'>
+  <ul>
+	#foreach($adv in $obj.advs)
+  <li #if($!velocityCount==1) class='this' #end style='cursor:pointer;'></li>
+    #end
+  </ul>
+  </div>
+  </div>
+#end

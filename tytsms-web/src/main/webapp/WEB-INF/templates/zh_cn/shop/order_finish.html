@@ -1,0 +1,330 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>支付结果 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/layout.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/active.css" type="text/css" rel="stylesheet" />
+
+
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+
+<script>
+jQuery(function(){
+	function Lottery(id, cover, coverType, width, height, drawPercentCallback) {
+	    this.conId = id;
+	    this.conNode = document.getElementById(this.conId);
+	    this.cover = cover;
+	    this.coverType = coverType;
+	    this.mask = null;
+	    this.maskCtx = null;
+	    this.lottery = null;
+	    this.lotteryType = 'image';
+	    this.width = width || 244;
+	    this.height = height || 150;
+	    this.clientRect = null;
+	    this.drawPercentCallback = drawPercentCallback;
+	}
+
+	Lottery.prototype = {
+	    createElement: function (tagName, attributes) {
+	        var ele = document.createElement(tagName);
+	        for (var key in attributes) {
+	            ele.setAttribute(key, attributes[key]);
+	        }
+	        return ele;
+	    },
+	    getTransparentPercent: function(ctx, width, height) {
+	        var imgData = ctx.getImageData(0, 0, width, height),
+	            pixles = imgData.data,
+	            transPixs = [];
+	        for (var i = 0, j = pixles.length; i < j; i += 4) {
+	            var a = pixles[i + 3];
+	            if (a < 128) {
+	                transPixs.push(i);
+	            }
+	        }
+	        return (transPixs.length / (pixles.length / 4) * 100).toFixed(2);
+	    },
+	    resizeCanvas: function (canvas, width, height) {
+	        canvas.width = width;
+	        canvas.height = height;
+	        canvas.getContext('2d').clearRect(0, 0, width, height);
+	    },
+	    drawPoint: function (x, y) {
+	        this.maskCtx.beginPath();
+	        var radgrad = this.maskCtx.createRadialGradient(x, y, 0, x, y, 20);
+	        radgrad.addColorStop(0, 'rgba(0,0,0,0.6)');
+	        radgrad.addColorStop(1, '#808080');
+	        this.maskCtx.fillStyle = radgrad;
+	        this.maskCtx.arc(x, y, 20, 0, Math.PI * 2, true);
+	        this.maskCtx.fill();
+	        if (this.drawPercentCallback) {
+	            this.drawPercentCallback.call(null, this.getTransparentPercent(this.maskCtx, this.width, this.height));
+	        }
+	    },
+	    bindEvent: function () {
+	        var _this = this;
+	        var device = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+	        var clickEvtName = device ? 'touchstart' : 'mousedown';
+	        var moveEvtName = device? 'touchmove': 'mousemove';
+	        if (!device) {
+	            var isMouseDown = false;
+	            document.addEventListener('mouseup', function(e) {
+	                isMouseDown = false;
+	            }, false);
+	        } else {
+	            document.addEventListener("touchmove", function(e) {
+	                if (isMouseDown) {
+	                    e.preventDefault();
+	                }
+	            }, false);
+	            document.addEventListener('touchend', function(e) {
+	                isMouseDown = false;
+	            }, false);
+	        }
+	        this.mask.addEventListener(clickEvtName, function (e) {
+	            isMouseDown = true;
+	            var docEle = document.documentElement;
+	            if (!_this.clientRect) {
+	                _this.clientRect = {
+	                    left: 0,
+	                    top:0
+	                };
+	            }
+	            var x = (device ? e.touches[0].clientX : e.clientX) - _this.clientRect.left + docEle.scrollLeft - docEle.clientLeft;
+	            var y = (device ? e.touches[0].clientY : e.clientY) - _this.clientRect.top + docEle.scrollTop - docEle.clientTop;
+	            _this.drawPoint(x, y);
+	        }, false);
+
+	        this.mask.addEventListener(moveEvtName, function (e) {
+	            if (!device && !isMouseDown) {
+	                return false;
+	            }
+	            var docEle = document.documentElement;
+	            if (!_this.clientRect) {
+	                _this.clientRect = {
+	                    left: 0,
+	                    top:0
+	                };
+	            }
+	            var x = (device ? e.touches[0].clientX : e.clientX) - _this.clientRect.left + docEle.scrollLeft - docEle.clientLeft;
+	            var y = (device ? e.touches[0].clientY : e.clientY) - _this.clientRect.top + docEle.scrollTop - docEle.clientTop;
+	            _this.drawPoint(x, y);
+	        }, false);
+	    },
+	    drawLottery: function () {
+	        
+	        this.mask = this.mask || this.createElement('canvas', {
+	            style: 'position:absolute;left:0;top:0;'
+	        });
+
+	        if (!this.conNode.innerHTML.replace(/[\w\W]| /g, '')) {
+	            
+	            this.conNode.appendChild(this.mask);
+	            this.clientRect = this.conNode ? this.conNode.getBoundingClientRect() : null;
+	            this.bindEvent();
+	        }
+
+	       
+	        this.maskCtx = this.maskCtx || this.mask.getContext('2d');
+
+	       
+	           
+	            this.drawMask();
+	        
+	    },
+	    drawMask: function() {
+	        this.resizeCanvas(this.mask, this.width, this.height);
+	        if (this.coverType == 'color') {
+	            this.maskCtx.fillStyle = this.cover;
+	            this.maskCtx.fillRect(0, 0, this.width, this.height);
+	            this.maskCtx.font = "50px Courier New";
+	            this.maskCtx.fillStyle = "#858585";
+	            this.maskCtx.fillText("刮奖区", 50, 80);
+
+	            this.maskCtx.globalCompositeOperation = 'destination-out';
+	            
+	        } else if (this.coverType == 'image'){
+	            var image = new Image(),
+	                _this = this;
+	            image.onload = function () {
+	                _this.maskCtx.drawImage(this, 0, 0);
+	                _this.maskCtx.globalCompositeOperation = 'destination-out';
+	            }
+	            image.src = this.cover;
+	        }
+	    },
+	    init: function () {
+	        
+	        this.drawLottery();
+	    }
+	}
+
+	jQuery(function (){
+	    var lottery = new Lottery('lotteryContainer', '#CCC', 'color', 244, 150, drawPercent);
+	    lottery.init();
+	    
+	    var drawPercentNode = jQuery("#drawPercent").val();
+	    jQuery("#freshBtn").click(function(){
+	   		drawPercent.innerHTML = '0%';
+	        lottery.init();
+	    });
+	    
+	    
+	});
+
+	var ischecked = true;
+	//IE8以下
+	if (!jQuery.support.leadingWhitespace) {
+	   #if($!orderNo)
+		jQuery.ajax({  
+            url: "$!webPath/scratch_coupon.htm",  
+            type: 'POST',  
+            data: {orderId:"$!obj.order_id"},
+		    dataType : 'json',
+            success: function (data) {  
+               if(data.result == "true"){
+               }else{
+               }
+            }  
+        }); 
+		#end
+	}else{
+		function drawPercent(percent) {
+	        drawPercent.innerHTML = percent + '%';
+	        if(ischecked){
+	            ischecked = false;
+	            jQuery.ajax({  
+		            url: "$!webPath/scratch_coupon.htm",  
+		            type: 'POST',  
+		            data: {orderId:"$!obj.order_id"},
+				    dataType : 'json',
+		            success: function (data) {  
+		               if(data.result == "true"){
+		               }else{
+		               }
+		            }  
+		        });  
+	        }
+	    }		 
+	}	
+	jQuery(".mt-black_overlay").show();
+	jQuery(".gj-box").show();
+	
+	jQuery(".gj-close").click(function(){
+		jQuery(".mt-black_overlay ").hide();
+		jQuery(".gj-box").hide();
+	});					
+})
+</script>
+
+<script>
+
+</script>
+
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="payfor_box">
+    <ul class="payfor_box_ul">
+      <li>订单编号：<i>$!{obj.order_id}</i></li>
+      #set($total_goods_amount=$!{obj.totalPrice})
+      #if($!obj.child_order_detail)
+        #set($order_detail_maps=$!orderFormTools.queryGoodsInfo("$!obj.child_order_detail"))
+         #foreach($child_map in $order_detail_maps)
+         #set($child_order=$!orderFormTools.query_order("$!child_map.get('order_id')"))
+           #set($total_goods_amount=$total_goods_amount+$child_order.goods_amount)
+         #end
+      #end
+      <li>应付金额：<b>¥$!{total_goods_amount}</b></li>
+      #if($!obj.order_status==0)
+      #set($status="已取消")
+      #end
+      #if($!obj.order_status==10)
+      #set($status="待付款")
+      #end
+      #if($!obj.order_status==15)
+      #set($status="线下支付待审核")
+      #end
+      #if($!obj.order_status==20)
+      #set($status="付款成功")
+      #end
+      #if($!obj.order_status==30)
+      #set($status="已发货")        
+      #end                
+      #if($!obj.order_status==40)
+      #set($status="已收货")
+      #end
+      #if($!obj.order_status==50)
+      #set($status="已完成,已评价")                                              
+      #end
+      #if($!obj.order_status==60)
+      #set($status="已结束")                                              
+      #end
+      <li>支付情况：<em>$!status</em></li>
+    </ul>
+    <span class="payfor_back">#if($!obj.order_status==10)<a href="$!webPath/order_pay_view.htm?id=$!obj.id" class="payfor_back_a"><i>返回重新支付</i></a> #end <a href="$!webPath/buyer/order_view.htm?id=$!obj.id" class="payfor_back_a"><i>查看订单信息</i></a></span> </div>
+
+  $!httpInclude.include("/footer.htm") </div>
+ 
+#if($!orderNo)
+<!-- 刮奖 -->  
+<div class="mt-black_overlay"></div>
+<!--刮奖--> 
+<div class="gj-box">
+<a href="javascript:void(0);" class="gj-close">×</a>
+
+<div class="gj-content">
+<div id="lotteryContainer"></div>
+</div>
+<!--分享-->
+<div class="gj-share">
+
+<div class="bdsharebuttonbox">
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a></div>
+<script>
+window._bd_share_config={
+	"common":{
+       "bdText":"#让嘴巴去旅行#亲，我会告诉你，我分享只是为了让你羡慕嫉妒恨么？",
+       "bdUrl":"$!webPath/shop/mouthTravel/index.htm",
+       "bdPic":"$!webPath/resources/style/common/images/foodActivity.jpg",
+       "bdMini":"2",
+       "bdMiniList":false,
+       "bdStyle":"1",
+       "bdSize":"24",
+       "onAfterClick":geturl
+    },
+    "share":{"bdSize":24},
+};
+with(document)0[(getElementsByTagName('head')[0]||body).
+appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+function geturl(cmd) {
+ 	jQuery.ajax({  
+        url: "$!webPath/share_order_integral.htm",
+        data:"shareCode="+cmd+"&orderId=$!obj.order_id",
+        type: 'POST',  
+	    dataType : 'json',
+        success: function (json) {  
+        }  
+    });
+}
+</script>
+</div>
+</div>
+#end
+</body>
+</html>

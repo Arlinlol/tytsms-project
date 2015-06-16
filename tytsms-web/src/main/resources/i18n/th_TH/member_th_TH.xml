@@ -1,0 +1,1869 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>会员子系统国际化配置</comment>
+	<!-- 配置规范：1、子系统名.功能模块名.标识名 例如：oss.goods.publish 2、除中文外的国际化配置，每个key 行上面用注明对应的中文 -->
+
+	<!-- account_area_chlids.html -->
+	<entry key="member.account_area_chlids.please_choose">กรุณาเลือก...</entry><!--请选择...  -->
+	
+	<!-- account_avatar.html -->
+	<entry key="member.account_avatar.modify_image">แก้ไขรูปภาพ</entry><!--修改图像  -->
+	<entry key="member.account_avatar.upload_failure">上传失败</entry><!--上传失败  -->
+	<entry key="member.account_avatar.mobile_phone">แก้ไขเบอร์โทรศัพท์มือถือ</entry><!--手机号码修改  -->
+	<entry key="member.account_avatar.account_information">ข้อมูลบัญชี </entry><!--账户信息   -->
+	<entry key="member.account_avatar.shop_system">เวอร์ชั่น V1.0 ระบบมอลล์ แบบ B2B2C ของเว็บไซต์ taiyitao </entry><!--Taiyitao B2B2C商城系统V1.0版   -->
+	<entry key="member.account_avatar.authorization_calls">เบอร์โทรศัพท์ที่ได้รับอนุญาติ</entry><!--授权咨询电话  -->
+	<entry key="member.account_avatar.basic_information">ข้อมูลทั่วไป</entry><!--基本信息   -->
+	<entry key="member.account_avatar.change_password">แก้ไขรหัสผ่าน</entry><!--修改密码  -->
+	<entry key="member.account_avatar.modify_email">แก้ไขอีเมลล์</entry><!--修改电子邮箱  -->
+	<entry key="member.account_avatar.modify_mobile_phone">แก้ไขเบอร์โทรศัพท์</entry><!--修改手机号码  -->
+	<entry key="member.account_avatar.modify_head">แก้ไขรูปภาพโปรไฟล์</entry><!--修改头像  -->
+
+	<!-- account_bind.html -->
+	<entry key="member.account_bind.bind_account ">การเชื่อมต่อบัญชีกับเบอร์โทรศัพท์</entry><!--账号绑定  -->
+	<entry key="member.account_bind.bind_failure">เชื่อมต่อล้มหเหลว</entry><!--绑定失败  -->
+	<entry key="member.account_bind.is_bind">เชื่อมต่อเรียบร้อย</entry><!--已绑定  -->
+	<entry key="member.account_bind.successfully_binding">ท่านทำรายการเชื่อมต่อสำเร็จแล้ว</entry><!--您已成功绑定  -->
+	<entry key="member.account_bind.relieve_bind">QQเชื่อมต่อกับบัญชีแล้วไม่สามารถใช้ QQ เข้าสู่ระบบของมอลล์ ,ท่านจะทำรายการต่ออีกไหม?</entry><!--解除QQ绑定后将不能使用QQ账号登录商城，是否继续?  -->
+	<entry key="member.account_bind.unbundling">ยกเลิกการเชื่อมต่อ</entry><!--解绑  -->
+	<entry key="member.account_bind.account_authorization">บัญชีได้รับอนุญาติ</entry><!--账户授权  -->
+	<entry key="member.account_bind.account_relationship_binding">การเชื่อมต่อระหว่างบัญชี</entry><!--账户关系绑定  -->
+	<entry key="member.account_bind.account_emailx">สามารถใช้บัญชี QQ เข้าสู่เว็บไซต์ taiyitao ได้โดยตรง</entry><!--可使用QQ账号直接登录泰易淘  -->
+	<entry key="member.account_bind.in_commission">ถ้าใช้การเชื่อมต่อ blog sina แล้ว ก็ไม่สามารถใช้ บัญชี blog sina เข้าสู่ระบบของมอลล์ได้ จะทำรายการต่อไหม? </entry><!--解除新浪微博绑定后将不能使用新浪微博账号登录商城，是否继续?   -->
+	<entry key="member.account_bind.in_commission_sina">สามารถใช้ Wechat sina เข้าสู่เว็บไซต์ taiyitao ได้โดยตรง</entry><!--可使用新浪微博直接登录泰易淘   -->
+	<entry key="member.account_bind.unbound">ยังได้ทำรายการการเชื่อมต่อ</entry><!--未绑定   -->
+	<entry key="member.account_bind.binding_success">ถ้าเชื่อมต่อเรียบร้อยแล้ว สามารถใช้ QQ เข้าสู่เว็บไซต์  taiyitao ได้โดยตรง</entry><!--绑定成功后可使用QQ直接登录泰易淘  -->
+	<entry key="member.account_bind.not_open">ระบบยังได้เปิดให้บริการ</entry><!--平台未开启  -->
+	<entry key="member.account_bind.binding_success_commission">ถ้าเชื่อมต่อเรียบร้อยแล้ว สามารถใช้ wechat sina เข้าสู่เว็บไซต์  taiyitao ได้โดยตรง</entry><!--绑定成功后可使用新浪微博直接登录泰易淘  -->
+	<entry key="member.account_bind.promptly_bind">เชื่อมต่อล้มหเหลว</entry><!--立即绑定  -->
+
+	<!-- account_email.html -->
+	<entry key="member.account_email.password_not_empty">กรุณากรอกรหัสผ่าน</entry><!--当前密码不能为空    -->
+	<entry key="member.account_email.modify_email">แก้ไขอีเมล์</entry><!--修改邮箱  -->
+	<entry key="member.account_email.email_not_empty">กรุณากรอกอีเมล์</entry><!--邮箱不能为空  -->
+	<entry key="member.account_email.email_not_wrong">รูปแบบของอีเมล์ไม่ถูกต้อง</entry><!--邮箱格式不对  -->
+	<entry key="member.account_email.email_exists">อีเมล์นี้มีอยู่แล้ว</entry><!--该邮箱已存在    -->
+	<entry key="member.account_email.account">ข้อมูลบัญชี</entry><!--账户信息  -->
+	<entry key="member.account_email.basic_information">ข้อมูลทั่วไป</entry><!--基本信息  -->
+	<entry key="member.account_email.modify_password">แก้ไขรหัสผ่าน</entry><!--修改密码    -->
+	<entry key="member.account_email.modify_emai">แก้ไขอีเมล์</entry><!--修改电子邮箱  -->
+	<entry key="member.account_email.modify_mobile_phone">แก้ไขเบอร์มือถือ</entry><!--修改手机号码  -->
+	<entry key="member.account_email.modify_head">แก้ไขโปรไฟล์ (รูปภาพ)</entry><!--修改头像  -->
+	<entry key="member.account_email.your_password">รหัสผ่านของคุณ</entry><!--您的密码  -->
+	<entry key="member.account_email.email">อีเมล์</entry><!--电子邮件：  -->
+	<entry key="member.account_email.save">บันทึก</entry><!--保存   -->
+
+	<!-- account_mobile.html -->
+	<entry key="member.account_mobile.modify_mobile_phone">แก้ไขเบอร์มือถือ</entry><!--手机号码修改  -->
+	<entry key="member.account_mobile.mobile_phone_not_empty">กรุณากรอกเบอร์มือถือ</entry><!--手机号码不能为空  -->
+	<entry key="member.account_mobile.mobile_phone_bind">เบอร์มือถือได้ทำรายการการเชื่อมต่อเรียบร้อยแล้ว</entry><!--该手机号码已经绑定  -->
+	<entry key="member.account_mobile.verification_not_empty">กรุณากรอกรหัสยืนยันตัวตน</entry><!--验证码不能为空   -->
+	<entry key="member.account_mobile.sms_failure">ส่งข้อความไม่สำเร็จ</entry><!--短信发送失败   -->
+	<entry key="member.account_mobile.mall_not_open_messaging_service">มอลล์ยังไม่ได้เปิดบริการส่งข้อความ</entry><!--商城未开启短信服务  -->
+	<entry key="member.account_mobile.phone_number">กรุณากรอกเบอร์โทรศัพท์ที่ถูกต้อง</entry><!--请输入正确的手机号码    -->
+	<entry key="member.account_mobile.obtain">อีก.....วินาที จะได้รับรหัสยืนยันตัวตนใหม่ ,รหัสมีระยะเวลาการใช้งาน 15 นาที</entry><!--秒后可以重新获取,验证码15分钟有效  -->
+	<entry key="member.account_mobile.account">ข้อมูลบัญชี</entry><!--账户信息  -->
+	<entry key="member.account_mobile.basic_information">ข้อมูลทั่วไป</entry><!--基本信息   -->
+	<entry key="member.account_mobile.modify_password">แก้ไขรหัสผ่าน</entry><!--修改密码  -->
+	<entry key="member.account_mobile.modify_email">แก้ไขอีเมล์</entry><!--修改电子邮箱 -->
+	<entry key="member.account_mobile.modify_mobile">แก้ไขเบอร์โทรศัพท์มือถือ</entry><!--修改手机号码    -->
+	<entry key="member.account_mobile.modify_head">แก้ไขรูปภาพ</entry><!--修改头像    -->
+	<entry key="member.account_mobile.new_mobile">เบอร์มือถือใหม่</entry><!--新手机号码   -->
+	<entry key="member.account_mobile.gain_obtain">รับหมายเลขยืนยันตัวตน</entry><!--获取验证码  -->
+	<entry key="member.account_mobile.phone_obtain">รหัสยืนยันผ่านมือถือ</entry><!--手机验证码   -->
+	<entry key="member.account_mobile.save">บันทึก</entry><!--保存   -->
+
+
+	<!-- account_nav.html -->
+	<entry key="member.account_nav.edit_profile">แก้ไขข้อมูล</entry><!--编辑资料   -->
+	<entry key="member.account_nav.my_account">บัญชี</entry><!--我的账户   -->
+	<entry key="member.account_nav.personal_data">ข้อมูลสินค้า</entry><!--个人资料   -->
+	<entry key="member.account_nav.delivery_address">ที่อยู่รับสินค้า</entry><!--收货地址    -->
+	<entry key="member.account_nav.my_friends">เพื่อน</entry><!--我的好友    -->
+	<entry key="member.account_nav.pm">ข้อความส่งจากระบบ</entry><!--站内短信  -->
+	<entry key="member.account_nav.account_bind">การเชื่อมต่อบัญชี</entry><!--账号绑定  -->
+	<entry key="member.account_nav.recharge_manage">การจัดการเติมเงิน</entry><!--充值管理   -->
+	<entry key="member.account_nav.deposit_manage">การจัดการถอนเงินสด</entry><!--提现管理    -->
+	<entry key="member.account_nav.payment_details">รายละเอียด รายได้ ค่าใช้จ่าย</entry><!--收支明细    -->
+
+	<!-- account_password.html -->
+	<entry key="member.account_password.modify_password">แก้ไขรหัสผ่าน</entry><!--修改密码    -->
+	<entry key="member.account_password.password_not_empty">กรุณากรอกรหัสผ่าน</entry><!--当前密码不能为空    -->
+	<entry key="member.account_password.new_password_not_empty">กรุณากรอกรหัสผ่านใหม่</entry><!--新密码不能为空    -->
+	<entry key="member.account_password.new_password_not_less_than">รหัสผ่านใหม่ต้องไม่น้อยกว่า{0}หลัก</entry><!--新密码不能少于{0}位   -->
+	<entry key="member.account_password.new_password_not_greater_than">รหัสผ่านใหม่ไม่สามารถมากกว่า{0}หลัก</entry><!--新密码不能大于{0}位    -->
+	<entry key="member.account_password.verify_password_not_empty">ยืนยันรหัสผ่านอีกครั้ง</entry><!--重复密码不能为空    -->
+	<entry key="member.account_password.two_password_input">รหัสผ่านไม่ตรงกัน</entry><!--两次密码输入不一样    -->
+	<entry key="member.account_password.account">ข้อมูลบัญชี</entry><!--账户信息    -->
+	<entry key="member.account_password.modify_email">แก้ไขอีเมล์</entry><!--修改电子邮箱   -->
+	<entry key="member.account_password.modify_mobile">แก้ไขเบอร์โทรศัพท์</entry><!--修改手机号码   -->
+	<entry key="member.account_password.modify_head">แก้ไขโปรไฟล์</entry><!--修改头像   -->
+	<entry key="member.account_password.your_password">รหัสผ่านของท่าน </entry><!--您的密码：   -->
+	<entry key="member.account_password.new_password">รหัสผ่านใหม่</entry><!--新密码：   -->
+	<entry key="member.account_password.verify_password">กรอกรหัสผ่านอีกครั้ง</entry><!--重复密码：  -->
+	<entry key="member.account_password.save">บันทึก</entry><!--保存    -->
+
+	<!-- account.html -->
+	<entry key="member.account.personal_details">ข้อมูลส่วนตัว</entry><!--个人信息    -->
+	<entry key="member.account.email_not_correct">รูปแบบอีเมล์ไม่ถูกต้อง</entry><!--邮箱格式不正确  -->
+	<entry key="member.account.nickname_not_empty">กรุณากรอกชื่อเล่น</entry><!--昵称不能为空   -->
+	<entry key="member.account.must_be_numeric_format">ต้องเป็นรูปแบบตัวเลข</entry><!--必须为数字格式   -->
+	<entry key="member.account.please_choose">กรุณาเลือก</entry><!--请选择...    -->
+	<entry key="member.account.image_not_correct">รูปแบบรูปภาพ ไม่ถูกต้อง</entry><!--图片格式不正确    -->
+	<entry key="member.account.account">ข้อมูลบัญชี</entry><!--账户信息    -->
+	<entry key="member.account.basic_information">ข้อมูลทั่วไป</entry><!--基本信息    -->
+	<entry key="member.account.modify_password">แก้ไขรหัสผ่าน</entry><!--修改密码   -->
+	<entry key="member.account.modify_email">แก้ไขอีเมล์</entry><!--修改电子邮箱   -->
+	<entry key="member.account.modify_phone">แก้ไขเบอร์โทรศัพท์</entry><!--修改手机号码    -->
+	<entry key="member.account.modify_head">แก้ไขรูปภาพ โปรไฟล์</entry><!--修改头像   -->
+	<entry key="member.account.head">รูปภาพโปรไฟล์</entry><!-- 头像  -->
+	<entry key="member.account.image">รูปแบบของรูปภาพ</entry><!--图片格式    -->
+	<entry key="member.account.measure">ขนาดเหมาสมที่สุด 110x110 พิกเซล</entry><!--最适合尺寸110 * 110 像素    -->
+	<entry key="member.account.nickname">ชื่อเล่น</entry><!--昵称：  -->
+	<entry key="member.account.real_name">ชื่อ - นามสกุลจริง</entry><!--真实姓名：  -->
+	<entry key="member.account.sex">เพศ</entry><!--性别：  -->
+	<entry key="member.account.man">ชาย</entry><!--男    -->
+	<entry key="member.account.woman">หญิง</entry><!--女   -->
+	<entry key="member.account.secrecy">ไม่ระบุ</entry><!-- 保密  -->
+	<entry key="member.account.email">อีเมล์</entry><!--邮箱：  -->
+	<entry key="member.account.binding">ทำรายการการเชื่อมต่อเรียบร้อยแล้ว</entry><!--[已绑定]  -->
+	<entry key="member.account.modify">การแก้ไข</entry><!--[修改]    -->
+	<entry key="member.account.now_binding">ทำรายการการเชื่อมต่อตอนนี้</entry><!--现在绑定   -->
+	<entry key="member.account.phone">มือถือ</entry><!--手机：  -->
+	<entry key="member.account.identity_card">บัตรประชาชน</entry><!--身份证：  -->
+	<entry key="member.account.date_of_birth">เดือน ปี เกิด</entry><!--出生年月：  -->
+	<entry key="member.account.monthly_income">รายได้ต่อเดือน</entry><!--月收入：  -->
+	<entry key="member.account.residential_address">ที่อยู่อาศัย</entry><!--居住地址：  -->
+	<entry key="member.account.detailed_address">กรุณากรอกที่อยู่ที่ชัดเจน</entry><!--请填写详细地址    -->
+	<entry key="member.account.save">บันทึก</entry><!--保存   -->
+	<entry key="member.account.no_income">ไม่มีรายได้ประจำ</entry><!--无收入   -->
+	<entry key="member.account.under">2000ด้านล่างนี้หยวน</entry><!--2000元以下  -->
+	<entry key="member.account.above">8000ด้านบน</entry><!--8000以上  -->
+	
+
+	<!-- activity_apply.html -->
+	<entry key="member.activity_apply.through_train_apply">คำร้องขอใช้แบนเนอร์ เข้าสู่ร้านค้าโดยตรง</entry><!--直通车申请  -->
+	<entry key="member.activity_apply.through_train_goods_not_empty">กรุณากรอกสินค้าในแบนเนอร์ เข้าสู่ร้านค้าโดยตรง</entry><!--直通车商品不能为空   -->
+	<entry key="member.activity_apply.through_train_price_not_empty">กรุณากรอกราคาการใช้แบนเนอร์ เข้าสู่ร้านค้าโดยตรง</entry><!--直通车价格不能为空   -->
+	<entry key="member.activity_apply.through_train_price_only_integer">ราคาการใช้แบนเนอร์ ต้องเป็นจำนวนเต็ม</entry><!--直通车价格只能为整数   -->
+	<entry key="member.activity_apply.through_train_price_less_than">ราคาการใช้แบนเนอร์ต้องไม่น้อยกว่า...</entry><!--直通车价格不能少于   -->
+	<entry key="member.activity_apply.gold_cannot_more_than">เหรียญทองไม่สามารถน้อยกว่า .... ดอลล่า</entry><!--金币不能超过$   -->
+	<entry key="member.activity_apply.bigentime_not_empty">เวลาเริ่มต้นไม่สามารถเว้นว่างไว้</entry><!--开始时间不能为空   -->
+	<entry key="member.activity_apply.through_train_gold_not_empty">ช่องทางเหรียญไม่สามารถเว้นว่างไว้</entry><!--直通车金币不能为空   -->
+	<entry key="member.activity_apply.through_train_gold_only_integer">ช่องทางราคาเป็นจำนวนเต็มเท่านั้น</entry><!--直通车金币只能为整数   -->
+	<entry key="member.activity_apply.through_train_gold_less_than">ช่องทางราคาไม่สามารถน้อยกว่า</entry><!--直通车金币不能少于   -->
+	<entry key="member.activity_apply.business_center">ศูนย์รวมผู้ขาย</entry><!--商家中心   -->
+	<entry key="member.activity_apply.apply_participation">สมัครเข้าร่วมกิจกรรม</entry><!--申请参加活动   -->
+	<entry key="member.activity_apply.activity_name">ชื่อกิจกรรม</entry><!--活动名称：  -->
+	<entry key="member.activity_apply.activity_explain">คำอธิบายของกิจกรรม</entry><!--活动说明：   -->
+	<entry key="member.activity_apply.goods_name">ชื่อสินค้า</entry><!--商品名称：  -->
+	<entry key="member.activity_apply.seek">ค้นหา</entry><!--搜索    -->
+	<entry key="member.activity_apply.hold_down">สามารถเลือกได้หลายๆ หัวข้อ</entry><!--按住ctrl多选  กด ctrl   -->
+	<entry key="member.activity_apply.save">บันทึก</entry><!--保存   -->
+
+	<!--activity_goods_list.html -->
+	<entry key="member.activity_goods_list.activity_manage">การจัดการกิจกรรม</entry><!--活动管理   -->
+	<entry key="member.activity_goods_list.business_center">ศูนย์รวมผู้ขาย</entry><!--商家中心    -->
+	<entry key="member.activity_goods_list.activity_goods">สินค้าที่ร่วมกิจกรรม</entry><!--活动商品    -->
+	<entry key="member.activity_goods_list.activity_lisst">รายการของกิจกรรม</entry><!--活动列表   -->
+	<entry key="member.activity_goods_list.goods_name">ชื่อสินค้า</entry><!--商品名称    -->
+	<entry key="member.activity_goods_list.activity_name">ชื่อกิจกรรม</entry><!--活动名称    -->
+	<entry key="member.activity_goods_list.begintime">เวลาเริ่มต้น</entry><!--开始时间    -->
+	<entry key="member.activity_goods_list.endtime">เวลาสิ้นสุด</entry><!--结束时间    -->
+	<entry key="member.activity_goods_list.status">สถานะ</entry><!--状态    -->
+	<entry key="member.activity_goods_list.untreated">ยังไม่ดำเนินการ</entry><!--未处理   -->
+	<entry key="member.activity_goods_list.processed">ดำเนินการเรียบร้อย</entry><!--已处理    -->
+	<entry key="member.activity_goods_list.canceled">ยกเลิกเรียบร้อย</entry><!--已取消    -->
+	<entry key="member.activity_goods_list.waiting_audit">กำลังดำเนินการตรวจสอบ</entry><!--等待审核    -->
+	<entry key="member.activity_goods_list.approve">ผ่านการตรวจสอบเรียบร้อย</entry><!--审核通过    -->
+	<entry key="member.activity_goods_list.refuse_pass">ไม่ผ่านการตรวจสอบ</entry><!--拒绝通过    -->
+
+	<!-- activity.html -->
+	<entry key="member.activity.activity_manage">การจัดการกิจกรรม</entry><!--活动管理    -->
+	<entry key="member.activity.business_center">ศูนย์รวมผู้ขาย</entry><!--商家中心    -->
+	<entry key="member.activity.activity_list">รายการกิจกรรม</entry><!--活动列表    -->
+	<entry key="member.activity.activity_name">ชื่อกิจกรรม</entry><!--活动名称    -->
+	<entry key="member.activity.activity_explain">คำอธิบายของกิจกรรม</entry><!--活动说明   -->
+	<entry key="member.activity.begintime">เวลาเริ่มต้น</entry><!--开始时间    -->
+	<entry key="member.activity.endtime">เวลาสิ้นสุด</entry><!--结束时间    -->
+	<entry key="member.activity.operate">การดำเนินการ</entry><!--操作   -->
+	<entry key="member.activity.untreated">ยังไม่ได้ดำเนินการ</entry><!--未处理    -->
+	<entry key="member.activity.processed">ดำเนินการเรียบร้อย</entry><!--已处理   -->
+	<entry key="member.activity.canceled">ยกเลิกเรียบร้อย</entry><!--已取消    -->
+	<entry key="member.activity.participation">เข้าร่วมกิจกรรม</entry><!--参加活动    -->
+	<entry key="member.activity.activity_goods">สินค้าที่เข้าร่วมกิจกรรม</entry><!--活动商品    -->
+	<entry key="member.activity.activity_detail">รายละเอียดกิจกรรม</entry><!--活动详情    -->
+	
+	<!-- address_add.html -->
+	<entry key="member.address_add.consignee_not_empty">กรุณากรอกชื่อผู้รับสินค้า</entry><!--收货人不能为空    -->
+	<entry key="member.address_add.please_region_detail">กรุณาเลือกเขตพื้นที่ที่ชัดเจน</entry><!--请选择详细区域    -->
+	<entry key="member.address_add.detailed_address_not_empty">กรุณากรอกที่อยู่ที่ชัดเจน</entry><!--详细地址不能为空    -->
+	<entry key="member.address_add.right_zip_code">กรุณากรอกรหัสไปรษณีย์ให้ถูกต้อง</entry><!--请正确填写邮政编码    -->
+	<entry key="member.address_add.zip_not_empty">กรุณากรอกรหัสไปรษณีย์</entry><!--邮政编码不能为空    -->
+	<entry key="member.address_add.phone_mobile_number">กรุณากรอกเบอร์โทรติดต่อหรือกรอกเบอร์มือถือของท่าน</entry><!--联系电话、手机至少填写一项    -->
+	<entry key="member.address_add.phone_number_correctly">กรุณากรอกเบอร์มือถือให้ถูกต้อง</entry><!--请正确填写手机号码    -->
+	<entry key="member.address_add.phone_number">กรุณากรอกเบอร์โทรติดต่อให้ถูกต้อง</entry><!--请正确填写联系电话    -->
+	<entry key="member.address_add.please_select">กรุณาเลือก....</entry><!--请选择    -->
+	<entry key="member.address_add.add_address">เพิ่มที่อยู่</entry><!--添加地址    -->
+	<entry key="member.address_add.consignee_name">ชื่อ นามสกุล ผู้รับสินค้า</entry><!--收货人姓名    -->
+	<entry key="member.address_add.merchant_area">สถานที่ภูมิภาคที่อาศัย</entry><!--所在区域：  -->
+	<entry key="member.address_add.please_select_area">กรุณาเลือกเขตพื้นที่</entry><!--请选择地区    -->
+	<entry key="member.address_add.modify">แก้ไข</entry><!--修改    -->
+	<entry key="member.address_add.detailed_address">ที่อยู่ที่ชัดเจน</entry><!--详细地址   -->
+	<entry key="member.address_add.zip_code">รหัสไปรษณีย์</entry><!--邮政编码    -->
+	<entry key="member.address_add.phone">เบอร์โทรติดต่อได้</entry><!--联系电话   -->
+	<entry key="member.address_add.mobile_phone">เบอร์มือถือ</entry><!--手机号码    -->
+	<entry key="member.address_add.submit">ตกลง</entry><!--提交    -->
+
+	<!-- address.html -->
+	<entry key="member.address.receiving_address">ที่อยู่ที่รับสินค้า</entry><!--收货地址   -->
+	<entry key="member.address.add_address">ที่อยู่เพิ่มเติม</entry><!--新增地址    -->
+	<entry key="member.address.introduction">คำแนะนำ</entry><!--介绍说明   -->
+	<entry key="member.address.shipping_address">กรุณากรอกที่อยู่ผู้รับรับสินค้าของตัวเอง ,เพื่อสะดวกในการเลือกที่อยู่การรับสินค้าของท่าน ในการสั่งซื้อสินค้า</entry><!--填写自己的收货地址，在下订单时方便选择收货地址。  -->
+	<entry key="member.address.consignee_name">ชื่อ นามสกุล ผู้รับสินค้า</entry><!--收货人名   -->
+	<entry key="member.address.region">ภูมิภาคที่อาศัย</entry><!--所在地区    -->
+	<entry key="member.address.detailed_address">ที่อยู่ที่ถูกต้อง</entry><!--详细地址   -->
+	<entry key="member.address.zip_code">รหัสไปรษณีย์</entry><!--邮政编码    -->
+	<entry key="member.address.phone">เบอร์โทรติดต่อได้</entry><!--联系电话    -->
+	<entry key="member.address.mobile_phone">เบอร์โทรมือถือ</entry><!--手机号码   -->
+	<entry key="member.address.operate">ดำเนินการ</entry><!--操作    -->
+	<entry key="member.address.not_filled">ยังไม่ได้กรอกข้อมูล</entry><!--未填写    -->
+	<entry key="member.address.retrieved_after_deletion">ลบเรียบร้อยแล้วไม่สามารถเรียกคืนข้อมูลได้ จะดำเนินการต่อหรือไม่?</entry><!--删除后不可恢复，是否继续?    -->
+	<entry key="member.address.delete">ลบข้อมูล</entry><!--删除   -->
+	<entry key="member.address.edit">แก้ไขข้อมูล</entry><!--编辑    -->
+	<entry key="member.address.not_receiving_address_information">ท่านยังไม่ได้กรอกข้อมูลที่อยู่ที่รับสินค้า</entry><!--您目前还没有收货地址信息！   -->
+	
+	<!-- buy_goods_finish.html -->
+	<entry key="member.buy_goods_finish.order_cancellation_record">ข้อมูลการยกเลิกรายการสั่งซื้อสินค้า</entry><!--订单取消记录    -->
+	<entry key="member.buy_goods_finish.have_bought_the_goods">สินค้าที่ซื้อแล้ว</entry><!--已购买的商品    -->
+	<entry key="member.buy_goods_finish.goods_info">ข้อมูลสินค้า</entry><!--商品信息    -->
+	<entry key="member.buy_goods_finish.goods_price">ราคาสินค้า</entry><!--商品价格    -->
+	<entry key="member.buy_goods_finish.previous_page">หน้าที่แล้ว</entry><!--上一页   -->
+	<entry key="member.buy_goods_finish.next_page">หน้าถัดไป</entry><!--下一页    -->
+	<entry key="member.buy_goods_finish.special_suggestion">การแจ้งเตือนแบบพิเศษ</entry><!--特别提示   -->
+	<entry key="member.buy_goods_finish.recent_purchase_goods">แสดงรายการสินค้าที่ซื้อช่วงสัปดาห์ล่าสุดจากรายการสินค้าที่ซื้อช่วงนี้</entry><!--在最近购买的商品中，显示最近一个星期内购买的商品    -->
+
+	<!-- buyer_cash_list.html -->
+	<entry key="member.buyer_cash_list.withdraw_application_list">รายการคำร้องถอนเงินสด</entry><!--提现申请列表   -->
+	<entry key="member.buyer_cash_list.withdraw_manage">การจัดการถอนเงินสด</entry><!--提现管理  -->
+	<entry key="member.buyer_cash_list.withdraw_apply">คำร้องถอนเงินสด</entry><!--提现申请  -->
+	<entry key="member.buyer_cash_list.application_list">รายการคำร้อง</entry><!--申请列表  -->
+	<entry key="member.buyer_cash_list.code">รหัส</entry><!--编号 -->
+	<entry key="member.buyer_cash_list.application_time">เวลายื่นคำร้อง</entry><!--申请时间  -->
+	<entry key="member.buyer_cash_list.withdraw_money">จำนวนเงินที่ต้องถอน</entry><!--提现金额 -->
+	<entry key="member.buyer_cash_list.withdraw_way">วิธีการถอนเงิน</entry><!--提现方式  -->
+	<entry key="member.buyer_cash_list.withdraw_status">สถานะการถอนเงิน</entry><!--提现状态  -->
+	<entry key="member.buyer_cash_list.pay_status">สถานะการชำระเงิน</entry><!--支付状态   -->
+	<entry key="member.buyer_cash_list.operate">การดำเนินการ</entry><!--操作   -->
+	<entry key="member.buyer_cash_list.alipay">อาลีเพลย์</entry><!--支付宝  -->
+	<entry key="member.buyer_cash_list.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱  -->
+	<entry key="member.buyer_cash_list.chinabank">ธนาคารออนไลน์</entry><!--网银在线  -->
+	<entry key="member.buyer_cash_list.tenpay">ไฉ-ฟู-ทง</entry><!--财付通  -->
+	<entry key="member.buyer_cash_list.offline_payment">การชำระเงินแบบออฟไลน์</entry><!--线下支付  -->
+	<entry key="member.buyer_cash_list.wait_for_review">รอการตรวจสอบ</entry><!--等待审核   -->
+	<entry key="member.buyer_cash_list.review_completed">การตรวจสอบเรียบร้อยแล้ว</entry><!--审核完成   -->
+	<entry key="member.buyer_cash_list.waiting_payment">รอการชำระเงิน</entry><!--等待支付   -->
+	<entry key="member.buyer_cash_list.pay_complete">ชำระเงินเรียบร้อย</entry><!--支付完成   -->
+	<entry key="member.buyer_cash_list.examine">เรียกดูข้อมูล</entry><!--查看  -->
+	<entry key="member.buyer_cash_list.application_record">ท่านยังไม่มีประวัติยื่นคำร้องถอนเงินสดตอนนี้!</entry><!--您目前还没有体现申请记录！ -->
+
+	<!-- buyer_cash_view.html -->
+	<entry key="member.buyer_cash_view.withdraw_details">ข้อมูลรายละเอียดการถอนเงินสด</entry><!--提现详情  -->
+	<entry key="member.buyer_cash_view.recharge">เติมเงินเข้าบัญชี</entry><!--账户充值  -->
+	<entry key="member.buyer_cash_view.withdraw_application">คำร้องการถอนเงินสด</entry><!--提现申请  -->
+	<entry key="member.buyer_cash_view.application_list">รายการการยื่นคำร้อง</entry><!--申请列表   -->
+	<entry key="member.buyer_cash_view.withdraw_code">รหัสการถอนเงินสด</entry><!--提现编号  -->
+	<entry key="member.buyer_cash_view.withdraw_money">ยอดเงินที่ต้องการถอน</entry><!--提现金额： -->
+	<entry key="member.buyer_cash_view.withdraw_time">เวลาที่ถอนเงินสด</entry><!--提现时间： -->
+	<entry key="member.buyer_cash_view.pay_way">วิธีการชำระ </entry><!--支付方式： -->
+	<entry key="member.buyer_cash_view.alipay">อาลีเพลย์</entry><!--支付宝  -->
+	<entry key="member.buyer_cash_view.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱  -->
+	<entry key="member.buyer_cash_view.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.buyer_cash_view.tenpay">ไฉ-ฟู-ทง</entry><!--财付通  -->
+	<entry key="member.buyer_cash_view.offline_payment">ชำระแบบออฟไลน์</entry><!--线下支付   -->
+	<entry key="member.buyer_cash_view.withdraw_status">สถานะการถอนเงินสด</entry><!--提现状态： -->
+	<entry key="member.buyer_cash_view.wait_for_review">รอการตรวจสอบ</entry><!--等待审核  -->
+	<entry key="member.buyer_cash_view.review_completed">ตรวจสอบเรียบร้อย</entry><!--审核完成   -->
+	<entry key="member.buyer_cash_view.pay_status">สถานะการชำระเงิน</entry><!--支付状态   -->
+	<entry key="member.buyer_cash_view.waiting_payment">รอการชำระเงิน</entry><!--等待支付   -->
+	<entry key="member.buyer_cash_view.pay_complete">ชำระเรียบร้อยแล้ว</entry><!--支付完成   -->
+	<entry key="member.buyer_cash_view.payee_name">ชื่อ นามสกุลการรับเงิน</entry><!--收款人姓名： -->
+	<entry key="member.buyer_cash_view.payee_bank">ชื่อ ธนาคารรับเงิน</entry><!--收款银行： -->
+	<entry key="member.buyer_cash_view.withdraw_remark">หมายเหตุการถอนเงินสด</entry><!--提现备注： -->
+	<entry key="member.buyer_cash_view.operate_admin">ผู้ดำเนินการ</entry><!--操作管理员： -->
+	<entry key="member.buyer_cash_view.operate_remark">หมายเหตุการดำเนินการ</entry><!--操作备注： -->
+	<entry key="member.buyer_cash_view.return_list">กลับไปหน้ารายการ</entry><!--返回列表  -->
+
+	<!--buyer_cash.html -->
+	<entry key="member.buyer_cash.withdraw_application">ยืนคำร้องถอนเงินสด</entry><!--提现申请 -->
+	<entry key="member.buyer_cash.pay_way_not_empty">กรุณากรอกวิธีการชำระเงิน</entry><!--支付方式不能为空   -->
+	<entry key="member.buyer_cash.min_amount">ยอดจำนวนเงินน้อยที่สุด คือ 1  </entry><!--最小金额为1  -->
+	<entry key="member.buyer_cash.payee_name_not_empty">กรุณากรอกชื่อผู้รับเงิน</entry><!--收款人不能为空   -->
+	<entry key="member.buyer_cash.payee_bank_noe_empty">กรุณากรอกชื่อธนาคารรับเงิน</entry><!--收款银行不能为空   -->
+	<entry key="member.buyer_cash.withdraw_amount_not_empty">กรุณากรอกจำนวนยอดเงินที่ถอน</entry><!-- 提现金额不能为空 -->
+	<entry key="member.buyer_cash.payee_account_not_empty">กรุณากรอกเลขบัญชีที่รับเงิน</entry><!--收款账号不能为空   -->
+	<entry key="member.buyer_cash.withdraw_manage">การจัดการถอนเงินสด</entry><!--提现管理   -->
+	<entry key="member.buyer_cash.application_list">รายการยื่นคำร้อง</entry><!--申请列表   -->
+	<entry key="member.buyer_cash.carry_balances">ยอดเงินคงเหลือที่สามารถถอนได้</entry><!--可提余额： -->
+	<entry key="member.buyer_cash.withdraw_way">วิธีการถอนเงินสด</entry><!--提现方式： -->
+	<entry key="member.buyer_cash.please_choose_withdraw_way">กรุณาเลือกวิธีการถอนเงิน</entry><!--请选择提现方式  -->
+	<entry key="member.buyer_cash.alipay">อาลีเพลย์</entry><!--支付宝  -->
+	<entry key="member.buyer_cash.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.buyer_cash.tenpay">ไฉ-ฟู-ทง</entry><!--财付通  -->
+	<entry key="member.buyer_cash.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱  -->
+	<entry key="member.buyer_cash.offline_payment">การชำระเงินแบบออฟไลน์</entry><!--线下支付  -->
+	<entry key="member.buyer_cash.weixin_payment">การชำระเงินแบบออฟไลน์</entry><!--微信支付  -->
+	<entry key="member.buyer_cash.withdraw_amount">จำนวนยอดเงินที่ถอน</entry><!--提现金额： -->
+	<entry key="member.buyer_cash.payee_name">ชื่อ- นามสกุล ผู้รับเงิน</entry><!-- 收款人姓名：-->
+	<entry key="member.buyer_cash.payee_bank">ชื่อธนาคารผู้รับเงิน</entry><!--收款银行： -->
+	<entry key="member.buyer_cash.payee_account">เลขบัญชีผู้รับเงิน</entry><!--收款账号： -->
+	<entry key="member.buyer_cash.withdraw_remark">หมายเหตุการถอนเงินสด</entry><!--提现备注： -->
+	<entry key="member.buyer_cash.submit">ตกลง</entry><!--提交  -->
+	<entry key="member.buyer_cash.weixin_payment">ชำระโดยวีแชท</entry><!--微信支付 -->
+
+	<!--buyer_complaint_seller.html -->
+	<entry key="member.buyer_complaint_seller.complaint_manage">การจัดการร้องเรียน</entry><!--投诉管理   -->
+	<entry key="member.buyer_complaint_seller.buyer_center">ศูนย์รวมผู้ซื้อ</entry><!--买家中心 -->
+	<entry key="member.buyer_complaint_seller.by_complaint">ถูกร้องเรียน</entry><!--被投诉  -->
+	<entry key="member.buyer_complaint_seller.my_complaint">การร้องเรียน</entry><!--我的投诉  -->
+	<entry key="member.buyer_complaint_seller.select_complaint_status">กรุณาเลือกสถานะการร้องเรียน</entry><!--选择投诉状态 -->
+	<entry key="member.buyer_complaint_seller.dialogue">กำลังสนทนาอยู่</entry><!--对话中 -->
+	<entry key="member.buyer_complaint_seller.arbitration">รอการตัดสิน</entry><!--待仲裁 -->
+	<entry key="member.buyer_complaint_seller.stocks">จัดการเรียบร้อยแล้ว</entry><!-- 已完成-->
+	<entry key="member.buyer_complaint_seller.seek">ค้นหา</entry><!-- 搜索-->
+	<entry key="member.buyer_complaint_seller.complaint_name">ผู้ร้องเรียน</entry><!--投诉人 -->
+	<entry key="member.buyer_complaint_seller.by_complaint_name">ผู้ถูกร้องเรียน</entry><!--被投诉人 -->
+	<entry key="member.buyer_complaint_seller.complaint_theme">หัวข้อร้องเรียน</entry><!--投诉主题 -->
+	<entry key="member.buyer_complaint_seller.complaint_time">เวลาที่ร้องเรียน</entry><!--投诉时间 -->
+	<entry key="member.buyer_complaint_seller.complaint_status">สถานะการร้องเรียน</entry><!-- 投诉状态-->
+	<entry key="member.buyer_complaint_seller.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.buyer_complaint_seller.new_complaint">การร้องเรียนใหม่</entry><!--新投诉 -->
+	<entry key="member.buyer_complaint_seller.stay_complaint">รอการร้องเรียน </entry><!--待申诉 -->
+	<entry key="member.buyer_complaint_seller.detailed">รายละเอียดการร้องเรียน</entry><!--详细 -->
+	
+	
+	
+	<!-- buyer_complaint.html -->
+	<entry key="member.buyer_complaint.my_complaint">การร้องเรียน</entry><!--我的投诉 -->
+	<entry key="member.buyer_complaint.select_complaint_status">กรุณาเลือกสถานะการร้องเรียน</entry><!--选择投诉状态 -->
+	<entry key="member.buyer_complaint.new_complaint">การร้องเรียนรายการใหม่</entry><!--新投诉 -->
+	<entry key="member.buyer_complaint.stay_complaint">รอการร้องเรียน</entry><!--待申诉 -->
+	<entry key="member.buyer_complaint.dialogue">กำลังสนทนา</entry><!--对话中 -->
+	<entry key="member.buyer_complaint.arbitration">รอการตัดสิน</entry><!--待仲裁 -->
+	<entry key="member.buyer_complaint.stocks">เรียบร้อย</entry><!--已完成 -->
+	<entry key="member.buyer_complaint.seek">ค้นหา</entry><!--搜索 -->
+	<entry key="member.buyer_complaint.complaint_list">รายการร้องเรียน</entry><!--投诉列表 -->
+	<entry key="member.buyer_complaint.complaint_name">ผู้ร้องเรียน</entry><!--投诉人 -->
+	<entry key="member.buyer_complaint.by_complaint_name">ผู้ถูกร้องเรียน</entry><!--被投诉人 -->
+	<entry key="member.buyer_complaint.complaint_theme">หัวข้อร้องเรียน</entry><!--投诉主题 -->
+	<entry key="member.buyer_complaint.complaint_time">เวลาร้องเรียน</entry><!--投诉时间 -->
+	<entry key="member.buyer_complaint.complaint_status">สถานะการร้องเรียน</entry><!--投诉状态 -->
+	<entry key="member.buyer_complaint.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.buyer_complaint.flat_taiwanese">ผู้ดำเนินการของระบบมอลล์</entry><!--平台商 -->
+	<entry key="member.buyer_complaint.detailed">รายละเอียด</entry><!--详细 -->
+	<entry key="member.buyer_complaint.confirm_cancel_complaint">ท่านแน่ใจว่าจะยกเลิกคำร้องไหม</entry><!--确认取消申诉吗？ -->
+	<entry key="member.buyer_complaint.cancel">ยกเลิก</entry><!--取消 -->
+	<entry key="member.buyer_complaint.complaint_record">ท่านยังไม่มีข้อมูลการร้องเรียน</entry><!--您目前还没有投诉记录！ -->
+
+	<!--buyer_consult.html -->
+	<entry key="member.buyer_consult.consult_manage">การจัดการการสอบถาม</entry><!--咨询管理 -->
+	<entry key="member.buyer_consult.buyer_center">ศูนย์รวมผู้ซื้อ</entry><!--买家中心 -->
+	<entry key="member.buyer_consult.all_consult">ข้อมูลสอบถามทั้งหมด</entry><!--全部咨询 -->
+	<entry key="member.buyer_consult.not_return_consult">ยังไม่ได้ตอบกลับการสอบถาม</entry><!--未回复咨询 -->
+	<entry key="member.buyer_consult.replied_consult">ตอบกลับเรียบร้อยแล้ว</entry><!--已回复咨询 -->
+	<entry key="member.buyer_consult.goods_consult">การสอบถามเกี่ยวกับสินค้า</entry><!--商品咨询 -->
+	<entry key="member.buyer_consult.consult_time">เวลาการสอบถาม</entry><!--咨询时间： -->
+	<entry key="member.buyer_consult.consult_content">ข้อความการสอบถาม</entry><!--咨询内容： -->
+	<entry key="member.buyer_consult.reply_content">ข้อความตอบกลับ</entry><!--回复内容： -->
+	<entry key="member.buyer_consult.reply_time">เวลาตอบกลับ</entry><!--回复时间： -->
+
+	<!-- buyer_coupon.html -->
+	<entry key="member.buyer_coupon.coupon">คูปองส่วนลด</entry><!--优惠券 -->
+	<entry key="member.buyer_coupon.coupon_code">รหัสคูปอง</entry><!--优惠券编号 -->
+	<entry key="member.buyer_coupon.coupon_money">ยอดเงินของคูปอง</entry><!--优惠券金额 -->
+	<entry key="member.buyer_coupon.available_order_money">จำนวนยอดเงินที่ใช้ได้สำหรับรายการสั่งซื้อ</entry><!--可用订单金额 -->
+	<entry key="member.buyer_coupon.begin_time">เวลาเริ่มต้นการใช้คูปอง</entry><!--开始有效期 -->
+	<entry key="member.buyer_coupon.end_time">เวลาสิ้นสุดการใช้คูปอง</entry><!--结束有效期 -->
+	<entry key="member.buyer_coupon.coupon_status">สถานะของคูปอง</entry><!--优惠券状态 -->
+	<entry key="member.buyer_coupon.unused">ยังไม่ได้เปิดใช้งาน</entry><!--未使用 -->
+	<entry key="member.buyer_coupon.has_been_used">คูปองใช้งานแล้ว</entry><!--已使用 -->
+	<entry key="member.buyer_coupon.coupon_information">ตอนนี้ท่านยังไม่มีข้อมูลในการใช้คูปอง</entry><!--您目前还没有优惠券信息！ -->
+
+	<!-- buyer_group.html -->
+	<entry key="member.buyer_group.my_group">รายการสั่งซื้อสินค้าประจำวัน </entry><!--我的生活购 -->
+	<entry key="member.buyer_group.please_choose_orderno">กรุณาเลือกรหัสออร์เดอร์...</entry><!--请输入订单编号 -->
+	<entry key="member.buyer_group.search">สอบถาม</entry><!--查询 -->
+	<entry key="member.buyer_group.group_order">รายการสั่งซื้อสินค้าประจำวัน </entry><!--生活购订单 -->
+	<entry key="member.buyer_group.consumer_code_list">รายการรหัสสินค้าที่บริโภค</entry><!--消费码列表 -->
+	<entry key="member.buyer_group.orderno">รหัสออร์เดอร์</entry><!--订单编号 -->
+	<entry key="member.buyer_group.goods">สินค้า</entry><!--商品 -->
+	<entry key="member.buyer_group.order_time">เวลาที่ทำรายการสั่งสินค้า</entry><!--下单时间 -->
+	<entry key="member.buyer_group.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.buyer_group.number">จำนวน</entry><!--数量 -->
+	<entry key="member.buyer_group.unit_price">ราคาต่อหน่วย</entry><!--单价 -->
+	<entry key="member.buyer_group.pay">การชำระเงิน</entry><!--支付 -->
+	<entry key="member.buyer_group.details">รายละเอียดการสั่งซื้อสินค้า</entry><!--详情 -->
+	<entry key="member.buyer_group.cannot_operate">ไม่สามารถดำเนินการได้</entry><!--无法操作 -->
+	<entry key="member.buyer_group.cancel_numbers">ท่านแน่ใจที่จะยกเลิกรหัสการสั่งซื้อ  ไหม</entry><!--是否确定取消编号为： -->
+	<entry key="member.buyer_group.order">รายการสั่งซื้อสินค้า</entry><!--订单？ -->
+	<entry key="member.buyer_group.cancel">ยกเลิก</entry><!--取消 -->
+	<entry key="member.buyer_group.not_ongoing_group">ท่านยังไม่มีรายการสั่งซื้อในกรุ๊ปบาย กลับไปเลือกสินค้า</entry><!--您目前还没有进行中的团购！这就去挑选商品。 -->
+	<entry key="member.buyer_group.group_home">หน้าแรก</entry><!--团购首页 -->
+
+	<!--buyer_head.html -->
+	<entry key="member.buyer_head.buyer_home">หน้าแรกของผู้ซื้อ</entry><!--买家首页 -->
+	<entry key="member.buyer_head.personal_homepage">หน้าโปรไฟล์</entry><!--个人主页 -->
+	<entry key="member.buyer_head.friend">เพื่อนสนิท</entry><!--好友 -->
+	<entry key="member.buyer_head.someone">ค้นหาเพื่อน</entry><!--找人 -->
+	<entry key="member.buyer_head.attention">ติดตาม</entry><!--关注 -->
+	<entry key="member.buyer_head.fans">สมาชิกในแฟนคลับ</entry><!-- 粉丝-->
+	<entry key="member.buyer_head.transaction">การซื้อขาย</entry><!--交易 -->
+	<entry key="member.buyer_head.my_cart">ตะกร้าสินค้า</entry><!--我的购物车 -->
+	<entry key="member.buyer_head.have_buy_goods">รายการสินค้าที่ซื้อแล้ว</entry><!--已买到的商品 -->
+	<entry key="member.buyer_head.my_favorite">รายการสั่งซื้อที่บันทึกเป็นรายการที่ชื่นชอบ</entry><!--我的收藏 -->
+	<entry key="member.buyer_head.complaint_manage">การจัดการการร้องเรียน</entry><!--投诉管理 -->
+	<entry key="member.buyer_head.setting">การตั้งค่า</entry><!--设置 -->
+	<entry key="member.buyer_head.personal_data">ข้อมูลส่วนตัว</entry><!-- 个人资料-->
+	<entry key="member.buyer_head.delivery_address">ที่อยู่ที่รับสินค้า</entry><!--收货地址 -->
+	<entry key="member.buyer_head.information">ข้อความ</entry><!--消息 -->
+	<entry key="member.buyer_head.system_information">ข้อความจากระบบ</entry><!--系统消息 -->
+	<entry key="member.buyer_head.direct_messages">จดหมายส่วนตัวจากระบบ</entry><!--站内私信 -->
+	<entry key="member.buyer_head.goods">สินค้า </entry><!--商品 -->
+	<entry key="member.buyer_head.store">ร้านค้า</entry><!--店铺 -->
+	<entry key="member.buyer_head.search_very_simple">ทำการค้นหาง่ายมาก</entry><!--搜索真的很简单！ -->
+
+	<!-- buyer_index.html -->
+	<entry key="member.buyer_index.edit_data">แก้ไขข้อมูล</entry><!--编辑资料 -->
+	<entry key="member.buyer_index.advance_deposit">เงินแบบมัดจำ</entry><!--预存款： -->
+	<entry key="member.buyer_index.recharge">เติมเงิน</entry><!--充值 -->
+	<entry key="member.buyer_index.coupon">คูปองส่วนลด</entry><!--优惠劵： -->
+	<entry key="member.buyer_index.integral">คะแนนสะสม</entry><!-- 积分：-->
+	<entry key="member.buyer_index.direct_messages">ข้อความจากระบบ</entry><!--站内信息： -->
+	<entry key="member.buyer_index.click_view">คลิกเรียกดูข้อมูล</entry><!--点击查看 -->
+	<entry key="member.buyer_index.view_all_order">เรียกดูรายการสั่งซื้อทั้งหมด</entry><!--查看全部订单 -->
+	<entry key="member.buyer_index.my_order">ใบสั่งซื้อ</entry><!--我的订单 -->
+	<entry key="member.buyer_index.for_the_goods">กำลังรอการรับสินค้า</entry><!--待收货 -->
+	<entry key="member.buyer_index.completed">เรียบร้อยแล้ว</entry><!--已完成 -->
+	<entry key="member.buyer_index.non_pay">ยังไม่ได้ชำระเงิน</entry><!--未支付 -->
+	<entry key="member.buyer_index.weixin_payment">ตัวอักษรขนาดเล็กการชำระเงิน</entry><!--微信支付  -->
+	<entry key="member.buyer_index.communications_payment">ตัวอักษรขนาดเล็กการชำระเงิน</entry><!--通联支付 -->
+	<entry key="member.buyer_index.unknown">ไม่รู้จัก</entry><!--未知  -->
+	<entry key="member.buyer_index.alipay">อาลีเพลย์</entry><!--支付宝 -->
+	<entry key="member.buyer_index.mobile_web_alipay">อาลีเพลย์บนมือถือ</entry><!-- 手机网页支付宝-->
+	<entry key="member.buyer_index.mobile_alipay">อาลีเพลย์บนแอฟลิเคชั่นผ่านมือถือ</entry><!--手机支付宝APP -->
+	<entry key="member.buyer_index.tenpay">ไฉ-ฟู-ทง</entry><!--财付通 -->
+	<entry key="member.buyer_index.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.buyer_index.silver_online">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.buyer_index.offline_payment">การชำระแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.buyer_index.advance_deposit_payment">การชำระเงินแบบมัดจำ</entry><!--预存款支付 -->
+	<entry key="member.buyer_index.pay_delivery">ชำระค่าสินค้าปลายทาง</entry><!--货到付款 -->
+	<entry key="member.buyer_index.canceled">ยกเลิกแล้ว</entry><!--已取消 -->
+	<entry key="member.buyer_index.offline_payment_approval">รอการตรวจสอบการชำระเงินแบบออฟไลน์</entry><!--线下支付待审核 -->
+	<entry key="member.buyer_index.cod_momentum">ชำระค่าสินค้าปลายทาง รอการจัดส่งสินค้า</entry><!--货到付款待发货 -->
+	<entry key="member.buyer_index.account_paid">ชำระเงินเรียบร้อยแล้ว</entry><!--已付款 -->
+	<entry key="member.buyer_index.delivered">ส่งสินค้าเรียบร้อยแล้ว</entry><!--已发货 -->
+	<entry key="member.buyer_index.have_goods">ได้รับสินค้าเรียบร้อยแล้ว</entry><!--已收货 -->
+	<entry key="member.buyer_index.buyer_apply_refund">คนซื้อยื่นคำร้องขอคืนสินค้า</entry><!--买家申请退货 -->
+	<entry key="member.buyer_index.refund_of">อยู่ระหว่างการดำเนินการคืนสินค้า</entry><!--退货中 -->
+	<entry key="member.buyer_index.return_completed">สิ้นสุดการคืนสินค้า</entry><!--退货完成，已结束 -->
+	<entry key="member.buyer_index.refuse_to_return">คนขายปฏิเสธการคืนสินค้า</entry><!--商家拒绝退货 -->
+	<entry key="member.buyer_index.refund_failure">การคืนสินค้าไม่สำเร็จ</entry><!--退货失败 -->
+	<entry key="member.buyer_index.have_evaluation">การสั่งซื้อสินค้าเรียบร้อย ,ประเมินความพึงพอใจเรียบร้อย</entry><!--已完成,已评价   -->
+	<entry key="member.buyer_index.an_evaluation">การสั่งซื้อสินค้าเรียบร้อย ,ไม่สามารถประมาณความพึงพอใจ</entry><!-- 已结束，不可评价 -->
+	<entry key="member.buyer_index.number">จำนวน</entry><!-- 数量-->
+	<entry key="member.buyer_index.view">เรียกดูข้อมูล</entry><!--查看 -->
+	<entry key="member.buyer_index.view_more">เรียกดูเพิ่มเติม</entry><!-- 查看更多-->
+	<entry key="member.buyer_index.focus_goods">สินค้าที่น่าสนใจ</entry><!--我关注的商品-->
+	<entry key="member.buyer_index.focus_store">ร้านค้าที่น่าสนใจ</entry><!--我关注的店铺 -->
+	<entry key="member.buyer_index.price">ราคา</entry><!--价格： -->
+	<entry key="member.buyer_index.your_focused_goods">ท่านยังไม่มีสินค้าที่น่าสนใจ</entry><!--您还没有关注的商品 -->
+	<entry key="member.buyer_index.your_focused_store">ท่านยังไม่มีร้านค้าที่น่าสนใจ</entry><!--您还没有关注的店铺 -->
+
+
+	<!-- buyer_nav.html -->
+	<entry key="member.nav.order_centre">รายการสั่งซื้อสินค้า</entry><!--订单中心 -->
+	<entry key="member.nav.my_order">ใบสั่งซื้อ</entry><!--我的订单 -->
+	<entry key="member.nav.my_gourp">รายการสั่งสินค้าประจำวัน</entry><!--我的生活购 -->
+	<entry key="member.nav.my_collect">รายการสินค้าที่ชื่นชอบ</entry><!--我的收藏 -->
+	<entry key="member.nav.my_credits">คะแนนสะสม</entry><!--我的积分兑换 -->
+	<entry key="member.nav.customer_service">บริการลูกค้า</entry><!--客服服务 -->
+	<entry key="member.nav.return_refund">คืนสินค้า/คืนเงิน</entry><!--退货/退款  -->
+	<entry key="member.nav.cancel_order">ยกเลิกรายการสั่งซื้อ</entry><!--取消订单记录 -->
+	<entry key="member.nav.my_complain">ร้องเรียน</entry><!--我的投诉 -->
+	<entry key="member.nav.mail">จดหมาย</entry><!--站内信 -->
+	<entry key="member.nav.account_center">ศูนย์รวมบัญชี</entry><!-- 账户中心-->
+	<entry key="member.nav.account_info">ข้อมูลบัญชี</entry><!--账户信息 -->
+	<entry key="member.nav.account_bind">เชื่อมต่อบัญชี</entry><!--账户绑定 -->
+	<entry key="member.nav.account_recharge">เติมเงินเข้าบัญชี</entry><!--账户充值 -->
+	<entry key="member.nav.payment_details">รายละเอียดค่าใช้จ่าย รายได้</entry><!--收支明细 -->
+	<entry key="member.nav.cash_manage">การจัดการถอนเงินสด</entry><!--提现管理 -->
+	<entry key="member.nav.delivery_address">ที่อยู่รับสินค้า</entry><!--收货地址 -->
+	<entry key="member.nav.coupon">คูปองส่วนลด</entry><!--优惠劵 -->
+	<entry key="member.nav.user_centre">ศูนย์ผู้ใช้</entry><!--用户中心ศูนย์กลางผู้ใช้ -->
+	<entry key="member.nav.invite_friends">เชิญเพื่อน</entry><!--邀请好友 เชิญเพื่อน -->
+	<entry key="member.nav.login_detail">รายละเอียดการเข้าสู่ระบบ</entry><!--登录详细  รายละเอียดการเข้าสู่ระบบ -->
+	<entry key="member.nav.integral_lottery">ใช่คะแนนแลกจับรางวัล</entry><!--积分抽奖ใช่คะแนนแลกจับรางวัล-->
+
+	<!-- buyer_order_cancel.html -->
+	<entry key="member.order_cancel.cancel_order">ท่านแน่ใจหรือไม่ที่จะยกเลิกรายการสั่งซื้อสินค้าดังต่อไปนี้</entry><!--您确定要取消下面的订单吗 -->
+	<entry key="member.order_cancel.orderno">รหัสการสั่งซื้อสินค้า</entry><!--订单号： -->
+	<entry key="member.order_cancel.cancel_cause">สาเหตุที่ยกเลิก</entry><!--取消原因： -->
+	<entry key="member.order_cancel.change_goods">เปลี่ยนซื้อสินค้าอื่น</entry><!--改买其他商品 -->
+	<entry key="member.order_cancel.buy_shops">ซื้อจากร้านค้าอื่น</entry><!--从其他店铺购买 -->
+	<entry key="member.order_cancel.other_causes">สาเหตุอื่นๆ</entry><!--其他原因 -->
+	<entry key="member.order_cancel.submit">ตกลง</entry><!--提交 -->
+
+	<!-- buyer_order_cofirm.html -->
+	<entry key="member.order_cofirm.order_goods">ท่านยืนยันได้ไหมว่าได้รับรายการสินค้าดังต่อไปนี้</entry><!--您是否确定已经收到以下订单的货品 -->
+	<entry key="member.order_cofirm.orderno">รหัสการสั่งซื้อสินค้า</entry><!--订单号： -->
+	<entry key="member.order_cofirm.remind">การแจ้งเตือนแบบพิเศษ</entry><!--特别提醒： -->
+	<!--该订单由多个商家发货，请收到所有商家货品后再确认收货！ -->
+	<entry key="member.order_cofirm.multiple_merchant_shipping">รายการสั่งซื้อสินค้านี้ดำเนินการจัดส่งสินค้าจากหลายร้านค้า กรุณายืนยันการได้รับสินค้า หลังจากได้รับสินค้าครบทุกร้านค้า </entry>
+	<entry key="member.order_cofirm.notice">หมายเหตุ</entry><!--注意： -->
+	<!--如果你尚未收到货品请不要点击“确认”。大部分被骗案件都是由于提前确认付款被骗的，请谨慎操作！ -->
+	<entry key="member.order_cofirm.received_goods">ถ้ายังไม่ได้รับสินค้า กรุณาอย่าคลิกปุ่ม ยืนยัน ส่วนใหญ่คดีฉ่อโกงเกิดมาจากการคลิกปุ่มยืนยันการชำระเงินล่วงหน้า</entry>
+	<entry key="member.order_cofirm.verify">ยืนยัน</entry><!--确认 -->
+
+	<!-- buyer_order_evaluate.html -->
+	<entry key="member.order_evaluate.order_goods_evaluation">ประเมินความพึงพอใจสินค้า</entry><!--订单商品评价 -->
+	<entry key="member.order_evaluate.confirm_evaluation">หลังจากให้การประเมินความพึงพอใจไม่สามารถแก้ไขได้ ท่านคิดว่าจะทำรายการไหม</entry><!--评价后不可修改，是否确定评价？ -->
+	<entry key="member.order_evaluate.goods_evaluation">คำประเมินความพึงพอใจของสินค้า</entry><!-- 商品评价-->
+	<entry key="member.order_evaluate.goods_name">ชื่อสินค้า</entry><!--商品名称 -->
+	<entry key="member.order_evaluate.number">จำนวน</entry><!-- 数量-->
+	<entry key="member.order_evaluate.price">ราคา</entry><!--价格 -->
+	<entry key="member.order_evaluate.description_consistent">สินค้าตรงกับคำอธิบายในเว็บไซต์</entry><!--描述相符： -->
+	<entry key="member.order_evaluate.service_attitude">ทัศนคติการบริการ</entry><!--服务态度： -->
+	<entry key="member.order_evaluate.delivery_speed">ความเร็วในการส่งของ</entry><!--发货速度： -->
+	<entry key="member.order_evaluate.remark">คำบรรยายความพึงพอใจ</entry><!--评语： -->
+	<entry key="member.order_evaluate.attention">หมายเหตุ</entry><!--注意： -->
+	<entry key="member.order_evaluate.transaction_evaluation">ถ้าประเมินความพึงพอใจเรียบร้อยแล้ว ไม่สามารถแก้ไขได้ กรุณาประเมิณด้วยความระมัดระวังให้การสั่งซื้อสินค้ารอบนี้</entry><!--评价后不可更改，请您根据本次交易，给予真实、客观、仔细地评价。 -->
+	<entry key="member.order_evaluate.merchant_credit">คำอธิบายความพึงพอใจของท่าน จะเป็นข้อมูลอ้างอิงในการสั่งซื้อสินค้าแก่ผู้ซื้อรายอื่น และมีผลต่อเครดิตของผู้ขายอีกด้วย</entry><!--您的评价将是其他买家的参考，也将影响商家的信用。 -->
+	<entry key="member.order_evaluate.cumulative_credit">เครดิตที่สะสมและกติกาการสะสมคะแนน</entry><!--累积信用和计分规则： -->
+	<entry key="member.order_evaluate.evaluation_scoring">ความพึงพอใจมีระดับปานกลางจะไม่สะสมคะแนน แต่มีผลต่อ อัตราความพึงพอใจที่ดีของร้านค้า กรุณาให้คะแนนประเมิณในครั้งนี้ อย่างระมัดระวัง</entry><!--中评不计分，但会影响商家的好评率，请慎重本次评价。 -->
+	<entry key="member.order_evaluate.evaluation">คำประเมินความพึงพอใจ</entry><!--评价： -->
+	<entry key="member.order_evaluate.good_reputation">ดี</entry><!--好评 -->
+	<entry key="member.order_evaluate.point">เพิ่ม 1 คะแนน</entry><!--(加一分)  -->
+	<entry key="member.order_evaluate.the_evaluation ">ปานกลาง</entry><!--中评 -->
+	<entry key="member.order_evaluate.not_add_cent">ไม่สะสมคะแนน</entry><!--不加分 -->
+	<entry key="member.order_evaluate.negative_comment">ควรปรับปรุง</entry><!--差评 -->
+	<entry key="member.order_evaluate.a_points">ลบ 1 คะแนน</entry><!-- 扣一分-->
+	<entry key="member.order_evaluate.study">ความคิดเห็น </entry><!--心得： -->
+	<entry key="member.order_evaluate.button">ปุ่ม</entry><!--按钮 -->
+	<entry key="member.order_evaluate.review_later">ขอประเมินความพึงพอใจทีหลัง</entry><!--以后再评 -->
+	<entry key="member.order_evaluate.evaluate">คำประเมินความพึงพอใจ</entry><!--评价 -->
+	
+	
+	<!-- buyer_order.html -->
+	<entry key="member.order.my_order">รายการการสั่งซื้อ</entry><!-- 我的订单-->
+	<entry key="member.order.system_reminder">การแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.order.beyond_retrieve">ลบทิ้งแล้ว ไม่สามารถเรียกคืนข้อมูลได้ จะดำเนอนการต่อไปหรือไม่?</entry><!--删除后不可恢复，是否继续？ -->
+	<entry key="member.order.convenient_remind">คำแนะนำสำหรับการใช้งานแบบสะดวก</entry><!--便利提醒： -->
+	<entry key="member.order.obligation">รอดำเนินการชำระเงิน</entry><!--待付款 -->
+	<entry key="member.order.the_goods">รอการรับสินค้า</entry><!--待收货 -->
+	<entry key="member.order.stocks">เรียร้อยแล้ว</entry><!--已完成 -->
+	<entry key="member.order.total_amount">ยอดเงินที่ท่านซื้อของตอนนี้:</entry><!--您当前购买金额总计： -->
+	<entry key="member.order.element">หยวน</entry><!-- 元-->
+	<entry key="member.order.all_order">รายการการสั่งซื้อทั้งหมด</entry><!--所有订单 -->
+	<entry key="member.order.send_goods">รอการดำเนินการส่งสินค้า</entry><!--待发货 -->
+	<entry key="member.order.delivered">ส่งสินค้าเรียบร้อย</entry><!--已发货 -->
+	<entry key="member.order.have_goods">ได้รับสินค้าเรียบร้อย</entry><!--已收货 -->
+	<entry key="member.order.canceled">ยกเลิกรายการสั่งซื้อ</entry><!--已取消 -->
+	<entry key="member.order.ordercode">รหัสรายการสั่งซื้อสินค้า</entry><!--订单编号： -->
+	<entry key="member.order.order_time">เวลาที่สั่งซื้อสินค้า</entry><!--下单时间： -->
+	<entry key="member.order.begin_time">เวลาเริ่มต้นสั่งซื้อสินค้า</entry><!--开始时间 -->
+	<entry key="member.order.end_time">เวลาสิ้นสุดการสั่งซื้อสินค้า</entry><!--结束时间 -->
+	<entry key="member.order.search">เรียกดูและสอบถาม</entry><!--查询 --> 
+	<entry key="member.order.total_order">รายการสั่งซื้อทั้งหมด</entry><!--全部订单 -->
+	<entry key="member.order.goods">สินค้า</entry><!--商品 -->
+	<entry key="member.order.consignee_name">ผู้รับสินค้า</entry><!--收货人 -->
+	<entry key="member.order.price">ราคา</entry><!--价格 -->
+	<entry key="member.order.logistics">การขนส่ง</entry><!--物流 -->
+	<entry key="member.order.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.order.obligation">รอการดำเนินการชำระเงิน</entry><!--待付款 -->
+	<entry key="member.order.offline_payment_approval">ตรวจสอบการชำระเงินแบบออฟไลน์</entry><!--线下支付待审核 -->
+	<entry key="member.order.cod_momentum">ชำระค่าสินค้าปลายทางและรอการดำเนินส่งสินค้าจากร้านค้า</entry><!--货到付款待发货 -->
+	<entry key="member.order.spend">ชำระเงินแล้ว</entry><!--已付款 -->
+	<entry key="member.order.delivered ">ส่งสินค้าเรียบร้อยแล้ว</entry><!--已发货 -->
+	<entry key="member.order.have_evaluation">การสั่งซื้อสินค้าสำเร็จ และประเมินความพึงพอใจแล้ว</entry><!--已完成,已评价  -->
+	<entry key="member.order.complete">การสั่งซื้อสินค้าสำเร็จ และไม่สามารถประเมินความพึงพอใจ</entry><!--已结束，不可评价  -->
+	<entry key="member.order.non_payment">ยังไม่ได้ชำระเงิน</entry><!--未支付 -->
+	<entry key="member.order.alipay">อาลีเพลย์ </entry><!--支付宝 -->
+	<entry key="member.order.mobile_web_alipay">อาลีเพลย์บนมือถือ</entry><!-- 手机网页支付宝-->
+	<entry key="member.order.mobile_alipay">อาลีเพลย์บนแอฟลิเคชั่นผ่านมือถือ</entry><!--手机支付宝APP -->
+	<entry key="member.order.tenpay">ไฉ-ฟู-ทง</entry><!--财付通 -->
+	<entry key="member.order.quick_money">การชำระเงอนแบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.order.silver_online">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.order.offline_payment">การชำระแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.order.advance_deposit_payment">การชำระเงินแบบมัดจำ</entry><!--预存款支付 -->
+	<entry key="member.order.pay_delivery">ชำระค่าสินค้าปลายทาง</entry><!--货到付款 -->
+	<entry key="member.order.delete_order">การลบรายการสั่งซื้อสินค้า</entry><!--删除订单 -->
+	<entry key="member.order.cancel_order">การยกเลิกรายการสั่งซื้อสินค้า</entry><!--取消订单 -->
+	<entry key="member.order.orderno">รหัสการสั่งซื้อสินค้า</entry><!--订单号： -->
+	<entry key="member.order.order_time">เวลาสั่งซื้อสินค้า</entry><!--下单时间： -->
+	<entry key="member.order.payment_method">วิธีชำระเงิน</entry><!--付款方式： -->
+	<entry key="member.order.delivery_charges">รวมค่าขนส่ง</entry><!--含运费 -->
+	<entry key="member.order.no_logistics_info">ยังไม่มีข้อมูลเกี่ยวกับการขนส่ง</entry><!--暂无物流信息 -->
+	<entry key="member.order.recharge">เติมเงิน</entry><!--充值 -->
+	<entry key="member.order.paying">ชำระเงิน</entry><!--付款 -->
+	<entry key="member.order.about_cinfirm_receit">ยืนยันการรับสินค้า</entry><!-- 确认收货 -->
+	<entry key="member.order.virtual_goods">สินค้าเสมือนจริง</entry><!--虚拟商品 -->
+	<entry key="member.order.i_evaluate">ฉันอยากแสดงความคิดเห็น </entry><!--我要评价 -->
+	<entry key="member.order.view_order">เรียกดูรายการสั่งสินค้า</entry><!--查看订单 -->
+	<entry key="member.order.choos_goods">ท่านยังไม่มีรายการสั่งสินค้า กลับไปเลือกซื้อสินค้า</entry><!--您目前还没有进行中的订单！这就去挑选商品。 -->
+	<entry key="member.order.guess_your_like">คาดว่าท่านชอบ...</entry><!--猜您喜欢 -->
+	<entry key="member.order.shop_price">ราคาของมอลล์</entry><!--商城价： -->
+	<entry key="member.order.weixin_payment">ตัวอักษรขนาดเล็กการชำระเงิน</entry><!--微信支付  -->
+	<entry key="member.order.unknown">ไม่รู้จัก</entry><!--未知  -->
+	<entry key="member.order.communications_payment">ตัวอักษรขนาดเล็กการชำระเงิน</entry><!--通联支付 -->
+	<entry key="member.order.order_status">สถานะรายการสั่งซื้อสินค้า</entry><!--订单状态： -->
+	<entry key="member.order.view_express">ตรวจสอบสถานะการขนส่ง</entry><!--查看物流 -->
+	<entry key="member.order.shop_main">หน้าแรกของมอลล์</entry><!--商城首页 -->
+	<entry key="member.order.waitting_deliver">รอร้านค้าจัดว่ง</entry><!-- 等待商家发货รอร้านค้าจัดว่ง-->
+	<entry key="member.order.order_complete">ใบสั่งซื้อเสร็จสิ้นแล้ว！</entry><!-- 订单已完成ใบสั่งซื้อเสร็จสิ้นแล้ว！-->
+	<entry key="member.order.deliver_money">รวมค่าขนส่ง:</entry><!-- 含运费รวมค่าขนส่ง:-->
+	<entry key="member.order.sum">รวม：</entry><!-- 合计รวม：-->
+	
+	
+	<!-- buyer_predeposit_log.html -->
+	<entry key="member.predeposit_log.payment_details">ข้อมูลรายละเอียด ค่าใช้จ่าย รายได้</entry><!--收支明细 -->
+	<entry key="member.predeposit_log.current_balance">ยอดเงินคงเหลือในบัญชีตอนนี้</entry><!--当前账户余额：¥  -->
+	<entry key="member.predeposit_log.code">รหัส</entry><!--编号 -->
+	<entry key="member.predeposit_log.money">ยอดเงิน(หยวน)</entry><!--金额(元)  -->
+	<entry key="member.predeposit_log.submit_time">เวลาที่ทำรายการ</entry><!--提交时间 -->
+	<entry key="member.predeposit_log.type">ประเภท</entry><!--类型 -->
+	<entry key="member.predeposit_log.describe">คำบรรยาย</entry><!--描述 -->
+	<entry key="member.predeposit_log.alipay">อาลีเพลย์</entry><!--支付宝 -->
+	<entry key="member.predeposit_log.tenpay">ไฉ-ฟู-ทง</entry><!--财付通 -->
+	<entry key="member.predeposit_log.quick_money">การชำระเงอนแบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.predeposit_log.silver_online">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.predeposit_log.offline_payment">การชำระแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.predeposit_log.waiting_pay">รอการดำเนินการชำระเงิน</entry><!--等待支付 -->
+	<entry key="member.predeposit_log.pay_complete">การชำระเงินเรียบร้อยแล้ว</entry><!--支付完成 -->
+	<entry key="member.predeposit_log.waitting_check">รอการดำเนินการตรวจสอบ</entry><!--等待审核 -->
+	<entry key="member.predeposit_log.no_detail">ยังไม่มีข้อมูลรายละเอียดค่าใช้จ่าย รายได้ ในตอนนี้</entry><!--您目前还没有收支明细记录！ -->
+
+	<!-- buyer_predeposit.html -->
+	<entry key="member.predeposit.deposit_prepaid">การเติมเงินแบบมัดจำ</entry><!--预存款充值 -->
+	<entry key="member.predeposit.mode_payment_not_empty">กรุณากรอกวิธีการชำระเงิน</entry><!--支付方式不能为空 -->
+	<entry key="member.predeposit.credit_not_empty">ยอดการเติมเงินไม่สามารถไว้ช่วงเปล่าได้</entry><!--充值金额不能为空 -->
+	<entry key="member.predeposit.greater_than_amount">กรุณากรอกยอดเงินแบบตัวเลข มากกว่า{0}</entry><!--请输入大于{0}的金额数字 -->
+	<entry key="member.predeposit.remitter_not_empty">กรุณากรอกชื่อผู้โอนเงิน</entry><!--汇款人不能为空 -->
+	<entry key="member.predeposit.remitter_bank_not_empty">กรุณากรอกชื่อธนาคารการโอนเงิน</entry><!--汇款银行不能为空 -->
+	<entry key="member.predeposit.remitter_time_not_empty">กรุณากรอกเวลาการโอนเงิน</entry><!--汇款时间不能为空 -->
+	<entry key="member.predeposit.recharge">เติมเงินเข้าบัญชี</entry><!--账户充值 -->
+	<entry key="member.predeposit.recharge_list">รายการเติมเงิน</entry><!--充值列表 -->
+	<entry key="member.predeposit.credit_available">ยอดเงินคงเหลือที่ใช้ได้</entry><!--可用余额： -->
+	<entry key="member.predeposit.mode_payment">รูปแบบการชำระเงิน</entry><!--支付方式：  -->
+	<entry key="member.predeposit.please_choose_mode_payment">กรุราเลือกรูปแบบการชำระเงิน</entry><!--请选择支付方式 -->
+	<entry key="member.predeposit.pay_amount">ยอดเงินที่ชำระ</entry><!--支付金额： -->
+	<entry key="member.predeposit.remitter_name">ชื่อ - นามสกุล ที่โอนเงิน</entry><!--汇款人姓名： -->
+	<entry key="member.predeposit.remitter_bank">ชื่อธนาคาร ที่โอนเงิน</entry><!--汇款银行： -->
+	<entry key="member.predeposit.remitter_date">วันที่ชำระเงิน</entry><!--汇款日期： -->
+	<entry key="member.predeposit.pay_remark">หมายเหตุการชำระเงิน</entry><!--支付备注： -->
+	<entry key="member.predeposit.save">บันทึก</entry><!--保存 -->
+
+
+	<!-- complaint_handle.html -->
+	<entry key="member.complaint_handle.complain_manage">การจัดการการร้องเรียน</entry><!--投诉管理 -->
+	<entry key="member.complaint_handle.not_image_type">รูปแบบ รูปภาพที่ไม่อนุญาตให้งาน</entry><!--不允许的图片类型 -->
+	<entry key="member.complaint_handle.complain_content_not_empty">กรุณากรอกข้อความในการร้องเรียน</entry><!--投诉内容不能为空 -->
+	<entry key="member.complaint_handle.my_complain">การร้องเรียน</entry><!--我的投诉 -->
+	<entry key="member.complaint_handle.initiate_complain">การเริ่มต้นร้องเรียน</entry><!--发起投诉 -->
+	<entry key="member.complaint_handle.complain_course">การขึ้นหน้าของการร้องเรียน</entry><!--投诉进程 -->
+	<entry key="member.complaint_handle.new_complain">การร้องเรียนรายการใหม่</entry><!--新投诉 -->
+	<entry key="member.complaint_handle.wait_appeal">รอการร้องเรียน</entry><!--待申诉 -->
+	<entry key="member.complaint_handle.dialogue">กำลังสนทนา</entry><!--对话中 -->
+	<entry key="member.complaint_handle.arbitration">รอการตัดสิน</entry><!--待仲裁 -->
+	<entry key="member.complaint_handle.completed">สิ้นสุดการร้องเรียน</entry><!--已完成 -->
+	<entry key="member.complaint_handle.order_detalis">ข้อมูลรายละเอียดการสั่งซื้อสินค้า</entry><!--订单详情 -->
+	<entry key="member.complaint_handle.order_info">ข้อมูลการสั่งซื้อสินค้า</entry><!--订单信息 -->
+	<entry key="member.complaint_handle.not_cancel">ยกเลิกรายการการสั่งซื้อสินค้า</entry><!--已取消 -->
+	<entry key="member.complaint_handle.wait_pay">รอการดำเนินการชำระเงิน</entry><!--待付款 -->
+	<entry key="member.complaint_handle.offline_pay_pending">รอการตรวจสอบการชำระเงินแบบออฟไลน์</entry><!--线下支付待审核 -->
+	<entry key="member.complaint_handle.spend">ชำระเงินเรียบร้อยแล้ว</entry><!--已付款 -->
+	<entry key="member.complaint_handle.delivered">ส่งสินค้าเรียบร้อยแล้ว</entry><!--已发货 -->
+	<entry key="member.complaint_handle.have_goods">ได้รับสินค้าเรียบร้อยแล้ว</entry><!--已收货 -->
+	<entry key="member.complaint_handle.have_evaluation">การสั่งซื้อสินค้าสำเร็จ และประเมินความพึงพอใจแล้ว</entry><!--已完成,已评价  -->
+	<entry key="member.complaint_handle.complete ">สิ้นสุดแล้ว</entry><!--已结束 -->
+	<entry key="member.complaint_handle.order_status">สถานะรายการการสั่งซื้อสินค้า</entry><!--订单状态 -->
+	<entry key="member.complaint_handle.orderno">รหัสรายการสั่งซื้อสินค้า</entry><!--订单号 -->
+	<entry key="member.complaint_handle.order_time">เวลาการสั่งซื้อสินค้า</entry><!--下单时间： -->
+	<entry key="member.complaint_handle.order_total_amount">ยอดเงินทั้งหมด รายการการสั่งซื้อสินค้า</entry><!--订单总额：¥   -->
+	<entry key="member.complaint_handle.seller_info">ข้อมูลผู้ขาย</entry><!--商家信息 -->
+	<entry key="member.complaint_handle.seller_name">ชื่อผู้ขาย</entry><!--商家名称 -->
+	<entry key="member.complaint_handle.buyer_info">ข้อมูลผู้ซื้อ</entry><!--买家信息 -->
+	<entry key="member.complaint_handle.buyer_name">ชื่อผู้ซื้อ</entry><!--买家名称 -->
+	<entry key="member.complaint_handle.complain_details">ข้อมูลรายละเอียดการร้องเรียน</entry><!--投诉详情 -->
+	<entry key="member.complaint_handle.complain_info">ข้อมูลการร้องเรียน</entry><!--投诉信息 -->
+	<entry key="member.complaint_handle.complain_status">สถานะการร้องเรียน</entry><!--投诉状态 -->
+	<entry key="member.complaint_handle.new_complain">การร้องเรียนรายใหม่</entry><!--新投诉 -->
+	<entry key="member.complaint_handle.buyer_complain">การร้องเรียนจากผู้ซื้อ</entry><!--买家投诉 -->
+	<entry key="member.complaint_handle.seller_complain">การร้องเรียนจากผู้ขาย</entry><!--商家投诉 -->
+	<entry key="member.complaint_handle.complain_type">ประเภทการร้องเรียน</entry><!--投诉类别 -->
+	<entry key="member.complaint_handle.complain_name">ผู้ร้องเรียน</entry><!--投诉人 -->
+	<entry key="member.complaint_handle.select_complain_theme">เลือกหัวข้อร้องเรียน</entry><!-- 选择投诉主题-->
+	<entry key="member.complaint_handle.complain_goods">สินค้าที่จะร้องเรียน</entry><!--要投诉的商品 -->
+	<entry key="member.complaint_handle.goods_info">ข้อมูลสินค้า</entry><!--商品信息 -->
+	<entry key="member.complaint_handle.number">จำนวน</entry><!-- 数量-->
+	<entry key="member.complaint_handle.price">ราคา</entry><!--价格 -->
+	<entry key="member.complaint_handle.problem_description">คำบรรยาย สาเหตุของปัญหา</entry><!--问题描述： -->
+	<entry key="member.complaint_handle.complain_content">เนื้อหาข้อความการร้องเรียน</entry><!--投诉内容 -->
+	<entry key="member.complaint_handle.image">รูปภาพต้องเป็น </entry><!--图片必须是 -->
+	<entry key="member.complaint_handle.format">รูปแบบ</entry><!--格式 -->
+	<entry key="member.complaint_handle.submit">ตกลง</entry><!--提交 -->
+	<entry key="member.complaint_handle.pic">แจ้งฟ้องรูปภาพ</entry><!--投诉图片 แจ้งฟ้องรูปภาพ-->
+
+	<!--complaint_img.html -->
+	<entry key="member.complaint_img.complain_image_view">เรียกดูรูปภาพการร้องเรียน</entry><!--投诉图片查看 -->
+	<entry key="member.complaint_img.shipping_address">ที่อยู่การรับสินค้า</entry><!--收货地址 -->
+	<entry key="member.complaint_img.my_complain">การร้องเรียน</entry><!--我的投诉 -->
+	<entry key="member.complaint_img.complain_details">ข้อมูลรายละเอียดการร้องเรียน</entry><!--投诉详情 -->
+	<entry key="member.complaint_img.complain_image">การร้องเรียนการจัดการรูปภาพ</entry><!--投诉处理图片 -->
+
+	<!--complaint_view.html -->
+	<entry key="member.complaint_view.complain_manage">การจัดการการร้องเรียน</entry><!--投诉管理-->
+	<entry key="member.complaint_view.complain_content_not_empty">กรุณากรอกข้อความการร้องเรียน</entry><!--申诉内容不能为空 -->
+	<entry key="member.complaint_view.not_image_type">ประเภทรูปภาพที่ไม่อนุญาตใช้งาน</entry><!--不允许的图片类型 -->
+	<entry key="member.complaint_view.submit_arbitration">แน่ใจไหมว่าจะยื่นคำร้องไปตัดสิน? </entry><!--确定提交仲裁吗？ -->
+	<entry key="member.complaint_view.release_dialogue_success">ส่งข้อความสนทนาสำเร็จ</entry><!-- 发布对话成功！-->
+	<entry key="member.complaint_view.my_complain">การร้องเรียน</entry><!--我的投诉 -->
+	<entry key="member.complaint_view.complain_list">รายการการร้องเรียน</entry><!--投诉列表 -->
+	<entry key="member.complaint_view.complain_details">ข้อมูลรายละเอียดการร้องเรียน</entry><!--投诉详情 -->
+	<entry key="member.complaint_view.complain_course">ความคืบหน้าของการร้องเรียน</entry><!-- 投诉进程-->
+	<entry key="member.complaint_view.new_complain">การร้องเรียนรายใหม่</entry><!--新投诉 -->
+	<entry key="member.complaint_view.wait_appeal">รอการร้องเรียน</entry><!--待申诉 -->
+	<entry key="member.complaint_view.dialogue">อยู่ระหว่างการสนทนา</entry><!--对话中 -->
+	<entry key="member.complaint_view.arbitration">รอการตัดสิน</entry><!--待仲裁 -->
+	<entry key="member.complaint_view.completed">สิ้นสุดแล้ว</entry><!--已完成 -->
+	<entry key="member.complaint_view.order_details">ข้อมูลรายละเอียดการสั่งซื้อสินค้า</entry><!--订单详情 -->
+	<entry key="member.complaint_view.order_info">ข้อมูลรายการสั่งซื้อสินค้า</entry><!--订单信息 -->
+	<entry key="member.complaint_view.have_cancel">ยกเลิกแล้ว</entry><!--已取消 -->
+	<entry key="member.complaint_view.wait_pay">รอการดำเนินการชำระเงิน</entry><!--待付款 -->
+	<entry key="member.complaint_view.offline_pay_pending">รอตรวจสอบการชำระเงินแบบออฟไลน์</entry><!--线下支付待审核 -->
+	<entry key="member.complaint_view.spend">ชำระเงินแล้ว</entry><!--已付款 -->
+	<entry key="member.complaint_view.delivered">ส่งสินค้าเรียบร้อยแล้ว</entry><!--已发货 -->
+	<entry key="member.complaint_view.have_goods">ได้รับสินค้าเรียบร้อยแล้ว</entry><!--已收货 -->
+	<entry key="member.complaint_view.have_evaluation">การสั่งสินค้าสำเร็จและประเมินความพึงพอใจ</entry><!--已完成,已评价  -->
+	<entry key="member.complaint_view.an_evaluation">การสั่งสินค้าสำเร็จและไม่สามารถประเมินความพึงพอใจ</entry><!--已完成,不可评价  -->
+	<entry key="member.complaint_view.order_status">สถานะรายการสั่งซื้อสินค้า</entry><!--订单状态： -->
+	<entry key="member.complaint_view.orderno">รหัสรายการสั่งซื้อสินค้า</entry><!--订单号： -->
+	<entry key="member.complaint_view.order_time">เวลาสั่งซื้อสินค้า</entry><!--下单时间： -->
+	<entry key="member.complaint_view.order_total_amount">ยอดเงินทั้งหมดจากรายการสั่งซื้อสินค้า</entry><!--订单总额：¥ -->
+	<entry key="member.complaint_view.seller_info">ข้อมูลผู้ขาย</entry><!--商家信息 -->
+	<entry key="member.complaint_view.seller_name">ชื่อผู้ขาย</entry><!--商家名称 -->
+	<entry key="member.complaint_view.buyer_info">ข้อมูลผู้ซื้อ</entry><!--买家信息 -->
+	<entry key="member.complaint_view.buyer_name">ชื่อผู้ซื้อ</entry><!--买家名称 -->
+	<entry key="member.complaint_view.complain_details">ข้อมูลรายละเอียดการร้องเรียน</entry><!-- 投诉详情-->
+	<entry key="member.complaint_view.complain_info">ข้อมูลการร้องเรียน</entry><!--投诉信息 -->
+	<entry key="member.complaint_view.complain_status">สถานะการร้องเรียน</entry><!--投诉状态： -->
+	<entry key="member.complaint_view.buyer_complain">การร้องเรียนจากผู้ซื้อ</entry><!--买家投诉 -->
+	<entry key="member.complaint_view.seller_complain">การร้องเรียนจากผู้ขาย</entry><!--商家投诉 -->
+	<entry key="member.complaint_view.complain_type">ประเภทการร้องเรียน</entry><!--投诉类别： -->
+	<entry key="member.complaint_view.complain_name">ผู้ร้องเรียน</entry><!--投诉人： -->
+	<entry key="member.complaint_view.complain_theme">หัวข้อร้องเรียน</entry><!--投诉主题： -->
+	<entry key="member.complaint_view.discovery_image">หลักฐานรูปภาพที่ใช้ในการร้องเรียน</entry><!--取证图片： -->
+	<entry key="member.complaint_view.view_image">เรียกดูรูปภาพ</entry><!--查看图片 -->
+	<entry key="member.complaint_view.complain_time">เวลาการร้องเรียน</entry><!--投诉时间： -->
+	<entry key="member.complaint_view.complain_goods">สินค้าที่ร้องเรียน</entry><!--投诉的商品 -->
+	<entry key="member.complaint_view.goods_info">ข้อมูลสินค้า</entry><!--商品信息 -->
+	<entry key="member.complaint_view.number">จำนวน</entry><!--数量 -->
+	<entry key="member.complaint_view.price">ราคา</entry><!--价格 -->
+	<entry key="member.complaint_view.problem_description">คำบรรยายของปัญหา</entry><!-- 问题描述：-->
+	<entry key="member.complaint_view.complain_content">ข้อความการร้องเรียน</entry><!-- 投诉内容-->
+	<entry key="member.complaint_view.appeal_details">รายละเอียดการร้องเรียนจากผู้ถูกร้องเรียน</entry><!--申诉详情 -->
+	<entry key="member.complaint_view.appeal_content">ข้อความการร้องเรียนจากผู้ถูกร้องเรียน</entry><!--申诉内容 -->
+	<entry key="member.complaint_view.appeal_image">รูปภาพการร้องเรียนจากผู้ถูกร้องเรียน</entry><!--申诉图片 -->
+	<entry key="member.complaint_view.image_must">รูปภาพต้องเป็น....</entry><!--图片必须是 -->
+	<entry key="member.complaint_view.format">รูปแบบ</entry><!--格式 -->
+	<entry key="member.complaint_view.appeal_info">ข่าวสารการร้องเรียนจากผู้ถูกร้องเรียน</entry><!--申诉信息 -->
+	<entry key="member.complaint_view.appeal_name">ผู้ถูกร้องเรียน</entry><!--申诉人： -->
+	<entry key="member.complaint_view.appeal_proof">หลักฐานการร้องเรียนจากผู้ถูกร้องเรียน</entry><!--申诉证据： -->
+	<entry key="member.complaint_view.appeal_time">เวลาการทำรายการร้องเรียนจากผู้ถูกร้องเรียน</entry><!--申诉时间： -->
+	<entry key="member.complaint_view.dialogue_details">ข้อมูลรายละเอียดสนทนาฝ่ายขายและฝ่ายซื้อ</entry><!--买卖双方对话详情 -->
+	<entry key="member.complaint_view.dialogue_recode">ข้อความการบันทึกการสนทนา</entry><!--对话记录： -->
+	<entry key="member.complaint_view.admin">ผู้ดำเนินการ</entry><!--管理员 -->
+	<entry key="member.complaint_view.appeal">การร้องเรียนจากผู้ถูกร้องเรียน</entry><!--申诉 -->
+	<entry key="member.complaint_view.complain">การร้องเรียน</entry><!--投诉 -->
+	<entry key="member.complaint_view.release_dialogue">ประกาศข้อความการสนทนา</entry><!--发布对话 -->
+	<entry key="member.complaint_view.arbitration_details">รายละเอียดการตัดสิน</entry><!--仲裁详情 -->
+	<entry key="member.complaint_view.arbitration_info">ข่าวสารการตัดสิน</entry><!--仲裁信息 -->
+	<entry key="member.complaint_view.arbitration_admin">ผู้ดำเนินการตัดสิน</entry><!--仲裁管理员： -->
+	<entry key="member.complaint_view.arbitration_time">เวลาการตัดสิน</entry><!--仲裁时间： -->
+	<entry key="member.complaint_view.arbitration_idea">ความคิดเห็นการตัดสิน</entry><!--仲裁意见： -->
+	<entry key="member.complaint_view.submit_appeal">การยื่นคำร้องจากผู้ถูกร้องเรียน </entry><!--提交申诉 -->
+	<entry key="member.complaint_view.refresh_dialogue">รีเฟรชการสนทนา</entry><!--刷新对话 -->
+	<entry key="member.complaint_view.submit_arbitration">การยื่นคำรองการตัดสิน</entry><!--提交仲裁 -->
+
+
+	<!-- consult_reply.html -->
+	<entry key="member.consult_reply.consult_content">ข้อความการสอบถาม</entry><!--咨询内容： -->
+	<entry key="member.consult_reply.revert_consult">การตอบกลับการสอบถาม</entry><!--回复咨询： -->
+	<entry key="member.consult_reply.submit">ตกลง</entry><!--提交 -->
+
+	<!--consult.html -->
+	<entry key="member.consult.consult_manage">การจัดการการสอบถาม</entry><!--咨询管理 -->
+	<entry key="member.consult.seller_center">ศูนย์รวมผู้ขาย</entry><!--商家中心 -->
+	<entry key="member.consult.all_consult">การสอบถาทั้งหมด</entry><!--全部咨询 -->
+	<entry key="member.consult.not_revert_consult">ยังไม่ได้ตอบกลับการสอบถาม</entry><!--未回复咨询 -->
+	<entry key="member.consult.revert_consult">ตอบกลับเรียบร้อยแล้ว</entry><!--已回复咨询 -->
+	<entry key="member.consult.selete_all">เลือกทั้งหมด</entry><!--全选 -->
+	<entry key="member.consult.delete">ลบข้อมูลทั้งหมด</entry><!--删除 -->
+	<entry key="member.consult.edit_revert">แก้ไขการข้อมูลการตอบกลับ</entry><!--编辑回复 -->
+	<entry key="member.consult.edit">แก้ไข</entry><!--编辑 -->
+	<entry key="member.consult.revert">ตอบกลับ</entry><!--回复 -->
+	<entry key="member.consult.consult_user">ผู้สอบถาม</entry><!--咨询用户： -->
+	<entry key="member.consult.consult_time">เวลาที่สอบถาม</entry><!-- 咨询时间：-->
+	<entry key="member.consult.consult_content">ข้อความที่สอบถาม</entry><!--咨询内容： -->
+	<entry key="member.consult.revert_content">ข้อความที่ตอบกลับ</entry><!--回复内容： -->
+	<entry key="member.consult.revert_time">เวลาที่ตอบกลับ</entry><!--回复时间： -->
+	<entry key="member.consult.goods_consult">การสอบถามเกี่ยวกับสินค้า</entry><!--商品咨询 -->
+	<entry key="member.consult.comfirm_delete">ยืนยันจะลบสอบถามนี้หรือไม่？</entry><!--确定删除该咨询吗ยืนยันจะลบสอบถามนี้หรือไม่？ -->
+
+	<!-- dialog_success.html -->
+	<entry key="member.dialog_success.oprate_completed">สิ้นสุดการดำเนินการ หน้าต่างจะปิดภายใน 2 วินาที</entry><!--操作完成，2秒后关闭窗口！ -->
+	<entry key="member.dialog_success.confirm">ยืนยัน</entry><!--确定 -->
+
+	<!-- dynamic_childs_list.html -->
+	<entry key="member.dynamic_childs_list.system_reminder">การแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.dynamic_childs_list.beyond_retrieve">ลบทิ้งแล้ว ไม่สามารถเรียกคืนข้อมูลได้ จะดำเนอนการต่อไปหรือไม่?</entry><!--删除后不可恢复，是否继续？ -->
+	<entry key="member.dynamic_childs_list.delete_success">ลบข้อมูลสำเร็จ</entry><!--删除成功！ -->
+	<entry key="member.dynamic_childs_list.revert">ตอบกลับ</entry><!--回复 -->
+	<entry key="member.dynamic_childs_list.delete">ลบทิ้ง</entry><!--删除 -->
+
+
+	<!-- dynamic_list.html -->
+	<entry key="member.dynamic_list.system_reminder">การแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.dynamic_list.intransit_success">การส่งต่อข้อมูลสำเร็จ</entry><!-- 转发成功！-->
+	<entry key="member.dynamic_list.intransit_faliure">การส่งต่อข้อมูลไม่สำเร็จ</entry><!-- 转发失败！-->
+	<entry key="member.dynamic_list.revert_success">การตอบกลับข้อมูลสำเร็จ</entry><!-- 回复成功！-->
+	<entry key="member.dynamic_list.revert_faliure">การตอบกลับข้อมูลไม่สำเร็จ</entry><!-- 回复失败！-->
+	<entry key="member.dynamic_list.revert">การตอบกลับข้อมูล</entry><!-- 回复-->
+	<entry key="member.dynamic_list.beyond_retrieve">ลบทิ้งแล้วไม่สามารถกู้คืนข้อมูลได้ ยืนยันการลบ</entry><!--删除后不可恢复，是否继续？ -->
+	<entry key="member.dynamic_list.delete_success">ลบข้อมูลสำเร็จ</entry><!--删除成功！ -->
+	<entry key="member.dynamic_list.all">ทั้งหมด</entry><!--全部 -->
+	<entry key="member.dynamic_list.oneself">ตัวเอง</entry><!--自己 -->
+	<entry key="member.dynamic_list.friend">เพื่อนสนิท</entry><!--好友 -->
+	<entry key="member.dynamic_list.mutually_attention">การติดตามซึ่งกันและกัน</entry><!--互相关注 -->
+	<entry key="member.dynamic_list.hide">ซ่อน</entry><!--隐藏 -->
+	<entry key="member.dynamic_list.delete">ลบทิ้ง</entry><!--删除 -->
+	<entry key="member.dynamic_list.store_name">ชื่อร้านค้า</entry><!--店铺名称： -->
+	<entry key="member.dynamic_list.view_detalis">เรียกดูข้อมูลรายละเอียด</entry><!--查看详情 -->
+	<entry key="member.dynamic_list.baby_name">ชื่อสินค้า</entry><!--宝贝名称: -->
+	<entry key="member.dynamic_list.goods_original_price">ราคาเดิมของสินค้า</entry><!--商品原价： -->
+	<entry key="member.dynamic_list.store_price">ราคาในร้านค้า</entry><!--店铺价格： -->
+	<entry key="member.dynamic_list.belongs_store">ร้านค้าที่สังกัด</entry><!--所属店铺： -->
+	<entry key="member.dynamic_list.praise">ชอบ</entry><!--赞 -->
+	<entry key="member.dynamic_list.intransit">การส่งต่อ</entry><!--转发 -->
+	<entry key="member.dynamic_list.review">ความคิดเห็น</entry><!--评论 -->
+	<entry key="member.dynamic_list.come_from">มาจาก</entry><!--来自： -->
+	<entry key="member.dynamic_list.people_feel">มีจำนวน .. คนชอบ</entry><!--人觉得很赞 -->
+	<entry key="member.dynamic_list.please_select_content">กรุณาพิมพ์ข้อความ</entry><!--请输入内容！ -->
+	
+	<entry key="member.dynamic_list.from">แชร์จาก</entry><!--转自แชร์จาก -->
+	<entry key="member.dynamic_list.shop_star">ระดับดาวของร้านค้า：</entry><!--店铺星级ระดับดาวของร้านค้า： -->
+	<entry key="member.dynamic_list.collect_count">จำนวนรายการโปรด</entry><!--收藏数จำนวนรายการโปรด -->
+	
+
+	<!--fav_goods_list.html /fav_store_list -->
+	<entry key="member.fav_goods_list.system_reminder">คำแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.fav_goods_list.attention">ท่านยังไม่มีสินค้าที่น่าสนใจ</entry><!--您还没有关注任何商品哦！ -->
+	<entry key="member.fav_goods_list.more_than_words">จำนวนอักษรที่พิมพ์ ต้องไม่เกิน 140 ตัวอักษร</entry><!--输入字数不能多于140个字！ -->
+	<entry key="member.fav_goods_list.less_than_words">กรุณากรอกอย่างน้อย 5 คำ</entry><!-- 请输入不少于5个字！-->
+	<entry key="member.fav_goods_list.release_success">ประกาศสำเร็จ</entry><!--发布成功！ -->
+	<entry key="member.fav_goods_list.release_failure">ประกาศไม่สำเร็จ </entry><!--发布失败！ -->
+	<entry key="member.fav_goods_list.attention_goods">ท่านยังไม่มีสินค้าที่น่าสนใจ กรุณากลับไปเลือกสินค้า</entry><!--您还没有关注任何商品哦，赶紧去关注一些商品吧！ -->
+	<entry key="member.fav_goods_list.share">การแบ่งปัน</entry><!--分享 -->
+
+
+	<!--favorite_goods.html -->
+	<entry key="member.favorite_goods.goods_store">สินค้าถูกบันทึกเป็นสินค้าที่ชื่นชอบ</entry><!--商品收藏 -->
+	<entry key="member.favorite_goods.my_store">รายการสินค้าที่ชื่นชอบ</entry><!--我的收藏 -->
+	<entry key="member.favorite_goods.collect_goods">การบันทึกสินค้าเป็นสินค้าที่ชื่นชอบ</entry><!--收藏商品 -->
+	<entry key="member.favorite_goods.collect_store">การบันทึกร้านค้าเป็นร้านที่ชื่นชอบ</entry><!--收藏店铺 -->
+	<entry key="member.favorite_goods.baby">สินค้า</entry><!-- 宝贝-->
+	<entry key="member.favorite_goods.unit_price">ราคาต่อหน่วย</entry><!--单价 -->
+	<entry key="member.favorite_goods.collect_time">เวลาที่บันทึก </entry><!--收藏时间 -->
+	<entry key="member.favorite_goods.store_name">ชื่อร้านค้า</entry><!--店铺名称 -->
+	<entry key="member.favorite_goods.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.favorite_goods.autotrophy_goods">สินค้าขายเอง</entry><!--自营商品 -->
+	<entry key="member.favorite_goods.online_customer_service">เจ้าหน้าที่ให้บริการลูกค้าออนไลน์</entry><!--在线客服 -->
+	<entry key="member.favorite_goods.member_login">เข้าสู่ระบบสมาชิก</entry><!--会员登录 -->
+	<entry key="member.favorite_goods.comfirm_collect">ท่านแน่ใจจะลบข้อมูลการบันทึกไหม?</entry><!--确定删除收藏?   -->
+	<entry key="member.favorite_goods.any_store">ตอนนี้ท่านยังไม่มีสินค้าใดที่บันทึกเป็นสินค้าที่ชื่นชอบ กลับไปเลือกซื้อสินค้า</entry><!--您目前没有收藏任何商品！这就去挑选商品。 -->
+	<entry key="member.favorite_goods.shop_main">หน้าแรกของมอลล์</entry><!--商城首页 -->
+	<entry key="member.favorite_goods.delete">ลบทิ้ง</entry><!--删除 -->
+	<entry key="member.favorite_goods.buy_immediately">สั่งซื้อทันที</entry><!--立即购买 สั่งซื้อทันที -->
+
+	<!-- favorite_store.html -->
+	<entry key="member.favorite_store.store_collect">ร้านค้าที่ถูกบันทึกเป็นร้านค้าที่ชื่นชอบ</entry><!--店铺收藏 -->
+	<entry key="member.favorite_store.my_collect">รายการที่ชื่นชอบ</entry><!--我的收藏 -->
+	<entry key="member.favorite_store.collect_goods">การบันทึกสินค้าเป็นสินค้าที่ชื่นชอบ</entry><!--收藏商品 -->
+	<entry key="member.favorite_store.collect_store">การบันทึกร้านค้าเป็นร้านค้าที่ชื่นชอบ</entry><!--收藏店铺 -->
+	<entry key="member.favorite_store.store_name">ชื่อร้านค้า</entry><!--店铺名称 -->
+	<entry key="member.favorite_store.store">เจ้าของร้านค้า</entry><!--店主 -->
+	<entry key="member.favorite_store.collect_time">เวลาที่บันทึก</entry><!--收藏时间 -->
+	<entry key="member.favorite_store.location">ภูมิภาคที่อาศัย</entry><!--所在地 -->
+	<entry key="member.favorite_store.operate">การดำเนินการ</entry><!-- 操作-->
+	<entry key="member.favorite_store.member_login">เข้าสู่ระบบสมาชิก</entry><!--会员登录 -->
+	<entry key="member.favorite_store.online_customer_service">เจ้าหน้าที่บริการลูกค้าออนไลน์</entry><!-- 在线客服-->
+	<entry key="member.favorite_store.comfirm_collect">ท่านแน่ใจหรือไม่ที่จะลบร้านค้าที่ชื่นชอบ?</entry><!--确定删除收藏?  -->
+	<entry key="member.favorite_store.any_store">ตอนนี้ท่านยังไม่ได้บันทึกรายการร้านค้าที่ชื่นชอบ</entry><!--您目前还没有收藏任何店铺！ -->
+	<entry key="member.favorite_store.delete">ลบทิ้ง</entry><!--删除 -->
+
+	<!-- gold_log.html -->
+	<entry key="member.gold_log.gold_conevel_log">รายงานการใช้เหรียญทอง</entry><!--金币兑换日志 -->
+	<entry key="member.gold_log.gold_log">รายงานการใช้เหรียญทอง</entry><!--金币日志 -->
+	<entry key="member.gold_log.seller_center">ศูนย์รวมผู้ขาย</entry><!--商家中心 -->
+	<entry key="member.gold_log.gold_conevel">การใช้เหรียญทองแลกซื้อสินค้า</entry><!--金币兑换 -->
+	<entry key="member.gold_log.conevel_list">รายการแลกซื้อ</entry><!--兑换列表 -->
+	<entry key="member.gold_log.gold">เหรียญทอง</entry><!--金币 -->
+	<entry key="member.gold_log.current_account_gold">เหรียญทองในบัญชีตอนนี้ </entry><!--当前账户金币 -->
+	<entry key="member.gold_log.operate_time">เวลาที่ดำเนินการ</entry><!-- 操作时间-->
+	<entry key="member.gold_log.type">ประเภท</entry><!-- 类型-->
+	<entry key="member.gold_log.describe">การอธิบาย</entry><!--描述 -->
+	<entry key="member.gold_log.augment">เพิ่มขึ้น</entry><!--增加 -->
+	<entry key="member.gold_log.reduce">ลดลง</entry><!-- 减少-->
+	<entry key="member.gold_log.alipay">อาลีเพลย์</entry><!--支付宝 -->
+	<entry key="member.gold_log.quick_money">การชำระเงินแบบรวดเร็ว </entry><!--快钱 -->
+	<entry key="member.gold_log.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.gold_log.tenpay">ไฉ-ฟู-ทง</entry><!--财付通 -->
+	<entry key="member.gold_log.offline_payment">การชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.gold_log.wait_payment">รอการชำระเงิน</entry><!--等待支付 -->
+	<entry key="member.gold_log.pay_mode">ชำระเงินเรียบร้อย</entry><!--支付完成 -->
+	<entry key="member.gold_log.wait_application">กำลังรอตรวจสอบ</entry><!--等待审核 -->
+
+	<!-- gold_pay.html -->
+	<entry key="member.gold_pay.pay_mode_not_empty">กรุณากรอกวิธีการชำระเงิน</entry><!--支付方式不能为空 -->
+	<entry key="member.gold_pay.recharge_amount_not_empty">กรุณากรอกจำนวนที่เติมเงิน</entry><!--充值金额不能为空 -->
+	<entry key="member.gold_pay.greater_than">กรุณากรอกยอดเงินที่มากกว่า 0</entry><!--请输入大于{0}的金额数字 -->
+	<entry key="member.gold_pay.remit_name_not_empty">กรุณากรอกชื่อผู้โอนเงิน</entry><!--汇款人不能为空 -->
+	<entry key="member.gold_pay.remit_bank_not_empty">กรุณกรอกชื่อธนาคารที่โอนเงิน</entry><!--汇款银行不能为空 -->
+	<entry key="member.gold_pay.remit_time_not_empty">กรุณากรอกเวลาที่โอนเงิน</entry><!--汇款时间不能为空 -->
+	<entry key="member.gold_pay.pay_mode">วิธีการชำระเงิน</entry><!--支付方式： -->
+	<entry key="member.gold_pay.alipay">อาลีเพลย์ </entry><!--支付宝 -->
+	<entry key="member.gold_pay.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.gold_pay.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.gold_pay.tenpay">ไฉ-ฟู-ทง</entry><!-- 财付通-->
+	<entry key="member.gold_pay.offline_payment">การชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.gold_pay.advance_payment">การชำระเงินแบบมัดจำ</entry><!--预付款支付 -->
+	<entry key="member.gold_pay.pay_amount">ยอดเงินที่ชำระ</entry><!--支付金额： -->
+	<entry key="member.gold_pay.convert_amount_number">จำนวนเหรียญทองที่ใช้</entry><!--兑换金币数： -->
+	<entry key="member.gold_pay.convert_remark">หมายเหตุ:</entry><!-- 兑换备注：-->
+	<entry key="member.gold_pay.pay">การชำระ</entry><!--支付 -->
+
+
+	<!-- gold_record_list.html -->
+	<entry key="member.gold_record_list.seller_center">ศูนย์รวมผู้ขาย</entry><!--商家中心 -->
+	<entry key="member.gold_record_list.convert_list">รายการแลกซื้อ</entry><!--兑换列表 -->
+	<entry key="member.gold_record_list.gold_convert">การใช้เหรียญทองแลกซื้อสินค้า</entry><!--金币兑换 -->
+	<entry key="member.gold_record_list.gold_log">รายงานการใช้เหรียญทอง</entry><!--金币日志 -->
+	<entry key="member.gold_record_list.recode_code">รหัสการบันทึก</entry><!-- 记录编号-->
+	<entry key="member.gold_record_list.convert_time">เวลาที่แลกซื้อ</entry><!--兑换时间 -->
+	<entry key="member.gold_record_list.convert_amount">จำนวนยอดเงินที่ใช้เหรียญทอง</entry><!--兑换金额 -->
+	<entry key="member.gold_record_list.pay_mode">วิธีที่ชำระ</entry><!--支付方式 -->
+	<entry key="member.gold_record_list.recharge_status">สถานะการเติมเงิน</entry><!--充值状态 -->
+	<entry key="member.gold_record_list.pay_status">สถานะการชำระเงิน</entry><!-- 支付状态-->
+	<entry key="member.gold_record_list.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.gold_record_list.alipay">อาลีเพลย์</entry><!--支付宝 -->
+	<entry key="member.gold_record_list.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.gold_record_list.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.gold_record_list.tenpay">ไฉ-ฟู-ทง</entry><!--财付通 -->
+	<entry key="member.gold_record_list.offline_payment">การชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.gold_record_list.advance_payment">การชำระเงินแบบมัดจำ</entry><!--预付款支付 -->
+	<entry key="member.gold_record_list.wait_payment">รอการชำระเงิน</entry><!--等待支付 -->
+	<entry key="member.gold_record_list.pay_complete">การชำระเงินเรียบร้อยแล้ว</entry><!--支付完成 -->
+	<entry key="member.gold_record_list.payment">ชำระ</entry><!-- 支付-->
+	<entry key="member.gold_record_list.view">เรียกดูข้อมูล</entry><!--查看 -->
+	<entry key="member.gold_record_list.wait_application">กำลังรอตรวจสอบ</entry><!--等待审核 -->
+
+
+	<!--gold_record.html -->
+	<entry key="member.gold_record.gold_buy">การใช้เหรียญทองแลกซื้อ</entry><!--金币购买 -->
+	<entry key="member.gold_record.pay_mode_not_empty">กรุณากรอกวิธีชำระเงิน</entry><!--支付方式不能为空 -->
+	<entry key="member.gold_record.convert_amount_not_empty">กรุณกรอกยอดเงินที่ใช้เหรียญ</entry><!--兑换金额不能为空 -->
+	<entry key="member.gold_record.convert_integer">รับการแลกซื้อแบบจำนวนเต็ม</entry><!--只接受整数兑换 -->
+	<entry key="member.gold_record.greater_than_amount">จำนวนยอดเงินต้องมากกว่า 0 </entry><!--请输入大于{0}的金额数字 -->
+	<entry key="member.gold_record.seller_center">ศูนย์รวมผู้ขาย</entry><!--商家中心 -->
+	<entry key="member.gold_record.gold_convert">การใช้เหรียญทองแลกซื้อสินค้า</entry><!--金币兑换 -->
+	<entry key="member.gold_record.convert_list">รายการที่แลกซื้อ</entry><!--兑换列表 -->
+	<entry key="member.gold_record.gold_log">รายงานการใช้เหรียญทอง</entry><!--金币日志 -->
+	<entry key="member.gold_record.convert_ratio">สัดส่วนการแลกซื้อ</entry><!--兑换比例： -->
+	<entry key="member.gold_record.convert">1 หยวนแลกได้ ...</entry><!--1元兑换  -->
+	<entry key="member.gold_record.gold">เหรียญทอง</entry><!--金币 -->
+	<entry key="member.gold_record.pay_mode">วิธีการชำระ</entry><!--支付方式： -->
+	<entry key="member.gold_record.please_choose_pay_mode">กรุณาเลือกวิธีการชำระเงิน</entry><!--请选择支付方式 -->
+	<entry key="member.gold_record.convert_cny">ารแลกเงินหยวน</entry><!--兑换人民币：ก -->
+	<entry key="member.gold_record.convert_remark">หมายเหตุ</entry><!--兑换备注： -->
+	<entry key="member.gold_record.remittance_info">กรุณากรอกข้อมูลการโอนเงินและอื่นๆ</entry><!--请输入汇款信息及其他备注 -->
+	<entry key="member.gold_record.submit">ตกลง</entry><!--提交 -->
+
+	<!--gold_view.html -->
+	<entry key="member.gold_view.recharge_details">รายละเอียดข้อมูลการเติมเงิน</entry><!--充值详情 -->
+	<entry key="member.gold_view.seller_center">ศูนย์รวมผู้ขาย</entry><!--商家中心 -->
+	<entry key="member.gold_view.convert_details">รายละเอียดการแลกซื้อ</entry><!--兑换详情 -->
+	<entry key="member.gold_view.gold_convert">การใช้เหรียญทองแลกซื้อสินค้า</entry><!--金币兑换 -->
+	<entry key="member.gold_view.convert_list">รายการแลกซื้อ</entry><!--兑换列表 -->
+	<entry key="member.gold_view.convert_log">รายงานการใช้เหรียญทอง</entry><!--兑换日志 -->
+	<entry key="member.gold_view.convert_code">สัดส่วนการแลกซื้อ</entry><!--兑换编号： -->
+	<entry key="member.gold_view.convert_amount">ยอดเงินที่ใช้เหรียญทอง</entry><!--兑换金额： -->
+	<entry key="member.gold_view.convert_gold">การแลกเป็นเหรียญทอง</entry><!--兑换金币： -->
+	<entry key="member.gold_view.gold">เหรียญทอง</entry><!--金币 -->
+	<entry key="member.gold_view.convert_time">เวลาที่แลกซื้อ</entry><!--兑换时间： -->
+	<entry key="member.gold_view.pay_mode">วิธีการชำระเงิน</entry><!--支付方式： -->
+	<entry key="member.gold_view.pay_status">สถานะการชำระเงิน</entry><!--支付状态： -->
+	<entry key="member.gold_view.alipay">อาลีเพลย์</entry><!--支付宝 -->
+	<entry key="member.gold_view.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.gold_view.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.gold_view.tenpay">ไฉ-ฟู-ทง </entry><!--财付通 -->
+	<entry key="member.gold_view.offline_payment">การชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.gold_view.convert_status">สถานะการใช้เหรียญ</entry><!--兑换状态： -->
+	<entry key="member.gold_view.wait_payment">รอการชำระเงิน</entry><!--等待支付 -->
+	<entry key="member.gold_view.pay_complete">ชำระเงินเรียบร้อย</entry><!--支付完成 -->
+	<entry key="member.gold_view.wait_review">รอการตรวจสอบ</entry><!--等待审核 -->
+	<entry key="member.gold_view.convert_remark">หมายเหตุการใช้เหรียญ</entry><!--兑换备注： -->
+	<entry key="member.gold_view.operate_admin">ผู้ดำเนินการ</entry><!--操作管理员： -->
+	<entry key="member.gold_view.operate_remark">หมายเหตุการดำเนินการ</entry><!--操作备注： -->
+	<entry key="member.gold_view.return_list">กลับไปหน้ารายการ</entry><!--返回列表 -->
+
+	<!-- group_life_return_apply.html -->
+	<entry key="member.group_life_return_apply.filling_explanation">กรุณากรอกคำอธิบาย</entry><!-- 请填写说明-->
+	<entry key="member.group_life_return_apply.return_operation">การส่งคำขอคืนสินค้าเรียบร้อยแล้ว กรุณาติดต่อกับผู้ขายทันที ขั้นตอนการคืนสินค้าทางผู้ขายเป็นฝ่ายดำเนินการ</entry><!-- 提交申请后请及时与商家联系，退货操作由商家来完成-->
+	<entry key="member.group_life_return_apply.goods_info">ข้อมูลสินค้า</entry><!--商品信息： -->
+	<entry key="member.group_life_return_apply.name">ชื่อสินค้า</entry><!--名称： -->
+	<entry key="member.group_life_return_apply.consume">รหัสสินค้าที่บริโภค</entry><!--消费码： -->
+	<entry key="member.group_life_return_apply.refund_state">การอธิบายการคืนเงิน</entry><!--退款说明： -->
+	<entry key="member.group_life_return_apply.cancel_refund">ยกเลิกการคืนเงิน</entry><!--取消退款 -->
+	<entry key="member.group_life_return_apply.submit_application">หลังจากยื่นคำร้องเรียบร้อยแล้ว กรุณาติดต่อร้านค้าเร็วที่สุด ถ้าร้านค้ายืตอบกลับการคืนสินค้าได้ ค่อยกรอกข้อมูลการขนส่ง สำหรับการคืนสินค้า</entry><!-- 提交申请后请及时与商家联系，商家同意退货后可填写退货物流信息-->
+	<entry key="member.group_life_return_apply.refund_reason">สาเหตุที่คืนเงิน</entry><!--退款原因： -->
+	<entry key="member.group_life_return_apply.repurchase">ซื้อสินค้าผิด/ทำรายการซื้อสินค้าใหม่</entry><!--买错了/重新买 -->
+	<entry key="member.group_life_return_apply.plans_change">การวางแผนมีการเปลี่ยนแปลง , ไม่มีเวลาใช้สินค้า</entry><!--计划有变，没时间消费 -->
+	<entry key="member.group_life_return_apply.reservation_is_not">การนัดหมายไม่สำเร็จ</entry><!--预约不上 -->
+	<entry key="member.group_life_return_apply.not_very_satisfied">เข้าไปดูสินค้าแล้ว แต่ยังไม่มีสินค้าที่น่าสนใจ</entry><!--去过了，不太满意 -->
+	<entry key="member.group_life_return_apply.rest">อื่นๆ</entry><!--其他 -->
+	<entry key="member.group_life_return_apply.submit">ตกลง</entry><!--提交 -->
+
+	<!--group_life_return.html -->
+	<entry key="member.group_life_return.repair_return">ส่งกลับไปซ่อม / ส่งกลับไปเปลี่ยนสินค้าใหม่</entry><!--返修/退换货 -->
+	<entry key="member.group_life_return.life_refund">การคืนเงินสำหรับรายการสั่งซื้อสินค้าใช้ประจำวัน </entry><!-- 生活购退款-->
+	<entry key="member.group_life_return.goods_return">สินค้าที่คืน</entry><!--商品退货 -->
+	<entry key="member.group_life_return.repair_return_recode">เรียกดูข้อมูลสินค้าที่ส่งไปซ่อม / สินค้าที่เปลี่ยนใหม่</entry><!--查看返修/退换货记录  -->
+	<entry key="member.group_life_return.group_consume">รหัสสินค้าที่บริโภคในกรุ๊ปบาย </entry><!--团购消费码 -->
+	<entry key="member.group_life_return.name">ชื่อ</entry><!--名称 -->
+	<entry key="member.group_life_return.order_time">เวลาที่ทำรายการสั่งซื้อ</entry><!--下单时间 -->
+	<entry key="member.group_life_return.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.group_life_return.application_refund">ยื่นคำร้องขอคืนเงิน</entry><!--申请退款 -->
+	<entry key="member.group_life_return.refund">คืนเงิน</entry><!--退款 -->
+	<entry key="member.group_life_return.been_used">ใช่แล้ว</entry><!--已使用 -->
+	<entry key="member.group_life_return.waiting_refund">รอการคืนเงิน</entry><!--等待退款 -->
+	<entry key="member.group_life_return.refund_complete">คืนเงินเรียบร้อย</entry><!--退款完成 -->
+	<entry key="member.group_life_return.refund_matter">คำถามที่สอบถามบ่อยเกี่ยวกับการคืนสินค้า</entry><!--退货常见问题 -->
+	<entry key="member.group_life_return.return">"คืนสินค้า"ถ้าปุ่มยังเป็นสีเทา,อาจจะเป็นเพราะว่ารายการสั่งซื้อยังไม่เรียบร้อยหรือสินค้ารายการนี้กำลังอยู่ในขั้นตอนการส่งซ่อม/ สินค้าเสมือนจริงก็ไม่สามารถคืนสินค้าได้</entry><!--“退货”按钮若为灰色，可能是因为订单尚未完成或该商品正在返修/退换货中；虚拟商品也无法进行退货。 -->
+	<entry key="member.group_life_return.refund_process">ขั้นตอนการคืนเงิน : ยื่นคำร้องคืนเงินจากผู้ซื้อ >ผู้ขายตอบรับ>ส่งข้อมูลถึงระบบ  > การคืนเงินจากระบบ>เงินเข้าบัญชีของผู้ซื้อ</entry><!--退款流程：买家申请退款→商家同意→提交平台→平台退款→至买家账户。 -->
+	<entry key="member.group_life_return.refund_time">เวลาที่ได้คืนเงิน : ใช้เวลาประมาณ 5-7 วันทำการ,เงินที่คืนจะใช้วิธีคืนแบบเงินมัดจำเข้าบัญชีผู้ซื้อ ,เงินมัดจำที่มีค่าเท่ากัน นำมาหักลบกับเงินหยวนได้</entry><!--退款到达时间：5至7个工作日，退货款项将以预存款的形式存入买家的账户中，预存款可抵消同等价值的人民币。 -->
+	<entry key="member.group_life_return.return_recode">ท่านยังไม่มีข้อมูลการคืนสินค้าในตอนนี้</entry><!-- 您目前还没有商品退货记录！-->
+	<entry key="member.group_life_return.applicating">กำลังยื่นเสนอ</entry><!--申请中 กำลังยื่นเสนอ-->
+	
+	<!-- groupinfo_list.html -->
+	<entry key="member.groupinfo_list.my_life">รายการสั่งซื้อสินค้าใช้ประจำวัน</entry><!-- 我的生活购-->
+	<entry key="member.groupinfo_list.life_order_details">ข้อมูลรายละเอียดรายการสั่งซื้อสินค้าใช้ประจำวัน</entry><!--生活购订单详情 -->
+	<entry key="member.groupinfo_list.life_order">รายการสั่งซื้อสินค้าประจำวัน</entry><!--生活购订单 -->
+	<entry key="member.groupinfo_list.consume_list">รายการรหัสสินค้าบริโภค</entry><!--消费码列表 -->
+	<entry key="member.groupinfo_list.group_consume">รายการสินค้าบริโภคในกรุ๊ปบาย</entry><!-- 团购消费码-->
+	<entry key="member.groupinfo_list.group_name">ชื่อกรุ๊ปบาย</entry><!--团购名称 -->
+	<entry key="member.groupinfo_list.group_price">ราคาต่อหน่วยของกรุ๊ปบาย</entry><!--团购单价 -->
+	<entry key="member.groupinfo_list.used_status">สถานะการใช้งาน</entry><!--使用状态 -->
+	<entry key="member.groupinfo_list.expire_time">เวลาหมดอายุ</entry><!--到期时间 -->
+	<entry key="member.groupinfo_list.unused">ยังไม่ได้ใช้งาน</entry><!--未使用 -->
+	<entry key="member.groupinfo_list.been_used">ใช้ร้านไปแล้ว</entry><!--已使用 -->
+	<entry key="member.groupinfo_list.expired">หมดอายุแล้ว</entry><!--已过期 -->
+	<entry key="member.groupinfo_list.refund">อยู่ในกระบวนการการคืนเงิน</entry><!--退款中 -->
+	<entry key="member.groupinfo_list.refunded">คืนเงินแล้ว</entry><!-- 已退款-->
+	<entry key="member.groupinfo_list.group_goods">ท่านยังไม่มีรายการสินค้าที่กำลังจัดทำในกรุ๊ปบาย กลับไปเลือกซื้อสินค้า</entry><!--您目前还没有进行中的团购！这就去挑选商品。 -->
+	<entry key="member.groupinfo_list.group_home">หน้าแรกของกรุ๊ปบาย</entry><!-- 团购首页-->
+
+	<!-- homepage_head.html -->
+	<entry key="member.homepage_head.system_prompt">คำแจ้งเตือนจากระบบ</entry><!-- 系统提示-->
+	<entry key="member.homepage_head.attention_user">การติดตามสำเร็จ</entry><!--关注成功！ -->
+	<entry key="member.homepage_head.attention_user">ท่านเคยติดตามผู้ใช้คนนี้แล้ว</entry><!--您已经关注过该用户！ -->
+	<entry key="member.homepage_head.my_release">ฉันอยากประกาศ............</entry><!-- 我要发布-->
+	<entry key="member.homepage_head.share_things">การแบ่งปันข่าวใหม่</entry><!--分享新鲜事 -->
+	<entry key="member.homepage_head.release_success">ประกาศข้อมูลสำเร็จ</entry><!--发布成功！ -->
+	<entry key="member.homepage_head.release">ประกาศข้อมูล</entry><!--发布 -->
+	<entry key="member.homepage_head.return_main">กลับไปหน้าแรกโปรไฟล์</entry><!-- 返回我的个人主页-->
+	<entry key="member.homepage_head.sex">เพศ</entry><!--性别： -->
+	<entry key="member.homepage_head.secrecy">ไม่ระบุ</entry><!--保密 -->
+	<entry key="member.homepage_head.man">ชาย</entry><!--男 -->
+	<entry key="member.homepage_head.wonman">หญิง</entry><!--女 -->
+	<entry key="member.homepage_head.birthday">วันเกิด</entry><!-- 生日：-->
+	<entry key="member.homepage_head.not_available_info">ยังไม่มีข้อมูลตอนนี้</entry><!--暂无信息 -->
+	<entry key="member.homepage_head.fan">สมาชิกแฟนคลับ</entry><!--粉丝 -->
+	<entry key="member.homepage_head.attention">การติดตาม</entry><!--关注 -->
+	<entry key="member.homepage_head.add_attention">เพิ่มติดตาม</entry><!--加关注เพิ่มติดตาม -->
+
+	<!-- homepage_myattention.html -->
+	<entry key="member.homepage_myattention.system_prompt">การแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.homepage_myattention.cancel_user">ท่านแน่ใจไหมว่าจะยกเลิกการติดตามของผู้ใช้คนนี้?</entry><!-- 您确定要取消对该用户的关注吗？-->
+	<entry key="member.homepage_myattention.cancel_success">การยกเลิกสำเร็จ</entry><!--取消成功！ -->
+	<entry key="member.homepage_myattention.cancel_faliruer">การยกเลิกไม่สำเร็จ</entry><!--取消失败！ -->
+	<entry key="member.homepage_myattention.my_main">หน้าโปรไฟล์</entry><!--我的主页 -->
+	<entry key="member.homepage_myattention.main">หน้าโปรไฟล์ของเขา</entry><!--TA的主页 -->
+	<entry key="member.homepage_myattention.friend">เพื่อนสนิท</entry><!--好友 -->
+	<entry key="member.homepage_myattention.attention">การติดตาม</entry><!--关注 -->
+	<entry key="member.homepage_myattention.fan">สมาชิกแฟนคลับ</entry><!--粉丝 -->
+	<entry key="member.homepage_myattention.welcome">สวัสดีครับ/ ค่ะ ยินดีต้อนรับเข้าสู่</entry><!--你好，欢迎来到 -->
+	<entry key="member.homepage_myattention.friend_list">รายชื่อเพื่อนสนิท</entry><!--好友列表 -->
+	<entry key="member.homepage_myattention.attention_list">รายชื่อการติดตาม</entry><!--关注列表 -->
+	<entry key="member.homepage_myattention.fan_list">รายชื่อสมาชิกแฟนคลับ</entry><!--粉丝列表 -->
+	<entry key="member.homepage_myattention.sex">เพศ</entry><!--性别： -->
+	<entry key="member.homepage_myattention.secrecy">ไม่ระบุ</entry><!--保密 -->
+	<entry key="member.homepage_myattention.wonman">หญิง</entry><!-- 女-->
+	<entry key="member.homepage_myattention.man">ชาย</entry><!--男 -->
+	<entry key="member.homepage_myattention.not_available">ยังไม่มี</entry><!--暂无 -->
+	<entry key="member.homepage_myattention.cancel_attention">ยกเลิกการติดตาม</entry><!--取消关注 -->
+
+
+	<!--homepage_myfans.html -->
+	<entry key="member.homepage_myfans.my_main">หน้าโปรไฟล์</entry><!--我的主页 -->
+	<entry key="member.homepage_myfans.main">หน้าโปรไฟล์ของเขา</entry><!--TA的主页 -->
+	<entry key="member.homepage_myfans.friend">เพื่อนสนิท</entry><!--好友 -->
+	<entry key="member.homepage_myfans.attention">การติดตาม</entry><!--关注 -->
+	<entry key="member.homepage_myfans.fan">สมาชิกแฟนคลับ</entry><!--粉丝 -->
+	<entry key="member.homepage_myfans.welcome">สวัสดีครับ/ ค่ะ ยินดีต้อนรับเข้าสู่</entry><!--你好，欢迎来到 -->
+	<entry key="member.homepage_myfans.friend_list">รายชื่อเพื่อนสนิท</entry><!--好友列表 -->
+	<entry key="member.homepage_myfans.attention_list">รายชื่อการติดตาม</entry><!--关注列表 -->
+	<entry key="member.homepage_myfans.fan_list">รายชื่อสมาชิกแฟนคลับ</entry><!--粉丝列表 -->
+	<entry key="member.homepage_myfans.sex">เพศ</entry><!--性别： -->
+	<entry key="member.homepage_myfans.secrecy">ไม่ระบุ</entry><!--保密 -->
+	<entry key="member.homepage_myfans.wonman">หญิง</entry><!-- 女-->
+	<entry key="member.homepage_myfans.man">ชาย</entry><!--男 -->
+
+	<!-- homepage_myfriends.html -->
+	<entry key="member.homepage_myfriends.system_prompt">การแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.homepage_myfriends.relieve_user">ท่านแน่ใจไหมที่จะยกเลิกการเป็นเพื่อนสนิทกับคนนี้หรือไม่</entry><!--您确定要解除和该用户的好友关系吗？ -->
+	<entry key="member.homepage_myfriends.relieve_success">ยกเลิกสำเร็จ</entry><!-- 解除成功！-->
+	<entry key="member.homepage_myfriends.relieve_failure">ยกเลิกไม่สำเร็จ</entry><!-- 解除失败！-->
+	<entry key="member.homepage_myfriends.my_main">หน้าโปรไฟล์</entry><!--我的主页 -->
+	<entry key="member.homepage_myfriends.main">หน้าโปรไฟล์ของเขา</entry><!--TA的主页 -->
+	<entry key="member.homepage_myfriends.friend">เพื่อนสนิท</entry><!--好友 -->
+	<entry key="member.homepage_myfriends.attention">การติดตาม</entry><!--关注 -->
+	<entry key="member.homepage_myfriends.fan">สมาชิกแฟนคลับ</entry><!--粉丝 -->
+	<entry key="member.homepage_myfriends.welcome">สวัสดีครับ/ ค่ะ ยินดีต้อนรับเข้าสู่</entry><!--你好，欢迎来到 -->
+	<entry key="member.homepage_myfriends.friend_list">รายชื่อเพื่อนสนิท</entry><!--好友列表 -->
+	<entry key="member.homepage_myfriends.attention_list">รายชื่อการติดตาม</entry><!--关注列表 -->
+	<entry key="member.homepage_myfriends.fan_list">รายชื่อสมาชิกแฟนคลับ</entry><!--粉丝列表 -->
+	<entry key="member.homepage_myfriends.sex">เพศ</entry><!--性别： -->
+	<entry key="member.homepage_myfriends.secrecy">ไม่ระบุ</entry><!--保密 -->
+	<entry key="member.homepage_myfriends.wonman">หญิง</entry><!-- 女-->
+	<entry key="member.homepage_myfriends.man">ชาย</entry><!--男 -->
+	<entry key="member.homepage_myfriends.delete_friend">ชาย</entry><!--解除好友 ยกเลิกเป็นเพื่อนกัน-->
+
+	<!--homepage_query_goods.html  -->
+	<entry key="member.homepage_query_goods.please_select_baby">กรุณาเลือกสินค้า</entry><!--请选择宝贝！ -->
+	<entry key="member.homepage_query_goods.please_select_content">กรุณาพิมพ์ข้อความ</entry><!--请输入内容！ -->
+	<entry key="member.homepage_query_goods.input_words">จำนวนอักษรที่พิมพ์ไม่สามารถเกิน 140 ตัวอักษร</entry><!-- 输入字数不能多于140个字！-->
+	<entry key="member.homepage_query_goods.system_prompt">การแจ้งเตือนจากระบบ</entry><!-- 系统提示-->
+	<entry key="member.homepage_query_goods.post_success">ประกาศสำเร็จ</entry><!--发布成功！ -->
+	<entry key="member.homepage_query_goods.post_failure">ประกาศไม่สำเร็จ</entry><!--发布失败！ -->
+	<entry key="member.homepage_query_goods.please_select_url">กรุณากรอกลิ้งค์(url) ของสินค้า</entry><!--请输入宝贝连接！ -->
+	<entry key="member.homepage_query_goods.please_select_confirm_url">กรุณากรอกลิ้งค์ (url) ของสินค้าให้ถูกต้อง</entry><!--请输入正确的宝贝连接！ -->
+	<entry key="member.homepage_query_goods.heart_baby">การแสดงภาพสินค้าที่คุณชื่นชอบ </entry><!--晒出你心中的宝贝 -->
+	<entry key="member.homepage_query_goods.purchase">ชื่อสินค้าเรียบร้อยแล้ว</entry><!--已购买 -->
+	<entry key="member.homepage_query_goods.favorite">โฟล์เดอร์ที่บันทึก</entry><!--收藏夹 -->
+	<entry key="member.homepage_query_goods.baby_url">ลิ้ง (url)สินค้า</entry><!-- 宝贝链接-->
+	<entry key="member.homepage_query_goods.gain_baby">การรับสินค้าที่คุณชื่นชอบ</entry><!-- 获取宝贝-->
+	<entry key="member.homepage_query_goods.new_something">ในทุกวันนี้มีข่าวสารเกิดขึ้นทุกวินาทีเพราะฉะนั้นมาแบ่งปัน พูดคุยกันเถอะ</entry><!--生活每天都有新鲜事.每天都来聊一聊 -->
+	<entry key="member.homepage_query_goods.confirm">ตกลง</entry><!--确定 -->
+
+	<!--homepage_query_stores.html  -->
+	<entry key="member.homepage_query_stores.please_select_store">กรุณาเลือกร้านค้า</entry><!-- 请选择店铺！-->
+	<entry key="member.homepage_query_stores.input_content">กรุณาพิมพ์ข้อความ</entry><!-- 请输入内容！-->
+	<entry key="member.homepage_query_stores.input_words">จำนวนอักษรที่พิมพ์ไม่สามารถเกิน 140 ตัวอักษร</entry><!--输入字数不能多于140个字！ -->
+	<entry key="member.homepage_query_stores.system_prompt">การแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.homepage_query_stores.post_success">ประกาศสำเร็จ</entry><!--发布成功！ -->
+	<entry key="member.homepage_query_stores.post_failure">ประกาศไม่สำเร็จ</entry><!--发布失败！ -->
+	<entry key="member.homepage_query_stores.share_store">แบ่งปันร้านค้ายอดนิยม</entry><!--分享精品店铺 -->
+	<entry key="member.homepage_query_stores.already_collected">การบันทึกร้านค้าเรียบร้อยแล้ว</entry><!--已收藏 -->
+	<entry key="member.homepage_query_stores.new_something">ในทุกวันนี้มีข่าวสารเกิดขึ้นทุกวินาที เพราะฉะนั้นแล้วมาแบ่งปันพูดคุยกันทุกวันเถอะ</entry><!--生活每天都有新鲜事.每天都来聊一聊 -->
+	<entry key="member.homepage_query_stores.confirm">ยืนยัน</entry><!--确定 -->
+
+	<!-- homepage_visit.html -->
+	<entry key="member.homepage_visit.last_activity">เข้าเยี่ยมชมล่าสุด</entry><!--最近访问 -->
+	<entry key="member.homepage_visit.total_views">จำนวนผู้เข้าเยี่ยมชมทั้งหมด</entry><!--总浏览量 -->
+	<entry key="member.homepage_visit.next">ครั้ง</entry><!--次 -->
+
+	<!-- homepage.html-->
+	<entry key="member.homepage.input_content">กรุณาพิมพ์ข้อความ</entry><!-- 请输入内容！-->
+	<entry key="member.homepage.system_prompt">การแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.homepage.my_main">หน้าโปรไฟล์</entry><!--我的主页 -->
+	<entry key="member.homepage.main">หน้าโปรไฟล์ของเขา</entry><!--TA的主页 -->
+	<entry key="member.homepage.friend">เพื่อนสนิท</entry><!--好友 -->
+	<entry key="member.homepage.attention">การติดตาม</entry><!--关注 -->
+	<entry key="member.homepage.fan">สมาชิกแฟนคลับ</entry><!--粉丝 -->
+	<entry key="member.homepage.welcome">สวัสดีครับ/ ค่ะ ยินดีต้อนรับเข้าสู่</entry><!--你好，欢迎来到 -->
+	<entry key="member.homepage.baby">สินค้า</entry><!-- 宝贝-->
+	<entry key="member.homepage.store">ร้านค้า</entry><!--店铺 -->
+	<entry key="member.homepage.all">ทั้งหมด</entry><!--全部 -->
+	<entry key="member.homepage.setting">การตั้งค่า</entry><!--设置 -->
+	<entry key="member.homepage.delete">ลบทิ้ง</entry><!--删除 -->
+	<entry key="member.homepage.review">ความคิดเห็น</entry><!--评论 -->
+	<entry key="member.homepage.secret">ความลับส่วนตัว </entry><!--私密 ความลับส่วนตัว-->
+	<entry key="member.homepage.open">เปิดเผย </entry><!--公开เปิดเผย -->
+	<entry key="member.homepage.dear_comfirm"> ท่านยืนยันจะตั้งค่าข้อมูลนี้เป็น</entry><!--亲，您确定要将该信息设置为 ท่านยืนยันจะตั้งค่าข้อมูลนี้เป็น-->
+	<entry key="member.homepage.delete_not_recover">หลังจากลบข้อมูลไม่สามารถเอากลับได้ จะลบออกหรือไม่ </entry><!--删除后数据不可恢复，是否删除หลังจากลบข้อมูลไม่สามารถเอากลับได้ จะลบออกหรือไม่ -->
+	<entry key="member.homepage.is_delete_record">删除后不可恢复，是否删除该条访问记录？</entry><!--删除后不可恢复，是否删除该条访问记录？ -->
+	<entry key="member.homepage.comment_success"> แสดงความคิดเห็นสำเร็จ</entry><!--评论成功 แสดงความคิดเห็นสำเร็จ-->
+	<entry key="member.homepage.comment_fail">แสดงความคิดเห็นล้มเหลว</entry><!--评论失败แสดงความคิดเห็นล้มเหลว -->
+	<entry key="member.homepage.delete_fail">ลบออกล้มเหลว</entry><!--删除失败ลบออกล้มเหลว -->
+	<entry key="member.homepage.fresh_thing">เรื่องราวใหม่</entry><!--新鲜事เรื่องราวใหม่ -->
+	<entry key="member.homepage.collect">เพิ่มรายการโปรด</entry><!--收藏เพิ่มรายการโปรด -->
+	<entry key="member.homepage.return">ชาย</entry><!--返回กลับไป -->
+	
+	<!-- integral_order_cofirm.html-->
+	<entry key="member.integral_order_cofirm.order">รหัสบิลการส่งสินค้า</entry><!--订单号： -->
+	<entry key="member.integral_order_cofirm.notice">หมายเหตุ</entry><!--注意： -->
+	<!--如果你尚未收到货品请不要点击“确认”。大部分被骗案件都是由于提前确认付款被骗的，请谨慎操作！ -->
+	<entry key="member.integral_order_cofirm.received_goods">ถ้ายังไม่ได้รับสินค้า กรุณาอย่าคลิกปุ่ม ยืนยัน ส่วนใหญ่คดีฉ่อโกงเกิดมาจากการคลิกปุ่มยืนยันการชำระเงินล่วงหน้า</entry>
+	<entry key="member.integral_order_cofirm.verify">ตกลง</entry><!--确认 -->
+	<entry key="member.integral_order_cofirm.comfirm_receive">ท่านยืนยันได้รับของขวัญที่แลกหรือไม่ ? </entry><!--您是否确已经收到以下兑换的礼品ท่านยืนยันได้รับของขวัญที่แลกหรือไม่ ? -->
+	
+	<!-- integral_order_list.html -->
+	<entry key="member.integral_order_list.not_cancel">ยกเลิกรายการการสั่งซื้อสินค้า</entry><!--已取消 -->
+	<entry key="member.integral_order_list.wait_pay">รอการดำเนินการชำระเงิน</entry><!--待付款 -->
+	<entry key="member.integral_order_list.offline_pay_pending">รอการตรวจสอบการชำระเงินแบบออฟไลน์</entry><!--线下支付待审核 -->
+	<entry key="member.integral_order_list.spend">ชำระเงินเรียบร้อยแล้ว</entry><!--已付款 -->
+	<entry key="member.integral_order_list.delivered">ส่งสินค้าเรียบร้อยแล้ว</entry><!--已发货 -->
+	<entry key="member.integral_order_list.have_goods">ได้รับสินค้าเรียบร้อยแล้ว</entry><!--已收货 -->
+	<entry key="member.integral_order_list.order">รหัสบิลการส่งสินค้า</entry><!--订单号： -->
+	<entry key="member.integral_order_list.order_time">เวลาที่ทำการสั่งซื้อสินค้า</entry><!-- 下单时间：-->
+	<entry key="member.integral_order_list.order_status">สถานะรายการสั่งซื้อสินค้า</entry><!--订单状态： -->
+	<entry key="member.integral_order_list.freight">ค่าขนส่ง</entry><!--运费 -->
+	<entry key="member.integral_order_list.number">จำนวน</entry><!-- 数量-->
+	<entry key="member.integral_order_list.alipay">อาลีเพลย์</entry><!-- 支付宝-->
+	<entry key="member.integral_order_list.quick_money">การชำระเงิน แบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.integral_order_list.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.integral_order_list.tenpay">ไฉ-ฟู-ทง </entry><!-- 财付通-->
+	<entry key="member.integral_order_list.offline_payment">ชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.integral_order_list.deposit_payment ">การชำระเงินแบบมัดจำ</entry><!--预存款支付 -->
+	<entry key="member.integral_order_list.not_pay">ยังไม่ได้ชำระเงิน</entry><!--未支付 -->
+	<entry key="member.integral_order_list.pay_mode">วิธีการชำระเงิน</entry><!-- 支付方式：-->
+	<entry key="member.integral_order_list.paying">ชำระเงิน</entry><!--付款 -->
+	<entry key="member.integral_order_list.cancel_order">การยกเลิกรายการสั่งซื้อสินค้า</entry><!--取消订单 -->
+	<entry key="member.integral_order_list.about_cinfirm_receipt">ยืนยันการรับสินค้า</entry><!--确认收货 -->
+	<entry key="member.integral_order_list.view_order">เรียกดูรายการสั่งสินค้า</entry><!--查看订单 -->
+	
+	<entry key="member.integral_order_list.integral_conversion">คะแนนแลกเปลี่ยน</entry><!--积分兑换คะแนนแลกเปลี่ยน -->
+	<entry key="member.integral_order_list.conversion_record">ข้อมูลบันทึกการแลกเปลี่ยน</entry><!--兑换记录ข้อมูลบันทึกการแลกเปลี่ยน -->
+	<entry key="member.integral_order_list.pay_deliver"> ชำระแล้ว รอจัดส่ง</entry><!--已付款，待发货 ชำระแล้ว รอจัดส่ง -->
+	<entry key="member.integral_order_list.receive_complete">ได้รับสินค้าเรียบร้อย</entry><!--已收货完成 ได้รับสินค้าเรียบร้อย -->
+	<entry key="member.integral_order_list.reduce_integral">ใช้คะแนนไป：</entry><!--消耗积分ใช้คะแนนไป ： -->
+	<entry key="member.integral_order_list.free_order">ไปสั่งซื้อไม่มีค่าขนส่ง </entry><!--无运费订单 ไปสั่งซื้อไม่มีค่าขนส่ง-->
+	<entry key="member.integral_order_list.return_integral">ยกเลิกใบสั่งซื้อจะได้คะแนนคืน จะทำตามหรือไม่ ? </entry><!--取消订单将会返回对应的积分，是否继续ยกเลิกใบสั่งซื้อจะได้คะแนนคืน จะทำตามหรือไม่  ? -->
+	<entry key="member.integral_order_list.integral_shop">คะแนนมอลล์  </entry><!--积分商城คะแนนมอลล์  -->
+	<entry key="member.integral_order_list.exchange_order">ท่านยังไม่มีใบสั่งซื้อแลกเปลี่ยนระหว่างดำเนินการ  ไปแลกเปลี่ยนเลย</entry><!--您目前还没有进行中兑换订单！赶紧兑换去哦。 -->
+	
+	
+	
+	<!-- integral_order_view.html-->
+	<entry key="member.integral_order_view.integral_situation">รายละเอียดคะแนนแลกเปลี่ยน </entry><!--积分兑换详情 รายละเอียดคะแนนแลกเปลี่ยน  -->
+	<entry key="member.integral_order_view.conversion_record">ข้อมูลบันทึกแลกเปลี่ยน</entry><!--兑换记录ข้อมูลบันทึกแลกเปลี่ยน -->
+	<entry key="member.integral_order_view.conversion_info">ข้อมูลแลกเปลี่ยน</entry><!--兑换信息ข้อมูลแลกเปลี่ยน -->
+	<entry key="member.integral_order_view.conversion_number">หมายเลขใบแลกซื้อ：</entry><!--兑换单号หมายเลขใบแลกซื้อ：-->
+	<entry key="member.integral_order_view.integral_conversion">คะแนนแลกเปลี่ยน</entry><!--兑换积分คะแนนแลกเปลี่ยน -->
+	<entry key="member.integral_order_view.member_info">ข้อมูลสมาชิก</entry><!--会员信息ข้อมูลสมาชิก -->
+	
+	<entry key="member.integral_order_view.member_name">ชื่อสมาชิก：</entry><!--会员名称ชื่อสมาชิก：-->
+	<entry key="member.integral_order_view.member_star">ระดับสมาชิก：</entry><!--会员等级ระดับสมาชิก：-->
+	<entry key="member.integral_order_view.member_email">อีเมล์สมาชิก：</entry><!--会员Emailอีเมล์สมาชิก： -->
+	<entry key="member.integral_order_view.conversion_Message">ฝากข้อความแลกเปลี่ยน：</entry><!--兑换留言ฝากข้อความแลกเปลี่ยน： -->
+	<entry key="member.integral_order_view.pay_info">ข้อมูลชำระ</entry><!--支付信息ข้อมูลชำระ -->
+	<entry key="member.integral_order_view.pay_Message">ฝากข้อความการชำระ：</entry><!--支付留言ฝากข้อความการชำระ：-->
+	<entry key="member.integral_order_view.deliver_time">เวลาจัดส่ง</entry><!--发货时间เวลาจัดส่ง -->
+	<entry key="member.integral_order_view.deliver_message">คำอธิบายจัดส่ง</entry><!--发货说明คำอธิบายจัดส่ง -->
+	<entry key="member.integral_order_view.logistics_tracking">ติดตามการขนส่ง</entry><!--物流跟踪 ติดตามการขนส่ง-->
+	
+	<entry key="member.integral_order_view.prensent_info">ข้อมูลของขวัญ</entry><!--礼品信息ข้อมูลของขวัญ -->
+	<entry key="member.integral_order_view.present_name">ชื้อของขวัญ</entry><!--礼品名称ชื้อของขวัญ-->
+	<entry key="member.integral_order_view.conversion_price">แลกเปลี่ยนค่าขนส่ง</entry><!--兑换运费แลกเปลี่ยนค่าขนส่ง-->
+	<entry key="member.integral_order_view.conversion_count">จำนวนแลกเปลี่ยน</entry><!--兑换数量จำนวนแลกเปลี่ยน-->
+	
+	<!--invite_register.html-->
+	<entry key="member.invite_register.tyt_change_life">ไทยี่เถา เปลี่ยนชีวิตของคุณ！</entry><!--泰易淘，改变你的生活ไทยี่เถา เปลี่ยนชีวิตของคุณ！-->
+	<entry key="member.invite_register.share_platform">แชร์เว็บไซต์</entry><!--NO.1 分享平台แชร์เว็บไซต์-->
+	<entry key="member.invite_register.share_to">แชร์ถึง：</entry><!--分享到แชร์ถึง：-->
+	<entry key="member.invite_register.auto_share_abstract">บทคัดย่อแชร์ที่กำหนดเองของคุณ </entry><!--您的自定义分享摘要 บทคัดย่อแชร์ที่กำหนดเองของคุณ -->
+	<entry key="member.invite_register.auto_share_content">เนื้อหาแชร์ที่กำหนดเองของคุณ </entry><!--您的自定义分享内容 เนื้อหาแชร์ที่กำหนดเองของคุณ-->
+	<entry key="member.invite_register.auto_pop">หัวข้อหน้าต่างแชร์ที่กำหนดเองของคุณ </entry><!--您的自定义pop窗口标题 หัวข้อหน้าต่างแชร์ที่กำหนดเองของคุณ -->
+	<entry key="member.invite_register.auto_pic">รูปภาพแชร์ที่กำหนดเองของคุณ </entry><!--您的自定义分享出去的图片รูปภาพแชร์ที่กำหนดเองของคุณ -->
+	<entry key="member.invite_register.auto_comment">คอมเม้นท์แชร์ที่กำหนดเองของคุณ </entry><!--您的自定义分享评论 คอมเม้นท์แชร์ที่กำหนดเองของคุณ -->
+	<entry key="member.invite_register.more">เพิ่มเติม</entry><!--更多เพิ่มเติม-->
+	<entry key="member.invite_register.sina">新浪 sina.com </entry><!--新浪 sina.com -->
+	<entry key="member.invite_register.tencent">腾讯 qq.com </entry><!--腾讯 qq.com -->
+	<entry key="member.invite_register.people">人人 renren.com</entry><!--人人renren.com-->
+	<entry key="member.invite_register.invite_integral">เชิญเพื่อนมาลงทะเบียน จะได้คะแนนแถมหลายเท่า</entry><!--邀请好友注册，享多倍积分赠送เชิญเพื่อนมาลงทะเบียน จะได้คะแนนแถมหลายเท่า -->
+	<entry key="member.invite_register.own_link">ส่งลิ้งค์เฉพาะตัวเองให้</entry><!--将专属链接发给 ส่งลิ้งค์เฉพาะตัวเองให้ -->
+	<entry key="member.invite_register.platform_friends">เพื่อนในQQ renren เป็นต้น</entry><!--QQ好友，人人等好友เพื่อนในQQ renren เป็นต้น -->
+	<entry key="member.invite_register.you_can_get">เพื่อนทุกท่านลงทะเบียนสำเร็จจากลิ้งค์เฉพาะ คุณจะได้รับ</entry><!--每有一位好友通过专属链接注册成功，您即可得到เพื่อนทุกท่านลงทะเบียนสำเร็จจากลิ้งค์เฉพาะ คุณจะได้รับ -->
+	<entry key="member.invite_register.phone_platform"> แชร์แพลตฟอร์มโมบายล์ </entry><!--NO.2 分享移动平台แชร์แพลตฟอร์มโมบายล์ -->
+	<entry key="member.invite_register.sweep"> สแกน QR code ของวีแชท Weibo แชร์ลิ้งค์ลงทะเบียนให้เพื่อน เพื่อนทุกท่านลงทะเบียนสำเร็จจากลิ้งค์นั้นจะได้รับ </entry><!--微信微博扫一扫，分享注册连接给好友，每有一位好友通过该连接成功注册可获得 สแกน QR code ของวีแชท Weibo แชร์ลิ้งค์ลงทะเบียนให้เพื่อน เพื่อนทุกท่านลงทะเบียนสำเร็จจากลิ้งค์นั้นจะได้รับ -->
+	<entry key="member.invite_register.open_after">เปิดภายหลัง </entry><!--稍后开放เปิดภายหลัง -->
+		
+	
+	<!--message_info.html  -->
+	<entry key="member.message_info.message">จดหมายจากระบบ</entry><!--站内信 -->
+	<entry key="member.message_info.content_not_empty">กรุณากรอกข้อความตอบกลับจากระบบ</entry><!--回复内容不能为空 -->
+	<entry key="member.message_info.system_message">ข้อความจากระบบ</entry><!--系统消息 -->
+	<entry key="member.message_info.sent_note">การส่งข้อความจากระบบ</entry><!--发送站内短信 -->
+	<entry key="member.message_info.received_message">ได้รับข้อความเรียบร้อยแล้ว</entry><!--收到消息 -->
+	<entry key="member.message_info.sent_message">ส่งข้อความสำเร็จ</entry><!--已发送消息 -->
+	<entry key="member.message_info.view_message">เรียกดูจดหมายจากระบบ</entry><!--查看站内信 -->
+	<entry key="member.message_info.speak">พูด</entry><!--说： -->
+	<entry key="member.message_info.reply_message">ตอบกลับข้อความ</entry><!-- 回复短信：-->
+	<entry key="member.message_info.sent">ส่งข้อความ</entry><!--发送 -->
+
+	<!-- message_send.html -->
+	<entry key="member.message_send.message">จดหมายส่งจากระบบ</entry><!--站内信 -->
+	<entry key="member.message_send.recipients_not_empty">กรุณากรอกผู้รับจดหมาย</entry><!--收件人不能为空 -->
+	<entry key="member.message_send.buyer_name">ไม่มีผู้ใช้คนนี้หรือชื่อซ้ำกับชื่อตัวเอง </entry><!--用户不存在或包含自己名称 -->
+	<entry key="member.message_send.message_content">กรุณากรอกเนื้อหาของข้อความ</entry><!-- 短信内容不能为空-->
+	<entry key="member.message_send.seed_success">ส่งจดหมายจากระบบสำเร็จ</entry><!-- 站内信发送成功！-->
+	<entry key="member.message_send.system_message">ข้อความจากระบบ</entry><!--系统消息 -->
+	<entry key="member.message_send.seed_message">ส่งข้อความจากระบบ</entry><!--发送站内短信 -->
+	<entry key="member.message_send.receive_message">ได้รับข้อความเรียบร้อยแล้ว</entry><!-- 收到消息-->
+	<entry key="member.message_send.sent_message">ได้ส่งข้อความเรียบร้อยแล้ว</entry><!--已发送消息 -->
+	<entry key="member.message_send.sent_note">ส่งข้อความ</entry><!--发送短信 -->
+	<entry key="member.message_send.recipients">ผู้รับข้อความ</entry><!--收件人： -->
+	<entry key="member.message_send.multiple_recipients">ถ้ามีผู้รับหลายคน กรุณาคั่นด้วย , คอมม่า</entry><!--多个收件人用逗号分开 -->
+	<entry key="member.message_send.content">ข้อความ</entry><!--内容： -->
+	<entry key="member.message_send.sent">ส่งข้อความ</entry><!--发送 -->
+
+	<!-- message.html -->
+	<entry key="member.message.mail">จดหมายจากระบบ </entry><!--站内信 -->
+	<entry key="member.message.system_message">ข้อความจากระบบ</entry><!--系统消息 -->
+	<entry key="member.message.seed_message">ส่งข้อความจากระบบ </entry><!--发送站内短信 -->
+	<entry key="member.message.receive_message">ได้รับข้อความแล้ว</entry><!--收到消息 -->
+	<entry key="member.message.sent_message">ได้ส่งข้อความแล้ว</entry><!--已发送消息 -->
+	<entry key="member.message.seed_name">ผู้ส่งข้อความ</entry><!--发送人 -->
+	<entry key="member.message.content">ข้อความ</entry><!-- 内容-->
+	<entry key="member.message.time">เวลา</entry><!--时间 -->
+	<entry key="member.message.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.message.unread">ยังไม่ได้อ่านข้อความ</entry><!--未读 -->
+	<entry key="member.message.new_replies">การตอบกลับใหม่</entry><!--新回复 -->
+	<entry key="member.message.view">เรียกดูข้อความ</entry><!--查看 -->
+	<entry key="member.message.delete_message">ท่านแน่ใจไหม ที่จะลบข้อความ?</entry><!--是否确定删除短信? -->
+	<entry key="member.message.delete">ลบทิ้ง</entry><!--删除 -->
+	<entry key="member.message.select_all">เลือกทั้งหมด</entry><!--全选 -->
+	<entry key="member.message.batch_delete">ลบทิ้งรายการที่เลือกทั้งหมด</entry><!--批量删除 -->
+	<entry key="member.message.message_recode">ท่านยังไม่ได้รับข้อความจากระบบในตอนนี้ </entry><!--您目前还没有收到站内短信！ -->
+
+	<!--order_cancel_listlog.html  -->
+	<entry key="member.order_cancel_listlog.order_cancel">ข้อมูลการยกเลิกรายการสั่งซื้อสินค้า</entry><!-- 订单取消记录  -->
+	<entry key="member.order_cancel_listlog.orderno">รหัสการสั่งซื้อสินค้า</entry><!--订单编号 -->
+	<entry key="member.order_cancel_listlog.goods">สินค้า</entry><!--商品 -->
+	<entry key="member.order_cancel_listlog.order_time">เวลาการสั่งซื้อสินค้า</entry><!--下单时间 -->
+	<entry key="member.order_cancel_listlog.order_cancel_recode">ท่านยังไม่มีข้อมูลการยกเลิกรายการสั่งซื้อสินค้าตอนนี้</entry><!--您目前还没有订单取消记录！ -->
+
+	<!--order_complaint_list.html  -->
+	<entry key="member.order_complaint_list.complain_list">รายการการร้องเรียน</entry><!-- 投诉列表-->
+	<entry key="member.order_complaint_list.my_complain">การร้องเรียน</entry><!-- 我的投诉-->
+	<entry key="member.order_complaint_list.orderno">รหัสการสั่งซื้อสินค้า</entry><!--订单编号 -->
+	<entry key="member.order_complaint_list.goods">สินค้า</entry><!--商品 -->
+	<entry key="member.order_complaint_list.order_time">เวลาการสั่งซื้อสินค้า</entry><!--下单时间 -->
+	<entry key="member.order_complaint_list.goods_complain">สินค้าขายตัวเองไม่สามารถร้องเรียนได้ </entry><!--自营商品不可投诉 -->
+	<entry key="member.order_complaint_list.complain">การร้องเรียน</entry><!-- 投诉-->
+	<entry key="member.order_complaint_list.complain_issue">คำถามที่ถามบ่อยเกี่ยวกับการร้องเรียน</entry><!--投诉常见问题 -->
+	<entry key="member.order_complaint_list.system_complain">เวลาที่ร้องเรียนจากระบบในตอนนี้เป็น.... </entry><!-- 当前系统投诉时长为-->
+	<entry key="member.order_complaint_list.day">วัน</entry><!--天 -->
+	<entry key="member.order_complaint_list.cannot_complain">ไม่สามารถ ร้องเรียนได้</entry><!--不可投诉 -->
+	<entry key="member.order_complaint_list.complain_products">ไม่สามารถร้องเรียนแบรนด์สินค้าของตัวเองได้ แต่สามารถติดต่อเจ้าหน้าที่บริการลูกค้าช่วยแก้ไขปัญหาได้</entry><!-- 自营商品虽然不可以投诉，但是可以联系客服帮您解决问题-->
+	<entry key="member.order_complaint_list.complain_recode">ท่านยังไม่มีข้อมูลการร้องเรียน</entry><!--您目前还没有投诉记录！ -->
+
+	<!--order_print.html  -->
+	<entry key="member.order_print.order_print">พิมพ์รายการสั่งซื้อสินค้า</entry><!--订单打印 -->
+	<entry key="member.order_print.ship_name">ผู้รับสินค้า</entry><!--收货人： -->
+	<entry key="member.order_print.phone">เบอร์โทรศัพท์</entry><!--电话： -->
+	<entry key="member.order_print.mobile">เบอร์มือถือ</entry><!--手机： -->
+	<entry key="member.order_print.location">ที่อยู่ภูมิภาค</entry><!--所在地： -->
+	<entry key="member.order_print.address">ที่อยู่</entry><!-- 地址：-->
+	<entry key="member.order_print.zip">รหัสไปรษณีย์</entry><!--邮编： -->
+	<entry key="member.order_print.order">รหัสบิลการส่งสินค้า</entry><!--订单号： -->
+	<entry key="member.order_print.order_time">เวลาที่ทำการสั่งซื้อสินค้า</entry><!-- 下单时间：-->
+	<entry key="member.order_print.deliver_code">รหัสใบเสร็จการสั่งสินค้า</entry><!--发货单号： -->
+	<entry key="member.order_print.code">ลำดับ</entry><!-- 序号-->
+	<entry key="member.order_print.goods_name">ชื่อสินค้า</entry><!--商品名称 -->
+	<entry key="member.order_print.standard">ขนาดสินค้า</entry><!-- 规格-->
+	<entry key="member.order_print.unit_price">ราคาต่อหน่วย (หยวน)</entry><!--单价（元） -->
+	<entry key="member.order_print.number">จำนวน</entry><!-- 数量-->
+	<entry key="member.order_print.subtotal">ยอดรวมย่อย (หยวน)</entry><!-- 小计（元）-->
+	<entry key="member.order_print.group_goods">สินค้ากรุ๊ปบาย</entry><!-- 团购商品-->
+	<entry key="member.order_print.total">ยอดรวม</entry><!--合计 -->
+	<entry key="member.order_print.aggregate">ยอดรวม</entry><!--总计 -->
+	<entry key="member.order_print.freight">ค่าขนส่ง</entry><!--运费 -->
+	<entry key="member.order_print.order_total_amount">ยอดเงินทั้งหมดของรายการสั่งซื้อสินค้า:</entry><!--订单总额：￥ -->
+	<entry key="member.order_print.store_name">ชื่อเจ้าของร้าน</entry><!--店主名: -->
+	<entry key="member.order_print.store">ร้านค้า</entry><!-- 店铺：-->
+	<entry key="member.order_print.print">พิมพ์</entry><!-- 打印-->
+	<entry key="member.order_print.open_after">เมื่อเลือกการตั้งค่าการพิมพ์กระดาษ A4 พิมพ์แนวตั้ง ไม่มีขอบกระดาษ  กระดาษ A4 หนึ่งใบสามารถพิมพ์ใบสั่งซื้อหนึ่งหน้า </entry><!--当打印设置选择A4纸张、纵向打印、无边距时每张A4打印纸可输出1页订单。 -->
+
+	<!-- order_return_apply.html -->
+	<entry key="member.order_return_apply.write_instructions">กรุณากรอกคำอธิบาย</entry><!-- 请填写说明-->
+	<entry key="member.order_return_apply.submit_application">หลังจากยื่นคำร้องเรียบร้อยแล้ว กรุณาติดต่อร้านค้าเร็วที่สุด ถ้าร้านค้ายืตอบกลับการคืนสินค้าได้ ค่อยกรอกข้อมูลการขนส่ง สำหรับการคืนสินค้า</entry><!--提交申请后请及时与商家联系，商家同意退货后可填写退货物流信息 -->
+	<entry key="member.order_return_apply.goods_info">ข้อมูลสินค้า</entry><!--商品信息： -->
+	<entry key="member.order_return_apply.goods_name">ชื่อสินค้า</entry><!--商品名称 -->
+	<entry key="member.order_return_apply.return_instructions">เหตุผลการคืนสินค้า</entry><!--退货说明： -->
+	<entry key="member.order_return_apply.cancel_return">ยกเลิกการคืนสินค้า</entry><!--取消退货 -->
+	<entry key="member.order_return_apply.application_instructions">คำอธิบายการยื่นคำร้อง</entry><!--申请说明 -->
+	<entry key="member.order_return_apply.submit">ตกลง</entry><!--提交 -->
+
+	<!--order_return_list.html  -->
+	<entry key="member.order_return_list.repair_return">ส่งกลับไปซ่อม / ส่งกลับเพื่อเปลี่ยนสินค้า</entry><!--返修/退换货 -->
+	<entry key="member.order_return_list.goods_return">การคืนสินค้า</entry><!--商品退货 -->
+	<entry key="member.order_return_list.life_return">การคืนเงินจากการสั่งซื้อสิน้าประจำวัน</entry><!--生活购退款 -->
+	<entry key="member.order_return_list.view_repair_return">เรียกดูข้อมูลการซ่อมสินค้า / เปลี่ยนคืนสินค้า</entry><!--查看返修/退换货记录 -->
+	<entry key="member.order_return_list.order_code">รหัสใบเสร็จการสั่งซื้อสินค้า</entry><!--订单编号 -->
+	<entry key="member.order_return_list.goods">สินค้า</entry><!--商品 -->
+	<entry key="member.order_return_list.order_time">เวลาสั่งซื้อสินค้า</entry><!-- 下单时间-->
+	<entry key="member.order_return_list.return">การคืนสินค้า</entry><!-- 退货-->
+	<entry key="member.order_return_list.application_return">ยื่นคำร้องคืนสินค้า</entry><!--申请退货 -->
+	<entry key="member.order_return_list.return_centre">กระบวนการคืนสินค้า</entry><!--退货中 -->
+	<entry key="member.order_return_list.return_complete">กระบวนการคืนสินค้าเรียบร้อยแล้ว</entry><!--退货完成 -->
+	<entry key="member.order_return_list.return_matter">คำถามที่พบบ่อยในการคืนสินค้า</entry><!--退货常见问题 -->
+	<entry key="member.order_return_list.for_return">"คืนสินค้า" ถ้าปุ่มยังเป็นสีเทา, อาจจะเป็นเพราะว่ารายการสั่งซื้อยังไม่เรียบร้อย หรือ สินค้ารายการนี้ กำลังอยู่ในขั้นตอนส่งกลับซ่อม*เปลี่ยนสินค้าอยู่ สินค้าเสมือนจริงไม่สามารถคืนสินค้าได้</entry><!--“退货”按钮若为灰色，可能是因为订单尚未完成或该商品正在返修/退换货中；虚拟商品也无法进行退货。 -->
+	<entry key="member.order_return_list.return_process">ขั้นตอนการคืนสินค้า : ยื่นคำร้องคืนสินค้าจากผู้ซื้อ >ผู้ขายตอบรับ> ผู้ซื้อแจ้งข้อมูลการขนส่งให้ผู้ขาย > ผู้ขายตอบรับ > คืนเงินจากระบบ>เงินเข้าบัญชีของผู้ซื้อ</entry><!-- 退货流程：买家申请退货→商家同意→买家提交退货物流→商家确认→平台退款→至买家账户。-->
+	<entry key="member.order_return_list.return_time">เวลาที่ได้คืนเงิน : ใช้เวลาประมาณ 5-7 วันทำการ,เงินที่คืนจะใช้วิธีการคืนเงินแบบมัดจำ เข้าบัญชีของผู้ซื้อ ,เงินมัดจำที่มีค่าเท่ากันสามารถนำมาหักลบับเงินหยวนได้</entry><!-- 退款到达时间：5至7个工作日，退货款项将以预存款的形式存入买家的账户中，预存款可抵消同等价值的人民币。-->
+	<entry key="member.order_return_list.return_records">ท่านยังไม่มีข้อมูลการคืนสินค้าตอนนี้</entry><!--您目前还没有商品退货记录！ -->
+
+	<!--order_return_listlog.html  -->
+	<entry key="member.order_return_listlog.repair_return">ส่งกลับเพื่อซ่อม / ข้อมูลการเปลี่ยนคืนสินค้า</entry><!-- 返修/退换货记录-->
+	<entry key="member.order_return_listlog.goods_return">คืนสินค้า</entry><!-- 商品退货-->
+	<entry key="member.order_return_listlog.life_return">คืนเงินรายการสั่งซื้อสินค้าประจำวัน</entry><!--生活购退款 -->
+	<entry key="member.order_return_listlog.view_repair_return">เรียกดูข้อมูลการซ่อม/ ข้อมูลการเปลี่ยนสินค้า</entry><!--查看返修/退换货记录  -->
+	<entry key="member.order_return_listlog.important_explanation">คำอธิบายที่สำคัญ</entry><!--重要说明 -->
+	<entry key="member.order_return_listlog.retrun_deposit">เงินที่คืนจะใช้วิธีการคืนแบบเงินมัดจำ </entry><!--退款将以预存款的方式进行退回 -->
+	<entry key="member.order_return_listlog.service_code">รหัสให้บริการ</entry><!-- 服务号-->
+	<entry key="member.order_return_listlog.goods">สินค้า</entry><!-- 商品-->
+	<entry key="member.order_return_listlog.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.order_return_listlog.hava_expired">ไม่สามารถคืนสินค้าได้เนื่องจากเกินเวลาที่กำหนด</entry><!--已过期，无法退货 -->
+	<entry key="member.order_return_listlog.application_success">การสมัครสมาชิกสำเร็จ กรุณารอการตรวจสอบ</entry><!--申请成功，请等待审核 -->
+	<entry key="member.order_return_listlog.approve">การตรวจสอบสำเร็จกรุณากรอกชื่อบริษัทขนส่งที่ต้องการจัดส่ง</entry><!-- 审核通过，请填写退货物流-->
+	<entry key="member.order_return_listlog.shipped">ผู้ซื้อส่งของกลับเรียบร้อยแล้ว รอการรับสินค้าจากผู้ขาย</entry><!-- 已经发货，等待商家收货-->
+	<entry key="member.order_return_listlog.unapprove">ไม่ผ่านการตรวจสอบ</entry><!--审核未通过 -->
+	<entry key="member.order_return_listlog.return_complete">การคืนสินค้าเรียบร้อยแล้ว กรุณารอการคืนเงินจากระบบ</entry><!--退货完成，请等待平台退款 -->
+	<entry key="member.order_return_listlog.refund_complete">การคืนเงินสำเร็จ</entry><!--退款完成 -->
+	<entry key="member.order_return_listlog.relevant_records">ตอนนี้ท่านยังไม่มีข้อมูลเปลี่ยนคืนสินค้า</entry><!--您目前还没有退换货记录！ -->
+
+	<!-- order_return_ship.html -->
+	<entry key="member.order_return_ship.express_code_not_empty">กรุณากรอกรหัสบิลการขนส่ง</entry><!-- 物流单号不能为空-->
+	<entry key="member.order_return_ship.express_company_not_empty">กรุณากรอกชื่อบริษัทการขนส่ง</entry><!-- 物流公司不能为空-->
+	<entry key="member.order_return_ship.you_have">ท่านยังมีเวลาอีก</entry><!--您还有 -->
+	<entry key="member.order_return_ship.day">วัน</entry><!-- 天-->
+	<entry key="member.order_return_ship.hour">ชั่วโมง</entry><!--时 -->
+	<entry key="member.order_return_ship.minute">นาที</entry><!--分 -->
+	<entry key="member.order_return_ship.second">วินาที</entry><!--秒 -->
+	<entry key="member.order_return_ship.more_than_time">ระบบจะแจ้งการเปลี่ยนคืนสินค้าไม่สำเร็จ</entry><!--，超过该时间系统将判定该退货失败！ถ้าเกินเวลานี้ -->
+	<entry key="member.order_return_ship.return_falirue">การคืนสินค้าไม่สำเร็จ</entry><!--退货失败 -->
+	<entry key="member.order_return_ship.express_company">บริษัทขนส่ง</entry><!--物流公司： -->
+	<entry key="member.order_return_ship.express_code">รหัสบิลการขนส่ง</entry><!--物流单号： -->
+	<entry key="member.order_return_ship.return_express_info">กรุณากรอกข้อมูลในการขนส่งให้ถูกต้องเพื่อคืนสินค้า</entry><!--请输入正确退货物流信息 -->
+	<entry key="member.order_return_ship.submit">ตกลง</entry><!--提交 -->
+	<entry key="member.invite_register.commit_comfirm">ยื่นเสนอข้อมูลขนส่งเรี่ยนร้อย รอร้านค้ายืนยัน</entry><!--已经提交退货物流信息，等待商家确认-->
+	
+	
+
+	<!-- order_returnlog_view.html -->
+	<entry key="member.order_returnlog_view.ship_details">ข้อมูลรายละเอียดบิลบริการ</entry><!--服务单详情 -->
+	<entry key="member.order_returnlog_view.return_express_code_not_empty">กรุณากรอกหมายเลขขนส่งสำหรับบการคืนสินค้า</entry><!-- 退货快递单号不能为空！-->
+	<entry key="member.order_returnlog_view.an">เปิดการใช้</entry><!--展开 -->
+	<entry key="member.order_returnlog_view.pack_up">ปิดการใช้งาน</entry><!--收起 -->
+	<entry key="member.order_returnlog_view.you_have">ท่านยังมีเวลาอีก</entry><!--您还有 -->
+	<entry key="member.order_returnlog_view.day">วัน</entry><!-- 天-->
+	<entry key="member.order_returnlog_view.hour">ชั่วโมง</entry><!--时 -->
+	<entry key="member.order_returnlog_view.minute">นาที</entry><!--分 -->
+	<entry key="member.order_returnlog_view.second">วินาที</entry><!--秒 -->
+	<entry key="member.order_returnlog_view.more_than_time">ถ้าเกินเวลานี้ระบบจะแจ้งการเปลี่ยนคืนสินค้าไม่สำเร็จ</entry><!-- 超过该时间系统将判定该退货失败！-->
+	<entry key="member.order_returnlog_view.return_faliure">การคืนสินค้าไม่สำเร็จ</entry><!-- 退货失败-->
+	<entry key="member.order_returnlog_view.service_number">รหัสบิลบริการ</entry><!-- 服务单号：-->
+	<entry key="member.order_returnlog_view.service_ship_details">ข้อมูลรายละเอียดการรับสินค้าในบิลบริการ</entry><!--服务单收货详情 -->
+	<entry key="member.order_returnlog_view.seller_ship_info">ข้อมูลรับสินค้าจากร้านค้า</entry><!--商家收货信息： -->
+	<entry key="member.order_returnlog_view.return_problem_description">คำอธิบายปัญหาในการคืนสินค้า</entry><!-- 退货问题描述：-->
+	<entry key="member.order_returnlog_view.express_company">บริษัทขนส่ง</entry><!--物流公司： -->
+	<entry key="member.order_returnlog_view.express_code">รหัสบิลการขนส่ง</entry><!--物流单号： -->
+	<entry key="member.order_returnlog_view.express_info">ข้อมูลการขนส่ง</entry><!-- 物流信息-->
+	<entry key="member.order_returnlog_view.correct__location">กรุณาเลือกสถานที่จัดส่งสินค้า</entry><!--请选择正确的发货地กรุณาเลือกสถานที่จัดส่งสินค้า！ -->
+	<entry key="member.order_returnlog_view.service_from">การบริการคืนสินค้าครวนี้จัดการโดย</entry><!--本次退货服务由การบริการคืนสินค้าครวนี้จัดการโดย -->
+	<entry key="member.order_returnlog_view.provide_from_you">นำเสนอให้ท่าน</entry><!--为您提供นำเสนอให้ท่าน-->
+	<entry key="member.order_returnlog_view.deliver_type">ประเทศส่งของ：</entry><!--发货类型ประเทศส่งของ：-->
+	<entry key="member.order_returnlog_view.deliver_location">สถานที่ส่งของ:</entry><!--发货地สถานที่ส่งของ:-->
+	<entry key="member.order_returnlog_view.receive_location">สถานที่รับของ：</entry><!--收货地สถานที่รับของ：-->
+	<entry key="member.order_returnlog_view.country">ภายในประเทศ</entry><!--国内ภายในประเทศ-->
+	<entry key="member.order_returnlog_view.internation">ต่างประเทศ</entry><!--国际ต่างประเทศ-->
+
+	<!-- order_seller_intro.html -->
+	<entry key="member.order_seller_intro.orderno">รหัสบิลการสั่งซื้อสินค้า</entry><!-- 订单号：-->
+	<entry key="member.order_seller_intro.virtual_goods">ข้อมูลด่านล่างนี้เป็นข้อมูลสินค้าเสมือนจริงจากผู้ขายที่ส่งมา </entry><!--以下是商家提交的虚拟商品信息： -->
+	<entry key="member.order_seller_intro.button">ปุ่ม</entry><!-- 按钮-->
+	<entry key="member.order_seller_intro.verify">ตกลง</entry><!--确认 -->
+	
+	<!-- buyer_adraw.html -->
+	<entry key="member.buyer_adraw.integral_lottery">คะแนนจับรางวัล</entry><!--积分抽奖คะแนนจับรางวัล-->
+	<entry key="member.buyer_adraw.turn_continue"> หมุนๆปาเป้า ของขวัญดีๆไม่หยุด </entry><!--转盘转转 好礼不断 หมุนๆปาเป้า ของขวัญดีๆไม่หยุด -->
+	<entry key="member.buyer_adraw.share_activity">แชร์กิจกรรม</entry><!--分享活动แชร์กิจกรรม-->
+	<entry key="member.buyer_adraw.get_one_integral">ได้รับ100คะแนน</entry><!--获得100积分ได้รับ100คะแนน-->
+	<entry key="member.buyer_adraw.share_immediately">แชร์ทันที</entry><!--立即分享แชร์ทันที-->
+	<entry key="member.buyer_adraw.share_to_qq">แชร์ถึง qqzone </entry><!--分享到QQ空间 แชร์ถึง qqzone -->
+	<entry key="member.buyer_adraw.share_to_sina_blog">แชร์ถึง Sina Weibo </entry><!--分享到新浪微博 แชร์ถึง Sina Weibo -->
+	<entry key="member.buyer_adraw.share_to_tencent_blog"> แชร์ถึง QQ Weibo </entry><!--分享到腾讯微博 แชร์ถึง QQ Weibo -->
+	<entry key="member.buyer_adraw.share_people">แชร์ถึงเว็บไซต์ renren </entry><!--分享到人人网 แชร์ถึงเว็บไซต์ renren -->
+	<entry key="member.buyer_adraw.share_to_weixin">แชร์ถึงวีแชท</entry><!--分享到微信 แชร์ถึงวีแชท -->
+	<entry key="member.buyer_adraw.invite_register">เชิญลงทะเบียน</entry><!--邀请注册เชิญลงทะเบียน-->
+	<entry key="member.buyer_adraw.get_two_integral">ได้รับ200คะแนน</entry><!--获得200积分ได้รับ200คะแนน-->
+	<entry key="member.buyer_adraw.register_immediately">ลงทะเบียนทันที </entry><!--立即注册 ลงทะเบียนทันที -->
+	<entry key="member.buyer_adraw.the_time_award">รางวัลช่วงเวลานี้ </entry><!--本期奖品รางวัลช่วงเวลานี้ -->
+	<entry key="member.buyer_adraw.participate_way">วิธีการเข้าร่วม</entry><!--参与方式 วิธีการเข้าร่วม -->
+	<entry key="member.buyer_adraw.tyt_web"> บนเว็บไซต์ทางการของไทยี่เถา </entry><!--在泰易淘官方网站 บนเว็บไซต์ทางการของไทยี่เถา -->
+	<entry key="member.buyer_adraw.tyt"> ไทยี่เถา</entry><!--泰易淘 ไทยี่เถา-->
+	<entry key="member.buyer_adraw.click_activity"></entry><!--点击活动页面“立即抽奖”按钮可以立即参与活动。-->
+	<entry key="member.buyer_adraw.lottery_rule"> กฎการจับรางวัล</entry><!--抽奖规则-->
+	<entry key="member.buyer_adraw.lottery_count">1. 20 คะแนนได้จับรางวัลหนึ่งครั้ง จำนวนจับรางวัลเป็น30ครั้ง  </entry><!--1. 20积分抽奖一次，抽奖次数30次； 1. คะแนนได้จับรางวัลหนึ่งครั้ง จำนวนจับรางวัลเป็น30ครั้ง -->
+	<entry key="member.buyer_adraw.lottery_goods">2. รางวัลที่ได้ หากคุณภาพไม่มีปัญหาจะไม่สามารถเปลี่ยนหรือคืนได้ และไม่สามารถแลกเป็นเงินสด </entry><!--2. 抽奖商品，非质量问题不接受退换货，亦不折现； 2. รางวัลที่ได้ หากคุณภาพไม่มีปัญหาจะไม่สามารถเปลี่ยนหรือคืนได้ และไม่สามารถแลกเป็นเงินสด -->
+	<entry key="member.buyer_adraw.illegal_method">3.สำหรับผู้ร่วมกิจกรรมที่ใช้วิธีใดๆที่ไม่ถูกต้อง ไทยี่เถามีสิทธิยกเลิกสิทธิ์จับรางวัลของนั้น </entry><!--3. 对于任何使用不当手法的参与者，泰易淘有权取消其抽奖资格；3.สำหรับผู้ร่วมกิจกรรมที่ใช้วิธีใดๆที่ไม่ถูกต้อง ไทยี่เถามีสิทธิยกเลิกสิทธิ์จับรางวัลของนั้น -->
+	<entry key="member.buyer_adraw.award_name">รายชื่อได้รางวัล </entry><!--中奖名单 รายชื่อได้รางวัล -->
+	<entry key="member.buyer_adraw.my_lottery">รางวัล </entry><!--我的奖品รางวัล-->
+	<entry key="member.buyer_adraw.tips">แจ้งเตือน </entry><!--提示 แจ้งเตือน  -->
+	<entry key="member.buyer_adraw.close">ปิด</entry><!--关闭 ปิด-->
+	<entry key="member.buyer_adraw.lottery_record">ข้อมูลบันทึกได้รางวัล </entry><!--中奖记录 ข้อมูลบันทึกได้รางวัล -->
+	<entry key="member.buyer_adraw.user_name">ชื่อผู้ใช้</entry><!--用户名ชื่อผู้ใช้ -->
+	<entry key="member.buyer_adraw.award_present">รางวัลที่ได้</entry><!--中奖礼品รางวัลที่ได้ -->
+	<entry key="member.buyer_adraw.lottery_time">เวลาจับรางวัล </entry><!--抽奖时间 เวลาจับรางวัล -->
+	
+	<!--buyer_login_detail.html-->
+	<entry key="member.buyer_login_detail.login_detail">รายการเข้าสู่ระบบ </entry><!--登录明细 รายการเข้าสู่ระบบ -->
+	<entry key="member.buyer_login_detail.tips">แจ้งเตือน หากพบบัญชีมีปัญหาล็อคอินที่ผิดปกติด กรุณาเปลี่ยนข้อมูลเข้าสู่ระบบหรือปรับปรุงการตั้งค่าความปลอดภัยของบัญชี </entry><!--提醒：如果发现账号存在异常登录，请及时更改登录信息或提高账户安全设置  แจ้งเตือน หากพบบัญชีมีปัญหาล็อคอินที่ผิดปกติด กรุณาเปลี่ยนข้อมูลเข้าสู่ระบบหรือปรับปรุงการตั้งค่าความปลอดภัยของบัญชี -->
+	<entry key="member.buyer_login_detail.login_time">เวลาเข้าสู่ระบบ ：</entry><!--登录时间 เวลาเข้าสู่ระบบ ：-->
+	<entry key="member.buyer_login_detail.login_address">ที่อยู่เข้าสู่ระบบ</entry><!--登录地址 ที่อยู่เข้าสู่ระบบ -->
+	<entry key="member.buyer_login_detail.no_login_info">ท่านยังไม่มีข้อมูลเข้าสู่ระบบในปัจจุบัน</entry><!--您目前还没有登陆信息！。ท่านยังไม่มีข้อมูลเข้าสู่ระบบในปัจจุบัน-->
+	
+	<!-- order_ship_view.html -->
+	<entry key="member.order_ship_view.view_express">ตรวจสอบสถานะการขนส่ง</entry><!--查看物流 -->
+	<entry key="member.order_ship_view.express_info">ข้อมุลการขนส่ง</entry><!--物流信息 -->
+	<entry key="member.order_ship_view.shipping_name">ผู้รับสินค้า</entry><!--收货人 -->
+	<entry key="member.order_ship_view.shipping_address">ที่อยู่รับสินค้า</entry><!--收货地址 -->
+	<entry key="member.order_ship_view.zip_code">รหัสไปรษณีย์</entry><!--邮政编码 -->
+	<entry key="member.order_ship_view.phone">เบอร์โทรศัพท์</entry><!--电话号码 -->
+	<entry key="member.order_ship_view.mobile_phone">เบอร์โทรศัพท์มือถือ</entry><!--手机号码 -->
+	<entry key="member.order_ship_view.shopping_mode">วิธีการจัดส่งสินค้า</entry><!--配送方式 -->
+	<entry key="member.order_ship_view.buyer_message">ข้อความจากผู้ซื้อ</entry><!--买家留言 -->
+	<entry key="member.order_ship_view.invoice_type">ประเภทของใบเสร็จ</entry><!-- 发票类型-->
+	<entry key="member.order_ship_view.invoice_header">หัวใบเสร็จ</entry><!--发票台头 -->
+	<entry key="member.order_ship_view.personage">ส่วนตัว</entry><!-- 个人-->
+	<entry key="member.order_ship_view.monad">หน่วยงาน</entry><!-- 单位-->
+	<entry key="member.order_ship_view.express_dynamic">การอัตเดตข่าวสารการขนส่ง</entry><!--物流动态 -->
+	<entry key="member.order_ship_view.express_company">บริษัทขนส่ง</entry><!--物流公司 -->
+	<entry key="member.order_ship_view.express_code">รหัสบิลการขนส่ง</entry><!-- 物流单号-->
+
+	<!-- order_view.html -->
+	<entry key="member.order_view.order_details">ข้อมูลรายละเอียดการสั่งซื้อสินค้า</entry><!--订单详情 -->
+	<entry key="member.order_view.home_page">หน้าแรก</entry><!--首页 -->
+	<entry key="member.order_view.my_order">รายการสั่งซื้อสินค้า</entry><!--我的订单 -->
+	<entry key="member.order_view.not_pay">ยังไม่ได้ชำระเงิน</entry><!--未支付 -->
+	<entry key="member.order_view.alipay">อาลีเพลย์ </entry><!-- 支付宝-->
+	<entry key="member.order_view.mobile_web_alipay">อาลีเพลย์บนมือถือ</entry><!--手机网页支付宝 -->
+	<entry key="member.order_view.mobile_alipay">อาลีเพลย์แบบแอฟลิเคชั่นผ่านมือถือ</entry><!--手机支付宝APP -->
+	<entry key="member.order_view.quick_money">การชำระเงินแบบรวดเร็ว</entry><!-- 快钱-->
+	<entry key="member.order_view.tenpay">ไฉ-ฟู-ทง </entry><!-- 财付通-->
+	<entry key="member.order_view.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.order_view.offline_paymen">การชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.order_view.pay_delivery">การชำระเงินปลายทาง</entry><!--货到付款 -->
+	<entry key="member.order_view.deposit_payment ">การชำระเงินแบบมัดจำ</entry><!--预存款支付 -->
+	<entry key="member.order_view.have_cancel">ยกเลิกแล้ว</entry><!-- 已取消-->
+	<entry key="member.order_view.obligation">รอการดำเนินการชำระเงิน</entry><!--待付款 -->
+	<entry key="member.order_view.offline_payment_approval">รอการตรวจสอบการชำระแบบออฟไลน์</entry><!-- 线下支付待审核-->
+	<entry key="member.order_view.cod_momentum">ชำระเงินปลายทางรอการดำเนินการจัดส่งสินค้า</entry><!--货到付款待发货 -->
+	<entry key="member.order_view.have_payment">ชำระเงินแล้ว</entry><!-- 已付款-->
+	<entry key="member.order_view.have_deliver">ส่งสินค้าสำเร็จ</entry><!-- 已发货-->
+	<entry key="member.order_view.have_shipping">ได้รับสินค้าเรียบร้อยแล้ว</entry><!--已收货 -->
+	<entry key="member.order_view.have_finish">การสั่งซื้อสำเร็จ,ประเมินความพึงพอใจเรียบร้อย</entry><!--已完成,已评价  -->
+	<entry key="member.order_view.orderno">รหัสรายการสั่งซื้อสินค้า</entry><!--订单号： -->
+	<entry key="member.order_view.status">สถานะ</entry><!-- 状态：-->
+	<entry key="member.order_view.payment">การชำระเงิน</entry><!--支付 -->
+	<entry key="member.order_view.photographed_goods">สินค้าอยู่ในตะกร้า</entry><!--拍下商品 -->
+	<entry key="member.order_view.seller_deliver">ผู้ขายส่งสินค้า</entry><!--商家发货 -->
+	<entry key="member.order_view.about_cinfirm_receipt">ยืนยันการรับสินค้า</entry><!--确认收货 -->
+	<entry key="member.order_view.finish">สำเร็จ</entry><!--完成 -->
+	<entry key="member.order_view.goods_detailed">รายการสินค้า</entry><!--商品清单 -->
+	<entry key="member.order_view.goods_image">รูปภาพสินค้า</entry><!--商品图片 -->
+	<entry key="member.order_view.goods_name">ชื่อสินค้า</entry><!-- 商品名称-->
+	<entry key="member.order_view.unit_price">ราคาต่อหน่วย</entry><!--单价 -->
+	<entry key="member.order_view.number">จำนวน</entry><!--数量 -->
+	<entry key="member.order_view.standard">ขนาด</entry><!--规格 -->
+	<entry key="member.order_view.total_price">ยอดรวม</entry><!--总价 -->
+	<entry key="member.order_view.group">กรุ๊ปบาย</entry><!--团购 -->
+	<entry key="member.order_view.group_goods">สินค้าในเซทเดียวกัน</entry><!--【组合商品】 -->
+	<entry key="member.order_view.nothing">ไม่มี</entry><!--无 -->
+	<entry key="member.order_view.seller_shipping">รายการสั่งซื้อสินค้านี้จัดส่งสินค้าโดยหลายร้านค้า</entry><!--【该订单由多个商家配送】 -->
+	<entry key="member.order_view.pay_info">ข้อมูลการชำระเงิน</entry><!--付款信息 -->
+	<entry key="member.order_view.order_log">การบันทึกการสั่งซื้อสินค้ารายวัน</entry><!--订单日志 -->
+	<entry key="member.order_view.order_tracking">การเช็คสถานะการจัดส่งสินค้า</entry><!-- 订单跟踪-->
+	<entry key="member.order_view.pay_mode">วิธีการชำระเงิน</entry><!--付款方式： -->
+	<entry key="member.order_view.goods_amount">จำนวนเงินของราคาสินค้า</entry><!-- 商品金额：￥-->
+	<entry key="member.order_view.freight_amount">จำนวนเงินของค่าขนส่ง</entry><!--运费金额：￥ -->
+	<entry key="member.order_view.coupon_amount">จำนวนเงินของส่วนลด</entry><!--优惠金额：￥ -->
+	<entry key="member.order_view.should_pay_amount">จำนวนเงินที่ต้องชำระ</entry><!--应支付金额：￥ -->
+	<entry key="member.order_view.log_info">ข้อมูลรายละเอียดรายงาน</entry><!--日志信息 -->
+	<entry key="member.order_view.handlers">ผู้ดำเนินการ</entry><!-- 操作者-->
+	<entry key="member.order_view.details">ข้อมูลรายละเอียด</entry><!--详情 -->
+	<entry key="member.order_view.order_info">ข้อมูลรายการสั่งซื้อสินค้า</entry><!--订单信息 -->
+	<entry key="member.order_view.shipping_info">ข้อมูลผู้รับสินค้า</entry><!-- 收货人信息-->
+	<entry key="member.order_view.shipping_name">ผู้รับสินค้า</entry><!-- 收货人：-->
+	<entry key="member.order_view.shipping_address">ที่อยู่รับสินค้า</entry><!-- 收货地址：-->
+	<entry key="member.order_view.zip_code">รหัสไปรษณีย์</entry><!-- 邮政编码：-->
+	<entry key="member.order_view.phone">เบอร์โทร</entry><!-- 电话号码：-->
+	<entry key="member.order_view.mobile_phone">เบอร์มือถือ</entry><!-- 手机号码：-->
+	<entry key="member.order_view.pay_shiping">วิธีการชำระเงินและวิธีการจัดส่งสินค้า</entry><!--支付方式及配送方式 -->
+	<entry key="member.order_view.pay_mode">วิธีการชำระเงิน</entry><!-- 支付方式：-->
+	<entry key="member.order_view.outstanding">ยังไม่ได้ชำระเงิน , ไม่มีเวลาชำระเงิน</entry><!--尚未支付，无支付时间 -->
+	<entry key="member.order_view.pay_time">เวลาชำระเงิน</entry><!-- 支付时间：-->
+	<entry key="member.order_view.payment_instructions">การอธิบายการชำระเงิน</entry><!--支付说明： -->
+	<entry key="member.order_view.shipping_way">วิธีการจัดส่งสินค้า</entry><!--配送方式： -->
+	<entry key="member.order_view.buyer_message">ข้อความจากผู้ซื้อ</entry><!--买家留言： -->
+	<entry key="member.order_view.invoice_info">ข้อมูลใบเสร็จการสั่งซื้อสินค้า</entry><!--发票信息 -->
+	<entry key="member.order_view.invoice_tye">ประเภทใบสั่งซื้อสินค้า</entry><!--发票类型： -->
+	<entry key="member.order_view.plain_invoice">ใบเสร็จการสั่งซื้อทั่วไป</entry><!--普通发票 -->
+	<entry key="member.order_view.value_added_invoice">ใบเสร็จรวมภาษี</entry><!--增值税发票 -->
+	<entry key="member.order_view.invoice_title">หัวใบเสร็จ</entry><!--发票抬头： -->
+	<entry key="member.order_view.not_available">ยังไม่มี</entry><!--暂无 -->
+	<entry key="member.order_view.total_amount_goods">ยอดเงินรวม</entry><!-- 商品总金额：￥-->
+	<entry key="member.order_view.coupon">ส่วนลด</entry><!--优惠：￥ -->
+	<entry key="member.order_view.freight">ค่าส่ง</entry><!--运费：￥ -->
+	<entry key="member.order_view.payable_amount">จำนวนเงินที่ต้องชำระ</entry><!--应付金额： -->
+
+	<!--predeposit_list.html  -->
+	<entry key="member.predeposit_list.recharge_list">รายการที่เติมเงิน</entry><!-- 充值列表-->
+	<entry key="member.predeposit_list.account_recharge">เติมเงินเข้าบัญชี</entry><!--账户充值 -->
+	<entry key="member.predeposit_list.code">รหัส</entry><!-- 编号-->
+	<entry key="member.predeposit_list.recharge_time">เวลาที่เติมเงิน</entry><!--充值时间 -->
+	<entry key="member.predeposit_list.recharge_amount">จำนวนเงินที่เติมเงิน</entry><!--充值金额 -->
+	<entry key="member.predeposit_list.pay_mode">วิธีการชำระเงิน</entry><!--支付方式 -->
+	<entry key="member.predeposit_list.recharge_status">สถานะการเติมเงิน</entry><!--充值状态 -->
+	<entry key="member.predeposit_list.pay_status">สถานะการชำระเงิน</entry><!--支付状态 -->
+	<entry key="member.predeposit_list.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.predeposit_list.alipay">อาลีเพลย์</entry><!-- 支付宝-->
+	<entry key="member.predeposit_list.quick_money">การชำระเงิน แบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.predeposit_list.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.predeposit_list.tenpay">ไฉ-ฟู-ทง </entry><!-- 财付通-->
+	<entry key="member.predeposit_list.offline_payment">ชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.predeposit_list.wait_pay">รอการชำระเงิน</entry><!--等待支付 -->
+	<entry key="member.predeposit_list.pay_complete">ชำระเงินเรียบร้อย</entry><!--支付完成 -->
+	<entry key="member.predeposit_list.wait_review">รอการตรวจสอบ</entry><!--等待审核 -->
+	<entry key="member.predeposit_list.payment">ชำระ</entry><!-- 支付-->
+	<entry key="member.predeposit_list.view">เรียกดูข้อมูล</entry><!-- 查看-->
+	<entry key="member.predeposit_list.recharge_info">ท่านยังไม่มีข้อมูลการเติมเงิน</entry><!-- 您目前还没有充值信息！-->
+
+	<!--predeposit_pay.html  -->
+	<entry key="member.predeposit_pay.pay_mode_not_empty">กรุณากรอกวิธีการชำระเงิน</entry><!--支付方式不能为空 -->
+	<entry key="member.predeposit_pay.recharge_amount_not_empty">กรุณากรอกยอดเงินที่เติมเงิน</entry><!--充值金额不能为空 -->
+	<entry key="member.predeposit_pay.greater_than_amount_number">กรุณากรอกยอดเงิน มากกว่า {0}</entry><!--请输入大于{0}的金额数字 -->
+	<entry key="member.predeposit_pay.remit_name_not_empty">กรุณากรอก ผู้โอนเงิน</entry><!--汇款人不能为空 -->
+	<entry key="member.predeposit_pay.remit_bank_not_empty">กรุณากรอกชื่อธนาคารที่โอนเงิน</entry><!-- 汇款银行不能为空-->
+	<entry key="member.predeposit_pay.remit_time_not_empty">กรุณากรอกเวลาที่โอนเงิน</entry><!-- 汇款时间不能为空-->
+	<entry key="member.predeposit_pay.pay_mode">วิธีชำระเงิน</entry><!-- 支付方式：-->
+	<entry key="member.predeposit_pay.alipay">อาลีเพลย์</entry><!--支付宝 -->
+	<entry key="member.predeposit_pay.quick_money">การชำระเงินแบบรวดเร็ว</entry><!-- 快钱-->
+	<entry key="member.predeposit_pay.chinabank">ธนาคารออนไลน์</entry><!--网银在线 -->
+	<entry key="member.predeposit_pay.tenpay">ไฉ-ฟู-ทง </entry><!--财付通 -->
+	<entry key="member.predeposit_pay.offline_payment">ชำระเงินแบบออฟไลน์</entry><!-- 线下支付-->
+	<entry key="member.predeposit_pay.pay_amount">ยอดเงินที่ชำระ</entry><!--支付金额： -->
+	<entry key="member.predeposit_pay.remit_name">ชื่อ - นามสกุลของผู้โอนเงิน</entry><!--汇款人姓名： -->
+	<entry key="member.predeposit_pay.remit_bank">ธนาคารที่โอนเงิน</entry><!--汇款银行： -->
+	<entry key="member.predeposit_pay.remit_time">วันที่โอนเงิน</entry><!--汇款日期： -->
+	<entry key="member.predeposit_pay.member_remark">หมายเหตุของสมาชิก</entry><!-- 会员备注：-->
+	<entry key="member.predeposit_pay.payment">ชำระ</entry><!-- 支付-->
+
+	<!--predeposit_view.html  -->
+	<entry key="member.predeposit_view.recharge_details">ข้อมูลรายละเอียดการเติมเงน</entry><!--充值详情 -->
+	<entry key="member.predeposit_view.account_recharge">เติมเงินเข้าบัญชี</entry><!-- 账户充值-->
+	<entry key="member.predeposit_view.recharge_list">รายการเติมเงิน</entry><!--充值列表 -->
+	<entry key="member.predeposit_view.recharge_code">รหัสการเติมเงิน</entry><!--充值编号： -->
+	<entry key="member.predeposit_view.recharge_amount">ยอดเงินที่เติมเงิน</entry><!--充值金额： -->
+	<entry key="member.predeposit_view.recharge_time">เวลาที่เติมเงิน</entry><!--充值时间： -->
+	<entry key="member.predeposit_view.pay_mode">วิธีการชำระเงิน</entry><!--支付方式： -->
+	<entry key="member.predeposit_view.alipay">อาลีเพลย์</entry><!-- 支付宝-->
+	<entry key="member.predeposit_view.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.predeposit_view.chinabank">ธนาคารออนไลน์</entry><!-- 网银在线-->
+	<entry key="member.predeposit_view.tenpay">ไฉ-ฟู-ทง  </entry><!--财付通 -->
+	<entry key="member.predeposit_view.offline_payment">ชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.predeposit_view.recharge_status">สถานะการเติมเงิน</entry><!--充值状态： -->
+	<entry key="member.predeposit_view.wait_pay">รอการชำระเงิน</entry><!--等待支付 -->
+	<entry key="member.predeposit_view.pay_status">สถานะการชำระเงิน</entry><!--支付状态： -->
+	<entry key="member.predeposit_view.wait_review">รอการตรวจสอบ</entry><!-- 等待审核-->
+	<entry key="member.predeposit_view.pay_complete">การชำระเงินเรียบร้อย</entry><!-- 支付完成-->
+	<entry key="member.predeposit_view.emit_name">ชื่อ-นามสกุลผู้โอนเงิน</entry><!-- 汇款人姓名：-->
+	<entry key="member.predeposit_view.remit_bank">ชื่อธนาคารที่โอนเงิน</entry><!--汇款银行： -->
+	<entry key="member.predeposit_view.remit_time">วันที่โอนเงิน</entry><!-- 汇款日期：-->
+	<entry key="member.predeposit_view.recharge_remark">หมายเหตุการเติมเงิน</entry><!--充值备注： -->
+	<entry key="member.predeposit_view.operation_admin">ผู้ดำเนินการ</entry><!--操作管理员： -->
+	<entry key="member.predeposit_view.operation_remark">หมายเหตุการดำเนินการ</entry><!--操作备注： -->
+	<entry key="member.predeposit_view.return_list">กลับไปหน้ารายการ</entry><!--返回列表 -->
+
+	<!-- query_ship_data.html -->
+	<entry key="member.query_ship_data.no_logistics_info">ยังไม่มีข้อมูลการขนส่ง</entry><!--暂无物流信息！ -->
+	<entry key="member.query_ship_data.express_company_network_anomalies">ระบบของบริษัทขนส่งเกิดความขัดข้องรบกวนตรวจสอบภายหลัง</entry><!-- 快递公司网络异常，请稍后查询-->
+
+	<!--recharge_order_view.html  -->
+	<entry key="member.recharge_order_view.order_details">รายละเอียดการจัดส่งสินค้า</entry><!--订单详情 -->
+	<entry key="member.recharge_order_view.home_page">หน้าแรก</entry><!--首页 -->
+	<entry key="member.recharge_order_view.my_order">ใบสั่งซื้อ</entry><!--我的订单 -->
+	<entry key="member.recharge_order_view.not_payment">ยังไม่ได้ชำระเงิน</entry><!-- 未支付-->
+	<entry key="member.recharge_order_view.alipay">อาลีเพลย์</entry><!--支付宝 -->
+	<entry key="member.recharge_order_view.mobile_web_alipay">ระบบอาลีเพลย์ บนมือถือ</entry><!-- 手机网页支付宝-->
+	<entry key="member.recharge_order_view.mobile_alipay">อาลีเพลย์แบบ แอฟพลิเคชั่น ผ่านมือถือ </entry><!--手机支付宝APP -->
+	<entry key="member.recharge_order_view.quick_money">การชำระเงินแบบรวดเร็ว</entry><!--快钱 -->
+	<entry key="member.recharge_order_view.tenpay">ไฉ-ฟู-ทง</entry><!--财付通 -->
+	<entry key="member.recharge_order_view.chinabank">ธนาคารออนไลน์</entry><!-- 网银在线-->
+	<entry key="member.recharge_order_view.offline_payment">การชำระเงินแบบออฟไลน์</entry><!--线下支付 -->
+	<entry key="member.recharge_order_view.pay_on_delivery">การชำระเงินปลายทาง</entry><!-- 货到付款-->
+	<entry key="member.recharge_order_view.advance_deposit_payment">การชำระเงินแบบมัดจำ</entry><!--预存款支付 -->
+	<entry key="member.recharge_order_view.have_cancel">ยกเลิกเรียบร้อยแล้ว</entry><!--已取消 -->
+	<entry key="member.recharge_order_view.obligation">รอการชำระเงิน</entry><!--待付款 -->
+	<entry key="member.recharge_order_view.offline_payment_approval">การตรวจสอบการชำระเงินแบบออฟไลน์</entry><!-- 线下支付待审核-->
+	<entry key="member.recharge_order_view.cod_momentum">ชำระเงินปลายทางรอการจัดส่งสินค้า</entry><!-- 货到付款待发货-->
+	<entry key="member.recharge_order_view.have_payment">ชำระเงินเรียบร้อย</entry><!-- 已付款-->
+	<entry key="member.recharge_order_view.have_deliver">ส่งสินค้าเรียบร้อย</entry><!-- 已发货-->
+	<entry key="member.recharge_order_view.have_goods">ได้รับสินค้าเรียบร้อย</entry><!-- 已收货-->
+	<entry key="member.recharge_order_view.have_evaluation">การสั่งซื้อสำเร็จ,ประเมินความพึงพอใจเรียบร้อย</entry><!--已完成,已评价  -->
+	<entry key="member.recharge_order_view.orderno">รหัสรายการสั่งซื้อสินค้า</entry><!--订单号： -->
+	<entry key="member.recharge_order_view.status">สถานะ</entry><!-- 状态：-->
+	<entry key="member.recharge_order_view.pay">การชำระเงิน</entry><!-- 支付-->
+	<entry key="member.recharge_order_view.payment_info">ข้อมูลการชำระเงิน</entry><!-- 付款信息-->
+	<entry key="member.recharge_order_view.payment_method">วิธีการชำระเงิน</entry><!-- 付款方式：-->
+	<entry key="member.recharge_order_view.goods_amount">ยอดเงินของสินค้า</entry><!-- 商品金额：￥-->
+	<entry key="member.recharge_order_view.should_amount">ยอดเงินที่ต้องชำระ</entry><!--应支付金额：￥ -->
+	<entry key="member.recharge_order_view.order_info">ข้อมูลการสั่งซื้อสินค้า</entry><!-- 订单信息-->
+	<entry key="member.recharge_order_view.prepaid_phone">รายการเติมเงิน</entry><!-- 充值清单-->
+	<entry key="member.recharge_order_view.goods_image">รูปภาพสินค้า</entry><!--商品图片 -->
+	<entry key="member.recharge_order_view.goods_name">ชื่อสินค้า</entry><!--商品名称 -->
+	<entry key="member.recharge_order_view.unit_price">ราคาต่อหน่วย</entry><!--单价 -->
+	<entry key="member.recharge_order_view.number">จำนวน</entry><!--数量 -->
+	<entry key="member.recharge_order_view.total_price">ราคารวม</entry><!--总价 -->
+	<entry key="member.recharge_order_view.total_amount_goods">ยอดเงินรวมของสินค้า</entry><!-- 商品总金额：￥-->
+	<entry key="member.recharge_order_view.amount_payable">ยอดเงินที่ต้องชำระ</entry><!--应付金额： -->
+
+	<!--refund_view.html  -->
+	<entry key="member.refund_view.not_empty">ต้องกรอกข้อมูล</entry><!--不能为空 -->
+	<entry key="member.refund_view.refund_code">รหัสการคืนเงิน</entry><!--退款编号： -->
+	<entry key="member.refund_view.refund_time">เวลาการคืนเงิน</entry><!--退款时间： -->
+	<entry key="member.refund_view.member_name">ชื่อสมาชิกของผู้ซื้อ</entry><!--买家会员名： -->
+	<entry key="member.refund_view.refund_money">ยอดเงินที่ต้องคืนเงิน</entry><!--退款金额： -->
+	<entry key="member.refund_view.pay_mode">วิธีการชำระเงิน</entry><!--支付方式： -->
+	<entry key="member.refund_view.remark_info">หมายเหตุ</entry><!--备注信息： -->
+
+	<!-- refund.html -->
+	<entry key="member.refund.refund_manage">การจัดการการคืนเงิน</entry><!-- 退款管理-->
+	<entry key="member.refund.seller_center">ศูนย์รวมร้านค้า</entry><!--商家中心 -->
+	<entry key="member.refund.refund_record">ประวัติการคืนเงิน</entry><!--退款记录 -->
+	<entry key="member.refund.order_code">รหัสรายการสั่งซื้อสินค้า</entry><!-- 订单编号-->
+	<entry key="member.refund.member_name">ชื่อสมาชิกของผู้ซื้อ</entry><!-- 买家会员名-->
+	<entry key="member.refund.refund_time">เวลาที่คืนเงิน</entry><!-- 退款时间：-->
+	<entry key="member.refund.search">ค้นหา</entry><!-- 搜索-->
+	<entry key="member.refund.refund_code">รหัสการคืนเงิน</entry><!--退款编号 -->
+	<entry key="member.refund.refund_moeny">ยอดเงินที่คืนเงิน</entry><!-- 退款金额-->
+	<entry key="member.refund.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.refund.view">เรียกดูข้อมูล</entry><!--查看 -->
+
+	<!-- report_add.html -->
+	<entry key="member.report_add.report_goods">สินค้าที่ถูกรายงาน</entry><!-- 举报商品-->
+	<entry key="member.report_add.report_type_not_empty">กรุณากรอกประเภทรายงานการร้องเรียน</entry><!--举报类型不能为空 -->
+	<entry key="member.report_add.report_theme_not_empty">กรุณากรอกหัวข้อที่รายงาน</entry><!-- 举报主题不能为空-->
+	<entry key="member.report_add.report_content_not_empty">กรุณากรอกข้อความที่รายงาน</entry><!-- 举报内容不能为空-->
+	<entry key="member.report_add.buyer_center">ศูนย์รวมลูกค้า</entry><!-- 买家中心-->
+	<entry key="member.report_add.report_list">รายการการรายงาน</entry><!-- 举报列表-->
+	<entry key="member.report_add.report_type">ประเภทของรายงาน</entry><!--举报类型： -->
+	<entry key="member.report_add.please_choose_report_type">กรุณาเลือกประเภทการรายงาน</entry><!-- 请选择举报类型-->
+	<entry key="member.report_add.report_theme">หัวข้อรายงาน</entry><!--举报主题： -->
+	<entry key="member.report_add.please_choose_report_theme">กรุณาเลือกหัวข้อการรายงาน</entry><!--请选择举报主题 -->
+	<entry key="member.report_add.discovery_image1">รูปหลักฐาน 1</entry><!--取证图片1： -->
+	<entry key="member.report_add.discovery_image2">รูปหลักฐาน 2</entry><!-- 取证图片2：-->
+	<entry key="member.report_add.discovery_image3">รูปหลักฐาน 3</entry><!--取证图片3： -->
+	<entry key="member.report_add.report_content">ข้อความรายงาน</entry><!--举报内容： -->
+	<entry key="member.report_add.affirm_report">ยืนยันการรายงาน</entry><!--确认举报 -->
+	<entry key="member.report_add.submit">ตกลง</entry><!-- 提交-->
+
+	<!--report_img.html  -->
+	<entry key="member.report_img.complain_image_view">เรียกดูรูปภาพการรายงาน</entry><!--投诉图片查看 -->
+	<entry key="member.report_img.buyer_center">ศูนย์รวมผู้ซื้อ</entry><!-- 买家中心-->
+	<entry key="member.report_img.report_image">รูปภาพการรายงาน</entry><!-- 举报图片-->
+	<entry key="member.report_img.image_list">รายการรูปภาพ</entry><!-- 图片列表-->
+	<entry key="member.report_img.image1">รูปภาพ1</entry><!--图片一 -->
+	<entry key="member.report_img.image2">รูปภาพ2</entry><!-- 图片二-->
+	<entry key="member.report_img.image3">รูปภาพ3</entry><!--图片三 -->
+
+	<!--  report_view.html-->
+	<entry key="member.report_view.report_details">ข้อมูลรายละเอียดการรายงาน</entry><!--举报详情 -->
+	<entry key="member.report_view.reply_not_empty">กรุณากรอกข้อความที่ตอบกลับ</entry><!-- 回复内容不能为空-->
+	<entry key="member.report_view.buyer_center">ศูนย์รวมผู้ซื้อ</entry><!-- 买家中心-->
+	<entry key="member.report_view.report_list">รายการการรายงาน</entry><!--举报列表 -->
+	<entry key="member.report_view.report_goods">สินค้าที่ถูกรายงาน</entry><!--举报商品： -->
+	<entry key="member.report_view.report_type">ประเภทการรายงาน</entry><!--举报类型： -->
+	<entry key="member.report_view.report_theme">หัวข้อการรายงาน</entry><!-- 举报主题：-->
+	<entry key="member.report_view.report_time">เวลาการรายงาน</entry><!-- 举报时间：-->
+	<entry key="member.report_view.report_content">เนื้อหาการรายงาน</entry><!--举报内容： -->
+	<entry key="member.report_view.report_status">สถานะการรายงาน</entry><!-- 举报状态：-->
+	<entry key="member.report_view.untreated">ยังไม่ได้จัดการ</entry><!-- 未处理-->
+	<entry key="member.report_view.processed">จัดการเรียบร้อยแล้ว</entry><!--已处理 -->
+	<entry key="member.report_view.result">ผลการดำเนินงาน</entry><!-- 处理结果：-->
+	<entry key="member.report_view.waiting_process">รอการดำเนินงาน</entry><!--等待处理 -->
+	<entry key="member.report_view.valid_report">การรายงานที่มีประสิทธิภาพ</entry><!--有效举报 -->
+	<entry key="member.report_view.nullity_report">การรายงานที่ไม่มีคุณภาพ</entry><!--无效举报 -->
+	<entry key="member.report_view.discovery_image1">รูปหลักฐานที่ 1</entry><!--取证图片1： -->
+	<entry key="member.report_view.discovery_image2">รูปหลักฐานที่ 2</entry><!--取证图片2： -->
+	<entry key="member.report_view.discovery_image3">รูปหลักฐานที่ 3</entry><!-- 取证图片3：-->
+	<entry key="member.report_view.view_Image">เรียกดูรูปภาพต้นฉบับ</entry><!--查看原图 -->
+
+
+	<!--report.html  -->
+	<entry key="member.report.my_report">การรายงาน</entry><!-- 我的举报-->
+	<entry key="member.report.buyer_center">ศูนย์รวมผู้ซื้อ</entry><!-- 买家中心-->
+	<entry key="member.report.report_list">รายการการรายงาน</entry><!--举报列表 -->
+	<entry key="member.report.goods_name">ชื่อสินค้า</entry><!-- 商品名称-->
+	<entry key="member.report.report_type">ประเภทการรายงาน</entry><!-- 举报类型-->
+	<entry key="member.report.report_status">สถานะการรายงาน</entry><!--举报状态 -->
+	<entry key="member.report.report_time">เวลาที่ทำรายการ</entry><!-- 举报时间-->
+	<entry key="member.report.result">ผลการการจัดการ</entry><!--处理结果 -->
+	<entry key="member.report.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="member.report.untreated">ยังไม่ได้ดำเนินการ</entry><!-- 未处理-->
+	<entry key="member.report.processed">ดำเนินการเรียบร้อยแล้ว</entry><!--已处理 -->
+	<entry key="member.report.canceled">ยกเลิกรายการเรียบร้อยแล้ว</entry><!--已取消 -->
+	<entry key="member.report.waiting_process">รอการดำเนินการ</entry><!--等待处理 -->
+	<entry key="member.report.valid_report">การรายงานที่มีประสิทธิภาพ</entry><!-- 有效举报-->
+	<entry key="member.report.nullity_report">การรายงานที่ไม่มีคุณภาพ</entry><!-- 无效举报-->
+	<entry key="member.report.spite_report">การรายงานที่ไม่มีจุดประสงค์ที่ดี</entry><!--恶意举报 -->
+	<entry key="member.report.view">เรียกดูข้อมูล</entry><!--查看 -->
+	<entry key="member.report.cancel_report">แน่ใจว่าจะยกเลิกการรายงาน</entry><!-- 是否确定取消举报-->
+	<entry key="member.report.cancel">ยกเลิก</entry><!--取消-->
+
+
+	<!--return_view.html  -->
+	<entry key="member.return_view.not_empty">กรุณากรอกข้อมูล</entry><!-- 不能为空-->
+	<entry key="member.return_view.return_code">รหัสการคืนสินค้า</entry><!-- 退货编号：-->
+	<entry key="member.return_view.return_time">เวลาการคืนสินค้า</entry><!-- 退货时间：-->
+	<entry key="member.return_view.member_name">ชื่อสมาชิกของผู้ซื้อ</entry><!--买家会员名： -->
+	<entry key="member.return_view.remark_info">หมายเหตุ</entry><!--备注信息： -->
+	<entry key="member.return_view.goods_name">ชื่อสินค้า</entry><!-- 商品名称-->
+	<entry key="member.return_view.return_number">จำนวนสินค้าที่ต้องการคืน</entry><!-- 退货数量-->
+
+
+	<!-- share_img.html -->
+	<entry key="member.share_img.system_hint">คำแจ้งเตือนจากระบบ</entry><!--系统提示 -->
+	<entry key="member.share_img.delete_success">ลบทิ้งสำเร็จ</entry><!--删除成功！ -->
+	<entry key="member.share_img.salse">การแบ่งปัน</entry><!-- 分享-->
+
+	<!-- ship_ajax.html -->
+	<entry key="member.ship_ajax.dispose_time">เวลาที่จัดการ</entry><!-- 处理时间-->
+	<entry key="member.ship_ajax.dispose_info">ข่าวสารการจัดการ</entry><!-- 处理信息-->
+	<entry key="member.ship_ajax.Logistics_company">บริษัทขนส่ง</entry><!-- 物流公司：-->
+	<entry key="member.ship_ajax.Logistics_code">รหัสบิลการขนส่ง</entry><!--物流单号： -->
+
+	<!-- success.html -->
+	<entry key="member.success.system_hint">คำแจ้งเตือนจากระบบ</entry><!-- 系统提示-->
+	
+</properties>

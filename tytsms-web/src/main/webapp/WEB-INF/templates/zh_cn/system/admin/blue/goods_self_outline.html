@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script>
+//
+function ajax_update(id,fieldName,obj,value){
+   var val;
+   if(value==undefined){
+	 val=jQuery(obj).val();
+   }else val=value; 
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/goods_self_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }    
+				 if(value!=undefined){
+				   jQuery(obj.parentNode.parentNode).remove();
+				 }
+              }
+	    });
+}
+function query_form(){
+jQuery("#ListForm").submit();
+	}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">违规下架商品</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/goods_self_list.htm?goods_status=0"><b>出售中的商品</b></a></li>
+            <li><a href="$!webPath/admin/goods_self_list.htm?goods_status=1"><b>仓库中的商品</b></a></li>
+            <li><a href="$!webPath/admin/goods_self_list.htm?goods_status=-2" class="this"><b>违规下架商品</b></a></li>
+            <li style="display:none"><a href="$!webPath/admin/goods_self_report.htm"><b>被举报禁售商品</b></a></li>
+    </ul>
+  </div>
+	<form name="ListForm" id="ListForm" action="" method="post">
+    <div class="search">
+      <span>商品名称</span> <span class="size100">
+          <input name="goods_name" type="text" id="goods_name" value="$!goods_name" />
+          </span> <span>品牌名称</span> 
+          <span><select name="brand_id" id="brand_id">
+          <option value="">所有品牌</option>
+          #foreach($gb in $gbs)
+          <option value="$!gb.id">$!gb.name</option>
+          #end
+          </select></span>
+            <span>发布人</span> 
+          <span><select name="u_admin_id" id="u_admin_id">
+          <option value="">发布人姓名</option>
+          #foreach($u_admin in $user_admins)
+          <option value="$!u_admin.id">$!u_admin.userName</option>
+          #end
+          </select></span>
+          
+          <span>
+          <input name="" type="button"  value="搜索" style="cursor:pointer;" onclick="query_form()" class="search_btn"/>
+        </span> 
+     
+    </div>
+     <div class="operation">
+    <h3>友情提示</h3>
+    <ul>
+      <li>出售中的商品，在商城前台所有访客均可查看</li>
+      <li>仓库中的商品，暂时没有出售的商品，前台所有游不可查看</li>
+      <li>违规下架商品，管理员根据商城访客举报结合实际情况设定违规，违规商品前台不可显示，只能管理员能取消违规</li>
+      <li style="display:none">被举报禁售商品，管理员根据用户举报信息对商品设定为举报并且禁止销售商品</li>
+    </ul>
+  </div>
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="3%">&nbsp;</td>
+          <th width="27%"><span class="form_btna">商品名称</span></th>
+          <th width="20%"><span class="form_btna">商品分类</span></th>
+          <th width="8%"><span class="form_btna">发布人</span></th>
+          <th width="8%"><span class="form_btna">品牌</span></th> 
+          <th width="8%"><span class="form_btna">商品价格</span></th> 
+          <th width="6%" align="center"><span class="form_btna">查看次数</span></th>
+          <th align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+      #foreach($obj in $objs)
+      #set($small="$!webPath/$!config.goodsImage.path/$!config.goodsImage.name")
+      #if($!obj.goods_main_photo)
+      #set($bigimg="$!webPath/$!obj.goods_main_photo.path/$!obj.goods_main_photo.name")
+      #set($small="$!{bigimg}_small.$!{obj.goods_main_photo.ext}")
+      #end
+        <tr>
+          <td align="center" class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+          <td>
+          <span style=" display:block; float:left; margin-right:10px;">
+          <a href="$!webPath/goods_$!{obj.id}.htm" target="_blank">
+          <img src="$!small" width="55px" height="55px"/>
+          </a>
+          </span>
+          <label>
+            <textarea name="textarea" cols="40" rows="2"  title="可编辑" onblur="ajax_update('$!obj.id','goods_name',this)">$!obj.goods_name</textarea>
+          </label></td>
+          <td align="center">#if($!obj.gc.parent.parent)$!obj.gc.parent.parent.className >#end #if($!obj.gc.parent)$!obj.gc.parent.className >#end $!obj.gc.className</td> 
+          <td align="center">$!obj.user_admin.userName</td>  
+          <td align="center">$!obj.goods_brand.name</td> 
+          <td align="center">$!obj.goods_current_price</td>
+          <td align="center">$!obj.goods_click</td>
+          <td class="hui oprate_con" align="center">
+          	<a href="$!webPath/admin/goods_self_edit.htm?id=$!obj.id" class="blue">编辑</a>
+            <a href="javascript:if(confirm('删除后不可恢复?'))window.location.href='$!webPath/admin/goods_self_del.htm?mulitId=$!obj.id&op=out'" class="blue">删除</a>
+          </td>
+        </tr>
+     #end
+    </table>
+    </div>
+    <div class="operate_bar">
+        <div class="fenye">
+            <span id="queryCondition" style="display:none">
+            #foreach($sm in $sms)
+            <input name="$!sm.key" id="$!sm.key" type="hidden" value="$!sm.value"/>
+            #end
+            </span>
+            <input name="mulitId" type="hidden" id="mulitId" />
+        	<input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+       		$!gotoPageFormHTML      
+        </div> 
+   		<div class="oper_sp">
+        	<span class="oper_check"><label for="all"><input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部</label></span>
+           	<span class="oper_del"><input name="" type="button" value="删除" onclick="cmd('$!webPath/admin/goods_self_del.htm?op=out');" style="cursor:pointer;" /></span>
+        </div>          
+ 	</div>
+  </form>
+</div>
+</body>
+</html>

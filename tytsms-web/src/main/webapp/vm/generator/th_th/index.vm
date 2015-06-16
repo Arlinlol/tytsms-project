@@ -1,0 +1,343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta property="qc:admins" content="2340216471114176375" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!config.title</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}" />
+<meta name="copyright" content="$!{config.copyRight}" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+#set($store_second_url="$!webPath")
+#if($!second_domain_view)
+  #set($store_second_url="http://$!{store.store_second_domain}.$!{domainPath}")
+#end
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/index_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+
+
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.lazyload.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="$!store_second_url/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.iskyshop.validate.js" type="text/javascript"></script>
+
+<script>
+jQuery(document).ready(function(){
+	//鼠标经过左侧分类							
+  jQuery(".left_menu_dl").mouseover(function(){								 
+	var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){
+	 var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).addClass("left_menu_this").removeClass("left_menu_dt");	
+     jQuery("#child_"+id).show();			
+	}
+  }).mouseleave(function(){ 
+	 var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){ 
+     var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).removeClass("left_menu_this").addClass("left_menu_dt");	
+     jQuery("#child_"+id).hide();
+	}
+  });
+  
+  //鼠标经过推荐商品、猜你喜欢	
+  jQuery("#index_sale_tab ul li").mouseover(function(){	
+	jQuery(this).siblings().removeClass("this");
+	jQuery(this).addClass("this");
+	var i = jQuery(this).index();
+	jQuery("#index_sale_tab").siblings().hide();
+	jQuery("#index_sale_tab").siblings().eq(i).show();
+	if(i==0){
+	jQuery("#sale_change").attr("mark","recommend");
+	}else{
+		jQuery("#sale_change").attr("mark","like");
+		your_like_good();
+		}
+  });
+  //鼠标经过楼层标题
+  jQuery(".storey_tab ul li").mouseover(function(){								 
+	jQuery(this).siblings().removeClass("this");
+	jQuery(this).addClass("this");
+	var i = jQuery(this).index();
+	jQuery(this).parent().parent().siblings().not(".hot_sell").hide();
+	jQuery(this).parent().parent().siblings().eq(i).show();
+	
+  });
+  var head_h=jQuery("#head_h").height();
+  jQuery("#head_unbomb").height(head_h);
+  jQuery(window).scroll(function(){
+	  var top = jQuery(document).scrollTop();
+	  //顶部搜索框跟随
+	  if(top==0){
+		  jQuery("#top").attr("style","");
+	  }else{
+		  jQuery("#top").attr("style","position:fixed;top:0px;width:100%");
+	  }
+	  if(top>head_h){
+		   jQuery("#head_h").addClass("head_fixd");
+	  }else{
+		   jQuery("#head_h").removeClass("head_fixd");
+	  }
+	  //楼层导航跟随
+	  jQuery("li[floor_id^=floor_] b").css("display","block");
+	  jQuery("div[id^=floor_]").each(function(){
+	     var floor_top=jQuery(this).offset().top-top;
+		 if(floor_top<=580&&floor_top>=0){
+		  var floor_id=jQuery(this).attr("id");
+		   jQuery("li[floor_id="+floor_id+"] b").css("display","none");
+		 }
+	  });
+  });	
+  //右上角公告切换
+  	jQuery(".top_mr_tab li").mouseover(function(){
+		jQuery(this).siblings().removeClass("this");
+		jQuery(this).addClass("this");
+		var i = jQuery(this).index();
+		jQuery(".top_mr_box").hide();		
+		jQuery(".top_mr_box").eq(i).show();										
+	});
+  
+  //用户登录、商家入驻tab页切换
+  jQuery("#top_mid_login_tab>li").css("cursor","pointer").mouseover(function(){
+      var id=jQuery(this).attr("id");
+	  jQuery("#top_mid_login_tab>li").removeClass("this");
+	  jQuery(this).addClass("this");
+	  if(id=="top_mid_login_tab_user"){
+	     jQuery("#top_mid_login_tab_seller_info").hide();
+		 jQuery("#top_mid_login_tab_user_info").show();
+	  }
+	  if(id=="top_mid_login_tab_seller"){
+	     jQuery("#top_mid_login_tab_user_info").hide();
+		 jQuery("#top_mid_login_tab_seller_info").show();
+	  }
+  });
+  
+  //猜你喜欢异步加载
+  function your_like_good(){
+	  jQuery.ajax({
+ 		  type:'POST',
+ 		 dataType: "json",
+ 		  url:'$!webPath/ajax_you_like.htm',
+ 		  data:"",
+			  beforeSend:function(){
+				     jQuery("#index_sale_con_like").empty();
+					 jQuery("#index_sale_con_like").html("<div style='width:100%;height:301px;text-align:center;'><img src='$!webPath/th_th/resources/style/common/images/loader.gif' style='margin-top:145px;' /></div>");
+				  },
+			  success:function(result){
+				  var html = "";
+			      jQuery.each(result.list, function(index,data) {
+					  html = html + "<ul class='index_sale_two'>";
+					  var img = "";
+				      if(data.goods_main_photo){
+						  img = result.imageWebServer+"/"+data.main_photo_path+"/"+data.main_photo_name+"_middle."+data.main_photo_ext;
+					  }else{
+						  img = result.imageWebServer+"/"+result.config_goodsImage_path+"/"+result.config_goodsImage_name;
+					  } 
+					  var goods_url = result.webPath+"/goods_"+data.id+".htm";
+					   if(result.second_domain_open && data.goods_type==1 && data.store_second_domain!=""){
+						  goods_url = "http://"+data.store_second_domain+"."+result.domainPath+"/goods_"+data.id+".htm";
+					  } 
+					  html = html+ "<li class='sale_two_img'><a href=\""+goods_url+"\"><span class='img_cspan'><p><img src=\""+img+"\" width='170' height='170' /></p></span></a></li>";
+					  html = html+ "<li class='sale_two_name'><a href=\""+goods_url+"\">"+data.goods_name+"</a></li>";
+					  html = html+ "<li class='sale_two_price'>ราคาที่ขาย：<strong>฿"+data.store_price+"</strong></li>";
+					  html = html+ "</ul>";
+				}); 
+				jQuery("#index_sale_con_like").html(html);
+			}
+			 });
+  	}
+  
+});
+</script>
+
+
+<script>
+//异步加载头部内容优化性能
+jQuery(document).ready(function(){
+	 jQuery.ajax({
+		 type:'POST',
+		 dataType: "json",
+		 url:'$!webPath/ajax_head.htm',
+		 data:"",
+		 success:function(result){
+			 var html = "";
+			 if(result!=null && result.user){
+				 html +="<span>"+result.user_userName+" สวัสดีค่ะ /ครับ,ยินดีต้อนรับสู่taiyitao！" //您好，欢迎来到泰易淘
+				 if(result.user_userRole.indexOf("ADMIN")!=-1){
+					 html +="[<a href='$!webPath/admin/index.htm'>การจัดการระบบหลังร้านค้า</a>] "
+				 }
+				 html +="[<a href='$!webPath/iskyshop_logout.htm'>ออกจากระบบของมอลล์</a>]"
+				 html +="</span> ";
+				 jQuery("#replace").replaceWith(html);
+				 if(result.user_userRole.indexOf("SELLER")!=-1){
+					 jQuery(".top_collect").after("<b class='top_b'>|</b> <span class='top_shop'><a href='$!webPath/seller/index.htm'>การจัดการเจ้าของธุรกิจ</a></span>"); 
+				 }
+			  }else{
+				jQuery(".top_collect").after("<b class='top_b'>|</b><span class='top_shop'><a href='$!webPath/seller/login.htm'>เข้าสู่ระบบร้านค้า</a></span> "); 
+			  }
+			}
+		 });
+		
+	});
+</script>
+
+</head>
+<body>
+<!--点击收藏-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery(".top_pull").mouseover(function(){
+	jQuery(this).find("div").show();
+	jQuery(this).find("em").addClass("em_this");
+	jQuery(this).find("s").addClass("this");
+  	}).mouseleave(function(){
+    jQuery(this).find("div").hide();
+	jQuery(this).find("em").removeClass("em_this");
+	jQuery(this).find("s").removeClass("this");
+  });					
+								});
+var browserEvent = function (obj, url, title) {
+    var e = window.event || arguments.callee.caller.arguments[0];
+    var B = {
+        IE : /MSIE/.test(window.navigator.userAgent) && !window.opera
+        , FF : /Firefox/.test(window.navigator.userAgent)
+        , OP : !!window.opera
+    };
+    obj.onmousedown = null;
+    if (B.IE) {
+        obj.attachEvent("onmouseup", function () {
+            try {
+                window.external.AddFavorite(url, title);
+                window.event.returnValue = false;
+            } catch (exp) {}
+        });
+    } else {
+        if (B.FF || obj.nodeName.toLowerCase() == "a") {
+            obj.setAttribute("rel", "sidebar"), obj.title = title, obj.href = url;
+        } else if (B.OP) {
+            var a = document.createElement("a");
+            a.rel = "sidebar", a.title = title, a.href = url;
+            obj.parentNode.insertBefore(a, obj);
+            a.appendChild(obj);
+            a = null;
+        }
+    }
+};
+</script>
+<div class="top" id="top">
+  <div class="top_page">
+    <div class="top_right">
+    	<span id="replace">สวัสดีค่ะ/ครับ ,ยินดีต้อนรับสู่#*您好,欢迎来到*#$!{config.websiteName}！[<a href="$!webPath/user/login.htm">เข้าสู่ระบบของมอลล์#*登录商城 *#</a>][<a href="$!webPath/register.htm">การลงทะเบียนฟรี#*免费注册*#</a>]</span>
+    	<b>|</b> <span class="top_pull"> <a href="$!webPath/buyer/order.htm">รายการสั่งซื้อของฉัน#*我的订单*#</a> </span> <b>|</b> 
+    	#if($!config.weixin_store&&$!config.weixin_qr_img)
+			<span class="top_pull">
+			<!--加em_this和top_this-->
+			<em class=""><i>มอลล์บน Wechat#*微信商城*#</i><s class="this"></s></em>
+			<div class="top_this" style="display:none">
+				<div class="top_this_box"><img src="$!webPath/$!config.weixin_qr_img.path/$!config.weixin_qr_img.name" width="77" height="77" /><i class="top_this_i">ติดตามมอลล์ในวีแชท#*关注微信商城*#</i></div>
+			</div>
+			</span> <b>|</b> 
+		#end
+		
+		#if($!config.app_download==1) <span class="top_pull">
+        <!--加em_this和top_this-->
+			<em class=""><i>มอลล์บนมือถือ#*手机商城*#</i><s class="this"></s></em>
+			<div class="top_this" style="display:none;">
+			<div class="top_this_box">$!DISPALY_FILE
+			<div class="top_this_code"><img src="$!webPath/$!MIDDLE_NAME/app/app_dowload.png" width="77" height="77" /></div>
+			<i class="top_this_i"><a href="$!config.ios_download" target="_blank"><img src="$!webPath/th_th/resources/style/system/front/default/images/app-store.png" width="111" height="37" /></a></i> <i class="top_this_i"><a href="$!config.android_download" target="_blank"><img src="$!webPath/th_th/resources/style/system/front/default/images/android.png" width="111" height="37" /></a></i> </div>
+			</div>
+			</span> <b>|</b>
+		#end 
+	  <span class="top_pull"> <em class="">บริการลูกค้า#*客户服务*#<s  class="this"></s></em>
+      <div class="top_this" style="display:none;">
+        <ul class="top_pull_con_style2">
+          <li><a href="$!webPath/articlelist_help.htm" target="_blank">ศูนย์การให้ความช่วยเหลือ#*帮助中心*#</a></li>
+          <li><a href="$!webPath/doc_service.htm" target="_blank">บริการหลังการขาย#*售后服务*#</a></li>
+          <li><a href="$!webPath/doc_online.htm" target="_blank">เจ้าหน้าที่บริการลูกค้าออนไลน์#*在线客服*#</a></li>
+          <li><a href="$!webPath/doc_complaint.htm" target="_blank">ศูนย์การร้องเรียน#*投诉中心*#</a></li>
+          <li><a href="$!webPath/doc_email.htm" target="_blank">อีเมล์ของเจ้าหน้าที่บริการลูกค้า#*客服邮箱*#</a></li>
+          <li><a href="$!webPath/seller_apply.htm" target="_blank">ผู้ขายเปิดร้านค้าบนเว็บไซต์#*商家入驻*#</a></li>
+        </ul>
+      </div>
+      </span> <b>|</b> #set($navs=$!navTools.queryNav(-1,-1))
+      #if($!navs.size()>0) <span class="top_pull"> <em class="">การนำทางของเว็บไซต์#*网站导航*#<s class=""></s></em>
+      <div class="top_this" style="display:none">
+        <div class="website">
+          <ul>
+            #foreach($nav in $navs)
+            <li><a href="$!nav.url"  #if($!{nav.new_win}==1)target="_blank"#end  rel="nofollow">$!nav.title</a></li>
+            #end
+          </ul>
+        </div>
+      </div>
+      </span> #end </div>
+    <span class="top_collect"><a href="javascript:void(0);" onclick="browserEvent(this, '$!webPath','$!{config.websiteName}')">บันทึกเว็บไซต์นี้เป็นเว็บไซต์ที่ชื่นชอบ</a></span>
+    </div>
+</div>
+<div id="head_unbomb">#parse("head.vm") </div>
+#parse("nav.vm")
+#parse("advert.vm")
+<div class="main"> 
+  <div class="index_center_box">
+    <div class="index_sale">
+      <div class="index_sale_tab" id="index_sale_tab"> <a href="javascript:void(0);" class="sale_change" mark="recommend" id="sale_change">เปลี่ยนกล่มใหม่#*换一组*#</a>
+        <ul>
+          <li class="this" recommend_goods_random="1">สินค้าแนะนำ#*推荐商品*#<s></s></li>
+          <li recommend_goods_random="1">คาดว่าท่านชอบ#*猜您喜欢*#<s></s></li>
+        </ul>
+      </div>
+      <!--推荐商品-->
+      <div class="index_sale_box" style="display:block" id="index_sale_box_recommend">
+		#parse("recommend.vm")
+      </div>
+      <!--猜您喜欢-->
+      <div class="index_sale_box" style="display:none" id="index_sale_box_like">
+        <div class="index_sale_con" id="index_sale_con_like"> 
+        </div>
+      </div>
+    </div>
+    <div class="index_brand_right">
+      <div class="brand">
+        <h3><span><a href="$!webPath/brand/index.htm" target="_blank">เพิ่มเติม#*更多*#</a></span>แบรนด์ที่แนะนำ#*推荐品牌*#</h3>
+		#parse("goodsBrands.vm")
+      </div>
+      <div class="brand_bottom_adv">
+        <script src="$!webPath/advert_invoke.htm?id=4"></script>
+      </div>
+    </div>
+  </div>
+  #parse("floor.vm")
+  ##<div class="floor_ad_banner"><a href=""><img src="$!webPath/th_th/resources/style/system/front/default/images/floor_ad_banner.jpg" target="_blank"  alt="首页底部通栏"/></a></div>
+  <div class="floor_ad_banner"><script src="$!webPath/advert_invoke.htm?id=9"></script></a></div>
+  </div>
+  
+  <div class="footer_all">
+  	<div class="promise">
+		<div class="main" style="height:75px;background: #a1e4ff;">
+		<div class="promise_main">
+		<div class="promise_m"><i class="promise_1"></i><span class="pro_sp1">รับประกันสินค้าแท้ 100%</span></div>
+		<div class="promise_m"><i class="promise_2"></i><span class="pro_sp1">คลังสินค้าและขนส่ง</span></div>
+		<div class="promise_m"><i class="promise_3"></i><span class="pro_sp1">การชำระเงินที่ปลอดภัย</span></div>
+		<div class="promise_m"><i class="promise_4"></i><span class="pro_sp1">เจ้าของธุรกิจ</span></div>
+		</div>
+		</div>
+	</div>
+	</div>
+	
+	<div class="main">
+  	 <div class="footer_shopping">
+		 #parse("articleClass.vm")
+	 </div>
+	</div>
+  #parse("footer.vm")
+</body>
+</html>

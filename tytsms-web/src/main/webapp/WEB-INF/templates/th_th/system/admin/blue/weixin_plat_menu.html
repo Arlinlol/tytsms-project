@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath//th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" /> 
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+function weixin_menu_create(){
+  jQuery.ajax({type:'POST',
+			   url:'$!webPath/admin/weixin_plat_menu_create.htm',
+			   data:'',
+			   success:function(data){
+				     if(data=="0"){
+				        alert("菜单生成成功，由于微信缓存不能立刻显示！");
+					 }
+				   }
+		     });
+}
+jQuery(document).ready(function(e) {
+      jQuery("div.weixin_nav ul li").hover(function(){
+			jQuery(this).find(".weixin_nav_dl").show();
+		    },function(){
+			jQuery(".weixin_nav_dl").hide();
+			});
+});
+</script>
+</head>
+<body>
+  <div class="cont">
+    <h1 class="seth">微商城配置</h1>
+    <div class="nav_list"> 
+  
+    <ul>
+    <li><a href="$!webPath/admin/weixin_plat_set.htm"><b>基本信息</b></a> </li>
+   <li><a href="$!webPath/admin/weixin_plat_menu.htm" class="this"><b>微商城菜单</b></a></li>
+    </ul> 
+   
+     </div>
+    <div class="weixin_box">
+	<div class="weixin_box_head">
+        <div class="weixin_head_fl">返回</div>
+        <div class="weixin_head_mid">$!{config.weixin_account}</div>
+        <div class="weixin_head_fr"></div>
+    </div>
+    <div class="weixin_box_main">
+    	<span>
+         #if($!config.weixin_qr_img)  
+         <img src="$!webPath/$!config.weixin_qr_img.path/$!config.weixin_qr_img.name"  width="100" height="100" /> 
+         #else
+         <img src="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/images/ewm.jpg" width="100" height="100" />
+         #end
+        </span>
+        <span class="weixin_add_nav">
+        #if($!weixin_menus.size()<3)
+        	<a href="javascript:void(0);" dialog_uri="$!webPath/admin/weixin_menu_add.htm" dialog_title="设置微信菜单" dialog_width="400" dialog_height="400" dialog_id="plat_quick_menu"><img src="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/images/wx_add.png" width="80" height="80" /></a>
+        #end 
+            <a href="javascript:void(0);"  onclick="weixin_menu_create()"><img src="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/images/wx_sc.png" width="80" height="80" /></a>
+        </span>
+    </div>
+    
+    <div class="weixin_nav">
+    	<div class="weixin_nav_left"><img src="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/images/nav_left.png" /></div>
+    	<ul>
+            #foreach($weixin_menu in $weixin_menus)
+        	<li>
+            	<a href="javascript:void(0);" dialog_uri="$!webPath/admin/weixin_menu_add.htm?menu_id=$!{weixin_menu.id}" dialog_title="设置微信菜单" dialog_width="400" dialog_height="400" dialog_id="plat_quick_menu">$!{weixin_menu.menu_name}</a>
+                <dl class="weixin_nav_dl" style="display:none">
+                	<dd><a href="javascript:void(0);" dialog_uri="$!webPath/admin/weixin_menu_add.htm?pmenu_id=$!{weixin_menu.id}" dialog_title="设置微信菜单" dialog_width="400" dialog_height="400" dialog_id="plat_quick_menu">+</a></dd>
+               #foreach($child in $weixin_menu.childs)
+                    <dd><a href="javascript:void(0);" dialog_uri="$!webPath/admin/weixin_menu_add.htm?menu_id=$!{child.id}" dialog_title="设置微信菜单" dialog_width="400" dialog_height="400" dialog_id="plat_quick_menu">$!{child.menu_name}</a></dd>
+			   #end
+
+                </dl>
+            </li>
+            #end
+        </ul>
+    </div>
+</div>    
+  </div>
+</body>
+</html>

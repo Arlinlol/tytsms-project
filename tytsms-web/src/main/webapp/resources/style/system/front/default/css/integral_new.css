@@ -1,0 +1,114 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/***积分商城***/
+.integral_left { width:206px; float:left; border:2px solid #DDD;}
+.integral_right { width:787px; float:right;} 
+
+/***积分商城-左侧***/
+.integral_left h1 { background-color:#F1F1F1; height:24px; padding:5px 10px; line-height:24px;}
+.inte_login { height:30px; line-height:30px;}
+.inte_login_btn { width:85px; height:24px; line-height:24px; border-radius:4px; text-align:center; background:#f37103; float:left; color:#FFF;}
+.inte_login_btn:hover { color:#FFF;}
+.my_inte { width:186px; height:76px; padding:10px;}
+.my_inte ul li { width:196px; font-size:14px;  line-height:30px;}
+.my_inte ul li em{ font-style:normal; float:left; width:50px; float:left; display:block;}
+.my_inte ul li span{ width:136px; display:block; float:left;}
+.my_inte ul li span img { float:left;}
+.my_inte ul li .level { font-size:12px; float:left; padding-left:10px; color:#999;}
+.my_inte ul li b{ width:136px; display:block; float:left; color:#C11C1C; font-size:16px;}
+.inte_detail { padding:10px;}
+.inte_detail ul li { height:30px; line-height:30px; padding-left:15px; background:url(../images/integral/inte_icon.gif) no-repeat left center;}
+.inte_arrow { width:100%; height:18px;}
+.inte_choose { padding:10px;}
+.inte_choose ul li { height:30px; line-height:30px; border-bottom:1px solid #DDD; background:url(../images/integral/inte_xx.png) no-repeat left center; padding-left:20px;}
+.inte_rank { width:186px; padding:10px; float:left;}
+.inte_rank h3{ margin-bottom:5px; font-size:12px; white-space:nowrap; overflow:hidden;}
+.inte_rank  b { height:21px; width:21px; line-height:21px; text-align:center; border-radius:20px; background-color:#999; margin-right:5px; float:left; color:#FFF;}
+.li_list { width:186px; float:left; margin-bottom:10px;}
+.li_list:hover b {background-color:#c11c1c}
+.li_hover { width:186px; height:80px; float:left; padding:5px 0px;}
+.li_hover_img { width:80px; height:80px; float:left;}
+.li_hover_img img { width:78px; height:78px; border:1px solid #DDD;}
+.inte_price { width:101px; padding-left:5px; float:left; line-height:30px;}
+.inte_price span { width:101px; float:left; line-height:24px; white-space:nowrap;}
+/* 大幻灯 */
+.slideBox{ width:785px; height:310px; overflow:hidden; position:relative; border:1px solid #ddd; float:left; }
+.slideBox .hd{ height:35px; overflow:hidden; position:absolute; right:5px; bottom:0px; z-index:1; }
+.slideBox .hd ul{ overflow:hidden; zoom:1; float:left;  }
+.slideBox .hd ul li{ float:left; margin-right:2px;  width:15px; height:15px; line-height:14px; text-align:center; background:#fff; cursor:pointer; padding:5px; border-radius:50%; margin-right:10px; }
+.slideBox .hd ul li.on{ background:#f37103; color:#fff; }
+.slideBox .bd{ position:relative; height:100%; z-index:0;   }
+.slideBox .bd li{ zoom:1; vertical-align:middle; }
+.slideBox .bd img{ width:785px; height:310px; display:block;  }
+/***积分商城-右侧***/
+.inte_banner { width:785px; height:310px; border:1px solid transparent; overflow:hidden;}
+.inte_slide { width:785px; height:310px; float:left;}
+.inte_advert { width:190px; height:310px; float:right;}
+.inte_advert img { width:190px; height:310px;}
+.integral_right h2 { margin-top:15px; border-bottom:2px solid #DDD; padding-bottom:5px;}
+.integral_right h2 b { font-size:18px; height:24px; line-height:24px; border-left:3px solid #DDD; padding-left:10px;}
+.integral_right h2 a { float:right;}
+.inte_list_box { width:770px; overflow:hidden; border:1px solid #DDD; padding:15px; padding-right:0px;}
+.inte_list { width:700px;}
+.inte_list ul { width:220px; height:290px; float:left; margin-right:13px; display:block; margin-bottom:15px;}
+.inte_list ul li { width:200px; float:left; padding:10px;}
+.recom_img { width:198px; position:relative; border:1px dotted #DDD;}
+.recom_img span { width:198px; height:24px; line-height:24px; float:left; text-align:center; font-size:14px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+.recom_img em { width:20px; height:15px; position:absolute; top:-8px; left:-8px; background:url(../images/integral/scissor.png) no-repeat;}
+.inte_number { height:30px; padding:5px 0px;}
+.inte_number span { float:left;}
+.inte_number b { font-size:16px; color:#F60; margin-right:5px;}
+.inte_number a { padding:5px 10px;margin-top: 5px; font-size:14px; background-color:#ED7B00; border-radius:4px; text-align:center; color:#FFF; float:right;+float:none;}
+.inte_number .bg_gray { background-color:#999;}
+.inte_number .bg_gray:hover { background-color:#8a8a8a;}
+.inte_number a:hover { background-color:#ff5a00;}
+
+/***积分商城-列表***/
+.integral_select{ border:1px solid #ddd; padding:10px; overflow:hidden}
+.integral_select dt{ background:#ED7B00; height:25px; line-height:25px; color:#fff; float:left; width:10%;}
+.integral_select dt span{ padding-left:10px; padding-right:10px; float:left;} 
+.integral_select dd{ float:left; width:90%;}
+.integral_select dd ul{ padding-left:20px;}
+.integral_select dd ul li{ float:left; margin-right:10px; line-height:25px; padding-left:15px; padding-right:15px; background:url(../images/integral/clali.jpg) no-repeat left center}
+.integral_select dd ul .this{ background:#ED7B00; }
+.integral_select dd ul .this a{color:#FFF;}
+
+.level_img { width:24px; float:left;}
+.level_num { width:110px; float:left; padding-left:10px;}
+.level_num strong { width:110px; float:left; font-weight:normal; margin-bottom:5px;}
+.level_num b {width:110px; font-size:14px;}
+
+/***积分商城-分页***/
+.exc_list{ overflow:hidden;  width:100%;}
+.exc_list .goods_one{ margin-left:10px;}
+.ext_page{overflow:hidden;  width:100%; padding-top:10px; padding-bottom:10px; text-align:center}
+.ext_page span{ padding-top:5px; padding-bottom:5px;}
+.ext_page span b{padding:2px 6px; margin-left:5px; background:#E6E6E6; border:1px solid #ccc;}
+.ext_page span b.this{ background:#ED7B00; color:#fff;}
+.ext_page span a{padding:2px 6px; margin-left:5px; background:#fff; border:1px solid #ccc;}
+.ext_page span a:hover{ background:#ED7B00; color:#fff;border:1px solid #ED7B00;}
+.ext_page span a.this{ background:#ED7B00; color:#fff;border:1px solid #ED7B00;}
+
+.main { width:1002px; margin:10px auto;}
+@media screen and (min-widht:800px) and (max-width:1024px){
+.main { width:1002px;  margin:10px auto;}
+.integral_left { width:206px;}
+.integral_right { width:787px;}
+.inte_banner { width:785px; overflow:hidden;}
+.inte_list_box { width:770px;}
+.inte_list { width:700px;}
+.inte_list ul { margin-right:13px;}
+}
+
+@media screen and (min-width:1024px) {
+.main { width:1200px;  margin:10px auto;}
+.integral_left { width:206px;}
+.integral_right { width:985px;}
+.inte_banner { width:983px;}
+.inte_list_box { width:968px;}
+.inte_list { width:983px;}
+.inte_list ul { margin-right:22px;}
+}
+.inte_choose ul .this { background-color:#F1F1F1;}
+.inte_choose ul .this a { color:#555;}

@@ -1,0 +1,868 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.user_chatting.immediately_dialog")- $!config.title </title><!-- 即时对话窗口  -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/im/css/im.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/th_th/resources/style/common/css/jquery.bigcolorpicker.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/ajaxfileupload.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.bigcolorpicker.js"></script>
+<script>
+#if($!goods)
+ var goods_inventory=$!goods.goods_inventory;
+ var store_price=$!goods.goods_current_price; 
+#end
+jQuery(document).ready(function(){
+jQuery("#font_colour").bigColorpicker(function(el,color){
+	jQuery("#content").css("color",color);
+	jQuery(el).val(color);
+	});									
+	window.setInterval(refresh_Message,5000);								
+	jQuery(".im_tab ul li").mouseover(function(){								
+		jQuery(".im_tab ul li").removeClass("this");
+		var mark =	jQuery(this).addClass("this").attr("mark");
+		jQuery(".im_right_detail div[mark^=]").hide();
+		jQuery("div[err_div^=]").hide();
+		jQuery(".im_right_detail div[mark='"+mark+"']").show();
+		jQuery("div[err_div^='err_"+mark+"']").show();
+	});
+#if($!goods)	
+	#set($group=0)
+	#set($current_price=$!goods.goods_current_price)
+	#if($!{goods.group_buy}==2)
+	  #set($group=1)
+	#end
+	#if($!group==1)
+	  #foreach($info in $goods.group_goods_list)
+		#if($info.group.id==$!goods.group.id)
+		  var store_price=$!info.gg_price;
+		  #set($current_price=$!{info.gg_price})
+		  #if($!info.gg_max_count>0)
+			var goods_inventory=$!info.gg_max_count;
+		  #else
+			var goods_inventory=$!info.gg_count;
+		  #end
+		#end
+	  #end
+	#else 
+		#if($!{goods.activity_status}==2 && $!user)
+			#set($level_name=$!goodsViewTools.query_user_level_name("$!user.id")) 
+			#if($!level_name=="#springMessage('sms.user_chatting.bronze_member')")/* "铜牌会员" */
+			 store_price=$!goods.activity_price;
+			#end
+			#if($!level_name=="#springMessage('sms.user_chatting.silver_member')")/* "银牌会员" */
+			 store_price=$!goods.activity_price1;
+			#end
+			#if($!level_name=="#springMessage('sms.user_chatting.gold_member')")/* "金牌会员" */
+			 store_price=$!goods.activity_price2;
+			#end
+			#if($!level_name=="#springMessage('sms.user_chatting.super_member')")/* "超级会员" */
+			 store_price=$!goods.activity_price3;
+			#end
+		#end
+	#end
+#end
+jQuery("#content").html("");
+  jQuery("#content").keydown(function(){
+	text = jQuery.trim(jQuery(this).html());
+	var last=360-text.length;
+	if(last>=0){
+	jQuery(".im_limit").html("#springMessage('sms.user_chatting.can_enter_yet')<b>"+last+"</b>#springMessage('sms.user_chatting.characters')");	/* 还可以输入 字 */
+		}else{
+		jQuery(".im_limit").html("<b style='color:#F00'>#springMessage('sms.user_chatting.out_off_limit')</b>");/* 超出字数限制 */
+			}
+	});
+
+	//打开表情、字体、设置、图片窗口
+	jQuery(".im_edit_h1 img[id^='chatting_']").click(function(){
+			var cls = jQuery(this).parent().attr("class");
+			if(cls=="im_this"){
+			jQuery(".im_edit_h1 img[id^='chatting_']").parent().removeClass("im_this");
+			jQuery("div[mark^=chatting_]").hide();
+			 jQuery("#div_log").show();
+			 jQuery("#div_history").html("").hide();  
+				}else{
+				jQuery(".im_edit_h1 img[id^='chatting_']").parent().removeClass("im_this");
+				jQuery(this).parent().addClass("im_this");
+				var mark =jQuery(this).attr("mark");
+				jQuery("div[mark^=chatting_]").hide();
+				jQuery("div[mark=chatting_"+mark+"]").show();
+				if(mark=="history"){
+					    jQuery("#div_log").hide();
+						var loading = "<img src='$!webPath/th_th/resources/style/im/images/waiting.gif' />";																							/* 历史加载中 */
+						jQuery("#div_history").show().css("text-align","center").html("<table width='100%' height='100%'><tr><td style='vertical-align: middle; text-align:center;'>"+loading+"<p>#springMessage('sms.user_chatting.history')...</p></td></tr></table>");	
+				   		jQuery.post("$!webPath/user_show_history.htm",{
+						"chatting_id":"$!{chatting.id}"
+						},function(data){
+						   if(data!=""){
+								jQuery("#div_history").css("text-align","left").html(data);   
+							   }else{
+								jQuery("#div_history").find("td").html("<p>#springMessage('sms.user_chatting.no_chatting_record')</p>");  /* 没有聊天记录！ */
+								   }
+							},"text");	
+				}
+			}
+		});
+
+	//鼠标点击表情况事件
+	jQuery(".im_emo_ul img").click(function(){
+	  var emoNum = jQuery(this).attr("emoNum");
+      var content = jQuery("#content").html();
+	  var emo = "<img src='$!webPath/th_th/resources/style/im/images/emo/"+emoNum+".gif'/>";
+	  jQuery("#content").html(content+emo);
+	  jQuery(".im_edit_h1 img[id^='chatting_']").parent().removeClass("im_this");
+	  jQuery("div[mark^=chatting_]").hide();
+	});	
+	
+	
+	//图片上传
+	jQuery("#image").live("change",function(){								
+		var cid = "$!{chatting.id}";
+		if(cid!=""){
+		var now=new Date();
+		var date  = now.getFullYear()+"-"+now.getMonth()+"-"+now.getDay()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();	
+		var msg = "<li><div class='im_me'>
+		<div class='im_me_icon'>
+		<p><img src='$!webPath/th_th/resources/style/im/images/im_me_icon.png' width='40' height='40' />
+		</p></div>
+		<div 	class='im_me_dialogue'>
+		<table class='im_msg_me' cellpadding='0' cellspacing='0'><tbody>
+		<tr><td><span class='im_others_name'>$!{user.userName}</span><span class='im_time'>&nbsp;&nbsp;"+date+"</span></td> </tr>
+		<tr><td align='center'><img id='waiting_img' src='$!webPath/th_th/resources/style/im/images/waiting.gif' onclick='show_image(this)' style='max-height:50px;cursor:pointer'/></td> 
+		</tr></tbody>
+		</table><span class='im_arrow_me'></span></div></div></li>";
+			jQuery("#chatting_ul").append(msg);
+			 scrollToBottom();
+			jQuery.ajaxFileUpload({
+                 url:'$!webPath/user_img_upload.htm?cid='+cid,
+                 fileElementId:'image',      
+                 dataType: 'text',                
+                 success: function (data){
+				 if(data=="error"){
+					 jQuery("img[id^='waiting_']").last().attr("src","$!webPath/th_th/resources/style/im/images/load_error.jpg").removeAttr("onclick");
+					 }else{	 
+					jQuery("img[id^='waiting_']").last().attr("src",data);
+					 }             
+				}
+			});
+		}else{
+		alert("#springMessage('sms.plat_chatting.select_one_user')");/* "请选择一个用户" */
+		}
+	});
+
+		//字体颜色大小改变
+	jQuery("#font").change(function(){
+		var val =jQuery(this).val();
+		jQuery("#content").css("font-family",val);
+		});
+	jQuery("#font_size").change(function(){								
+		var val =jQuery(this).val();
+		jQuery("#content").css("font-size",val+"px");
+		});
+	#if($!{chatting.font})
+	jQuery("#font").val("$!{chatting.font}");
+	#end	
+	#if($!{chatting.font_size})
+	jQuery("#font_size").val("$!{chatting.font_size}")
+	#end	
+	#if($!{chatting.font_colour})
+	jQuery("#font_colour").val("$!{chatting.font_colour}")
+	#end
+
+});////
+
+#if($!goods)<!--商品-->
+function add_cart(){
+#if($!user.id==$!goods.goods_store.user.id)
+ alert("#springMessage('sms.store_goods.no_buy_own_goods')");/* "不能购买自己的商品！" */
+#else
+  var add=true
+  var gsp="";
+  if(jQuery("li[mark='spec']").length==0){
+    add=true;
+  }else{
+	jQuery("li[mark='spec']").each(function(){
+	   jQuery.each(jQuery(this).find("a:first"),function(){
+		  gsp=jQuery(this).attr("gsp")+","+gsp; 
+	   });
+	});
+  }
+  if(goods_inventory==0){
+    add=false;
+	alert("#springMessage('sms.store_goods.inventory_zero')");/* "商品库存为0,不能购买!" */
+	return;
+  } 
+  if(add){
+	jQuery.post("$!webPath/add_goods_cart.htm",{"id":"$!goods.id","count":1,"price":store_price,"gsp":gsp},
+				function(data){
+				window.opener.window.open("$!webPath/goods_cart0.htm?gid=$!{goods.id}");
+	},"json");
+  }
+ #end
+}
+#end<!--商品-->
+//
+function send_Message(){
+	var font = jQuery("#font").val();
+	var font_size = jQuery("#font_size").val();
+	var font_colour = jQuery("#font_colour").val();
+	var text = jQuery.trim(jQuery("#content").html());
+	text=text.replace("<br>","");
+	var last=360-text.length;
+	if(text!="" && last>=0 && last<=360){
+		jQuery.post("$!webPath/user_chatting_save.htm",{
+				"font":font,
+				"font_size":font_size,
+				"font_colour":font_colour,	
+				"text":text,
+				"chatting_id":"$!{chatting.id}"
+				},function(data){
+					jQuery("#content").html("");
+					jQuery("#chatting_ul").append(data);
+					jQuery(".im_limit b").html("360");
+					scrollToBottom();
+					},"text");	
+		}
+	}	
+
+//即时刷新聊天记录
+function refresh_Message(){
+	var session = jQuery("#div_session").attr("session");
+	if(session=="true"){
+		var chatting_id="$!{chatting.id}";
+		if(chatting_id!=""){
+		jQuery.post("$!webPath/user_chatting_refresh.htm",
+					{
+					"chatting_id":"$!{chatting.id}"
+					},
+					function(data){
+						if(data){
+						jQuery("#chatting_ul").append(data);
+						scrollToBottom();
+						}
+						},"text");
+		}
+	}
+}
+ function scrollToBottom() {
+     var scrollTop = jQuery("#chatting_ul")[0].scrollHeight;
+    jQuery("#chatting_ul").scrollTop(scrollTop);
+ }
+ //图片放大
+  function show_image(obj) {
+  var src =jQuery(obj).attr("src");
+  var img = "<img src='"+src+"'/>";
+	jQuery(".white_content_opa,.white_content").fadeIn().find(".white_box table td[valign='middle']").html(img);
+ }
+ //历史记录分页
+function ajaxPage(url,currentPage,obj){
+  jQuery.ajax({type:'POST',url:url,data:{"currentPage":currentPage,"chatting_id":"$!chatting.id"},
+			  beforeSend:function(){
+				jQuery("#div_log").hide();
+				var loading = "<img src='$!webPath/th_th/resources/style/im/images/waiting.gif' />";
+				jQuery("#div_history").show().css("text-align","center").html("<table width='100%' height='100%'><tr><td style='vertical-align: middle; text-align:center;'>"+loading+"<p>历史加载中...</p></td></tr></table>");	  
+			   },
+			  success:function(data){
+			  jQuery("#div_history").css("text-align","left").html($!CommUtil.htmlUnescape(data)); 
+ 			  //jQuery("#div_history").css("text-align","left").html(data);   
+			 }
+		})
+  }
+</script>
+<script>
+    jQuery(document).keydown(function(e){
+        var key =  e.which;
+		if(key==13){
+			send_Message();
+			}
+    });
+</script>	
+</head>
+<body>
+<div class="im_wrap">
+  <!--im-头部-->
+  <div class="im_head">
+    <div class="im_head_box">
+      <div class="im_head_left"> <span class="im_portrait">
+      
+      <img src="$!webPath/th_th/resources/style/im/images/im_portrait.png" width="52" height="52" />
+      </span> <span class="im_name">$!{chatting.config.kf_name}</span> </div>
+      <div class="im_head_right"></div>
+    </div>
+  </div>
+  <!--im-主体-->
+  <div class="im_main">
+    <div class="im_main_box">
+      <!--im-主体-左侧-->
+      <div class="im_main_left">
+        <div class="im_chat_list" style="display:" id="div_log" >
+          <ul id="chatting_ul" style="display:">
+          </ul>
+          </div>
+          
+          <div id="div_history" class="im_chat_list img_chat_img" style="display:none;"> 
+		</div>
+
+        <!--im-主体-输入框-->
+        <div class="im_edit">
+          <div class="im_edit_h1">
+            <ul>
+              <li><a href="javascript:void(0);" title="#springMessage('sms.user_chatting.font_editing')"><img src="$!webPath/th_th/resources/style/im/images/im_edit_01.png" width="33" height="29" id="chatting_font" mark="font" /></a>
+                <!--字体弹出层-->
+                <div class="im_font_tier" style="display:none;" mark="chatting_font">
+                  <select class="im_family" id="font">
+                    <option value="宋体">#springMessage("sms.user_chatting.song_typeface")</option><!-- 宋体 -->
+                    <option value="黑体">#springMessage("sms.user_chatting.black_typeface")</option><!-- 黑体 -->
+                    <option value="微软雅黑">#springMessage("sms.user_chatting.Microsoft_YaHei")</option><!-- 微软雅黑 -->
+                    <option value="楷体">#springMessage("sms.user_chatting.regular_script")</option><!-- 楷体 -->
+                  </select>
+                  <select class="im_size" id="font_size">
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="16">16</option>
+                    <option value="18">18</option>
+                    <option value="20">20</option>
+                    <option value="22">22</option>
+                    <option value="24">24</option>
+                    <option value="26">26</option>
+                    <option value="28">28</option>
+                    <option value="30">30</option>
+                  </select>
+                 <span class="im_color">#springMessage("sms.user_chatting.font_color")<!-- 字体颜色： --><input name="font_colour" type="text" id="font_colour" value="$!chatting.font_colour"  style="cursor:pointer" readonly="readonly"/></span> </div>
+              </li>
+              <li><a href="javascript:void(0);" title="#springMessage('sms.user_chatting.chatting_expression')"><img src="$!webPath/th_th/resources/style/im/images/im_edit_02.png" width="33" height="29" id="chatting_emo" mark="emo" /></a> 
+              <!--表情弹出层-->
+              <div class="im_satis_tier" style="display:none" mark="chatting_emo">
+              	<ul class="im_emo_ul">
+                #foreach($count in [1..98])
+                	<li><a href="javascript:void(0);"><img src="$!webPath/th_th/resources/style/im/images/emo/$!{count}.gif" emoNum="$!{count}"/></a></li>
+               	#end
+                </ul>
+              </div>
+
+              </li>
+                <li><a href="javascript:void(0);" title="#springMessage('sms.user_chatting.picture_upload')" class="file_img_a"><img src="$!webPath/th_th/resources/style/im/images/im_edit_03.png" width="33" height="29" id="chatting_img" mark="img"/><input  name="image" id="image" value=""  type="file" class="file_img_upload"/></a></li>
+              <li><a href="javascript:void(0);" title="#springMessage('sms.user_chatting.chatting_record')"><img src="$!webPath/th_th/resources/style/im/images/im_edit_06.png" width="33" height="29" id="chatting_history" mark="history"/></a></li>
+              <li mark="evaluate" style="display:none"><a href="javascript:void(0);"><i><img src="$!webPath/th_th/resources/style/im/images/im_edit_04.png" width="33" height="29" id="chatting_evaluate" mark="evaluate"/></i></a>
+                <!--满意度弹出层-->
+                <div class="im_satis_tier" style="display:none; width:370px;" mark="chatting_evaluate">
+                  <h2>#springMessage("sms.user_chatting.is_satisfaction_of_client")<!-- 您对当前客服人员服务满意吗？ --></h2>
+                  <div class="im_choose">
+                    <ul>
+                      <li>
+                        <input type="radio" />
+                        <span>#springMessage("sms.user_chatting.very_satisfaction")<!-- 非常满意 --></span></li>
+                      <li>
+                        <input type="radio" />
+                        <span>#springMessage("sms.user_chatting.satisfaction")<!-- 满意 --></span></li>
+                      <li>
+                        <input type="radio" />
+                        <span>#springMessage("sms.user_chatting.general")<!-- 一般 --></span></li>
+                      <li>
+                        <input type="radio" />
+                        <span>#springMessage("sms.user_chatting.no_satisfaction")<!-- 不满意 --></span></li>
+                      <li>
+                        <input type="radio" />
+                        <span>#springMessage("sms.user_chatting.very_bad")<!-- 非常不满意 --></span></li>
+                    </ul>
+                  </div>
+                  <div class="im_satis_textarea">
+                    <textarea>#springMessage("sms.user_chatting.more_healthy")<!-- 发货更健康 --></textarea>
+                  </div>
+                  <div class="im_statis_sub">
+                    <input mark="close_eva" type="button" value="#springMessage('sms.user_chatting.commit')" /><!--提交  -->
+                    <span>#springMessage("sms.user_chatting.can_enter_character")<!-- 还可以输入200字 --></span> </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="im_textarea_box">
+          	<div class="im_textarea" style="overflow:auto;">
+            <div id="content" style="width:100%; height:100%;font-size:$!{chatting.font_size}px; color:$!{chatting.font_colour};font-family:$!{chatting.font};" contenteditable="true"></div>
+            </div>
+          </div>
+          <div class="im_area_btn">
+           <a class="im_save" href="javascript:void(0);" onclick="send_Message()">#springMessage("sms.user_chatting.send")<!-- 发 送 --></a> 
+           <a class="im_over" href="javascript:void(0);"  onclick="if(confirm(#springMessage('sms.user_chatting.is_closing')))window.close();">#springMessage("sms.user_chatting.end_dialog")<!-- 结束对话 --></a>
+            <span class="im_limit">#springMessage("sms.user_chatting.can_enter_yet")<!-- 还可以输入 --><b>360</b>#springMessage("sms.user_chatting.characters")<!-- 字 --></span> </div>
+        </div>
+      </div>
+      </div>
+      <!--im-主体-右侧-->
+      <div class="im_main_right">
+        <div class="im_tab">
+          <ul>
+            <li class="this" mark="goods"><a href="javascript:void(0);">#if($!goods)#springMessage("sms.user_chatting.consult_goods")<!-- 咨询商品 -->#else#springMessage("sms.user_chatting.merchant_hot_sell")<!-- 商家热卖 -->#end</a></li>
+            #if($!store)
+            <li mark="store"><a href="javascript:void(0);">#springMessage("sms.user_chatting.store_inoformation")<!-- 店铺信息 --></a></li>
+            #end
+            <li mark="order"><a href="javascript:void(0);">#springMessage("sms.user_chatting.my_order")<!-- 我的订单 --></a></li>
+            <li mark="return"><a href="javascript:void(0);">#springMessage("sms.user_chatting.my_return_order")<!-- 我的退货单 --></a></li>
+          </ul>
+        </div>
+        <div class="im_right_detail" style=" width:100%;  overflow-y:scroll;">
+         
+         
+           #if($!goods)
+          <!--im-咨询商品-->
+          <div class="im_goods_detail" style="display:;" mark="goods">
+            <div class="im_advisory" style=" height:320px;">
+              <div class="im_goods_info"> <span class="im_goods_pic">
+              #set($bigimg="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}")
+              #set($img="$!{bigimg}_middle.$!{goods.goods_main_photo.ext}")
+              #if(!$!goods.goods_main_photo)
+              #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+              #end
+            #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+            #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+            #end 
+              
+              <a href="$!{goods_url}" target="_blank"><img src="$!{img}" width="150" height="150" /></a></span> <span class="im_goods_name"><a href="$!{goods_url}" target="_blank">$!goods.goods_name</a></span> </div>
+              <div class="im_add_gwc"><a href="javascript:void(0);" onclick="add_cart()">#springMessage("sms.user_chatting.add_cart")<!-- 加入购物车 --></a></div>
+              <div class="im_goods_para">
+                <ul>
+                  <li><span class="im_para_left">#springMessage("sms.user_chatting.price")<!-- 价 格： --></span><span class="im_para_right im_text_red" id="store_price">¥$!{goods.goods_current_price}</span></li>
+                  <li><span class="im_para_left">#springMessage("sms.user_chatting.repertory")<!-- 库 存： --></span><span class="im_para_right im_text_blue" id="goods_inventory">$!{goods.goods_inventory}#springMessage("sms.goods_cart2.a")<!-- （件） --></span></li>
+                  <li> <span class="im_para_left">#springMessage("sms.user_chatting.evaluate")<!-- 评 价： --></span> <span class="im_para_right">
+                   #set($well_evaluate = $!CommUtil.null2Double($!{goods.well_evaluate})*100)
+                    <div class="im_star"><i style="width:$!{well_evaluate}%;"></i></div>
+                    <div class="im_text_blue">($!{goods.evaluates.size()}#springMessage("sms.user_chatting.evaluate_count")<!-- 条评论 -->)</div>
+                    </span> </li>
+                    #set($well="$!{well_evaluate}%")
+                  <li><span class="im_para_left">#springMessage("sms.store_head.good_rate")<!-- 好评率： --></span><span class="im_para_right"><i class="im_text_blue">$!{well}</i>#springMessage("sms.user_chatting.good_reputation")<!-- 好评 --></span></li>
+                </ul>
+              </div>
+            </div>
+		<ul style="display:none">
+          #foreach($spec in $goodsViewTools.generic_spec("$!goods.id"))
+          <li mark="spec" style="display:none">
+          #foreach($gsp in $goods.goods_specs)
+            #if($!{gsp.spec.id}==$!spec.id) 
+                <a href="javascript:void(0);" sname="$!gsp.value" spec="$!gsp.spec.id" gsp="$!gsp.id">
+                </a> 
+            #end
+           #end
+             </li>
+          #end
+		</ul>          
+           <!--默认规格-->
+           <script>
+			  function goods_spec_set(obj){
+				var spec=jQuery(obj).attr("spec");
+				var gsp="";	
+				jQuery("li[mark='spec']").find("a:first").each(function(){
+					gsp=jQuery(this).attr("gsp")+","+gsp;									
+				});
+				jQuery.post("$!webPath/load_goods_gsp.htm",{"id":"$!goods.id","gsp":gsp},function(data){
+				   goods_inventory=data.count;
+				   store_price=data.price;
+				   jQuery("#store_price").html("¥"+store_price);
+				   jQuery("#goods_inventory").html(goods_inventory+"#springMessage('sms.goods_cart2.a')");/* （件） */
+					#if($!{goods.activity_status}==2 && $!user)
+					#set($level_name=$!goodsViewTools.query_user_level_name("$!user.id")) 
+					#if($!level_name=="#springMessage('sms.user_chatting.bronze_member')")/* "铜牌会员" */
+					store_price=$!goods.activity_price;
+					#end
+					#if($!level_name=="#springMessage('sms.user_chatting.silver_member')")/* "银牌会员" */
+					store_price=$!goods.activity_price1;
+					#end
+					#if($!level_name=="#springMessage('sms.user_chatting.gold_member')")/* "金牌会员" */
+					store_price=$!goods.activity_price2;
+					#end
+					#if($!level_name=="#springMessage('sms.user_chatting.super_member')")/* "超级会员" */
+					store_price=$!goods.activity_price3;
+					#end
+					#end
+				  },"json");
+			  }
+
+          jQuery("li[mark='spec']").each(function(){								  
+			var th = jQuery(this).find("a").first();
+			goods_spec_set(th); 
+		   });
+          </script>
+          
+            <script>
+            jQuery(document).ready(function(){
+			 jQuery(".im_question a").click(function(){
+				var article_id =jQuery(this).attr("article_id");
+				window.opener.window.open("$!webPath/article_"+article_id+".htm");	
+					});								
+			 });
+            </script>
+            <!--im-常见问题-->
+            <div class="im_question">
+              <h1>#springMessage("sms.user_chatting.normal_problem")<!-- 常见问题 --></h1>
+              <ul>
+              #foreach($obj in $article)
+                <li><a href="javascript:void(0);" article_id="$!obj.id">$!obj.title</a></li>
+           	  #end
+              </ul>
+            </div>
+          </div>
+          #else
+          <div class="im_recommend" mark="goods">
+          	<table cellpadding="0" cellspacing="0" border="0">
+            	<tbody>
+                #foreach($goods in $recommends)
+                 #if($!goods.goods_main_photo)
+             	 	#set($bigimg="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}")
+             	 	#set($img="$!{bigimg}_small.$!{goods.goods_main_photo.ext}")
+        		  #else
+          			  #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+        		  #end
+                  
+                        #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+                    #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+                    #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+                    #end 
+
+                	<tr>
+                    	<td width="25%">
+                        <a href="javascript:void(0);" onclick="window.opener.window.open('$!{goods_url}');"><img src="$!{img}" width="60" height="60" /></a>
+                        </td>
+                        <td valign="top">
+                        	<ul class="im_recommend_ul">
+                            	<li class="im_recom_name"><a href="javascript:void(0);" onclick="window.opener.window.open('$!{goods_url}');">$!goods.goods_name</a></li>
+                                <li class="im_recom_price">¥<strong>$!goods.goods_current_price</strong></li>
+                            </ul>
+                        </td>
+                    </tr>
+                  #end  
+                </tbody>
+            </table>
+            <div class="im_question">
+              <h1>#springMessage("sms.user_chatting.normal_problem")<!-- 常见问题 --></h1>
+              <ul>
+              #foreach($obj in $article)
+                <li><a href="javascript:void(0);" article_id="$!obj.id">$!obj.title</a></li>
+           	  #end
+              </ul>
+            </div>
+          </div>
+          #end
+                      #if($!store)
+                      <!--im-店铺信息-->
+                      <div class="store_level" style="display:none;" mark="store">
+                        <div class="im_store_info" style="height:320px;">
+                          <div class="im_store_pd20">
+                            <div class="store_detail">
+                              <ul>
+                                #set($store_url="$!webPath/store_$!{store.id}.htm")
+                                #if($!config.second_domain_open && $!store.store_second_domain!="")
+                                #set($store_url="http://$!{store.store_second_domain}.$!{domainPath}")
+                                #end
+                                <li><span class="company_name">#springMessage("sms.user_chatting.merchant_store")<!-- 商家店铺： --></span><span class="red"><a href="$!{store_url}" target="_blank">$!store.store_name</a></span></li>
+                              </ul>
+                            </div>
+                            <table class="level_table" cellpadding="0" cellspacing="0" border="0">
+                              <tbody>
+                                <tr>
+                                  <td colspan="2"><b>#springMessage("sms.user_chatting.grade_detail")<!-- 评分详细 --></b></td>
+                                  <td colspan="2">#springMessage("sms.user_chatting.compare_to_same_industry")<!-- 与同行业相比 --></td>
+                                </tr>
+                                <tr>
+                                  <td width="75" class="im_gray">#springMessage("sms.user_chatting.desciption")<!-- 描述相符： --></td>
+                                  <td width="55">#if(!$!{store.sp.description_evaluate})0#else $!{store.sp.description_evaluate} #end#springMessage("sms.store_index.point")<!-- 分 --></td>
+                                  <td width="20"><span class="level_arrow $!{description_css}"></span></td>
+                                  <td class="im_$!{description_css}">$!description_result</td>
+                                </tr>
+                                <tr>
+                                  <td class="im_gray">#springMessage("sms.user_chatting.serve_attitude")<!-- 服务态度： --></td>
+                                  <td>#if(!$!{store.sp.service_evaluate})0#else $!{store.sp.service_evaluate} #end#springMessage("sms.store_index.point")<!-- 分 --></td>
+                                  <td><span class="level_arrow $!{service_css}"></span></td>
+                                  <td class="im_$!{service_css}">$!service_result</td>
+                                </tr>
+                                <tr>
+                                  <td class="im_gray">#springMessage("sms.user_chatting.deliver_speed")<!-- 发货速度： --></td>
+                                  <td>#if(!$!{store.sp.ship_evaluate})0#else $!{store.sp.ship_evaluate} #end#springMessage("sms.store_index.point")<!-- 分 --></td>
+                                  <td><span class="level_arrow $!{ship_css}"></span></td>
+                                  <td class="im_$!{service_css}">$!ship_result</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                      #end
+         	 <!--im-我的订单-->
+        			 <script>
+	 var all_order=$!{all_orders};
+	 var all_return=$!{all_returnlogs};
+	 var order_begin=0;
+	 var return_begin=0;					
+      function user_ajaxPage(url,obj){
+			 var temp_currentPage=0;	 
+			 var flag = false;
+			 var mark =jQuery(obj).attr("mark");
+			 var type =jQuery(obj).attr("type");
+			 if(type=="order"){
+				if(mark=='up'&&order_begin<all_order-1){
+				 order_begin++;
+				 temp_currentPage=order_begin;
+				 flag = true;
+				 }
+				 if(mark=='down' &&order_begin>=1){
+				 order_begin--;
+				 temp_currentPage=order_begin;
+				 flag = true;
+				 } 
+			  } 
+				if(type=="return"){
+				   if(mark=='up'&&return_begin<all_return-1){
+					 return_begin++;
+					  temp_currentPage=return_begin;
+					 flag = true;
+					 }
+					 if(mark=='down' &&return_begin>=1){
+					 return_begin--;
+					  temp_currentPage=return_begin;
+					 flag = true;
+					 } 	
+				}	 
+						 if(flag){
+								if(type=="order"){
+								jQuery(".im_order_detail[mark='order']").attr("style","text-align:center; min-height:140px; padding-top:135px;").html("#springMessage('sms.user_chatting.loading')....");/* 加载中 */
+								}else{
+								jQuery(".im_order_detail[mark='return']").attr("style","text-align:center; min-height:120px; padding-top:84px;").html("#springMessage('sms.user_chatting.loading')....");/* 加载中 */
+								}
+									jQuery.post(url,{
+										"currentPage":temp_currentPage
+										},function(data){
+											if(type=="order"){
+											jQuery("#order_page").html(order_begin+1);
+											jQuery(".im_order_detail[mark='order']").removeAttr("style").html(data);
+											}
+											if(type=="return"){
+											jQuery("#return_page").html(return_begin+1);
+											jQuery(".im_order_detail[mark='return']").removeAttr("style").html(data);
+											}
+										},"text");	 
+						 }
+		}
+         </script>
+                     #if($!orders.size()>0)
+                      <div class="im_order_form" style="display:none;" mark="order">
+                        <div class="im_order_more">
+                          <div class="im_order_page"> <a href="javascript:void(0);" mark="down" type="order" onclick="user_ajaxPage('$!webPath/chatting_order_ajax.htm',this)">#springMessage("sms.user_chatting.up_page")<!-- 上页 --></a> <span class="im_order_num"><b id="order_page">1</b>/$!{all_orders}</span> <a href="javascript:void(0);" mark="up" type="order" onclick="user_ajaxPage('$!webPath/chatting_order_ajax.htm',this)">#springMessage("sms.user_chatting.down_page")<!-- 下页 --></a> </div>
+                           </div>
+                        <div class="im_order_detail" mark="order">
+                         #foreach($obj in $orders)
+                          <table cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                              <tr>
+                                <td width="30%" class="im_dt">#springMessage("sms.user_chatting.order_status")</td><!-- 订单状态： -->
+                                  #if($!obj.order_status==0)
+                                  #set($status="#springMessage('sms.user_chatting.aready_cancel')")<!-- "已取消" -->
+                                  #end
+                                  
+                                  #if($!obj.order_status==10)
+                                  #set($status="#springMessage('sms.user_chatting.waiting_payment')")<!-- "待付款" -->
+                                  #end
+                                  
+                                  #if($!obj.order_status==15)
+                                  #set($status="#springMessage('sms.user_chatting.outline_pay_check')")<!-- "线下支付待审核" -->
+                                  #end
+                                  
+                                  #if($!obj.order_status==16)
+                                  #set($status="#springMessage('sms.user_chatting.payment_after_arrive')")<!-- "货到付款待发货" -->
+                                  #end
+                                  
+                                  #if($!obj.order_status==20)
+                                  #set($status="#springMessage('sms.user_chatting.aready_pay')")<!-- "已付款" -->
+                                  #end
+                                  
+                                  #if($!obj.order_status==30)
+                                  #set($status="#springMessage('sms.user_chatting.aready_deliver')")       <!-- "已发货"  -->
+                                  #end 
+                                                 
+                                  #if($!obj.order_status==40)
+                                  #set($status="#springMessage('sms.user_chatting.aready_recive')")<!-- "已收货" -->
+                                  #end
+                                  
+                                  #if($!obj.order_status==50)
+                                  #set($status="#springMessage('sms.user_chatting.finish_evaluate')")   <!--  "已完成,已评价"   -->                             
+                                  #end
+                                  
+                                  #if($!obj.order_status==60)
+                                  #set($status="#springMessage('sms.user_chatting.aready_end')") <!--  "已结束"     -->                                        
+                                  #end 
+                                  
+                                  #if($!obj.order_status==65)
+                                  #set($status="#springMessage('sms.user_chatting.end_can_not_evaluate')")  <!--  "已结束，不可评价"  -->                             
+                                  #end
+                                <td class="im_dd">$!{status}</td>
+                              </tr>
+                              <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.order_code")<!-- 订单编号： --></td>
+                                <td class="im_dd">$!obj.order_id</td>
+                              </tr>
+                              #if($!obj.order_cat==0)
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.buy_goods")<!-- 下单商品： --></td>
+                                <td class="im_dd"><ul class="im_order_goods">
+                              #foreach($map in $!orderformTools.queryGoodsInfo("$!obj.goods_info"))
+                              #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+                              #set($img="$!webPath/$!{goods_mainphoto_path}")
+                              #set($goods_count = "$!{map.get('goods_count')}")
+                              #set($goods_price = "$!{map.get('goods_price')}")
+                              #set($goods_gsp_val = "$!{map.get('goods_gsp_val')}")
+                                    <li><img src="$!img" width="50" height="50" /></li>
+                              #end	
+                                  </ul></td>
+                              </tr>
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.goods_price")<!-- 商品单价： --></td>
+                                <td class="im_dd">$!goods_price （#springMessage("sms.user_chatting.yuan")<!-- 元 -->）</td>
+                              </tr>
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.count")<!-- 下单数量： --></td>
+                                <td class="im_dd">$!goods_count</td>
+                              </tr>
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.order_carriage")<!-- 订单运费： --></td>
+                                <td class="im_dd">$!obj.ship_price （#springMessage("sms.user_chatting.yuan")<!-- 元 -->）</td>
+                              </tr>
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.order_sum_price")<!-- 订单总价： --></td>
+                             #set($map=$!orderformTools.queryCouponInfo("$!obj.coupon_info"))
+                                <td class="im_dd">$!obj.totalPrice（元）#if($!obj.coupon_info!="")#springMessage("sms.user_chatting.use_discount_coupon")<!-- 使用优惠券抵消 -->$!{map.get('coupon_amount')} #springMessage("sms.user_chatting.yuan")<!-- 元 -->】 #end</td>
+                              </tr>
+                              #end
+                                #if($!obj.order_cat==2)
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.buy_goods")<!-- 下单商品： --></td>
+                                <td class="im_dd"><ul class="im_order_goods">
+                              #set($map=$!orderformTools.queryGroupInfo("$!obj.group_info"))
+                              #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+                              #set($img="$!webPath/$!{goods_mainphoto_path}")
+                              #set($goods_count = "$!{map.get('goods_count')}")
+                              #set($goods_price = "$!{map.get('goods_price')}")
+                              #set($goods_name = "$!{map.get('goods_name')}")
+                                    <li><img src="$!img" width="50" height="50" /></li>	
+                                  </ul></td>
+                              </tr>
+                              <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.goods_name")<!-- 商品名称： --></td>
+                                <td class="im_dd">$!goods_name</td>
+                              </tr>
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.goods_price")<!-- 商品单价： --></td>
+                                <td class="im_dd">$!goods_price （#springMessage("sms.user_chatting.yuan")<!-- 元 -->）</td>
+                              </tr>
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.count")<!-- 下单数量： --></td>
+                                <td class="im_dd">$!goods_count</td>
+                              </tr>
+                                <tr>
+                                <td class="im_dt">#springMessage("sms.user_chatting.order_sum_price")<!-- 订单总价： --></td>
+                             #set($map=$!orderformTools.queryCouponInfo("$!obj.coupon_info"))
+                                <td class="im_dd">$!obj.totalPrice（#springMessage("sms.user_chatting.yuan")<!-- 元 -->）#if($!obj.coupon_info!="")#springMessage("sms.user_chatting.use_discount_coupon")<!-- 使用优惠券抵消 -->$!{map.get('coupon_amount')} #springMessage("sms.user_chatting.yuan")<!-- 元 -->】 #end</td>
+                              </tr>
+                              #end
+                            </tbody>
+                          </table>
+                             #end
+                        </div>
+                      </div>
+                      #else
+                      <div style=" text-align:center; display:none;padding-top:20px;" err_div="err_order">#springMessage("sms.user_chatting.no_data")<!-- 暂无数据！ --></div>
+                      #end
+          
+       
+          <!--im-最近的退换-->
+          			   #if($!returnlogs.size()>0)
+        			  <div class="im_order_form" style="display:none;" mark="return">
+            <div class="im_order_more">
+              <div class="im_order_page"> <a href="javascript:void(0);"  mark="down" type="return" onclick="user_ajaxPage('$!webPath/chatting_return_ajax.htm',this)">#springMessage("sms.user_chatting.up_page")<!-- 上页 --></a> <span class="im_order_num"><b id="return_page">1</b>/$!{all_returnlogs}</span> <a href="javascript:void(0);"  mark="up" type="return" onclick="user_ajaxPage('$!webPath/chatting_return_ajax.htm',this)">#springMessage("sms.user_chatting.down_page")<!-- 下页 --></a> </div>
+              </div>
+            <div class="im_order_detail" mark="return">
+            #foreach($obj in $returnlogs)
+              <table cellpadding="0" cellspacing="0" border="0">
+                <tbody>
+                  <tr>
+                    <td width="30%" class="im_dt">#springMessage("sms.user_return_ajax.return_code")<!-- 退单编号： --></td>
+                    <td class="im_dd">$!obj.return_service_id</td>
+                  </tr>
+                  #set($status="#springMessage('sms.user_chatting.return_the_application')")<!-- "退货申请中" -->
+                  #if($!obj.goods_return_status==-1)
+                  #set($status="#springMessage('sms.user_chatting.return_refuse')")<!-- "退货申请被拒绝" -->
+                  #end
+                  #if($!obj.goods_return_status==5)
+                  #set($status="#springMessage('sms.user_chatting.return_the_application')")<!-- "退货申请中" -->
+                  #end
+                   #if($!obj.goods_return_status==6)
+                  #set($status="#springMessage('sms.user_chatting.return_application_pass')")<!-- "退货申请审核通过" -->
+                  #end
+                  #if($!obj.goods_return_status==7)
+                  #set($status="#springMessage('sms.user_chatting.buy_returnning')")<!-- "买家退货中" -->
+                  #end
+                  #if($!obj.goods_return_status==10)
+                  #set($status="#springMessage('sms.user_chatting.return_finish')")<!-- "退货完成" -->
+                  #end
+                  <tr>
+                    <td class="im_dt">#springMessage("sms.user_chatting.current_status")<!-- 当前状态： --></td>
+                    <td class="im_dd">$!{status}</td>
+                  </tr>
+                  <tr>
+                    <td class="im_dt">#springMessage("sms.user_chatting.application_time")<!-- 申请时间： --></td>
+                    <td class="im_dd">$!CommUtil.formatLongDate($!obj.addTime)</td>
+                  </tr>
+                  <tr>
+                    <td class="im_dt">#springMessage("sms.user_chatting.return_goods")<!-- 退货商品： --></td>
+                    <td class="im_dd">$!obj.goods_name</td>
+                  </tr>
+                  <tr>
+                    <td class="im_dt">#springMessage("sms.user_chatting.goods_price")<!-- 商品单价： --></td>
+                    <td class="im_dd">$!obj.goods_price （#springMessage("sms.user_chatting.yuan")<!-- 元 -->）</td>
+                  </tr>
+                   <tr>
+                    <td class="im_dt">#springMessage("sms.user_chatting.return_sum_price")<!-- 退货总价： --></td>
+                    <td class="im_dd">$!{obj.goods_price} X $!{obj.goods_count} =  $!{obj.goods_all_price} （#springMessage("sms.user_chatting.yuan")<!-- 元 -->）</td>
+                  </tr>
+                </tbody>
+              </table>
+              #end
+            </div>
+          </div>
+                       #else
+                      <div style=" text-align:center; display:none; padding-top:20px;" err_div="err_return">#springMessage("sms.user_chatting.no_data")<!-- 暂无数据！ --></div>
+                      #end
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
+<div class="white_content_opa" style="display:none" ></div>
+<div class="white_content" style="display:none">
+	<a class="white_close" href="javascript:void(0);" onclick="jQuery('.white_content,.white_content_opa').fadeOut();"></a>
+    <div class="white_box">
+    	<table width="100%" height="100%">
+        	<tbody>
+            	<tr>
+                	<td valign="middle"></td>
+                </tr>
+        	</tbody>
+        </table>
+    </div>
+</div> 
+<div id="div_session" session="true" style="display:none"></div>
+<script>
+#if($!chatting_error)
+	window.setInterval(close_window,1000);
+	jQuery("#div_session").attr("session","false");
+	alert("#springMessage('sms.user_chatting.window_close')");	/* "由于长时间没有操作，系统正将会话窗口关闭，请确认" */
+#end
+function close_window(){
+	window.close();
+	}
+</script>
+</body>
+</html>

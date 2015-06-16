@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-子账号列表-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/resources/style/common/css/overlay_blue.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=sub_account_list") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>我的店铺</b>><b>子账户管理</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title"> 
+        	<div class="seller_list_tit">[当期店铺等级允许${store.grade.acount_num}个子账户,当前已创建  $!{user.childs.size()}个]</div>
+          <div class="seller_list_title">
+            <ul class="seller_title_ul">
+              <li class="this"><a href="$!webPath/seller/sub_account_list.htm"><i></i>子账户列表</a></li>
+              <li ><a href="$!webPath/seller/sub_account_add.htm"><i></i>新增子账户</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/sub_account_list.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="139">用户名</th>
+                  <th width="128">真实姓名</th>
+                  <th width="125">最后一次登录</th>
+                  <th width="100">手机号码</th>
+                  <th width="100">联系电话</th>
+                  <th width="100" align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                <tr >
+                  <td align="center">$!obj.userName</td>
+                  <td align="center">$!obj.trueName</td>
+                  <td align="center">#if($!obj.lastLoginDate)$!CommUtil.formatLongDate($!obj.lastLoginDate)#else 暂无登录记录#end</td>
+                  <td align="center">$!obj.mobile</td>
+                  <td align="center">$!obj.telephone</td>
+                  <td align="center" class="del_operate"><a href="$!webPath/seller/sub_account_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="del_a">编辑</a>|<a href="javascript:void(0);" onclick="if(confirm('删除后不可恢复，是否继续?'))window.location.href='$!webPath/seller/sub_account_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="del_a">删除</a></td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

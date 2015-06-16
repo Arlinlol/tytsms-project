@@ -1,0 +1,419 @@
+<script>
+jQuery(document).ready(function(){
+  jQuery("#navul li").each(function(){
+    var original_url=jQuery(this).attr("original_url");
+	if("$!{current_url}".indexOf(original_url)>=0){
+	   jQuery(this).addClass("this");	
+	}
+  });
+});
+</script>
+
+<div class="nav">
+  <div class="nav_center">
+    <div class="nav_left">
+      <h2><a href="$!webPath/goods_class.htm"><span>全部商品分类 <em><img src="$!webPath/resources/style/system/front/default/images/nav_top.gif" width="10" height="5" /></em></span></a> </h2>
+      <div class="index_topleft">
+        <div class="left_menu" id="left_menu"> #foreach($gc in $!gcs)
+          #set($icon_img="$!webPath/resources/style/common/images/icon/default_icon.png")
+          <dl #if($!velocityCount%2==0)class="left_menu_dl double" #else class="left_menu_dl" #end child_count="$!gc.childs.size()" id="$!gc.id" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+            #if($!gc.icon_type==0)
+            #if($!gc.icon_sys!="")
+            #set($icon_img="$!webPath/resources/style/common/images/icon/icon_$!{gc.icon_sys}.png")
+            #end
+            #else
+            #if($!gc.icon_acc)
+            #set($icon_img="$!webPath/$!gc.icon_acc.path/$!gc.icon_acc.name")
+            #end
+            #end
+            <dt class="left_menu_dt" id="dts_$!gc.id"><i class="left_menu_i"><img src="$!icon_img" width="16" height="16" /></i><strong class="left_menu_str"><a href="$!webPath/store_goods_list_$!{gc.id}.htm">$!gc.className</a></strong><b class="left_menu_str_b">#foreach($child_gc in $gcViewTools.query_third_rec("$!gc.id",3))<a href="$!webPath/store_goods_list_$!{child_gc.id}.htm">$!{child_gc.className}</a>  #end</b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_$!gc.id">
+              <div class="left_menu_con"> #foreach($gc1 in $gc.childs) <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="$!webPath/store_goods_list_$!{gc1.id}.htm" target="_blank">$!gc1.className</a></dt>
+                  <dd>#foreach($gc2 in $gc1.childs)#if($!gc2.display)<a href="$!webPath/store_goods_list_$!{gc2.id}.htm" target="_blank">$!gc2.className</a>#end #end</dd>
+                </dl>
+                </span> #end </div>
+            </dd>
+          </dl>
+          #end </div>
+      </div>
+    </div>
+    <ul id="navul">
+      #set($navs=$!navTools.queryNav(0,-1))
+      #foreach($nav in $navs)
+      #if($!CommUtil.indexOf("$!nav.url","http://")>=0)
+      #set($url="$!nav.url")
+      #else
+      #set($url="$!webPath/$!{nav.url}")
+      #end
+      <li><a href="$!url" id="$!nav.id" #if($!nav.new_win==1)target="_blank"#end original_url="$!nav.original_url"><span>$!{nav.title}</span></a></li>
+      #end
+    </ul>
+  </div>
+</div>
+
+<script src="$!webPath/advert_invoke.htm?id=1"></script>
+
+<div class="main">
+  
+  <div class="index_center_box">
+    <div class="index_sale">
+      <div class="index_sale_tab" id="index_sale_tab"> <a href="javascript:void(0);" class="sale_change" mark="recommend" id="sale_change" onclick="switch_recommend_goods();">换一组</a>
+        <ul>
+          <li class="this" recommend_goods_random="1">推荐商品<s></s></li>
+          <li recommend_goods_random="1">猜您喜欢<s></s></li>
+        </ul>
+      </div>
+      <!--推荐商品-->
+      <div class="index_sale_box" style="display:block" id="index_sale_box_recommend">
+        <div class="index_sale_con" id="index_sale_con_recommend"> #foreach($!store_recommend_good in $store_recommend_goods)
+          <ul class="index_sale_two">
+            #if($!store_recommend_good.goods_main_photo)
+            #set($img="$!imageWebServer/$!{store_recommend_good.goods_main_photo.path}/$!{store_recommend_good.goods_main_photo.name}_middle.$!{store_recommend_good.goods_main_photo.ext}")
+            #else
+            #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            #end
+            #set($goods_url="$!webPath/goods_$!{store_recommend_good.id}.htm")
+            #if($!config.second_domain_open && $!store_recommend_good.goods_type==1 && $!store_recommend_good.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{store_recommend_good.goods_store.store_second_domain}.$!{domainPath}/goods_$!{store_recommend_good.id}.htm")
+            #end
+            <li class="sale_two_img"> <a href="$!goods_url" target="_blank"> <span class="img_cspan">
+              <p><img src="$!img" width="170" height="170" /></p>
+              </span></a> </li>
+            <li class="sale_two_name"><a href="$!goods_url">$!store_recommend_good.goods_name</a></li>
+            <li class="sale_two_price">售价：<strong>¥$!store_recommend_good.store_price</strong></li>
+          </ul>
+          #end </div>
+      </div>
+      <!--猜您喜欢-->
+      <div class="index_sale_box" style="display:none" id="index_sale_box_like">
+        <div class="index_sale_con" id="index_sale_con_like"> #foreach($!your_like_good in $your_like_goods)
+          <ul class="index_sale_two">
+            #if($!your_like_good.goods_main_photo)
+            #set($img="$!imageWebServer/$!{your_like_good.goods_main_photo.path}/$!{your_like_good.goods_main_photo.name}_middle.$!{your_like_good.goods_main_photo.ext}")
+            #else
+            #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            #end
+            #set($goods_url="$!webPath/goods_$!{your_like_good.id}.htm")
+            #if($!config.second_domain_open && $!your_like_good.goods_type==1 && $!your_like_good.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{your_like_good.goods_store.store_second_domain}.$!{domainPath}/goods_$!{your_like_good.id}.htm")
+            #end
+            <li class="sale_two_img"><a href="$!goods_url"><span class="img_cspan">
+              <p><img src="$!img" width="170" height="170" /></p>
+              </span></a></li>
+            <li class="sale_two_name"><a href="$!goods_url">$!your_like_good.goods_name</a></li>
+            <li class="sale_two_price">售价：<strong>¥$!your_like_good.store_price</strong></li>
+          </ul>
+          #end </div>
+      </div>
+    </div>
+    <div class="index_brand_right">
+      <div class="brand">
+        <h3><span><a href="$!webPath/brand/index.htm" target="_blank">更多</a></span>推荐品牌</h3>
+        <ul>
+          #foreach($gb in $!goodsBrands)
+          #set($gb_url="$!webPath/brand_goods_$!{gb.id}.htm")
+          <li>#if($!{gb.brandLogo})<img src="$!imageWebServer/$!{gb.brandLogo.path}/$!{gb.brandLogo.name}" width="142" height="66" /><a href="$!gb_url" target="_blank">$!{gb.name}</a>#end</li>
+          #end
+        </ul>
+      </div>
+      <div class="brand_bottom_adv">
+        <script src="$!webPath/advert_invoke.htm?id=4"></script>
+      </div>
+    </div>
+  </div>
+<script>
+jQuery(function(){ 
+   jQuery(".storey_list li").mouseenter(function(){
+	  jQuery(".storey_list li").stop();											 
+      jQuery(this).parent().parent().find("li").animate({"opacity":"0.2"},{queue:false, duration:1000});
+	  jQuery(this).animate({"opacity":"0.9"},{queue:false, duration:1000});
+   }).mouseleave(function(){
+	  jQuery(".storey_list li").stop();
+      jQuery(this).animate({"opacity":"0.9"},{queue:false, duration:1000});
+   });	
+   jQuery(".storey_list").mouseleave(function(){
+	  jQuery(".storey_list li").stop();
+      jQuery(this).parent().parent().find("li").css("opacity","1.0"); 
+	});
+   jQuery(".hot_sell_ul li").mouseenter(function(){		
+	  jQuery(".hot_sell_ul li").stop();											 
+	  jQuery(this).parent().find("li").animate({"opacity":"0.2"},{queue:false, duration:1000});
+	  jQuery(this).animate({"opacity":"0.9"},{queue:false, duration:1000});
+   }).mouseleave(function(){
+	  jQuery(".hot_sell_ul li").stop();
+      jQuery(this).animate({"opacity":"1.0"},{queue:false, duration:1000});
+   });
+   jQuery(".hot_sell_ul").mouseleave(function(){
+      jQuery(".hot_sell_ul li").stop();
+      jQuery(this).parent().find("li").css("opacity","1.0");
+   });
+   //
+   jQuery(".goods_pic img").lazyload({effect:"fadeIn",width:230,height:230});
+   //back_floor
+   jQuery(".back_floor>ul>li").click(function(){
+	  var id=jQuery(this).attr("floor_id");									   
+      var top = jQuery("#"+id).offset().top-80;
+      jQuery('body,html').animate({scrollTop:top},1000);
+   }); 
+})
+</script>
+<!--蓝色-->
+#foreach($floor in $floors)
+<div class="storey $!{floor.gf_css}" id="floor_$!{velocityCount}">
+  <div class="storey_left">
+    <h1><b>$!{velocityCount}F</b><span>$!{floor.gf_name}</span></h1>
+    <div class="storey_bd">
+      <div class="storey_ul">
+        <ul>
+          #foreach($gc in $gf_tools.generic_gf_gc("$!floor.gf_gc_list"))
+          #foreach($c_gc in $gc.childs)
+          <li><a href="$!webPath/store_goods_list_$!{c_gc.id}.htm" target="_blank">$!c_gc.className</a></li>
+          #end
+          #end
+        </ul>
+      </div>
+      <div class="advert">$!gf_tools.generic_adv("$!webPath","$!floor.gf_left_adv")</div>
+    </div>
+  </div>
+  <div class="storey_right">
+    <div class="storey_tab">
+      <ul>
+        #foreach($info in $floor.childs)
+        <li #if($!{velocityCount}==1) class="this" #end style="cursor:pointer;" id="$!{info.id}" store_gc="$!floor.id"><a href="javascript:void(0);">$!{info.gf_name}</a><s></s></li>
+        #end
+      </ul>
+    </div>
+    #foreach($info in $floor.childs)
+    <div class="storey_list" #if($!{velocityCount}>1) style="display:none;" #end>
+      <ul>
+        #foreach($goods in $gf_tools.generic_goods("$!info.gf_gc_goods"))
+        #if($!goods)
+        
+        #if($!goods.goods_main_photo)               
+        #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_middle.$!{goods.goods_main_photo.ext}")
+        #else
+        #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+        #end
+        
+        #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+        #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+        #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+        #end
+        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="$!goods_url" target="_blank">$!{goods.goods_name}</a></span> <span class="goods_price">¥<b>$!{goods.goods_current_price}</b><em>¥$!{goods.goods_price}</em></span> <span class="goods_pic"><a href="$!goods_url" target="_blank"><span class="img_cspan">
+                <p><img src="$!imageWebServer/resources/style/common/images/loader.gif" original="$!img"  onerror="this.src='$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+        #end 
+        #end
+      </ul>
+    </div>
+    #end
+    <div class="hot_sell">
+      <div class="hot_sell_br"> #set($map=$!gf_tools.generic_goods_list("$!floor.gf_list_goods"))
+        <h2>$!map.get("list_title")</h2>
+        <ul class="hot_sell_ul">
+          #if($!map.get("goods1"))
+          #set($goods=$!map.get("goods1"))
+          #if($!goods.goods_main_photo)                   
+          #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+          #else
+          #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+          #end
+          
+          #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+          
+          #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+          #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+          #end
+          <li> <em class="number_01"></em> <span class="hot_goods_pic"><a href="$!goods_url" target="_blank"><span class="img_cspan">
+            <p><img src="$!img" width="80" height="80" /></p>
+            </span></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+              <p class="hot_goods_name"><a href="$!goods_url" target="_blank">$!goods.goods_name</a></p>
+              <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+            </div>
+          </li>
+          #end
+          #if($!map.get("goods2"))
+          #set($goods=$!map.get("goods2"))
+          #if($!goods.goods_main_photo)                   
+          #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+          #else
+          #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+          #end
+          
+          #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+          
+          #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+          #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+          #end
+          <li> <em class="number_02"></em> <span class="hot_goods_pic"><a href="$!goods_url" target="_blank"><img src="$!img" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+              <p class="hot_goods_name"><a href="$!goods_url" target="_blank">$!goods.goods_name</a></p>
+              <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+            </div>
+          </li>
+          #end
+          #if($!map.get("goods3"))
+          #set($goods=$!map.get("goods3"))
+          #if($!goods.goods_main_photo)                   
+          #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+          #else
+          #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+          #end
+          
+          #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+          
+          #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+          #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+          #end
+          <li> <em class="number_03"></em> <span class="hot_goods_pic"><a href="$!goods_url" target="_blank"><img src="$!img" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+              <p class="hot_goods_name"><a href="$!goods_url" target="_blank">$!goods.goods_name</a></p>
+              <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+            </div>
+          </li>
+          #end
+          #if($!map.get("goods4"))
+          #set($goods=$!map.get("goods4"))
+          #if($!goods.goods_main_photo)                   
+          #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+          #else
+          #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+          #end
+          
+          #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+          
+          #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+          #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+          #end
+          <li> <em class="number_04"></em> <span class="hot_goods_pic"><a href="$!goods_url" target="_blank"><img src="$!img" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+              <p class="hot_goods_name"><a href="$!goods_url" target="_blank">$!goods.goods_name</a></p>
+              <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+            </div>
+          </li>
+          #end
+          #if($!map.get("goods5"))
+          #set($goods=$!map.get("goods5"))
+          #if($!goods.goods_main_photo)                   
+          #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+          #else
+          #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+          #end
+          
+          #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+          
+          #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+          #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+          #end
+          <li> <em class="number_05"></em> <span class="hot_goods_pic"><a href="$!goods_url" target="_blank"><img src="$!img" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+              <p class="hot_goods_name"><a href="$!goods_url" target="_blank">$!goods.goods_name</a></p>
+              <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+            </div>
+          </li>
+          #end
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+#end
+<div class="back_box_x" style="display:none;">
+  <div class="back_floor">
+    <ul>
+      #foreach($floor in $floors)
+      <li  floor_id="floor_$!{velocityCount}"><a href="javascript:void(0);"><b>
+      #if(!$!floor.icon)
+      <img src="$!webPath/resources/style/system/front/default/images/left_nav.png"/>
+      #else
+      <img src="$!webPath/$!{floor.icon.path}/$!{floor.icon.name}"/>
+      #end
+      </b><span>$!{floor.gf_name}</span></a></li>
+      #end
+    </ul>
+  </div>
+</div>
+
+  </div>
+  
+  <div class="footer_all">
+  	<div class="promise">
+		<div class="main">
+		<div class="promise_main">
+		<div class="promise_m"><i class="promise_1"></i><span class="pro_sp1">100%</span><span>正品保证</span></div>
+		<div class="promise_m"><i class="promise_2"></i><span class="pro_sp1">保税</span><span>仓库物流</span></div>
+		<div class="promise_m"><i class="promise_3"></i><span class="pro_sp1">便捷</span><span>安全支付</span></div>
+		<div class="promise_m"><i class="promise_4"></i><span class="pro_sp1">商家</span><span>权威认证</span></div>
+		</div>
+		</div>
+	</div>
+	
+	<div class="main">
+  	 <div class="footer_shopping">
+	  #if($!img_partners.size()>0 ||$!$text_partners.size()>0)
+	  <div class="friendlink">
+	    <h1>合作伙伴</h1>
+	    <ul class="linkimg">
+	      #foreach($info in $img_partners)
+	      <li> <a href="$!info.url" target="_blank"><img src="$!imageWebServer/$!info.image.path/$!info.image.name" width="92" height="35" /></a></li>
+	      #end
+	    </ul>
+	    <div class="linka">#foreach($info in $text_partners)<a href="$!info.url" target="_blank">$!info.title</a>#end </div>
+	  </div>
+	  #end
+	  
+	  <div class="shopping"> #foreach($ac in $acs)
+	    <div class="shopone">
+	      <h3>$!ac.className</h3>
+	      <ul>
+	        #foreach($article in $ac.articles)
+	        #set($title="$!article.title")
+	        #if($title.length()>12)
+			#set($title=$title.substring(0,12))
+			#end
+	        #if($!article.url!="")
+	        #set($url="$!article.url")
+	        #else
+	        #set($url="$!webPath/article_$!{article.id}.htm")
+	        #end
+	        <li><a  href="$!url" target="_blank">$!title</a></li>
+	        #end
+	      </ul>
+	    </div>
+	    #end 
+		
+		<div class="shopone">
+	      <h3>在线客服</h3>
+	      <ul>
+	      <li><a href="tencent://message/?Menu=yes&uin=1273685323&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45
+" target="_blank">点击进入在线咨询</a></li>
+	      <li><span style=" color:#333;font-weight: bold;">09:00-18:00(周一至周六)</span></li>
+
+	        	      </ul>
+	    </div>
+		
+	     <div class="shopone">
+         <h3>官方微信</h3>
+         <ul>
+           <li><img id="u62_img" class="img " src="$!webPath/resources/style/system/front/default/images/u62.jpg" width="100px"></li>
+           <li style="margin-top:0px;padding:5px;"><a href="http://weibo.com/taiyitao" target="_blank"><strong style="font-size:16px;color:#333;line-height:50px;">官方微博</strong><img id="u66_img" class="img " src="$!webPath/resources/style/system/front/default/images/u66.png" style="width:40px;margin-bottom:-6px;"></a></li>
+          </ul>
+        </div>
+	    </div>
+	  </div>
+	  </div>

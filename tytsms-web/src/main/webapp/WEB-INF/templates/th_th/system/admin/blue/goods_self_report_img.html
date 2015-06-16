@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+#macro ( genericTree $somelist ) 
+#foreach ( $some in $somelist )
+<option value="$!some.id">
+#if($!some.level>0)
+#foreach($count in [-1..$!some.level])&nbsp;#end #end $!some.className</option>
+#genericTree($some.childs) 
+#end 
+#end
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script>
+//
+jQuery(document).ready(function(){
+#if($!brand_id)
+jQuery("#brand_id").val("$!brand_id");
+#end
+});
+function ajax_update(id,fieldName,obj,value){
+   var val;
+   if(value==undefined){
+	 val=jQuery(obj).val();
+   }else val=value; 
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/goods_self_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/th_th/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }    
+				 if(value!=undefined){
+				   jQuery(obj.parentNode.parentNode).remove();
+				 }
+              }
+	    });
+}
+
+function query_form(){
+jQuery("#ListForm").submit();
+	}
+</script>
+</head>
+<body scroll="yes">
+<div class="cont">
+  <h3 class="seth">举报图片</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/goods_self_list.htm?goods_status=0"><b>出售中的商品</b></a></li>
+            <li><a href="$!webPath/admin/goods_self_list.htm?goods_status=1"><b>仓库中的商品</b></a></li>
+            <li><a href="$!webPath/admin/goods_self_list.htm?goods_status=-2"><b>违规下架商品</b></a></li>
+            <li><a href="$!webPath/admin/goods_self_report.htm"  class="this"><b>被举报禁售商品</b></a></li>
+        </ul>
+  </div>
+  <ul class="comp_tousul">
+                  #if($!obj.acc1)
+                    <li><span><div style="width:100%; height:400px;overflow:scroll;"><img src="$!webPath/$!obj.acc1.path/$!obj.acc1.name" height="$!obj.acc1.height" width="$!obj.acc1.width" /></div><i class="comp_delall">图片一</i></span></li>
+                  #end
+                  #if($!obj.acc2)
+                    <li><span><div style="width:100%; height:400px;overflow:scroll;"><img src="$!webPath/$!obj.acc2.path/$!obj.acc2.name" height="$!obj.acc2.height" width="$!obj.acc2.width" /></div><i class="comp_delall">图片二</i></span></li>
+                  #end
+                  #if($!obj.acc3)
+                    <li><span><div style="width:100%; height:400px;overflow:scroll;"><img src="$!webPath/$!obj.acc3.path/$!obj.acc3.name" height="$!obj.acc3.height" width="$!obj.acc3.width" /></div><i class="comp_delall">图片三</i></span></li>
+                  #end
+                  </ul>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script>
+//
+jQuery(document).ready(function(){
+});
+function ajax_update(id,fieldName,obj,value){
+   var val;
+   if(value==undefined){
+	 val=jQuery(obj).val();
+   }else val=value; 
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/group_lifeself_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/th_th/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }    
+				 if(value!=undefined){
+				   jQuery(obj.parentNode.parentNode).remove();
+				 }
+              }
+	    });
+}
+
+function query_form(){
+jQuery("#ListForm").submit();
+	}
+</script>
+</head>
+<body scroll="yes">
+<div class="cont">
+  <h3 class="seth">团购管理</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/group_self.htm"><b>商品类团购列表</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_self.htm"><b>生活类团购列表</b></a></li>
+            <li><a href="$!webPath/admin/group_self_add.htm?type=goods"><b>新增商品类团购商品</b></a></li>
+            <li><a href="$!webPath/admin/group_self_add.htm?type=life"><b>新增生活类团购商品</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_selforder.htm"><b>生活购订单列表</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_selfinfo.htm"><b>团购消费码列表</b></a></li>
+            <li><a href="javascript:void(0);" class="this"><b>订单详情</b></a></li>
+        </ul>
+  </div>
+ <form name="ListForm" id="ListForm" action="" method="post">
+    <div class="search">
+      <span>消费码：</span> <span class="size150">
+          <input name="info_id" type="text" id="info_id" value="$!info_id" />
+          </span>
+           <span>使用状态：</span><span><select name="status" id="status">
+          <option value="">请选择</option>
+          <option value="0" #if($!status==0) selected="selected" #end>未使用</option>
+            <option value="-1" #if($!status==-1) selected="selected" #end>已过期</option>
+              <option value="1" #if($!status==1) selected="selected" #end>已使用</option>
+          </select></span>
+          <span>
+          <span>
+          <input name="" type="button"  value="搜索" style="cursor:pointer;" onclick="query_form()" class="search_btn"/>
+        </span> 
+        <span>订单号：$!order.order_id</span>
+    </div>
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="20%"><span class="form_btna">团购消费码</span></th>
+          <th width="20%"><span class="form_btna">团购名称</span></th>
+          <th width="20%"><span class="form_btna">团购单价</span></th>
+          <th width="20%"><span class="form_btna">使用状态</span></th>
+          <th width="15%"><span class="form_btna">到期时间</span></th>
+          <th align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+      #foreach($obj in $infos)
+        <tr>
+              <td align="center">$!obj.group_sn</td>
+              <td align="center">$!obj.lifeGoods.gg_name</td>
+              <td align="center">$!obj.lifeGoods.group_price</td>
+              <td align="center">#if($!obj.status==0)未使用#end #if($!obj.status==1) 已使用 #end #if($!obj.status==-1) 已过期 #end</td>
+              <td align="center">$!CommUtil.formatLongDate($!goods.endTime)</td>
+              <td align="center">#if($!obj.status==0)<a href="javascript:void(0);" onclick="if(confirm('是否确定使用编号为：$!obj.group_sn 消费码？'))window.location.href='$!webPath/admin/use_lifeinfo.htm?id=$!obj.id'">使用</a>#elseif($!obj.status==-1) 已过期 #else 已使用#end</td>
+          <td>$!CommUtil.formatShortDate($!c.coupon.coupon_end_time)</td></td>
+        </tr>
+     #end
+    </table>
+    </div>
+    <div class="operate_bar">
+        <div class="fenye">
+            <span id="queryCondition" style="display:none">
+            </span>
+            <input name="mulitId" type="hidden" id="mulitId" />
+        	<input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+       		$!gotoPageFormHTML      
+        </div>          
+ 	</div>
+  </form>
+</div>
+</body>
+</html>

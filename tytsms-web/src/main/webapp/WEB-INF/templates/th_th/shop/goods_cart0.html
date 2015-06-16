@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.goods_cart1.my_cart") </title><!--我的购物车-->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/good_cart.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<style type="text/css">
+.policy{display:none;}
+.top_user{ position:absolute; right:135px;top:30px;}
+.goodscar{position:absolute; right:0px;top:30px;}
+.head_search{ width:456px; margin-left:0px;}
+.head_seartxt .h_sear_txt{ width:370px;}
+</style>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="shopping_cart">
+    <div class="shopping_ok"><span>#springMessage("sms.goods_cart0.goods_add_cart")<!--商品已经成功加入购物车--></span><a href="$!{return_url}" class="go_on_buy">#springMessage("sms.goods_cart0.continue_shopping")<!--继续购物--></a><a href="$!webPath/goods_cart1.htm" class="car_total">#springMessage("sms.goods_cart0.settlement")<!--去购物车结算--></a></div>
+  </div>
+ <div class="shopping_other">
+    <h3><strong>#springMessage("sms.goods_cart0.also_buy")<!-- 购买该商品的用户还购买了 --></strong></h3>
+    <div class="shopping_other_list">
+      <div class="shopping_other_list_box"> 
+      #foreach($goods in $class_goods)
+        #if($!goods.goods_main_photo)
+        #set($small_img="$!webPath/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+        #else
+        #set($small_img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+        #end
+        
+           #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+            #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+            #end 
+        
+        <dl>
+          <dt><a href="$!goods_url" target="_blank"><span class="img_cspan">
+            <p><img src="$!{small_img}" width="100" height="100" /></p>
+            </span></a></dt>
+          <dd>
+            <h4><a href="$!goods_url" target="_blank">$!goods.goods_name</a></h4>
+            <strong>฿$!{goods.goods_current_price}</strong></dd>
+        </dl>
+        #end </div>
+    </div>
+  </div> 
+  <div class="shopping_other">
+    <h3><strong>#springMessage("sms.goods_cart0.other_goods")<!--您可能还需要其他商品--></strong></h3>
+    <div class="shopping_other_list">
+      <div class="shopping_other_list_box"> #foreach($goods in $ztc_goods)
+        #if($!goods.goods_main_photo)
+        #set($small_img="$!webPath/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+        #else
+        #set($small_img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+        #end
+        
+              #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+            #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+            #end 
+        <dl>
+          <dt><a href="$!goods_url" target="_blank"><span class="img_cspan">
+            <p><img src="$!{small_img}" width="100" height="100" /></p>
+            </span></a></dt>
+          <dd>
+            <h4><a href="$!goods_url" target="_blank">$!goods.goods_name</a></h4>
+            <strong>฿$!{goods.goods_current_price}</strong></dd>
+        </dl>
+        #end </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

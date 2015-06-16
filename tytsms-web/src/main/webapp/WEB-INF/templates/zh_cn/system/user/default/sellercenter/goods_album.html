@@ -1,0 +1,19 @@
+<div class="tab_body_b">
+<h1 class="album_h1"> <i>相册列表</i></h1>
+<div class="album_list">
+  <ul>
+  #foreach($album in $albums)
+      #set($cover_img="$!webPath/resources/style/system/front/default/images/user_photo/photom.jpg")
+	  #if($!album.album_cover)
+   	  #set($cover_img="$!webPath/$!album.album_cover.path/$!album.album_cover.name") 
+  	  #end
+    <li><span><img src="$!cover_img" width="190" height="190" #if($!{ajax_type}=='.editor_photo_detail')onclick="switch_editor_photo(this)" #else onclick="photo_switch('tab_body_b',this)" #end album_id="$!album.id" style="cursor:pointer"/><b>$!{album.photos.size()}</b></span>
+      <p>$!album.album_name</p>
+    </li>
+  #end
+  </ul>
+</div>
+<div class="tab_page">
+  <div class="tab_page2" id="img_photo" ajax_page="goods_album" ajax_type="$!{ajax_type}">$!gotoPageAjaxHTML</div>
+</div>
+</div>

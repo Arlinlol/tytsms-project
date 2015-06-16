@@ -1,0 +1,137 @@
+<style>
+.box_table {
+	border-collapse:collapse;
+	font-size:12px;
+	background-color:#FFF;
+}
+.box_table td {
+	padding-left:0px;
+}
+.box_table .login_nameu{}
+.box_table td .login_nameu{ color:#999;}
+.box_table input[type="text"],.box_table input[type="password"]{ width:260px; height:30px;}
+.box_table input[type="submit"]{ width:265px; height:32px;}
+.box_table td span a{color:#999;}
+.box_table td span a:hover{color:#f37103;}
+.box_table .forget_left{float:left;}
+.box_table .free_right{float:right;padding-right:0px;}
+
+.box_table .input_green {width:260px;}
+.box_table .input_yzm { width:80px;}
+.yzm{ margin-right:5px; vertical-align:middle; display:inline-block;}
+.nosee { line-height:24px;}
+.pizhu {
+	display:block;
+	margin-top:3px;
+	color:#CCC;
+	font-style:normal;
+}
+.box_table strong {
+	color:#F00;
+	font-size:14px;
+	margin-left:5px;
+}
+.settedtab_b{
+	padding-left:10px;
+	color:#F90}
+</style>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+	  errorPlacement: function(error, element) {
+				element.parent().find("b").html("");
+					error.appendTo(element.parent().find("b"));
+	 },						 
+       rules: {
+			username: "required",
+			password: "required"#if($!config.securityCodeLogin),
+			code:"required"#end},
+		messages: {
+			username: "#springMessage('sms.login.user_name_not_null')"      /* "用户名不能为空" */,
+			password: "#springMessage('sms.login.password_not_null')" /* "密码不能为空" */#if($!config.securityCodeLogin),
+			code:     "#springMessage('sms.login.security_code_not_null')" /* "验证码不能为空" */#end
+					},
+	   submitHandler:function(){
+	      var username=jQuery("#username").val();
+          var password=jQuery("#password").val();
+		  var code=jQuery("#code").val();
+          jQuery.post("$!webPath/iskyshop_login.htm",{"username":username,"password":password,"code":code,"ajax_login":true},function(data){
+              if(data=="success"){
+	             window.location.reload();
+	          }else{
+	             alert("#springMessage('sms.user_dialog_login.login_fail')");/* 用户名、密码错误，登录失败！ */
+	          }
+             },"text");
+	   },
+	   invalidHandler: function(form, validator) {  //不通过回调
+            return false;
+       } 
+  });
+  
+});
+</script>
+<div style="width:260px;margin:0 auto;">
+<form action="$!webPath/iskyshop_login.htm" method="post" id="theForm">
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    <tr>
+      <td width="200" align="left" valign="middle"><span class="login_nameu">#springMessage("sms.login.aready_check")<!-- 邮箱/用户名/已验证手机 --></span></td>
+      </tr>
+      <tr>
+      <td align="left"> <input name="username" type="text" id="username" size="30" autocomplete="off" /><br><b class="settedtab_b"></b></td>
+    </tr>
+    <tr>
+      <td align="left" valign="top"><span class="login_nameu">#springMessage("sms.login.login_password")<!-- 登录密码 --></span></td>
+      </tr>
+      <tr>
+      <td align="left"><input name="password" type="password" id="password" size="30"  autocomplete="off" /><br><b class="settedtab_b"></b></td>
+    </tr>
+     #if($!config.securityCodeLogin)
+	<tr>
+      <td width="100" align="left" valign="middle"><span class="login_nameu">#springMessage("sms.login.security_code")<!-- 验证码： --></span></td>
+      </tr>
+                  <tr align="left" valign="top">
+                    <td>
+					    <input class="input_yzm" name="code" type="text" id="code" style="text-transform:uppercase;width:50px;height:23px;line-height:23px;" size="30"  autocomplete="off"/><b class="settedtab_b"></b>
+					<script>
+                        function refreshCode(){
+	                        jQuery("#code_img").attr("src","$!webPath/verify.htm?d"+new Date().getTime());
+                        }
+                      </script>
+					  <span class="yzm" #if($!config.securityCodeType=='voice')style="display:none;"#end><img style="cursor:pointer;" src="$!webPath/verify.htm" id="code_img" onclick="refreshCode();" width="59" height="27" /></span><span class="nosee" #if($!config.securityCodeType=='voice')style="display:none;"#end><a href="javascript:void(0);" onclick="refreshCode();">#springMessage("sms.top.see_fuzzy")<!-- 看不清？换一张 --></a></span>
+					#if($!config.securityCodeType=="voice")
+					     <span class="yzm"><a href="javascript:void(0);" onclick="readCode('player')" title="#springMessage('sms.login.speak_security_code')"><!-- 朗读验证码 -->
+                   <img src="$!imageWebServer/th_th/resources/style/common/images/speaker.gif" border="0" /></a></span><span id="player"></span>
+				   <script>
+				   function readCode(id){
+                         var  s = "<embed id='sound_play' name='sound_play' src='$!webPath/th_th/resources/flash/soundPlayer.swf?" + (new Date().getTime()) + "' FlashVars='url=$!webPath"+ "' width='0'   height='0' allowScriptAccess='always' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' /></embed>";
+                    jQuery("#"+id).html(s);
+                    }
+				   </script>
+					  #end	
+					</td>
+                  
+                  </tr>
+                  
+				  #end
+				  
+	 
+      <td align="left"><span class="inputbtn">
+			<br>
+        <input name="login" type="submit" style="cursor:pointer;" value="#springMessage('sms.top.login_immediately')" /><!-- 立即登录 -->
+      </span></td>
+    </tr>
+	<tr>
+      <td align="left" style="padding-top: 5px;">
+      <span class="forget_left">
+      <a class="forget_password" href="$!webPath/forget1.htm">#springMessage("sms.login.forget_password")<!-- 忘记密码？ --></a>
+      </span>
+      <span class="free_right">
+      <a class="free_resgist" href="$!webPath/register.htm">#springMessage("sms.login.free_register")<!-- 免费注册 --></a>
+      </span>
+     </td>
+    </tr>
+      </tr>
+  </table>
+</form>
+</div>

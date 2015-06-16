@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>生活购 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+function group_count_adjust(count,group_id){
+   	  jQuery.post("$!webPath/group_count_adjust.htm",{"group_id":group_id,"count":count},function(data){
+		 if(data.error=="100"){																										
+	       jQuery("#group_count").val(count);
+		   jQuery("#group_total_price").html("¥"+data.group_total_price);
+		   jQuery("#total_price").html(data.group_total_price);
+		 }
+		 if(data.error=="200"){
+		   alert("库存不足，请重新选择数量！");
+		   jQuery("#group_count").val(data.count);
+		   jQuery("#group_total_price").html("¥"+data.group_total_price);
+		   jQuery("#total_price").html(data.group_total_price);
+		 }
+	   },"json");
+  }
+jQuery(document).ready(function() {
+   jQuery("#count_down").click(function(){
+	var count=jQuery("#group_count").val();
+	var group_id=jQuery(this).attr("mark");
+	if(count>1){
+	  count--;
+	   group_count_adjust(count,group_id);
+	}
+  });
+  jQuery("#count_up").click(function(){
+	var count=jQuery("#group_count").val();
+	var group_id=jQuery(this).attr("mark");
+	if(count>0){
+	  count++;
+	   group_count_adjust(count,group_id);
+	}									 
+  }); 
+  jQuery("#group_count").keyup(function(){
+  	var group_id=jQuery(this).attr("mark");
+	var count=jQuery("#group_count").val().replace(/\D/g,'');
+	if(count==""||count<=0){
+       count=1;
+	}
+	if(count>0){
+	  group_count_adjust(count,group_id);
+	}	
+  });
+});
+
+function submitForm(){
+	jQuery("#cart_form").submit();
+	}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="shopping_cart">
+    <div class="shopping_step">
+      <ul class="shopping_step_ul">
+        <li class="shopping_step_athis"><span></span><i></i><strong>1.填写核对订单信息</strong></li>
+        <li class="shopping_step_b"><span></span><i></i><strong>2.成功提交订单</strong></li>
+      </ul>
+    </div>
+    <form  method="post"  name="cart_form" target="_self" id="cart_form" action="$!webPath/life_order_save.htm">
+     <input name="orderForm_session" value="$!orderForm_session" type="hidden" />
+    <input name="group_id" id="group_id" value="$!obj.id" type="hidden" />
+    <div class="shopping_list_order">
+      <h3>订单信息确认</h3>
+      <div class="shopping_order_box">
+      <h4>联系方式</h4>
+      <div class="shopping_order_phone">
+     手机号：<input name="mobile" type="text" id="mobile" class="shop_order_txt" value="$!user.mobile" readonly="readonly"/>
+      </div>
+      <h4>商品清单</h4>
+      <table width="100%" border="0" cellpadding="0" cellspacing="0" class="shopping_table">
+        <tr>
+          <th width="50%">商品名称</th>
+          <th width="13%">单价</th>
+          <th width="15%">数量</th>
+          <th width="13%">小计(元)</th>
+        </tr>
+        <tr goods_list="goods_info_$!obj.id" id="$!obj.id">
+          <td><dl class="shopping_goods">
+              <dt><a href="$!webPath/grouplife/view_$!{obj.id}.htm?type=life" target="_blank"><span class="img_cspan">          
+                <p><img src="$!imageWebServer/$!obj.group_acc.path/$!obj.group_acc.name" width="60" height="60" /></p>
+                </span></a></dt>
+              <dd>
+                <h5><a href="$!goods_url" target="_blank">$!obj.gg_name </a></h5>
+                </dd>
+            </dl></td>
+          <td align="center">¥$!obj.group_price</td>
+          <td><span class="shop_count"><a  href="javascript:void(0);" id="count_down" mark="$!obj.id" class="shop_cut"></a>
+            <input type="text" value="1" id="group_count" mark="$!obj.id" name="order_count" class="shop_num" />
+            <a href="javascript:void(0);" id="count_up" class="shop_add" mark="$!obj.id"></a></span></td>
+          <td align="center"><strong class="shopping_result" id="group_total_price">¥$!obj.group_price</strong></td>
+        </tr>
+      </table>
+      </div>
+    </div>
+    <div class="shopping_operate"><span class="go_count"><b>商品总价：<strong id="total_price">¥$!{obj.group_price}</strong>元</b>
+      <a href="javascript:void(0);" #if(!$!user)dialog_uri="$!webPath/user_dialog_login.htm" dialog_title="会员登录" dialog_width="430" dialog_height="100" dialog_id="user_login" #else onclick="submitForm()" #end  class="go_price" >去结算</a></span></div>
+     </form>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

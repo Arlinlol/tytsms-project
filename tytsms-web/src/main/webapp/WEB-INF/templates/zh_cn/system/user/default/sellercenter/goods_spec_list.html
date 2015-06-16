@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台 - 商家规格列表-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+</head>
+
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    $!httpInclude.include("/seller/nav.htm?op=goods_spec_list")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>商品管理</b> > <b>规格列表</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href="$!webPath/seller/goods_spec_list.htm"><i></i>规格列表</a></li>
+            <li ><a href="$!webPath/seller/goods_spec_add.htm"><i></i>新增规格</a></li>
+          </ul>
+        </div>
+        <div class="user_list_box">
+           <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/goods_spec_list.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="5%"></th>
+                  <th width="5%">序号</th>
+                  <th width="25%">规格名称</th>
+                  <th width="35%">规格值</th>
+                  <th align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                <tr >
+                  <td align="center"><span class="checkpro"> <input type="checkbox" value="$!obj.id" /></span></td>
+                  <td align="center">$!obj.sequence</td>
+                  <td align="center">$!obj.name</td>
+                  <td align="center">$!shopTools.genericProperty($!obj)</td>
+                   <td class="del_operate" align="center"><a href="$!webPath/seller/goods_spec_edit.htm?id=$!obj.id" class="del_a">编辑</a><a href="javascript:if(confirm('删除后不可恢复?'))window.location.href='$!webPath/seller/goods_spec_del.htm?mulitId=$!obj.id'" class="del_a">删除</a></td>
+                </tr>
+                #end
+              </table>
+            </div>
+           <div class="userlist_allop">
+            <div class="seller_list_page">
+              <div  class="seller_page_sp">$!gotoPageFormHTML</div>
+              <div class="user_listoper_p"> <i>
+                 <label><input name="all1" type="checkbox" id="all1" onclick="selectAll(this)" value="" />
+               全选</label>
+                </i> <a  href="javascript:void(0);" onclick="cmd('$!webPath/seller/goods_spec_del.htm','')" class="user_oper_all"><em></em>删除</a> </div>
+            </div>
+          </div>
+           <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+           <input name="mulitId" type="hidden" id="mulitId" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

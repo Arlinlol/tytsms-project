@@ -1,0 +1,22 @@
+﻿<script>
+jQuery(document).ready(function(){
+  var data='$!obj.goods_property';
+  var properties=eval("("+data+")");
+  jQuery.each(properties,function(index,item){
+      jQuery(".pro_intro_tabone ul").append("<li>"+item.name+":"+item.val+"</li>");
+  });
+});
+</script>
+<div id="temp_data">
+<div class="pro_introbox_x">
+<div class="pro_intro_tabone">
+<ul>
+</ul>
+</div>
+</div> 
+$!CommUtil.htmlUnescape($!adver ) 
+$!CommUtil.htmlUnescape($!topPlate.plate_content)  <br />
+$!CommUtil.htmlUnescape($!obj.goods_details)  <br />
+$!CommUtil.htmlUnescape($!bottomPlate.plate_content)
+$!CommUtil.htmlUnescape($!progress) 
+</div>

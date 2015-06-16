@@ -1,0 +1,37 @@
+﻿#set($well_evaluate = $!CommUtil.null2Double($!{goods.well_evaluate})*100)
+#set($well="$!{well_evaluate}%")
+#set($middle_evaluate = $!CommUtil.null2Double($!{goods.middle_evaluate})*100)
+#set($middle="$!{middle_evaluate}%")
+#set($bad_evaluate = $!CommUtil.null2Double($!{goods.bad_evaluate})*100)
+#set($bad="$!{bad_evaluate}%")
+<div class="pro_grade">
+  <h3><strong>商品评价</strong></h3>
+  <span class="grade_percent"><em>好评度：</em><i>$!{well}</i></span>
+  <ul class="grade_ul">
+    <li><span>好评：<i>($!{well})</i></span><b class="progress"><em style="width:$!{well}"></em></b></li>
+    <li><span>中评：<i>($!{middle})</i></span><b class="progress"><em style="width:$!{middle}"></em></b></li>
+    <li><span>差评：<i>($!{bad})</i></span><b class="progress"><em style="width:$!{bad}"></em></b></li>
+  </ul>
+</div>
+<div class="pro_appraise">
+  <div class="pro_appraise_box">
+    <div class="details_list_dl"> #if($!rows!=0)
+      #foreach($obj in $objs)
+      <dl class="details_dis_dl">
+        <dt><span> #set($img="$!webPath/$!config.memberIcon.path/$!config.memberIcon.name")
+          #if($!obj.evaluate_user.photo)
+          #set($img="$!webPath/$!obj.evaluate_user.photo.path/$!obj.evaluate_user.photo.name")
+          #end
+          <p><img src="$!img" width="45" height="45" /></p>
+          </span></dt>
+        <dd>
+          <p class="details_dis_p"><span>$!{obj.evaluate_user.userName} $!CommUtil.formatShortDate($!obj.addTime)</span><b>$!{obj.evaluate_info}</b></p>
+        </dd>
+      </dl>
+      #end 
+      #else
+      <div class="novalue"> 还没有评价内容 </div>
+      #end </div>
+    <div class="details_discus_page"> <span>$!gotoPageAjaxHTML</span> </div>
+  </div>
+</div>

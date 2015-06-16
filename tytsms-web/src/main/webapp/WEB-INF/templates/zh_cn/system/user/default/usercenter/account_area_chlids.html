@@ -1,0 +1,7 @@
+#if(!$!childs)
+ <option >请选择...</option>
+#end
+ 	<option >请选择...</option>
+   #foreach($area in $childs)
+    <option value="$!area.id">$!area.areaName</option>
+ #end

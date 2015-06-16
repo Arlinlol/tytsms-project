@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-直通车申请列表-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center"> $!httpInclude.include("/seller/nav.htm?op=ztc")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销推广</b> ><b>直通车申请列表</b></span></div>
+      <div class="seller_list">
+        <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/ztc_apply_list.htm">
+          <div class="seller_list_title">
+            <ul class="seller_title_ul">
+              <li><a href='$!webPath/seller/ztc_apply.htm'><i></i>直通车申请</a></li>
+              <li class="this"><a href='$!webPath/seller/ztc_apply_list.htm'><i></i>直通车商品列表</a></li>
+              <li><a href='$!webPath/seller/ztc_list.htm'><i></i>直通车商品</a></li>
+            </ul>
+            <div  class="seller_title_sp"> <span>商品名称</span> <span class="size150">
+              <input name="goods_name" type="text" id="goods_name" />
+              </span> <span>
+              <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="user_sear_btn"/>
+              </span> </div>
+          </div>
+        </form>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/ztc_apply_list.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="139">商品名称</th>
+                  <th width="128">剩余金币(枚)</th>
+                  <th width="125">开始时间</th>
+                  <th width="100">状态</th>
+                  <th width="100" align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                #if($!obj.audit==-1)
+                #set($status = "审核未通过")
+                #end
+                #if($!obj.audit==0)
+                #set($status = "待审核")
+                #end
+                #if($!obj.audit==1)
+                #set($status = "审核通过")
+                #end
+                <tr > #if($!obj.goods_main_photo)
+                  #set($img="$!webPath/$!{obj.goods_main_photo.path}/$!{obj.goods_main_photo.name}")
+                  #else
+                  #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                  #end
+                  <td><img style="float:left; margin-right:5px" src="$!img" width="60" height="63" /><a href="$!webPath/goods_$!{obj.id}.htm" target="_blank">$!obj.goods_name</a></td>
+                  <td align="center">$!obj.ztc_gold</td>
+                  <td align="center">$!CommUtil.formatShortDate($!obj.ztc_begin_time)</td>
+                  #if($!obj.ztc_pay_status==1)
+                  #set($pay_status="已支付")
+                  #end
+                  #if($!obj.ztc_pay_status==0)
+                  #set($pay_status="未支付")
+                  #end
+                  #if($!obj.ztc_status==1)
+                  #set($ztc_status="待审核")
+                  #end
+                  #if($!obj.ztc_status==2)
+                  #set($ztc_status="审核通过")
+                  #end
+                  #if($!obj.ztc_status==-1)
+                  #set($ztc_status="审核失败")
+                  #end
+                  <td align="center">$!{pay_status},$!{ztc_status}</td>
+                  <td align="center" class="del_operate"><a href="$!webPath/seller/ztc_apply_view.htm?id=$!obj.id" class="del_a">查看</a></td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

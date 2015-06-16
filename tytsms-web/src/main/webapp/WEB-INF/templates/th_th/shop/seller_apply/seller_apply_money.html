@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.seller_apply_money.price_standard") - $!config.title </title><!-- 类目费用标准 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/shop_into.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script>
+function backwards(step){
+	window.location.href="$!webPath/seller_apply.htm?op=back&step="+step;
+}
+</script>
+</head>
+
+<body>
+$!httpInclude.include("/top.htm")
+<div class="head">
+  <h1 class="logo" title=""> #if($!config.websiteLogo) <a href="$!webPath/index.htm"><img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" width="209" height="70"/></a> #else <a href="$!webPath/index.htm"><img src="$!webPath/th_th/resources/style/system/front/default/images/logo.jpg" width="209" height="70"/> </a> #end </h1>
+  <span class="head_into">#springMessage("sms.seller_apply_money.merchant_enter")<!-- 商家入驻 --></span> <a href="$!webPath/doc.htm?mark=apply_help" target="_blank" class="head_help">#springMessage("sms.seller_apply_money.enter_helper")<!-- 入驻帮助 --></a> </div>
+<div class="nav_into">
+  <ul>
+    <li><a href="javascript:void(0)" onclick="backwards(1)">#springMessage("sms.seller_apply_money.enter_protocol")<!-- 入驻协议 --></a></li>
+    <li><a href="javascript:void(0)" onclick="backwards(3)">#springMessage("sms.seller_apply_money.company_information_commit")<!-- 公司信息提交 --></a></li>
+    <li><a href="javascript:void(0)" class="this">#springMessage("sms.seller_apply_money.store_information_commit")<!-- 店铺信息提交 --></a></li>
+    <li><a href="javascript:void(0)">#springMessage("sms.seller_apply_money.check_log_search")<!-- 审核日志查询 --></a></li>
+  </ul>
+</div>
+<div class="main">
+<div class="settled_box">
+<h3><span class="settled_title">#springMessage("sms.seller_apply_money.price_standard")<!-- 类目费用标准 --></span></h3>
+<div class="settled_white">
+<div class="settled_white_box">
+<table width="850" border="1" cellpadding="0" cellspacing="0" class="shop_clsmoney_table" bordercolor="#77b4e1">
+  <tr>
+    <th width="250">#springMessage("sms.seller_apply_money.store_type")<!-- 店铺类目 --></th>
+    <th width="250">#springMessage("sms.seller_apply_money.second_type")<!-- 二级类目 --></th>
+    <th width="175">#springMessage("sms.seller_apply_money.rental")<!-- 佣金 --></th>
+    <th width="175">#springMessage("sms.seller_apply_money.promise_cash")<!-- 保证金（单位：元） --></th>
+  </tr>
+  #foreach($gcs in $goodsClass)
+  <tr>
+    <td><span class="shop_csl_sp">$!gcs.className</span></td>
+    <td colspan="3">
+    #foreach($gc in $gcs.childs)
+        <ul class="shop_csl_ul">
+        <li class="shop_csl2">$!gc.className</li><li>#if($!gc.commission_rate)$!gc.commission_rate#else———#end</li><li>#if($!gc.guarantee)$!gc.guarantee#else———#end</li>
+        </ul>
+    #end
+    </td>
+  </tr>
+  #end
+</table>
+
+</div>
+
+<div class="settled_bottom"><span><a href="javascript:void(0)" class="settled_btn" onclick="backwards(6)"><b><em>#springMessage("sms.seller_apply_money.complete_store_type")<!-- 完善店铺类目及类目信息 --></em></b></a></span></div>
+</div>
+</div>
+</div>
+</body>
+</html>

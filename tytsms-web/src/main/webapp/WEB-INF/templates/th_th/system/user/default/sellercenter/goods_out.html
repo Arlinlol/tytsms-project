@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-违规下架商品-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    $!httpInclude.include("/seller/nav.htm?op=goods_out")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>商品管理</b>><b>违规下架商品</b></span></div>
+
+        <div class="seller_list">
+          <div class="seller_list_title">
+           <form action="$!webPath/seller/goods_out.htm" method="post">
+            <div  class="seller_title_sp"> <span>商品分类</span> <span>
+              <select name="user_class_id" id="user_class_id">
+                <option value="">请选择商品分类...</option>
+                
+                
+                  #foreach($user_class in $goodsViewTools.query_user_class(""))
+                  
+                
+                <option value="$!user_class.id">$!user_class.className</option>
+                
+                
+                  #foreach($c_user_class in $user_class.childs)
+                  
+                
+                <option value="$!c_user_class.id">&nbsp;&nbsp;$!c_user_class.className</option>
+                
+                
+                  #end
+                  #end
+                
+              
+              </select>
+              </span> <span>商品名称</span> <span class="size150">
+              <input name="goods_name" type="text" id="goods_name" />
+              </span> <span>
+              <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="user_sear_btn"/>
+              </span> </div>
+              </form>
+            <div class="alldel_l"> <label> <span class="check_input">
+             <input name="all1" type="checkbox" id="all1" onclick="selectAll(this)" value="" />
+              </span> <span>
+             全选
+              </span></label> <span> <a href="javascript:void(0);" onclick="cmd('$!webPath/seller/goods_del.htm','')" class="user_down_shop"><em></em>删除</a> </span> </div>
+          </div>
+        <form action="$!webPath/seller/goods_out.htm" method="post" name="ListForm" id="ListForm">
+          <div class="user_list_box">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table" >
+              <tr id="opertitle">
+                <th width="30"></th>
+                <th width="320">商品名称</th>
+                <th width="200">商品分类</th>
+                <th width="70">价格</th>
+                <th width="70">推荐</th>
+                <th align="center">操作</th>
+              </tr>
+              #foreach($obj in $objs)
+              <tr>
+                <td align="center"><span class="checkpro">
+                  <input type="checkbox" value="$!obj.id" />
+                  #if($!obj.goods_main_photo)
+                  #set($img="$!webPath/$!{obj.goods_main_photo.path}/$!{obj.goods_main_photo.name}_small.$!{obj.goods_main_photo.ext}")
+                  #else
+                  #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                  #end </span></td>
+                <td valign="middle"><dl class="return_goods">
+                    <dt><img src="$!img" width="60" height="63" /></dt>
+                     #set($goods_url="$!webPath/goods_$!{obj.id}.htm")
+ 					 #if($!config.second_domain_open)
+					 #set($goods_url="http://$!{obj.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.id}.htm")
+					 #end
+                    <dd class="nameproduct"><a href="$!goods_url" target="_blank">$!obj.goods_name</a></dd>
+                  </dl></td>
+                <td align="center">#if($!obj.gc)$!storeTools.generic_goods_class_info($!obj.gc)#end</td>
+                <td align="center">$!obj.store_price</td>
+                <td align="center"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/$!{obj.goods_recommend}.jpg" width="16" height="16" /></td>
+                <td class="del_operate" align="center"><a href="$!webPath/seller/goods_edit.htm?id=$!obj.id" target="_blank" class="del_a">编辑</a><a href="javascript:if(confirm('删除后不可恢复?'))window.location.href='$!webPath/seller/goods_del.htm?mulitId=$!obj.id&op=out'" class="del_a">删除</a></td>
+              </tr>
+              #end
+            </table>
+          </div>
+          <div class="userlist_allop">
+            <div class="seller_list_page">
+              <div  class="seller_page_sp">
+                <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+                <input name="mulitId" type="hidden" id="mulitId" />
+                <input name="goods_name" type="hidden" id="goods_name" value="$!goods_name" />
+                <input name="user_class_id" type="hidden" id="user_class_id" value="$!user_class_id" />
+              $!gotoPageFormHTML</div>
+              <div class="user_listoper_p"><label> <i>
+                <input name="all1" type="checkbox" id="all1" onclick="selectAll(this)" value="" />
+                全选
+                </i></label> <a  href="javascript:void(0);" onclick="cmd('$!webPath/seller/goods_del.htm?op=out','')" class="user_oper_all"><em></em>删除</a> </div>
+            </div>
+          </div>
+        </form>
+        </div>
+    </div>
+  </div>
+  </div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

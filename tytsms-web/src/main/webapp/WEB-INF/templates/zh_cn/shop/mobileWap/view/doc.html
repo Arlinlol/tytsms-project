@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+</head>
+<body>
+<div>
+#if($!doc)
+$!doc.content
+#else
+<div style="text-align:center; padding-top:100px">
+暂无数据！
+</div>
+#end
+</div>
+</body>
+</html>

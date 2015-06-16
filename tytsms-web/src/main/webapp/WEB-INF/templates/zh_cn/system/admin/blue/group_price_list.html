@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">价格区间</h1>
+  <div class="nav_list">
+  <ul>
+   <li><a href="$!webPath/admin/group_list.htm"><b>团购列表</b></a> </li>
+   <li><a href="$!webPath/admin/group_add.htm"><b>新增团购</b></a></li>
+   <li><a href="$!webPath/admin/group_class_list.htm?type=goods" ><b>商品团购分类</b></a> </li>
+   <li><a href="$!webPath/admin/group_class_list.htm?type=life" ><b>生活团购分类</b></a> </li>
+   <li><a href="$!webPath/admin/group_class_add.htm?type=goods" ><b>新增商品类分类</b></a></li>
+   <li><a href="$!webPath/admin/group_class_add.htm?type=life" ><b>新增生活类分类</b></a></li>
+   <li><a href="$!webPath/admin/group_area_list.htm" ><b>团购区域</b></a></li>
+   <li><a href="$!webPath/admin/group_area_add.htm"><b>新增区域</b></a></li>
+   <li><a href="$!webPath/admin/group_price_list.htm" class="this"><b>价格区间</b></a></li>
+  <li><a href="$!webPath/admin/group_price_add.htm"><b>添加区间</b></a> </li>
+   </ul>   
+   </div>
+  <form method="post" id="ListForm" action="$!webPath/admin/group_price_list.htm">
+    <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="30"></th>
+        <th width="30%"><span class="form_btna">价格区间名称</span></th>
+        <th width="25%" align="center"><span class="form_btna">价格区间上限</span></th>
+        <th align="center" width="25%"><span class="form_btna">价格区间下限</span></th>
+        <th  align="center"><span class="form_btna">操作</span></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr id="column_$!{obj.id}">
+        <td class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+        <td>$!obj.gpr_name</td>
+        <td align="center">$!obj.gpr_end</td>
+        <td align="center">$!obj.gpr_begin</td>
+        #if($!obj.status==0)
+          #set($status="正常")
+        #end
+        #if($!obj.status==1)
+          #set($status="关闭")
+        #end
+        <td  align="center" class="hui oprate_con"><a href="$!webPath/admin/group_price_edit.htm?id=$!obj.id" class="blue">编辑</a>|<a href="javascript:void(0);" onclick="if(confirm('删除后不可恢复，是否继续？'))window.location.href='$!webPath/admin/group_price_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="blue">删除</a></td>
+      </tr>
+      #end
+    </table>
+  </div>
+  
+  <div class="operate_bar">
+    <div class="fenye"><input name="endTime" type="hidden" id="endTime" value="$!endTime" />
+          <input name="beginTime" type="hidden" id="beginTime" value="$!beginTime" />
+          <input name="ac_status" type="hidden" id="ac_status" value="$!ac_status" />
+          <input name="q_ac_title" type="hidden" id="q_ac_title" value="$!q_ac_title" />
+          <input type="hidden" name="mulitId" id="mulitId" />
+          <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+          $!gotoPageFormHTML</div> 
+    
+    <div class="oper_sp"> <span class="oper_check"> <input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部</span>
+           <span class="oper_del">  <input name="" type="button" value="删除" onclick="cmd('$!webPath/admin/group_price_del.htm');"/></span></div>
+             
+ </div>
+ 
+  </form>
+</div>
+</body>
+</html>

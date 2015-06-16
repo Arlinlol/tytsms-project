@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery(":radio[id=pd_status][value=$!obj.pd_status]").attr("checked",true);
+  jQuery(":radio[id=pd_pay_status][value=$!obj.pd_pay_status]").attr("checked",true);
+});
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">预存款管理</h1>
+  <div class="nav_list">
+    <ul>
+      <li><a href="$!webPath/admin/predeposit_list.htm"><b>充值管理</b></a></li>
+      <li><a href="$!webPath/admin/predeposit_cash.htm"><b>提现管理</b></a></li>
+      <li><a href="$!webPath/admin/predeposit_modify.htm"><b>人工操作</b></a></li>
+      <li><a href="javascript:void(0);" class="this"><b>预存款审核</b></a></li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/predeposit_save.htm" method="post" id="theForm">
+    <div class="edit">
+      <div class="editul setcont">
+        <ul class="set1">
+          <li class="setcont_bg">预存款编号</li>
+          <li><span class="webname"> $!obj.pd_sn </span></li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">会员名称</li>
+          <li>$!obj.pd_user.userName</li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">提交时间</li>
+          <li>$!CommUtil.formatShortDate($!obj.addTime)</li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">支付方式</li>
+          #if($!obj.pd_payment=="outline")
+          #set($pd_payment="线下支付")
+          #end
+          #if($!obj.pd_payment=="alipay")
+          #set($pd_payment="支付宝")
+          #end
+          #if($!obj.pd_payment=="tenpay")
+          #set($pd_payment="财付通")
+          #end
+          #if($!obj.pd_payment=="bill")
+          #set($pd_payment="快钱")
+          #end
+          #if($!obj.pd_payment=="chinabank")
+          #set($pd_payment="网银在线")
+          #end
+          <li>$!pd_payment</li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">充值金额</li>
+          <li>$!obj.pd_amount</li>
+        </ul>
+        #if($!obj.pd_payment=="outline")
+        <ul class="set1">
+          <li class="setcont_bg">汇款人姓名</li>
+          <li>$!obj.pd_remittance_user</li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">汇款银行</li>
+          <li>$!obj.pd_remittance_bank</li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">汇款日期</li>
+          <li>$!obj.pd_remittance_time</li>
+        </ul>
+        #end
+        <ul class="set1">
+          <li class="setcont_bg">预存款备注</li>
+          <li>$!obj.pd_remittance_info</li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">支付状态</li>
+          <li class="radiosp">
+            <label> <span>
+              <input style="border:none; height:16px; width:16px;" name="pd_pay_status" id="pd_pay_status"  type="radio" value="0" />
+              </span> <span>等待支付</span> </label>
+            <label> <span>
+              <input style="border:none; height:16px; width:16px;" name="pd_pay_status" id="pd_pay_status"  type="radio" value="1" />
+              </span> <span>等待审核</span> </label>
+            <label> <span>
+              <input style="border:none; height:16px; width:16px;"  id="pd_pay_status" name="pd_pay_status" type="radio" value="2" />
+              </span> <span>完成支付</span> </label>
+          </li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">预存款状态</li>
+          <li class="radiosp">
+            <label> <span>
+              <input style="border:none; height:16px; width:16px;" name="pd_status" id="pd_status"  type="radio" value="0" />
+              </span> <span> 等待审核</span> </label>
+            <label> <span>
+              <input style="border:none; height:16px; width:16px;"  id="pd_status" name="pd_status" type="radio" value="-1" />
+              </span><span> 已经关闭</span> </label>
+            <label> <span>
+              <input style="border:none; height:16px; width:16px;"  id="pd_status" name="pd_status" type="radio" value="1" />
+              </span><span>完成审核 </span> </label>
+          </li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">操作备注</li>
+          <li>
+            <textarea name="pd_admin_info" id="pd_admin_info" cols="45" rows="5"></textarea>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="submit"> <span class="pad120">
+      <input name="save" type="submit" value="完成审核" onclick="window.location.href='$!webPath/admin/predeposit_list.htm'" />
+      <input name="id" type="hidden" id="id" value="$!obj.id" />
+      <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      <input name="list_url" type="hidden" id="list_url" value="$!webPath/admin/predeposit_list.htm?currentPage=$!currentPage" />
+      </span> </div>
+  </form>
+</div>
+</body>
+</html>

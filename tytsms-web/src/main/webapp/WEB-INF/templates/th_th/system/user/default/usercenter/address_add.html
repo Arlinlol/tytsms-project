@@ -1,0 +1,134 @@
+<script>
+jQuery.validator.addMethod("mobile_telephone",function(value,element){
+  if(jQuery("#telephone").val()==""&&jQuery("#mobile").val()==""){
+     return false;
+	 
+  }else return true;
+});
+jQuery(document).ready(function(){
+  							
+ jQuery("#theForm").validate({
+	ignore: "",
+    rules:{
+	  trueName:{required :true},
+	  area_id:{required :true},
+	  area_info:{required :true},
+	   zip:{required :true,isZipCode:true},
+	   mobile:{mobile_telephone:true,isMobile:true},
+	  telephone:{isTel :true}
+	 },
+	messages:{
+	  trueName:{required :"#springMessageText('member.address_add.consignee_not_empty','')"},
+	  area_id:{required :"#springMessageText('member.address_add.please_region_detail','')"},
+	  area_info:{required :"#springMessageText('member.address_add.detailed_address_not_empty','')"},
+	   zip:{required :"#springMessageText('member.address_add.zip_not_empty','')",isZipCode:"#springMessageText('member.address_add.right_zip_code','')"},
+	  mobile:{mobile_telephone :"#springMessageText('member.address_add.phone_mobile_number','')",isMobile:"#springMessageText('member.address_add.phone_number_correctly','')"},
+	  telephone:{isTel :"#springMessageText('member.address_add.phone_number','')"} 
+	},
+	errorPlacement: function(error, element) {
+		 element.parent().siblings().html("");
+         error.appendTo(element.parent().siblings());
+           }	 
+  });
+    
+ jQuery("select").change(function(){
+     var level=jQuery(this).attr("level");
+	 var id=jQuery(this).val();
+	 if(id!=""){
+	  jQuery.post("$!webPath/load_area.htm",{"pid":id},function(data){
+	     jQuery("#area"+level).empty();
+		  jQuery("#area"+level).append("<option value=''>#springMessageText('member.address_add.please_select','')</option>");
+	    jQuery.each(data, function(index,item){
+		  jQuery("#area"+level).append("<option value='"+item.id+"'>"+item.areaName+"</option>");
+		  jQuery("#area"+level).show();
+		});
+	  },"json");
+	 }else{
+	   for(var i=level;i<=3;i++){
+	    jQuery("#area"+i).empty();
+	    jQuery("#area"+i).hide();
+	   }
+	 }
+  });
+ jQuery("#area4").change(function(){
+   var id=jQuery(this).val();
+   jQuery("#area_id").val(id);
+ });
+});
+</script>
+<form action="$!webPath/buyer/address_save.htm" method="post" id="theForm">
+  <div class="white_content"> <a href = "javascript:void(0);"  class="white_close" onclick="jQuery('#contant').children().remove();"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/close.gif" width="16" height="16" /></a>
+    <div class="white_contant">
+      <h3 class="white_title"><span>#springMessageText('member.address_add.add_address','')</span></h3>
+      <div class="white_box">
+      
+        <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="white_table">
+    <tr>
+      <td width="150" align="right" valign="top"><span>#springMessageText('member.address_add.consignee_name','')</span>：
+        <input name="id" type="hidden" id="id" value="$!obj.id" />
+      </td>
+      <td align="left"><span>
+        <input name="trueName" type="text" id="trueName" value="$!obj.trueName" size="35" />
+      </span><span style="float:left; color:#F00;"></span></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top"><span>#springMessageText('member.address_add.merchant_area','')：</span></td>
+      <td align="left">
+      #set($address="$!obj.area.parent.parent.parent.areaName $!obj.area.parent.parent.areaName $!obj.area.parent.areaName $!obj.area.areaName")
+      <span id="area_area_info">$!address</span>
+      <span> <span style="float:left;"> <select name="area1" id="area1" level="2" style="width:100px;#if($!obj)display:none;#end">
+                    <option value="" selected="selected">#springMessageText('member.address_add.please_select_area','')</option>
+ 				  #foreach($area in $areas)
+                     <option value="$!area.id">$!area.areaName</option>
+				  #end
+                   </select>
+                  <input type="button" name="area_edit" id="area_edit" value="#springMessageText('member.address_add.modify','')" #if(!$!obj)style="display:none;"#end onclick="javascript:jQuery('#area1').show();jQuery('#area_area_info').empty();jQuery('#area_id').val('');jQuery(this).hide();" />
+                  <select name="area2" id="area2" style="display:none;width:60px;" level="3">
+                  </select>
+                <select name="area3" id="area3" style="display:none;width:60px;" level="4">
+                  </select>
+                 <!--cty 修改时间2015-3-12 增加内容 -->
+                <select name="area4" id="area4" style="display:none;width:60px;" level="5">
+                  </select>
+                  <input name="area_id" type="hidden" id="area_id"  value="$!obj.area.id"/></span> <span style="float:left; color:#F00;"></span></span>
+                   
+      </td>
+    </tr>
+    <tr>
+      <td align="right" valign="top"><span>#springMessageText('member.address_add.detailed_address','')</span>：</td>
+      <td align="left"><span style="float:left;">
+        <input name="area_info" type="text" id="area_info" value="$!obj.area_info" size="35" />
+      </span>
+      <span style="float:left; color:#F00;"></span>
+      </td>
+    </tr>
+    <tr>
+      <td align="right" valign="top"><span>#springMessageText('member.address_add.zip_code','')</span>：</td>
+      <td align="left"><span>
+        <input name="zip" type="text" id="zip" value="$!obj.zip" size="35" />
+      </span><span style="float:left; color:#F00;"></span></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top"><span>#springMessageText('member.address_add.phone','')</span>：</td>
+      <td align="left" id="other_reason2"><span>
+        <input name="telephone" type="text" id="telephone" value="$!obj.telephone" size="35" />
+      </span><span style="float:left; color:#F00;"></span></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top"><span>#springMessageText('member.address_add.mobile_phone','')</span>：</td>
+      <td align="left"><span>
+        <input name="mobile" type="text" id="mobile" value="$!obj.mobile" size="35" />
+      </span><span style="float:left; color:#F00;"></span></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><span class="inputbtn">
+        <input name="" type="submit" value="#springMessageText('member.address_add.submit','')" style="cursor:pointer;"  class="white_btn"/>
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      </span></td>
+    </tr>
+  </table>
+      </div>
+    </div>
+  </div>
+  <div class="black_overlay"></div>
+</form>

@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/index_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/error.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/layout.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+	  var count=5;
+	  window.setInterval(go,1000);
+	  function go(){
+	    count--;
+	  		if(count<0){
+			count=5;
+			}
+		jQuery(".error_ul_bottom strong").html(count);
+	    if(count==0) window.location.href="$!webPath/index.htm";
+	  }
+	</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+#if($!config.websiteLogo)
+    #set($img="$!imageWebServer/$!{config.websiteLogo.path}/$!{config.websiteLogo.name}")
+    #else
+    #set($img="$!webPath/resources/style/system/front/default/images/logo.jpg")
+    #end
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="errorpage">
+    <div class="error_page_mid"> <span class="error_left_a"></span> <span class="error_left_b"></span> <span class="error_right_a"> <b class="error_right_a_top"></b>
+      <div class="error_right_a_mid">
+        <ul>
+          <li class="error_ul_top">我们为您挑选了如此棒的商品，还在等什么?</li>
+          <li class="error_ul_mid">您可以：稍后再试或 <a href=""> 联系客服</a>。</li>
+          <li class="error_ul_bottom">将在<strong>5</strong>秒后自动转到<a href="$!webPath/index.htm" style="color:#F00"> 商城首页</a>，请稍候...</li>
+        </ul>
+      </div>
+      <b class="error_right_a_bottom"></b> </span> <span class="error_right_b"></span> </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

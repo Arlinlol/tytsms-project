@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-我的账单- $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //批量统计
+  jQuery("#statistics").click(function(){
+	var mulitId="";
+	jQuery(":checkbox:checked[name!='menu']").each(function(){
+	  if(jQuery(this).val()!=""&&jQuery(this).val()!="true"){	  
+	    mulitId+=jQuery(this).val()+",";
+	  }
+	});
+	if(mulitId!=""){
+		jQuery.post("$!webPath/seller/payofflog_ajax.htm",
+					{"mulitId":mulitId
+						},function(data){
+							if(data.error==true){
+							jQuery(".user_indet").show();
+							jQuery("#total_amount").html(data.total_amount);
+							jQuery("#order_total_price").html(data.order_total_price);
+							jQuery("#commission_amount").html(data.commission_amount);
+							}else{
+							alert("您的账单信息错误，请稍后重试！");
+							}
+							},"json");
+	}else{
+       alert("至少选择一条数据记录");
+	}							   
+	});
+  
+});
+
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=payoff") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>结算管理</b>><b>我的账单</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li #if(!$!status||$!status=='not') class="this" #end><a href="$!webPath/seller/payofflog_list.htm?status=not"><i></i>未结算</a></li>
+            <li><a href="$!webPath/seller/payofflog_ok_list.htm"><i></i>可结算</a></li>
+            <li #if($!status=='underway') class="this" #end><a href="$!webPath/seller/payofflog_list.htm?status=underway"><i></i>结算中</a></li>
+            <li #if($!status=='already') class="this" #end><a href="$!webPath/seller/payofflog_list.htm?status=already"><i></i>已结算</a></li>
+          </ul>
+          <div class="payoff_infor_show"><marquee scrollAmount="3">
+          #if($!config.payoff_mag_type==0)$!payoff_mag_default #else $!config.payoff_mag_auto #end
+          </marquee></div>
+        </div>
+ 
+ <div class="user_ser_warning">
+<ul>
+<li>未结算账单说明：</li>
+<li>买家确认收货或者系统自动确认收货后立刻生成结算账单，只有买家评价完毕或者超出可评价时间的订单在结算日可申请结算。</li>
+</ul>
+</div>
+        <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/payofflog_list.htm">
+          <div class="user_sp_right"> <span>
+            <input name="pl_sn" type="text" class="user_title_txt" id="pl_sn" placeholder="流水号" value="$!pl_sn"/>
+            <input name="order_id" type="text" class="user_title_txt" id="order_id" placeholder="订单号" value="$!order_id"/>
+            <input name="beginTime" type="text" class="user_title_txt" id="beginTime" placeholder="入账时间(起始)" value="$!beginTime" readonly="readonly"/>
+            <input name="endTime" type="text" class="user_title_txt" id="endTime" placeholder="入账时间(结束)" value="$!endTime" readonly="readonly"/>
+            <input name="" type="submit" class="user_sear_btn" value="查询"/>
+            </span> </div>
+
+            
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="3%"></th>
+                  <th width="15%">流水号</th>
+                  <th width="15%">类型</th>
+                  #if($!status=='underway')
+                  <th width="14%">申请结账时间</th>
+                  #end
+                  #if($!status=='already')
+                  <th width="14%">结算完成时间</th>
+                  #end
+                  #if(!$!status||$!status=='not')
+                  <th width="14%">入账时间</th>
+                  #end
+                  <th width="12%">销售金额（元）</th>
+                  <th width="12%">销售佣金（元）</th>
+                  <th width="12%">结算金额（元）</th>
+                  <th  align="center">操作</th>
+                </tr>
+                 #foreach($obj in $objs)
+                <tr>
+                  <th><span class="checkpro">
+                    <input type="checkbox" value="$!obj.id" />
+                    </span></th>
+                  <td align="center"  #if($!obj.payoff_type==-1)class="tr_red"#end>$!obj.pl_sn</td>
+                  #if($!obj.payoff_type==0)
+                  #set($payoff_type="入账")
+                  #end 
+                  #if($!obj.payoff_type==-1)
+                  #set($payoff_type="出账")
+                  #end 
+                  <td align="center" #if($!obj.payoff_type==-1)class="tr_red"#end>$!payoff_type</td>
+                   #if($!status=='underway')
+                    <td align="center">$!CommUtil.formatLongDate($!obj.apply_time)</td>
+                  #end
+                  #if($!status=='already')
+                   <td align="center" #if($!obj.payoff_type==-1)class="tr_red"#end>$!CommUtil.formatLongDate($!obj.complete_time)</td>
+                  #end
+                  #if(!$!status||$!status=='not')
+                    <td align="center" #if($!obj.payoff_type==-1)class="tr_red"#end>$!CommUtil.formatLongDate($!obj.addTime)</td>
+                  #end
+                  <td align="center" #if($!obj.payoff_type==-1)class="tr_red"#end>$!obj.order_total_price</td>
+                  <td align="center" #if($!obj.payoff_type==-1)class="tr_red"#end>$!obj.commission_amount</td>
+                  <td align="center" #if($!obj.payoff_type==-1)class="tr_red"#end>$!obj.total_amount</td>
+                  <td align="center" class="del_operate"><a href="javascript:void(0);" onclick="window.location.href='$!webPath/seller/payofflog_info.htm?id=$!obj.id&&currentPage=$!currentPage&&op=$!{status}'" class="del_a">详情</a></td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <div class="user_indet" style="display:none">
+            	<span>订单总金额：<b id="order_total_price"></b>（元）</span>
+                <span>订单总佣金：<b id="commission_amount"></b>（元）</span>
+                <span>结算总金额：<b id="total_amount"></b>（元）</span>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <input id="status" name="status" type="hidden" value="$!status"/>
+            <input name="mulitId" type="hidden" id="mulitId" />
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+              <div class="user_listoper_p"> <i>
+              <label>
+                <input type="checkbox" id="all1" onclick="selectAll(this)" value="" />
+                全选</label>
+                </i>
+                <a  href="javascript:void(0);" id="statistics" class="user_oper_all"><em></em>批量统计</a>
+                 </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

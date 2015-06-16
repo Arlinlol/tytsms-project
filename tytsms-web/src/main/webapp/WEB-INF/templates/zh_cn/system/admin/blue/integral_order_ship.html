@@ -1,0 +1,53 @@
+<script>
+jQuery(document).ready(function(){
+    jQuery("#theForm").validate({
+	   rules:{
+		   igo_ship_code:{required:true},
+		   igo_ship_time:{required:true}
+		   },
+	   messages:{
+	       igo_ship_code:{required:"物流单号不能为空"},
+		   igo_ship_time:{required:"发货时间不能为空"}
+	   }
+	}); 
+
+});
+</script>
+<form action="$!webPath/admin/integral_order_ship_save.htm" method="post" id="theForm">
+  
+      <div class="edit">
+      <div class="editul setcont" >
+      <ul class="set1">
+      <li class="set1_bg">兑换用户：</li>
+      <li>$!obj.igo_user.userName</li>
+      </ul>
+      <ul class="set1">
+      <li class="set1_bg">兑换单号：</li>
+      <li>$!obj.igo_order_sn</li>
+      </ul>
+      <ul class="set1">
+      <li class="set1_bg">物流公司：</li>
+      <li>
+          <select name="ec_id" id="ec_id">
+          #foreach($expressCompany in $expressCompanys)
+          <option value="$!expressCompany.id">$!expressCompany.company_name</option>
+          #end
+          </select>
+      </li>
+      </ul>
+      <ul class="set1">
+      <li class="set1_bg">物流单号：</li>
+      <li><input name="igo_ship_code" type="text" id="igo_ship_code" value="$!obj.igo_ship_code" /></li>
+      </ul>
+      <ul class="set1">
+      <li class="set1_bg">发货说明：</li>
+      <li><textarea name="igo_ship_content" id="igo_ship_content" cols="40" rows="6">$!obj.igo_ship_content</textarea></li>
+      </ul>
+      </div>
+      </div>
+<div class="submit">
+      <span class="pad120">  <input name="" type="submit" value="提交" style="cursor:pointer;"/>
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        <input name="id" type="hidden" id="id" value="$!obj.id" /></span>
+      </div>
+</form>

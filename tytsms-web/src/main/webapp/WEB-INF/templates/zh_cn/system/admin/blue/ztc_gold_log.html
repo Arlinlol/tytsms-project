@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+});
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">店铺管理</h1>
+  <div class="nav_list">
+
+  <ul> 
+  <li><a href="$!webPath/admin/ztc_set.htm"><b>直通车设置</b></a></li>
+  <li> <a href="$!webPath/admin/ztc_apply.htm"><b>直通车申请</b></a></li>
+   <li><a href="$!webPath/admin/ztc_goods.htm"><b>直通车商品</b></a></li>
+    <li> <a href="$!webPath/admin/ztc_gold_log.htm" class="this"><b>金币日志</b></a></li>
+     </ul> 
+    
+     </div>
+  <form method="post" id="queryForm">
+  <div class="search">
+    <span>商品名称</span> <span class="size100">
+        <input name="goods_name" type="text" id="goods_name" />
+        </span> <span>店铺名称</span> <span class="size100">
+        <input name="store_name" type="text" id="store_name" />
+        </span> <span>提交时间</span> <span class="size100">
+        <input name="beginTime" type="text" id="beginTime" />
+        </span><span>—</span><span class="size100">
+        <input name="endTime" type="text" id="endTime" />
+        </span><span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+        </span>
+
+  </div>
+  </form>
+  <form method="post" id="ListForm">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="20%"><span class="form_btna">商品名称</span></th>
+        <th width="20%"><span class="form_btna">店铺名称</span></th>
+        <th width="10%"><span class="form_btna">会员名称</span></th>
+        <th align="center" width="10%"><span class="form_btna">金币数量</span></th>
+        <th align="center" width="10%"><span class="form_btna">提交时间</span></th>
+        <th width="10%" align="center"><span class="form_btna">类型</span></th>
+        <th ><span class="form_btna">描述</span></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr>
+        <td>$!obj.zgl_goods.goods_name</td>
+        <td align="center">$!obj.zgl_goods.goods_store.store_name</td>
+        <td align="center">$!obj.zgl_goods.goods_store.user.userName</td>
+        <td align="center">$!obj.zgl_gold</td>
+        <td align="center">$!CommUtil.formatShortDate($!obj.addTime)</td>
+        #set($zgl_type="增加")
+        #if($!obj.zgl_type==1)
+          #set($zgl_type="减少")
+        #end
+        <td align="center">$!zgl_type</td>
+        <td align="center">$!obj.zgl_content</td>
+      </tr>
+      #end
+    </table>
+  </div>
+
+    
+    <div class="operate_bar">
+    <div class="fenye">    <input name="endTime" type="hidden" id="endTime" value="$!endTime" />
+    <input name="beginTime" type="hidden" id="beginTime" value="$!beginTime" />
+    <input name="store_name" type="hidden" id="store_name" value="$!store_name" />
+    <input name="goods_name" type="hidden" id="goods_name" value="$!goods_name" />
+    <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+    $!gotoPageFormHTML</div> 
+     
+ </div>
+  </form>
+</div>
+</body>
+</html>

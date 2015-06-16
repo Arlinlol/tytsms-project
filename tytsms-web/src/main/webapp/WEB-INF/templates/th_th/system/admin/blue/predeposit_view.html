@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">预存款管理</h1>
+  <div class="nav_list">
+  
+   <ul>
+   <li> <a href="$!webPath/admin/predeposit_list.htm"><b>充值管理</b></a></li>
+    <li> <a href="$!webPath/admin/predeposit_cash.htm"><b>提现管理</b></a></li>
+    <li> <a href="$!webPath/admin/predeposit_modify.htm"><b>人工操作</b></a></li>
+    <li> <a href="javascript:void(0);" class="this"><b>预存款详情</b></a></span></li> 
+   </ul>
+    </div>
+     <div class="edit">
+   <div class="editul setcont">
+     <ul class="set1">
+       <li class="setcont_bg">预存款编号</li>
+       <li><span class="webname">
+         $!obj.pd_sn
+       </span></li>
+     </ul>
+     <ul class="set1">
+       <li class="setcont_bg">会员名称</li>
+       <li>$!obj.pd_user.userName</li>
+     </ul>
+     <ul class="set1">
+       <li class="setcont_bg">提交时间</li>
+       <li>$!CommUtil.formatShortDate($!obj.addTime)</li>
+     </ul>
+     <ul class="set1">
+       <li class="setcont_bg">支付方式</li>
+       #if($!obj.pd_payment=="outline")
+          #set($pd_payment="线下支付")
+        #end
+        #if($!obj.pd_payment=="alipay")
+          #set($pd_payment="支付宝")
+        #end
+        #if($!obj.pd_payment=="tenpay")
+          #set($pd_payment="财付通")
+        #end
+        #if($!obj.pd_payment=="bill")
+          #set($pd_payment="快钱")
+        #end
+        #if($!obj.pd_payment=="chinabank")
+          #set($pd_payment="网银在线")
+        #end
+       <li>$!pd_payment</li>
+     </ul>
+     <ul class="set1">
+       <li class="setcont_bg">充值金额</li>
+       <li>$!obj.pd_amount</li>
+     </ul>
+     #if($!obj.pd_payment=="outline")
+     <ul class="set1">
+       <li class="setcont_bg">汇款人姓名</li>
+       <li>$!obj.pd_remittance_user</li>
+     </ul>
+     <ul class="set1">
+       <li class="setcont_bg">汇款银行</li>
+       <li>$!obj.pd_remittance_bank</li>
+     </ul>
+     <ul class="set1">
+       <li class="setcont_bg">汇款日期</li>
+       <li>$!obj.pd_remittance_time</li>
+     </ul>
+     #end
+     <ul class="set1">
+       <li class="setcont_bg">支付状态</li>
+       #if($!obj.pd_pay_status==0)
+          #set($pd_pay_status="等待支付")
+        #end  
+        #if($!obj.pd_pay_status==1)
+          #set($pd_pay_status="等待审核")
+        #end       
+        #if($!obj.pd_pay_status==2)
+          #set($pd_pay_status="支付完成")
+        #end 
+       <li>$!pd_pay_status</li>
+     </ul>
+     <ul class="set1">
+       <li class="setcont_bg">预存款状态</li>
+       #if($!obj.pd_status==-1)
+          #set($pd_status="已关闭")
+        #end
+        #if($!obj.pd_status==0)
+          #set($pd_status="未完成")
+        #end
+        #if($!obj.pd_status==1)
+          #set($pd_status="已完成")
+        #end
+       <li>$!pd_status</li>
+     </ul>
+     <ul class="set1">
+       <li class="setcont_bg">预存款备注</li>
+       <li>$!obj.pd_remittance_info</li>
+     </ul>
+     #if($!obj.pd_admin)
+     <ul class="set1">
+       <li class="setcont_bg">操作管理员</li>
+       <li>$!obj.pd_admin.userName</li>
+     </ul>
+     #end
+     #if($!obj.pd_admin_info)
+     <ul class="set1">
+       <li class="setcont_bg">操作备注</li>
+       <li>$!obj.pd_admin_info</li>
+     </ul>
+     #end
+   </div>
+   </div>
+  <div class="submit">
+   <span class="pad120"> <input name="save" type="button" value="返回列表" onclick="window.location.href='$!webPath/admin/predeposit_list.htm'" /></span>
+  </div>
+</div>
+</body>
+</html>

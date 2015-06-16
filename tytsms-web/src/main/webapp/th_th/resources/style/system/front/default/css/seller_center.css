@@ -1,0 +1,12 @@
+@charset "utf-8";
+/* CSS Document */
+.seller_right .seller_list{ width:842px;}
+.seller_right .seller_list .user_list_box{width:842px;}
+.seller_right .seller_list .userlist_allop{width:840px;}
+
+.seller_right .user_list{width:842px;}
+.seller_right .user_list .userlist_allop{width:840px;}
+.seller_right .add_usercenter{width:842px;}
+
+.seller_right .user_list .orderlist_one{ width:842px;}
+.seller_right .user_list .orderlist_one .orderlist_bottom{width:840px;}

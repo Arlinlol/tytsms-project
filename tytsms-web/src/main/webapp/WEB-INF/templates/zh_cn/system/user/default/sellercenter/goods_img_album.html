@@ -1,0 +1,21 @@
+<h1> <i><a href="javascript:void(0);" onclick="show_album('tab_body_b',jQuery('.tabbody_ul li:eq(1)'))">返回相册<img src="$!webPath/resources/style/system/front/default/images/usercenter/return_album.jpg" width="17"/></a></i></h1><span></span>
+<script>
+function goods_photo_set(obj){
+  var src=jQuery(obj).attr("src");
+  var image_id=jQuery(obj).attr("image_id");
+	if(photo_count==0){
+		 jQuery("#goods_image_0").attr("src",src).attr("image_id",image_id);
+	}
+  jQuery("#goods_image_"+(photo_count+1)).attr("src",src).attr("image_id",image_id);
+  photo_count++;
+  photo_count=photo_count>=5?5:photo_count;
+}
+</script>
+<ul class="tabphoto">
+  #foreach($photo in $photos)
+  <li><a href="javascript:void(0);" onclick="goods_photo_set(this);" image_id="$!photo.id" src="$!webPath/$!photo.path/$!photo.name"><img src="$!webPath/$!photo.path/$!{photo.name}_small.$!{photo.ext}" width="90" height="90" /></a></li>
+  #end
+</ul>
+<div class="tab_page">
+  <div class="tab_page2" id="img_photo" ajax_type=".tab_body_b" ajax_page="goods_img" album_id="$!{album_id}" type="goods_img_album">$!gotoPageAjaxHTML</div>
+</div>

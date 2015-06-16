@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link href="$!webPath/resources/style/common/css/jquery.bigcolorpicker.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.bigcolorpicker.js"></script>
+<script>
+jQuery(document).ready(function(){
+ //改变系统提示的样式
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+  //表单验证
+  jQuery("#theForm").validate({
+    rules:{
+		wm_text_font_size:{number:true,min:0},
+		wm_image_alpha:{number:true,min:0}
+	 },
+	messages:{
+	    wm_text_font_size:{number:"字体大小只能为数字",min:"字体大小必须大于0"},
+		wm_image_alpha:{number:"透明度只能为数字",min:"透明度必须大于0"}
+	}
+  });
+  //
+  jQuery("#img_wm_set a").click(function(){
+	 jQuery("#img_wm_set a").removeClass("this");
+	 jQuery(this).addClass("this");
+	 jQuery("#wm_image_pos").val(jQuery(this).attr("pos"));
+   });
+   jQuery("#text_wm_set a").click(function(){
+	 jQuery("#text_wm_set a").removeClass("this");
+	 jQuery(this).addClass("this");
+	 jQuery("#wm_text_pos").val(jQuery(this).attr("pos"));
+   });
+   jQuery("#wm_text_color").bigColorpicker();		
+ #if($!obj)
+	var img_status = jQuery("#wm_image_open").val();
+   if(img_status=="true"){
+		jQuery("#wm_imgs_on").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg");
+	}else{
+		jQuery("#wm_imgs_on").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg");
+	}
+	
+	var text_status = jQuery("#wm_text_open").val();
+   if(text_status=="true"){
+		jQuery("#wm_text_on").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg");
+	}else{
+		jQuery("#wm_text_on").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg");
+	}
+	
+   jQuery("#wm_text_font").val("$!obj.wm_text_font");
+   jQuery("#img_wm_set a").removeClass("this");
+   jQuery("#img_wm_set a[pos=$!obj.wm_image_pos]").addClass("this");
+   jQuery("#text_wm_set a").removeClass("this");
+   jQuery("#text_wm_set a[pos=$!obj.wm_text_pos]").addClass("this");
+  #end
+  
+  jQuery("#wm_imgs_on").css("cursor","pointer").click(function(){
+     var state = jQuery("#wm_image_open").val();
+	 if(state=="true"){
+		jQuery("#wm_image_open").val("false");
+		jQuery("#wm_imgs_on").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg");
+	}else{
+		jQuery("#wm_image_open").val("true");
+		jQuery("#wm_imgs_on").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg");
+	}
+  });
+  jQuery("#wm_text_on").css("cursor","pointer").click(function(){
+     var state = jQuery("#wm_text_open").val();
+	 if(state=="true"){
+		jQuery("#wm_text_open").val("false");
+		jQuery("#wm_text_on").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg");
+	}else{
+		jQuery("#wm_text_open").val("true");
+		jQuery("#wm_text_on").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg");
+	}
+  });
+});
+
+function saveForm(){
+  jQuery("#theForm").submit();
+}
+
+
+</script>
+<body>
+<div class="cont">
+  <h1 class="seth">自营相册</h1>
+  <div class="nav_list">
+
+      <ul>
+      <li> <a href="$!webPath/admin/album.htm"><b>我的相册</b></a></li>
+       <li><a href="$!webPath/admin/watermark.htm" class="this"><b>水印管理</b></a> </li>
+	</ul>
+   </div>
+ <form action="$!webPath/admin/watermark_save.htm" method="post" enctype="multipart/form-data" id="theForm" name="theForm">
+ <input name="id" type="hidden" id="id" value="$!obj.id" />
+  <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+ <div class="edit">
+ <div class="editul setcont">
+    <!--鼠标经过样式-->
+    <ul class="set1">
+      <li class="setcont_bg">开启图片水印</li>
+      <li><span class="webname">
+        <input name="wm_image_open" type="hidden" id="wm_image_open" value="$!obj.wm_image_open" />
+        <img src="$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg" width="61" height="23" id="wm_imgs_on"/>
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">开启后，上传图片自动进行图片水印</strong><strong class="c"></strong></span></li>
+    </ul>
+    <!--鼠标未经过样式-->
+    <ul class="set1">
+      <li class="setcont_bg">水印图片</li>
+      <li>
+        <div> 
+       #if($!obj&&$!{obj.wm_image})
+       <img src="$!webPath/$!obj.wm_image.path/$!obj.wm_image.name"/>
+       #end
+       </div> 
+        <div style="padding-top:10px;"><span><input name="wm_img" id="wm_img" type="file"  size="32"/></span>
+      <span id="nothis"><strong class="q"></strong><strong class="w">选择水印图片</strong><strong class="c"></strong></span></div>
+      
+      </li>
+      
+
+      
+    </ul>
+	<ul class="set1">
+      <li class="setcont_bg">图片透明度</li>
+      <li><span class="size70">
+        <input name="wm_image_alpha" type="text" id="wm_image_alpha" value="$!obj.wm_image_alpha" />
+      </span><span>%</span><span id="nothis"><strong class="q"></strong><strong class="w">0-100</strong><strong class="c"></strong></span></li>
+    </ul>
+    <ul class="set1">
+     <input type="hidden" name="wm_image_pos" id="wm_image_pos" value="$!obj.wm_image_pos" />
+      <li class="setcont_bg">图片位置</li>
+      <li>
+           <div class="mark_position">
+     <div class="mark_outside">
+     <div class="mark_inside">
+      <h2>选择水印图片所在位置</h2>
+        <div class="marking" id="img_wm_set"> <a href="javascript:void(0);" class="this" pos="1">左上</a> <a href="javascript:void(0);" pos="2">中上</a> <a  href="javascript:void(0);" pos="3">右上</a> <a href="javascript:void(0);" pos="8">左中</a> <a href="javascript:void(0);" pos="9">正中</a> <a href="javascript:void(0);" pos="4">右中</a> <a href="javascript:void(0);" pos="7">左下</a> <a href="javascript:void(0);" pos="6">中下</a> <a href="javascript:void(0);" pos="5">右下</a> </div>
+             </div>
+     </div>
+     </div>
+      </li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">开启文字水印</li>
+      <li><span class="webname">
+        <input name="wm_text_open" type="hidden" id="wm_text_open" value="$!obj.wm_text_open" />
+        <img src="$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg" width="61" height="23" id="wm_text_on"/>
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">开启文字水印后，上传图片时候系统自动文字水印</strong><strong class="c"></strong></span></li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">水印文字</li>
+      <li><span class="webname">
+        <input name="wm_text" type="text" id="wm_text" value="$!obj.wm_text"/>
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">设置水印文字</strong><strong class="c"></strong></span></li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">文字大小</li>
+      <li><span class="size70">
+        <input name="wm_text_font_size" type="text" id="wm_text_font_size" value="$!obj.wm_text_font_size" />
+      </span><span>px</span><span id="nothis"><strong class="q"></strong><strong class="w">设置水印文字大小</strong><strong class="c"></strong></span></li>
+    </ul>
+    <ul class="set1">
+     <input name="wm_text_pos" type="hidden" id="wm_text_pos" value="$!obj.wm_text_pos" />
+      <li class="setcont_bg">文字水印位置</li>
+      <li>
+       <div class="mark_position">
+     <div class="mark_outside">
+     <div class="mark_inside">
+      <h2>选择文字放置位置</h2>
+       <div class="marking" id="text_wm_set"> 
+       <a href="javascript:void(0);" class="this" pos="1">左上</a>
+        <a href="javascript:void(0);" pos="2">中上</a> 
+        <a  href="javascript:void(0);" pos="3">右上</a> 
+        <a href="javascript:void(0);" pos="8">左中</a> 
+        <a href="javascript:void(0);" pos="9">正中</a>
+         <a href="javascript:void(0);" pos="4">右中</a>
+          <a href="javascript:void(0);" pos="7">左下</a> 
+          <a href="javascript:void(0);" pos="6">中下</a> 
+          <a href="javascript:void(0);" pos="5">右下</a>
+          </div>
+      </div></div></div>
+      </li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">文字字体</li>
+      <li><span class="webname">
+      						<select name="wm_text_font" id="wm_text_font">
+                              <option value="Arial">Arial</option>
+                               <option value="黑体">黑体</option>
+                                <option value="宋体">宋体</option>
+                            </select>
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">水印文字的字体</strong><strong class="c"></strong></span></li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">文字颜色</li>
+      <li><span class="size70">
+         <input name="wm_text_color" type="text" id="wm_text_color" value="$!obj.wm_text_color"  readonly="true"/>
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">水印字体的颜色值</strong><strong class="c"></strong></span></li>
+    </ul>
+    </div>
+    </div>
+  </form>
+  <div class="submit">
+   <span class="pad120"> <input name="save" type="button" value="提交" onclick="saveForm()" /></span>
+  </div>
+</div>
+</body>
+</html>

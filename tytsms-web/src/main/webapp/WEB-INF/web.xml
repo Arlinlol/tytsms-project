@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>TaiYiTao Shopping Mall System</display-name>
+	<welcome-file-list>
+		<welcome-file>index.htm</welcome-file>
+	</welcome-file-list>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext-configuration.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!--jpaFilter用来开启session，避免系统domain中出现fetch=FetchType.EAGER -->
+	<filter>
+		<filter-name>jpaFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter
+		</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>false</param-value>
+		</init-param>
+		<init-param>
+			<param-name>entityManagerFactory</param-name>
+			<param-value>entityManagerFactory</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>jpaFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!--编码过滤器 -->
+	<filter>
+		<filter-name>encoding-filter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<!--强制转换编码(request和response均适用) -->
+		<init-param>
+			<param-name>ForceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encoding-filter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<!--spring security权限过滤 -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<!-- SSO过滤器 -->
+	<filter>
+		<filter-name>secondDomainFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>secondDomainFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<!--URL伪静态 -->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<!-- <init-param> <param-name>logLevel</param-name> <param-value>DEBUG</param-value> 
+			</init-param> -->
+	</filter>
+	<filter-mapping>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<!-- 网页压缩过滤器 -->
+	<filter>
+		<filter-name>GZIPEncoder</filter-name>
+		<filter-class>com.iskyshop.core.zip.CompressionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>GZIPEncoder</filter-name>
+		<servlet-name>/tytsms</servlet-name>
+	</filter-mapping>
+	<!--商城过滤器 -->
+	<filter>
+		<filter-name>shopFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shopFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<!--页面缓存配置 -->
+	<filter>
+		<filter-name>SimplePageFragmentCachingFilter</filter-name>
+		<filter-class>com.iskyshop.core.ehcache.PageCacheFiler</filter-class>
+		<init-param>
+			<param-name>patterns</param-name>
+			<param-value>
+
+			</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SimplePageFragmentCachingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+	</filter-mapping>
+	<!--系统主控servlet -->
+	<servlet>
+		<servlet-name>tytsms</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>tytsms</servlet-name>
+		<url-pattern>*.htm</url-pattern>
+	</servlet-mapping>
+	<!--特殊字符过滤 -->
+	<filter>
+		<filter-name>tytsmsHtmlCharacterFilter</filter-name>
+		<filter-class>com.iskyshop.core.filter.TytsmsHtmlCharacterFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>tytsmsHtmlCharacterFilter</filter-name>
+		<url-pattern>*.htm</url-pattern>
+	</filter-mapping>
+	<!--图片上传Servlet 
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>com.iskyshop.foundation.servlet.UploadServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/image/upload</url-pattern>
+	</servlet-mapping>-->
+	<listener>
+		<listener-class>com.iskyshop.core.loader.ServletContextLoaderListener</listener-class>
+	</listener>
+	<!-- <listener> <listener-class> org.springframework.security.ui.session.HttpSessionEventPublisher 
+		</listener-class> </listener> -->
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>tytsms.root</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.util.WebAppRootListener</listener-class>
+	</listener>
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500.htm</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.htm</location>
+	</error-page>
+	<!-- MIME类型 -->
+	<mime-mapping>
+		<extension>doc</extension>
+		<mime-type>application/msword</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>xls</extension>
+		<mime-type>application/msexcel</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>pdf</extension>
+		<mime-type>application/pdf</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>zip</extension>
+		<mime-type>application/zip</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>rar</extension>
+		<mime-type>application/rar</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>txt</extension>
+		<mime-type>application/txt</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>chm</extension>
+		<mime-type>application/mshelp</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>apk</extension>
+		<mime-type>application/vnd.android.package-archive</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>ipa</extension>
+		<mime-type>application/vnd.iphone</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>css</extension>
+		<mime-type>text/css</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>js</extension>
+		<mime-type>application/javascript</mime-type>
+	</mime-mapping>
+    <distributable/>
+</web-app>

@@ -1,0 +1,4 @@
+runtime.log=velocity.log 
+input.encoding=UTF-8 
+output.encoding=UTF-8 
+#file.resource.loader.path=/Users/lukdennis/Development/eclipse-tytsms-web/tytsms-project/tytsms-web/src/main/webapp/vm

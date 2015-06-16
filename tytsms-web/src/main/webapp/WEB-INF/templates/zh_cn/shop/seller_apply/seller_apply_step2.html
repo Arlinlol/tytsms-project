@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>联系信息 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/shop_into.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.card.js" type="text/javascript"></script>
+<script src="$!webPath/resources/js/jquery.iskyshop.validate.js" type="text/javascript"></script>
+<script>
+<!--表单验证-->
+jQuery(document).ready(function(e) {
+    jQuery('#appley').hide();
+    jQuery("#theForm").validate({		
+	 ignore: "",
+	errorPlacement: function(error, element) {
+				element.parent().find("b").html("");
+					error.appendTo(element.parent().find("b"));
+	},						  
+     rules: {
+            store_ower:{required:true},
+            store_telephone:{required:true},
+            license_c_name:{required:true},
+            license_c_address:{required:true}
+			},
+     messages: {
+            store_ower:{required:"请填写真实姓名"},
+            store_telephone:{required:"请填写电话号码"},
+            license_c_name:{required:"请填写公司名称"},
+            license_c_address:{required:"请填写公司地址"}
+		  }
+		 
+  });
+  jQuery("#thesForm").validate({		
+	 ignore: "",
+	errorPlacement: function(error, element) {
+				element.parent().find("b").html("");
+					error.appendTo(element.parent().find("b"));
+	},						  
+     rules: {
+	        trueName:{required:true},
+			telephone:{required:true,isTel:true},
+			email:{required:true,email:true}
+			},
+     messages: {
+	        trueName:{required:"请填写联系人姓名"},
+			telephone:{required:"请填写联系人电话",isTel:"电话号码格式不对"},
+			email:{required:"请填写联系人邮箱",email:"请填写正确的邮箱"}
+		  }
+		 
+  });
+});<!--end-->
+function saveForm(){
+	jQuery("#theForm").submit();
+}
+function saveForms(){
+   jQuery("#thesForm").submit();
+}
+function backwards(){
+	window.location.href="$!webPath/seller_apply.htm?op=back&step=1";
+}
+function tabConClick(){
+	jQuery('#tabCon').show();
+    jQuery('#appley').hide();
+	jQuery("#selected").addClass("selected");
+	jQuery("#apply").removeClass("selected");
+}
+function appleyClick(){
+   jQuery('#tabCon').hide();
+   jQuery('#appley').show();
+	jQuery("#selected").removeClass("selected");
+	jQuery("#apply").addClass('selected');
+}
+
+
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="head">
+  <h1 class="logo" title=""> #if($!config.websiteLogo) <a href="$!webPath/index.htm"><img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" width="209" height="70"/></a> #else <a href="$!webPath/index.htm"><img src="$!webPath/resources/style/system/front/default/images/logo.jpg" width="209" height="70"/> </a> #end </h1>
+  <span class="head_into">商家入驻</span> <a href="$!webPath/doc.htm?mark=apply_help" target="_blank" class="head_help">入驻帮助</a> </div>
+<div class="nav_into">
+  <ul>
+    <li><a href="javascript:void(0)" onclick="backwards()">入驻须知</a></li>
+    <li><a href="javascript:void(0)" class="this">公司信息提交</a></li>
+    <li><a href="javascript:void(0)">店铺信息提交</a></li>
+    <li><a href="javascript:void(0)">审核日志查询</a></li>
+  </ul>
+</div>
+<div class="main">
+	<div class="flow">
+		<ul>
+			<li id="selected" class="selected" onclick="tabConClick();">快速入驻</li>
+			<li id="apply" onclick="appleyClick();">正常入驻</li>
+		</ul>
+	 	<div class="settled_step"><span><em class="setstep_light_blue"></em><b class="strong_light_two"></b><strong class="strong_blue">入驻须知</strong></span><span><em class="setstep_strong_blue"></em><b class="strong_blue_two"></b><strong class="strong_blue">公司信息认证</strong></span><span><em class="setstep_grey"></em><b class="strong_grey_three"></b><strong class="grey">店铺信息认证</strong></span><span><em class="setstep_grey"></em><b class="strong_grey_four"></b><strong class="grey">等待审核</strong></span></div>
+		<div class="settled_box" id="tabCon">
+	    <div class="settled_white">
+	      <form action="$!webPath/seller_apply_quickly_save.htm" method="post" id="theForm">
+	        <div class="settled_white_box">
+	          <div class="settled_warning"><span>用于入驻过程中接收反馈的入驻通知，请务必正确填写。</span></div>
+	          <div class="settled_form">
+	            <table width="760" border="0" cellpadding="0" cellspacing="0" class="settled_table">
+	              <tr>
+	                <td align="right" width="150" valign="top"><span class="sred_span">
+	                  <input name="step" type="hidden" id="step" value="3" />
+	                真实姓名(Name)：</span><strong class="sred">*</strong></td>
+	                <td><input name="store_ower" type="text"  class="size200" id="store_ower"/>
+	                  <b class="settedtab_b"></b></td>
+	              </tr>
+	              <tr>
+	                <td align="right" width="150" valign="top"><span class="sred_span">电话号码(Phone)：</span><strong class="sred">*</strong></td>
+	                <td><input name="store_telephone" type="text"  class="size200" id="store_telephone"/>
+	                  <b class="settedtab_b"></b></td>
+	              </tr>
+	              <tr>
+	                <td align="right" width="180" valign="top"><span class="sred_span">公司名称(Company name)：</span><strong class="sred">*</strong></td>
+	                <td><input name="license_c_name" type="text"  class="size200" id="license_c_name"/>
+	                  <b class="settedtab_b"></b></td>
+	              </tr>
+				  <tr>
+	                <td align="right" width="190" valign="top"><span class="sred_span">公司地址(Company address)：</span><strong class="sred">*</strong></td>
+	                <td><input name="license_c_address" type="text"  class="size200" id="license_c_address"/>
+	                  <b class="settedtab_b"></b></td>
+	              </tr>
+	            </table>
+	            <div class="apply"><a onclick="saveForm()" href="javascript:void(0);" class="apply_btn">立即申请</a></div>
+	          </div>
+	        </div>
+	      </form>
+	    </div>
+	  </div>
+  
+  <div class="settled_box" id="appley">
+    <div class="settled_white">
+      <form action="$!webPath/seller_apply_step2_save.htm" method="post" id="thesForm">
+        <div class="settled_white_box">
+          <div class="settled_warning"><span>商家入驻联系人信息</span><b>用于入驻过程中接收反馈的入驻通知，请务必正确填写。</b></div>
+          <div class="settled_form">
+            <table width="760" border="0" cellpadding="0" cellspacing="0" class="settled_table">
+              <tr>
+                <td align="right" width="150" valign="top"><span class="sred_span">
+                  <input name="step" type="hidden" id="step" value="3" />
+                联系人姓名：</span><strong class="sred">*</strong></td>
+                <td><input name="trueName" type="text"  class="size200" id="trueName"/>
+                  <b class="settedtab_b"></b></td>
+              </tr>
+              <tr>
+                <td align="right" width="150" valign="top"><span class="sred_span">联系人电话：</span><strong class="sred">*</strong></td>
+                <td><input name="telephone" type="text"  class="size200" id="telephone" />
+                  <b class="settedtab_b"></b></td>
+              </tr>
+              <tr>
+                <td align="right" width="150" valign="top"><span class="sred_span">联系人电子邮箱：</span><strong class="sred">*</strong></td>
+                <td><input name="email" type="text"  class="size200" id="email" />
+                  <b class="settedtab_b"></b></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div class="settled_bottom"><span><a onclick="saveForms()" href="javascript:void(0);" class="settled_btn"><b><em>下一步，完善公司信息</em></b></a></span></div>
+      </form>
+    </div>
+  </div>
+    
+  
+	</div>
+</div>
+</body>
+</html>

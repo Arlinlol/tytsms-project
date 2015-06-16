@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<body>
+<div class="cont">
+  <h3 class="seth">自营退货</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/self_return.htm" class="this"><b>自营退货</b></a></li>
+        </ul>
+  </div>
+	<form name="queryForm" id="queryForm" action="$!webPath/admin/self_return.htm" method="post">
+    <div class="search">
+      <span>商品名称</span> 
+  <span class="size150">
+          <input name="name" type="text" id="name" value="$!name" /></span>
+          <span>服务单号</span> <span class="size150">
+          <input name="return_service_id" type="text" id="return_service_id" value="$!return_service_id" />
+          </span> <span>申请者</span> <span class="size150">
+          <input name="user_name" type="text" id="user_name" value="$!user_name" />
+          </span> <span>
+          <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn" />
+          </span> 
+ 
+    </div>
+  </form>
+  <form name="ListForm" id="ListForm" action="$!webPath/admin/self_return.htm" method="post">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+         <th width="10%"><span class="form_btna">服务单号</span></th>
+          <th width="8%"><span class="form_btna">商品名称</span></th>
+          <th width="8%"><span class="form_btna">商品数量</span></th>
+          <th width="9%"><span class="form_btna">申请者</span></th>
+          <th width="15%"><span class="form_btna">商品价格</span></th>
+          <th width="15%"><span class="form_btna">商品总价</span></th>
+          <th width="19%"><span class="form_btna">商品图片</span></th>
+          <th  align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+        <td align="center"><span class="size70">$!obj.return_service_id</span></td>
+          <td align="center"><span class="size70"><a href="$!webPath/goods_$!{obj.goods_id}.htm" target="_blank" style=" color:#00F">$!obj.goods_name</a></span></td>
+          <td align="center"><span class="size70">$!obj.goods_count</span></td>
+           <td align="center"><span class="size150">$!obj.user_name  </span></td>
+           <td align="center"><span class="size70">$!obj.goods_price</span></td>         
+          <td align="center"><span class="size150">$!obj.goods_all_price</span></td>
+          <td align="center">
+          #set($img="$!webPath/$!{obj.goods_mainphoto_path}")
+          <a href="$!webPath/goods_$!{obj.goods_id}.htm" target="_blank"><img src="$!img" width="70" height="70" /></a> 
+          </td>
+          <td class="hui oprate_con" align="center">
+          		#if($!obj.goods_return_status==5)
+          		<a href="$!webPath/admin/self_return_check.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">审核</a>
+                #end
+                #if($!obj.goods_return_status==-1)
+          		<a href="javascript:void(0);">不可退货</a>
+                #end
+                #if($!obj.goods_return_status==6)
+          		<a href="javascript:void(0);">审核通过，请等待买家退货</a>
+                #end
+                #if($!obj.goods_return_status==7)
+                <ul>
+          		<li><a href="$!webPath/admin/self_return_check.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">买家已退货，查看物流</a></li>
+                <li><a href="javascript:void(0);" onclick="if(confirm('是否确认收货，确认后状态不可改变?'))window.location.href='$!webPath/admin/self_return_confirm.htm?id=$!obj.id&currentPage=$!currentPage'"  class="blue">确认收货</a></li>
+                </ul>
+                #end
+                #if($!obj.goods_return_status==10)
+          		<a href="javascript:void(0);">退货已完成</a>
+                #end
+                </td>
+        </tr>
+        #end
+    </table>
+    
+    <div class="operate_bar">
+        <div class="fenye" id="queryCondition">
+            <input name="mulitId" type="hidden" id="mulitId" />
+            <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+           $!gotoPageFormHTML
+        </div> 
+        <div class="oper_sp">
+        </div>         
+ 	</div>
+  </div>
+  </form>
+</div>
+</body>
+</html>

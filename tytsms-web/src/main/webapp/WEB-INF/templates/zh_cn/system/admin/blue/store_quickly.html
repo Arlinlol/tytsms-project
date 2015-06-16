@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/blue/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script>
+function ajax_update(id,fieldName,obj){
+   var val=jQuery(obj).val();
+    jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/store_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }      
+              }
+	    });
+}
+jQuery(document).ready(function(){
+	#if($!grade_id)
+		jQuery("#grade_id").val("$!grade_id");
+	#end
+	
+	#if($!store_status)
+		jQuery("#store_status").val("$!store_status");
+	#end
+	});
+
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">店铺管理</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/store_list.htm" ><b>管理</b></a></li>
+        <li><a href="$!webPath/admin/store_add.htm" ><b>新增</b></a></li>
+        <li><a href="$!webPath/admin/store_quickly.htm" class="this"><b>快速入驻</b></a></li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/store_list.htm" method="post" name="ListForm" id="ListForm">
+  <div class="search">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th>&nbsp;</td>
+        <th width="10%"><span class="form_btna">店主用户名 | 店主姓名</span></th>
+        <th width="10%"><span class="form_btna">店主真实姓名</span></th>
+        <th width="10%"><span class="form_btna">电话号码</span></th>
+        <th width="15%"><span class="form_btna">公司名称</span></th>
+        <th width="15%"><span class="form_btna">公司地址</span></th>
+        <th width="10%"><span class="form_btna">状态</span></th>
+        <th><b class="form_btnb">操作</b></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td class="check_position"><input type="checkbox" name="checkbox" id="checkbox" value="$!obj.id" /></td>
+        <td align="center">$!{obj.user.userName}&nbsp;&nbsp;|&nbsp;&nbsp;$!obj.store_ower</td>
+        <td align="center">$!obj.store_ower</td>
+        <td align="center">$!obj.store_telephone</td>
+        <td align="center">$!obj.license_c_name</td>
+        <td align="center">$!{obj.license_c_address}</td>
+        #if($!obj.store_status==0)
+		  #set($store_status="未提交入驻申请")
+		#end
+        #if($!obj.store_status==5)
+		  #set($store_status="公司信息审核中")
+		#end
+        #if($!obj.store_status==6)
+		  #set($store_status="公司审核拒绝")
+		#end
+		#if($!obj.store_status==10)
+		  #set($store_status="店铺信息审核中")
+		#end
+        #if($!obj.store_status==11)
+		  #set($store_status="店铺审核拒绝")
+		#end
+		#if($!obj.store_status==15)
+		  #set($store_status="正常营业")
+		#end		
+		#if($!obj.store_status==20)
+		  #set($store_status="违规关闭")
+		#end
+        #if($!obj.store_status==25)
+		  #set($store_status="到期关闭")
+		#end
+		#if($!obj.store_status==30)
+		  #set($store_status="快速入驻审核中")
+		#end
+        
+         #set($store_url="$!webPath/store_$!{obj.id}.htm")
+        #if($!config.second_domain_open && $!obj.store_second_domain!="")
+           #set($store_url="http://$!{obj.store_second_domain}.$!{domainPath}")
+        #end
+        <td align="center">$!store_status</td>
+        <td class="hui oprate_con" align="center">
+        	<a href="$!webPath/admin/store_new.htm?userName=$!{obj.user.userName}" class="blue">编辑</a> 
+            |<a href="javascript:void();" onclick="if(confirm('删除店铺将同步删除店铺对应的商品、订单，且不可恢复，是否继续？'))window.location.href='$!webPath/admin/store_del.htm?mulitId=$!obj.id'" class="blue">删除</a> 
+            |<a href="$!store_url" target="_blank" class="blue">查看店铺</a>
+        </td>
+      </tr>
+      #end
+    </table>
+  </div>
+  <div class="operate_bar">
+    <div class="fenye">
+    	<input type="hidden" name="mulitId" id="mulitId" />
+   		<input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+  		$!gotoPageFormHTML
+    </div>   
+    <div class="oper_sp">
+    	<span class="oper_check"><input type="checkbox" name="all" id="all" value="" onclick="selectAll(this);" />全部</span>
+        <span class="oper_del"><input name="" type="button" onclick="cmd('$!webPath/admin/store_del.htm','')" value="删除" style="cursor:pointer;" />
+        </span>
+    </div>     
+ </div>
+  </form>
+</div>
+</body>
+</html>

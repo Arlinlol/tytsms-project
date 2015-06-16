@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.search_group_list.group_purchase")</title><!-- 团购信息 --> 
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/group_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.lazyload.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery(".group_list_one img").lazyload({effect:"fadeIn",width:278,height:278});
+  jQuery(".group_top_sort a").removeClass("this");
+  jQuery(".group_top_sort a[id^=$!order_type]").addClass("this");
+  #if($!orderType=="desc")
+  jQuery(".group_top_sort a[id^=$!order_type] i").addClass("sort_top");
+  #else
+  jQuery(".group_top_sort a[id^=$!order_type] i").addClass("sort_bottom");
+  #end
+  jQuery(".group_class a").removeClass("this");
+  jQuery(".group_class a[id=price_$!{gpr_id}]").addClass("bluebg");
+  jQuery(".group_class a[id=gc_$!{gc_id}]").addClass("bluebg");
+});
+function group_sel(field,val){
+  jQuery("#"+field).val(val);
+  jQuery("#ListForm").submit();
+}
+function group_order(field1,val1,field2,val2){
+  jQuery("#"+field1).val(val1);
+  jQuery("#"+field2).val(val2);
+  jQuery("#ListForm").submit();
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/group/head.htm")
+$!httpInclude.include("/group/nav.htm")
+
+<div class="group_bg">
+  <div class="main">
+    <div class="group_index_top">
+      <dl class="group_class">
+        <dt>#springMessage("sms.search_group_list.classify")<!-- 分类： --></dt>
+        <dd>
+        <a href="javascript:void(0);" onclick="group_sel('gc_id','')" id="gc_">#springMessage("sms.search_group_list.not_limit")<!-- 不限 --></a> 
+   #foreach($gc in $gcs)
+               <a href="javascript:void(0);" onclick="group_sel('gc_id','$!gc.id')" id="gc_$!{gc.id}">$!gc.gc_name</a>
+   #end            
+        </dd>
+      </dl>
+
+      <dl class="group_class">
+        <dt>#springMessage("sms.search_group_list.price_symbol")<!-- 价格： --></dt>
+        <dd>
+        <a href="javascript:void(0);" onclick="group_sel('gpr_id','')" id="price_">#springMessage("sms.search_group_list.not_limit")<!-- 不限 --></a>
+        #foreach($gpr in $gprs)
+         <a href="javascript:void(0);" onclick="group_sel('gpr_id','$!gpr.id')" id="price_$!gpr.id">$!gpr.gpr_name</a> 
+        #end
+           </dd>
+      </dl>
+    </div>
+    	#if($!orderType=="desc")
+        #set($c_orderType="asc")
+        #else
+        #set($c_orderType="desc")
+        #end
+    <div class="group_top_sort"><span class="top_sort_page"></span><span class="top_sort_left">#springMessage("sms.search_group_list.sort")<!-- 排序： --></span><span class="sort_operate"><a href="javascript:void(0);" onclick="group_order('orderBy','addTime','orderType','$!c_orderType');"  class="this" id="addTime_$!orderType"><b>#springMessage("sms.search_group_list.default")<!-- 默认 --></b><i></i></a><a href="javascript:void(0);" onclick="group_order('orderBy','group_price','orderType','$!c_orderType');" id="group_price_$!orderType"><b>#springMessage("sms.search_group_list.price")<!-- 价格 --></b><i></i></a><a a href="javascript:void(0);" onclick="group_order('orderBy','gg_rebate','orderType','$!c_orderType');"  id="gg_rebate_$!orderType"><b>#springMessage("sms.search_group_list.discount")<!-- 折扣 --></b><i></i></a><a href="javascript:void(0);" onclick="group_order('orderBy','selled_count','orderType','$!c_orderType');"  id="selled_count_$!orderType"><b>#springMessage("sms.search_group_list.sale_count")<!-- 销量 --></b><i></i></a></span></div>
+    <form action="$!webPath/grouplife/search.htm?type=$!type" method="post" id="ListForm">
+    <div class="group_list"> 
+    #foreach($obj in $objs)
+      <ul class="group_list_one">
+        <li class="group_list_img"><span>
+          <p><a href="$!webPath/grouplife/view_$!{obj.vo_id}.htm?type=life"><img src="$!webPath/$!obj.vo_main_photo_url" original="$!webPath/$!obj.vo_main_photo_url" onerror="this.src='$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}';" /></a></p>
+          </span></li>
+        <li class="group_list_name"><a href="$!webPath/grouplife/view_$!{obj.vo_id}.htm?type=life">$!obj.vo_title</a></li>
+        <li class="group_list_mid"><span class="group_list_price"><strong>¥$!obj.vo_store_price</strong><em><i>$!obj.vo_rate#springMessage("sms.search_group_list.discount_one")<!-- 折 --></i><b>¥$!obj.vo_cost_price</b></em></span></li>
+        <li class="group_list_people"><span class="group_list_see"><a href="$!webPath/grouplife/view_$!{obj.vo_id}.htm?type=life">#springMessage("sms.search_group_list.search_detail")<!-- 查看详细 --></a></span><b>#springMessage("sms.search_group_list.aready_sale_count")<!-- 已售出 -->$!obj.vo_goods_salenum</b></li>
+      </ul>
+      #end </div>
+    <div class="fenye"><span>$!gotoPageFormHTML</span></div>
+     <input name="ga_id" type="hidden" id="ga_id" value="$!ga_id" />
+        <input name="gpr_id" type="hidden" id="gpr_id" value="$!gpr_id" />
+        <input name="gc_id" type="hidden" id="gc_id" value="$!gc_id" />
+        <input name="orderBy" type="hidden" id="orderBy" value="$!orderBy" />
+        <input name="orderType" type="hidden" id="orderType" value="$!orderType" />
+        <input type="hidden" name="currentPage" id="currentPage" />
+        <input type="hidden" name="keyword" id="keyword" value="$!keyword" />
+    </form>
+  </div>
+</div>
+<div class="main">
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

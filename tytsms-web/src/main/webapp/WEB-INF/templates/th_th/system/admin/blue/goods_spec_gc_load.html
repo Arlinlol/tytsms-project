@@ -1,0 +1,17 @@
+﻿#if($!gcs.size()>0)
+<script>
+  #foreach($gc in $obj.spec_goodsClass_detail)
+  jQuery("input[type='checkbox'][value='"+$!{gc.id}+"']").attr("checked",true);
+  #end
+</script>
+<ul class="set3">
+<li><strong class="sred"></strong>详细分类</li>
+<li>
+#foreach($gc in $gcs)
+ <label>
+<span class="checkbox_left"><input name="gc_ids" type="checkbox" value="$!gc.id"/></span><span class="checkbox_right">$!gc.className</span>
+</label>
+#end
+</li>
+</ul>
+#end

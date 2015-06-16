@@ -1,0 +1,1827 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>商城子系统国际化配置</comment>
+	<!-- 配置规范：1、子系统名.功能模块名.标识名 例如：oss.goods.publish 2、除中文外的国际化配置，每个key 行上面用注明对应的中文 -->
+	<entry key="sms.home.userlogin2">商城登陆</entry>
+
+
+	<!-- goods_consult.html -->
+	<entry key="sms.consult.no_content">还没有咨询内容</entry>
+	<entry key="sms.consult.content">咨询内容：</entry>
+	<entry key="sms.consult.hide">匿名</entry>
+	<entry key="sms.consult.reply">店家回复：</entry>
+	<entry key="sms.consult.vcode_null">验证码不能为空</entry>
+	<entry key="sms.consult.vcode_error">验证码不正确</entry>
+	<entry key="sms.consult.consult">我要咨询：</entry>
+	<entry key="sms.consult.email">电子邮件：</entry>
+	<entry key="sms.consult.vcode">验证码：</entry>
+	<entry key="sms.consult.read_vcode">朗读验证码</entry>
+	<entry key="sms.consult.appear_anonymously">匿名发表</entry>
+	<entry key="sms.consult.published_consulting">发表咨询</entry>
+
+	<!-- goods_evaluation.html -->
+	<entry key="sms.evaluation.reviews">商品评价</entry>
+	<entry key="sms.evaluation.rating">好评度：</entry>
+	<entry key="sms.evaluation.good_review">好评：</entry>
+	<entry key="sms.evaluation.medium_review">中评：</entry>
+	<entry key="sms.evaluation.not_review">还没有评价内容</entry>
+
+	<!--goods_list.html -->
+	<entry key="sms.goods_list.xxx">不能收藏自己的店铺</entry>
+	<entry key="sms.goods_list.xxx">店铺收藏成功！</entry>
+	<entry key="sms.goods_list.xxx">该店铺已经被收藏！</entry>
+	<entry key="sms.goods_list.xxx">评分详细</entry>
+	<entry key="sms.goods_list.xxx">与行业相比</entry>
+	<entry key="sms.goods_list.xxx">商品评分：</entry>
+	<entry key="sms.goods_list.xxx">分</entry>
+	<entry key="sms.goods_list.xxx">服务评分：</entry>
+	<entry key="sms.goods_list.xxx">分</entry>
+	<entry key="sms.goods_list.xxx">时效评分：</entry>
+	<entry key="sms.goods_list.xxx">店铺名称：</entry>
+	<entry key="sms.goods_list.xxx">公司名称：</entry>
+	<entry key="sms.goods_list.xxx">联系电话：</entry>
+	<entry key="sms.goods_list.xxx">店铺地址：</entry>
+	<entry key="sms.goods_list.xxx">详细地址：</entry>
+	<entry key="sms.goods_list.xxx">客服当前不在线，是否继续</entry>
+	<entry key="sms.goods_list.xxx">店铺首页</entry>
+	<entry key="sms.goods_list.xxx">描述相符：</entry>
+	<entry key="sms.goods_list.xxx">服务态度：</entry>
+	<entry key="sms.goods_list.xxx">发货速度：</entry>
+	<entry key="sms.goods_list.xxx">所在地：</entry>
+	<entry key="sms.goods_list.xxx">联系电话：</entry>
+	<entry key="sms.goods_list.xxx">商品分类</entry>
+	<entry key="sms.goods_list.xxx">热销排行</entry>
+	<entry key="sms.goods_list.xxx">销量</entry>
+	<entry key="sms.goods_list.xxx">价格</entry>
+	<entry key="sms.goods_list.xxx">好评度</entry>
+	<entry key="sms.goods_list.xxx">上架时间</entry>
+	<entry key="sms.goods_list.xxx">条评价</entry>
+
+	<!-- goods_order.html -->
+	<entry key="sms.goods_order.xxx">还没有成交记录</entry>
+	<entry key="sms.goods_order.xxx">买家</entry>
+	<entry key="sms.goods_order.xxx">商品价格</entry>
+	<entry key="sms.goods_order.xxx">商品规格</entry>
+	<entry key="sms.goods_order.xxx">购买数量</entry>
+	<entry key="sms.goods_order.xxx">成交时间</entry>
+
+	<!--store_eva.html -->
+	<entry key="sms.store_eva.xxx">评价</entry>
+	<entry key="sms.store_eva.xxx">内容</entry>
+	<entry key="sms.store_eva.xxx">商品</entry>
+	<entry key="sms.store_eva.xxx">金额</entry>
+	<entry key="sms.store_eva.xxx">买家</entry>
+	<entry key="sms.store_eva.xxx">时间</entry>
+	<entry key="sms.store_eva.xxx">好评</entry>
+	<entry key="sms.store_eva.xxx">中评</entry>
+	<entry key="sms.store_eva.xxx">差评</entry>
+	<entry key="sms.store_eva.xxx">这家伙什么都没说</entry>
+
+	<!-- store_goods_search.html -->
+	<entry key="sms.store_goods_search.xxx">包含</entry>
+	<entry key="sms.store_goods_search.xxx">商品搜索结果</entry>
+	<entry key="sms.store_goods_search.xxx">搜索结果</entry>
+	<entry key="sms.store_goods_search.xxx">查看详情</entry>
+	<entry key="sms.store_goods_search.xxx">最近成交</entry>
+	<entry key="sms.store_goods_search.xxx">对不起，没有对应商品信息！</entry>
+
+
+	<!--store_goods.html -->
+	<entry key="sms.store_goods.xxx">铜牌会员</entry>
+	<entry key="sms.store_goods.xxx">银牌会员</entry>
+	<entry key="sms.store_goods.xxx">金牌会员</entry>
+	<entry key="sms.store_goods.xxx">超级会员</entry>
+	<entry key="sms.store_goods.xxx">努力加载</entry>
+	<entry key="sms.store_goods.xxx">不能收藏自己的商品</entry>
+	<entry key="sms.store_goods.xxx">商品收藏成功！</entry>
+	<entry key="sms.store_goods.xxx">已经收藏该商品！</entry>
+	<entry key="sms.store_goods.xxx">不能购买自己的商品！</entry>
+	<entry key="sms.store_goods.xxx">至少购买一件商品</entry>
+	<entry key="sms.store_goods.xxx">商品库存为0,不能购买!</entry>
+	<entry key="sms.store_goods.xxx">商品细节图</entry>
+	<entry key="sms.store_goods.xxx">会员登录</entry>
+	<entry key="sms.store_goods.xxx">分享商品到：站外</entry>
+	<entry key="sms.store_goods.xxx">分享商品</entry>
+	<entry key="sms.store_goods.xxx">当前商品为促销商品，用户登录后方可享受促销价格！</entry>
+	<entry key="sms.store_goods.xxx">当前商品为团购商品</entry>
+	<entry key="sms.store_goods.xxx">参考价格：</entry>
+	<entry key="sms.store_goods.xxx">团购价格</entry>
+	<entry key="sms.store_goods.xxx">商城价格</entry>
+	<entry key="sms.store_goods.xxx">促销价格：</entry>
+	<entry key="sms.store_goods.xxx">您当前为</entry>
+	<entry key="sms.store_goods.xxx">，享受商城价格</entry>
+	<entry key="sms.store_goods.xxx">折的优惠</entry>
+	<entry key="sms.store_goods.xxx">商品评价：</entry>
+	<entry key="sms.store_goods.xxx">已有</entry>
+	<entry key="sms.store_goods.xxx">人评价</entry>
+	<entry key="sms.store_goods.xxx">在线客服</entry>
+	<entry key="sms.store_goods.xxx">客服当前不在线，是否继续</entry>
+	<entry key="sms.store_goods.xxx">配 送 至：</entry>
+	<entry key="sms.store_goods.xxx">选择你的收货城市</entry>
+	<entry key="sms.store_goods.xxx">您当前所在地：</entry>
+	<entry key="sms.store_goods.xxx">商家承担</entry>
+	<entry key="sms.store_goods.xxx">平邮</entry>
+	<entry key="sms.store_goods.xxx">快递</entry>
+	<entry key="sms.store_goods.xxx">销售情况：</entry>
+	<entry key="sms.store_goods.xxx">售出</entry>
+	<entry key="sms.store_goods.xxx">件</entry>
+	<entry key="sms.store_goods.xxx">购买数量：</entry>
+	<entry key="sms.store_goods.xxx">已选择</entry>
+	<entry key="sms.store_goods.xxx">加入购物车</entry>
+	<entry key="sms.store_goods.xxx">立即购买</entry>
+	<entry key="sms.store_goods.xxx">评分详细</entry>
+	<entry key="sms.store_goods.xxx">与同行业相比</entry>
+	<entry key="sms.store_goods.xxx">描述相符：</entry>
+	<entry key="sms.store_goods.xxx">服务态度：</entry>
+	<entry key="sms.store_goods.xxx">发货速度：</entry>
+	<entry key="sms.store_goods.xxx">商城客服：</entry>
+	<entry key="sms.store_goods.xxx">客服当前不在线，是否继续</entry>
+	<entry key="sms.store_goods.xxx">点击咨询</entry>
+	<entry key="sms.store_goods.xxx">点击这里给我发消息</entry>
+	<entry key="sms.store_goods.xxx">公司名称：</entry>
+	<entry key="sms.store_goods.xxx">暂未填写</entry>
+	<entry key="sms.store_goods.xxx">进入商家店铺</entry>
+	<entry key="sms.store_goods.xxx">相关分类</entry>
+	<entry key="sms.store_goods.xxx">同类其他品牌</entry>
+	<entry key="sms.store_goods.xxx">商品排行</entry>
+	<entry key="sms.store_goods.xxx">热销商品排行</entry>
+	<entry key="sms.store_goods.xxx">热门收藏排行</entry>
+	<entry key="sms.store_goods.xxx">出售：</entry>
+	<entry key="sms.store_goods.xxx">收藏：</entry>
+	<entry key="sms.store_goods.xxx">商城热卖</entry>
+	<entry key="sms.store_goods.xxx">参考价：¥</entry>
+	<entry key="sms.store_goods.xxx">商城价： </entry>
+	<entry key="sms.store_goods.xxx">商品详情</entry>
+	<entry key="sms.store_goods.xxx">商品评价</entry>
+	<entry key="sms.store_goods.xxx">成交记录</entry>
+	<entry key="sms.store_goods.xxx">产品咨询</entry>
+
+
+	<!-- store_index.html -->
+	<entry key="sms.store_index.xxx">不能收藏自己的店铺</entry>
+	<entry key="sms.store_index.xxx">店铺收藏成功！</entry>
+	<entry key="sms.store_index.xxx">该店铺已经被收藏！</entry>
+	<entry key="sms.store_index.xxx">评分详细</entry>
+	<entry key="sms.store_index.xxx">与同行业相比</entry>
+	<entry key="sms.store_index.xxx">描述相符：</entry>
+	<entry key="sms.store_index.xxx">分</entry>
+	<entry key="sms.store_index.xxx">服务态度：</entry>
+	<entry key="sms.store_index.xxx">发货速度：</entry>
+	<entry key="sms.store_index.xxx">店铺名称：</entry>
+	<entry key="sms.store_index.xxx">公司名称：</entry>
+	<entry key="sms.store_index.xxx">联系电话：</entry>
+	<entry key="sms.store_index.xxx">店铺地址：</entry>
+	<entry key="sms.store_index.xxx">详细地址：</entry>
+	<entry key="sms.store_index.xxx">客服当前不在线，是否继续?</entry>
+	<entry key="sms.store_index.xxx">店铺首页</entry>
+	<entry key="sms.store_index.xxx">价格：</entry>
+	<entry key="sms.store_index.xxx">立即抢购</entry>
+	<entry key="sms.store_index.xxx">所在地：</entry>
+	<entry key="sms.store_index.xxx">商品分类</entry>
+	<entry key="sms.store_index.xxx">热销排行</entry>
+	<entry key="sms.store_index.xxx">条评价</entry>
+
+
+	<!-- store_nav.html -->
+	<entry key="sms.store_nav.xxx">店铺首页</entry>
+
+	<!-- store_url.html -->
+	<entry key="sms.store_url.xxx">评分详细</entry>
+	<entry key="sms.store_url.xxx">与行业相比</entry>
+	<entry key="sms.store_url.xxx">商品评分：</entry>
+	<entry key="sms.store_url.xxx">服务评分：</entry>
+	<entry key="sms.store_url.xxx">时效评分：</entry>
+	<entry key="sms.store_url.xxx">店铺名称：</entry>
+	<entry key="sms.store_url.xxx">公司名称：</entry>
+	<entry key="sms.store_url.xxx">联系电话：</entry>
+	<entry key="sms.store_url.xxx">店铺地址：</entry>
+	<entry key="sms.store_url.xxx">详细地址：</entry>
+	<entry key="sms.store_url.xxx">客服当前不在线，是否继续</entry>
+	<entry key="sms.store_url.xxx">描述相符：</entry>
+	<entry key="sms.store_url.xxx">服务态度：</entry>
+	<entry key="sms.store_url.xxx">发货速度：</entry>
+	<entry key="sms.store_url.xxx">所在地：</entry>
+	<entry key="sms.store_url.xxx">会员登录</entry>
+	<entry key="sms.store_url.xxx">商品分类</entry>
+	<entry key="sms.store_url.xxx">热销排行</entry>
+
+	<!-- plat_chatting_log.html -->
+	<entry key="sms.plat_chatting_log.xxx">由于长时间没有操作，系统正将会话窗口关闭，请确认</entry>
+
+	<!-- plat_chatting_open.html -->
+	<entry key="sms.plat_chatting_open.xxx">与</entry>
+	<entry key="sms.plat_chatting_open.xxx">对话中</entry>
+	<entry key="sms.plat_chatting_open.xxx">最近没有咨询的商品！</entry>
+
+	<!-- plat_chatting.html /store_chatting.html -->
+	<entry key="sms.plat_chatting.xxx">即时对话窗口</entry>
+	<entry key="sms.plat_chatting.xxx">还可以输入</entry>
+	<entry key="sms.plat_chatting.xxx">字</entry>
+	<entry key="sms.plat_chatting.xxx">超出字数限制</entry>
+	<entry key="sms.plat_chatting.xxx">删除该联系用户也将关闭与其的对话窗口，是否继续？</entry>
+	<entry key="sms.plat_chatting.xxx">当前没有联系人</entry>
+	<entry key="sms.plat_chatting.xxx">历史加载中</entry>
+	<entry key="sms.plat_chatting.xxx">没有聊天记录！</entry>
+	<entry key="sms.plat_chatting.xxx">请选择一个用户</entry>
+	<entry key="sms.plat_chatting.xxx">消息加载中，请稍后</entry>
+	<entry key="sms.plat_chatting.xxx">请选择一个用户！</entry>
+	<entry key="sms.plat_chatting.xxx">宋体</entry>
+	<entry key="sms.plat_chatting.xxx">黑体</entry>
+	<entry key="sms.plat_chatting.xxx">微软雅黑</entry>
+	<entry key="sms.plat_chatting.xxx">楷体</entry>
+	<entry key="sms.plat_chatting.xxx">字体颜色：</entry>
+	<entry key="sms.plat_chatting.xxx">图片上传</entry>
+	<entry key="sms.plat_chatting.xxx">聊天记录</entry>
+	<entry key="sms.plat_chatting.xxx">客服名称：</entry>
+	<entry key="sms.plat_chatting.xxx">自动回复：</entry>
+	<entry key="sms.plat_chatting.xxx">可编辑自动回复信息</entry>
+	<entry key="sms.plat_chatting.xxx">提 交</entry>
+	<entry key="sms.plat_chatting.xxx">自动回复</entry>
+	<entry key="sms.plat_chatting.xxx">发 送</entry>
+	<entry key="sms.plat_chatting.xxx">是否要关闭聊天窗口？</entry>
+	<entry key="sms.plat_chatting.xxx">结束对话</entry>
+	<entry key="sms.plat_chatting.xxx">还可以输入</entry>
+	<entry key="sms.plat_chatting.xxx">字</entry>
+	<entry key="sms.plat_chatting.xxx">全部联系人</entry>
+	<entry key="sms.plat_chatting.xxx">最近咨询商品</entry>
+	<entry key="sms.plat_chatting.xxx">最近没有咨询的商品！</entry>
+
+	<!--store_chatting_log.html/user_chatting_log.html -->
+	<entry key="sms.store_chatting_log.xxx">由于长时间没有操作，系统正将会话窗口关闭，请确认</entry>
+
+	<!-- store_chatting_open.html -->
+	<entry key="sms.store_chatting_open.xxx">与</entry>
+	<entry key="sms.store_chatting_open.xxx">对话中</entry>
+	<entry key="sms.store_chatting_open.xxx">最近没有咨询的商品！</entry>
+
+	<!-- user_chatting.html -->
+	<entry key="sms.user_chatting.xxx">即时对话窗口</entry>
+	<entry key="sms.user_chatting.xxx">铜牌会员</entry>
+	<entry key="sms.user_chatting.xxx">银牌会员</entry>
+	<entry key="sms.user_chatting.xxx">金牌会员</entry>
+	<entry key="sms.user_chatting.xxx">超级会员</entry>
+	<entry key="sms.user_chatting.xxx">还可以输入</entry>
+	<entry key="sms.user_chatting.xxx">字</entry>
+	<entry key="sms.user_chatting.xxx">超出字数限制</entry>
+	<entry key="sms.user_chatting.xxx">没有聊天记录！</entry>
+	<entry key="sms.user_chatting.xxx">字体编辑</entry>
+	<entry key="sms.user_chatting.xxx">宋体</entry>
+	<entry key="sms.user_chatting.xxx">黑体</entry>
+	<entry key="sms.user_chatting.xxx">微软雅黑</entry>
+	<entry key="sms.user_chatting.xxx">楷体</entry>
+	<entry key="sms.user_chatting.xxx">字体颜色：</entry>
+	<entry key="sms.user_chatting.xxx">聊天表情</entry>
+	<entry key="sms.user_chatting.xxx">图片上传</entry>
+	<entry key="sms.user_chatting.xxx">聊天记录</entry>
+	<entry key="sms.user_chatting.xxx">您对当前客服人员服务满意吗？</entry>
+	<entry key="sms.user_chatting.xxx">非常满意</entry>
+	<entry key="sms.user_chatting.xxx">满意</entry>
+	<entry key="sms.user_chatting.xxx">一般</entry>
+	<entry key="sms.user_chatting.xxx">不满意</entry>
+	<entry key="sms.user_chatting.xxx">非常不满意</entry>
+	<entry key="sms.user_chatting.xxx">发货更健康</entry>
+	<entry key="sms.user_chatting.xxx">提 交</entry>
+	<entry key="sms.user_chatting.xxx">还可以输入200字</entry>
+	<entry key="sms.user_chatting.xxx">发 送</entry>
+	<entry key="sms.user_chatting.xxx">是否要关闭聊天窗口？</entry>
+	<entry key="sms.user_chatting.xxx">结束对话</entry>
+	<entry key="sms.user_chatting.xxx">咨询商品</entry>
+	<entry key="sms.user_chatting.xxx">商家热卖</entry>
+	<entry key="sms.user_chatting.xxx">店铺信息</entry>
+	<entry key="sms.user_chatting.xxx">我的订单</entry>
+	<entry key="sms.user_chatting.xxx">我的退货单</entry>
+	<entry key="sms.user_chatting.xxx">加入购物车</entry>
+	<entry key="sms.user_chatting.xxx">价 格</entry>
+	<entry key="sms.user_chatting.xxx">库 存</entry>
+	<entry key="sms.user_chatting.xxx">评 价</entry>
+	<entry key="sms.user_chatting.xxx">条评论</entry>
+	<entry key="sms.user_chatting.xxx">好评</entry>
+	<entry key="sms.user_chatting.xxx">铜牌会员</entry>
+	<entry key="sms.user_chatting.xxx">银牌会员</entry>
+	<entry key="sms.user_chatting.xxx">金牌会员</entry>
+	<entry key="sms.user_chatting.xxx">超级会员</entry>
+	<entry key="sms.user_chatting.xxx">商家店铺：</entry>
+	<entry key="sms.user_chatting.xxx">评分详细</entry>
+	<entry key="sms.user_chatting.xxx">与同行业相比</entry>
+	<entry key="sms.user_chatting.xxx">描述相符：</entry>
+	<entry key="sms.user_chatting.xxx">服务态度：</entry>
+	<entry key="sms.user_chatting.xxx">发货速度：</entry>
+	<entry key="sms.user_chatting.xxx">加载中</entry>
+	<entry key="sms.user_chatting.xxx">上页</entry>
+	<entry key="sms.user_chatting.xxx">下页</entry>
+	<entry key="sms.user_chatting.xxx">订单状态：</entry>
+	<entry key="sms.user_chatting.xxx">已取消</entry>
+	<entry key="sms.user_chatting.xxx">待付款</entry>
+	<entry key="sms.user_chatting.xxx">线下支付待审核</entry>
+	<entry key="sms.user_chatting.xxx">货到付款待发货</entry>
+	<entry key="sms.user_chatting.xxx">已付款</entry>
+	<entry key="sms.user_chatting.xxx">已发货</entry>
+	<entry key="sms.user_chatting.xxx">已收货</entry>
+	<entry key="sms.user_chatting.xxx">已完成,已评价</entry>
+	<entry key="sms.user_chatting.xxx">已结束</entry>
+	<entry key="sms.user_chatting.xxx">已结束，不可评价</entry>
+	<entry key="sms.user_chatting.xxx">订单编号：</entry>
+	<entry key="sms.user_chatting.xxx">下单商品：</entry>
+	<entry key="sms.user_chatting.xxx">商品单价：</entry>
+	<entry key="sms.user_chatting.xxx">下单数量：</entry>
+	<entry key="sms.user_chatting.xxx">订单运费：</entry>
+	<entry key="sms.user_chatting.xxx">订单总价：</entry>
+	<entry key="sms.user_chatting.xxx">使用优惠券抵消</entry>
+	<entry key="sms.user_chatting.xxx">元</entry>
+	<entry key="sms.user_chatting.xxx">商品名称：</entry>
+	<entry key="sms.user_chatting.xxx">暂无数据！</entry>
+	<entry key="sms.user_chatting.xxx">退单编号：</entry>
+	<entry key="sms.user_chatting.xxx">退货申请中</entry>
+	<entry key="sms.user_chatting.xxx">退货申请被拒绝</entry>
+	<entry key="sms.user_chatting.xxx">退货申请审核通过</entry>
+	<entry key="sms.user_chatting.xxx">买家退货中</entry>
+	<entry key="sms.user_chatting.xxx">退货完成</entry>
+	<entry key="sms.user_chatting.xxx">当前状态：</entry>
+	<entry key="sms.user_chatting.xxx">申请时间：</entry>
+	<entry key="sms.user_chatting.xxx">退货商品：</entry>
+	<entry key="sms.user_chatting.xxx">退货总价：</entry>
+	<entry key="sms.user_chatting.xxx">由于长时间没有操作，系统正将会话窗口关闭，请确认</entry>
+
+	<!-- user_order_ajax.html -->
+	<entry key="sms.user_order_ajax.xxx">订单状态：</entry>
+	<entry key="sms.user_order_ajax.xxx">已取消</entry>
+	<entry key="sms.user_order_ajax.xxx">待付款</entry>
+	<entry key="sms.user_order_ajax.xxx">线下支付待审核</entry>
+	<entry key="sms.user_order_ajax.xxx">货到付款待发货</entry>
+	<entry key="sms.user_order_ajax.xxx">已付款</entry>
+	<entry key="sms.user_order_ajax.xxx">已发货</entry>
+	<entry key="sms.user_order_ajax.xxx">已收货</entry>
+	<entry key="sms.user_order_ajax.xxx">已完成,已评价</entry>
+	<entry key="sms.user_order_ajax.xxx">已结束</entry>
+	<entry key="sms.user_order_ajax.xxx">已结束，不可评价</entry>
+	<entry key="sms.user_order_ajax.xxx">下单商品：</entry>
+	<entry key="sms.user_order_ajax.xxx">订单编号：</entry>
+	<entry key="sms.user_order_ajax.xxx">商品单价：</entry>
+	<entry key="sms.user_order_ajax.xxx">下单数量：</entry>
+	<entry key="sms.user_order_ajax.xxx">订单运费：</entry>
+	<entry key="sms.user_order_ajax.xxx">订单总价：</entry>
+	<entry key="sms.user_order_ajax.xxx">使用优惠券抵消</entry>
+	<entry key="sms.user_order_ajax.xxx">元</entry>
+	<entry key="sms.user_order_ajax.xxx">商品名称：</entry>
+
+	<!-- user_return_ajax.html -->
+	<entry key="sms.user_return_ajax.xxx">退单编号：</entry>
+	<entry key="sms.user_return_ajax.xxx">退货申请中</entry>
+	<entry key="sms.user_return_ajax.xxx">退货申请被拒绝</entry>
+	<entry key="sms.user_return_ajax.xxx">退货申请审核通过</entry>
+
+	<entry key="sms.user_return_ajax.xxx">买家退货中</entry>
+	<entry key="sms.user_return_ajax.xxx">退货完成</entry>
+	<entry key="sms.user_return_ajax.xxx">当前状态：</entry>
+	<entry key="sms.user_return_ajax.xxx">申请时间：</entry>
+	<entry key="sms.user_return_ajax.xxx">退货商品：</entry>
+	<entry key="sms.user_return_ajax.xxx">商品单价：</entry>
+	<entry key="sms.user_return_ajax.xxx">退货总价：</entry>
+
+	<!-- seller_apply_money.html -->
+	<entry key="sms.seller_apply_money.xxx">类目费用标准</entry>
+	<entry key="sms.seller_apply_money.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_money.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_money.xxx">入驻协议</entry>
+	<entry key="sms.seller_apply_money.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_money.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_money.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_money.xxx">店铺类目</entry>
+	<entry key="sms.seller_apply_money.xxx">二级类目</entry>
+	<entry key="sms.seller_apply_money.xxx">佣金</entry>
+	<entry key="sms.seller_apply_money.xxx">保证金（单位：元）</entry>
+	<entry key="sms.seller_apply_money.xxx">完善店铺类目及类目信息</entry>
+
+	<!-- seller_apply_step0.html -->
+	<entry key="sms.seller_apply_step0.xxx">入驻协议</entry>
+	<entry key="sms.seller_apply_step0.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_step0.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_step0.xxx">入驻须知</entry>
+	<entry key="sms.seller_apply_step0.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_step0.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_step0.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_step0.xxx">协议确定</entry>
+	<entry key="sms.seller_apply_step0.xxx">同意以上协议，下一步</entry>
+	<entry key="sms.seller_apply_step0.xxx">我已仔细阅读并同意协议</entry>
+
+	<!-- seller_apply_step1.html -->
+	<entry key="sms.seller_apply_step1.xxx">入驻须知</entry>
+	<entry key="sms.seller_apply_step1.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_step1.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_step1.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_step1.xxx">公司信息认证</entry>
+	<entry key="sms.seller_apply_step1.xxx">店铺信息认证</entry>
+	<entry key="sms.seller_apply_step1.xxx">等待审核</entry>
+	<entry key="sms.seller_apply_step1.xxx">开始提交</entry>
+
+	<!-- seller_apply_step2.html -->
+	<entry key="sms.seller_apply_step2.xxx">联系信息</entry>
+	<entry key="sms.seller_apply_step2.xxx">请填写联系人姓名</entry>
+	<entry key="sms.seller_apply_step2.xxx">请填写联系人电话</entry>
+	<entry key="sms.seller_apply_step2.xxx">电话号码格式不对</entry>
+	<entry key="sms.seller_apply_step2.xxx">请填写联系人邮箱</entry>
+	<entry key="sms.seller_apply_step2.xxx">请填写正确的邮箱</entry>
+	<entry key="sms.seller_apply_step2.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_step2.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_step2.xxx">入驻须知</entry>
+	<entry key="sms.seller_apply_step2.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_step2.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_step2.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_step2.xxx">公司信息认证</entry>
+	<entry key="sms.seller_apply_step2.xxx">店铺信息认证</entry>
+	<entry key="sms.seller_apply_step2.xxx">等待审核</entry>
+	<entry key="sms.seller_apply_step2.xxx">联系方式</entry>
+	<entry key="sms.seller_apply_step2.xxx">商家入驻联系人信息</entry>
+	<entry key="sms.seller_apply_step2.xxx">用于入驻过程中接收反馈的入驻通知，请务必正确填写。</entry>
+	<entry key="sms.seller_apply_step2.xxx">联系人姓名：</entry>
+	<entry key="sms.seller_apply_step2.xxx">联系人电话：</entry>
+	<entry key="sms.seller_apply_step2.xxx">联系人电子邮箱：</entry>
+	<entry key="sms.seller_apply_step2.xxx">下一步，完善公司信息</entry>
+
+	<!-- seller_apply_step3.html -->
+	<entry key="sms.seller_apply_step3.xxx">公司信息</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写公司名称</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写注册号</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写营业执照详细地址</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写成立日期</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写营业期限</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写注册资本</entry>
+	<entry key="sms.seller_apply_step3.xxx">注册资本只能是整数</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写经营范围</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写公司详细地址</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写公司电话</entry>
+	<entry key="sms.seller_apply_step3.xxx">电话号码格式不对</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写紧急联系人</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写紧急联系人手机</entry>
+	<entry key="sms.seller_apply_step3.xxx">手机号码格式不正确</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写组织机构代码</entry>
+	<entry key="sms.seller_apply_step3.xxx">请选择营业期限开始时间</entry>
+	<entry key="sms.seller_apply_step3.xxx">请选择营业期限结束时间</entry>
+	<entry key="sms.seller_apply_step3.xxx">请填写正确的营业期限</entry>
+	<entry key="sms.seller_apply_step3.xxx">请选择营业执照所在地</entry>
+	<entry key="sms.seller_apply_step3.xxx">请选择公司所在地</entry>
+	<entry key="sms.seller_apply_step3.xxx">请选择上传法人身份证</entry>
+	<entry key="sms.seller_apply_step3.xxx">请上传营业执照电子版</entry>
+	<entry key="sms.seller_apply_step3.xxx">请上传组织机构代码证电子版</entry>
+	<entry key="sms.seller_apply_step3.xxx">身份证电子版</entry>
+	<entry key="sms.seller_apply_step3.xxx">上传身份证电子版</entry>
+	<entry key="sms.seller_apply_step3.xxx">营业执照电子版</entry>
+	<entry key="sms.seller_apply_step3.xxx">上传营业执照电子版</entry>
+	<entry key="sms.seller_apply_step3.xxx">组织机构代码证电子版</entry>
+	<entry key="sms.seller_apply_step3.xxx">上传组织机构代码证</entry>
+	<entry key="sms.seller_apply_step3.xxx">您已经上传过身份证电子版照片了</entry>
+	<entry key="sms.seller_apply_step3.xxx">您已经上传过营业执照电子版了</entry>
+	<entry key="sms.seller_apply_step3.xxx">您已经上传组织机构代码证了</entry>
+	<entry key="sms.seller_apply_step3.xxx">您已经上传过组织机构代码证了</entry>
+	<entry key="sms.seller_apply_step3.xxx">删除后不可恢复，是否继续？</entry>
+	<entry key="sms.seller_apply_step3.xxx">删除失败，请重新删除！</entry>
+	<entry key="sms.seller_apply_step3.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_step3.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_step3.xxx">入驻协议</entry>
+	<entry key="sms.seller_apply_step3.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_step3.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_step3.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_step3.xxx">入驻须知</entry>
+	<entry key="sms.seller_apply_step3.xxx">公司信息认证</entry>
+	<entry key="sms.seller_apply_step3.xxx">店铺信息认证</entry>
+	<entry key="sms.seller_apply_step3.xxx">等待审核</entry>
+	<entry key="sms.seller_apply_step3.xxx">以下所需要上传电子版资质仅支持JPG、GIF、PNG格式的图片，大小不超过1M，且必须加盖企业彩色公章。</entry>
+	<entry key="sms.seller_apply_step3.xxx">营业执照信息</entry>
+	<entry key="sms.seller_apply_step3.xxx">注册号(营业执照号)：</entry>
+	<entry key="sms.seller_apply_step3.xxx">法人身份证电子版：</entry>
+	<entry key="sms.seller_apply_step3.xxx">查看</entry>
+	<entry key="sms.seller_apply_step3.xxx">删除</entry>
+	<entry key="sms.seller_apply_step3.xxx">营业执照所在地：</entry>
+	<entry key="sms.seller_apply_step3.xxx">省份</entry>
+	<entry key="sms.seller_apply_step3.xxx">城市</entry>
+	<entry key="sms.seller_apply_step3.xxx">州县</entry>
+	<entry key="sms.seller_apply_step3.xxx">营业执照详细地址：</entry>
+	<entry key="sms.seller_apply_step3.xxx">成立日期：</entry>
+	<entry key="sms.seller_apply_step3.xxx">营业期限：</entry>
+	<entry key="sms.seller_apply_step3.xxx">注册资本：</entry>
+	<entry key="sms.seller_apply_step3.xxx">经营范围：</entry>
+	<entry key="sms.seller_apply_step3.xxx">万元</entry>
+	<entry key="sms.seller_apply_step3.xxx">营业执照副本电子版：</entry>
+	<entry key="sms.seller_apply_step3.xxx">公司详细地址：</entry>
+	<entry key="sms.seller_apply_step3.xxx">公司电话：</entry>
+	<entry key="sms.seller_apply_step3.xxx">公司紧急联系人：</entry>
+	<entry key="sms.seller_apply_step3.xxx">公司紧急联系人手机：</entry>
+	<entry key="sms.seller_apply_step3.xxx">组织结构代码证</entry>
+	<entry key="sms.seller_apply_step3.xxx">组织机构代码：</entry>
+	<entry key="sms.seller_apply_step3.xxx">查看大图</entry>
+	<entry key="sms.seller_apply_step3.xxx">组织机构代码证电子版：</entry>
+	<entry key="sms.seller_apply_step3.xxx">下一步，完善税务及银行信息</entry>
+
+	<!-- seller_apply_step4.html -->
+	<entry key="sms.seller_apply_step4.xxx">税务及银行信息</entry>
+	<entry key="sms.seller_apply_step4.xxx">小规模纳税人</entry>
+	<entry key="sms.seller_apply_step4.xxx">请填写纳税人识别号</entry>
+	<entry key="sms.seller_apply_step4.xxx">请填写银行开户名</entry>
+	<entry key="sms.seller_apply_step4.xxx">请填写开户银行支行名称</entry>
+	<entry key="sms.seller_apply_step4.xxx">请填写公司银行账号</entry>
+	<entry key="sms.seller_apply_step4.xxx">请填写开户行支行联行号</entry>
+	<entry key="sms.seller_apply_step4.xxx">请填写紧急联系人手机</entry>
+	<entry key="sms.seller_apply_step4.xxx">请选择开户行所在地</entry>
+	<entry key="sms.seller_apply_step4.xxx">请上传税务登记证电子版</entry>
+	<entry key="sms.seller_apply_step4.xxx">请上传纳税人登记证电子版</entry>
+	<entry key="sms.seller_apply_step4.xxx">请上传开户银行许可证电子版</entry>
+	<entry key="sms.seller_apply_step4.xxx">税务登记证电子版</entry>
+	<entry key="sms.seller_apply_step4.xxx">税务登记证电子版</entry>
+	<entry key="sms.seller_apply_step4.xxx">纳税人资格证电子版</entry>
+	<entry key="sms.seller_apply_step4.xxx">开户银行许可证</entry>
+	<entry key="sms.seller_apply_step4.xxx">您已经上传税务登记证电子版照片了</entry>
+	<entry key="sms.seller_apply_step4.xxx">您已经上传纳税人资格证电子版照片了</entry>
+	<entry key="sms.seller_apply_step4.xxx">您已经上传开户银行许可证电子版照片了</entry>
+	<entry key="sms.seller_apply_step4.xxx">小规模纳税人</entry>
+	<entry key="sms.seller_apply_step4.xxx">删除后不可恢复，是否继续？</entry>
+	<entry key="sms.seller_apply_step4.xxx">删除失败，请重新删除！</entry>
+	<entry key="sms.seller_apply_step4.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_step4.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_step4.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_step4.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_step4.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_step4.xxx">入驻须知</entry>
+	<entry key="sms.seller_apply_step4.xxx">公司信息认证</entry>
+	<entry key="sms.seller_apply_step4.xxx">店铺信息认证</entry>
+	<entry key="sms.seller_apply_step4.xxx">等待审核</entry>
+	<entry key="sms.seller_apply_step4.xxx">以下所需要上传电子版资质仅支持JPG、GIF、PNG格式的图片，大小不超过1M。</entry>
+	<entry key="sms.seller_apply_step4.xxx">纳税人识别号：</entry>
+	<entry key="sms.seller_apply_step4.xxx">纳税人类型：</entry>
+	<entry key="sms.seller_apply_step4.xxx">小规模纳税人</entry>
+	<entry key="sms.seller_apply_step4.xxx">纳税类型税码：</entry>
+	<entry key="sms.seller_apply_step4.xxx">税务登记证电子版：</entry>
+	<entry key="sms.seller_apply_step4.xxx">删除</entry>
+	<entry key="sms.seller_apply_step4.xxx">一般纳税人资格证电子版：</entry>
+	<entry key="sms.seller_apply_step4.xxx">开户银行许可证</entry>
+	<entry key="sms.seller_apply_step4.xxx">银行开户名：</entry>
+	<entry key="sms.seller_apply_step4.xxx">公司银行账号：</entry>
+	<entry key="sms.seller_apply_step4.xxx">开户银行支行名称：</entry>
+	<entry key="sms.seller_apply_step4.xxx">开户银行支行所在地：</entry>
+	<entry key="sms.seller_apply_step4.xxx">省份</entry>
+	<entry key="sms.seller_apply_step4.xxx">城市</entry>
+	<entry key="sms.seller_apply_step4.xxx">州县</entry>
+	<entry key="sms.seller_apply_step4.xxx">银行开户许可证电子版：</entry>
+	<entry key="sms.seller_apply_step4.xxx">下一步，完善店铺信息</entry>
+
+
+
+	<!-- seller_apply_step5.html -->
+	<entry key="sms.seller_apply_step5.xxx">店铺基本信息</entry>
+	<entry key="sms.seller_apply_step5.xxx">请填写店铺名称</entry>
+	<entry key="sms.seller_apply_step5.xxx">店铺名已经存在</entry>
+	<entry key="sms.seller_apply_step5.xxx">请填写店主真实姓名</entry>
+	<entry key="sms.seller_apply_step5.xxx">店铺区域不能为空</entry>
+	<entry key="sms.seller_apply_step5.xxx">请填写店主的身份证号</entry>
+	<entry key="sms.seller_apply_step5.xxx">身份证号格式不对</entry>
+	<entry key="sms.seller_apply_step5.xxx">请填写店铺的详细地址</entry>
+	<entry key="sms.seller_apply_step5.xxx">请填写店铺的邮编</entry>
+	<entry key="sms.seller_apply_step5.xxx">邮编格式不对</entry>
+	<entry key="sms.seller_apply_step5.xxx">请填写店铺的联系电话</entry>
+	<entry key="sms.seller_apply_step5.xxx">电话号码格式不对</entry>
+	<entry key="sms.seller_apply_step5.xxx">请填写店铺的联系电话</entry>
+	<entry key="sms.seller_apply_step5.xxx">电话号码格式不对</entry>
+	<entry key="sms.seller_apply_step5.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_step5.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_step5.xxx">入驻协议</entry>
+	<entry key="sms.seller_apply_step5.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_step5.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_step5.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_step5.xxx">入驻须知</entry>
+	<entry key="sms.seller_apply_step5.xxx">公司信息认证</entry>
+	<entry key="sms.seller_apply_step5.xxx">店铺信息认证</entry>
+	<entry key="sms.seller_apply_step5.xxx">等待审核</entry>
+	<entry key="sms.seller_apply_step5.xxx">店铺信息</entry>
+	<entry key="sms.seller_apply_step5.xxx">店铺名称：</entry>
+	<entry key="sms.seller_apply_step5.xxx">店主真实姓名：</entry>
+	<entry key="sms.seller_apply_step5.xxx">店主身份证号：</entry>
+	<entry key="sms.seller_apply_step5.xxx">所在地区：</entry>
+	<entry key="sms.seller_apply_step5.xxx">省份</entry>
+	<entry key="sms.seller_apply_step5.xxx">城市</entry>
+	<entry key="sms.seller_apply_step5.xxx">州县</entry>
+	<entry key="sms.seller_apply_step5.xxx">详细地址：</entry>
+	<entry key="sms.seller_apply_step5.xxx">店铺邮编：</entry>
+	<entry key="sms.seller_apply_step5.xxx">联系电话：</entry>
+	<entry key="sms.seller_apply_step5.xxx">联系QQ：</entry>
+	<entry key="sms.seller_apply_step5.xxx">联系MSN：</entry>
+	<entry key="sms.seller_apply_step5.xxx">阿里旺旺：</entry>
+	<entry key="sms.seller_apply_step5.xxx">选择店铺类型</entry>
+	<entry key="sms.seller_apply_step5.xxx">期望店铺类型：</entry>
+	<entry key="sms.seller_apply_step5.xxx">店铺有效期：</entry>
+	<entry key="sms.seller_apply_step5.xxx">主营类目：</entry>
+	<entry key="sms.seller_apply_step5.xxx">下一步，完善店铺类型与经营类目</entry>
+
+	<!--seller_apply_step6.html -->
+	<entry key="sms.seller_apply_step6.xxx">店铺类目及资质</entry>
+	<entry key="sms.seller_apply_step6.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_step6.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_step6.xxx">入驻协议</entry>
+	<entry key="sms.seller_apply_step6.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_step6.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_step6.xxx">公司信息认证</entry>
+	<entry key="sms.seller_apply_step6.xxx">店铺信息认证</entry>
+	<entry key="sms.seller_apply_step6.xxx">等待审核</entry>
+	<entry key="sms.seller_apply_step6.xxx">店铺类目及类目信息</entry>
+	<entry key="sms.seller_apply_step6.xxx">一级类目</entry>
+	<entry key="sms.seller_apply_step6.xxx">请选择</entry>
+	<entry key="sms.seller_apply_step6.xxx">二级类目</entry>
+	<entry key="sms.seller_apply_step6.xxx">添加</entry>
+	<entry key="sms.seller_apply_step6.xxx">取消</entry>
+	<entry key="sms.seller_apply_step6.xxx">选择可经营类目</entry>
+	<entry key="sms.seller_apply_step6.xxx">gradeName店铺可以经营不同一级类目下的若干二级类目</entry>
+	<entry key="sms.seller_apply_step6.xxx">gradeName店铺所经营的类目必须共属一个一级类目</entry>
+	<entry key="sms.seller_apply_step6.xxx">详细类目：</entry>
+	<entry key="sms.seller_apply_step6.xxx">查看类目费用标准</entry>
+	<entry key="sms.seller_apply_step6.xxx">序号</entry>
+	<entry key="sms.seller_apply_step6.xxx">一级类目</entry>
+	<entry key="sms.seller_apply_step6.xxx">操作</entry>
+	<entry key="sms.seller_apply_step6.xxx">删除</entry>
+	<entry key="sms.seller_apply_step6.xxx">上一步</entry>
+	<entry key="sms.seller_apply_step6.xxx">下一步，确认在线服务协议</entry>
+
+
+	<!-- seller_apply_step7.html -->
+	<entry key="sms.seller_apply_step7.xxx">协议确认</entry>
+	<entry key="sms.seller_apply_step7.xxx">请阅读并同意协议</entry>
+	<entry key="sms.seller_apply_step7.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_step7.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_step7.xxx">入驻协议</entry>
+	<entry key="sms.seller_apply_step7.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_step7.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_step7.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_step7.xxx">在线合同协议确认</entry>
+	<entry key="sms.seller_apply_step7.xxx">提交入驻申请</entry>
+	<entry key="sms.seller_apply_step7.xxx">我已仔细阅读并同意协议</entry>
+	<entry key="sms.seller_apply_step7.xxx">提交入驻申请</entry>
+
+
+	<!-- seller_apply_wait.html -->
+	<entry key="sms.seller_apply_wait.xxx">入驻申请已提交</entry>
+	<entry key="sms.seller_apply_wait.xxx">商家入驻</entry>
+	<entry key="sms.seller_apply_wait.xxx">入驻帮助</entry>
+	<entry key="sms.seller_apply_wait.xxx">公司信息提交</entry>
+	<entry key="sms.seller_apply_wait.xxx">店铺信息提交</entry>
+	<entry key="sms.seller_apply_wait.xxx">审核日志查询</entry>
+	<entry key="sms.seller_apply_wait.xxx">咨询审核</entry>
+	<entry key="sms.seller_apply_wait.xxx">1、审核时效：资质初审7个工作日，复审1-15个工作日，店铺授权1-3个工作日。</entry>
+	<entry key="sms.seller_apply_wait.xxx">2、您可登陆查看审核状态，也可通过商务联系人邮箱了解入驻进度。</entry>
+	<entry key="sms.seller_apply_wait.xxx">3、店铺开通后，登陆商家管理后台的用户名和密码会发送到您入驻时填写的联系人邮箱中。</entry>
+	<entry key="sms.seller_apply_wait.xxx">审核进度</entry>
+	<entry key="sms.seller_apply_wait.xxx">提交入驻申请</entry>
+	<entry key="sms.seller_apply_wait.xxx">正在认证公司信息</entry>
+	<entry key="sms.seller_apply_wait.xxx">正在认证店铺信息</entry>
+	<entry key="sms.seller_apply_wait.xxx">正在认证店铺信息</entry>
+
+	<!--seller_apply_wait1.html -->
+	<entry key="sms.seller_apply_wait1.xxx">商家入驻成功</entry>
+	<entry key="sms.seller_apply_wait1.xxx">审核日志</entry>
+	<entry key="sms.seller_apply_wait1.xxx">您已成功提交入驻申请</entry>
+	<entry key="sms.seller_apply_wait1.xxx">公司信息审核拒绝</entry>
+	<entry key="sms.seller_apply_wait1.xxx">拒绝原因：</entry>
+	<entry key="sms.seller_apply_wait1.xxx">重新提交公司信息</entry>
+	
+	<!--  seller_apply_wait2.html-->
+	<entry key="sms.seller_apply_wait2.xxx">正在认证公司信息</entry>
+	<entry key="sms.seller_apply_wait2.xxx">公司信息审核通过</entry>
+	<entry key="sms.seller_apply_wait2.xxx">店铺信息审核拒绝</entry>
+	<entry key="sms.seller_apply_wait2.xxx">拒绝原因：</entry>
+	<entry key="sms.seller_apply_wait2.xxx">重新提交店铺信息</entry>
+
+	<!-- seller_apply_wait3.html -->
+	<entry key="sms.seller_apply_wait3.xxx">您已成功提交入驻申请</entry>
+	<entry key="sms.seller_apply_wait3.xxx">正在认证公司信息</entry>
+	<entry key="sms.seller_apply_wait3.xxx">公司信息审核通过</entry>
+	<entry key="sms.seller_apply_wait3.xxx">正在认证店铺信息</entry>
+	<entry key="sms.seller_apply_wait3.xxx">店铺信息审核通过</entry>
+	<entry key="sms.seller_apply_wait3.xxx">您已成功入驻</entry>
+	<entry key="sms.seller_apply_wait3.xxx">说明：</entry>
+	<entry key="sms.seller_apply_wait3.xxx">请退出登陆状态，然后在首页左上方“商家登陆”的入口登陆。</entry>
+	
+	
+	<!--seller_store_ajax_select.html  -->
+	<entry key="sms.seller_store_ajax_select.xxx">州县</entry>
+	
+	<!--seller_store_gc_list.html  -->
+	<entry key="sms.seller_store_gc_list.xxx">序号</entry>
+	<entry key="sms.seller_store_gc_list.xxx">一级seller_store_gc_listy</entry>
+	<entry key="sms.seller_store_gc_list.xxx">二级类目</entry>
+	<entry key="sms.seller_store_gc_list.xxx">操作</entry>
+	<entry key="sms.seller_store_gc_list.xxx">删除</entry>
+	
+	
+	<!-- activity.html页面国际化 -->
+	<entry key="sms.doc.xxx">元</entry>
+	<entry key="sms.activity.xxx">销量：</entry>
+	<entry key="sms.activity.xxx">最低价：</entry>
+	<entry key="sms.activity.xxx">抱歉，没有相应的活动商品！</entry>
+	<entry key="sms.activity.xxx">返回商城首页</entry>
+
+	<!-- article_list.html/article.html页面国际化 -->
+	<entry key="sms.article.xxx">文章分类</entry>
+	<entry key="sms.article.xxx">最新新闻</entry>
+	<entry key="sms.article.xxx">文章列表</entry>
+
+	<!-- balance_pay.html页面国际化 -->
+	<entry key="sms.balance_pay.xxx">预付款支付</entry>
+	<entry key="sms.balance_pay.xxx">付款说明不能为空</entry>
+	<entry key="sms.balance_pay.xxx">付款金额:¥</entry>
+	<entry key="sms.balance_pay.xxx">请输入预存款留言信息 (预存款留言有利于商家迅速辨别买家，您也可以稍后在用户中心“我的订单”中进行付款)：</entry>
+
+	<!-- brand_goods.html页面国际化 -->
+	<entry key="sms.brand_goods.xxx">推广商品</entry>
+	<entry key="sms.brand_goods.xxx">原价：¥</entry>
+	<entry key="sms.brand_goods.xxx">参考价：¥</entry>
+	<entry key="sms.brand_goods.xxx">抢购价：</entry>
+	<entry key="sms.brand_goods.xxx">立即抢购</entry>
+	<entry key="sms.brand_goods.xxx">共</entry>
+	<entry key="sms.brand_goods.xxx">个商品</entry>
+	<entry key="sms.brand_goods.xxx">排序：</entry>
+	<entry key="sms.brand_goods.xxx">默认</entry>
+	<entry key="sms.brand_goods.xxx">销量</entry>
+	<entry key="sms.brand_goods.xxx">好评</entry>
+	<entry key="sms.brand_goods.xxx">价格</entry>
+	<entry key="sms.brand_goods.xxx">库存：</entry>
+	<entry key="sms.brand_goods.xxx">全部</entry>
+	<entry key="sms.brand_goods.xxx">仅显示有货 </entry>
+	<entry key="sms.brand_goods.xxx">商品类型：</entry>
+	<entry key="sms.brand_goods.xxx">商城自营 </entry>
+	<entry key="sms.brand_goods.xxx">商家商品 </entry>
+	<entry key="sms.brand_goods.xxx">已有</entry>
+	<entry key="sms.brand_goods.xxx">评价</entry>
+	<entry key="sms.brand_goods.xxx">自营商品</entry>
+	<entry key="sms.brand_goods.xxx">抱歉，没有找到符合条件的商品！</entry>
+	<entry key="sms.brand_goods.xxx">查看全部商品</entry>
+
+	<!-- brand.html页面国际化 -->
+	<entry key="sms.brand.xxx">商城品牌</entry>
+	<entry key="sms.brand.xxx">推荐品牌</entry>
+	<entry key="sms.brand.xxx">分类：</entry>
+	<entry key="sms.brand.xxx">全部</entry>
+
+	<!-- cart_address.html页面国际化 -->
+	<entry key="sms.cart_address.xxx">收货人不能为空</entry>
+	<entry key="sms.cart_address.xxx">请选择详细区域</entry>
+	<entry key="sms.cart_address.xxx">详细地址不能为空</entry>
+	<entry key="sms.cart_address.xxx">邮政编码不能为空</entry>
+	<entry key="sms.cart_address.xxx">请正确填写邮政编码</entry>
+	<entry key="sms.cart_address.xxx">联系电话、手机至少填写一项</entry>
+	<entry key="sms.cart_address.xxx">请正确填写手机号码</entry>
+	<entry key="sms.cart_address.xxx">请选择</entry>
+	<entry key="sms.cart_address.xxx">编辑地址</entry>
+	<entry key="sms.cart_address.xxx">添加地址</entry>
+	<entry key="sms.cart_address.xxx">收货人姓名</entry>
+	<entry key="sms.cart_address.xxx">所在区域：</entry>
+	<entry key="sms.cart_address.xxx">请选择地区</entry>
+	<entry key="sms.cart_address.xxx">修改</entry>
+	<entry key="sms.cart_address.xxx">详细地址</entry>
+	<entry key="sms.cart_address.xxx">邮政编码</entry>
+	<entry key="sms.cart_address.xxx">联系电话</entry>
+	<entry key="sms.cart_address.xxx">手机号码</entry>
+	<entry key="sms.cart_address.xxx">提交</entry>
+
+	<!-- cart_menu_detail.html页面国际化 -->
+	<entry key="sms.cart_menu_detail.xxx">删除</entry>
+	<entry key="sms.cart_menu_detail.xxx">购物车总价：</entry>
+	<entry key="sms.cart_menu_detail.xxx">查看我的购物车</entry>
+	<entry key="sms.cart_menu_detail.xxx">购物车还没有商品!</entry>
+
+	<!-- close.html页面国际化 -->
+	<entry key="sms.close.xxx">首页</entry>
+	<entry key="sms.close.xxx">招聘英才</entry>
+	<entry key="sms.close.xxx">广告合作</entry>
+	<entry key="sms.close.xxx">联系我们</entry>
+	<entry key="sms.close.xxx">关于ISkyShop</entry>
+
+
+	<!-- company_register.html页面国际化 -->
+	<entry key="sms.company_register.xxx">用户名不能为空</entry>
+	<entry key="sms.company_registervity.xxx">不可使用特殊字符</entry>
+	<entry key="sms.company_register.xxx">用户名已存在</entry>
+	<entry key="sms.company_register.xxx">密码不能为空</entry>
+	<entry key="sms.company_register.xxx">密码不能小于{0}个字符</entry>
+	<entry key="sms.company_register.xxx">密码不能大于{0}个字符</entry>
+	<entry key="sms.company_register.xxx">重复密码不能为空</entry>
+	<entry key="sms.company_register.xxx">两次输入密码不一致</entry>
+	<entry key="sms.company_register.xxx">请选择所在部门</entry>
+	<entry key="sms.company_register.xxx">公司名称不能为空</entry>
+	<entry key="sms.company_register.xxx">公司地址不能为空</entry>
+	<entry key="sms.company_register.xxx">联系人电话不能为空</entry>
+	<entry key="sms.company_register.xxx">请选择公司所在地</entry>
+	<entry key="sms.company_register.xxx">联系人姓名不能为空</entry>
+	<entry key="sms.company_register.xxx">email不能为空</entry>
+	<entry key="sms.company_register.xxx">email格式不正确</entry>
+	<entry key="sms.company_register.xxx">该email已经存在</entry>
+	<entry key="sms.company_register.xxx">请接受用户协议</entry>
+	<entry key="sms.company_register.xxx">验证码不能为空</entry>
+	<entry key="sms.company_register.xxx">验证码不正确</entry>
+	<entry key="sms.company_register.xxx">请选择</entry>
+	<entry key="sms.company_register.xxx">我已经注册，现在就</entry>
+	<entry key="sms.company_register.xxx">登录</entry>
+	<entry key="sms.company_register.xxx">个人用户注册</entry>
+	<entry key="sms.company_register.xxx">企业用户注册</entry>
+	<entry key="sms.company_register.xxx">欢迎注册成为企业用户</entry>
+	<entry key="sms.company_register.xxx">周到服务</entry>
+	<entry key="sms.company_register.xxx">1.订单下达后，客服专员服务；</entry>
+	<entry key="sms.company_register.xxx">2.快递绿色通道，专属快递服务；</entry>
+	<entry key="sms.company_register.xxx">3.零订单积压，第一时间发货；</entry>
+	<entry key="sms.company_register.xxx">专项五大特权</entry>
+	<entry key="sms.company_register.xxx">1. 支付方式更灵活；</entry>
+	<entry key="sms.company_register.xxx">2. 全款全额增值税票；</entry>
+	<entry key="sms.company_register.xxx">3. 大批采购，价格再优惠；</entry>
+	<entry key="sms.company_register.xxx">4. 大额订单，专车配送；</entry>
+	<entry key="sms.company_register.xxx">5. 可享受大金额优惠券。</entry>
+	<entry key="sms.company_register.xxx">申请条件</entry>
+	<entry key="sms.company_register.xxx">必须是能提供合法的营业执照及法人代表身份证的单位或公司，单次消费金额在10000元（含）以上或年采购10万元以上客户。</entry>
+	<entry key="sms.company_register.xxx">账户信息</entry>
+	<entry key="sms.company_register.xxx">账户名</entry>
+	<entry key="sms.company_register.xxx">请设置密码</entry>
+	<entry key="sms.company_register.xxx">请确认密码</entry>
+	<entry key="sms.company_register.xxx">联系人信息</entry>
+	<entry key="sms.company_register.xxx">联系人姓名</entry>
+	<entry key="sms.company_register.xxx">所在部门</entry>
+	<entry key="sms.company_register.xxx">办公室</entry>
+	<entry key="sms.company_register.xxx">市场部</entry>
+	<entry key="sms.company_register.xxx">采购部</entry>
+	<entry key="sms.company_register.xxx">技术部</entry>
+	<entry key="sms.company_register.xxx">人力资源部</entry>
+	<entry key="sms.company_register.xxx">固定电话</entry>
+	<entry key="sms.company_register.xxx">手机</entry>
+	<entry key="sms.company_register.xxx">联系人邮箱</entry>
+	<entry key="sms.company_register.xxx">公司信息</entry>
+	<entry key="sms.company_register.xxx">公司名称</entry>
+	<entry key="sms.company_register.xxx">公司所在地</entry>
+	<entry key="sms.company_register.xxx">公司地址</entry>
+	<entry key="sms.company_register.xxx">购买类型/用途</entry>
+	<entry key="sms.company_register.xxx">IT设备</entry>
+	<entry key="sms.company_register.xxx">数码通讯</entry>
+	<entry key="sms.company_register.xxx">办公用品耗材</entry>
+	<entry key="sms.company_register.xxx">大家电</entry>
+	<entry key="sms.company_register.xxx">项目合作-政府采购</entry>
+	<entry key="sms.company_register.xxx">公司网址</entry>
+	<entry key="sms.company_register.xxx">企业人数</entry>
+	<entry key="sms.company_register.xxx">1000以上</entry>
+	<entry key="sms.company_register.xxx">公司行业</entry>
+	<entry key="sms.company_register.xxx">互联网/电子商务</entry>
+	<entry key="sms.company_register.xxx">旅游/酒店</entry>
+	<entry key="sms.company_register.xxx">法律/服务</entry>
+	<entry key="sms.company_register.xxx">媒体/传播</entry>
+	<entry key="sms.company_register.xxx">计算机软件</entry>
+	<entry key="sms.company_register.xxx">财务/统计</entry>
+	<entry key="sms.company_register.xxx">其他</entry>
+	<entry key="sms.company_register.xxx">公司性质</entry>
+	<entry key="sms.company_register.xxx">政府机关/事业单位</entry>
+	<entry key="sms.company_register.xxx">国营</entry>
+	<entry key="sms.company_register.xxx">私营</entry>
+	<entry key="sms.company_register.xxx">中外合资</entry>
+	<entry key="sms.company_register.xxx">外资</entry>
+	<entry key="sms.company_register.xxx">其他</entry>
+	<entry key="sms.company_register.xxx">验证码：</entry>
+	<entry key="sms.company_register.xxx">朗读验证码</entry>
+	<entry key="sms.company_register.xxx">我已阅读并同意</entry>
+	<entry key="sms.company_register.xxx">《商城在线服务协议》</entry>
+	<entry key="sms.company_register.xxx">用户注册协议</entry>
+	<entry key="sms.company_register.xxx">同意并继续</entry>
+
+
+	<!-- doc.html页面国际化 -->
+	<entry key="sms.doc.xxx">用户注册协议</entry>
+	<entry key="sms.doc.xxx">文章分类</entry>
+	<entry key="sms.doc.xxx">最新新闻</entry>
+	<entry key="sms.doc.xxx">当前位置：</entry>
+	<entry key="sms.doc.xxx">首页</entry>
+
+
+	<!-- error.html页面国际化 -->
+	<entry key="sms.error.xxx">系统提示 - </entry>
+
+
+	<!-- exception.html页面国际化 -->
+	<entry key="sms.exception.xxx">系统异常提示</entry>
+	<entry key="sms.exception.xxx">系统出现异常！</entry>
+
+	<!-- floor.html页面国际化 -->
+	<entry key="sms.floor.xxx">已售</entry>
+	<entry key="sms.floor.xxx">件</entry>
+
+	<!-- footer.html页面国际化 -->
+	<entry key="sms.footer.xxx">返回主页</entry>
+	<entry key="sms.footer.xxx">返回顶部</entry>
+
+
+	<!-- forget common国际化内容 -->
+	<entry key="sms.forget.xxx">找回密码</entry>
+	<entry key="sms.forget.xxx">填写账户名</entry>
+	<entry key="sms.forget.xxx">验证身份</entry>
+	<entry key="sms.forget.xxx">设置新密码</entry>
+	<entry key="sms.forget.xxx">完成</entry>
+	<entry key="sms.forget.xxx">提交</entry>
+	<entry key="sms.forget.xxx">下一步</entry>
+
+	<!-- forget1.html页面国际化 -->
+	<entry key="sms.forget1.xxx">用户名不能为空</entry>
+	<entry key="sms.forget1.xxx">验证码不能为空</entry>
+	<entry key="sms.forget1.xxx">账户名称：</entry>
+	<entry key="sms.forget1.xxx">请输入用户名/邮箱/已验证手机号</entry>
+	<entry key="sms.forget1.xxx">验证码</entry>
+
+
+	<!-- forget2.html页面国际化 -->
+	<entry key="sms.forget2.xxx">找回密码第二步</entry>
+	<entry key="sms.forget2.xxx">秒后可以重新获取,验证码30分钟有效</entry>
+	<entry key="sms.forget2.xxx">系统繁忙，发送失败</entry>
+	<entry key="sms.forget2.xxx">用户名：</entry>
+	<entry key="sms.forget2.xxx">请选择验证码接收方式：</entry>
+	<entry key="sms.forget2.xxx">邮箱接收</entry>
+	<entry key="sms.forget2.xxx">验证手机接收</entry>
+	<entry key="sms.forget2.xxx">获得验证码</entry>
+	<entry key="sms.forget2.xxx">收到的验证码：</entry>
+	<entry key="sms.forget2.xxx">验证码30分钟有效</entry>
+
+	<!-- forget3.html页面国际化 -->
+	<entry key="sms.forget3.xxx">密码不能为空</entry>
+	<entry key="sms.forget3.xxx">密码长度最小为6位字母</entry>
+	<entry key="sms.forget3.xxx">重复密码不能为空</entry>
+	<entry key="sms.forget3.xxx">两次输入密码不一致</entry>
+	<entry key="sms.forget3.xxx">新密码：</entry>
+	<entry key="sms.forget3.xxx">重复密码：</entry>
+	<entry key="sms.forget3.xxx">修改密码</entry>
+
+	<!-- goods_cart0.html页面国际化 -->
+	<entry key="sms.goods_cart0.xxx">商品已经成功加入购物车</entry>
+	<entry key="sms.goods_cart0.xxx">继续购物</entry>
+	<entry key="sms.goods_cart0.xxx">去购物车结算</entry>
+	<entry key="sms.goods_cart0.xxx">您可能还需要其他商品</entry>
+
+	<!-- goods_cart1.html页面国际化 -->
+	<entry key="sms.goods_cart1.xxx">我的购物车</entry>
+	<entry key="sms.goods_cart1.xxx">库存不足，请重新选择数量！</entry>
+	<entry key="sms.goods_cart1.xxx">团购库存不足，请重新选择数量！</entry>
+	<entry key="sms.goods_cart1.xxx">不能收藏自己的商品</entry>
+	<entry key="sms.goods_cart1.xxx">收藏成功!</entry>
+	<entry key="sms.goods_cart1.xxx">您已经收藏过该商品!</entry>
+	<entry key="sms.goods_cart1.xxx">登录后才可收藏商品，现在登录？</entry>
+	<entry key="sms.goods_cart1.xxx">1.我的购物车</entry>
+	<entry key="sms.goods_cart1.xxx">2.填写核对订单信息</entry>
+	<entry key="sms.goods_cart1.xxx">3.成功提交订单</entry>
+	<entry key="sms.goods_cart1.xxx">我的购物车</entry>
+	<entry key="sms.goods_cart1.xxx">全选</entry>
+	<entry key="sms.goods_cart1.xxx">商品名称</entry>
+	<entry key="sms.goods_cart1.xxx">单价</entry>
+	<entry key="sms.goods_cart1.xxx">数量</entry>
+	<entry key="sms.goods_cart1.xxx">小计(元)</entry>
+	<entry key="sms.goods_cart1.xxx">操作</entry>
+	<entry key="sms.goods_cart1.xxx">(团购)</entry>
+	<entry key="sms.goods_cart1.xxx">(促销)</entry>
+	<entry key="sms.goods_cart1.xxx">收藏</entry>
+	<entry key="sms.goods_cart1.xxx">删除</entry>
+	<entry key="sms.goods_cart1.xxx">商品总价（不含运费）：</entry>
+	<entry key="sms.goods_cart1.xxx">元</entry>
+	<entry key="sms.goods_cart1.xxx">会员登录</entry>
+	<entry key="sms.goods_cart1.xxx">去结算</entry>
+	<entry key="sms.goods_cart1.xxx">您的购物车还是空的，赶紧行动吧！</entry>
+	<entry key="sms.goods_cart1.xxx">查看订单</entry>
+	<entry key="sms.goods_cart1.xxx">，或者是</entry>
+	<entry key="sms.goods_cart1.xxx">随便看看</entry>
+	<entry key="sms.goods_cart1.xxx">您可能还需要其他商品</entry>
+
+
+	<!-- goods_cart2.html页面国际化 -->
+	<entry key="sms.goods_cart2.xxx">订单确认 </entry>
+	<entry key="sms.goods_cart2.xxx">优惠</entry>
+	<entry key="sms.goods_cart2.xxx">地址信息不正确</entry>
+	<entry key="sms.goods_cart2.xxx">订单信息错误！请重新下单</entry>
+	<entry key="sms.goods_cart2.xxx">1.我的购物车</entry>
+	<entry key="sms.goods_cart2.xxx">2.填写核对订单信息</entry>
+	<entry key="sms.goods_cart2.xxx">3.成功提交订单</entry>
+	<entry key="sms.goods_cart2.xxx">收货地址信息</entry>
+	<entry key="sms.goods_cart2.xxx">新增地址</entry>
+	<entry key="sms.goods_cart2.xxx">地址管理</entry>
+	<entry key="sms.goods_cart2.xxx">编辑</entry>
+	<entry key="sms.goods_cart2.xxx">删除</entry>
+	<entry key="sms.goods_cart2.xxx">暂无信息</entry>
+	<entry key="sms.goods_cart2.xxx">回购物车修改商品</entry>
+	<entry key="sms.goods_cart2.xxx">订单详细信息</entry>
+	<entry key="sms.goods_cart2.xxx">商品名称 </entry>
+	<entry key="sms.goods_cart2.xxx">商品单价</entry>
+	<entry key="sms.goods_cart2.xxx">数量</entry>
+	<entry key="sms.goods_cart2.xxx">商品规格</entry>
+	<entry key="sms.goods_cart2.xxx">费用小计</entry>
+	<entry key="sms.goods_cart2.xxx">自营商品</entry>
+	<entry key="sms.goods_cart2.xxx">店铺</entry>
+	<entry key="sms.goods_cart2.xxx">（促销）</entry>
+	<entry key="sms.goods_cart2.xxx">（团购）</entry>
+	<entry key="sms.goods_cart2.xxx">给商家留言：</entry>
+	<entry key="sms.goods_cart2.xxx">运送方式：</entry>
+	<entry key="sms.goods_cart2.xxx">发票类型：</entry>
+	<entry key="sms.goods_cart2.xxx">普通发票</entry>
+	<entry key="sms.goods_cart2.xxx">增值税发票</entry>
+	<entry key="sms.goods_cart2.xxx">发票抬头：</entry>
+	<entry key="sms.goods_cart2.xxx">个人</entry>
+	<entry key="sms.goods_cart2.xxx">使用优惠券</entry>
+	<entry key="sms.goods_cart2.xxx">可用优惠劵</entry>
+	<entry key="sms.goods_cart2.xxx">请选择优惠券</entry>
+	<entry key="sms.goods_cart2.xxx">店铺合计费用：</entry>
+	<entry key="sms.goods_cart2.xxx">商品金额：¥</entry>
+	<entry key="sms.goods_cart2.xxx">优惠券：¥</entry>
+	<entry key="sms.goods_cart2.xxx">运费：¥</entry>
+	<entry key="sms.goods_cart2.xxx">应付金额：</entry>
+
+	<!-- goods_cart3.html页面国际化 -->
+	<entry key="sms.goods_cart3.xxx">购物车 </entry>
+	<entry key="sms.goods_cart3.xxx">1.我的购物车</entry>
+	<entry key="sms.goods_cart3.xxx">2.填写核对订单信息</entry>
+	<entry key="sms.goods_cart3.xxx">3.成功提交订单</entry>
+	<entry key="sms.goods_cart3.xxx">订单提交成功</entry>
+	<entry key="sms.goods_cart3.xxx">您的订单已成功生成，选择您想用的支付方式进行支付</entry>
+	<entry key="sms.goods_cart3.xxx">应付金额：</entry>
+	<entry key="sms.goods_cart3.xxx">您可以在用户中心</entry>
+	<entry key="sms.goods_cart3.xxx">我的订单</entry>
+	<entry key="sms.goods_cart3.xxx">查看订单</entry>
+	<entry key="sms.goods_cart3.xxx">您可以选择的付款方式</entry>
+	<entry key="sms.goods_cart3.xxx">货到付款</entry>
+	<entry key="sms.goods_cart3.xxx">预存款支付</entry>
+	<entry key="sms.goods_cart3.xxx">确认支付</entry>
+	<entry key="sms.goods_cart3.xxx">支付提醒</entry>
+	<entry key="sms.goods_cart3.xxx">已经完成支付！</entry>
+	<entry key="sms.goods_cart3.xxx">支付出现问题！</entry>
+
+
+	<!-- goods_class.html页面国际化 -->
+	<entry key="sms.goods_class.xxx">所有商品分类 </entry>
+	<entry key="sms.goods_class.xxx">全部商品分类</entry>
+	<entry key="sms.goods_class.xxx">全部品牌</entry>
+	<entry key="sms.goods_class.xxx">全部商品</entry>
+	<entry key="sms.goods_class.xxx">商品全部分类</entry>
+
+
+
+	<!-- goods_list_bottom.html页面国际化 -->
+	<entry key="sms.goods_list_bottom.xxx">最近浏览</entry>
+	<entry key="sms.goods_list_bottom.xxx">根据浏览猜你喜欢</entry>
+	<entry key="sms.goods_list_bottom.xxx">已有</entry>
+
+
+	<!-- goods_share.html页面国际化 -->
+	<entry key="sms.goods_share.xxx">系统提示</entry>
+	<entry key="sms.goods_share.xxx">输入字数不能多于140个字！</entry>
+	<entry key="sms.goods_share.xxx">请输入不少于5个字！</entry>
+	<entry key="sms.goods_share.xxx">发布成功！</entry>
+	<entry key="sms.goods_share.xxx">发布失败</entry>
+	<entry key="sms.goods_share.xxx">商品名称</entry>
+	<entry key="sms.goods_share.xxx">市场价格</entry>
+	<entry key="sms.goods_share.xxx">店铺价格</entry>
+	<entry key="sms.goods_share.xxx">分享</entry>
+
+
+	<!-- group_evaluate.html页面国际化 -->
+	<entry key="sms.group_evaluate.xxx">商品评价</entry>
+	<entry key="sms.group_evaluate.xxx">好评度：</entry>
+	<entry key="sms.group_evaluate.xxx">好评：</entry>
+	<entry key="sms.group_evaluate.xxx">中评：</entry>
+	<entry key="sms.group_evaluate.xxx">差评：</entry>
+	<entry key="sms.group_evaluate.xxx">暂时没有评价</entry>
+
+
+
+	<!-- group_head.html页面国际化 -->
+	<entry key="sms.group_head.xxx">生活惠</entry>
+	<entry key="sms.group_head.xxx">商品惠</entry>
+	<entry key="sms.group_head.xxx">系统繁忙，请稍后重试！</entry>
+	<entry key="sms.group_head.xxx">团购</entry>
+	<entry key="sms.group_head.xxx">[更换]</entry>
+	<entry key="sms.group_head.xxx">全国</entry>
+	<entry key="sms.group_head.xxx">商品惠</entry>
+	<entry key="sms.group_head.xxx">生活惠</entry>
+	<entry key="sms.group_head.xxx">搜索</entry>
+	<entry key="sms.group_head.xxx">去购物车结算</entry>
+
+
+	<!-- group_life.html页面国际化 -->
+	<entry key="sms.group_life.xxx">团购信息</entry>
+	<entry key="sms.group_life.xxx">分类：</entry>
+	<entry key="sms.group_life.xxx">不限</entry>
+	<entry key="sms.group_life.xxx">排序：</entry>
+	<entry key="sms.group_life.xxx">默认</entry>
+	<entry key="sms.group_life.xxx">价格</entry>
+	<entry key="sms.group_life.xxx">折扣</entry>
+	<entry key="sms.group_life.xxx">销量</entry>
+	<entry key="sms.group_life.xxx">查看详细</entry>
+	<entry key="sms.group_life.xxx">已售出</entry>
+
+
+	<!-- group_list.html页面国际化 -->
+	<entry key="sms.group_list.xxx">团购信息 </entry>
+	<entry key="sms.group_list.xxx">当前团购</entry>
+	<entry key="sms.group_list.xxx">即将开始</entry>
+	<entry key="sms.group_list.xxx">往期团购</entry>
+	<entry key="sms.group_list.xxx">即将开始</entry>
+	<entry key="sms.group_list.xxx">记得抢购哦</entry>
+	<entry key="sms.group_list.xxx">原价:</entry>
+	<entry key="sms.group_list.xxx">折扣:</entry>
+	<entry key="sms.group_list.xxx">现价:</entry>
+	<entry key="sms.group_list.xxx">节省:</entry>
+	<entry key="sms.group_list.xxx">已经结束</entry>
+	<entry key="sms.group_list.xxx">期待下次吧</entry>
+	<entry key="sms.group_list.xxx">没有即将开始团购活动</entry>
+	<entry key="sms.group_list.xxx">没有往期团购活动</entry>
+
+
+	<!-- group_nav.html页面国际化 -->
+	<entry key="sms.group_nav.xxx">全部商品分类</entry>
+	<entry key="sms.group_nav.xxx">全部商品</entry>
+	<entry key="sms.group_nav.xxx">商城首页</entry>
+	<entry key="sms.group_nav.xxx">商品惠</entry>
+	<entry key="sms.group_nav.xxx">生活惠</entry>
+
+	<!-- group_order.html页面国际化 -->
+	<entry key="sms.group_order.xxx">买家</entry>
+	<entry key="sms.group_order.xxx">商品价格</entry>
+	<entry key="sms.group_order.xxx">商品规格</entry>
+	<entry key="sms.group_order.xxx">购买数量</entry>
+	<entry key="sms.group_order.xxx">成交时间</entry>
+
+
+	<!-- group_view.html页面国际化 -->
+	<entry key="sms.group_view.xxx">天</entry>
+	<entry key="sms.group_view.xxx">小时</entry>
+	<entry key="sms.group_view.xxx">秒</entry>
+	<entry key="sms.group_view.xxx">分钟</entry>
+	<entry key="sms.group_view.xxx">该团购已结束</entry>
+	<entry key="sms.group_view.xxx">马上团</entry>
+	<entry key="sms.group_view.xxx">已售完</entry>
+	<entry key="sms.group_view.xxx">已结束</entry>
+	<entry key="sms.group_view.xxx">原价</entry>
+	<entry key="sms.group_view.xxx">折扣</entry>
+	<entry key="sms.group_view.xxx">折</entry>
+	<entry key="sms.group_view.xxx">节省</entry>
+	<entry key="sms.group_view.xxx">团购成功，已售出</entry>
+	<entry key="sms.group_view.xxx">分享到：</entry>
+	<entry key="sms.group_view.xxx">商品介绍</entry>
+	<entry key="sms.group_view.xxx">商品评价</entry>
+	<entry key="sms.group_view.xxx">成交记录</entry>
+	<entry key="sms.group_view.xxx">热门团购</entry>
+	<entry key="sms.group_view.xxx">抢购</entry>
+	<entry key="sms.group_view.xxx">已售出</entry>
+
+
+	<!-- group.html页面国际化 -->
+	<entry key="sms.group.xxx">团购信息</entry>
+	<entry key="sms.group.xxx">不限</entry>
+	<entry key="sms.group.xxx">价格：</entry>
+	<entry key="sms.group.xxx">排序：</entry>
+	<entry key="sms.group.xxx">默认</entry>
+	<entry key="sms.group.xxx">价格</entry>
+	<entry key="sms.group.xxx">折扣</entry>
+	<entry key="sms.group.xxx">销量</entry>
+	<entry key="sms.group.xxx">查看详细</entry>
+	<entry key="sms.group.xxx">已售出</entry>
+
+	<!-- grouplife_view.html页面国际化 -->
+	<entry key="sms.grouplife_view.xxx">会员登录</entry>
+	<entry key="sms.grouplife_view.xxx">马上团</entry>
+	<entry key="sms.grouplife_view.xxx">已售完</entry>
+	<entry key="sms.grouplife_view.xxx">已结束</entry>
+	<entry key="sms.grouplife_view.xxx">原价</entry>
+	<entry key="sms.grouplife_view.xxx">折扣</entry>
+	<entry key="sms.grouplife_view.xxx">折</entry>
+	<entry key="sms.grouplife_view.xxx">节省</entry>
+	<entry key="sms.grouplife_view.xxx">不支持退款</entry>
+	<entry key="sms.grouplife_view.xxx">天内随时退款</entry>
+	<entry key="sms.grouplife_view.xxx">已售出</entry>
+	<entry key="sms.grouplife_view.xxx">分享到：</entry>
+	<entry key="sms.grouplife_view.xxx">商品介绍</entry>
+	<entry key="sms.grouplife_view.xxx">热门团购</entry>
+	<entry key="sms.grouplife_view.xxx">抢购</entry>
+	<entry key="sms.grouplife_view.xxx">已售出</entry>
+
+
+	<!-- head_ajax_usercenter.html页面国际化 -->
+	<entry key="sms.head_ajax_usercenter.xxx">您好</entry>
+	<entry key="sms.head_ajax_usercenter.xxx">退出商城</entry>
+	<entry key="sms.head_ajax_usercenter.xxx">用户登录</entry>
+	<entry key="sms.head_ajax_usercenter.xxx">待收货</entry>
+	<entry key="sms.head_ajax_usercenter.xxx">我的订单</entry>
+	<entry key="sms.head_ajax_usercenter.xxx">待付款订单</entry>
+	<entry key="sms.head_ajax_usercenter.xxx">已购买商品</entry>
+	<entry key="sms.head_ajax_usercenter.xxx">最近浏览的商品</entry>
+
+
+	<!-- head.html页面国际化 -->
+	<entry key="sms.head.xxx">加载中，请稍后...</entry>
+	<entry key="sms.head.xxx">购物车还没有商品!</entry>
+	<entry key="sms.head.xxx">繁忙，请稍后重试！</entry>
+	<entry key="sms.head.xxx">试试搜索，更加方便！</entry>
+	<entry key="sms.head.xxx">热门搜索</entry>
+	<entry key="sms.head.xxx">用户中心</entry>
+	<entry key="sms.head.xxx">去购物车结算</entry>
+
+	<!-- index.html页面国际化 -->
+	<entry key="sms.index.xxx">您好,欢迎来到</entry>
+	<entry key="sms.index.xxx">管理后台</entry>
+	<entry key="sms.index.xxx">退出商城</entry>
+	<entry key="sms.index.xxx">您好，欢迎来到</entry>
+	<entry key="sms.index.xxx">登录商城</entry>
+	<entry key="sms.index.xxx">免费注册</entry>
+	<entry key="sms.index.xxx">我的订单</entry>
+	<entry key="sms.index.xxx">微信商城</entry>
+	<entry key="sms.index.xxx">关注微信商城</entry>
+	<entry key="sms.index.xxx">手机商城</entry>
+	<entry key="sms.index.xxx">客户服务</entry>
+	<entry key="sms.index.xxx">帮助中心</entry>
+	<entry key="sms.index.xxx">售后服务</entry>
+	<entry key="sms.index.xxx">在线客服</entry>
+	<entry key="sms.index.xxx">投诉中心</entry>
+	<entry key="sms.index.xxx">客服邮箱</entry>
+	<entry key="sms.index.xxx">商家入驻</entry>
+	<entry key="sms.index.xxx">网站导航</entry>
+	<entry key="sms.index.xxx">收藏本站</entry>
+	<entry key="sms.index.xxx">商家登录</entry>
+	<entry key="sms.index.xxx">公告</entry>
+	<entry key="sms.index.xxx">规则</entry>
+	<entry key="sms.index.xxx">安全</entry>
+	<entry key="sms.index.xxx">指南</entry>
+	<entry key="sms.index.xxx">马上登录</entry>
+	<entry key="sms.index.xxx">招商入驻</entry>
+	<entry key="sms.index.xxx">登录</entry>
+	<entry key="sms.index.xxx">注册</entry>
+	<entry key="sms.index.xxx">欢迎您</entry>
+	<entry key="sms.index.xxx">预存款</entry>
+	<entry key="sms.index.xxx">积分</entry>
+	<entry key="sms.index.xxx">申请商家入驻</entry>
+	<entry key="sms.index.xxx">登录商家管理中心</entry>
+	<entry key="sms.index.xxx">请输入手机号</entry>
+	<entry key="sms.index.xxx">手机号格式不正确</entry>
+	<entry key="sms.index.xxx">元</entry>
+	<entry key="sms.index.xxx">系统错误</entry>
+	<entry key="sms.index.xxx">话费充值</entry>
+	<entry key="sms.index.xxx">手机号：</entry>
+	<entry key="sms.index.xxx">支持移动、联通、电信</entry>
+	<entry key="sms.index.xxx">面值：</entry>
+	<entry key="sms.index.xxx">元</entry>
+	<entry key="sms.index.xxx">点击充值</entry>
+	<entry key="sms.index.xxx">推荐商品</entry>
+	<entry key="sms.index.xxx">猜您喜欢</entry>
+	<entry key="sms.index.xxx">售价：</entry>
+	<entry key="sms.index.xxx">更多</entry>
+	<entry key="sms.index.xxx">推荐品牌</entry>
+	<entry key="sms.index.xxx">友情链接</entry>
+
+
+	<!-- integral_balance_pay.html页面国际化 -->
+	<entry key="sms.integral_balance_pay.xxx">付款说明不能为空</entry>
+	<entry key="sms.integral_balance_pay.xxx">积分兑换预存款支付</entry>
+	<entry key="sms.integral_balance_pay.xxx">请输入汇款信息 (如转账的账号、时间等，您也可以稍后在用户中心“我的订单”中进行付款)：</entry>
+
+
+	<!-- integral_exchange1.html页面国际化 -->
+	<entry key="sms.integral_exchange1.xxx">已选择兑换的礼品</entry>
+	<entry key="sms.integral_exchange1.xxx">礼品名称 </entry>
+	<entry key="sms.integral_exchange1.xxx">兑换积分</entry>
+	<entry key="sms.integral_exchange1.xxx">邮费</entry>
+	<entry key="sms.integral_exchange1.xxx">兑换数量</entry>
+	<entry key="sms.integral_exchange1.xxx">积分小计</entry>
+	<entry key="sms.integral_exchange1.xxx">操作</entry>
+	<entry key="sms.integral_exchange1.xxx">删除</entry>
+	<entry key="sms.integral_exchange1.xxx">删除失败，请尝试重新操作！</entry>
+	<entry key="sms.integral_exchange1.xxx">您当前积分</entry>
+	<entry key="sms.integral_exchange1.xxx">分</entry>
+	<entry key="sms.integral_exchange1.xxx">所需总积分</entry>
+	<entry key="sms.integral_exchange1.xxx">继续兑换</entry>
+	<entry key="sms.integral_exchange1.xxx">确认兑换</entry>
+	<entry key="sms.integral_exchange1.xxx">您的购物车还是空的,赶紧行动吧</entry>
+	<entry key="sms.integral_exchange1.xxx">随便看看</entry>
+	<entry key="sms.integral_exchange1.xxx">您还未登陆，可能导致购物车为空</entry>
+	<entry key="sms.integral_exchange1.xxx">马上登陆</entry>
+
+
+	<!-- integral_exchange2.html页面国际化 -->
+	<entry key="sms.integral_exchange2.xxx">收货人不能为空</entry>
+	<entry key="sms.integral_exchange2.xxx">请选择详细区域</entry>
+	<entry key="sms.integral_exchange2.xxx">邮政编码不能为空</entry>
+	<entry key="sms.integral_exchange2.xxx">详细地址不能为空</entry>
+	<entry key="sms.integral_exchange2.xxx">联系电话格式不对,区号+电话号</entry>
+	<entry key="sms.integral_exchange2.xxx">电话号与手机号码至少填写一个</entry>
+	<entry key="sms.integral_exchange2.xxx">手机号码格式不对</entry>
+	<entry key="sms.integral_exchange2.xxx">请选择</entry>
+	<entry key="sms.integral_exchange2.xxx">收货人地址</entry>
+	<entry key="sms.integral_exchange2.xxx">收货人姓名</entry>
+	<entry key="sms.integral_exchange2.xxx">电话</entry>
+	<entry key="sms.integral_exchange2.xxx">使用新的收货地址</entry>
+	<entry key="sms.integral_exchange2.xxx">填写真实姓名</entry>
+	<entry key="sms.integral_exchange2.xxx">所在地区</entry>
+	<entry key="sms.integral_exchange2.xxx">请选择地区</entry>
+	<entry key="sms.integral_exchange2.xxx">邮政编码</entry>
+	<entry key="sms.integral_exchange2.xxx">详细地址</entry>
+	<entry key="sms.integral_exchange2.xxx">手机号码</entry>
+	<entry key="sms.integral_exchange2.xxx">电话号码</entry>
+	<entry key="sms.integral_exchange2.xxx">我要留言</entry>
+	<entry key="sms.integral_exchange2.xxx">所需总积分</entry>
+	<entry key="sms.integral_exchange2.xxx">分,运费</entry>
+	<entry key="sms.integral_exchange2.xxx">完成兑换</entry>
+	<entry key="sms.integral_exchange2.xxx">已选礼品</entry>
+
+
+	<!-- integral_exchange3.html页面国际化 -->
+	<entry key="sms.integral_exchange3.xxx">积分商城</entry>
+	<entry key="sms.integral_exchange3.xxx">礼品兑换完成!订单编号为</entry>
+
+
+	<!-- integral_exchange4.html页面国际化 -->
+	<entry key="sms.integral_exchange4.xxx">购物车 </entry>
+	<entry key="sms.integral_exchange4.xxx">订单提交成功</entry>
+	<entry key="sms.integral_exchange4.xxx">您的订单已成功生成，选择您想用的支付方式进行支付</entry>
+	<entry key="sms.integral_exchange4.xxx">订单编号</entry>
+	<entry key="sms.integral_exchange4.xxx">应付金额</entry>
+	<entry key="sms.integral_exchange4.xxx">您可以在用户中心</entry>
+	<entry key="sms.integral_exchange4.xxx">我的订单</entry>
+	<entry key="sms.integral_exchange4.xxx">查看订单</entry>
+	<entry key="sms.integral_exchange4.xxx">您可以选择的付款方式</entry>
+	<entry key="sms.integral_exchange4.xxx">在线支付</entry>
+	<entry key="sms.integral_exchange4.xxx">下一步</entry>
+	<entry key="sms.integral_exchange4.xxx">支付提醒</entry>
+	<entry key="sms.integral_exchange4.xxx">已经完成支付！</entry>
+	<entry key="sms.integral_exchange4.xxx">支付出现问题！</entry>
+
+
+	<!-- integral_list.html页面国际化 -->
+	<entry key="sms.integral_list.xxx">礼品列表 </entry>
+	<entry key="sms.integral_list.xxx">积分商城</entry>
+	<entry key="sms.integral_list.xxx">商城积分信息</entry>
+	<entry key="sms.integral_list.xxx">登陆显示积分情况</entry>
+	<entry key="sms.integral_list.xxx">会员登录</entry>
+	<entry key="sms.integral_list.xxx">登 陆</entry>
+	<entry key="sms.integral_list.xxx">积分</entry>
+	<entry key="sms.integral_list.xxx">等级</entry>
+	<entry key="sms.integral_list.xxx">积分兑换说明</entry>
+	<entry key="sms.integral_list.xxx">兑换排行榜</entry>
+	<entry key="sms.integral_list.xxx">市场价格</entry>
+	<entry key="sms.integral_list.xxx">兑换积分</entry>
+	<entry key="sms.integral_list.xxx">分</entry>
+	<entry key="sms.integral_list.xxx">兑换数量</entry>
+	<entry key="sms.integral_list.xxx">个</entry>
+	<entry key="sms.integral_list.xxx">积分选择区</entry>
+	<entry key="sms.integral_list.xxx">全部</entry>
+	<entry key="sms.integral_list.xxx">分以下</entry>
+	<entry key="sms.integral_list.xxx">分以上</entry>
+	<entry key="sms.integral_list.xxx">铜牌及以上会员</entry>
+	<entry key="sms.integral_list.xxx">银牌及以上会员</entry>
+	<entry key="sms.integral_list.xxx">金牌及以上会员</entry>
+	<entry key="sms.integral_list.xxx">超级会员专享</entry>
+	<entry key="sms.integral_list.xxx">需要</entry>
+	<entry key="sms.integral_list.xxx">积分</entry>
+	<entry key="sms.integral_list.xxx">兑换</entry>
+
+	<!-- integral_order_finish.html页面国际化 -->
+	<entry key="sms.integral_order_finish.xxx">订单编号</entry>
+	<entry key="sms.integral_order_finish.xxx">应付金额</entry>
+	<entry key="sms.integral_order_finish.xxx">已取消</entry>
+	<entry key="sms.integral_order_finish.xxx">待付款</entry>
+	<entry key="sms.integral_order_finish.xxx">线下支付待审核</entry>
+	<entry key="sms.integral_order_finish.xxx">付款成功</entry>
+	<entry key="sms.integral_order_finish.xxx">已发货"</entry>
+	<entry key="sms.integral_order_finish.xxx">已收货</entry>
+	<entry key="sms.integral_order_finish.xxx">已完成</entry>
+	<entry key="sms.integral_order_finish.xxx">支付情况</entry>
+	<entry key="sms.integral_order_finish.xxx">返回重新支付</entry>
+	<entry key="sms.integral_order_finish.xxx">查看订单信息</entry>
+
+	<!-- integral_outline_pay.html页面国际化 -->
+	<entry key="sms.integral_outline_pay.xxx">线下汇款 </entry>
+	<entry key="sms.integral_outline_pay.xxx">付款说明不能为空</entry>
+	<entry key="sms.integral_outline_pay.xxx">请输入汇款信息 (如转账的账号、时间等，您也可以稍后在用户中心“我的订单”中进行付款)</entry>
+
+
+	<!-- integral_view.html页面国际化 -->
+	<entry key="sms.integral_view.xxx">积分商城</entry>
+	<entry key="sms.integral_view.xxx">兑换数量不能为空</entry>
+	<entry key="sms.integral_view.xxx">只能为整数</entry>
+	<entry key="sms.integral_view.xxx">最多兑换</entry>
+	<entry key="sms.integral_view.xxx">最少兑换1件</entry>
+	<entry key="sms.integral_view.xxx">商品编号</entry>
+	<entry key="sms.integral_view.xxx">上架时间</entry>
+	<entry key="sms.integral_view.xxx">兑换时间</entry>
+	<entry key="sms.integral_view.xxx">至</entry>
+	<entry key="sms.integral_view.xxx">无限制</entry>
+	<entry key="sms.integral_view.xxx">兑换限制</entry>
+	<entry key="sms.integral_view.xxx">每名会员最多兑换</entry>
+	<entry key="sms.integral_view.xxx">无限制</entry>
+	<entry key="sms.integral_view.xxx">市场价格</entry>
+	<entry key="sms.integral_view.xxx">我的积分</entry>
+	<entry key="sms.integral_view.xxx">尚未登录</entry>
+	<entry key="sms.integral_view.xxx">消耗积分</entry>
+	<entry key="sms.integral_view.xxx">邮费</entry>
+	<entry key="sms.integral_view.xxx">商家承担</entry>
+	<entry key="sms.integral_view.xxx">铜牌及以上会员</entry>
+	<entry key="sms.integral_view.xxx">银牌及以上会员</entry>
+	<entry key="sms.integral_view.xxx">金牌及以上会员</entry>
+	<entry key="sms.integral_view.xxx">超级会员专享</entry>
+	<entry key="sms.integral_view.xxx">要求等级:</entry>
+	<entry key="sms.integral_view.xxx">兑换数量</entry>
+	<entry key="sms.integral_view.xxx">剩余</entry>
+	<entry key="sms.integral_view.xxx">件</entry>
+	<entry key="sms.integral_view.xxx">我要兑换</entry>
+	<entry key="sms.integral_view.xxx">分享该礼品到</entry>
+	<entry key="sms.integral_view.xxx">礼品介绍</entry>
+	<entry key="sms.integral_view.xxx">礼品兑换记录</entry>
+
+
+	<!-- integral.html页面国际化 -->
+	<entry key="sms.integral.xxx">积分商城</entry>
+	<entry key="sms.integral.xxx">商城积分信息</entry>
+	<entry key="sms.integral.xxx">登陆显示积分情况</entry>
+	<entry key="sms.integral.xxx">会员登录</entry>
+	<entry key="sms.integral.xxx">登 陆</entry>
+	<entry key="sms.integral.xxx">积分</entry>
+	<entry key="sms.integral.xxx">等级</entry>
+	<entry key="sms.integral.xxx">积分兑换说明</entry>
+	<entry key="sms.integral.xxx">积分选择区</entry>
+	<entry key="sms.integral.xxx">全部</entry>
+	<entry key="sms.integral.xxx">兑换排行榜</entry>
+	<entry key="sms.integral.xxx">推荐兑换商品</entry>
+	<entry key="sms.integral.xxx">更多</entry>
+	<entry key="sms.integral.xxx">会员登录</entry>
+	<entry key="sms.integral.xxx">需要</entry>
+	<entry key="sms.integral.xxx">积分</entry>
+	<entry key="sms.integral.xxx">兑换</entry>
+
+	<!-- integral1.html页面国际化 -->
+	<entry key="sms.integral1.xxx">推荐兑换商品</entry>
+	<entry key="sms.integral1.xxx">更多</entry>
+	<entry key="sms.integral1.xxx">市场价格</entry>
+	<entry key="sms.integral1.xxx">我要兑换</entry>
+	<entry key="sms.integral1.xxx">最新兑换商品</entry>
+	<entry key="sms.integral1.xxx">商城积分信息</entry>
+	<entry key="sms.integral1.xxx">登录显示积分情况</entry>
+	<entry key="sms.integral1.xxx">会员登录</entry>
+	<entry key="sms.integral1.xxx">您的积分是</entry>
+	<entry key="sms.integral1.xxx">已选择兑换礼品</entry>
+	<entry key="sms.integral1.xxx">分</entry>
+	<entry key="sms.integral1.xxx">个</entry>
+	<entry key="sms.integral1.xxx">积分细则</entry>
+	<entry key="sms.integral1.xxx">积分兑换说明</entry>
+	<entry key="sms.integral1.xxx">积分选择区</entry>
+	<entry key="sms.integral1.xxx">兑换排行榜</entry>
+	<entry key="sms.integral1.xxx">市场价格</entry>
+	<entry key="sms.integral1.xxx">兑换积分</entry>
+	<entry key="sms.integral1.xxx">兑换数量</entry>
+
+
+	<!--life_order.html页面国际化 -->
+	<entry key="sms.life_order.xxx">生活购 </entry>
+	<entry key="sms.life_order.xxx">库存不足，请重新选择数量！</entry>
+	<entry key="sms.life_order.xxx">1.填写核对订单信息</entry>
+	<entry key="sms.life_order.xxx">2.成功提交订单</entry>
+	<entry key="sms.life_order.xxx">订单信息确认</entry>
+	<entry key="sms.life_order.xxx">联系方式</entry>
+	<entry key="sms.life_order.xxx">手机号</entry>
+	<entry key="sms.life_order.xxx">商品清单</entry>
+	<entry key="sms.life_order.xxx">商品名称</entry>
+	<entry key="sms.life_order.xxx">单价</entry>
+	<entry key="sms.life_order.xxx">数量</entry>
+	<entry key="sms.life_order.xxx">小计(元)</entry>
+	<entry key="sms.life_order.xxx">商品总价</entry>
+	<entry key="sms.life_order.xxx">去结算</entry>
+
+
+	<!--line_pay.html页面国际化 -->
+	<entry key="sms.line_pay.xxx">正在生成安全支付链接，请等待......</entry>
+
+	<!--login.html页面国际化 -->
+	<entry key="sms.login.xxx">用户登录</entry>
+	<entry key="sms.login.xxx">用户名不能为空</entry>
+	<entry key="sms.login.xxx">密码不能为空</entry>
+	<entry key="sms.login.xxx">验证码不能为空</entry>
+	<entry key="sms.login.xxx">邮箱/用户名/已验证手机</entry>
+	<entry key="sms.login.xxx">登录密码</entry>
+	<entry key="sms.login.xxx">验证码</entry>
+	<entry key="sms.login.xxx">朗读验证码</entry>
+	<entry key="sms.login.xxx">忘记密码？</entry>
+	<entry key="sms.login.xxx">使用合作网站账号登录</entry>
+	<entry key="sms.login.xxx">免费注册</entry>
+
+	<!--nav.html页面国际化 -->
+	<entry key="sms.nav.xxx">全部商品分类</entry>
+
+
+	<!--order_finish.html页面国际化 -->
+	<entry key="sms.order_finish.xxx">支付结果</entry>
+	<entry key="sms.order_finish.xxx">订单编号</entry>
+	<entry key="sms.order_finish.xxx">应付金额</entry>
+	<entry key="sms.order_finish.xxx">已取消</entry>
+	<entry key="sms.order_finish.xxx">待付款</entry>
+	<entry key="sms.order_finish.xxx">线下支付待审核</entry>
+	<entry key="sms.order_finish.xxx">付款成功</entry>
+	<entry key="sms.order_finish.xxx">已发货</entry>
+	<entry key="sms.order_finish.xxx">已收货</entry>
+	<entry key="sms.order_finish.xxx">已完成,已评价</entry>
+	<entry key="sms.order_finish.xxx">已结束</entry>
+	<entry key="sms.order_finish.xxx">支付情况</entry>
+	<entry key="sms.order_finish.xxx">返回重新支付</entry>
+	<entry key="sms.order_finish.xxx">查看订单信息</entry>
+
+	<!--order_pay.html页面国际化 -->
+	<entry key="sms.order_pay.xxx">1.我的购物车</entry>
+	<entry key="sms.order_pay.xxx">2.填写核对订单信息</entry>
+	<entry key="sms.order_pay.xxx">3.成功提交订单</entry>
+	<entry key="sms.order_pay.xxx">订单提交成功</entry>
+	<entry key="sms.order_pay.xxx">您的订单已成功生成，选择您想用的支付方式进行支付</entry>
+	<entry key="sms.order_pay.xxx">订单编号</entry>
+	<entry key="sms.order_pay.xxx">应付金额</entry>
+	<entry key="sms.order_pay.xxx">您可以在用户中心</entry>
+	<entry key="sms.order_pay.xxx">我的订单</entry>
+	<entry key="sms.order_pay.xxx">查看订单</entry>
+	<entry key="sms.order_pay.xxx">您可以选择的付款方式</entry>
+	<entry key="sms.order_pay.xxx">在线支付</entry>
+	<entry key="sms.order_pay.xxx">确认支付</entry>
+	<entry key="sms.order_pay.xxx">支付提醒</entry>
+	<entry key="sms.order_pay.xxx">已经完成支付！</entry>
+	<entry key="sms.order_pay.xxx">支付出现问题！</entry>
+
+
+	<!--outline_pay.html页面国际化 -->
+	<entry key="sms.outline_pay.xxx">线下汇款 </entry>
+	<entry key="sms.outline_pay.xxx">付款说明不能为空</entry>
+	<entry key="sms.outline_pay.xxx">付款金额:</entry>
+	<entry key="sms.outline_pay.xxx">请输入汇款信息 (如转账的账号、时间等，您也可以稍后在用户中心“我的订单”中进行付款)</entry>
+	<entry key="sms.outline_pay.xxx">提交</entry>
+
+
+	<!--payafter_pay.html页面国际化 -->
+	<entry key="sms.payafter_pay.xxx">货到付款</entry>
+	<entry key="sms.payafter_pay.xxx">付款说明不能为空</entry>
+	<entry key="sms.payafter_pay.xxx">货到付款</entry>
+	<entry key="sms.payafter_pay.xxx">确定使用“货到付款”吗？</entry>
+	<entry key="sms.payafter_pay.xxx">送货说明：</entry>
+
+
+	<!--qq_login_api.html页面国际化 -->
+	<entry key="sms.qq_login_api.xxx">合作伙伴账号登录</entry>
+
+
+	<!--qq_login_bind.html页面国际化 -->
+	<entry key="sms.qq_login_bind.xxx">QQ互联</entry>
+	<entry key="sms.qq_login_bind.xxx">用户名不能为空</entry>
+	<entry key="sms.qq_login_bind.xxx">用户名已存在</entry>
+	<entry key="sms.qq_login_bind.xxx">密码不能为空</entry>
+	<entry key="sms.qq_login_bind.xxx">重复密码不能为空</entry>
+	<entry key="sms.qq_login_bind.xxx">两次密码不一样</entry>
+	<entry key="sms.qq_login_bind.xxx">Email不能为空</entry>
+	<entry key="sms.qq_login_bind.xxx">Email已经存在</entry>
+	<entry key="sms.qq_login_bind.xxx">请接受用户协议</entry>
+	<entry key="sms.qq_login_bind.xxx">完善账号信息</entry>
+	<entry key="sms.qq_login_bind.xxx">已有账号！绑定我的账号</entry>
+	<entry key="sms.qq_login_bind.xxx">QQ账号登录成功，默认用户密码为123456，请自行修改</entry>
+	<entry key="sms.qq_login_bind.xxx">用户名：</entry>
+	<entry key="sms.qq_login_bind.xxx">设置密码：</entry>
+	<entry key="sms.qq_login_bind.xxx">重复密码：</entry>
+	<entry key="sms.qq_login_bind.xxx">邮箱：</entry>
+	<entry key="sms.qq_login_bind.xxx">同意用户协议</entry>
+	<entry key="sms.qq_login_bind.xxx">确认提交</entry>
+	<entry key="sms.qq_login_bind.xxx">用户名：</entry>
+	<entry key="sms.qq_login_bind.xxx">密码：</entry>
+	<entry key="sms.qq_login_bind.xxx">确认提交</entry>
+
+	<!--recharge_order.html/recharge_success.html页面国际化 -->
+	<entry key="sms.recharge_order.xxx">手机充值</entry>
+	<entry key="sms.recharge_order.xxx">手机充值</entry>
+	<entry key="sms.recharge_order.xxx">手机充值服务>支付订单</entry>
+	<entry key="sms.recharge_order.xxx">1.填写充值信息</entry>
+	<entry key="sms.recharge_order.xxx">2.确认订单信息</entry>
+	<entry key="sms.recharge_order.xxx">3.支付</entry>
+	<entry key="sms.recharge_order.xxx">4.充值完成</entry>
+	<entry key="sms.recharge_order.xxx">账户预存款：</entry>
+	<entry key="sms.recharge_order.xxx">刷新</entry>
+	<entry key="sms.recharge_order.xxx">预存款充值</entry>
+	<entry key="sms.recharge_order.xxx">手机号码：</entry>
+	<entry key="sms.recharge_order.xxx">充值面值：</entry>
+	<entry key="sms.recharge_order.xxx">充值价格：</entry>
+	<entry key="sms.recharge_order.xxx">元</entry>
+	<entry key="sms.recharge_order.xxx">确认充值</entry>
+	<entry key="sms.recharge_order.xxx">提交</entry>
+	<entry key="sms.recharge_order.xxx">温馨提示</entry>
+	<entry key="sms.recharge_order.xxx">如遇运营商系统繁忙，到账时间会有延迟。</entry>
+	<entry key="sms.recharge_order.xxx">充值金额可能会分多次到账。</entry>
+	<entry key="sms.recharge_order.xxx">本充值不参加当地运营商活动。</entry>
+	<entry key="sms.recharge_order.xxx">支持全国各省市（不包括港、澳、台地区）。</entry>
+	<entry key="sms.recharge_order.xxx">部分地区无法提供充值发票，请谨慎购买。</entry>
+	<entry key="sms.recharge_order.xxx">话费到账情况请拨打运营商客服电话查询（移动：10086，联通：10010，电信：10000）。</entry>
+	<entry key="sms.recharge_order.xxx">客户服务</entry>
+	<entry key="sms.recharge_order.xxx">客服电话：</entry>
+	<entry key="sms.recharge_order.xxx">服务时间：</entry>
+
+	<!--recharge.html页面国际化 -->
+	<entry key="sms.recharge.xxx">请仔细核对充值号码，充错号将无法退款</entry>
+	<entry key="sms.recharge.xxx">手机号格式不正确</entry>
+	<entry key="sms.recharge.xxx">请选择充值金额</entry>
+	<entry key="sms.recharge.xxx">请准确核对充值号码，充错号将无法退款</entry>
+	<entry key="sms.recharge.xxx">面值</entry>
+	<entry key="sms.recharge.xxx">修改</entry>
+	<entry key="sms.recharge.xxx">价格：</entry>
+	<entry key="sms.recharge.xxx">说明：</entry>
+	<entry key="sms.recharge.xxx">由于平台收款存在较高手续费，系统仅支持</entry>
+	<entry key="sms.recharge.xxx">【预存款】</entry>
+	<entry key="sms.recharge.xxx">充值</entry>
+
+	<!--register.html页面国际化 -->
+	<entry key="sms.register.xxx">用户注册</entry>
+	<entry key="sms.register.xxx">用户名不能为空</entry>
+	<entry key="sms.register.xxx">不可使用特殊字符</entry>
+	<entry key="sms.register.xxx">用户名已存在</entry>
+	<entry key="sms.register.xxx">密码不能为空</entry>
+	<entry key="sms.register.xxx">密码不能小于{0}个字符</entry>
+	<entry key="sms.register.xxx">密码不能大于{0}个字符</entry>
+	<entry key="sms.register.xxx">重复密码不能为空</entry>
+	<entry key="sms.register.xxx">两次输入密码不一致</entry>
+	<entry key="sms.register.xxx">email不能为空</entry>
+	<entry key="sms.register.xxx">email格式不正确</entry>
+	<entry key="sms.register.xxx">该email已经存在</entry>
+	<entry key="sms.register.xxx">请接受用户协议</entry>
+	<entry key="sms.register.xxx">验证码不能为空</entry>
+	<entry key="sms.register.xxx">验证码不正确</entry>
+	<entry key="sms.register.xxx">用户注册</entry>
+	<entry key="sms.register.xxx">我已经注册，现在就</entry>
+	<entry key="sms.register.xxx">登录</entry>
+	<entry key="sms.register.xxx">个人用户注册</entry>
+	<entry key="sms.register.xxx">企业用户注册</entry>
+	<entry key="sms.register.xxx">账户名称：</entry>
+	<entry key="sms.register.xxx">登录密码：</entry>
+	<entry key="sms.register.xxx">确认密码：</entry>
+	<entry key="sms.register.xxx">验证码：</entry>
+	<entry key="sms.register.xxx">我已阅读并同意</entry>
+	<entry key="sms.register.xxx">《商城在线服务协议》</entry>
+	<entry key="sms.register.xxx">立即注册</entry>
+	<entry key="sms.register.xxx">用户注册协议</entry>
+	<entry key="sms.register.xxx">同意并继续</entry>
+
+	<!--search_goods_list.html页面国际化 -->
+	<entry key="sms.search_goods_list.xxx">搜索结果</entry>
+	<entry key="sms.search_goods_list.xxx">搜索商品</entry>
+	<entry key="sms.search_goods_list.xxx">全部结果</entry>
+	<entry key="sms.search_goods_list.xxx">所有类目</entry>
+	<entry key="sms.search_goods_list.xxx">推广商品</entry>
+	<entry key="sms.search_goods_list.xxx">原价：</entry>
+	<entry key="sms.search_goods_list.xxx">商城价：</entry>
+	<entry key="sms.search_goods_list.xxx">热卖推荐</entry>
+	<entry key="sms.search_goods_list.xxx">参考价：</entry>
+	<entry key="sms.search_goods_list.xxx">抢购价：</entry>
+	<entry key="sms.search_goods_list.xxx">立即抢购</entry>
+	<entry key="sms.search_goods_list.xxx">共</entry>
+	<entry key="sms.search_goods_list.xxx">个商品</entry>
+	<entry key="sms.search_goods_list.xxx">排序：</entry>
+	<entry key="sms.search_goods_list.xxx">默认</entry>
+	<entry key="sms.search_goods_list.xxx">销量</entry>
+	<entry key="sms.search_goods_list.xxx">人气</entry>
+	<entry key="sms.search_goods_list.xxx">好评</entry>
+	<entry key="sms.search_goods_list.xxx">价格</entry>
+	<entry key="sms.search_goods_list.xxx">库存：</entry>
+	<entry key="sms.search_goods_list.xxx">全部 </entry>
+	<entry key="sms.search_goods_list.xxx">仅显示有货</entry>
+	<entry key="sms.search_goods_list.xxx">商品类型：</entry>
+	<entry key="sms.search_goods_list.xxx">全部 </entry>
+	<entry key="sms.search_goods_list.xxx">商城自营</entry>
+	<entry key="sms.search_goods_list.xxx">商家商品</entry>
+	<entry key="sms.search_goods_list.xxx">直降</entry>
+	<entry key="sms.search_goods_list.xxx">商品销量</entry>
+	<entry key="sms.search_goods_list.xxx">用户评论</entry>
+	<entry key="sms.search_goods_list.xxx">会员登录</entry>
+	<entry key="sms.search_goods_list.xxx">在线客服</entry>
+	<entry key="sms.search_goods_list.xxx">自营商品</entry>
+	<entry key="sms.search_goods_list.xxx">抱歉，没有找到符合条件的商品！</entry>
+	<entry key="sms.search_goods_list.xxx">查看全部商品</entry>
+
+
+	<!--search_group_list.html/search_grouplife_list.html页面国际化 -->
+	<entry key="sms.search_group_list.xxx">团购信息</entry>
+	<entry key="sms.search_group_list.xxx">分类：</entry>
+	<entry key="sms.search_group_list.xxx">不限</entry>
+	<entry key="sms.search_group_list.xxx">价格：</entry>
+	<entry key="sms.search_group_list.xxx">排序：</entry>
+	<entry key="sms.search_group_list.xxx">默认</entry>
+	<entry key="sms.search_group_list.xxx">价格</entry>
+	<entry key="sms.search_group_list.xxx">折扣</entry>
+	<entry key="sms.search_group_list.xxx">销量</entry>
+	<entry key="sms.search_group_list.xxx">查看详细</entry>
+	<entry key="sms.search_group_list.xxx">已售出</entry>
+
+	<!--sina_login_api.html页面国际化 -->
+	<entry key="sms.sina_login_api.xxx">合作伙伴账号登录 </entry>
+
+
+	<!--sina_login_bind.html页面国际化 -->
+	<entry key="sms.sina_login_bind.xxx">新浪微博登录 </entry>
+	<entry key="sms.cosina_login_apixx">用户名不能为空</entry>
+	<entry key="sms.sina_login_bind.xxx">用户名已存在</entry>
+	<entry key="sms.sina_login_bind.xxx">密码不能为空</entry>
+	<entry key="sms.sina_login_bind.xxx">重复密码不能为空</entry>
+	<entry key="sms.sina_login_bind.xxx">两次密码不一样</entry>
+	<entry key="sms.sina_login_bind.xxx">Email不能为空</entry>
+	<entry key="sms.sina_login_bind.xxx">Email已经存在</entry>
+	<entry key="sms.sina_login_bind.xxx">请接受用户协议</entry>
+	<entry key="sms.sina_login_bind.xxx">新浪微博账户</entry>
+	<entry key="sms.sina_login_bind.xxx">完善账号信息</entry>
+	<entry key="sms.sina_login_bind.xxx">已有账号！绑定我的账号</entry>
+	<entry key="sms.sina_login_bind.xxx">新浪微博登录成功，默认密码为123456，请自行修改</entry>
+	<entry key="sms.sina_login_bind.xxx">用户名：</entry>
+	<entry key="sms.sina_login_bind.xxx">设置密码：</entry>
+	<entry key="sms.sina_login_bind.xxx">重复密码：</entry>
+	<entry key="sms.sina_login_bind.xxx">邮箱：</entry>
+	<entry key="sms.sina_login_bind.xxx">同意用户协议</entry>
+	<entry key="sms.sina_login_bind.xxx">确认提交</entry>
+
+
+
+	<!--store_goods_list.html -->
+	<entry key="sms.store_goods_list.xxx">推广商品</entry>
+	<entry key="sms.store_goods_list.xxx">原价：</entry>
+	<entry key="sms.store_goods_list.xxx">商城价：</entry>
+	<entry key="sms.store_goods_list.xxx">参考价：</entry>
+	<entry key="sms.store_goods_list.xxx">抢购价：</entry>
+	<entry key="sms.store_goods_list.xxx">立即抢购</entry>
+	<entry key="sms.store_goods_list.xxx">重置筛选条件</entry>
+	<entry key="sms.store_goods_list.xxx">商品筛选</entry>
+	<entry key="sms.store_goods_list.xxx">您已选择：</entry>
+	<entry key="sms.store_goods_list.xxx">展开</entry>
+	<entry key="sms.store_goods_list.xxx">收起</entry>
+	<entry key="sms.store_goods_list.xxx">品牌：</entry>
+	<entry key="sms.store_goods_list.xxx">更多</entry>
+	<entry key="sms.store_goods_list.xxx">共</entry>
+	<entry key="sms.store_goods_list.xxx">个商品</entry>
+	<entry key="sms.store_goods_list.xxx">排序：</entry>
+	<entry key="sms.store_goods_list.xxx">默认</entry>
+	<entry key="sms.store_goods_list.xxx">销量</entry>
+	<entry key="sms.store_goods_list.xxx">好评</entry>
+	<entry key="sms.store_goods_list.xxx">价格</entry>
+	<entry key="sms.store_goods_list.xxx">库存：</entry>
+	<entry key="sms.store_goods_list.xxx">全部 </entry>
+	<entry key="sms.store_goods_list.xxx">仅显示有货</entry>
+	<entry key="sms.store_goods_list.xxx">商品类型：</entry>
+	<entry key="sms.store_goods_list.xxx">商城自营</entry>
+	<entry key="sms.store_goods_list.xxx">商家商品</entry>
+	<entry key="sms.store_goods_list.xxx">直降</entry>
+	<entry key="sms.store_goods_list.xxx">商品销量</entry>
+	<entry key="sms.store_goods_list.xxx">用户评论</entry>
+	<entry key="sms.store_goods_list.xxx">在线客服</entry>
+	<entry key="sms.store_goods_list.xxx">会员登录</entry>
+	<entry key="sms.store_goods_list.xxx">抱歉，没有找到符合条件的商品！</entry>
+	<entry key="sms.store_goods_list.xxx">查看全部商品</entry>
+
+
+	<!--store_head.html -->
+	<entry key="sms.store_head.xxx">会员登录</entry>
+	<entry key="sms.store_head.xxx">店铺动态评分</entry>
+	<entry key="sms.store_head.xxx">与同行业相比</entry>
+	<entry key="sms.store_head.xxx">描述相符：</entry>
+	<entry key="sms.store_head.xxx">服务态度：</entry>
+	<entry key="sms.store_head.xxx">发货速度：</entry>
+	<entry key="sms.store_head.xxx">店铺认证</entry>
+	<entry key="sms.store_head.xxx">店铺信息</entry>
+	<entry key="sms.store_head.xxx">商品数量：</entry>
+	<entry key="sms.store_head.xxx">件</entry>
+	<entry key="sms.store_head.xxx">好评率：</entry>
+	<entry key="sms.store_head.xxx">创店时间：</entry>
+	<entry key="sms.store_head.xxx">收藏人气：</entry>
+	<entry key="sms.store_head.xxx">搜全站</entry>
+	<entry key="sms.store_head.xxx">搜本店</entry>
+	<entry key="sms.store_head.xxx">不能收藏自己的店铺</entry>
+	<entry key="sms.store_head.xxx">店铺收藏成功！</entry>
+	<entry key="sms.store_head.xxx">该店铺已经被收藏！</entry>
+
+
+	<!--store_head.html -->
+	<entry key="sms.store_head.xxx">系统提示</entry>
+
+
+	<!--switch_like_goods.html -->
+	<entry key="sms.switch_like_goods.xxx">售价：</entry>
+
+
+	<!--top.html -->
+	<entry key="sms.top.xxx">您好,欢迎来到</entry>
+	<entry key="sms.top.xxx">管理后台</entry>
+	<entry key="sms.top.xxx">退出商城</entry>
+	<entry key="sms.top.xxx">您好，欢迎来到</entry>
+	<entry key="sms.top.xxx">登录商城</entry>
+	<entry key="sms.top.xxx">免费注册</entry>
+	<entry key="sms.top.xxx">我的订单</entry>
+	<entry key="sms.top.xxx">微信商城</entry>
+	<entry key="sms.top.xxx">关注微信商城</entry>
+	<entry key="sms.top.xxx">手机商城</entry>
+	<entry key="sms.top.xxx">客户服务</entry>
+	<entry key="sms.top.xxx">帮助中心</entry>
+	<entry key="sms.top.xxx">售后服务</entry>
+	<entry key="sms.top.xxx">在线客服</entry>
+	<entry key="sms.top.xxx">投诉中心</entry>
+	<entry key="sms.top.xxx">客服邮箱</entry>
+	<entry key="sms.top.xxx">商家入驻</entry>
+	<entry key="sms.top.xxx">网站导航</entry>
+	<entry key="sms.top.xxx">收藏本站</entry>
+	<entry key="sms.top.xxx">商家登录</entry>
+	<entry key="sms.top.xxx">商家管理</entry>
+
+	<!--user_dialog_login.html -->
+	<entry key="sms.user_dialog_login.xxx">用户名不能为空</entry>
+
+
+
+
+</properties>

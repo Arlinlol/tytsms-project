@@ -1,0 +1,95 @@
+<link href="$!webPath/th_th/resources/style/common/css/window.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+	   rules:{
+		   return_group_content:{required:true}
+		   },
+	   messages:{
+		   return_group_content:{required:"#springMessage('member.group_life_return_apply.filling_explanation')"}/* 请填写说明 */
+	   }
+	});
+});
+</script>
+#if($!obj.status==3)
+<form action="$!webPath/buyer/grouplife_return_apply_cancel.htm" method="post" id="theForm">
+<input id="id" name="id" type="hidden" value="$!obj.id"/>
+<h4 class="white_table_h4">#springMessage("member.group_life_return_apply.return_operation")<!-- 提交申请后请及时与商家联系，退货操作由商家来完成 -->  </h4>
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="">
+    #set($img="$!webPath/$!obj.lifeGoods.group_acc.path/$!obj.lifeGoods.group_acc.name")
+  <tr>
+      <td width="15%" align="right" valign="top">#springMessage("member.group_life_return_apply.goods_info")<!-- 商品信息： -->
+      </td>
+      <style type="text/css">
+	  .return_apply_name { width:100%; line-height:24px; display:block;float:left;}
+	  .return_apply_num { width:100%; float:left; color:#999;}
+	  .return_apply_ul li { width:100%; float:left; margin-bottom:5px;}
+	  </style>
+      <td width="15%" align="left"><img width="70" height="70" src="$!img"/>
+      </td>
+      <td align="left" valign="top">
+      <span class="return_apply_num">#springMessage("member.group_life_return_apply.name")<!-- 名称： -->$!{obj.lifeGoods.gg_name}</span>
+       <span class="return_apply_num">#springMessage("member.group_life_return_apply.consume")<!-- 消费码： --><b style="color:#00F">$!{obj.group_sn}</b></span>
+      </td>
+    </tr>
+<tr>
+      <td height="78" align="right" valign="center">#springMessage("member.group_life_return_apply.refund_state")<!-- 退款说明： --></td>
+      </td>
+      <td align="left" colspan="2">$!obj.refund_reasion</td>
+    </tr>
+    <tr>
+      <td height="50" align="center" colspan="3"><span class="inputbtn"><!-- 取消退款 -->
+        <input name="" type="submit" value="#springMessage('member.group_life_return_apply.cancel_refund')" style="cursor:pointer;" class="white_btn"/>      
+      </span></td>		
+    </tr>
+  </table>
+</form>  
+#else
+<form action="$!webPath/buyer/grouplife_return_apply_save.htm" method="post" id="theForm">
+<input id="id" name="id" type="hidden" value="$!obj.id"/>
+ <h4 class="white_table_h4">#springMessage("member.group_life_return_apply.submit_application")<!-- 提交申请后请及时与商家联系，商家同意退货后可填写退货物流信息 --></h4>      
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="white_table">
+  #set($img="$!webPath/$!obj.lifeGoods.group_acc.path/$!obj.lifeGoods.group_acc.name")
+  <tr>
+      <td width="15%" align="right" valign="top">#springMessage("member.group_life_return_apply.goods_info")<!-- 商品信息： -->
+      </td>
+      <style type="text/css">
+	  .return_apply_name { width:100%; line-height:24px; display:block;float:left;}
+	  .return_apply_num { width:100%; float:left; color:#999;}
+	  .return_apply_ul li { width:100%; float:left; margin-bottom:5px;}
+	  </style>
+      <td width="15%" align="left"><img width="70" height="70" src="$!img"/>
+      </td>
+      <td align="left" valign="top">
+      <span class="return_apply_num">#springMessage("member.group_life_return_apply.name")<!-- 名称： -->$!{obj.lifeGoods.gg_name}</span>
+       <span class="return_apply_num">#springMessage("member.group_life_return_apply.consume")<!-- 消费码： --><b style="color:#00F">$!{obj.group_sn}</b></span>
+      </td>
+    </tr>
+     <tr>
+      <td height="78" align="right" valign="top">#springMessage("member.group_life_return_apply.refund_reason")<!-- 退款原因： --></td>
+      </td>
+      <td align="left" valign="top" colspan="2">
+      	<ul class="return_apply_ul">
+        	<li><label><input name="reasion" type="radio" value="1" checked="checked"> #springMessage("member.group_life_return_apply.repurchase")<!-- 买错了/重新买 --></input></label></li>
+            <li><label><input name="reasion" type="radio" value="2"> #springMessage("member.group_life_return_apply.plans_change")<!-- 计划有变，没时间消费 --></input></label></li>
+            <li><label><input name="reasion" type="radio" value="3"> #springMessage("member.group_life_return_apply.reservation_is_not")<!-- 预约不上 --></input></label></li>
+            <li><label><input name="reasion" type="radio" value="4"> #springMessage("member.group_life_return_apply.not_very_satisfied")<!-- 去过了，不太满意 --></input></label></li>
+            <li><label><input name="reasion" type="radio" value="5"> #springMessage("member.group_life_return_apply.rest")<!-- 其他 --></input></label></li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td height="78" align="right" valign="top">#springMessage("member.group_life_return_apply.refund_state")<!-- 退款说明： --></td>
+      </td>
+      <td align="left" colspan="2"><textarea name="return_group_content" cols="45" rows="2" id="return_group_content"></textarea></td>
+    </tr>
+    <tr>
+      <td height="50" align="center" colspan="3"><span class="inputbtn">
+        <input name="" type="submit" value="#springMessage('member.group_life_return_apply.submit')" style="cursor:pointer;" class="white_btn"/>      
+      </span></td>									<!-- 提交 -->
+    </tr>
+  </table>
+</form>
+#end

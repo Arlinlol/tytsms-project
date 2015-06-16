@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的足迹-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(function(){ 
+  //jQuery(".user_guess_box_like").slide({mainCell:'.guess_like_box_like',autoPlay:true,effect:'left', vis:6, scroll:2, autoPage:true,interTime:3000,prevCell:"#like_goods_left",nextCell:"#like_goods_right"});
+  //
+  jQuery(".footprint_center_right_one").mouseenter(function(){
+	 jQuery(".footprint_center_right_one_del").hide();														
+     jQuery(this).find(".footprint_center_right_one_del").show();
+  }).mouseleave(function(){
+     jQuery(this).find(".footprint_center_right_one_del").hide();
+  });
+})
+function fp_remove(date,goods_id,obj){
+	jQuery.ajax({type:'POST',url:'$!webPath/buyer/foot_point_remove.htm',data:{"date":date,"goods_id":goods_id},
+				 success:function(data){
+				    if(data=="true"){
+					   jQuery(obj).parent().parent().remove();
+					}
+				 }
+	});
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter"> $!httpInclude.include("/buyer/nav.htm?op=foot")
+    <div class="usercenter_right">
+		 <div class="myorder">
+	        <h4><strong>我的足迹</strong></h4>
+	     </div>
+	     <div class="usercenter_foot">
+	        <div class="footprint">
+	          <!--没有浏览足迹 foot_nothing  display:"block" -->
+	             #if($!objs==0)
+		          <div class="foot_nothing">
+		            <div class="foot_nothing_word">还没有任何浏览足迹哦 ！</div>
+		            <div class="foot_nothing_word_back">
+		              <div class="footprint_back"><a href="$!webPath/buyer/index.htm">返回个人中心</a></div>
+		              <div class="footprint_back"><a href="$!webPath">返回商城首页</a></div>
+		            </div>
+		          </div>
+		          #else
+	           <!--没有浏览足迹 footprint_center隐藏  -->
+		          <form action="$!webPath/buyer/foot_point.htm" method="post" id="ListForm">
+			          <div class="footprint_center">
+			           	 <div class="footprint_center_top"></div>
+				            <ul>
+				                #foreach($obj in $objs)
+				                <li> 
+				                	<li> <span class="footprint_center_time">$!obj.fp_date<i>浏览过$!{obj.fp_goods_count}件商品</i><a  href="javascript:void(0);" onclick="fp_remove('$!obj.fp_date','',this);">移除当天足迹</a></span> <span class="footprint_center_foot"></span>
+					                <div class="footprint_center_right"> 
+					                 #foreach($fpv in $footPointTools.generic_fpv("$!obj.fp_goods_content"))
+						                #set($store=$!footPointTools.goods_second_domain("$!fpv.fpv_goods_id","goods"))
+						               #set($goods_domainPath="$!webPath/goods_$!{fpv.fpv_goods_id}.htm")
+						               #if($!store&&$!config.second_domain_open && $!store.store_second_domain!="")
+						               #set($goods_domainPath="http://$!{store.store_second_domain}.$!{domainPath}/goods_$!{fpv.fpv_goods_id}.htm")
+						             #end                                 
+					                	<div class="footprint_center_right_one">
+						                    <div class="footprint_center_right_one_img"><a href="$!goods_domainPath" target="_blank"><img src="$!{fpv.fpv_goods_img_path}" /></a></div>
+						                    <div class="footprint_center_right_one_del" style="display:none;"><a href="javascript:void(0);" onclick="fp_remove('$!obj.fp_date','$!fpv.fpv_goods_id',this);"><img src="$!webPath/resources/style/system/front/default/images/foot_del.png" /></a></div>
+						                    <div class="footprint_center_right_one_word"> <span class="footprint_center_right_one_word_price">￥$!{fpv.fpv_goods_price}</span> <span class="footprint_center_right_one_word_enter"><a href="$!webPath/store_goods_list_$!{fpv.fpv_goods_class_id}.htm" target="_blank">查找相似</a></span> <span class="footprint_center_right_one_word_sales">销量：$!{fpv.fpv_goods_sale}件</span> </div>
+					                  	</div>
+					                 #end
+					                </div>
+				              </li>
+				              #end
+                  			</ul>
+                	</div>
+          			<div class="footprint_fenye">
+	                  <div class="footprint_fenye_main">
+		                <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+		                 $!gotoPageFormHTML</div>
+	                  </div>  
+              		</div>
+              </form>
+               #end 
+           </div>
+        </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<ul>
+          #foreach($gb in $!goodsBrands)
+          #set($gb_url="$!webPath/brand_goods_$!{gb.id}.htm")
+          <li>#if($!{gb.brandLogo})<img src="$!imageWebServer/$!{gb.brandLogo.path}/$!{gb.brandLogo.name}" width="142" height="66" /><a href="$!gb_url" target="_blank">$!{gb.name}</a>#end</li>
+          #end
+        </ul>

@@ -1,0 +1,71 @@
+<script type="text/javascript">
+document.addEventListener('WeixinJSBridgeReady', function onBridgeReady() {
+WeixinJSBridge.call('hideToolbar');
+});
+</script>
+<style>
+.layout-login-area {
+    background-color: #fff;
+    margin: 0 auto;
+    max-width: 640px;
+    padding-bottom: 1.8em;
+    text-align: center;
+    width: 100%;
+}
+
+.layout-login-area .layout-login {
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0.55em 0.71em;
+    text-align: left;
+}
+
+
+.layout-version {
+    padding: 0.71em 0 5px;
+}
+
+
+.layout-copyright {
+    color: #666;
+    font-size: 12px;
+    line-height: 28px;
+}
+
+.layout-new-fr {
+    float: right;
+}
+
+
+.layout-version a {
+    color: #6e6e6e;
+    padding: 0 1.16em;
+}
+.layout-login-area a {
+    color: #666;
+    font-size: 0.85em;
+}
+</style>
+<div class="layout-login-area" id="footer">
+<div class="layout-login">
+	#if($!user.userName)
+		<a report-eventid="MCommonHTail_Login"  report-eventparam="" page_name="index"  class="J_ping" href="$!webPath/mobileWap/buyer/index.htm?user_id=$!user.id">$!user.userName</a>
+		<span class="layout-lg-bar">|</span>
+		<a report-eventid="MCommonHTail_Register"  report-eventparam="" page_name="index"  class="J_ping" href="$!webPath//mobileWap/logout.htm">退出</a>
+	#else 
+		<a report-eventid="MCommonHTail_Login"  report-eventparam="" page_name="index"  class="J_ping" href="$!webPath/mobileWap/login.htm">登录</a>
+		<span class="layout-lg-bar">|</span><a report-eventid="MCommonHTail_Register"  report-eventparam="" page_name="index"  class="J_ping" href="$!webPath/mobileWap/register.htm">注册</a>
+	#end
+	
+		<span  class="layout-new-fr"><a report-eventid="MCommonHTail_ToTop"  report-eventparam="" page_name="index"  class="J_ping" href="$!webPath/mobileWap/index.htm">首页 </a> <span class="layout-lg-bar">|</span><a report-eventid="MCommonHTail_ToTop"  report-eventparam="" page_name="index"  class="J_ping" href="#top">回到顶部</a></span>
+		</div>
+    	<div class="layout-version">
+			<span  id="clientArea">
+			<!-- $!webPath/upload/app/taiyitao.apk  -->
+				<a href="$!webPath$!downloadUrl" id="layout_toClient" report-eventid="MCommonHTail_PCEdition"  report-eventparam="" page_name="index" class="layout-openJD J_ping">客户端</a>
+			</span>
+			<a href="$!webPath/mobileWap/index.htm" report-eventid="MCommonHTail_ClientApp"  report-eventparam="" page_name="index" class="layout-on J_ping">触屏版</a>
+			<a href="$!webPath/index.html" report-eventid="MCommonHTail_PCEdition"  report-eventparam="" page_name="index" class="J_ping" id="layout_toPcHome">电脑版</a>
+    	</div>
+        <div class="layout-copyright">Copyright &copy; 2014-2015 泰易淘taiyitao.com 版权所有 </div>
+	</div>
+</div>

@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!obj.title - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+
+<script>
+//异步加载头部内容优化性能
+jQuery(document).ready(function(){
+	 jQuery.ajax({
+		 type:'POST',
+		 dataType: "json",
+		 url:'$!webPath/ajax_head.htm',
+		 data:"",
+		 success:function(result){
+			 var html = "";
+			 if(result!=null && result.user){
+				 html +="<span>"+result.user_userName+" สวัสดีค่ะ /ครับ,ยินดีต้อนรับสู่taiyitao！" 
+				 if(result.user_userRole.indexOf("ADMIN")!=-1){
+					 html +="[<a href='$!webPath/admin/index.htm'>การจัดการระบบหลังร้านค้า</a>] "
+				 }
+				 html +="[<a href='$!webPath/iskyshop_logout.htm'>ออกจากระบบของมอลล์</a>]"
+				 html +="</span> ";
+				 jQuery("#replace").replaceWith(html);
+				 if(result.user_userRole.indexOf("SELLER")!=-1){
+					 jQuery(".top_collect").after("<b class='top_b'>|</b> <span class='top_shop'><a href='$!webPath/seller/index.htm'>การจัดการร้านค้า</a></span>"); 
+				 }
+			  }else{
+				jQuery(".top_collect").after("<b class='top_b'>|</b><span class='top_shop'><a href='$!webPath/seller/login.htm'>เข้าสู่ระบบร้านค้า</a></span> "); 
+			  }
+			}
+		 });
+		
+	});
+</script>
+</head>
+<body>
+#parse("top.vm")
+#parse("head.vm")
+#parse("nav1.vm")
+<div class="main">
+  <div class="main_left">
+    <div class="article_class">
+      <h3><strong>ประเภทข้อความ</strong></h3>
+      <ul>
+         #foreach($ac in $acs)
+			<li><a href="$!webPath/articlelist_help_$!{ac.id}.htm">$!ac.className</a></li>
+            #end
+      </ul>
+    </div>
+    <div class="article_news">
+      <h3><strong>ข่าวล่าสุด</strong></h3>
+      <ul>
+        #foreach($article in $articles)
+               #if($!{article.url}&&$!{article.url}!="")
+               <li><a href="$!url">$!article.title</a></li>
+              #else
+			    <li><a href="$!webPath/article_$!{article.id}.htm">$!article.title</a></li>
+              #end
+            #end
+      </ul>
+    </div>
+  </div>
+  #if($!doc)
+  	<div class="main_right">
+    <div class="article_details">
+      <h2 class="art_details_h2">$!obj.title</h2>
+      <div class="art_details_box">$!obj.content</div>
+    </div>
+  </div>
+  #else
+  	<div class="main_right">
+    <div class="article_details">
+      <h2 class="art_details_h2">$!obj.title</h2>
+      <h3 class="art_details_h3"> <div class="details_enjoy">$!{config.share_code}</div><span style="line-height:35px;">时间：$!CommUtil.formatLongDate($!obj.addTime)</span></h3>
+      <div class="art_details_box">$!obj.content</div>
+    </div>
+    <div class="details_other">
+       <ul>
+			  #set($article=$!articleTools.queryArticle($!obj.id,-1))
+			  #if($!article.url!="")
+		        #set($url="$!article.url")
+		      #else
+		        #set($url="$!webPath/article_$!{article.id}.htm")
+		      #end
+              <li>บทที่แล้ว：#if($!article.id!="")<a href="$!url" target="_blank">$!article.title</a>#else $!article.title #end</li>
+			  #set($article=$!articleTools.queryArticle($!obj.id,1))
+			  #if($!article.url!="")
+		        #set($url="$!article.url")
+		      #else
+		        #set($url="$!webPath/article_$!{article.id}.htm")
+		      #end			  
+              <li>บทต่อไป：#if($!article.id!="")<a href="$!url" target="_blank">$!article.title</a>#else $!article.title #end</li>
+            </ul>
+    </div>
+  </div>
+  #end
+  #parse("footer.vm")
+</div>
+</body>
+</html>

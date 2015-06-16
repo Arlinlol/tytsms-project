@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-商家品牌添加-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){
+jQuery.validator.addMethod("verify",function(value,element){
+var re = /^[a-zA-Z]*$/;
+        if(re.test(jQuery("#first_word").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }
+});
+  jQuery("#theForm").validate({
+	  errorPlacement: function(error, element) {
+				element.parent().find("i").html("");
+					error.appendTo(element.parent().find("i"));
+				},
+       rules: {
+			name:{required:true},
+			first_word:{required:true,verify:true,maxlength:1},
+			brandLogo:{#if(!$!obj)required:true,#end accept:"jpg,gif,png,jpeg"}
+		  },
+	   messages: {
+		    name:{required:"品牌名称不能为空"},
+			first_word:{required:"名称首字母不能为空",verify:"请输入名称首字母",maxlength:"输入长度不正确"},
+			brandLogo:{#if(!$!obj)required:"品牌标志不能为空",#end accept:"格式不对，只能为jpg|gif|png|jpeg"}
+	     }
+  });
+});
+</script>
+</head>
+
+<body>
+
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    $!httpInclude.include("/seller/nav.htm?op=goods_brand")
+    <div class="seller_right">
+         <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>商品管理</b> > <b>品牌申请</b></span></div>
+          <div class="seller_list">
+          <div class="seller_list_title">
+              <ul class="seller_title_ul">
+               #if($!edit)
+               <li ><a href='$!webPath/seller/goods_brand_list.htm' ><i></i>品牌列表</a></li>
+               <li><a href='$!webPath/seller/goods_brand_add.htm' ><i></i>品牌申请</a></li>
+               <li class="this"><a href='javascript:void(0);' ><i></i>编辑品牌</a></li>
+               #else
+               <li ><a href='$!webPath/seller/goods_brand_list.htm' ><i></i>品牌列表</a></li>
+               <li class="this"><a href='$!webPath/seller/goods_brand_add.htm' ><i></i>品牌申请</a></li>
+               #end
+              </ul>
+            </div>
+          
+     
+          
+              <div class="add_usercenter">
+                <form action="$!webPath/seller/goods_brand_save.htm" method="post" id="theForm" enctype="multipart/form-data">
+                 <input name="id" type="hidden" id="id"  value="$!obj.id"/>
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+                    <tr>
+                      <td align="right"><strong class="redstr">*</strong>品牌名称：</td>
+                     <td >
+                        <input name="name" type="text" id="name"  value="$!obj.name" class="base_txt"/><i class="base_i"></i>
+                      </td>
+                    </tr>
+                     <tr>
+                      <td align="right"><strong class="redstr">*</strong>首字母：</td>
+                     <td>
+                        <input name="first_word" type="text" id="first_word"  value="$!obj.first_word" class="base_txt"/><i class="base_i"></i>
+                      </td>
+                    </tr>
+                    
+                    #if($!obj.brandLogo)
+                     <tr>
+                      <td align="right">品牌预览：</td>
+                      <td >
+                        <a href="$!webPath/$!obj.brandLogo.path/$!obj.brandLogo.name" target="_blank"><img src="$!webPath/$!obj.brandLogo.path/$!obj.brandLogo.name" height="44px" width="88px" title="点击查看大图"/></a>
+                    </td>
+                    </tr>
+                    #end
+                    <tr>
+                      <td align="right"><strong class="redstr">*</strong>品牌标志：</td>
+                      <td >
+                        <input name="brandLogo" type="file" id="brandLogo" class="brand_logo" /><i class="base_i"></i>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                      <td align="right" >申请备注：</td>
+                      <td >
+                        <textarea name="remark" cols="40" rows="6" id="remark" class="base_text">$!obj.remark</textarea>
+                    </td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td >
+                        <input name="" type="submit"  value="提交" style="cursor:pointer;" class="seller_save"/>
+                      </td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+          
+
+          
+          
+          </div>
+</div>
+  </div>
+  </div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

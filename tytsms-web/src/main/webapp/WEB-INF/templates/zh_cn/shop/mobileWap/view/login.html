@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>泰易淘</title>
+<link href="$!webPath/resources/style/mobileWap/css/style1.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="$!webPath/resources/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="$!webPath/resources/js/jquery.validate.min.js"></script>
+</head>
+<script type="text/javascript">
+
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+     errorPlacement:function(error,element) {
+      error.appendTo(element.parent().find(".login_error_sp"));  
+	  element.parent().parent().addClass(" phone_login_red");
+    },
+	success:function(label){
+	    label.parent().hide();
+	},
+	rules: {
+			username: "required",
+			password: "required"}
+  });
+});
+function saveForm(){
+	jQuery.post("$!webPath/mobileWap/iskyshop_user_login.htm",{"userName":jQuery("#userName").val(),"password":jQuery("#password").val()},function(data){
+		if(data.code == 100){
+			if(document.referrer.indexOf("login.htm") > 0 || document.referrer ==""){
+				window.location.href = "$!webPath/mobileWap/index.htm"
+			}else {
+				window.location.href = document.referrer;
+			}
+			//window.history.back(-1);
+		}else if(data.code == -100){ //100,登陆成功,-100账号不存在，-200,密码不正确，-300登录失败
+			jQuery("#showError").html("<font color = 'red' size='6'>账号不存在,请确认!</font>");
+		}else if(data.code == -200){
+			jQuery("#showError").html("<font color = 'red' size='6'>密码不正确,请确认!</font>");
+		}else if(data.code == -300){
+			jQuery("#showError").html("<font color = 'red' size='6'>账号或密码错误,请重新输入!</font>");
+		}
+			
+	},"json");
+	
+	}
+function register(){
+	window.location.href="$!webPath/mobileWap/register.htm"
+	}	
+
+</script>
+<body style="background-image:url($!webPath/resources/style/mobileWap/images/login.png);">
+<div class="wapper">
+<div class="main_a" >
+  <div class="title"><img style="height:200px;" src="$!webPath/resources/style/mobileWap/images/logo-tyt.png"></div>
+  <div class="content">
+  <form name="form1" id="form1" action="$!webPath/mobileWap/iskyshop_user_login.htm" method="post" >
+  	 <div id="showError" align="center" style ="height:20px;"></div>	
+     <div class="fm" style="text-align:center;padding:3% 0;margin:7% 0">
+     	<div width="30%" height="20%" align="center" class="input_div"><span class="login_span">用户名</span><input name="userName" id="userName" class="login_input"><input name="openId" type="hidden" id="openId" class="regist_txt text" style="margin-left:5%;border-left:0px;border-top:0px;border-right:0px;border-bottom:1px ;font-size:2em"></div>
+     	<div class="input_div"><span class="login_span">密&nbsp;&nbsp;&nbsp;码</span><input name="password" type="passWord" id="password" class="regist_txt text login_input"></div>
+    </div>
+    <div class="register">
+    
+    	<div  onclick="saveForm()" class="register_btn bt">登录</div>
+    
+        <div  onclick="register()" class="register_btn bt">注册</div>
+    
+ </form>
+  </div>
+</div>
+</body>
+</html>

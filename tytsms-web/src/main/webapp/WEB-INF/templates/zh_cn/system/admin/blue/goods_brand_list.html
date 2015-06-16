@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  tipStyle();
+//设置推荐的默认装态
+	function recommendState(){
+	var state = jQuery("#recommend").val();
+	if(state=="true"){
+		jQuery("#recommend").val("false");
+		jQuery("#stateOff").show();
+		jQuery("#stateOn").hide();
+	}else{
+		jQuery("#recommend").val("true");
+		jQuery("#stateOff").hide();
+		jQuery("#stateOn").show();
+	}
+}
+});
+//网站logo file样式
+jQuery(function(){
+    var textButton="<input type='text' name='textfield' id='textfield1' class='size13' /><input type='button' name='button' id='button1' value='' class='filebtn' />"
+	jQuery(textButton).insertBefore("#brandLogo");
+	jQuery("#brandLogo").change(function(){
+	jQuery("#textfield1").val(jQuery("#brandLogo").val());
+	})
+});	
+//
+function ajax_update(id,fieldName,obj){
+   var val=jQuery(obj).val();
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/goods_brand_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }      
+              }
+	    });
+}
+</script>
+<body>
+<div class="cont">
+  <h3 class="seth">品牌管理</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/goods_brand_list.htm" class="this"><b>管理</b></a></li>
+            <li><a href="$!webPath/admin/goods_brand_add.htm" ><b>新增</b></a></li>
+            <li><a href="$!webPath/admin/goods_brand_audit.htm"><b>申请列表</b></a></li>
+        </ul>
+  </div>
+	<form name="queryForm" id="queryForm" action="" method="post">
+    <div class="search">
+      <span>品牌名称</span> <span class="size150">
+          <input name="name" type="text" id="name" />
+          </span> <span>类别</span> <span class="size150">
+          <input name="category" type="text" id="category" />
+          </span> <span class="btn_search">
+          <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn" />
+          </span> 
+ 
+    </div>
+  </form>
+  <div class="operation">
+    <h3>友情提示</h3>
+    <ul>
+      <li> 通过商品品牌管理，你可以进行查看、编辑、删除系统商品品牌</li>
+      <li>设置推荐的品牌会在商城首页根据序号从小到大的顺利轮换显示</li>
+      <li>设置品牌首字母，在品牌列表页通过首字母搜索品牌</li>
+    </ul>
+  </div>
+  <form name="ListForm" id="ListForm" action="$!webPath/admin/goods_brand_list.htm" method="post">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="3%">&nbsp;</th>
+          <th width="8%"><span class="form_btna">排序</span></th>
+          <th width="8%"><span class="form_btna">首字母</span></th>
+          <th width="24%"><span class="form_btna">品牌名称</span></th>
+          <th width="15%"><span class="form_btna">类别</span></th>
+          <th width="14%"><span class="form_btna">品牌图片标识</span></th>
+          <th width="8%" align="center"><span class="form_btna">推荐</span></th>
+          <th width="8%" align="center"><span class="form_btna">首页显示</span></th>
+          <th  align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td  class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+          <td align="center"><span class="size70"> <input type="text" name="$!obj.sequence" id="$!obj.sequence"  value="$!obj.sequence"  onblur="ajax_update('$!obj.id','sequence',this)" title="可编辑"/></span></td>
+          <td align="center"><span class="size70"> <input type="text" name="$!obj.first_word" id="$!obj.first_word"  value="$!obj.first_word"  onblur="ajax_update('$!obj.id','first_word',this)" title="可编辑"/></span></td>
+          <td align="center"><span class="size150"><input name="$!obj.name" type="text" id="$!obj.name"  onblur="ajax_update('$!obj.id','name',this)"  value="$!obj.name" title="可编辑"/>
+          </span></td>
+          <td align="center"><span class="size150"> $!obj.category.name </span></td>
+          <td align="center"><img src="$!webPath/$!obj.brandLogo.path/$!obj.brandLogo.name" width="142" height="66" /></td>
+          <td align="center"><img onclick="ajax_update('$!obj.id','recommend',this)" src="$!webPath/resources/style/system/manage/blue/images/$!{obj.recommend}.png" width="25" height="21" border="0" style="cursor:pointer;" title="可编辑"/> </td>
+          <td align="center"><img onclick="ajax_update('$!obj.id','show_index',this)" src="$!webPath/resources/style/system/manage/blue/images/$!{obj.show_index}.png" width="25" height="21" border="0" style="cursor:pointer;" title="可编辑"/> </td>
+          <td class="hui oprate_con" align="center">
+          		<a href="$!webPath/admin/goods_brand_edit.htm?id=$!obj.id" class="blue">编辑</a>
+                |<a href="javascript:void(0);" onclick="if(confirm('删除后不可回复，是否继续'))window.location.href='$!webPath/admin/goods_brand_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="blue">删除</a></td>
+        </tr>
+        #end
+    </table>
+    
+    <div class="operate_bar">
+        <div class="fenye" id="queryCondition">
+            <input name="category" type="hidden" id="category" value="$!category" />
+            <input name="name" type="hidden" id="name" value="$!name" />
+            <input name="mulitId" type="hidden" id="mulitId" />
+            <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+           $!gotoPageFormHTML
+        </div> 
+        <div class="oper_sp">
+            <span class="oper_check">
+                <input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部
+            </span>
+            <span class="oper_del"><input name="" type="button" style="cursor:pointer;" value="删除" onclick="cmd('$!webPath/admin/goods_brand_del.htm?currentPage=$!currentPage');"/>
+            </span>
+        </div>         
+ 	</div>
+  </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+﻿<div class="evaluone">
+  <table width="797" border="0" cellspacing="0" cellpadding="0" class="evaluonetable">
+    <tr>
+      <td width="80">#springMessage("sms.store_eva.evaluate")<!-- 评价 --></td>
+      <td width="140">#springMessage("sms.store_eva.content")<!-- 内容 --></td>
+      <td width="100" align="center">#springMessage("sms.store_eva.goods")<!-- 商品 --></td>
+      <td width="60" align="center">#springMessage("sms.store_eva.money")<!-- 金额 --></td>
+      <td width="100" align="center">#springMessage("sms.store_eva.buyer")<!-- 买家 --></td>
+      <td width="100" align="center">#springMessage("sms.store_eva.time")<!-- 时间 --></td>
+    </tr>
+    #foreach($obj in $objs)
+    <tr> #if($!obj.evaluate_buyer_val==1)
+      #set($evaluate_buyer_val="#springMessage('sms.store_eva.high_praise')")<!-- "好评" -->
+      #end
+      #if($!obj.evaluate_buyer_val==0)
+      #set($evaluate_buyer_val="#springMessage('sms.store_eva.medium_praise')")<!-- "中评" -->
+      #end
+      #if($!obj.evaluate_buyer_val==-1)
+      #set($evaluate_buyer_val="#springMessage('sms.store_eva.bad_praise')")<!-- "差评" -->
+      #end
+      <td>$!evaluate_buyer_val</td>
+      <td>#if($!{obj.evaluate_info}!="")$!{obj.evaluate_info} #else #springMessage("sms.store_eva.say_nothing")<!-- 这家伙什么都没说 --> #end</td>
+      <td class="goodsevalu"><span class="nameevalu"><a href="$!webPath/goods_$!{obj.evaluate_goods.id}.htm" target="_blank">$!obj.evaluate_goods.goods_name</a></span></td>
+      <td align="center"><strong class="orange">¥$!{obj.of.totalPrice}</strong></td>
+      <td align="center">$!obj.evaluate_user.userName</td>
+      <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+    </tr>
+    #end
+  </table>
+</div>
+<div class="fenye">
+  <div class="fenyes">$!gotoPageAjaxHTML</div>
+</div>

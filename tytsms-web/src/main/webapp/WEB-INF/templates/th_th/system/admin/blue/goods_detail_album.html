@@ -1,0 +1,16 @@
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<div class="tab_body_b">
+<h1> <i><a href="javascript:void(0);" onclick="switch_editor_album('album_list')">返回相册<img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/return_album.jpg" width="17"/></a></i></h1>
+<script>
+  function editor_photo_set(obj){
+     var html="<img src='"+jQuery(obj).attr("src")+"' />";
+     editor.insertHtml(html);   
+  }
+ </script>
+<div class="photo">
+  <div id="editor_photo_list" class="tabphoto"> #foreach($photo in $photos) <a href="javascript:void(0);" onclick="editor_photo_set(this);" image_id="$!photo.id" src="$!webPath/$!photo.path/$!photo.name"><img src="$!webPath/$!photo.path/$!{photo.name}_small.$!{photo.ext}" width="90" height="90" /></a> #end </div>
+  <div class="tab_page">
+    <div class="tab_page2" id="editor_photo" ajax_type=".editor_photo_detail" ajax_page="goods_img" album_id="$!{album_id}" type="goods_detail_album">$!gotoPageAjaxHTML</div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,47 @@
+<link href="$!webPath/th_th/resources/style/common/css/window.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script>
+function switch_reason(){
+  var ck=jQuery("#reason_other").attr("checked");
+  if(ck=="checked"){
+    jQuery("#other_reason").show();
+  }else{
+	jQuery("#other_reason").hide();  
+  }
+}
+</script>
+<form action="$!webPath/buyer/order_cancel_save.htm" method="post" id="theForm">
+  <table style="float:left;" width="390" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    <tr>
+      <td colspan="2" align="left" valign="top" >#springMessage("member.order_cancel.cancel_order")<!-- 您确定要取消下面的订单吗? --></td>
+    </tr>
+    <tr>
+      <td width="100" align="right" valign="top">#springMessage("member.order_cancel.orderno")<!-- 订单号： -->
+        <input name="id" type="hidden" id="id" value="$!obj.id" />
+      </td>
+      <td align="left">$!obj.order_id</td>
+    </tr>
+    <tr>
+      <td rowspan="4" align="right" valign="top">#springMessage("member.order_cancel.cancel_cause")<!-- 取消原因： --></td>
+      <td align="left"><label><input name="state_info" type="radio" id="radio" value="#springMessage('member.order_cancel.change_goods')" checked="checked"  onclick="switch_reason();"/>
+     #springMessage("member.order_cancel.change_goods")<!--  改买其他商品 --></label></td>  <!-- 改买其他商品 -->
+    </tr>
+    <tr>
+      <td align="left"><label><input name="state_info" type="radio" id="radio2" value="#springMessage('member.order_cancel.buy_shops')"  onclick="switch_reason();"/>
+     #springMessage("member.order_cancel.buy_shops")<!--  从其他店铺购买 --></label></td><!-- 从其他店铺购买 -->
+    </tr>
+    <tr>
+      <td align="left"><label><input name="state_info" type="radio" id="reason_other" value="other" onclick="switch_reason();" />
+     #springMessage("member.order_cancel.other_causes")<!--  其他原因 --></label></td>
+    </tr>
+    <tr>
+      <td align="left" id="other_reason" style="display:none;"><textarea name="other_state_info" id="other_state_info" cols="30" rows="5"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><span class="inputbtn">
+        <input name="" type="submit" value="#springMessage('member.order_cancel.submit')" style="cursor:pointer;"/><!-- 提交 -->
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      </span></td>
+    </tr>
+  </table>
+</form>

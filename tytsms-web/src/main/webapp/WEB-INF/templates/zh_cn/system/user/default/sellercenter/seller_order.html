@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-订单管理-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/resources/style/common/css/overlay_blue.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+  jQuery("#order_status").val("$!order_status");
+  //显示收件人信息
+ jQuery("b[mark^='name_']").hover(function(){
+	jQuery(".xx").hide();
+	jQuery(this).parent().parent().find("div.xx").show();
+	},function(){
+	jQuery(".xx").hide();
+		});
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center"> $!httpInclude.include("/seller/nav.htm?op=order")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>交易管理</b>><b>订单查询与跟踪</b></span></div>
+      <div class="user_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li #if($!order_status=='all' || !$!order_status)class="this" #end><i></i><a href="$!webPath/seller/order.htm?order_status=all">所有订单</a></li>
+            <li #if($!order_status=='order_submit')class="this" #end><i></i><a href="$!webPath/seller/order.htm?order_status=order_submit">已经提交</a></li>
+            <li #if($!order_status=='order_pay')class="this" #end><i></i><a href="$!webPath/seller/order.htm?order_status=order_pay">已经付款</a></li>
+            <li #if($!order_status=='order_shipping')class="this" #end><i></i><a href="$!webPath/seller/order.htm?order_status=order_shipping">已经发货</a></li>
+            <li #if($!order_status=='order_finish')class="this" #end><i></i><a href="$!webPath/seller/order.htm?order_status=order_finish">已经完成</a></li>
+            <li #if($!order_status=='order_cancel')class="this" #end><i></i><a href="$!webPath/seller/order.htm?order_status=order_cancel">已经取消</a></li>
+          </ul>
+        </div>
+        <script>
+			#if($!order_status)
+			  jQuery(".orderul li").removeClass("this");
+		     jQuery(".orderul li a[href$=$!order_status]").parent().addClass("this");
+			#end
+		  </script>
+        <form action="$!webPath/seller/order.htm" method="post" id="ListForm">
+          <div class="user_sp_right"> <span>
+            <input name="order_id" type="text" class="user_title_txt" id="order_id" placeholder="订单编号" value="$!order_id"/>
+            <input name="buyer_userName" type="text" class="user_title_txt" id="buyer_userName" placeholder="买家" value="$!buyer_userName"  />
+            <input name="beginTime" type="text" class="user_title_txt" id="beginTime" placeholder="下单时间(起始)" value="$!beginTime" readonly="readonly"/>
+            <input name="endTime" type="text" class="user_title_txt" id="endTime" placeholder="下单时间(结束)" value="$!endTime" readonly="readonly"/>
+            <input name="" type="submit" class="user_sear_btn" value="查询"/>
+            </span> </div>
+          #foreach($obj in $objs)
+          #if($!obj.order_status==0)
+          #set($status="已取消")
+          #end
+          #if($!obj.order_status==10)
+          #set($status="待付款")
+          #end
+          #if($!obj.order_status==15)
+          #set($status="线下支付待审核")
+          #end
+          #if($!obj.order_status==16)
+          #set($status="货到付款待发货")
+          #end
+          #if($!obj.order_status==20)
+          #set($status="已付款")
+          #end
+          #if($!obj.order_status==30)
+          #set($status="已发货")        
+          #end                
+          #if($!obj.order_status==40)
+          #set($status="已收货")
+          #end
+          #if($!obj.order_status==50)
+          #set($status="已完成")                                              
+          #end
+          #if($!obj.order_status==60)
+          #set($status="已结束")                                              
+          #end 
+
+          
+          #set($payment="未知")   
+          #if($!obj.payment.mark=="alipay")
+          #set($payment="支付宝")
+          #end
+          #if($!obj.payment.mark=="wechatpay")
+          #set($payment="微信支付")
+          #end
+          #if($!obj.payment.mark=="alipay_wap")
+          #set($payment="手机网页支付宝")
+          #end
+          #if($!obj.payment.mark=="alipay_app")
+          #set($payment="手机支付宝APP")
+          #end
+          #if($!obj.payment.mark=="tenpay")
+          #set($payment="财付通")
+          #end
+          #if($!obj.payment.mark=="bill")
+          #set($payment="快钱")
+          #end                 
+          #if($!obj.payment.mark=="chinabank")
+          #set($payment="网银在线")
+          #end       
+          #if($!obj.payment.mark=="outline")
+          #set($payment="线下支付")
+          #end                  
+          #if($!obj.payment.mark=="balance")
+          #set($payment="预存款支付")
+          #end
+          #if($!obj.payment.mark=="payafter")
+          #set($payment="货到付款")
+          #end
+          #if($!obj.payment.mark=="paypal")
+          #set($payment="paypal")
+          #end
+          #if($!obj.payment.mark=="allinpay")
+          #set($payment="通联支付")
+          #end
+          #set($order_type="PC订单")
+          #if($obj.order_type=="weixin")
+          #set($order_type="微信订单")
+          #end
+          #if($obj.order_type=="android")
+          #set($order_type="Android订单")
+          #end
+          #if($obj.order_type=="ios")
+          #set($order_type="IOS订单")
+          #end
+          <div class="orderlist_one">
+            <h4 class="orderlist_one_h4"><span>订单号：$!{obj.order_id}</span><span>下单时间：$!CommUtil.formatLongDate($!obj.addTime)</span><span>订单状态：<strong style="color:#F00">$!status</strong></span> #if($!payment)<span class="blue">支付方式：$!payment</span>#end<span class="blue">订单类型：$!order_type</span> </h4>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_order_table">
+              <tr>
+                <td width="36%"> #foreach($map in $!orderFormTools.queryGoodsInfo("$!obj.goods_info"))
+                  #set($goods_id = "$!{map.get('goods_id')}")	
+                  #set($goods_name = "$!{map.get('goods_name')}")
+                  #set($goods_count = "$!{map.get('goods_count')}")
+                  #set($goods_price = "$!{map.get('goods_price')}")
+                  #set($goods_type = "$!{map.get('goods_type')}")
+                  #set($goods_gsp_val = "$!{map.get('goods_gsp_val')}")
+                  #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+                  #set($img="$!webPath/$!{goods_mainphoto_path}")
+                  <dl class="order_img">
+                    #set($goods_url="$!webPath/goods_$!{goods_id}.htm")
+                    #if($!config.second_domain_open)
+                    #set($goods_url="http://$!{store.store_second_domain}.$!{domainPath}/goods_$!{goods_id}.htm")
+                    #end
+                    <dt><a href="$!goods_url" target="_blank"><img src="$!img" width="60" height="60" /></a></dt>
+                    <dd><span class="order_img_name"><a href="$!goods_url" target="_blank">$!{goods_name}</a></span> #if($!goods_type=="group")<strong style="color:#F00">(团)</strong>#end #if($!goods_type=="combin") <strong style="color:#F00">【组合销售】</strong> #end <b>数量：$!{goods_count}</b> <b>$!goods_gsp_val</b> </dd>
+                  </dl>
+                  #end </td>
+                <td width="20%" align="center"><span class="blue2 order_xx"><b mark="name_$!{obj.id}" obj_id="$!obj.id">$!obj.user_name</b>
+                  <div class="xx" style="display:none;">
+                    <h6>联系信息</h6>
+                    <ul id="table_$!obj.id">
+                      <li> <span class="xx_sp">姓名：</span><span class="xx_date">$!obj.receiver_Name</span></li>
+                      <li> <span class="xx_sp">电话：</span><span class="xx_date">$!{obj.receiver_telephone}</span></li>
+                      <li> <span class="xx_sp">手机：</span><span class="xx_date">$!{obj.receiver_mobile}</span></li>
+                      <li> <span class="xx_sp">邮编：</span><span class="xx_date">$!{obj.receiver_zip}</span></li>
+                      <li> <span class="xx_sp">地址：</span><span class="xx_date">$!{obj.receiver_area} $!{obj.receiver_area_info}</span></li>
+                    </ul>
+                  </div>
+                  </span></td>
+                <td width="12%" align="center"><span class="order_sp">¥$!{obj.totalPrice}</span><span class="order_sp"><strong>(含运费:¥$!CommUtil.null2Float($!obj.ship_price))</strong></span>#if($!{obj.order_status}==10)<span class="order_sp"><a href="javascript:void(0);" dialog_uri="$!webPath/seller/order_fee.htm?id=$!obj.id" dialog_title="调整费用" dialog_width="400" dialog_height="100" dialog_id="order_fee" class="order_money_modify">调整费用</a></span>#end</td>
+                <td align="center"><ul class="ul_04">
+                    #if($!obj.order_status==10)
+                    <li>$!status</li>
+                    #end
+                    
+                    #if($!obj.order_status==0)
+                    <li><a href="javascript:void(0);">&nbsp;</a></li>
+                    <li style="color:#ff4f19; text-decoration:underline;">$!status</li>
+                    #end
+                    
+                    #if($!obj.order_status==15)
+                    <li><a href="javascript:void(0);">&nbsp;</a></li>
+                    <li class="li_11"><a href="javascript:void(0);" dialog_uri="$!webPath/seller/seller_order_outline.htm?id=$!obj.id" dialog_title="确认收款" dialog_width="400" dialog_height="100" dialog_id="order_outline_fee" class="order_outline_ok">确认收款</a></li>
+                    #end
+                    
+                    #if($!obj.order_status==10 || $!obj.order_status==15)
+                    <li><a style="color:#ff4f19; text-decoration:underline;" href="javascript:void(0);" dialog_uri="$!webPath/seller/order_cancel.htm?id=$!obj.id" dialog_title="取消订单" dialog_width="400" dialog_height="100" dialog_id="order_cancel">取消订单</a></li>
+                    #end
+                    
+                    
+                    #if($!obj.order_status==65)
+                    <li class="li_04"> 已结束,不可评价</li>
+                    #end
+                    
+                    #if($!obj.order_status==20 || $!obj.order_status==16 )
+                    <li><a href="javascript:void(0);">&nbsp;</a></li>
+                    <li class="li_11"> <a href="javascript:void(0);" dialog_uri="$!webPath/seller/order_shipping.htm?id=$!obj.id&currentPage=$!currentPage" dialog_title="确认发货" dialog_width="410" dialog_height="100" dialog_id="order_cancel" class="order_outline_ok">确认发货</a></li>
+                    #end
+                    #if($!obj.order_status==30)
+                    <li class="li_11"> <a href="javascript:void(0);" dialog_uri="$!webPath/seller/order_shipping_code.htm?id=$!obj.id&currentPage=$!currentPage" dialog_title="修改物流" dialog_width="410" dialog_height="100" dialog_id="order_shipping">修改物流</a></li>
+                    #end
+                  </ul></td>
+              </tr>
+            </table>
+            <div class="orderlist_bottom"><span> #if($!obj.order_status==30)<a href="$!webPath/seller/ship_view.htm?id=$!obj.id" class="order_bottom_btn" target="_blank"/>查看物流</a> #end<a href="$!webPath/seller/order_view.htm?id=$!obj.id" class="order_bottom_btn" target="_blank"/>查看订单</a><a href="$!webPath/seller/order_print.htm?id=$!obj.id" class="order_bottom_btn" target="_blank"/>打印订单</a></span></div>
+          </div>
+          #end
+          <div class="userlist_allop">
+            <input name="currentPage" type="hidden" class="user_title_txt" id="currentPage"  value="$!currentPage"/>
+            <input name="order_status" type="hidden" id="order_status" value="$!order_status" />
+            <div class="user_list_page"><span class="user_page_sp">$!gotoPageFormHTML</span> </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

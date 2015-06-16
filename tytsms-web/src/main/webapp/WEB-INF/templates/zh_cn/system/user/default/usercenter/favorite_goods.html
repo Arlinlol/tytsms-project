@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商品收藏-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter"> $!httpInclude.include("/buyer/nav.htm?op=favorite")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><span class="myorder_fright"></span><strong>我的收藏</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li class="this"><i></i><a href="$!webPath/buyer/favorite_goods.htm">收藏商品</a></li>
+            <li><i></i><a href="$!webPath/buyer/favorite_store.htm">收藏店铺</a></li>
+          </ul>
+        </div>
+      #if($!objs.size()>0)  
+        <form action="$!webPath/buyer/favorite_goods.htm" method="post" id="ListForm">
+          <div class="show_smallimg">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="smallimg_table" >
+              <tr>
+                <th width="300">宝贝
+                  <input name="mulitId" type="hidden" id="mulitId" />
+                  <input name="type" type="hidden" id="type" value="0" /></th>
+                <th width="90">单价</th>
+                <th width="130" align="center">收藏时间</th>
+                <th width="150" align="center">店铺名称</th>
+                <th align="center">操作</th>
+              </tr>
+            </table>
+            #foreach($obj in $objs)
+            #if($!obj.goods.goods_main_photo)
+            #set($img="$!webPath/$!{obj.goods.goods_main_photo.path}/$!{obj.goods.goods_main_photo.name}_small.$!{obj.goods.goods_main_photo.ext}")
+            #else
+            #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            #end
+            #set($goods_url="$!webPath/goods_$!{obj.goods.id}.htm")
+            #if($!config.second_domain_open && $!obj.goods.goods_type==1 && $!obj.goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{obj.goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.goods.id}.htm")
+            #end
+            <div class="shelves_goods">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" class="goodstable1">
+                <tr>
+                  <td width="300"><ul class="goodsul">
+                      <li><span class="goodscheck">
+                        <input name="id" type="checkbox" id="id" value="$!obj.id" />
+                        </span></li>
+                      <li><span class="goodsimg"><a href="$goods_url" target="_blank"><img src="$!img" width="50" height="50" /></a></span></li>
+                      <li class="goodsp"><span style="padding-top:10px"><a href="$!goods_url" target="_blank" class="blue2">$!obj.goods.goods_name</a></span> </li>
+                    </ul></td>
+                  <td width="90" align="center"><strong class="red">￥$!{obj.goods.store_price}</strong></td>
+                  <td width="130">$!CommUtil.formatLongDate($!obj.addTime)</td>
+                  <td width="150" class="goodsp2" align="center"><span>#if($!obj.goods.goods_store) $!obj.goods.goods_store.store_name #else 自营商品 #end</span> <span> <a href="javascript:void(0);" #if(!$!user)dialog_uri="$!current_webPath/user_dialog_login.htm" dialog_title="会员登录" dialog_width="430" dialog_height="100" dialog_id="user_login" #else onclick="open_im('$!obj.goods.id','$!webPath','user','store','$!obj.goods_store.id');" #end class="deta_eval_online" style="margin-left:35px;">在线客服</a> </span></td>
+                  <td align="center" class="goodsp3"><span class="del"><a href="javascript:void(0);" onclick="if(confirm('确定删除收藏?'))window.location.href='$!webPath/buyer/favorite_del.htm?mulitId=$!obj.id&currentPage=$!currentPage&type=0'" class="blue">删除</a></span> <span class="goodsbtn">
+                    <input name="" type="button" value="立即购买" onclick="window.location.href=('$!webPath/goods_$!{obj.goods.id}.htm')" />
+                    </span></td>
+                </tr>
+              </table>
+            </div>
+            #end </div>
+          <div class="userlist_allop">
+            <div class="user_list_page"><span class="user_page_sp">$!gotoPageHTML</span>
+              <p class="user_listoper_p"><i>
+                <input name="all1" type="checkbox" id="all1" value="" onclick="selectAll(this);"/>
+                </i><a href="javascript:void(0);" onclick="cmd('$!webPath/buyer/favorite_del.htm','')"  class="user_oper_all"><em></em>删除</a></p>
+            </div>
+          </div>
+        </form>
+       #else
+         <div class="nothing">
+            <div class="nothing_left"><img src="$!webPath/resources/style/system/front/default/images/nothing.png" /></div>
+            <div class="nothing_right">您目前没有收藏任何商品！这就去挑选商品。<a href="$!webPath/index.htm" target="_blank">商城首页</a></div>
+          </div>
+        #end
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

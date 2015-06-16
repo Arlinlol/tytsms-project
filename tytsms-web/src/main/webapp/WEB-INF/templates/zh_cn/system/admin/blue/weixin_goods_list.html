@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="../../../../resources/style/system/manage/blue/template.css"  rel="stylesheet" type="text/css"/>
+<title></title>
+#macro ( genericTree $somelist ) 
+#foreach ( $some in $somelist )
+<option value="$!some.id">
+#if($!some.level>0)
+#foreach($count in [-1..$!some.level])&nbsp;#end #end $!some.className</option>
+#genericTree($some.childs) 
+#end 
+#end
+<!--[if IE]>
+<style type="text/css">
+.input{behavior: url($!webPath/resources/style/common/css/ie-css3.htc);}
+</style>
+<![endif]-->
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script>
+//
+function ajax_update(id,fieldName,obj,value){
+   var val;
+   if(value==undefined){
+	 val=jQuery(obj).val();
+   }else val=value; 
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/weixin_goods_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }    
+				 if(value!=undefined){
+				   jQuery(obj.parentNode.parentNode).remove();
+				 }
+              }
+	    });
+}
+</script>
+</head>
+<body scroll="yes">
+<div class="cont">
+  <h1 class="seth">微店商品管理</h1>
+  
+  <div class="nav_list"> 
+	
+    <ul>
+	<li><a href="$!webPath/admin/goods_list.htm" class="this"><b>所有微店商品</b></a></li>
+    </ul> 
+
+    </div>
+	<form name="queryForm" id="queryForm" action="" method="post">
+    <div class="search">
+      <ul>
+        <li> <span>商品名称</span> <span class="size150">
+          <input name="goods_name" type="text" id="goods_name" />
+          </span> <span>品牌名称</span> <span>
+          <select name="goods.goods_brand.id" id="goods.goods_brand.id">
+          <option value="">所有品牌</option>
+          #foreach($gb in $gbs)
+          <option value="$!gb.id">$!gb.name</option>
+          #end
+          </select></span>
+          <span>类别</span><span>
+          <select name="goods.gc.id" id="goods.gc.id">
+          <option value="">所有分类</option>
+            
+           #genericTree($!gcs)
+          
+          </select></span>
+          <span>特别推荐</span><span>
+          <select name="weixin_shop_recommend" id="weixin_shop_recommend">
+            <option value="">是否特别推荐</option>
+            <option value="true">是</option>
+            <option value="false">否</option>
+</select></span>
+          <span>
+          <input name="" type="button"  value="搜索" style="cursor:pointer;" onclick="query();"  class="search_btn"/>
+        </span> </li>
+      </ul>
+    </div>
+  </form>
+  <div class="operation">
+    <h3>友情提示</h3>
+    <ul>
+      <li>微店商品，显示已经开通微店的店铺的所有商品，未开通、过期的微店商品均不显示</li>
+       <li>推荐后的商品将会在平台运营的微商城首页位置显示</li>
+    </ul>
+  </div>
+  <form name="ListForm" id="ListForm" action="" method="post">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="3%">&nbsp;</th>
+          <th width="20%"><span class="form_btna">商品名称</span></th>
+          <th width="10%"><span class="form_btna">品牌</span></th>
+          <th width="10%"><span class="form_btna">分类名</span></th>
+          <th width="10%"><span class="form_btna">所在店铺</span></th>
+          <th width="8%"><span class="form_btna">微店公众号</span></th>
+          <th width="8%" align="center"><span class="form_btna">查看次数</span></th>
+          <th width="8%" align="center"><span class="form_btna">微信商城热卖</span></th>
+          <th width="8%" align="center"><span class="form_btna">微信商城推荐</span></th>
+          <th  align="center"><span class="form_btna">操作</span></th>
+        </tr>
+      #foreach($obj in $objs)
+        <tr>
+          <td class="goods_brand_list"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+          <td><label>
+            <textarea name="textarea" cols="40" rows="3"  title="可编辑" onblur="ajax_update('$!obj.id','goods_name',this)">$!obj.goods_name</textarea>
+          </label></td>
+          <td>$!obj.goods_brand.name</td>
+          <td>$!obj.gc.className</td>
+          <td>$!obj.goods_store.store_name</td>
+          #if($!obj.goods_status==0)
+           #set($goods_status="上架")
+          #end
+          #if($!obj.goods_status==1)
+           #set($goods_status="仓库中")
+          #end
+          #if($!obj.goods_status==-1)
+           #set($goods_status="已下架")
+          #end
+          #if($!obj.goods_status==-2)
+           #set($goods_status="违规下架")
+          #end
+          <td>$!obj.goods_store.weixin_account</td>
+          <td align="center">$!obj.goods_click</td>
+          <td align="center"><img onclick="ajax_update('$!obj.id','weixin_shop_hot',this)" src="$!webPath/resources/style/system/manage/blue/images/$!{obj.weixin_shop_hot}.png" width="25" height="21" border="0" style="cursor:pointer;" title="热卖推荐在微商城首页显示"/></td>
+          <td align="center"><img onclick="ajax_update('$!obj.id','weixin_shop_recommend',this)" src="$!webPath/resources/style/system/manage/blue/images/$!{obj.weixin_shop_recommend}.png" width="25" height="21" border="0" style="cursor:pointer;" title="特别推荐后微商城在首页显示"/></td>
+          <td class="hui oprate_con" align="center"><a href="$!webPath/goods.htm?id=$!obj.id" target="_blank">查看</a></td>
+        </tr>
+     #end
+     
+     
+      
+    </table>
+
+    </div>
+    
+    
+    
+    <div class="operate_bar">
+    <div class="fenye">       <span id="queryCondition" style="display:none">
+		   #foreach($sm in $sms)
+<input name="$!sm.key" id="$!sm.key" type="hidden" value="$!sm.value"/>
+		   #end
+	 </span>
+	   <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+	   $!gotoPageFormHTML </div> 
+    
+    <div class="oper_sp"> <span class="oper_check">   
+        <input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>
+          <input name="mulitId" type="hidden" id="mulitId" />全部</span>
+           <span class="oper_del">   <input name="" type="button" value="删除" onclick="cmd('$!webPath/admin/goods_del.htm');" style="cursor:pointer;" /></span></div>
+             
+ </div>
+  </form>
+</div>
+</body>
+</html>

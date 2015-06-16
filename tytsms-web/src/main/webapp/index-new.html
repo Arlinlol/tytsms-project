@@ -1,0 +1,1520 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta property="qc:admins" content="2340216471114176375" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>泰易淘-东南亚跨境电子商务平台</title>
+<meta name="keywords" content="泰易淘，东南亚跨境电子商务平台，东南亚购物，跨境购，海淘购物，泰国进口，东南亚进口" />
+<meta name="description" content="泰易淘，改变您的生活！东南亚跨境购物平台，专注挖掘东南亚十国的特色文化、特色产品，秉承“真诚·极致”的服务理念，践行“源头供应、正品保证”的郑重承诺，以诚信、专业的态度打造便捷、轻松的购物环境，为用户提供最正宗、最丰富、最优质的特色商品。" />
+<meta name="generator" content="" />
+<meta name="author" content="" />
+<meta name="copyright" content="" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/css/index_new.css" type="text/css" rel="stylesheet" />
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+
+
+<script src="http://localhost:8080/tytsms-web/resources/js/jquery-1.6.2.js"></script>
+<script src="http://localhost:8080/tytsms-web/resources/js/jquery.lazyload.js"></script>
+<script src="http://localhost:8080/tytsms-web/resources/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="http://localhost:8080/tytsms-web/resources/js/jquery.shop.common.js"></script>
+<script src="http://localhost:8080/tytsms-web/resources/js/jquery.validate.min.js"></script>
+<script src="http://localhost:8080/tytsms-web/resources/js/jquery.iskyshop.validate.js" type="text/javascript"></script>
+<script src="http://localhost:8080/tytsms-web/resources/js/Cookie.js"></script>
+
+<script>
+jQuery(document).ready(function(){
+	//鼠标经过左侧分类							
+  jQuery(".left_menu_dl").mouseover(function(){								 
+	var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){
+	 var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).addClass("left_menu_this").removeClass("left_menu_dt");	
+     jQuery("#child_"+id).show();			
+	}
+  }).mouseleave(function(){ 
+	 var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){ 
+     var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).removeClass("left_menu_this").addClass("left_menu_dt");	
+     jQuery("#child_"+id).hide();
+	}
+  });
+  
+  //鼠标经过推荐商品、猜你喜欢	
+  jQuery("#index_sale_tab ul li").mouseover(function(){	
+	jQuery(this).siblings().removeClass("this");
+	jQuery(this).addClass("this");
+	var i = jQuery(this).index();
+	jQuery("#index_sale_tab").siblings().hide();
+	jQuery("#index_sale_tab").siblings().eq(i).show();
+	if(i==0){
+	jQuery("#sale_change").attr("mark","recommend");
+	}else{
+		jQuery("#sale_change").attr("mark","like");
+		your_like_good();
+		}
+  });
+  //鼠标经过楼层标题
+  jQuery(".storey_tab ul li").mouseover(function(){								 
+	jQuery(this).siblings().removeClass("this");
+	jQuery(this).addClass("this");
+	var i = jQuery(this).index();
+	jQuery(this).parent().parent().siblings().not(".hot_sell").hide();
+	jQuery(this).parent().parent().siblings().eq(i).show();
+	
+  });
+  var head_h=jQuery("#head_h").height();
+  jQuery("#head_unbomb").height(head_h);
+  jQuery(window).scroll(function(){
+	  var top = jQuery(document).scrollTop();
+	  //顶部搜索框跟随
+	  if(top==0){
+		  jQuery("#top").attr("style","");
+	  }else{
+		  jQuery("#top").attr("style","position:fixed;top:0px;width:100%");
+	  }
+	  if(top>head_h){
+		   jQuery("#head_h").addClass("head_fixd");
+	  }else{
+		   jQuery("#head_h").removeClass("head_fixd");
+	  }
+	  //楼层导航跟随
+	  jQuery("li[floor_id^=floor_] b").css("display","block");
+	  jQuery("div[id^=floor_]").each(function(){
+	     var floor_top=jQuery(this).offset().top-top;
+		 if(floor_top<=580&&floor_top>=0){
+		  var floor_id=jQuery(this).attr("id");
+		   jQuery("li[floor_id="+floor_id+"] b").css("display","none");
+		 }
+	  });
+  });	
+  //右上角公告切换
+  	jQuery(".top_mr_tab li").mouseover(function(){
+		jQuery(this).siblings().removeClass("this");
+		jQuery(this).addClass("this");
+		var i = jQuery(this).index();
+		jQuery(".top_mr_box").hide();		
+		jQuery(".top_mr_box").eq(i).show();										
+	});
+  
+  //用户登录、商家入驻tab页切换
+  jQuery("#top_mid_login_tab>li").css("cursor","pointer").mouseover(function(){
+      var id=jQuery(this).attr("id");
+	  jQuery("#top_mid_login_tab>li").removeClass("this");
+	  jQuery(this).addClass("this");
+	  if(id=="top_mid_login_tab_user"){
+	     jQuery("#top_mid_login_tab_seller_info").hide();
+		 jQuery("#top_mid_login_tab_user_info").show();
+	  }
+	  if(id=="top_mid_login_tab_seller"){
+	     jQuery("#top_mid_login_tab_user_info").hide();
+		 jQuery("#top_mid_login_tab_seller_info").show();
+	  }
+  });
+  
+  //猜你喜欢异步加载
+  function your_like_good(){
+	  jQuery.ajax({
+ 		  type:'POST',
+ 		 dataType: "json",
+ 		  url:'http://localhost:8080/tytsms-web/ajax_you_like.htm',
+ 		  data:"",
+			  beforeSend:function(){
+				     jQuery("#index_sale_con_like").empty();
+					 jQuery("#index_sale_con_like").html("<div style='width:100%;height:301px;text-align:center;'><img src='http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif' style='margin-top:145px;' /></div>");
+				  },
+			  success:function(result){
+				  var html = "";
+			      jQuery.each(result.list, function(index,data) {
+					  html = html + "<ul class='index_sale_two'>";
+					  var img = "";
+				      if(data.goods_main_photo){
+						  img = result.imageWebServer+"/"+data.main_photo_path+"/"+data.main_photo_name+"_middle."+data.main_photo_ext;
+					  }else{
+						  img = result.imageWebServer+"/"+result.config_goodsImage_path+"/"+result.config_goodsImage_name;
+					  } 
+					  var goods_url = result.webPath+"/goods_"+data.id+".htm";
+					   if(result.second_domain_open && data.goods_type==1 && data.store_second_domain!=""){
+						  goods_url = "http://"+data.store_second_domain+"."+result.domainPath+"/goods_"+data.id+".htm";
+					  } 
+					  html = html+ "<li class='sale_two_img'><a href=\""+goods_url+"\"><span class='img_cspan'><p><img src=\""+img+"\" width='170' height='170' /></p></span></a></li>";
+					  html = html+ "<li class='sale_two_name'><a href=\""+goods_url+"\">"+data.goods_name+"</a></li>";
+					  html = html+ "<li class='sale_two_price'>售价：<strong>¥"+data.store_price+"</strong></li>";
+					  html = html+ "</ul>";
+				}); 
+				jQuery("#index_sale_con_like").html(html);
+			}
+			 });
+  	}
+  
+});
+</script>
+
+
+<script>
+//异步加载头部内容优化性能
+jQuery(document).ready(function(){
+	 jQuery.ajax({
+		 type:'POST',
+		 dataType: "json",
+		 url:'http://localhost:8080/tytsms-web/ajax_head.htm',
+		 data:"",
+		 success:function(result){
+			 var html = "";
+			 if(result!=null && result.user){
+				 html +="<span>"+result.user_userName+" 您好,欢迎来到泰易淘！" 
+				 if(result.user_userRole.indexOf("ADMIN")!=-1){
+					 html +="[<a href='http://localhost:8080/tytsms-web/admin/index.htm'>管理后台</a>] "
+				 }
+				 html +="[<a href='http://localhost:8080/tytsms-web/iskyshop_logout.htm'>退出商城</a>]"
+				 html +="</span> ";
+				 jQuery("#replace").replaceWith(html);
+				 if(result.user_userRole.indexOf("SELLER")!=-1){
+					 jQuery(".top_collect").after("<b class='top_b'>|</b> <span class='top_shop'><a href='http://localhost:8080/tytsms-web/seller/index.htm'>商家管理</a></span>"); 
+				 }
+			  }else{
+				jQuery(".top_collect").after("<b class='top_b'>|</b><span class='top_shop'><a href='http://localhost:8080/tytsms-web/seller/login.htm'>商家登录</a></span> "); 
+			  }
+			}
+		 });
+		
+	});
+</script>
+
+<script>
+ window.onload=function(){
+  var ck=new Cookie("HasLoaded");  //每个页面的new Cookie名HasLoaded不能相同
+  if(ck.Read()==null){//未加载过，Cookie内容为空
+    
+	    jQuery("#fade").show();
+        jQuery(".ab_icon").show();
+		
+
+		jQuery(".f_close").click(function(){
+        jQuery("#fade").hide();
+        jQuery(".ab_icon").hide();
+        })
+	
+     //设置保存时间
+     var dd = new Date();
+     dd = new Date(dd.getYear() + 1900, dd.getMonth(), dd.getDate());
+     dd.setDate(dd.getDate() + 365);
+     ck.setExpiresTime(dd);
+
+      ck.Write("true");  //设置Cookie。只要IE不关闭，Cookie就一直存在
+  }
+  else{
+  //Cookie存在，表示页面是被刷新的 
+  }
+ }
+</script>
+
+</head>
+<body>
+<div id="fade" class="mt-black_overlay"></div>
+<div class="ab_icon">
+   <div class="f_close"></div>
+   <a href="http://localhost:8080/tytsms-web/shop/mouthTravel/index.htm" style="display:block;width:1000px; height:500px;"></a>
+</div>
+<!--点击收藏-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery(".top_pull").mouseover(function(){
+	jQuery(this).find("div").show();
+	jQuery(this).find("em").addClass("em_this");
+	jQuery(this).find("s").addClass("this");
+  	}).mouseleave(function(){
+    jQuery(this).find("div").hide();
+	jQuery(this).find("em").removeClass("em_this");
+	jQuery(this).find("s").removeClass("this");
+  });					
+								});
+var browserEvent = function (obj, url, title) {
+    var e = window.event || arguments.callee.caller.arguments[0];
+    var B = {
+        IE : /MSIE/.test(window.navigator.userAgent) && !window.opera
+        , FF : /Firefox/.test(window.navigator.userAgent)
+        , OP : !!window.opera
+    };
+    obj.onmousedown = null;
+    if (B.IE) {
+        obj.attachEvent("onmouseup", function () {
+            try {
+                window.external.AddFavorite(url, title);
+                window.event.returnValue = false;
+            } catch (exp) {}
+        });
+    } else {
+        if (B.FF || obj.nodeName.toLowerCase() == "a") {
+            obj.setAttribute("rel", "sidebar"), obj.title = title, obj.href = url;
+        } else if (B.OP) {
+            var a = document.createElement("a");
+            a.rel = "sidebar", a.title = title, a.href = url;
+            obj.parentNode.insertBefore(a, obj);
+            a.appendChild(obj);
+            a = null;
+        }
+    }
+};
+</script>
+<div class="top" id="top">
+  <div class="top_page">
+    <div class="top_right">
+    	<span id="replace"> 您好，欢迎来到taiyitao！[<a href="http://localhost:8080/tytsms-web/user/login.htm">登录商城</a>][<a href="http://localhost:8080/tytsms-web/register.htm">免费注册</a>]</span>
+    	<b>|</b> <span class="top_pull"> <a href="http://localhost:8080/tytsms-web/buyer/order.htm">我的订单</a> </span> <b>|</b> 
+    			
+		 <span class="top_pull">
+        <!--加em_this和top_this-->
+			<em class=""><i>手机商城</i><s class="this"></s></em>
+			<div class="top_this" style="display:none;">
+			<div class="top_this_box">
+			<div class="top_this_code"><img src="http://localhost:8080/tytsms-web/upload/app/app_dowload.png" width="77" height="77" /></div>
+			<i class="top_this_i"><a href="itms-services://?action=download-manifest&amp;url=https://dn-taiyitao.qbox.me/tytsms-1.0.1.plist" target="_blank"><img src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/app-store.png" width="111" height="37" /></a></i> <i class="top_this_i"><a href="http://shouji.baidu.com/software/item?docid=7517850&amp;from=as" target="_blank"><img src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/android.png" width="111" height="37" /></a></i> </div>
+			</div>
+			</span> <b>|</b> 
+			  <span class="top_pull"> <em class="">客户服务<s  class="this"></s></em>
+      <div class="top_this" style="display:none;">
+        <ul class="top_pull_con_style2">
+          <li><a href="http://localhost:8080/tytsms-web/articlelist_help.htm" target="_blank">帮助中心</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/doc_service.htm" target="_blank">售后服务</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/doc_online.htm" target="_blank">在线客服</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/doc_complaint.htm" target="_blank">投诉中心</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/doc_email.htm" target="_blank">客服邮箱</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/seller_apply.htm" target="_blank">商家入驻</a></li>
+        </ul>
+      </div>
+      </span> <b>|</b>        </div>
+    <span class="top_collect"><a href="javascript:void(0);" onclick="browserEvent(this, 'http://localhost:8080/tytsms-web','taiyitao')">收藏本站</a></span>
+    </div>
+</div>
+<div id="head_unbomb"><script>
+jQuery(document).ready(function(){
+  //获取购物车商品数量
+  jQuery.ajax({
+		type:'POST',
+		url:'http://localhost:8080/tytsms-web/ajax_carts.htm',
+		data:'',
+	    success:function(data){
+	     jQuery("#cart_goods_count_top").html(data);
+		   }
+		});	
+		
+		
+	//鼠标经过用户中心
+   jQuery("#top_user_sp").mouseover(function(){
+		if(jQuery("#top_user_hb").size()==0){
+			jQuery.ajax({type:'POST',url:'http://localhost:8080/tytsms-web/head_ajax_usercenter.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#top_user_hid").html('<div class="top_user_hb" id="top_user_hb"><span class="top_user_loading"><img src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#top_user_hid").show();
+							   },
+						  success:function(data){
+						     jQuery("#top_user_hid").empty();
+								 jQuery("#top_user_hid").html(data);
+							   }
+						});		
+		}else{
+			jQuery("#top_user_hid").show();
+			}
+	jQuery("#top_user_sp").addClass("top_user_sp_this");
+  	});
+   jQuery("#top_user").mouseleave(function(){
+    jQuery("#top_user_hid").hide();
+	jQuery("#top_user_sp").removeClass("top_user_sp_this");
+  });
+   
+   //鼠标经过购物车
+   jQuery("#goodscar_sp").mouseover(function(){
+			var gstatus =jQuery("#goodscar_con_box").attr("mark");
+			if(gstatus=="none")
+			  jQuery.ajax({type:'POST',url:'http://localhost:8080/tytsms-web/cart_menu_detail.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#goodscar_con_box").empty().html(' <div><span class="top_user_loading"><img src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#goodscar_con_box").show();
+							   },
+						  success:function(data){
+							  jQuery("#goodscar_con_box").attr("mark","show");
+							     jQuery("#goodscar_con_box").empty();
+								 jQuery("#goodscar_con_box").html(data);
+							   }
+						});
+			  jQuery("#goodscar_sp").addClass("goodscar_sp_this");
+		   });
+		   jQuery("#goodscar").mouseleave(function(){
+			jQuery("#goodscar_con_box").attr("mark","none");
+			  jQuery("#goodscar_con_box").hide();
+			  jQuery("#goodscar_sp").removeClass("goodscar_sp_this");
+		   });
+});
+function search_form(){
+  var keyword=arguments[0];
+  var type=arguments[1];
+  if(keyword!=""&&keyword!=undefined){
+   jQuery("#keyword").val(keyword);
+  }
+  if(type!=""&&type!=undefined){
+    jQuery("#type").val(type);
+  }
+  jQuery("#searchForm").submit();	
+  jQuery("#keyword").val("");
+}
+		 var total_price=0;
+		 		 		function cart_remove(id){
+           jQuery.post("http://localhost:8080/tytsms-web/remove_goods_cart.htm",{"id":id},function(data){
+		   if(data.code=="100"){		
+		   jQuery("table[class=shopping_table] tr[id="+id+"]").remove();
+		   jQuery(".goodscar_list li[id="+id+"]").remove();
+           jQuery("#cart_goods_count_top").html(data.count);
+		   jQuery("#cart_goods_price_top").html(data.total_price);
+           jQuery("#total_price").html(data.total_price);
+		   if(data.count==0){//购物车页面没有商品
+		  	 jQuery("form[id=cart_form]").remove();
+			 jQuery(".goodscar_list").remove();
+			 jQuery(".shopping_car_none").show();//cart1-none-goods
+			 jQuery("#goodscar_con_box").html("<b class='goodscar_none'>购物车还没有商品!</b>");	
+		   }
+			}
+			 if(data.code=="200"){	
+			 alert("系统繁忙，请稍后重试！");
+			 }
+         
+         },"json");
+       }
+</script>
+<!--[if lt IE 9]>
+    <script src="http://localhost:8080/tytsms-web/resources/js/css3-mediaqueries.js"></script>
+<![endif]-->
+<div class="head_width" id="head_h">
+  <div class="head">         <h1 class="logo"><span>
+      <p><a href="http://localhost:8080/tytsms-web/index.htm"> <img src="http://localhost:8080/tytsms-web/upload/system/ee55c994-5d50-4ebc-a9bd-045eacd32a63.png" border="0" /> </a></p>
+      </span></h1>
+    <form action="http://localhost:8080/tytsms-web/search.htm" method="post" id="searchForm">
+      <input name="type" type="hidden" id="type" value="" />
+      <div class="head_search"> <span class="head_seartxt">
+        <input name="keyword" type="text" id="keyword" placeholder="让嘴巴去旅行！" x-webkit-speech lang="zh-CN" onwebkitspeechchange="jQuery('#searchForm').submit()" class="h_sear_txt" style="padding-left:5px;" />
+        <input name="" type="submit"  class="h_sear_btn" value="搜索"/>
+        </span><span class="head_searstr">热门搜索： <a href="javascript:void(0);" onclick="search_form('泰国化妆品','goods');">泰国化妆品</a>  <a href="javascript:void(0);" onclick="search_form('特色零食','goods');">特色零食</a>  <a href="javascript:void(0);" onclick="search_form('手工艺品','goods');">手工艺品</a>  </span></div>
+    </form>
+   
+    <!--用户中心开始-->
+    <div class="top_user" id="top_user">
+      <span class="top_user_sp" id="top_user_sp"><a onclick="location='http://localhost:8080/tytsms-web/buyer/index.htm'">用户中心</a><s></s></span>
+      <div class="top_user_hid" id="top_user_hid" style="display:none"> </div>
+    </div>
+    <div class="goodscar" id="goodscar">
+    
+    
+      <span class="goodscar_sp" id="goodscar_sp">
+      <span>
+      <i class="goodscar_img"></i>
+      <em class="goodscar_num"><b id="cart_goods_count_top">0</b></em><a href="http://localhost:8080/tytsms-web/goods_cart1.htm">去购物车结算</a>
+      </span>
+      </span>
+      
+      
+      <div class="goodscar_con_box" id="goodscar_con_box" style="display:none" mark="none"> </div>
+    </div>
+    <!--购物车结束-->
+  </div>
+</div>
+ </div>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#navul li").each(function(){
+    var original_url=jQuery(this).attr("original_url");
+	if("".indexOf(original_url)>=0){
+	   jQuery(this).addClass("this");	
+	}
+  });
+});
+</script>
+<script>
+jQuery(function(){
+
+jQuery("#navul li:eq(1)").css("position","relative");
+jQuery("#navul li:eq(1) a span").append('<i class="hot_icon"></i>');
+
+})
+</script>
+
+<div class="nav">
+  <div class="nav_center">
+    <div class="nav_left">
+      <h2><a href="http://localhost:8080/tytsms-web/goods_class.htm"><span>全部商品分类 <em><img src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/nav_top.gif" width="10" height="5" /></em></span></a> </h2>
+      <div class="index_topleft">
+        <div class="left_menu" id="left_menu">           <dl  class="left_menu_dl"  child_count="1" id="6" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+                                                            <dt class="left_menu_dt" id="dts_6"><i class="left_menu_i"><img src="http://localhost:8080/tytsms-web/upload/class_icon/7e69c53d-b356-46c3-8a7d-6212b758c506.png" width="16" height="16" /></i><strong class="left_menu_str"><a href="http://localhost:8080/tytsms-web/store_goods_list_6.htm">食品饮料</a></strong><b class="left_menu_str_b"><a href="http://localhost:8080/tytsms-web/store_goods_list_12.htm">冻干榴莲</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_14.htm">芒果脆卷酥</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_8.htm">泰国零食</a>  </b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_6">
+              <div class="left_menu_con">  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_7.htm" target="_blank">泰国正品</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_12.htm" target="_blank">冻干榴莲</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_14.htm" target="_blank">芒果脆卷酥</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_8.htm" target="_blank">泰国零食</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_10.htm" target="_blank">泰国米</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_11.htm" target="_blank">坚果</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_15.htm" target="_blank">咖啡腰果</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_16.htm" target="_blank">比你亲妈还了解你的风味</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_17.htm" target="_blank">干吃牛奶片</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_18.htm" target="_blank">酸辣腰果</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_19.htm" target="_blank">炸榴莲条</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_20.htm" target="_blank">脆皮蛋卷</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_21.htm" target="_blank">芝麻味米饼</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_22.htm" target="_blank">泰式糖果</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_23.htm" target="_blank">调味料</a> </dd>
+                </dl>
+                </span>  </div>
+            </dd>
+          </dl>
+                    <dl class="left_menu_dl double"  child_count="3" id="24" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+                                                            <dt class="left_menu_dt" id="dts_24"><i class="left_menu_i"><img src="http://localhost:8080/tytsms-web/upload/class_icon/91cda5c7-846b-413d-a031-19ea5416bfd8.png" width="16" height="16" /></i><strong class="left_menu_str"><a href="http://localhost:8080/tytsms-web/store_goods_list_24.htm">个护化妆</a></strong><b class="left_menu_str_b"><a href="http://localhost:8080/tytsms-web/store_goods_list_32.htm">洁面</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_35.htm">面膜</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_42.htm">精油芳疗</a>  </b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_24">
+              <div class="left_menu_con">  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_31.htm" target="_blank">面部护肤</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_32.htm" target="_blank">洁面</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_35.htm" target="_blank">面膜</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_139.htm" target="_blank">眼霜</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_33.htm" target="_blank">乳液</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_34.htm" target="_blank">精华液</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_36.htm" target="_blank">个人护理</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_37.htm" target="_blank">沐浴露</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_38.htm" target="_blank">洗手液</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_39.htm" target="_blank">身体乳霜</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_140.htm" target="_blank">护发素</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_40.htm" target="_blank">泰国化妆品</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_42.htm" target="_blank">精油芳疗</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_41.htm" target="_blank">面部保养</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_43.htm" target="_blank">身体护理</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_44.htm" target="_blank">手部保养</a> </dd>
+                </dl>
+                </span>  </div>
+            </dd>
+          </dl>
+                    <dl  class="left_menu_dl"  child_count="3" id="45" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+                                                            <dt class="left_menu_dt" id="dts_45"><i class="left_menu_i"><img src="http://localhost:8080/tytsms-web/upload/class_icon/ba5564c0-7ad1-476a-b350-52682d655fee.png" width="16" height="16" /></i><strong class="left_menu_str"><a href="http://localhost:8080/tytsms-web/store_goods_list_45.htm">鞋包配饰</a></strong><b class="left_menu_str_b"><a href="http://localhost:8080/tytsms-web/store_goods_list_51.htm">公文包</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_52.htm">单肩包</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_54.htm">钱包</a>  </b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_45">
+              <div class="left_menu_con">  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_46.htm" target="_blank">潮流鞋靴</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_47.htm" target="_blank">凉鞋</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_48.htm" target="_blank">高跟鞋</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_49.htm" target="_blank">平底鞋</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_50.htm" target="_blank">时尚潮包</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_51.htm" target="_blank">公文包</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_52.htm" target="_blank">单肩包</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_54.htm" target="_blank">钱包</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_53.htm" target="_blank">手提包</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_55.htm" target="_blank">功能箱包</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_56.htm" target="_blank">拉杆箱</a> </dd>
+                </dl>
+                </span>  </div>
+            </dd>
+          </dl>
+                    <dl class="left_menu_dl double"  child_count="3" id="70" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+                                                            <dt class="left_menu_dt" id="dts_70"><i class="left_menu_i"><img src="http://localhost:8080/tytsms-web/upload/class_icon/f44f7619-2e52-4707-a134-a02782ca5a38.png" width="16" height="16" /></i><strong class="left_menu_str"><a href="http://localhost:8080/tytsms-web/store_goods_list_70.htm">男女服饰</a></strong><b class="left_menu_str_b"><a href="http://localhost:8080/tytsms-web/store_goods_list_141.htm">短袖</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_145.htm">长裙</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_74.htm">皮带</a>  </b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_70">
+              <div class="left_menu_con">  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_71.htm" target="_blank">男装</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_74.htm" target="_blank">皮带</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_72.htm" target="_blank">衬衫</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_73.htm" target="_blank">短裤</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_75.htm" target="_blank">女装</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_141.htm" target="_blank">短袖</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_145.htm" target="_blank">长裙</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_76.htm" target="_blank">半身裙</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_78.htm" target="_blank">休闲裤</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_77.htm" target="_blank">衬衫</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_79.htm" target="_blank">内衣</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_80.htm" target="_blank">童装</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_81.htm" target="_blank">短袖T恤</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_82.htm" target="_blank">短裤</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_83.htm" target="_blank">童裙</a> </dd>
+                </dl>
+                </span>  </div>
+            </dd>
+          </dl>
+                    <dl  class="left_menu_dl"  child_count="3" id="84" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+                                                            <dt class="left_menu_dt" id="dts_84"><i class="left_menu_i"><img src="http://localhost:8080/tytsms-web/upload/class_icon/9703be81-d475-4eb1-878e-15a11bf467a6.png" width="16" height="16" /></i><strong class="left_menu_str"><a href="http://localhost:8080/tytsms-web/store_goods_list_84.htm">家居家装</a></strong><b class="left_menu_str_b"><a href="http://localhost:8080/tytsms-web/store_goods_list_86.htm">床品套件</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_88.htm">LED灯</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_89.htm">台灯</a>  </b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_84">
+              <div class="left_menu_con">  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_85.htm" target="_blank">家纺</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_86.htm" target="_blank">床品套件</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_87.htm" target="_blank">家电灯具</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_88.htm" target="_blank">LED灯</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_89.htm" target="_blank">台灯</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_90.htm" target="_blank">工艺品</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_91.htm" target="_blank">花瓶</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_93.htm" target="_blank">油画</a> </dd>
+                </dl>
+                </span>  </div>
+            </dd>
+          </dl>
+                    <dl class="left_menu_dl double"  child_count="5" id="94" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+                                                            <dt class="left_menu_dt" id="dts_94"><i class="left_menu_i"><img src="http://localhost:8080/tytsms-web/upload/class_icon/059259d2-e645-4b62-9b8d-754bff8aed2e.png" width="16" height="16" /></i><strong class="left_menu_str"><a href="http://localhost:8080/tytsms-web/store_goods_list_94.htm">母婴玩具/运动户外</a></strong><b class="left_menu_str_b"><a href="http://localhost:8080/tytsms-web/store_goods_list_96.htm">奶粉</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_101.htm">跑步机</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_113.htm">童睡袋</a>  </b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_94">
+              <div class="left_menu_con">  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_95.htm" target="_blank">奶粉/喂养</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_96.htm" target="_blank">奶粉</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_97.htm" target="_blank">奶嘴</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_98.htm" target="_blank">玩具</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_99.htm" target="_blank">益智玩具</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_100.htm" target="_blank">健身器材</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_101.htm" target="_blank">跑步机</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_102.htm" target="_blank">户外/野营</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_103.htm" target="_blank">帐篷</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_112.htm" target="_blank">婴儿潮装</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_113.htm" target="_blank">童睡袋</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_114.htm" target="_blank">短袖T恤</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_115.htm" target="_blank">连体衣</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_116.htm" target="_blank">口水巾</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_118.htm" target="_blank">外套</a> </dd>
+                </dl>
+                </span>  </div>
+            </dd>
+          </dl>
+                    <dl  class="left_menu_dl"  child_count="5" id="119" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+                                                            <dt class="left_menu_dt" id="dts_119"><i class="left_menu_i"><img src="http://localhost:8080/tytsms-web/upload/class_icon/db3ea3f8-34b0-4bdb-8296-d70715ee61dd.png" width="16" height="16" /></i><strong class="left_menu_str"><a href="http://localhost:8080/tytsms-web/store_goods_list_119.htm">数码电子/汽配用品</a></strong><b class="left_menu_str_b"><a href="http://localhost:8080/tytsms-web/store_goods_list_132.htm">U盘</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_61.htm">移动电源</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_59.htm">手机</a>  </b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_119">
+              <div class="left_menu_con">  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_58.htm" target="_blank">手机通讯</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_59.htm" target="_blank">手机</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_60.htm" target="_blank">手机配件</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_61.htm" target="_blank">移动电源</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_62.htm" target="_blank">手机外壳</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_63.htm" target="_blank">手机激光键盘</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_64.htm" target="_blank">摄像影音</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_65.htm" target="_blank">自拍神器</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_66.htm" target="_blank">网络机顶盒</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_129.htm" target="_blank">智能设备</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_132.htm" target="_blank">U盘</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_133.htm" target="_blank">汽配用品</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_135.htm" target="_blank">行车记录仪</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_136.htm" target="_blank">车灯</a> </dd>
+                </dl>
+                </span>  </div>
+            </dd>
+          </dl>
+                    <dl class="left_menu_dl double"  child_count="2" id="104" style="position:relative;">
+            <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+                                                            <dt class="left_menu_dt" id="dts_104"><i class="left_menu_i"><img src="http://localhost:8080/tytsms-web/upload/class_icon/34d40b04-1b7d-4ad4-9854-fa6bed998a0a.png" width="16" height="16" /></i><strong class="left_menu_str"><a href="http://localhost:8080/tytsms-web/store_goods_list_104.htm">珠宝首饰</a></strong><b class="left_menu_str_b"><a href="http://localhost:8080/tytsms-web/store_goods_list_111.htm">时尚手表</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_108.htm">项链</a>  <a href="http://localhost:8080/tytsms-web/store_goods_list_109.htm">首饰盒</a>  </b></dt>
+            <dd class="left_menu_dd" style="display:none" id="child_104">
+              <div class="left_menu_con">  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_105.htm" target="_blank">手表</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_111.htm" target="_blank">时尚手表</a> </dd>
+                </dl>
+                </span>  <span class="left_menu_sp">
+                <dl class="left_con_dl">
+                  <dt><a href="http://localhost:8080/tytsms-web/store_goods_list_107.htm" target="_blank">珠宝配饰</a></dt>
+                  <dd><a href="http://localhost:8080/tytsms-web/store_goods_list_108.htm" target="_blank">项链</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_109.htm" target="_blank">首饰盒</a> <a href="http://localhost:8080/tytsms-web/store_goods_list_110.htm" target="_blank">戒指</a> </dd>
+                </dl>
+                </span>  </div>
+            </dd>
+          </dl>
+           </div>
+      </div>
+    </div>
+    <ul id="navul">
+                              <li><a href="http://localhost:8080/tytsms-web/index.htm" id="5" target="_blank" original_url="index.htm"><span>首页</span></a></li>
+                        <li><a href="http://localhost:8080/tytsms-web/shop/mouthTravel/index.htm" id="6" target="_blank" original_url="shop/mouthTravel/index.htm"><span>零食专场</span></a></li>
+                        <li><a href="http://localhost:8080/tytsms-web/brand/index.htm" id="1" target="_blank" original_url="brand/index.htm"><span>品牌</span></a></li>
+                        <li><a href="http://localhost:8080/tytsms-web/integral/index.htm" id="2" target="_blank" original_url="integral/index.htm"><span>积分商城</span></a></li>
+                        <li><a href="http://localhost:8080/tytsms-web/group/index.htm" id="10" target="_blank" original_url="group/index.htm"><span>团购</span></a></li>
+          </ul>
+  </div>
+</div>
+ <script>
+ jQuery('document').ready(function(){ 
+ jQuery('.top_mid_slide').slide({mainCell:'.top_mid_slider_ul',titCell:'.banner_top li',titOnClassName:'this',trigger:'mouseover',autoPlay:true});
+  })
+  </script>
+   <div class='top_mid_slide'>
+  <ul class='top_mid_slider_ul'>
+     <li class='top_mid_slider_ul_li'  style='background:url(http://localhost:8080/tytsms-web/upload/advert/c880e8e4-793a-4612-a4ef-08456c6e3b5f.jpg) no-repeat; background-position: 50% 0%;'><a style='height:485px; display:block;' href='http://localhost:8080/tytsms-web/advert_redirect.htm?url=&id=4'></a></li>
+   
+     <li class='top_mid_slider_ul_li'  style='background:url(http://localhost:8080/tytsms-web/upload/advert/9d5daece-cc20-4757-9f20-d10365e01c06.jpg) no-repeat; background-position: 50% 0%;'><a style='height:485px; display:block;' href='http://localhost:8080/tytsms-web/advert_redirect.htm?url=http://www.taiyitao.com/goods_45.htm&id=3'></a></li>
+   
+     <li class='top_mid_slider_ul_li'  style='background:url(http://localhost:8080/tytsms-web/upload/advert/2909cda0-baac-4dd6-b765-264c65ace3cd.jpg) no-repeat; background-position: 50% 0%;'><a style='height:485px; display:block;' href='http://localhost:8080/tytsms-web/advert_redirect.htm?url=http://www.taiyitao.com/goods_51.htm&id=2'></a></li>
+   
+     <li class='top_mid_slider_ul_li'  style='background:url(http://localhost:8080/tytsms-web/upload/advert/aed33b6c-f53f-4766-a74f-d30d1b0d4409.jpg) no-repeat; background-position: 50% 0%;'><a style='height:485px; display:block;' href='http://localhost:8080/tytsms-web/advert_redirect.htm?url=http://www.taiyitao.com/goods_72.htm&id=1'></a></li>
+   
+     </ul>
+  <div class='banner_top'>
+   <ul>
+	   <li  class='this'  style='cursor:pointer;'></li>
+       <li  style='cursor:pointer;'></li>
+       <li  style='cursor:pointer;'></li>
+       <li  style='cursor:pointer;'></li>
+       </ul>
+   </div>
+  </div>
+<div class="main"> 
+  <div class="index_center_box">
+    <div class="index_sale">
+      <div class="index_sale_tab" id="index_sale_tab"> <a href="javascript:void(0);" class="sale_change" mark="recommend" id="sale_change">换一组</a>
+        <ul>
+          <li class="this" recommend_goods_random="1">推荐商品<s></s></li>
+          <li recommend_goods_random="1">猜您喜欢<s></s></li>
+        </ul>
+      </div>
+      <!--推荐商品-->
+      <div class="index_sale_box" style="display:block" id="index_sale_box_recommend">
+		<script type="text/javascript">
+ jQuery(document).ready(function(){
+	 var recommend_goods_random=1;
+	 jQuery("#sale_change").click(function(){
+	 var target = jQuery("#sale_change").attr("mark");
+	 recommend_goods_random=parseInt(jQuery(".index_sale_tab li[class='this']").attr("recommend_goods_random"));
+	 jQuery.ajax({
+		 		  type:'POST',
+		 		  url:'http://localhost:8080/tytsms-web/switch_'+target+'_goods.htm',
+		 		  data:{"recommend_goods_random":recommend_goods_random},
+	  			  beforeSend:function(){
+	  				     jQuery("#index_sale_con_"+target).empty();
+	  					 jQuery("#index_sale_box_"+target).html("<div style='width:100%;height:301px;text-align:center;'><img src='http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif' style='margin-top:145px;' /></div>");
+	  				  },
+	  			  success:function(html){
+	  	                      jQuery("#index_sale_box_"+target).html(html);
+	  	                      recommend_goods_random++;
+	  						  if(target=="recommend"){
+	  							  if(recommend_goods_random>6){
+	                                               recommend_goods_random=1;
+	  	                       		}
+	  						  } 
+	  						  if(target=="like"){
+	  						      if(recommend_goods_random>6){
+	                                               recommend_goods_random=1;
+	  	                       		}
+	  						  }
+	  						  jQuery(".index_sale_tab li[class='this']").attr("recommend_goods_random",recommend_goods_random);
+	  					  }
+	  			 });
+			});
+ 	});
+  </script>
+
+<div class="index_sale_con" id="index_sale_con_recommend">           <ul class="index_sale_two">
+                                                <li class="sale_two_img"> <a href="http://localhost:8080/tytsms-web/goods_222.htm" target="_blank"> <span class="img_cspan">
+              <p><img src="http://localhost:8080/tytsms-web/upload/store/1/a43a65aa-ed5b-47cb-9089-6845d961d4e6.jpg_middle.jpg" width="170" height="170" /></p>
+              </span></a> </li>
+            <li class="sale_two_name"><a href="http://localhost:8080/tytsms-web/goods_222.htm">测试添加商品</a></li>
+            <li class="sale_two_price">售价：<strong>¥100.00</strong></li>
+          </ul>
+                    <ul class="index_sale_two">
+                                                <li class="sale_two_img"> <a href="http://localhost:8080/tytsms-web/goods_125.htm" target="_blank"> <span class="img_cspan">
+              <p><img src="http://localhost:8080/tytsms-web/upload/store/2/760b9d40-f037-4289-9e3b-679d02c58a45.jpg_middle.jpg" width="170" height="170" /></p>
+              </span></a> </li>
+            <li class="sale_two_name"><a href="http://localhost:8080/tytsms-web/goods_125.htm">欧萃碧 优机洋槐舒纹眼霜15ml</a></li>
+            <li class="sale_two_price">售价：<strong>¥168.00</strong></li>
+          </ul>
+                    <ul class="index_sale_two">
+                                                <li class="sale_two_img"> <a href="http://localhost:8080/tytsms-web/goods_25.htm" target="_blank"> <span class="img_cspan">
+              <p><img src="http://localhost:8080/tytsms-web/upload/store/1/9134a435-b1d0-45a7-9a6d-0e27d36c1465.jpg_middle.jpg" width="170" height="170" /></p>
+              </span></a> </li>
+            <li class="sale_two_name"><a href="http://localhost:8080/tytsms-web/goods_25.htm">泰国特质香米</a></li>
+            <li class="sale_two_price">售价：<strong>¥0.10</strong></li>
+          </ul>
+                    <ul class="index_sale_two">
+                                                <li class="sale_two_img"> <a href="http://localhost:8080/tytsms-web/goods_1.htm" target="_blank"> <span class="img_cspan">
+              <p><img src="http://localhost:8080/tytsms-web/upload/store/1/64a16d06-9cc9-4dd8-bc26-664dcda08525.jpg_middle.jpg" width="170" height="170" /></p>
+              </span></a> </li>
+            <li class="sale_two_name"><a href="http://localhost:8080/tytsms-web/goods_1.htm">Heart Made 盐焗腰果 泰国进口坚果零食</a></li>
+            <li class="sale_two_price">售价：<strong>¥56.00</strong></li>
+          </ul>
+                    <ul class="index_sale_two">
+                                                <li class="sale_two_img"> <a href="http://localhost:8080/tytsms-web/goods_4.htm" target="_blank"> <span class="img_cspan">
+              <p><img src="http://localhost:8080/tytsms-web/upload/store/1/24463a2a-d42e-4209-853b-24341568aadb.jpg_middle.jpg" width="170" height="170" /></p>
+              </span></a> </li>
+            <li class="sale_two_name"><a href="http://localhost:8080/tytsms-web/goods_4.htm">泰国进口 正品VEGGIEZ 油炸芒果</a></li>
+            <li class="sale_two_price">售价：<strong>¥36.00</strong></li>
+          </ul>
+           </div>      </div>
+      <!--猜您喜欢-->
+      <div class="index_sale_box" style="display:none" id="index_sale_box_like">
+        <div class="index_sale_con" id="index_sale_con_like"> 
+        </div>
+      </div>
+    </div>
+    <div class="index_brand_right">
+      <div class="brand">
+        <h3><span><a href="http://localhost:8080/tytsms-web/brand/index.htm" target="_blank">更多</a></span>推荐品牌</h3>
+		<ul>
+                    <li><img src="http://localhost:8080/tytsms-web/upload/brand/502378db-d32a-41c8-9ed4-db72a2bc3a4a.png" width="142" height="66" /><a href="http://localhost:8080/tytsms-web/brand_goods_14.htm" target="_blank">BOSTANTEN</a></li>
+                    <li><img src="http://localhost:8080/tytsms-web/upload/brand/82c21407-e08a-4d12-890e-b106c07d6065.png" width="142" height="66" /><a href="http://localhost:8080/tytsms-web/brand_goods_21.htm" target="_blank">美即</a></li>
+                    <li><img src="http://localhost:8080/tytsms-web/upload/brand/0a94dd2a-1114-4d1a-b1d8-a166d68f24c8.png" width="142" height="66" /><a href="http://localhost:8080/tytsms-web/brand_goods_40.htm" target="_blank">测试品牌</a></li>
+                    <li><img src="http://localhost:8080/tytsms-web/upload/brand/b177fe0e-24a4-42ac-b614-c832d3111a3e.png" width="142" height="66" /><a href="http://localhost:8080/tytsms-web/brand_goods_42.htm" target="_blank">测试9</a></li>
+                  </ul>      </div>
+      <div class="brand_bottom_adv">
+        <script src="http://localhost:8080/tytsms-web/advert_invoke.htm?id=4"></script>
+      </div>
+    </div>
+  </div>
+  <script>
+jQuery(function(){ 
+   jQuery(".storey_list li").mouseenter(function(){
+	  jQuery(".storey_list li").stop();											 
+      jQuery(this).parent().parent().find("li").animate({"opacity":"0.2"},{queue:false, duration:1000});
+	  jQuery(this).animate({"opacity":"0.9"},{queue:false, duration:1000});
+   }).mouseleave(function(){
+	  jQuery(".storey_list li").stop();
+      jQuery(this).animate({"opacity":"0.9"},{queue:false, duration:1000});
+   });	
+   jQuery(".storey_list").mouseleave(function(){
+	  jQuery(".storey_list li").stop();
+      jQuery(this).parent().parent().find("li").css("opacity","1.0"); 
+	});
+   jQuery(".hot_sell_ul li").mouseenter(function(){		
+	  jQuery(".hot_sell_ul li").stop();											 
+	  jQuery(this).parent().find("li").animate({"opacity":"0.2"},{queue:false, duration:1000});
+	  jQuery(this).animate({"opacity":"0.9"},{queue:false, duration:1000});
+   }).mouseleave(function(){
+	  jQuery(".hot_sell_ul li").stop();
+      jQuery(this).animate({"opacity":"1.0"},{queue:false, duration:1000});
+   });
+   jQuery(".hot_sell_ul").mouseleave(function(){
+      jQuery(".hot_sell_ul li").stop();
+      jQuery(this).parent().find("li").css("opacity","1.0");
+   });
+   //
+   jQuery(".goods_pic img").lazyload({effect:"fadeIn",width:230,height:230});
+   //back_floor
+   jQuery(".back_floor>ul>li").click(function(){
+	  var id=jQuery(this).attr("floor_id");									   
+      var top = jQuery("#"+id).offset().top-80;
+      jQuery('body,html').animate({scrollTop:top},1000);
+   }); 
+})
+</script>
+<!--蓝色-->
+<div class="storey orange_storey" id="floor_1">
+  <div class="storey_left">
+    <h1><b>1F</b><span>食品饮料</span></h1>
+    <div class="storey_bd">
+      <div class="storey_ul">
+        <ul>
+                              <li><a href="http://localhost:8080/tytsms-web/store_goods_list_8.htm" target="_blank">泰国零食</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_10.htm" target="_blank">泰国米</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_11.htm" target="_blank">坚果</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_12.htm" target="_blank">冻干榴莲</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_14.htm" target="_blank">芒果脆卷酥</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_15.htm" target="_blank">咖啡腰果</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_17.htm" target="_blank">干吃牛奶片</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_18.htm" target="_blank">酸辣腰果</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_19.htm" target="_blank">炸榴莲条</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_20.htm" target="_blank">脆皮蛋卷</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_21.htm" target="_blank">芝麻味米饼</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_22.htm" target="_blank">泰式糖果</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_23.htm" target="_blank">调味料</a></li>
+                            </ul>
+      </div>
+      <div class="advert"><div style='float:left;overflow:hidden;'><a href='' target='_blank'><img src='http://localhost:8080/tytsms-web/upload/advert/351ecbe3-86c6-460a-9923-e837dacc69dd.png' /></a></div></div>
+    </div>
+  </div>
+  <div class="storey_right">
+    <div class="storey_tab">
+      <ul>
+                <li  class="this"  style="cursor:pointer;" id="5" store_gc="1"><a href="javascript:void(0);">泰国正品</a><s></s></li>
+              </ul>
+    </div>
+        <div class="storey_list" >
+      <ul>
+                        
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_17.htm" target="_blank">Durian 金枕头冻干榴莲   100g</a></span> <span class="goods_price">¥<b>63.80</b><em>¥64.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_17.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_18.htm" target="_blank">泰国PUMPUI 香脆虾肉 10g</a></span> <span class="goods_price">¥<b>6.90</b><em>¥7.90</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_18.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_2.htm" target="_blank">RAMWONG 榴莲糯米饭 泰国进口糯米饭</a></span> <span class="goods_price">¥<b>36.00</b><em>¥40.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_2.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/1/47e8d1f9-1d10-4350-9ffa-a2a902d9dcd1.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                      </ul>
+    </div>
+        <div class="hot_sell">
+      <div class="hot_sell_br">         <h2>泰国特推</h2>
+        <ul class="hot_sell_ul">
+                                        
+                    
+                    <li> <em class="number_01"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_1.htm" target="_blank"><span class="img_cspan">
+            <p><img src="http://localhost:8080/tytsms-web/upload/store/1/64a16d06-9cc9-4dd8-bc26-664dcda08525.jpg_small.jpg" width="80" height="80" /></p>
+            </span></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售7件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_1.htm" target="_blank">Heart Made 盐焗腰果 泰国进口坚果零食</a></p>
+              <p class="hot_goods_price">¥<b>56.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_02"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_10.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/4/e39e9026-de06-4753-ae3c-a32df87844fe.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_10.htm" target="_blank">Heart Made 泰国进口芒果脆卷酥 150g</a></p>
+              <p class="hot_goods_price">¥<b>38.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_03"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_21.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/5/7c164089-baa5-422b-8922-2fa2d77a4b02.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售3件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_21.htm" target="_blank">露莎士 黄咖喱粉酱粉调味料280g*3瓶装</a></p>
+              <p class="hot_goods_price">¥<b>49.60</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_04"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_23.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/5/812b69f3-fc0a-4c44-a479-35e591a1c789.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售1件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_23.htm" target="_blank">丽尔泰 冬阴功汤料酱 1kg 泰国进口酸辣汤 调料调味品</a></p>
+              <p class="hot_goods_price">¥<b>58.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_05"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_5.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/1/f1414f12-8c26-4108-839f-845224430803.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售5件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_5.htm" target="_blank">泰国进口小老板炸海苔  辣香味</a></p>
+              <p class="hot_goods_price">¥<b>7.60</b></p>
+            </div>
+          </li>
+                  </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="storey pink_storey" id="floor_2">
+  <div class="storey_left">
+    <h1><b>2F</b><span>个护化妆</span></h1>
+    <div class="storey_bd">
+      <div class="storey_ul">
+        <ul>
+                              <li><a href="http://localhost:8080/tytsms-web/store_goods_list_41.htm" target="_blank">面部保养</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_42.htm" target="_blank">精油芳疗</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_43.htm" target="_blank">身体护理</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_44.htm" target="_blank">手部保养</a></li>
+                                        <li><a href="http://localhost:8080/tytsms-web/store_goods_list_32.htm" target="_blank">洁面</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_33.htm" target="_blank">乳液</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_34.htm" target="_blank">精华液</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_35.htm" target="_blank">面膜</a></li>
+                                        <li><a href="http://localhost:8080/tytsms-web/store_goods_list_37.htm" target="_blank">沐浴露</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_38.htm" target="_blank">洗手液</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_39.htm" target="_blank">身体乳霜</a></li>
+                            </ul>
+      </div>
+      <div class="advert"><div style='float:left;overflow:hidden;'><a href='' target='_blank'><img src='http://localhost:8080/tytsms-web/upload/advert/b31fd36f-873e-4113-b265-74c1d8fff693.png' /></a></div></div>
+    </div>
+  </div>
+  <div class="storey_right">
+    <div class="storey_tab">
+      <ul>
+                <li  class="this"  style="cursor:pointer;" id="6" store_gc="2"><a href="javascript:void(0);">泰国化妆品</a><s></s></li>
+              </ul>
+    </div>
+        <div class="storey_list" >
+      <ul>
+                        
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_36.htm" target="_blank">JANJIRA美白排毒活肤按摩油250ML</a></span> <span class="goods_price">¥<b>498.00</b><em>¥504.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_36.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/9/774774cf-9378-4f44-95bd-b91bf0827417.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_42.htm" target="_blank">JANJIRA沁爽活力身体磨砂啫喱 250ML</a></span> <span class="goods_price">¥<b>0.10</b><em>¥0.10</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_42.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/9/40e5d496-8f96-4d2e-8705-317dd8afd277.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_45.htm" target="_blank">[salviarwhite]泰国鲑鱼水凝精华 300g</a></span> <span class="goods_price">¥<b>0.04</b><em>¥258.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_45.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/9/c08e38ab-4e6c-4b9e-8a91-a2ea17f91708.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_16.htm" target="_blank">泰国无火香薰粉红田园风（茉莉）精油 排解压力套装 </a></span> <span class="goods_price">¥<b>36.00</b><em>¥48.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_16.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/8/359b8673-fe73-47e3-8694-919003cf4142.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                      </ul>
+    </div>
+        <div class="hot_sell">
+      <div class="hot_sell_br">         <h2>美妆特推</h2>
+        <ul class="hot_sell_ul">
+                                        
+                    
+                    <li> <em class="number_01"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_51.htm" target="_blank"><span class="img_cspan">
+            <p><img src="http://localhost:8080/tytsms-web/upload/store/2/99441d0d-10b4-480a-915c-af743f10ac03.jpg_small.jpg" width="80" height="80" /></p>
+            </span></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_51.htm" target="_blank">百莲凯 紧致焕颜修复面膜 8片/盒 368元/盒 688元/套 即2盒（送10盒） </a></p>
+              <p class="hot_goods_price">¥<b>368.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_02"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_133.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/2/bcfe3924-c211-4d65-8b9c-9de602590494.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_133.htm" target="_blank">卡诗 活力胶结物精华液12ml  护发精华染烫修复护发精华素 发膜伴侣</a></p>
+              <p class="hot_goods_price">¥<b>68.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_03"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_125.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/2/760b9d40-f037-4289-9e3b-679d02c58a45.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_125.htm" target="_blank">欧萃碧 优机洋槐舒纹眼霜15ml</a></p>
+              <p class="hot_goods_price">¥<b>168.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_04"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_126.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/2/1024b5ad-02d3-4f7c-a387-fdf9189d595d.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_126.htm" target="_blank">Beauty Buffet 牛奶洁面乳100ml </a></p>
+              <p class="hot_goods_price">¥<b>48.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_05"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_13.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/2/c382e22b-9503-4bad-b5c5-bce81ee7c83c.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_13.htm" target="_blank">欧莱雅 复颜抗皱提拉紧致补水护肤滋润乳液 125ml</a></p>
+              <p class="hot_goods_price">¥<b>230.00</b></p>
+            </div>
+          </li>
+                  </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="storey blue_storey" id="floor_3">
+  <div class="storey_left">
+    <h1><b>3F</b><span>鞋包配饰</span></h1>
+    <div class="storey_bd">
+      <div class="storey_ul">
+        <ul>
+                              <li><a href="http://localhost:8080/tytsms-web/store_goods_list_47.htm" target="_blank">凉鞋</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_48.htm" target="_blank">高跟鞋</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_49.htm" target="_blank">平底鞋</a></li>
+                                        <li><a href="http://localhost:8080/tytsms-web/store_goods_list_51.htm" target="_blank">公文包</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_52.htm" target="_blank">单肩包</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_53.htm" target="_blank">手提包</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_54.htm" target="_blank">钱包</a></li>
+                                        <li><a href="http://localhost:8080/tytsms-web/store_goods_list_56.htm" target="_blank">拉杆箱</a></li>
+                            </ul>
+      </div>
+      <div class="advert"><div style='float:left;overflow:hidden;'><a href='' target='_blank'><img src='http://localhost:8080/tytsms-web/upload/advert/5150a2f7-00c7-4b47-aaaa-e5722716fafe.png' /></a></div></div>
+    </div>
+  </div>
+  <div class="storey_right">
+    <div class="storey_tab">
+      <ul>
+                <li  class="this"  style="cursor:pointer;" id="11" store_gc="7"><a href="javascript:void(0);">热爆品牌</a><s></s></li>
+              </ul>
+    </div>
+        <div class="storey_list" >
+      <ul>
+                        
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_48.htm" target="_blank">波斯丹顿男士手提包 真皮14寸电脑公文包 单肩包 休闲商务精品男包 </a></span> <span class="goods_price">¥<b>295.00</b><em>¥538.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_48.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/12/b8401f1b-7e7f-45b8-9842-2745f1e365a0.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_66.htm" target="_blank">波斯丹顿 男士皮带 纯牛皮 腰带平滑扣 商务休闲裤带 韩版潮男正品 </a></span> <span class="goods_price">¥<b>89.00</b><em>¥199.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_66.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/20/f96785a7-36ec-4293-931a-c9a844288006.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_104.htm" target="_blank">KKK钱包 进口全牛皮手抓包 真皮手拿包 男士真皮手抓包长款</a></span> <span class="goods_price">¥<b>199.00</b><em>¥199.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_104.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/28/524a82ed-6087-4606-af96-5d34f519d108.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_100.htm" target="_blank">柯玛妮克 新款鱼嘴牛皮高跟鞋  优雅格调系列</a></span> <span class="goods_price">¥<b>1120.00</b><em>¥1280.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_100.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/28/87faaaa6-1069-4f3b-998e-079ae3cca463.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                      </ul>
+    </div>
+        <div class="hot_sell">
+      <div class="hot_sell_br">         <h2>鞋包特推</h2>
+        <ul class="hot_sell_ul">
+                                        
+                    
+                    <li> <em class="number_01"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_101.htm" target="_blank"><span class="img_cspan">
+            <p><img src="http://localhost:8080/tytsms-web/upload/store/28/36bda3d0-a6e8-447d-a7fa-bcfaaad2e09a.jpg_small.jpg" width="80" height="80" /></p>
+            </span></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_101.htm" target="_blank">非谜 时尚甜美系尖头蝴蝶结平底鞋</a></p>
+              <p class="hot_goods_price">¥<b>428.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_02"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_62.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/12/37d10574-531f-4581-8ef2-e857551013cd.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_62.htm" target="_blank">波斯丹顿 铝框 拉杆箱 旅行箱 男女行李箱登机箱 </a></p>
+              <p class="hot_goods_price">¥<b>419.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_03"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_60.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/12/d274f5f6-3916-43f8-84f8-0b6bee34fc95.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_60.htm" target="_blank">波斯丹顿 万向轮男女士拉杆箱 旅行箱 行李箱 密码箱登机箱 </a></p>
+              <p class="hot_goods_price">¥<b>289.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_04"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_103.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/28/e521d060-e678-4f8a-b621-53c8e3c8272b.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_103.htm" target="_blank">波斯丹顿 商务男包 牛皮包 韩版男士包包休闲单肩包斜挎包</a></p>
+              <p class="hot_goods_price">¥<b>219.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_05"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_102.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/28/57c8d001-a90e-459b-84f8-93cb1da1198b.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_102.htm" target="_blank">波斯丹顿 男士手提包商务横款 牛皮电脑公文包休闲单肩斜挎包男包</a></p>
+              <p class="hot_goods_price">¥<b>399.00</b></p>
+            </div>
+          </li>
+                  </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="storey green_storey" id="floor_4">
+  <div class="storey_left">
+    <h1><b>4F</b><span>数码电子</span></h1>
+    <div class="storey_bd">
+      <div class="storey_ul">
+        <ul>
+                              <li><a href="http://localhost:8080/tytsms-web/store_goods_list_59.htm" target="_blank">手机</a></li>
+                                        <li><a href="http://localhost:8080/tytsms-web/store_goods_list_61.htm" target="_blank">移动电源</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_62.htm" target="_blank">手机外壳</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_63.htm" target="_blank">手机激光键盘</a></li>
+                                        <li><a href="http://localhost:8080/tytsms-web/store_goods_list_65.htm" target="_blank">自拍神器</a></li>
+                    <li><a href="http://localhost:8080/tytsms-web/store_goods_list_66.htm" target="_blank">网络机顶盒</a></li>
+                            </ul>
+      </div>
+      <div class="advert"><div style='float:left;overflow:hidden;'><a href='' target='_blank'><img src='http://localhost:8080/tytsms-web/upload/advert/da5c5ea6-a6a5-46b5-abff-4782c16685ca.png' /></a></div></div>
+    </div>
+  </div>
+  <div class="storey_right">
+    <div class="storey_tab">
+      <ul>
+                <li  class="this"  style="cursor:pointer;" id="10" store_gc="4"><a href="javascript:void(0);">品牌领航</a><s></s></li>
+              </ul>
+    </div>
+        <div class="storey_list" >
+      <ul>
+                        
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_54.htm" target="_blank">F1手机激光键盘  SHOWME  600克  所有手机型号适用  黑色</a></span> <span class="goods_price">¥<b>275.00</b><em>¥280.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_54.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/13/0f307c92-0f29-4278-b859-edb82d4894af.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_57.htm" target="_blank">iPhone6 手机壳 水钻p苹果4.7奢华保护套i6浮雕ihone6外壳子</a></span> <span class="goods_price">¥<b>11.80</b><em>¥13.80</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_57.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/14/3a9709a2-1349-4ff2-80f4-8d70df111a6f.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_72.htm" target="_blank">超萌可爱娃娃电源  Ewa移动电源  250克  4400毫安</a></span> <span class="goods_price">¥<b>0.04</b><em>¥85.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_72.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/13/2b6ad326-ad38-4170-898c-108738ec24c9.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                                
+                        
+                        <li>
+          <div class="bd_right">
+            <div class="storey_ps">
+              <div class="storey_hover"> <span class="goods_name"><a href="http://localhost:8080/tytsms-web/goods_105.htm" target="_blank">Canon/佳能 数码相机IXUS 155 </a></span> <span class="goods_price">¥<b>758.00</b><em>¥968.00</em></span> <span class="goods_pic"><a href="http://localhost:8080/tytsms-web/goods_105.htm" target="_blank"><span class="img_cspan">
+                <p><img src="http://localhost:8080/tytsms-web/resources/style/common/images/loader.gif" original="http://localhost:8080/tytsms-web/upload/store/14/49fcf73e-f762-4798-a447-c6382172dc11.jpg_middle.jpg"  onerror="this.src='http://localhost:8080/tytsms-web/upload/system/201b2477-e3bc-4617-8be0-4e0d263563e3.jpg';" width="28" height="28"/></p>
+                </span></a></span> </div>
+            </div>
+          </div>
+        </li>
+                      </ul>
+    </div>
+        <div class="hot_sell">
+      <div class="hot_sell_br">         <h2>数码特推</h2>
+        <ul class="hot_sell_ul">
+                                        
+                    
+                    <li> <em class="number_01"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_47.htm" target="_blank"><span class="img_cspan">
+            <p><img src="http://localhost:8080/tytsms-web/upload/store/13/96192ae2-39c6-4910-8f31-9c2d819d5059.jpg_small.jpg" width="80" height="80" /></p>
+            </span></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_47.htm" target="_blank">晶彩系列手机  翼鸣  130克  红 黑 银 3色可选</a></p>
+              <p class="hot_goods_price">¥<b>85.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_02"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_108.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/14/aeb749f8-9bb6-445e-bf4a-b6f98ca758a1.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_108.htm" target="_blank">赫卡 别克昂科拉日行灯 15款昂科拉无损安装日行灯带转向改装专用</a></p>
+              <p class="hot_goods_price">¥<b>369.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_03"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_107.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/14/dca433b2-a4f9-4b10-a3f1-a3c57167fe7c.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_107.htm" target="_blank">菲星 行车记录仪H6+ 导航后视镜高清行车记录仪双镜头测速电子狗一体机1080P H6+32G卡</a></p>
+              <p class="hot_goods_price">¥<b>1633.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_04"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_106.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/14/437bea27-0dd7-43d1-b7e4-611e25e2c245.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_106.htm" target="_blank">CUBE TV 3D网络高清电视盒子TV BOX 机顶盒 一年华人频道免费看</a></p>
+              <p class="hot_goods_price">¥<b>1280.00</b></p>
+            </div>
+          </li>
+                                                  
+                    
+                    <li> <em class="number_05"></em> <span class="hot_goods_pic"><a href="http://localhost:8080/tytsms-web/goods_105.htm" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/store/14/49fcf73e-f762-4798-a447-c6382172dc11.jpg_small.jpg" width="80" height="80"/></a></span>
+            <div class="hot_describe">
+              <p class="hot_goods_promo">已售0件</p>
+              <p class="hot_goods_name"><a href="http://localhost:8080/tytsms-web/goods_105.htm" target="_blank">Canon/佳能 数码相机IXUS 155 </a></p>
+              <p class="hot_goods_price">¥<b>758.00</b></p>
+            </div>
+          </li>
+                  </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="back_box_x" style="display:none;">
+  <div class="back_floor">
+    <ul>
+            <li  floor_id="floor_1"><a href="javascript:void(0);"><b>
+            <img src="http://localhost:8080/tytsms-web/upload/floor/d6052f6d-4b4d-4a46-ab99-894536084407.png"/>
+            </b><span>食品饮料</span></a></li>
+            <li  floor_id="floor_2"><a href="javascript:void(0);"><b>
+            <img src="http://localhost:8080/tytsms-web/upload/floor/ec1facfb-b180-4312-8540-7679936fe986.png"/>
+            </b><span>个护化妆</span></a></li>
+            <li  floor_id="floor_3"><a href="javascript:void(0);"><b>
+            <img src="http://localhost:8080/tytsms-web/upload/floor/10ca2988-0bfb-4e24-8542-9a823484c47d.png"/>
+            </b><span>鞋包配饰</span></a></li>
+            <li  floor_id="floor_4"><a href="javascript:void(0);"><b>
+            <img src="http://localhost:8080/tytsms-web/upload/floor/5f1e94c3-3592-4f31-8847-22ee1fe97857.png"/>
+            </b><span>数码电子</span></a></li>
+          </ul>
+  </div>
+</div>
+    <div class="floor_ad_banner"><script src="http://localhost:8080/tytsms-web/advert_invoke.htm?id=9"></script></a></div>
+  </div>
+  
+  <div class="footer_all">
+  	<div class="promise">
+		<div class="main" style="height: 50px;background: #85a737;">
+		<div class="promise_main">
+		<div class="promise_m"><i class="promise_1"></i><span class="pro_sp1">100%</span><span>正品保证</span></div>
+		<div class="promise_m"><i class="promise_2"></i><span class="pro_sp1">保税</span><span>仓库物流</span></div>
+		<div class="promise_m"><i class="promise_3"></i><span class="pro_sp1">便捷</span><span>安全支付</span></div>
+		<div class="promise_m"><i class="promise_4"></i><span class="pro_sp1">商家</span><span>权威认证</span></div>
+		</div>
+		</div>
+	</div>
+	
+	<div class="main">
+  	 <div class="footer_shopping">
+		   	  <div class="friendlink">
+	    <h1>合作伙伴</h1>
+	    <ul class="linkimg">
+	      	      <li> <a href="http://www.taobao.com" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/partner/d63fe8ab-a0f8-4985-98ac-60c488a04531.png" width="92" height="35" /></a></li>
+	      	      <li> <a href="http://www.jd.com/" target="_blank"><img src="http://localhost:8080/tytsms-web/upload/partner/394ebc41-96db-4531-88f6-749a2f16013d.png" width="92" height="35" /></a></li>
+	      	    </ul>
+	    <div class="linka"><a href="http://www.sina.com" target="_blank">weibo</a><a href="http://www.baidu.com" target="_blank">百度</a> </div>
+	  </div>
+	  	  
+	  <div class="shopping">
+	  	    <div class="shopone">
+	      <h3>使用帮助</h3>
+	      <ul>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_47.htm" target="_blank">购物流程</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_48.htm" target="_blank">玩转官网</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_53.htm" target="_blank">会员积分</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_54.htm" target="_blank">邀请好友注册</a></li>
+	        	      </ul>
+	    </div>
+	    	    <div class="shopone">
+	      <h3>支付及配送</h3>
+	      <ul>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_49.htm" target="_blank">注册及登录</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_50.htm" target="_blank">货到付款</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_51.htm" target="_blank">运费说明</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_52.htm" target="_blank">快递及配送区域</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_55.htm" target="_blank">发货时间</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_56.htm" target="_blank">物流信息查询</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_57.htm" target="_blank">验货签收</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_58.htm" target="_blank">FAQ</a></li>
+	        	      </ul>
+	    </div>
+	    	    <div class="shopone">
+	      <h3>售后服务</h3>
+	      <ul>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_59.htm" target="_blank">退货/退款流程</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_60.htm" target="_blank">退货/退款政策</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_61.htm" target="_blank">开具发票</a></li>
+	        	      </ul>
+	    </div>
+	    	    <div class="shopone">
+	      <h3>关于我们</h3>
+	      <ul>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_63.htm" target="_blank">关于泰易淘</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_65.htm" target="_blank">联系我们</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_66.htm" target="_blank">商务合作</a></li>
+	        	        	        	        <li><a  href="http://localhost:8080/tytsms-web/article_68.htm" target="_blank">加入泰易淘x</a></li>
+	        	      </ul>
+	    </div>
+	    		
+		<div class="shopone">
+	      <h3>在线客服</h3>
+	      <ul>
+	      <li><a href="tencent://message/?Menu=yes&uin=2853082168
+&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45
+" target="_blank">点击进入在线咨询</a></li>
+	      <li><span style=" color:#333;font-weight: bold;">09:00-18:00(周一至周六)</span></li>
+
+	        	      </ul>
+	    </div>
+		
+	     <div class="shopone">
+         <h3>官方微信</h3>
+         <ul>
+           <li><img id="u62_img" class="img " src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/u62.jpg" width="100px"></li>
+           <li style="margin-top:0px;padding:5px;"><a href="http://weibo.com/taiyitao" target="_blank"><strong style="font-size:16px;color:#333;line-height:50px;">官方微博</strong><img id="u66_img" class="img " src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/u66.png" style="width:40px;margin-bottom:-6px;"></a></li>
+          </ul>
+        </div>
+	    </div>	 </div>
+	</div>
+  <script>
+	jQuery(document).ready(function(){
+				//滚动条滚动事件
+		jQuery(window).scroll(function(){
+		var top = jQuery(document).scrollTop();
+		if(top==0){
+			  jQuery("#back_box").hide();
+			  jQuery(".back_box_x").hide();
+			}else{
+			  jQuery("#back_box").show();	
+		      jQuery(".back_box_x").show();
+			}
+		});	
+		//
+		jQuery("#toTop").click(function(){
+	       jQuery('body,html').animate({scrollTop:0},1000);
+	       return false;
+	    });
+	});
+	</script>
+	<div class="main">
+	  <div class="footer">
+	    <ul>
+	      	      	      <li class="hui2">	     
+	      	    
+	      </li>
+	      <li class="hui2">
+	      <img class="img " src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/u8_line.png" style="margin:5px;">
+	      Powered by Taiyitao 粤ICP备14092103号
+	      <img class="img " src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/u8_line.png" style="margin:5px;">
+	      </li>
+	       <li class="hui2" style="margin-top:-7px;">
+                                     广州泰易淘网络科技有限公司  版权所有 &nbsp;&nbsp;|<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254438980'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254438980' type='text/javascript'%3E%3C/script%3E"));</script>
+          </li>
+          <li style="margin-top:10px;">
+                <a href="https://search.szfw.org/cert/l/CX20141203005780006030" target="_blank">  <img id="u2_img" class="img " src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/u2.jpg" ></a>
+                <img id="u4_img" class="img " src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/u4.png" style="margin-left:5px;">
+                <img id="u6_img" class="img " src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/u6.png" style="margin-left:5px;">
+          </li>
+	      <li><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62119377-1', 'auto');
+  ga('send', 'pageview');
+
+</script></li>
+	    </ul>
+	  </div>
+	</div>
+	
+	<!--返回最顶部-->
+	<div id="back_box" style="position:fixed;width:40px; height:118px; float:left; right:0; z-index:9999; display:none; bottom:150px; _position:absolute;/*兼容IE6的代码*/
+	_bottom:auto;/*兼容IE6的代码*/
+	_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));">
+	  <div class="back_index"><a href="http://localhost:8080/tytsms-web/index.htm" target="_blank"  title="返回主页"></a></div>
+	  <div class="back_top"><a id="toTop" href="#" bosszone="hometop" style="display: block;"  title="返回顶部" target="_self" ></a></div>
+	</div>
+	
+	<!--第三方google数据分析 -->
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-62119377-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<!--第三方sogo数据统计-->
+<script  type="text/javascript">
+  var _sogou_sa_q = _sogou_sa_q || [];
+  _sogou_sa_q.push(['_sid', '271293-279121']);
+ (function() {
+    var _sogou_sa_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");
+    var _sogou_sa_src=_sogou_sa_protocol+"hermes.sogou.com/sa.js%3Fsid%3D271293-279121";
+    document.write(unescape("%3Cscript src='" + _sogou_sa_src + "' type='text/javascript'%3E%3C/script%3E"));
+    })();
+</script>
+
+<!--第三方聚效数据统计-->
+<script type="text/javascript">
+var _mvq = window._mvq || []; 
+window._mvq = _mvq;
+_mvq.push(['$setAccount', 'm-147059-0']);
+
+_mvq.push(['$setGeneral', '', '', /*用户名*/ '', /*用户id*/ '']);//如果不传用户名、用户id，此句可以删掉
+_mvq.push(['$logConversion']);
+(function() {
+	var mvl = document.createElement('script');
+	mvl.type = 'text/javascript'; mvl.async = true;
+	mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(mvl, s); 
+})();	
+</script>
+
+</body>
+</html>

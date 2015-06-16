@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="$!webPath/resources/style/mobile/css/style.css">
+<title></title>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+function iosFun(cmd,para)
+{ 
+    document.location="objc://"+cmd+":/"+para;  //cmd代表objective-c中的的方法名，parameter1自然就是参数了
+}
+</script>
+</script>
+</head>
+<body style="background-image:none">
+<div class="succeed">
+  <div class="pd10">
+    <div class="succeed_left"><img src="$!webPath/resources/style/mobile/images/succeed.png" width="48" height="48" /></div>
+    <div class="succeed_right">
+      <ul>
+        <li><strong>#if($!obj.payType=="payafter")下单成功，请等待发货！ #else付款成功！#end</strong></li>
+        <li>订单号：$!{obj.order_id}</li>
+      #if($!obj.payType!="payafter")  <li>付款金额：<b>¥$!{order_total_price}</b></li>#end
+      </ul>
+    </div>
+  </div>
+</div>
+#if($!obj.payType=="payafter")
+<div class="back_btn"><a href="javascript:void(0);" #if($!type=="android") onClick="window.js.gotoOrder()" #else onClick="iosFun('gotoOrder','')"  #end>我的订单</a></div>
+#else
+<div class="back_btn"><a href="javascript:void(0);" #if($!type=="android") onClick="window.js.gotoIndex()" #else onClick="iosFun('gotoIndex','')"  #end>付款完成</a></div>
+#end
+</body>
+</html>

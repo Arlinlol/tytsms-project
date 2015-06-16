@@ -1,0 +1,225 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessageText('member.account_avatar.modify_image','')-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type=text/css rel=stylesheet />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/swfobject.js"></script>
+<script>
+ jQuery(document).ready(function(){
+	  jQuery(".user_menu b").toggle(
+			function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+			},
+			function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+			});
+	
+ });
+function saveForm(){
+    jQuery("#theForm").submit();
+}
+</script>
+<script language="JavaScript" type="text/javascript">
+			<!--
+			function getParamsFromUrl() {
+			    var url, pos, parastr, para;
+			    url = window.location.href;
+			    pos = url.indexOf("?")
+			    if (pos > -1) {
+			    	parastr = url.substring(pos + 1);
+			    } else {
+			    	parastr = "";
+			    }
+			    return parastr;
+			}
+			
+			function reload() {
+				window.location.reload();
+			}
+			
+			function getUploadUrl() {
+				return "$!webPath/buyer/upload_avatar.htm";
+			}
+			
+			function uploadSuccessHandler(callbackMsg) {				
+				//alert("上传成功，回调方法请写在这里");
+				window.location.reload();
+			}
+			
+			function uploadFailHandler(callbackMsg) {				
+				//alert("上传失败，回调方法请写在这里#springMessageText('member.account_bind.bind_account','')");
+				alert("#springMessageText('member.account_avatar.upload_failure','')：" + callbackMsg);
+			}
+			
+			//大头像：宽
+			function getBigAvatarWidth() {				
+				return 132;
+			}
+			
+			//大头像：高
+			function getBigAvatarHeight() {				
+				return 132;
+			}
+			
+			//中头像：宽
+			function getMiddleAvatarWidth() {				
+				return 60;
+			}
+			
+			//中头像：高
+			function getMiddleAvatarHeight() {				
+				return 60;
+			}
+			
+			//小头像：宽
+			function getLittleAvatarWidth() {				
+				return 32;
+			}
+			
+			//小头像：高
+			function getLittleAvatarHeight() {				
+				return 32;
+			}
+			
+			//裁剪框：宽
+			function getCutRectWidth() {				
+				return 132;
+			}
+			
+			//裁剪框：高
+			function getCutRectHeight() {				
+				return 132;
+			}
+			//截取框是否可缩放
+			function getCutRectScalable() {				
+				return "true";
+			}
+			function getBgImage() {
+				return "$!webPath/th_th/resources/style/common/images/avatar/bg_image.png"
+			}
+			
+			function getCopyRightName_1() {				
+				return "#springMessageText('member.account_avatar.shop_system','')";
+			}
+			
+			function getCopyRightName_2() {				
+				return "#springMessageText('member.account_avatar.authorization_calls',''):400-8633551";
+			}
+			
+			function getCopyRightUrl_1() {				
+				return "http://www.taiyiao.com";
+			}
+			
+			function getCopyRightUrl_2() {				
+				return "http://www.taiyitao.com";
+			}
+			
+			function getAvatarBgColor() {
+				return 0xffffff;
+			}
+			function getAvatarBgImage() {				
+　　				return "$!webPath/th_th/resources/style/common/images/avatar/bg_image.png";
+　　			}
+			var _curImage = "$!webPath/th_th/resources/style/common/images/avatar/bg_image.png";
+			function setSourceImage(s) {
+				_curImage = s;
+				jQuert('#iskyshop_avatar').setSourceImage();
+			}
+			function getSourceImage() {
+				return _curImage;
+			}
+			// -->
+		</script>
+        <script type="text/javascript">
+            // For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. 
+            var swfVersionStr = "10.2.0";
+            // To use express install, set to playerProductInstall.swf, otherwise the empty string. 
+            var xiSwfUrlStr = "$!webPath/th_th/resources/flash/playerProductInstall.swf";
+            var flashvars = {};
+            //跨域访问策略文件
+            flashvars.policy_file_url="$!webPath/th_th/resources/other/crossdomain.xml";
+            //初始化图片
+            flashvars.init_image_url="$!webPath/th_th/resources/style/common/images/avatar/init_image.jpg";
+            //大头像名称
+            flashvars.big_avatar_name="iskyshop_big_avatar";
+            //中头像名称
+            flashvars.middle_avatar_name="iskyshop_middle_avatar";
+            //小头像名称
+            flashvars.little_avatar_name="iskyshop_little_avatar";
+            flashvars.url_params = getParamsFromUrl();
+            var params = {};
+            params.quality = "high";
+            params.bgcolor = "#ffffff";
+            params.allowscriptaccess = "sameDomain";
+            params.allowfullscreen = "true";
+            var attributes = {};
+            attributes.id = "c_avatar_iskyshop";
+            attributes.name = "c_avatar_iskyshop";
+            attributes.align = "middle";
+            swfobject.embedSWF(
+                "$!webPath/th_th/resources/flash/iskyshop_avatar.swf", "flashContent", 
+                "600", "400", 
+                swfVersionStr, xiSwfUrlStr, 
+                flashvars, params, attributes);
+            // JavaScript enabled so display the flashContent div in case it is not replaced with a swf object.
+            swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+        </script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=account")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>#springMessageText('member.account_avatar.account_information','')</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li><i></i><a href="$!webPath/buyer/account.htm">#springMessageText('member.account_avatar.basic_information','')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_password.htm">#springMessageText('member.account_avatar.change_password','')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_email.htm">#springMessageText('member.account_avatar.modify_email','')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_mobile.htm">#springMessageText('member.account_avatar.modify_mobile_phone','')</a></li>
+            <li class="this"><i></i><a href="$!webPath/buyer/account_avatar.htm">#springMessageText('member.account_avatar.modify_head','')</a></li>
+          </ul>
+        </div>       
+        <div class="add_usercenter">      
+        <div class="add_user_photo">
+        <span>
+        #if($!user.photo)
+			    #set($img="$!webPath/$!user.photo.path/$!user.photo.name")
+			  #else 
+			    #set($img="$!webPath/$!config.memberIcon.path/$!config.memberIcon.name")
+			  #end
+			  <img src="$!img" width="132" height="132" />
+        </span>
+        </div>
+        <div class="add_user_photo_change">
+      <div id="flashContent" style="width:600px; height:450px;">
+                  
+                </div>
+        </div>  
+        </div> 
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

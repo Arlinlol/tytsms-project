@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>购物车 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/good_cart.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/layout.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.qrcode.min.js"></script>
+<script>
+//返回当前页面高度
+function order_pay(){	
+  var h=document.body.scrollHeight;
+  var top= document.documentElement.scrollTop;
+  top=top+(h-top)/2;
+  jQuery('.black_overlay').css("height",h);
+  jQuery(".white_content").css("top",top);
+  jQuery('#pay_overlay').show()
+  jQuery('#theForm').submit();
+}
+function order_pay_wx(){	
+
+	  var can=jQuery('#qrcode').children("canvas");
+	  if(can.length>0){
+	  jQuery('#pay_overlay_wx').show();
+	  }else{
+      jQuery.ajax({type:'POST',url:'$!webPath/order_pay_wx.htm',async:false,data:{"payType":"wechatpay","order_id":"$!{order.id}"},success:function(data){
+	  #*jQuery("#qcode").attr('src','$!webPath'+data); *#
+	  jQuery(function(){
+	     jQuery('#qrcode').qrcode({
+		   render: "canvas",//设置渲染方式  
+           width : 300,//设置宽度  
+           height: 300,//设置高度
+		   text	: data
+	     });
+      })
+	  jQuery(".white_content_wx").css("position","fixed");
+	   var top = (jQuery(window).height() - 520)/2;
+	   if(top<60){
+	   top = 60;
+	   }   
+	   var left = (jQuery(window).width() - 800)/2; 
+	   var h=document.body.scrollHeight;  
+	  jQuery('.black_overlay').css("height",h);
+	  jQuery(".white_content_wx").css("width",800);
+	  jQuery(".white_content_wx").css("height",512);
+	  jQuery(".white_content_wx").css("top",top);
+	  jQuery(".white_content_wx").css("left",left);
+	  jQuery('#pay_overlay_wx').show();
+	},
+	error:function(XMLHttpRequest, textStatus, errorThrown){
+      alert("网络繁忙，请稍后再试！");
+      }
+	});
+	}
+}
+window.onscroll=function(){
+  var h=document.body.scrollHeight;
+  var top= document.documentElement.scrollTop;
+  top=top+(h-top)/2;
+  jQuery(".white_content").css("top",top);
+}
+jQuery(document).ready(function(){
+   jQuery(":radio[value=$!of.payment.mark]").attr("checked",true);
+});
+
+function ReplaceAll(str, sptr, sptr1){
+    while (str.indexOf(sptr) >= 0){
+       str = str.replace(sptr, sptr1);
+    }
+    return str;
+}
+</script>
+</head>
+<body style=" background:#fff;">
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="shopping_cart">
+    <div class="shopping_step">
+      <ul>
+        <li class="shopping_step_a"><span></span><i></i><strong>1.我的购物车</strong></li>
+        <li class="shopping_step_bthree"><span></span><i></i><strong>2.填写核对订单信息</strong></li>
+        <li class="shopping_step_cthis"><span></span><i></i><strong>3.成功提交订单</strong></li>
+      </ul>
+    </div>
+     <form action="$!webPath/order_pay.htm" method="post" target="_blank" id="theForm">
+    <div class="shopping_payfor">
+      <div class="shopping_payfor_top"> <span class="shopping_payfor_topleft"></span>
+        <ul class="orderul">
+          <li class="shopping_payfor_title">订单提交成功</li>
+          <li class="order_hui">您的订单已成功生成，选择您想用的支付方式进行支付</li>
+          <li class="order_box"><span class="order_box_cont">
+            <p>应付金额：<b>¥$!{all_of_price}</b></p>
+            </span></li>
+        #if($!order.order_cat!=2)  <li class="order_bottom">您可以在用户中心<a href="$!webPath/buyer/order.htm">“我的订单”</a>查看订单</li>#end
+        </ul>
+      </div>
+      <div class="shopping_payfor_bottom">
+        <h3 class="shopping_payfor_h3">您可以选择的付款方式</h3>
+        <div class="shopping_payfor_bmbox">
+        #set($alipay_install=$!paymentTools.queryShopPayment("alipay").get("install"))
+        #set($paypal_install=$!paymentTools.queryShopPayment("paypal").get("install"))
+        #set($allinpay_install=$!paymentTools.queryShopPayment("allinpay").get("install"))
+        #set($tenpay_install=$!paymentTools.queryShopPayment("tenpay").get("install"))
+        #set($chinabank_install=$!paymentTools.queryShopPayment("chinabank").get("install"))
+        #set($bill_install=$!paymentTools.queryShopPayment("bill").get("install"))
+        #set($wechatpay_install=$!paymentTools.queryShopPayment("wechatpay").get("install"))
+        #if($!alipay_install==true||$!paypal_install==true||$!allinpay_install==true||$!tenpay_install==true||$!chinabank_install==true||$!bill_install==true)
+          <h4>在线支付</h4>
+          <ul>         
+            #if($!alipay_install==true)
+            <li>
+            <label>
+              <input name="payType" type="radio" value="alipay" checked="checked" />
+              <span><img src="$!imageWebServer/resources/style/common/images/payment/alipay.jpg" width="115" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+            #end
+            #if($!paypal_install==true)
+            <li>
+              <label>
+              <input name="payType" type="radio" value="paypal" checked="checked" />
+              <span><img src="$!imageWebServer/resources/style/common/images/payment/paypal.jpg" width="115" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+            #end
+            #if($!allinpay_install==true)
+            <li>
+              <label>
+              <input name="payType" type="radio" value="allinpay" checked="checked" />
+              <span><img src="$!imageWebServer/resources/style/common/images/payment/allinpay_install.gif" width="115" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+            #end
+            #if($!tenpay_install==true)
+            <li>
+             <label>
+              <input name="payType" type="radio" value="tenpay" checked="checked" />
+              <span><img src="$!imageWebServer/resources/style/common/images/payment/tenpay.jpg" width="115" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+            #end
+            #if($!chinabank_install==true)
+            <li>
+             <label>
+              <input name="payType" type="radio" value="chinabank" checked="checked" />
+              <span><img src="$!imageWebServer/resources/style/common/images/payment/chinabank.jpg" width="115" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+            #end
+            #if($!bill_install==true)
+            <li>
+             <label>
+              <input name="payType" type="radio" value="bill" checked="checked" />
+              <span><img src="$!imageWebServer/resources/style/common/images/payment/bill.jpg" width="115" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+            #end
+          </ul>         
+          #end
+
+        #if(!$!group)
+          #set($install=$!paymentTools.queryShopPayment("payafter").get("install")) 
+          #if($!install==true)
+          <h4>货到付款</h4>
+          <ul>
+            <li>
+             <label>
+             <input name="payType" type="radio" value="payafter" />
+              <span><img src="$!imageWebServer/resources/style/common/images/payment/payafter.jpg" width="115" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+          </ul>
+          #end
+           #end
+          #set($install=$!paymentTools.queryShopPayment("balance").get("install")) 
+          #if($!install==true)           
+          <h4>预存款支付</h4>
+          <ul>
+            <li>
+             <label>
+             <input name="payType" type="radio" value="balance" />
+              <span><img src="$!imageWebServer/resources/style/common/images/payment/balance.jpg" width="115" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+          </ul>
+          #end
+          #set($wechatpay_install=$!paymentTools.queryShopPayment("wechatpay").get("install"))
+          #if($!wechatpay_install==true)           
+          <h4>扫码支付</h4>
+          <ul>
+            <li>
+             <label onclick="order_pay_wx();">
+              <span><img src="$!webPath/resources/style/common/images/payment/wechatpay.jpg" width="135" height="41" /></span>
+              </label>
+              <p></p>
+            </li>
+          </ul>
+          #end
+        </div>
+      </div>
+      <div class="shopping_payfor_next">
+           <input name="" type="button"  value="确认支付" onclick="order_pay();" style="cursor:pointer;"/>
+            <input name="order_id" type="hidden" id="order_id" value="$!{order.id}" />
+      </div>
+    </div>
+  </form>
+  </div>
+    $!httpInclude.include("/footer.htm")
+</div>
+<div style="display:none;" id="pay_overlay">
+  <div class="white_content"> <a href="javascript:void(0);" onclick="javascript:jQuery('#pay_overlay').hide();" class="white_close"></a>
+    <div class="white_box">
+      <h1>支付提醒</h1>
+      <dl class="white_dl">
+        <dt></dt>
+        <dd>
+          <div class="payf"><a href="$!webPath/order_finish.htm?order_id=$!{order.id}">已经完成支付！</a></div>
+          <div class="payf"><a href="javascript:void(0);"  onclick="javascript:jQuery('#pay_overlay').hide();" >支付出现问题！</a></div>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <div class="black_overlay"></div>
+</div>
+<div style="display:none;" id="pay_overlay_wx">
+  <div class="white_content_wx"> <a href="javascript:void(0);" onclick="javascript:jQuery('#pay_overlay_wx').hide();" class="white_close"><img src="$!imageWebServer/resources/style/system/front/default/images/close.jpg" width="14" height="14" /></a>
+    <div class="white_box">
+      <h1>微信支付提醒</h1>
+      <div class="p-w-bd">
+	      <div class="p-w-box">
+	      	<div class="pw-box-hd">
+	      		#*<img id="qcode" src="$!webPath/resources/style/system/front/default/images/logo.png" width="298">*#
+	      		<div id="qrcode"></div>
+	      	</div>
+	      	<div class="pw-box-ft">
+	      			<p>请使用微信扫一扫</p>
+	      			<p>扫描二维码支付</p>
+	      	</div>
+	      </div>
+	      <div class="p-w-sidebar">
+      	  </div>
+      </div>
+	  <div class="payf_wx"><a href="$!webPath/order_finish.htm?order_id=$!{order.id}">已经完成支付！</a><a href="javascript:void(0);"  onclick="javascript:jQuery('#pay_overlay_wx').hide();" >支付出现问题！</a></div>
+    </div>
+  </div>
+  <div class="black_overlay"></div>
+</div>
+
+<!--第三方聚效数据统计-->
+<script type="text/javascript">
+var goods_info = eval('$!{order.goods_info}');
+var child_order_detail = '$!{order.child_order_detail}';
+child_order_detail = child_order_detail.replace(/\"\[/g, '[');
+child_order_detail = child_order_detail.replace(/\]\"/g, ']');
+child_order_detail = child_order_detail.replace(/\\/g, '');
+child_order_detail = eval(child_order_detail);
+
+var _mvq = window._mvq || []; 
+window._mvq = _mvq;
+_mvq.push(['$setAccount', 'm-147059-0']);
+
+_mvq.push(['$setGeneral', 'ordercreate', '', /*用户名*/ '$!user.userName', /*用户id*/ '$!user.id']);
+_mvq.push(['$logConversion']);
+_mvq.push(['$addOrder',/*订单号*/ '$!order.order_id', /*订单金额*/ '$!order.totalPrice']);
+
+for(i=0; i<goods_info.length; i++) {
+	_mvq.push(['$addItem', /*订单号*/ '$!order.order_id', /*商品id*/ goods_info[i].goods_id, /*商品名称*/ goods_info[i].goods_name, /*商品价格*/ goods_info[i].goods_price, /*商品数量*/ goods_info[i].goods_count, /*商品页url*/ goods_info[i].goods_domainPath, /*商品页图片url*/ goods_info[i].goods_mainphoto_path]);
+}
+for(i=0; i<child_order_detail.length; i++) {
+    console.log(child_order_detail[i].order_goods_info.length);
+    var order_goods_info = child_order_detail[i].order_goods_info;
+    for(j=0;j<order_goods_info.length;j++) {
+    	_mvq.push(['$addItem', /*订单号*/ '$!order.order_id', /*商品id*/ order_goods_info[j].goods_id, /*商品名称*/ order_goods_info[j].goods_name, /*商品价格*/ order_goods_info[j].goods_price, /*商品数量*/ order_goods_info[j].goods_count, /*商品页url*/ order_goods_info[j].goods_domainPath, /*商品页图片url*/ order_goods_info[j].goods_mainphoto_path]);
+                               
+    }
+                                                
+}
+
+_mvq.push(['$logData']);
+</script>
+<script type="text/javascript">
+var _mvq = window._mvq || []; 
+window._mvq = _mvq;
+_mvq.push(['$setAccount', 'm-147059-0']);
+
+_mvq.push(['$setGeneral', '', '', /*用户名*/ '$!user.userName', /*用户id*/ '$!user.id']);//如果不传用户名、用户id，此句可以删掉
+_mvq.push(['$logConversion']);
+(function() {
+	var mvl = document.createElement('script');
+	mvl.type = 'text/javascript'; mvl.async = true;
+	mvl.src = ('https:' == document.location.protocol ? 'https://static-ssl.mediav.com/mvl.js' : 'http://static.mediav.com/mvl.js');
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(mvl, s); 
+})();	
+</script>
+</body>
+</html>

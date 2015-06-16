@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-优惠券列表- $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+ jQuery('#coupon_begin_time').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#coupon_end_time').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+});<!--end-->
+</script>
+</head>
+
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=coupon") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销推广</b>><b>优惠券列表</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href="$!webPath/seller/coupon.htm"><i></i>优惠券列表</a></li>
+            <li ><a href="$!webPath/seller/coupon_add.htm"><i></i>新增优惠券</a></li>
+          </ul>
+        </div>
+        <div  class="user_sp_right"> 
+         <form action="$!webPath/seller/coupon.htm" method="post">
+           	<span></span> 
+            <span class="size150"><input name="coupon_begin_time" type="text" id="coupon_begin_time"  placeholder="开始时间"/> - </span>
+            <span class="size150"><input name="coupon_end_time" type="text" id="coupon_end_time" placeholder="结束时间"/></span> 
+            <span>优惠劵名称</span> 
+            <span class="size150"><input name="coupon_name" type="text" id="coupon_name"/></span>
+            <input name="" type="submit"  value="搜索" style="cursor:pointer;"  class="user_sear_btn"/>
+            </span> 
+           
+          </form> </div>
+        <div class="user_list_box">
+        
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/coupon.htm">
+          
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="139">优惠券名称</th>
+                  <th width="128">优惠券金额</th>
+                  <th width="125">可用订单金额</th>
+                  <th width="125">发行数量</th>
+                  <th width="125">发放数量</th>
+                  <th width="150" align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                <tr >
+                  <td align="center">$!obj.coupon_name</td>
+                  <td align="center">$!obj.coupon_amount</td>
+                  <td align="center">$!obj.coupon_order_amount</td>
+                  <td align="center">#if($!{obj.coupon_count}==0)不限量 #else $!{obj.coupon_count}#end</td>
+                  <td align="center">$!{obj.couponinfos.size()}</td>
+                  #set($coupon_status=0)
+                  #if($!{obj.coupon_count}>0)
+                  #if($!{obj.couponinfos.size()}>=$!{obj.coupon_count})
+                  #set($coupon_status=1)
+                  #end
+                  #end
+                  <td align="center" class="del_operate">
+                  	#if($!{obj.couponinfos.size()}==0)
+                  	<a href="$!webPath/seller/coupon_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="del_a">编辑</a>
+                    | <a href="$!webPath/seller/coupon_del.htm?id=$!obj.id&currentPage=$!currentPage" class="del_a">删除</a> | 
+                    #end 
+					#if($coupon_status==0)
+          			<a href="$!webPath/seller/coupon_send.htm?id=$!obj.id&currentPage=$!currentPage" class="del_a">发放</a>
+         			#else 发放完毕
+         			#end
+                    #if($!{obj.couponinfos.size()}>0)
+                    | <a href="$!webPath/seller/coupon_info_list.htm?coupon_id=$!obj.id" class="del_a">发放列表</a>	
+                    #end 
+                    </td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.integral_exchange4.shopping_cart") </title><!--购物车-->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/layout.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+//返回当前页面高度
+function order_pay(){
+  var h=document.documentElement.clientHeight;
+  var top= document.documentElement.scrollTop+document.body.scrollTop;
+  jQuery('.black_overlay').css("height",h+top);
+  top=top+(h-top)/2;
+  jQuery(".white_content").css("top",top);
+  jQuery('#pay_overlay').show()
+  jQuery('#theForm').submit();
+}
+window.onscroll=function(){
+  var h=document.documentElement.clientHeight;
+  var top= document.documentElement.scrollTop+document.body.scrollTop;
+  top=top-50+(h-top)/2;
+  jQuery(".white_content").css("top",top);
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="index">
+    <div class="index2">
+      <div class="inte_step">
+        <div class="stepcenter"> <span class="inte_step1a"></span> <span class="inte_step2"></span> <span class="inte_step3a"></span> </div>
+      </div>
+    </div>
+  </div>
+  <div class="shopping_cart">
+  <form action="$!webPath/integral/order_pay.htm" method="post" target="_blank" id="theForm">
+    <div class="shopping_payfor">
+      <div class="shopping_payfor_top"> <span class="shopping_payfor_topleft"></span>
+        <ul class="orderul">
+          <li class="shopping_payfor_title">#springMessage("sms.integral_exchange4.submit_order")<!--订单提交成功--></li>
+          <li class="order_hui">#springMessage("sms.integral_exchange4.payment_method")<!--您的订单已成功生成，选择您想用的支付方式进行支付--></li>
+          <li class="order_box"><span class="order_box_cont">
+            <p>#springMessage("sms.integral_exchange4.order_number")<!--订单编号-->：<b>$!{obj.igo_order_sn}</b></p>
+            <p>#springMessage("sms.integral_exchange4.amount_payable")<!--应付金额-->：<b>¥$!{obj.igo_trans_fee}</b></p>
+            </span></li>
+          <li class="order_bottom">#springMessage("sms.integral_exchange4.user_center")<!--您可以在用户中心--><a href="$!webPath/buyer/integral_order_list.htm">“#springMessage("sms.integral_exchange4.my_order")<!--我的订单-->”</a>#springMessage("sms.integral_exchange4.look_order")<!--查看订单--></li>
+        </ul>
+      </div>
+      <div class="shopping_payfor_bottom">
+        <h3 class="shopping_payfor_h3">#springMessage("sms.integral_exchange4.choose_amount_payable")<!--您可以选择的付款方式--></h3>
+        <div class="shopping_payfor_bmbox">
+          <h4>#springMessage("sms.integral_exchange4.online_payment")<!--在线支付--></h4>
+          <ul>
+            #set($map=$!paymentTools.queryShopPayment("alipay"))
+            #set($install=$!map.get("install"))
+			#if($!install==true)
+            <li>
+              <label style="cursor:pointer">
+              <input name="payType" type="radio" value="alipay" checked="checked" />
+              <span><img src="$!imageWebServer/th_th/resources/style/common/images/payment/alipay.jpg" width="115" height="41" /></span>
+              </label>
+            </li>
+			#end
+            
+            #set($map=$!paymentTools.queryShopPayment("tenpay"))
+            #set($install=$!map.get("install"))
+            #if($!install==true)
+            <li>
+              <label style="cursor:pointer">
+              <input name="payType" type="radio" value="tenpay" />
+              <span><img src="$!imageWebServer/th_th/resources/style/common/images/payment/tenpay.jpg" width="115" height="41" /></span>
+              </label>
+            </li>
+            #end
+            #set($map=$!paymentTools.queryShopPayment("chinabank"))
+            #set($install=$!map.get("install"))
+            #if($!install==true)
+            <li>
+              <label style="cursor:pointer">
+              <input name="payType" type="radio" value="chinabank" />
+              <span><img src="$!imageWebServer/th_th/resources/style/common/images/payment/chinabank.jpg" width="115" height="41" /></span>
+              </label>
+            </li>
+            #end
+            #set($map=$!paymentTools.queryShopPayment("bill"))
+            #set($install=$!map.get("install"))
+            #if($!install==true)
+            <li>
+              <label style="cursor:pointer">
+              <input name="payType" type="radio" value="bill" />
+              <span><img src="$!imageWebServer/th_th/resources/style/common/images/payment/bill.jpg" width="115" height="41" /></span>
+              </label>
+            </li>
+            #end
+            
+            #set($map=$!paymentTools.queryShopPayment("paypal"))
+            #set($install=$!map.get("install"))
+            #if($!install==true)
+            <li>
+              <label style="cursor:pointer">
+              <input name="payType" type="radio" value="paypal" />
+              <span><img src="$!imageWebServer/th_th/resources/style/common/images/payment/paypal.jpg" width="115" height="41" /></span>
+              </label>
+            </li>
+            #end          
+            #set($map=$!paymentTools.queryShopPayment("allinpay"))
+            #set($install=$!map.get("install"))
+            #if($!install==true)
+            <li>
+              <label style="cursor:pointer">
+              <input name="payType" type="radio" value="allinpay" />
+              <span><img src="$!imageWebServer/th_th/resources/style/common/images/payment/allinpay.jpg" width="115" height="41" /></span>
+              </label>
+            </li>
+            #end          
+          </ul>
+           <h4>#springMessage("sms.goods_cart3.advance_payment")<!--预存款支付--></h4> 
+            #set($map=$!paymentTools.queryShopPayment("balance"))
+            #set($install=$!map.get("install"))
+            #if($!install==true)
+            <ul>
+                <li>
+                  <label style="cursor:pointer">
+                  <input name="payType" type="radio" value="balance" />
+                  <span><img src="$!imageWebServer/th_th/resources/style/common/images/payment/balance.jpg" width="115" height="41" /></span>
+                  </label>
+                </li>
+          	</ul>
+            #end
+        </div>
+      </div>
+      <div class="shopping_payfor_next">
+      	<input name="integral_order_id" type="hidden" id="integral_order_id" value="$!{obj.id}" />
+        <input name="" type="button" value="#springMessage('sms.integral_exchange4.next')" onclick="order_pay();"/><!--下一步-->
+      </div>
+    </div>
+  </form>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+<div style="display:none;" id="pay_overlay">
+  <div class="white_content"> <a href="javascript:void(0);" onclick="javascript:jQuery('#pay_overlay').hide();" class="white_close"><img src="$!imageWebServer/th_th/resources/style/system/front/default/images/close.jpg" width="14" height="14" /></a>
+    <div class="white_box">
+      <h1>#springMessage("sms.integral_exchange4.pay_remind")<!--支付提醒--></h1>
+      <dl class="white_dl">
+        <dt></dt>
+        <dd>
+          <div class="payf"><a href="$!webPath/integral/order_finish.htm?order_id=$!{obj.id}">#springMessage("sms.integral_exchange4.finish_pay")<!--已经完成支付！--></a></div>
+          <div class="payf"><a href="javascript:void(0);"  onclick="javascript:jQuery('#pay_overlay').hide();" >#springMessage("sms.integral_exchange4.payment_problems")<!--支付出现问题！--></a></div>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <div class="black_overlay"></div>
+</div>
+</body>
+</html>

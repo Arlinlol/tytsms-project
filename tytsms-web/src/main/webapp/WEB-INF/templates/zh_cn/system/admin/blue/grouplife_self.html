@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script>
+//
+jQuery(document).ready(function(){
+});
+function ajax_update(id,fieldName,obj,value){
+   var val;
+   if(value==undefined){
+	 val=jQuery(obj).val();
+   }else val=value; 
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/group_lifeself_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }    
+				 if(value!=undefined){
+				   jQuery(obj.parentNode.parentNode).remove();
+				 }
+              }
+	    });
+}
+
+function query_form(){
+jQuery("#ListForm").submit();
+	}
+</script>
+</head>
+<body scroll="yes">
+<div class="cont">
+  <h3 class="seth">团购管理</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/group_self.htm"><b>商品类团购列表</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_self.htm" class="this"><b>生活类团购列表</b></a></li>
+            <li><a href="$!webPath/admin/group_self_add.htm?type=goods"><b>新增商品类团购商品</b></a></li>
+            <li><a href="$!webPath/admin/group_self_add.htm?type=life"><b>新增生活类团购商品</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_selforder.htm"><b>生活购订单列表</b></a></li>
+            <li><a href="$!webPath/admin/grouplife_selfinfo.htm"><b>团购消费码列表</b></a></li>
+        </ul>
+  </div>
+ <form name="ListForm" id="ListForm" action="" method="post">
+    <div class="search">
+      <span>团购名称</span> <span class="size100">
+          <input name="gg_name" type="text" id="gg_name" value="$!gg_name" />
+          </span>
+          <span>
+          <input name="" type="button"  value="搜索" style="cursor:pointer;" onclick="query_form()" class="search_btn"/>
+        </span> 
+    </div>
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="15%"><span class="form_btna">团购名称</span></th>
+          <th width="10%"><span class="form_btna">团购活动</span></th>
+          <th width="10%"><span class="form_btna">团购价格</span></th>
+          <th width="10%"><span class="form_btna">商品原价</span></th>
+          <th width="10%"><span class="form_btna">开始时间</span></th>
+          <th width="10%"><span class="form_btna">结束时间</span></th>
+          <th width="5%"><span class="form_btna">剩余数量</span></th>
+          <th width="5%"><span class="form_btna">购买数量</span></th>
+          <th width="10%"><span class="form_btna">推荐</span></th>
+          <th width="5%"><span class="form_btna">团购状态</span></th>
+          <th align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+      #foreach($obj in $objs)
+        <tr>
+          <td align="center"><a href="$!webPath/grouplife/view_$!{obj.id}.htm?type=life" target="_blank">$!obj.gg_name</a></td>
+          <td align="center">$!obj.group.group_name</td>
+          <td align="center">$!obj.group_price</td>
+          <td align="center">$!obj.cost_price</td>
+          <td align="center">$!CommUtil.formatShortDate($!obj.beginTime)</td>
+          <td align="center">$!CommUtil.formatShortDate($!obj.endTime)</td>
+          <td align="center">$!obj.group_count</td>
+          <td align="center">$!obj.groupInfos.size()</td>
+          <td align="center"><img src="$!webPath/resources/style/system/manage/blue/images/$!{obj.group_recommend}.png" width="21" height="23" onclick="ajax_update('$!obj.id','group_recommend',this)"  style="cursor:pointer;" title="是否推荐"/></td>
+          #set($status="正常进行中")
+          #if($!obj.group_status==0)
+          #set($status="待审核")
+          #end
+          #if($!obj.group_status==-1)
+          #set($status="审核未通过")
+          #end
+          #if($!obj.group_status==-2)
+          #set($status="已过期")
+          #end
+          <td align="center">$!status</td>
+          <td class="hui oprate_con" align="center">         
+            <a href="$!webPath/admin/group_self_edit.htm?id=$!obj.id&currentPage=$!currentPage&type=life">编辑</a>
+            <a  href="javascript:if(confirm('删除后不可恢复?'))window.location.href='$!webPath/admin/group_lifeself_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'">删除</a>
+          </td>
+        </tr>
+     #end
+    </table>
+    </div>
+    <div class="operate_bar">
+        <div class="fenye">
+            <span id="queryCondition" style="display:none">
+            </span>
+            <input name="mulitId" type="hidden" id="mulitId" />
+        	<input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+       		$!gotoPageFormHTML      
+        </div>          
+ 	</div>
+  </form>
+</div>
+</body>
+</html>

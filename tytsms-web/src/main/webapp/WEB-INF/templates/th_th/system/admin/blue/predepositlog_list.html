@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth"><b>预存款明细</b></h3>
+  <form action="$!webPath/admin/predepositlog_list.htm" method="post">
+  <div class="search">
+    <ul>
+      <li> <span>会员名</span> <span class="size250">
+        <input name="userName" type="text" id="userName" />
+        </span> <span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;"  class="search_btn" />
+        </span> </li>
+    </ul>
+  </div>
+  </form>
+  <FORM name="ListForm" id="ListForm"  action="$!webPath/admin/predepositlog_list.htm" method="post">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="15%"><span class="form_btna">会员名称</span></th>
+        <th width="12%" ><span class="form_btna">提交时间</span></th>
+        <th width="10%" ><span class="form_btna">金额</span></th>
+        <th width="10%"><span class="form_btna">预存款类型</span></th>
+        <th width="10%"><span class="form_btna">操作类型</span></th>
+        <th width="10%"><span class="form_btna">操作管理员</span></th>
+        <th align="center"><b class="form_btnb">描述</b></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td align="center">$!obj.pd_log_user.userName</td>
+        <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+        <td align="center">$!obj.pd_log_amount</td>
+        <td align="center">$!obj.pd_type</td>
+        #if($!obj.type=="system")
+		  #set($type="系统积分管理")
+		#end
+		#if($!obj.type=="reg")
+		  #set($type="用户注册")
+		#end
+		<td align="center">$!obj.pd_op_type</td>
+		<td align="center">$!obj.pd_log_admin.userName</td>
+        <td align="center">$!obj.pd_log_info</td>
+      </tr>
+      #end
+    </table>
+  </div>
+  <div class="operate_bar">
+    <div class="fenye">
+    	<input type="hidden" name="currentPage" id="currentPage" value="$!currentPage" />
+	  	$!gotoPageFormHTML
+    </div>             
+ </div>
+ </FORM>
+</div>
+</body>
+</html>

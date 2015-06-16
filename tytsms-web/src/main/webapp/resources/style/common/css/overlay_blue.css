@@ -1,0 +1,251 @@
+@charset "utf-8";
+/* CSS Document */
+.white_content input[type="text"], .white_content input[type="password"], .white_content textarea, select {
+	padding: 3px;
+	resize: none;/*禁止调节元素的尺寸*/
+}
+/*锁屏*/
+.black_overlay {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color:#000;
+	z-index:10000000;
+	-moz-opacity: 0.5;
+	opacity:.50;
+	filter: alpha(opacity=50);
+}
+.white_content {
+	position: absolute;
+	top: 50%;
+	left:40%;
+	margin-top:-60px;
+	width: 404px;
+	background-color:none;
+	z-index:10000000000;
+	overflow: auto;
+	 border: 8px solid rgba(0,0,0,0.3);  
+	  text-align: center;
+	   border-radius: 15px; 
+	    -moz-background-clip: padding-box;
+		 -webkit-background-clip: padding-box;
+		  -o-background-clip: padding-box;
+		   background-clip: padding-box;
+}
+.content_load{
+    background:url(../images/ajax_loader.gif) no-repeat center center;
+	margin-top:10px;
+	float:left;
+	display:block;
+	width:400px;
+	height:50px;
+
+}
+.white_close {
+	background:url(../images/close_blue.jpg) no-repeat center right;
+	width:14px;
+	height:14px;
+	float:right;
+	right:15px;
+	top:10px;
+	display:block;
+	position:absolute;
+	z-index:1000000;
+}
+.white_box {
+	background:#fff;
+	margin-left:auto;
+	margin-right:auto;
+	padding-bottom:30px;
+	text-align:center;
+	border:2px solid #CCC; overflow:hidden;
+}
+.white_dl{ width:400px; float:left; overflow:hidden;}
+.white_dl dt{ background:url(../images/bag.jpg) no-repeat center right; width:150px; height:55px; float:left; overflow:hidden;}
+.white_dl dd{ width:250px; float:left; overflow:hidden}
+.white_box h1{ background:#fff; color:#0080C0; float:left; width:100%; border-bottom:1px solid #CCC; line-height:30px; text-indent:1em; text-align:left; font-size:16px; margin-bottom:20px;}
+.payf{ margin-top:10px; width:100%; float:left; text-indent:2em; text-align:left; line-height:20px}
+
+.white_contant{ width:100%; overflow:hidden;}
+.white_title{ height:30px; line-height:30px;background:#F90; font-size:14px;}
+.white_title span{ padding-left:20px; color:#fff; }
+.white_btn{ background:url(../images/save_blue.jpg) no-repeat; width:77px; height:28px; color:#FFFFFF; font-size:14px; border:0px; cursor:pointer}
+.inputbtn input{ background:url(../images/save_blue.jpg) no-repeat; width:77px; height:28px; color:#FFFFFF; font-size:14px; border:0px; cursor:pointer; margin-top:10px;}
+.white_sub_btn{ background:url(../images/input_btn.jpg) no-repeat; width:50px; height:24px; color:#FFFFFF; font-size:12px; border:0px; cursor:pointer; color:#000;}
+.white_textarea{ width:260px; height:50px; border:1px solid #ccc;}
+.white_table{ float:left;}
+.white_table td{ padding-top:10px;}
+.white_check{ float:left; margin-right:10px;}
+.white_check input{ position:relative; top:2px; margin-right:10px;}
+.white_b{ display:block; margin-top:5px; clear:both; color:#999; background:url(../images/base_i.jpg) no-repeat left top; padding-left:20px;  line-height:16px;}
+.white_radio{ display:block; float:left; margin-right:10px;}
+.white_radio input{ position:relative; top:2px; margin-right:5px;}
+.white_select{ display:block; float:left; margin-right:10px}
+/*消息框+锁屏*/
+.message_black_overlay {
+	position: absolute;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color:#000;
+	z-index:9999;
+	-moz-opacity: 0.5;
+	opacity:.50;
+	filter: alpha(opacity=50);
+}
+.message_white_content {
+	position: absolute;
+	top: 40%;
+	left:55%;
+	margin-left:-300px;
+	_margin-left:-100px;
+	width: 400px;
+	background-color:none;
+	z-index:10000005;
+	overflow: auto;
+			 border: 8px solid rgba(0,0,0,0.3); 
+	  color: #fff; 
+	  text-align: center;
+	   border-radius: 15px; 
+	    -moz-background-clip: padding-box;
+		 -webkit-background-clip: padding-box;
+		  -o-background-clip: padding-box;
+		   background-clip: padding-box;
+}
+.message_white_iframe {
+	border:1px solid #CCCCCC;
+	width:392px;
+	margin-left:auto;
+	margin-right:auto;
+	height:150px;
+	background:#fff;
+	border:1px solid #ccc;
+}
+.message_white_title {
+	height:30px;
+	line-height:30px;
+	background: #69F;
+	font-size:14px;
+	padding:0px;
+	margin:0px;
+}
+.message_white_title_bottom {
+	height:30px;
+	line-height:30px;
+	font-size:10px;
+	text-align:left;
+	padding-left:15px;
+	margin:0px;
+	border-top:1px solid #ccc;
+	font-family:"微软雅黑";
+	color:#999;
+}
+.message_white_title span {
+	padding-left:20px;
+	color:#fff;
+}
+.message_white_box {
+	padding-top:30px;
+	padding-left:70px;
+	height:55px;
+}
+.message_white_img_succeed {
+	background:url(../images/icon/succeed.png) no-repeat;
+	text-align:center;
+	float:left;
+	width:48px;
+	height:48px;
+	margin-right:10px;
+}
+.message_white_img_warning {
+	background:url(../images/icon/warning.png) no-repeat;
+	text-align:center;
+	float:left;
+	width:48px;
+	height:48px;
+	margin-right:10px;
+}
+.message_white_img_question {
+	background:url(../images/icon/question.png) no-repeat;
+	text-align:center;
+	float:left;
+	width:48px;
+	height:48px;
+	margin-right:10px;
+}
+.message_white_img_smile {
+	background:url(../images/icon/smile.png) no-repeat;
+	text-align:center;
+	float:left;
+	width:48px;
+	height:48px;
+	margin-right:10px;
+}
+.message_white_img_sad {
+	background:url(../images/icon/sad.png) no-repeat;
+	text-align:center;
+	float:left;
+	width:48px;
+	height:48px;
+	margin-right:10px;
+}
+.message_white_img_error {
+	background:url(../images/icon/error.png) no-repeat;
+	text-align:center;
+	float:left;
+	width:48px;
+	height:48px;
+	margin-right:10px;
+}
+.message_white_font {
+	float:left;
+	font-weight:bold;
+	font-family:"微软雅黑";
+	margin-top:8px;
+	font-size:16px;
+	width:255px;
+}
+/*------------*/
+.message_white_box1 {
+	 width:100%; text-align:center;
+	float:left;
+	margin-top:5px;
+	margin-bottom:10px;
+}
+.message_white_box1 input {
+	cursor:pointer;
+	width:60px;
+	border:1px solid #36F;
+	background-color:#639aff;
+	color:#FFF;
+	float:left;
+	line-height:22px;
+	_height:24px;
+}
+.message_white_box_del {
+	padding-top:30px;
+	padding-left:20px;
+	height:45px;
+	float:left; color:#000;
+}
+.message_white_iframe_del {
+	height:160px;
+	background:#fff; width:100%;
+}
+.message_white_title_bottom_del {
+	height:30px;
+	line-height:30px;
+	font-size:10px;
+	text-align:left;
+	padding-left:15px;
+	margin:0px;
+	border-top:1px solid #ccc;
+	font-family:"微软雅黑";
+	color:#999;
+	float:left;
+}
+
+

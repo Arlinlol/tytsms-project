@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link href="../../../../../../resources/style/system/manage/blue/template.css" rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">店铺等级</h1>
+  <div class="nav_list">
+  
+   <ul> 
+   <li><a href="$!webPath/admin/storegrade_list.htm"  class="this"><b>管理</b></a> </li>
+    <li> <a href="$!webPath/admin/storegrade_add.htm" ><b>新增</b></a> </li>
+   </ul>
+
+    </div>
+  <form action="$!webPath/admin/storegrade_list.htm" method="post">
+  <div class="search">
+    <ul>
+      <li> <span>等级名称</span> <span class="size250">
+        <input name="q_gradeName" type="text" id="q_gradeName" />
+        </span> <span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+        </span> </li>
+    </ul>
+  </div>
+  </form>
+  <FORM name="ListForm" id="ListForm"  action="$!webPath/admin/storegrade_list.htm" method="post">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="3%">&nbsp;</th>
+        <th width="5%">序号</th>
+        <th width="15%"><span class="form_btna">等级名称</span></th>
+        <th width="15%" ><span class="form_btna">允许发布商品数量</span></th>
+       <!-- <th width="128"><span class="form_btna">可选模板</span></th>-->
+        <th width="15%"><span class="form_btna">收费标准</span></th>
+        <th width="15%"><span class="form_btna">附件空间</span></th>
+        <th width="15%"><span class="form_btna">需要审核</span></th>
+        <th  align="center"><span class="form_btna">操作</span></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" />        </td>
+         <td align="center">$!obj.sequence</td>
+        <td align="center">$!obj.gradeName</td>
+        <td align="center">$!obj.goodsCount</td>
+      <!--  <td>$!{CommUtil.splitLength("$!obj.templates",",")}套</td>-->
+        <td align="center">$!obj.price</td>
+        <td align="center">#if($!obj.spaceSize==0)不限制#else $!{obj.spaceSize}M #end</td>
+        <td align="center">#if($!{obj.audit}==true)是#else否#end</td>
+        <td align="center" class="hui oprate_con"><a href="$!webPath/admin/storegrade_edit.htm?id=$!obj.id&amp;currentPage=$!currentPage" class="blue">编辑</a> | #if($!obj.sysGrade)默认等级不能删除#else<a href="javascript:void(0);" onclick="if(confirm('删除后不可恢复，是否继续?'))window.location.href='$!webPath/admin/storegrade_del.htm?mulitId=$!obj.id&amp;currentPage=$!currentPage'" class="blue">删除</a>#end<!-- | <a href="$!webPath/admin/storegrade_template.htm?id=$!obj.id" class="blue">设置可选模板</a>--></td>
+      </tr>
+      #end
+      
+    </table>
+  </div>
+
+      
+      <div class="operate_bar">
+    <div class="fenye">     <input type="hidden" name="currentPage" id="currentPage" value="$!currentPage" />
+	  <input name="mulitId" type="hidden" id="mulitId" />$!gotoPageFormHTML</div> 
+    
+    <div class="oper_sp"> <span class="oper_check"><input type="checkbox" name="all" id="all" onclick="selectAll(this)" value="" />全部</span>
+           <span class="oper_del">  <input name="" type="button" value="删除" style="cursor:pointer;" onclick="cmd('$!webPath/admin/storegrade_del.htm')"/></span></div>
+             
+ </div>
+  </FORM>
+</div>
+</body>
+</html>

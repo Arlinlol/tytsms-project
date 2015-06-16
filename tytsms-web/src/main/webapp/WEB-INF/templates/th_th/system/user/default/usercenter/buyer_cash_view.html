@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessageText('member.buyer_cash_view.withdraw_details','')-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=buyer_cash")  
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>#springMessageText('member.buyer_cash_view.recharge','')</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li><i></i><a href="$!webPath/buyer/buyer_cash.htm">#springMessageText('member.buyer_cash_view.withdraw_application','')</a></li>
+            <li><i></i><a href="$!webPath/buyer/buyer_cash_list.htm">#springMessageText('member.buyer_cash_view.application_list','')</a></li>
+            <li class="this"><i></i>#springMessageText('member.buyer_cash_view.withdraw_details','')</li>
+          </ul>
+        </div>       
+        <div class="add_usercenter">      
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_base_table">
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.withdraw_code','')：</td>
+              <td>$!obj.cash_sn</td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.withdraw_money','')：</td>
+              <td>$!obj.cash_amount
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.withdraw_time','')：</td>
+              <td>$!CommUtil.formatLongDate($!obj.addTime)
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.pay_way','')：</td>
+              #if($!obj.cash_payment=="alipay")
+                      #set($cash_payment="#springMessageText('member.buyer_cash_view.alipay','')")
+                    #end
+                    #if($!obj.cash_payment=="bill")
+                      #set($cash_payment="#springMessageText('member.buyer_cash_view.quick_money','')")
+                    #end
+                    #if($!obj.cash_payment=="chinabank")
+                      #set($cash_payment="#springMessageText('member.buyer_cash_view.chinabank','')")
+                    #end
+                    #if($!obj.cash_payment=="tenpay")
+                      #set($cash_payment="#springMessageText('member.buyer_cash_view.tenpay','')")
+                    #end
+                    #if($!obj.cash_payment=="outline")
+                      #set($cash_payment="#springMessageText('member.buyer_cash_view.offline_payment','')")
+                    #end
+              <td>$!cash_payment
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.withdraw_status','')：</td>
+              #if($!obj.cash_status==0)
+                      #set($cash_status="#springMessageText('member.buyer_cash_view.wait_for_review','')")
+                    #end
+                    #if($!obj.cash_status==1)
+                      #set($cash_status="#springMessageText('member.buyer_cash_view.review_completed','')")
+                    #end
+              <td>$!cash_status
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.pay_status','')：</td>
+              #if($!obj.cash_pay_status==0)
+                      #set($cash_pay_status="#springMessageText('member.buyer_cash_view.waiting_payment','')")
+                    #end
+                   #if($!obj.cash_pay_status==1)
+                      #set($cash_pay_status="#springMessageText('member.buyer_cash_view.pay_complete','')")
+                    #end
+              <td>$!cash_pay_status
+                </td>
+            </tr>
+            #if($!obj.cash_payment=="outline")
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.payee_name','')：</td>
+              <td>$!obj.cash_userName
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.payee_bank','')：</td>
+              <td>$!obj.cash_bank
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.withdraw_remark','')：</td>
+              <td>$!obj.cash_remittance_info
+                </td>
+            </tr>
+            #end
+            #if($!obj.cash_admin)
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.operate_admin','')：</td>
+              <td>$!obj.cash_admin.userName
+                </td>
+            </tr>
+            #end
+            #if($!obj.cash_admin_info)
+            <tr>
+              <td align="right">#springMessageText('member.buyer_cash_view.operate_remark','')：</td>
+              <td>$!obj.cash_admin_info
+                </td>
+            </tr>
+            #end
+            <tr>
+              <td>&nbsp;</td>
+              <td>
+                <input type="button" name="button"  value="#springMessageText('member.buyer_cash_view.return_list','')" style="cursor:pointer;"  class="save" onclick="window.location.href='$!webPath/buyer/buyer_cash_list.htm'" />
+              </td>
+            </tr> 
+          </table>
+        </div> 
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

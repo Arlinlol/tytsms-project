@@ -1,0 +1,62 @@
+﻿<script>
+jQuery(document).ready(function(){							
+jQuery("span.im_name").html("#springMessage('sms.plat_chatting_open.with') $!{chatting.user_name} #springMessage('sms.plat_chatting_open.communicate')");
+#if($!goods)
+#set($bigimg="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}")
+#set($img="$!{bigimg}_middle.$!{goods.goods_main_photo.ext}")
+#if(!$!goods.goods_main_photo)
+#set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+#end
+var text = "<tr><td width='15%'><img src='$!{img}' width='100' height='100' /></td><td valign='top'><ul><li class='im_goods_name'>$!goods.goods_name</li> <li class='im_goods_price'>¥<strong>$!goods.goods_current_price</strong></li> </ul></td></tr>";
+jQuery(".im_right_goods table").html(text);
+#else
+var text ="<tr><td width='100%' align='center'>#springMessage('sms.plat_chatting_open.no_consult_goods_current')</td></tr>";	/* 最近没有咨询的商品！ */
+jQuery(".im_right_goods table").html(text);
+#end
+});
+</script>
+#foreach($obj in $objs)        
+             #if(!$!obj.store_id && !$!obj.user_id || $!obj.store_id!="")
+             <!--im-user--> 
+            <li>
+              <div class="im_me">
+                <div class="im_me_icon">
+                  <p><img src="$!webPath/th_th/resources/style/im/images/im_others_icon.png" width="40" height="33" /></p>
+                </div>
+                <div class="im_me_dialogue">
+                  <table class="im_msg_me" cellpadding="0" cellspacing="0">
+                    <tbody>
+                      <tr>
+                        <td><span class="im_others_name">$!{obj.chatting.config.kf_name}</span><span class="im_time">&nbsp;&nbsp;$!CommUtil.formatLongDate($!obj.addTime)</span></td>
+                      </tr>
+                      <tr>
+                        <td><span  style="color:$!{obj.font_colour}; font-family:$!{obj.font}; font-size:$!{obj.font_size}px">$!CommUtil.htmlUnescape($!obj.content)</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <span class="im_arrow_me"></span> </div>
+              </div>
+            </li>
+            #else
+             <!--im-kf-->
+             <li>
+              <div class="im_others">
+                <div class="im_others_icon">
+                  <p><img src="$!webPath/th_th/resources/style/im/images/im_me_icon.png" width="40" height="40" /></p>
+                </div>
+                <div class="im_others_dialogue">
+                  <table class="im_msg_others" cellpadding="0" cellspacing="0">
+                    <tbody>
+                      <tr>
+                        <td><span class="im_others_name">$!obj.chatting.user_name</span><span class="im_time">&nbsp;&nbsp;$!CommUtil.formatLongDate($!obj.addTime)</span></td>
+                      </tr>
+                      <tr>
+                        <td><span  style="color:$!{obj.font_colour}; font-family:$!{obj.font}; font-size:$!{obj.font_size}px">$!CommUtil.htmlUnescape($!obj.content)</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <span class="im_arrow_others"></span> </div>
+              </div>
+            </li>
+            #end
+#end       

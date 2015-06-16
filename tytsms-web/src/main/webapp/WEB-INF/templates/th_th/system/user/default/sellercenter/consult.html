@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>咨询管理 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay_blue.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+   $!httpInclude.include("/seller/nav.htm?op=consult")
+   <div class="seller_right">
+<div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>客户服务</b>><b>咨询管理</b></span></div>
+        
+        <div class="seller_list">
+            <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li #if($!reply=="") class="this" #end><a href="$!webPath/seller/consult.htm"><i></i>全部咨询</a></li>
+            <li #if($!reply==false) class="this" #end ><a href="$!webPath/seller/consult.htm?reply=false"><i></i>未回复咨询</a></li>
+            <li #if($!reply==true) class="this" #end><a href="$!webPath/seller/consult.htm?reply=true"><i></i>已回复咨询</a></li>
+          </ul>
+        </div>
+           <form action="$!webPath/seller/consult.htm" method="post" id="ListForm">
+            <div class="ordercon">
+              #foreach($obj in $objs)
+                 #set($goods_url="$!webPath/goods_$!{obj.goods.id}.htm")
+            #if($!config.second_domain_open && $!obj.goods.goods_type==1 && $!obj.goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{obj.goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.goods.id}.htm")
+            #end 
+              <div class="consultation">
+                <div class="consul">
+                  <input name="id" type="checkbox" id="id" value="$!obj.id" />
+                </div>
+                <div class="tation">
+                  <div class="ctation">
+                    <div class="hhcation"><strong><a href="$!goods_url" target="_blank">$!{obj.goods.goods_name}</a></strong><span class="shopconsu">[商品咨询]</span><span class="del_edit"><a href="javascript:void(0);" onclick="if('确定删除该咨询吗？')window.location.href='$!webPath/seller/consult_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="delconsu">删除</a><a href="javascript:void(0);" dialog_uri="$!webPath/seller/consult_reply.htm?id=$!obj.id&currentPage=$!currentPage" dialog_title="编辑回复" dialog_width="400" dialog_height="100" dialog_id="order_cancel" class="editanswer">#if($!obj.reply)编辑#end回复</a></span></div>
+                    <div class="constit"><span class="constitsp"><strong>咨询用户：</strong>#if($!obj.consult_user) $!{obj.consult_user.userName}#else 匿名 #end</span><span class="constitsp"><strong>咨询时间：</strong>$!CommUtil.formatLongDate($!obj.addTime)</span></div>
+                    <div class="consts"><strong>咨询内容：</strong>$!{obj.consult_content}</div>
+                  </div>
+                  #if($!obj.consult_reply)
+                  <div class="onstation">
+                    <div class="consts"><strong>回复内容：</strong>$!{obj.consult_reply}</div>
+                    <div class="consts"><strong>回复时间：</strong>$!CommUtil.formatLongDate($!obj.reply_time)</div>
+                  </div>
+                  #end
+                </div>
+              </div>
+              #end
+         <div class="userlist_allop">
+            <div class="seller_list_page">
+              <div  class="seller_page_sp">$!gotoPageFormHTML</div>
+              <div class="user_listoper_p"> <i>
+                 <label><input name="all1" type="checkbox" id="all1" onclick="selectAll(this)" value="" />
+               全选</label>
+                </i> <a  href="javascript:void(0);" onclick="cmd('$!webPath/seller/consult_del.htm','')" class="user_oper_all"><em></em>删除</a> </div>
+            </div>
+          </div>
+                  <input name="mulitId" type="hidden" id="mulitId" />
+                  <input name="reply" type="hidden" id="reply" value="$!reply" />
+                  <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+            </div>
+            </form>
+          </div>
+          </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

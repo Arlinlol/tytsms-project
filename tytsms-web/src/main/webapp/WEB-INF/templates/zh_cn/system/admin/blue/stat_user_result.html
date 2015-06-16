@@ -1,0 +1,92 @@
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/charts/highcharts.js"></script>
+<script src="$!webPath/resources/js/charts/modules/exporting.js"></script>
+<script>
+jQuery(function(){ 
+  var chart;
+  chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: '$!stat_title',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '统计区间: $!CommUtil.formatShortDate($!{begin}) - $!CommUtil.formatShortDate($!{end})',
+                x: -20
+            },
+            xAxis: {
+                categories:$!times
+            },
+            yAxis: {
+                title: {
+                    text: '用户数(个)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        this.x +': '+ this.y +'个';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [{
+                name: '用户总数',
+                data: $!user_counts
+            }, {
+                name: '新增用户数',
+                data: $!user_increase_counts
+            }, {
+                name: '活跃用户数',
+                data: $!user_active_counts
+            }, {
+                name: '总下单用户数',
+                data: $!user_order_counts
+            },{
+                name: '当日注册下单用户数',
+                data: $!user_day_order_counts
+            }]
+        });
+})
+</script>
+<div  class="fshoptb" id="container">
+     
+  </div>
+ <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="15%"><span class="form_btna">统计日期</span></th>
+        <th width="15%"><span class="form_btna">用户总数</span></th>
+        <th width="10%"><span class="form_btna">新增用户数</span></th>
+        <th  width="20%"><span class="form_btna">活跃用户数</span></th>
+        <th  width="9%"><span class="form_btna">总下单用户数</span></th>
+        <th width="8%">当日注册下单用户数</th>
+      </tr>
+      #foreach($obj in $uss)
+      <tr>
+        <td align="center">$!CommUtil.formatShortDate($!obj.stat_time)</td>
+        <td align="center">$!obj.user_count</td>
+        <td align="center">$!obj.user_increase_count</td>
+        <td align="center">$!obj.user_active_count</td>
+        <td align="center">$!obj.user_order_count</td>       
+        <td align="center">$!obj.user_day_order_count</td>
+      </tr>
+     #end
+    </table>
+  </div>

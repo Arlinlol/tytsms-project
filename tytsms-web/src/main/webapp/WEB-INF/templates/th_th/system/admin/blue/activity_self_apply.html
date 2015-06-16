@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+
+ });
+//load
+function act_goods(obj){ 
+     var goods_name=jQuery("#goods_name").val();
+    jQuery.ajax({type:'POST',url:'$!webPath/admin/activity_self_goods_load.htm',data:{"goods_name":goods_name},
+				 beforeSend:function(){
+					  jQuery(obj).parent().find("img").show();
+					 }, 
+				 success:function(data){
+					 if(data!=""){
+					  jQuery("#result").show();
+					  jQuery(obj).parent().find("img").hide();
+					  jQuery("#act_goods_info").empty().append(data);
+					 }else{
+					  jQuery("#result").show();
+					  jQuery(obj).parent().find("img").hide();
+					  jQuery("#act_goods_info").empty().append("没有可参加活动的商品数据");	 
+						 }
+				    }
+			   });		
+	}
+//delete
+function remove_act_goods(obj){
+   jQuery(obj).parent().parent().find("img").attr("src","$!webPath/th_th/resources/style/common/images/good.jpg");	 
+   jQuery(obj).parent().parent().find("i").html("活动商品信息");	
+   jQuery(obj).parent().parent().find("img").attr("goods_id","");
+   jQuery(obj).parent().parent().find("img").attr("act_goods_img","false");
+   var goods_ids = "";
+    jQuery("img[act_goods_img=true]").each(function(){
+	var temp_goods_id=jQuery(this).attr("goods_id");
+	goods_ids = goods_ids+","+temp_goods_id;
+    })
+	jQuery("#goods_ids").val(goods_ids);
+}
+	
+function saveForm(){
+var goods_ids =jQuery("#goods_ids").val();
+		if(goods_ids!=""){
+		jQuery("#theForm").submit();	
+		}else{
+			alert("请选择活动商品");
+		}
+	}
+</script>
+</head>
+<body scroll="yes">
+<div class="cont">
+  <h3 class="seth">活动申请</h3>
+  <div class="nav_list">
+    <ul>
+      <li><a href="$!webPath/admin/activity_self.htm"><b>活动列表</b></a></li>
+      <li><a href="$!webPath/admin/activity_self_goods_list.htm" ><b>活动商品</b></a></li>
+      <li><a href="javascript:void(0);" class="this"><b>活动商品申请</b></a></li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/activity_self_apply_save.htm" method="post" name="theForm" id="theForm">
+    <input id="goods_ids" name="goods_ids" type="hidden" value=""/>
+    <input id="act_id" name="act_id" type="hidden" value="$!act.id"/>
+    <div class="edit">
+      <div class="editul setcont" >
+        <ul class="set1">
+          <li class="setcont_bg"><strong class="sred">*</strong>活动标题
+            <input name="id" type="hidden" id="id" value="$!obj.id" />
+          </li>
+          <li><span class="webname"> $!act.ac_title </span></li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg"><strong class="sred">*</strong>活动说明
+            <input name="id" type="hidden" id="id" value="$!obj.id" />
+          </li>
+          <li><span class="webname"> $!act.ac_content </span></li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg"><strong class="sred">*</strong>活动商品
+            <input name="id" type="hidden" id="id" value="$!obj.id" />
+          </li>
+          <li>
+            <div class="main_body">
+              <ul>
+                #foreach($count in [1..5])
+                <li> <span> <img src="$!webPath/th_th/resources/style/common/images/good.jpg" goods_current_price="0" goods_id=""  act_goods_img="false" width="110" height="110" /></span> <i>活动商品信息</i>
+                  <div class="add_gp">
+                    <input type="button" value="删除商品" class="delete_ip" onclick="remove_act_goods(this);" />
+                  </div>
+                </li>
+                #end
+              </ul>
+            </div>
+          </li>
+        </ul>
+        <ul class="set1" style="display:none" id="result">
+          <li class="setcont_bg"><strong class="sred"></strong>搜索结果
+            <input name="id" type="hidden" id="id" value="$!obj.id" />
+          </li>
+          <li><span class="webname" id="act_goods_info"> $!act.ac_title </span></li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg"><strong class="sred"></strong>商品搜索
+            <input name="id" type="hidden" id="id" value="$!obj.id" />
+          </li>
+          <li><span class="webname">
+            <input name="goods_name" type="text" id="goods_name" class="base_txt"/>
+            <input name="search" type="button" class="seller_save" style="cursor:pointer;width:60px;"  value="搜索" onclick="act_goods(this);" />
+            <input class="seller_save"  onclick='javascript: jQuery("#act_goods_info").empty();jQuery("#result").hide();'  style="cursor:pointer;width:60px;" type="button" name="button2" id="button"  value="关闭" />
+            <img src="$!webPath/th_th/resources/style/common/images/wait.gif" style="display:none;" > </span></li>
+        </ul>
+      </div>
+      <div class="submit"> <span class="pad120">
+        <input name="" type="button" value="保存" style="cursor:pointer;" onclick="saveForm();"/>
+        </span> </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

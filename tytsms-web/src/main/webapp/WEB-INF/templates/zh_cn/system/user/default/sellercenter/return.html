@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-退货列表- $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=return") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>客户服务</b>><b>退货管理</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href="$!webPath/seller/return.htm"><i></i>退货列表</a></li>
+          </ul>
+        </div>
+        <div  class="user_sp_right">
+          <form action="$!webPath/seller/return.htm" method="post">
+            <div  class="seller_title_sp"> <span>商品名称</span> <span class="size150">
+               <input name="name" type="text" id="name" value="$!name" />
+              </span> <span>服务单号</span> <span class="size150">
+             <input name="return_service_id" type="text" id="return_service_id" value="$!return_service_id" />
+              </span>
+               <span>申请者</span> <span>
+                <input name="user_name" type="text" id="user_name" value="$!user_name" />
+              </span> 
+               <span>
+              <input name="" type="submit"  value="搜索" style="cursor:pointer;"  class="user_sear_btn"/>
+              </span> </div>
+          </form>
+        </div>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/return.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                 <th width="100">服务单号</th>
+                  <th width="139">商品名称</th>
+                  <th width="78">商品图片</th>
+                  <th width="75">商品数量</th>
+                  <th width="80">商品价格</th>
+                  <th width="90">商品总价</th>
+                  <th width="80">申请者</th>
+                  <th width="150" align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                 #set($goods_url="$!webPath/goods_$!{obj.goods_id}.htm")
+ 				 #if($!config.second_domain_open)
+                 #set($goods_url="http://$!{store.store_second_domain}.$!{domainPath}/goods_$!{obj.goods_id}.htm")
+                 #end
+                <tr >
+                 <td align="center">$!obj.return_service_id</td>
+                  <td align="center"><a href="$!goods_url" target="_blank" style=" color:#E78617">$!obj.goods_name</a></td>
+                  <td align="center">#set($img="$!webPath/$!{obj.goods_mainphoto_path}") <a href="$!goods_url" target="_blank"><img src="$!img" width="70" height="70" /></a></td>
+                  <td align="center">$!obj.goods_count</td>
+                  <td align="center">$!obj.goods_price</td>
+                  <td align="center">$!obj.goods_all_price</td>
+                  <td align="center">$!obj.user_name</td>
+                  <td align="center" class="del_operate"> #if($!obj.goods_return_status==5) <a href="$!webPath/seller/return_check.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">审核</a> #end
+                    #if($!obj.goods_return_status==-1) <a href="javascript:void(0);">不可退货</a> #end
+                    #if($!obj.goods_return_status==6) <a href="javascript:void(0);">审核通过，请等待买家退货</a> #end
+                    #if($!obj.goods_return_status==7)
+                    <ul>
+                      <li><a href="$!webPath/seller/return_check.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">买家已退货，查看物流</a></li>
+                      <li><a href="javascript:void(0);" onclick="if(confirm('是否确认收货，确认后状态不可改变?'))window.location.href='$!webPath/seller/return_confirm.htm?id=$!obj.id&currentPage=$!currentPage'"  class="user_btn_a">确认收货</a></li>
+                    </ul>
+                    #end
+                    #if($!obj.goods_return_status==10) <a href="javascript:void(0);">退货已完成</a> #end </td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

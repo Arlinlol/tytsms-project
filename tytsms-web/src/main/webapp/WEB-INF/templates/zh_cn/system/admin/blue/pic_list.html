@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+function dele(obj){
+	if(obj=="$!{album.album_cover.id}"){
+		alert("封面不可删除！");
+	}else{
+		if(confirm("确定要执行该操作？")){
+		window.location.href="$!webPath/admin/user_pic_del.htm?mulitId="+obj+"&aid=$!{album.id}&currentPage=$!currentPage";
+		}	
+	}
+
+	}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">图片管理</h1>
+  <div class="nav_list">
+
+ <ul>
+  <li><a href="$!webPath/admin/user_photo_list.htm"><b>相册列表</b></a> </li>
+  <li><a href="javascript:void(0);" class="this" ><b>图片列表</b></a></li>
+  </ul>
+   </div>
+
+  <form id="ListForm" name="ListForm" action="$!webPath/admin/user_pic_list.htm" method="post">
+    <input id="aid" name="aid" value="$!{album.id}" type="hidden"/>
+    <input id="currentPage" name="currentPage" value="$!currentPage" type="hidden"/>
+    <input type="hidden" name="mulitId" id="mulitId" />
+    <div style="width:100%; clear:both; overflow:hidden">
+    <div class="allshop_ul">
+      <ul>
+        #foreach($obj in $objs)
+        <li class="allshop_td"> <span class="span_pic"> <a href="$!webPath/$!obj.path/$!obj.name" title="点击查看原图"  target="_blank"> <img src="$!webPath/$!obj.path/$!obj.name" width="80" height="80" /> </a> </span> <span class="span_set">
+          <input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" />
+          <a href="javascript:void(0);"  onclick="dele('$!obj.id')">删除</a></span> </li>
+        #end
+      </ul>
+    </div>
+    </div>
+<div class="operate_bar">
+        <div class="fenye">
+            <span id="queryCondition" style="display:none">
+            </span>
+       		$!gotoPageFormHTML      
+        </div> 
+   		<div class="oper_sp">
+        	<span class="oper_check"><label><input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部</label></span>
+           	<span class="oper_del"><input name="" type="button" value="删除" onclick="cmd('$!webPath/admin/user_pic_del.htm');" style="cursor:pointer;" /></span>
+        </div>          
+ 	</div>    
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>充值列表-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+			jQuery(".user_menu b").toggle(
+			function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+			},
+			function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+			});					
+								});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter"> $!httpInclude.include("/buyer/nav.htm?op=predeposit")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><span class="myorder_fright"></span><strong>账户充值</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li><i></i><a href="$!webPath/buyer/predeposit.htm">账户充值</a></li>
+            <li class="this"><i></i><a href="$!webPath/buyer/predeposit_list.htm">充值列表</a></li>
+          </ul>
+        </div>
+        #if($!objs.size()>0)
+        <form method="post" id="ListForm">
+          <div class="show_smallimg">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="smallimg_table" >
+              <tr id="opertitle">
+                <td width="200">编号</td>
+                <td width="200">充值时间</td>
+                <td width="110">充值金额</td>
+                <td width="110">支付方式</td>
+                <td width="110">充值状态</td>
+                <td width="110" align="left">支付状态</td>
+                <td align="left">操作</td>
+              </tr>
+              #foreach($obj in $objs)
+              <tr>
+                <td>$!obj.pd_sn</td>
+                <td>$!CommUtil.formatLongDate($!obj.addTime)</td>
+                <td>$!obj.pd_amount </td>
+                #if($!obj.pd_payment=="alipay")
+                #set($pd_payment="支付宝")
+                #end
+                #if($!obj.pd_payment=="bill")
+                #set($pd_payment="快钱")
+                #end
+                #if($!obj.pd_payment=="chinabank")
+                #set($pd_payment="网银在线")
+                #end
+                #if($!obj.pd_payment=="tenpay")
+                #set($pd_payment="财付通")
+                #end
+                #if($!obj.pd_payment=="outline")
+                #set($pd_payment="线下支付")
+                #end
+                <td>$!pd_payment</td>
+                #if($!obj.pd_status==0)
+                #set($pd_status="等待支付")
+                #end
+                #if($!obj.pd_status==1)
+                #set($pd_status="支付完成")
+                #end
+                <td>$!pd_status</td>
+                #if($!obj.pd_pay_status==0)
+                #set($pd_pay_status="等待支付")
+                #end
+                #if($!obj.pd_pay_status==1)
+                #set($pd_pay_status="等待审核")
+                #end
+                #if($!obj.pd_pay_status==2)
+                #set($pd_pay_status="支付完成")
+                #end
+                <td>$!pd_pay_status</td>
+                <td align="left">#if($!obj.pd_status==0)<a href="javascript:void(0);" dialog_uri="$!webPath/buyer/predeposit_pay.htm?id=$!obj.id&currentPage=$!currentPage" dialog_title="支付" dialog_width="500" dialog_height="100" dialog_id="cart_address">支付</a>#end　<a href="$!webPath/buyer/predeposit_view.htm?id=$!obj.id">查看</a></td>
+              </tr>
+              #end
+            </table>
+          </div>
+          <div class="userlist_allop">
+            <div class="user_list_page"> <span class="user_page_sp"> $!gotoPageFormHTML</span> </div>
+          </div>
+        </form>
+         #else
+          <div class="nothing">
+            <div class="nothing_left"><img src="$!webPath/resources/style/system/front/default/images/nothing.png" /></div>
+            <div class="nothing_right">您目前还没有充值信息！</div>
+          </div>
+          #end
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

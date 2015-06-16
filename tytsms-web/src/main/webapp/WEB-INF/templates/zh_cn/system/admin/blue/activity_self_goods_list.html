@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">活动管理</h1>
+  <div class="nav_list">
+    <ul>
+      <li><a href="$!webPath/admin/activity_self.htm"><b>活动列表</b></a></li>
+      <li><a href="javascript:void(0);" class="this"><b>活动商品</b></a></li>
+    </ul>
+  </div>
+  <form method="post" id="ListForm">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="40%"><span class="form_btna">活动商品</span></th>
+          <th width="25%"><span class="form_btna">活动标题</span></th>
+          <th width="12%" align="center"><span class="form_btna">开始时间</span></th>
+          <th align="center" width="12%"><span class="form_btna">结束时间</span></th>
+          <th align="center" width="12%"><span class="form_btna">状态</span></th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td >$!obj.ag_goods.goods_name</td>
+          <td align="center">$!obj.act.ac_title</td>
+          <td align="center">$!CommUtil.formatShortDate($!obj.act.ac_begin_time)</td>
+          <td align="center">$!CommUtil.formatShortDate($!obj.act.ac_end_time)</td>
+          #set($status="等待审核")
+          #if($!obj.ag_status==1)
+          #set($status="审核通过")
+          #end
+          #if($!obj.ag_status==-1)
+          #set($status="拒绝通过")
+          #end
+          <td align="center">$!status</td>
+        </tr>
+        #end
+      </table>
+    </div>
+    <div class="operate_bar">
+      <div class="fenye">
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        $!gotoPageFormHTML</div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

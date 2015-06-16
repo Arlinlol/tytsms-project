@@ -1,0 +1,50 @@
+#if($!objs.size()>0)
+<script>
+function ajaxPage(url,currentPage,obj){	
+  jQuery.post(url,{"currentPage":currentPage},
+			      function(data){
+							  jQuery("#act_goods_info").empty().append(data);
+							 },"text");
+}
+function set_act_goods(obj){
+  var goods_name= jQuery(obj).attr("goods_name");
+  var goods_img=jQuery(obj).attr("goods_img");
+  var goods_id=jQuery(obj).attr("goods_id");  
+  var act=false;
+  jQuery("img[act_goods_img=true]").each(function(){
+	var temp_goods_id=jQuery(this).attr("goods_id");
+	if(temp_goods_id==goods_id){
+	act=true;
+	 }
+  });
+  if(act){
+   	 alert("该商品已存在");
+	 return;
+  }
+  jQuery("img[act_goods_img=false]").first().attr("src",goods_img);
+  jQuery("img[act_goods_img=false]").first().attr("goods_id",goods_id);
+  jQuery("img[act_goods_img=false]").first().parent().parent().find("i").html(goods_name);
+  jQuery("img[act_goods_img=false]").first().attr("act_goods_img","true");
+  var ids = jQuery("#goods_ids").val()+","+goods_id;
+  jQuery("#goods_ids").val(ids);
+}
+</script>
+<div class="main_body" >
+  <ul>
+    #foreach($obj in $objs)
+    #if($!obj.goods_main_photo)               
+    #set($img="$!imageWebServer/$!{obj.goods_main_photo.path}/$!{obj.goods_main_photo.name}_small.$!{obj.goods_main_photo.ext}")
+    #else
+    #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+    #end
+
+    <li class="item"> <span><img src="$!img" goods_current_price="0" goods_id=""  combin_goods_img="false" width="110" height="110" /></span> <i>$!CommUtil.substring("$!obj.goods_name",8)</i>
+      <div class="add_gp">
+        <input type="button" value="添加商品" class="add_ip" onClick="set_act_goods(this)" goods_img="$!img" goods_name='$!CommUtil.substring("$!obj.goods_name",8)' goods_id="$!obj.id"/>
+      </div>
+    </li>
+    #end
+  </ul>
+      <div class="fenye">$!gotoPageAjaxHTML</div>
+</div>
+#end

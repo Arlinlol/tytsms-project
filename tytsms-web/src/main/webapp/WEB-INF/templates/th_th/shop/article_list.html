@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}" />
+<meta name="copyright" content="$!{config.copyRight}" />
+<title>
+#if($!obj.className)
+$!{obj.className}-$!{config.title}-$!{config.poweredby}
+#else
+#springMessage("sms.article.article_lists")-$!{config.title}-$!{config.poweredby}
+#end
+</title>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main"><div class="main_left">
+    <div class="article_class">
+      <h3><strong>#springMessage("sms.article.article_classification")</strong></h3>
+      <ul>
+         #foreach($ac in $acs)
+			<li><a href="$!webPath/articlelist_help_$!{ac.id}.htm">$!ac.className</a></li>
+            #end
+      </ul>
+    </div>
+    <div class="article_news">
+      <h3><strong>#springMessage("sms.article.latest_news")</strong></h3>
+      <ul>
+        #foreach($article in $articles)
+               #if($!{article.url}&&$!{article.url}!="")
+               <li><a href="$!article.url">$!article.title</a></li>
+              #else
+			    <li><a href="$!webPath/article_$!{article.id}.htm">$!article.title</a></li>
+              #end
+            #end
+      </ul>
+    </div>
+  </div>
+  <form  method="post" name="ListForm" id="ListForm">
+  <div class="main_right">
+    <div class="article_list">
+      <h3>#springMessage("sms.article.article_lists")</h3>
+      <ul class="article_list_ul">
+       #foreach($obj in $objs)
+       #if($!{obj.url}&&$!{obj.url}!="")
+       	#set($url="$!{obj.url}")
+       #else
+       	#set($url="$!webPath/article_$!{obj.id}.htm")
+       #end
+			<li><span>$!CommUtil.formatShortDate($!obj.addTime)</span><a href="$!url">$!obj.title</a></li>
+            #end
+      </ul>
+      <div class="fenye"><span>
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        $!gotoPageFormHTML</span></div>
+    </div>
+  </div>
+  </form>
+</div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

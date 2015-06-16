@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery(".storey_tab ul li").attr("cursor","pointer").click(function(){
+	jQuery(this).siblings().removeClass("this");
+	jQuery(this).addClass("this");
+	var i = jQuery(this).index();
+	jQuery(this).parent().parent().siblings().not(".hot_sell").hide();
+	jQuery(this).parent().parent().siblings().eq(i).show();
+  });
+});
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">首页楼层</h1>
+  <div class="nav_list">
+    <ul>
+      <li><a href="$!webPath/admin/goods_floor_list.htm"><b>管理</b></a></li>
+      <li><a href="$!webPath/admin/goods_floor_add.htm" ><b>新增</b></a> </li>
+      <li><a href="$!webPath/admin/goods_floor_template.htm?id=$!obj.id" class="this"><b>楼层模板</b></a></li>
+    </ul>
+  </div>
+  <div class="floor_editor">
+    <!--楼层样式0-->
+    <div class="floor_rel">
+      <div class="storey $!{obj.gf_css}">
+        <div class="storey_left">
+         <div class="blue_nothing"></div> <h1>$!{obj.gf_name}<a href="javascript:void(0);"  dialog_uri="$!webPath/admin/goods_floor_class.htm?id=$!{obj.id}" dialog_title="编辑分类" dialog_width="800" dialog_height="100" dialog_top="100"  dialog_id="goods_floor_cat" class="floor_edit_a"> 编辑</a></h1>
+          <div class="storey_bd">
+            <div class="storey_ul">
+              <ul>
+                #foreach($gc in $gf_tools.generic_gf_gc("$!obj.gf_gc_list"))
+                #foreach($c_gc in $gc.childs)
+                <li><a href="$!webPath/store_goods_list_$!{c_gc.id}.htm" target="_blank">$!c_gc.className</a></li>
+                #end
+                #end
+              </ul>
+            </div>
+            <div class="advert">$!gf_tools.generic_adv("$!url","$!obj.gf_left_adv")<span class="floor_left_sp"> <b> </b> <a href="javascript:void(0);"  dialog_uri="$!webPath/admin/goods_floor_left_adv.htm?id=$!obj.id" dialog_title="编辑199*180广告信息" dialog_width="800" dialog_height="100" dialog_top="100"  dialog_id="goods_floor_left_adv">编辑</a></span></div>
+          </div>
+        </div>
+        <div class="storey_right">
+          <div class="storey_tab">
+            <ul>
+              #foreach($info in $obj.childs)
+              <li #if($!{velocityCount}==1)class="this"#end style="cursor:pointer;" gc_id="$!info.id">$!{info.gf_name}<a href="javascript:void(0);"  dialog_uri="$!webPath/admin/goods_floor_gc_goods.htm?id=$!{info.id}" dialog_title="编辑【$!{info.gf_name}】楼层商品" dialog_width="800" dialog_height="100" dialog_top="80"  dialog_id="goods_floor_cat" class="floor_edit_a"> 编辑</a><s></s></li>
+              #end
+            </ul>
+          </div>
+          #foreach($info in $obj.childs)
+          <div class="storey_list" #if($!{velocityCount}>1) style="display:none;" #end>
+            <ul>
+              #foreach($goods in $gf_tools.generic_goods("$!info.gf_gc_goods"))
+              #if($!goods)
+              #if($!goods.goods_main_photo)               #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+              #else
+              #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+              #end
+              #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+              #if($!config.second_domain_open)
+              #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+              #end
+              <li>
+                <div class="bd_right">
+                  <div class="storey_ps">
+                    <div class="storey_hover"> <span class="goods_name"><a href="$!goods_url" target="_blank">$!{goods.goods_name}</a></span> <span class="goods_price">¥<b>$!{goods.goods_current_price}</b><em>¥$!{goods.goods_price}</em></span> <span class="goods_pic"><img src="$!img" width="230" height="230" /></span> </div>
+                  </div>
+                </div>
+              </li>
+              #end 
+            #end
+            </ul>
+             </div>
+          #end
+          <div class="hot_sell">
+            <div class="hot_sell_br">
+            #set($map=$!gf_tools.generic_goods_list("$!obj.gf_list_goods"))
+              <h2>$!map.get("list_title")<a href="javascript:void(0);"  dialog_uri="$!webPath/admin/goods_floor_list_goods.htm?id=$!obj.id" dialog_title="编辑列表信息" dialog_width="800" dialog_height="100" dialog_top="100"  dialog_id="goods_floor_cat" class="floor_edit_a"> 编辑</a></h2>
+              <ul class="hot_sell_ul">
+                 #if($!map.get("goods1"))
+           			 #set($goods=$!map.get("goods1"))
+           			 #if($!goods.goods_main_photo)                   
+                     #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+           		 #else
+             		 #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+           		 #end
+                	<li>
+                    	<em class="number_01"></em>
+                        <span class="hot_goods_pic"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank"><img src="$!img" width="80" height="80" /></a></span>
+                        <div class="hot_describe">
+                        	<p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+                            <p class="hot_goods_name"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank">$!CommUtil.substring("$!goods.goods_name",15)</a></p>
+                            <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+                        </div>
+                    </li>
+                    #end
+            		#if($!map.get("goods2"))
+            			#set($goods=$!map.get("goods2"))
+           				#if($!goods.goods_main_photo)                   
+                        #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+            		#else
+             		#set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            		#end
+                    <li>
+                    	<em class="number_02"></em>
+                        <span class="hot_goods_pic"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank"><img src="$!img" width="80" height="80"/></a></span>
+                        <div class="hot_describe">
+                        	<p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+                            <p class="hot_goods_name"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank">$!CommUtil.substring("$!goods.goods_name",15)</a></p>
+                            <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+                        </div>
+                    </li>
+                        #end
+            			#if($!map.get("goods3"))
+            			#set($goods=$!map.get("goods3"))
+            			#if($!goods.goods_main_photo)                   
+                        #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+            			#else
+             			#set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            			#end
+                    <li>
+                    	<em class="number_03"></em>
+                        <span class="hot_goods_pic"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank"><img src="$!img" width="80" height="80"/></a></span>
+                        <div class="hot_describe">
+                        	<p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+                            <p class="hot_goods_name"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank">$!CommUtil.substring("$!goods.goods_name",15)</a></p>
+                            <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+                        </div>
+                    </li>
+                    #end
+            			#if($!map.get("goods4"))
+            			#set($goods=$!map.get("goods4"))
+            			#if($!goods.goods_main_photo)                   
+                        #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+            			#else
+             			#set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            			#end
+                    <li>
+                    	<em class="number_04"></em>
+                        <span class="hot_goods_pic"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank"><img src="$!img" width="80" height="80"/></a></span>
+                        <div class="hot_describe">
+                        	<p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+                            <p class="hot_goods_name"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank">$!CommUtil.substring("$!goods.goods_name",15)</a></p>
+                            <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+                        </div>
+                    </li>
+                    #end
+            			#if($!map.get("goods5"))
+            			#set($goods=$!map.get("goods5"))
+            			#if($!goods.goods_main_photo)                   
+                        #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+            			#else
+             			#set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            			#end
+                    <li>
+                    	<em class="number_05"></em>
+                        <span class="hot_goods_pic"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank"><img src="$!img" width="80" height="80"/></a></span>
+                        <div class="hot_describe">
+                        	<p class="hot_goods_promo">已售$!{goods.goods_salenum}件</p>
+                            <p class="hot_goods_name"><a href="$!webPath/goods_$!{goods.id}.htm" target="_blank">$!CommUtil.substring("$!goods.goods_name",15)</a></p>
+                            <p class="hot_goods_price">¥<b>$!{goods.goods_current_price}</b></p>
+                        </div>
+                    </li>
+                    #end
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

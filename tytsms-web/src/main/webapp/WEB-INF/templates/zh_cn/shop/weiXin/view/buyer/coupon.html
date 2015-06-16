@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>微信商城 - 我的优惠券</title>
+<link href="$!webPath/resources/style/weiXin/css/phone.css" rel="stylesheet" type="text/css" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+
+
+    <style>
+
+* {
+    outline: 0 none;
+}
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td {
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+img {
+    border: 0 none;
+    vertical-align: top;
+}
+i, em {
+    font-style: normal;
+}
+ol, ul {
+    list-style: outside none none;
+}
+input, select, button, h1, h2, h3, h4, h5, h6 {
+    font-family: inherit;
+    font-size: 100%;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+a, a:visited {
+    color: #333;
+    text-decoration: none;
+}
+body {
+    -moz-user-select: none;
+    background: none repeat scroll 0 0 #fff;
+    color: #666;
+    font-family: Helvetica,STHeiti STXihei,Microsoft JhengHei,Microsoft YaHei,Arial;
+    font-size: 14px;
+    height: 100%;
+    line-height: 1.5;
+    margin: 0 auto;
+    max-width: 640px;
+    min-width: 320px;
+}
+
+.coupon_item .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.coupon_item .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.card_wx:after, .card_nav a:before, .cart_item.over .name:after, .cart_item.disabled .name:after, .coupon_item.over .name:after, .coupon_item.disabled .name:after, .coupon_item:before, .coupon_item:after, .coupon_item .select:before, .cart_item:before {
+    content: " ";
+    display: block;
+}
+.card_form .input_text, .card_form .input_code {
+}
+body {
+    background: none repeat scroll 0 0 #f3f3f3;
+}
+.wx_wrap {
+    background: none repeat scroll 0 0 #fff;
+    border-bottom: 1px solid #ddd;
+}
+.card_nav {
+    background: none repeat scroll 0 0 #efefef;
+    overflow: hidden;
+    width: 100%;
+}
+.card_nav a {
+    border-bottom: 1px solid #ddd;
+    color: #666;
+    display: block;
+    font-size: 16px;
+    height: 43px;
+    line-height: 45px;
+    padding-bottom: 2px;
+    position: relative;
+    text-align: center;
+}
+.card_nav a em {
+    margin-left: 5px;
+}
+.card_nav a.cur {
+    border-bottom: 3px solid #e4393c;
+    color: #e4393c;
+    padding-bottom: 0;
+}
+.card_nav a:before {
+    background: none repeat scroll 0 0 #ddd;
+    height: 20px;
+    left: -1px;
+    margin-top: -10px;
+    position: absolute;
+    top: 50%;
+    width: 1px;
+}
+.card_content {
+    padding: 15px 0;
+}
+.card_total {
+    border-bottom: 1px solid #ddd;
+    padding: 0 10px 8px 20px;
+    position: relative;
+}
+.card_total .title {
+    color: #666;
+    font-size: 14px;
+}
+.card_total .count {
+    color: #e4393c;
+    font-size: 30px;
+}
+.card_total .count em {
+    font-size: 12px;
+}
+.card_total .btn {
+    background: none repeat scroll 0 0 #3985ff;
+    border-radius: 3px;
+    bottom: 15px;
+    color: #fff;
+    display: block;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    width: 125px;
+}
+.cart_tips {
+    color: #999;
+    font-size: 12px;
+    padding: 15px 10px;
+}
+.cart_status {
+    color: #666;
+    font-size: 16px;
+    text-align: center;
+}
+.cart_status_none {
+    padding-top: 20%;
+}
+a.cart_item, a.coupon_item {
+    color: #fff;
+}
+.cart_item, .coupon_item {
+    background: none repeat scroll 0 0 #e4393c;
+    color: #fff;
+    display: block;
+    font-size: 12px;
+    margin: 10px;
+    overflow: hidden;
+    position: relative;
+}
+.cart_item.over, .cart_item.disabled, .coupon_item.over, .coupon_item.disabled {
+
+}
+.cart_item.over .name:after, .cart_item.disabled .name:after, .coupon_item.over .name:after, .coupon_item.disabled .name:after {
+    background: url("/wx/img/my/icon_card.png") no-repeat scroll 0 0 / 69px 73px rgba(0, 0, 0, 0);
+    bottom: -5px;
+    height: 37px;
+    position: absolute;
+    right: -5px;
+    transform: rotate(-25deg);
+    width: 69px;
+}
+.cart_item.disabled .name:after, .coupon_item.disabled .name:after {
+    background-position: left -37px;
+}
+.coupon_item {
+    min-height: 95px;
+    padding-left: 120px;
+}
+.coupon_item:before, .coupon_item:after {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAMCAYAAABfnvydAAAAM0lEQVQYV2NkgIL/QABjg2hGIADTIAJdEqYQpIgRlyRcER0UEHQkUd5E9j86GxwOtFUAAFr4H/34gjemAAAAAElFTkSuQmCC");
+    background-repeat: repeat-y;
+    background-size: 4px 6px;
+    height: 92%;
+    position: absolute;
+    top: 4%;
+    width: 4px;
+    z-index: 1;
+}
+.coupon_item:before {
+    left: -2px;
+}
+.coupon_item:after {
+    right: -2px;
+}
+.coupon_item .date {
+    font-size: 10px;
+    padding: 10px 0 0;
+}
+.coupon_item .name {
+    font-size: 12px;
+    margin: 5px 0;
+    overflow: hidden;
+    padding-right: 15px;
+}
+.coupon_item .count {
+    font-size: 50px;
+    font-weight: normal;
+    left: 10px;
+    position: absolute;
+    text-align: center;
+    top: 15px;
+    width: 100px;
+	color: #fefe41;
+	font-weight: bold;
+}
+.coupon_item .count em {
+    margin-right: 5px;
+}
+.coupon_item .id {
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+.coupon_item .select {
+    background: none repeat scroll 0 0 #eee;
+    color: #333;
+    height: 30px;
+    left: -120px;
+    line-height: 30px;
+    padding: 5px 0 5px 40px;
+    position: relative;
+    width: 200%;
+}
+.coupon_item .select:before {
+    background: url("/wx/img/my/icon_filter.png") no-repeat scroll 0 -20px / 20px 80px rgba(0, 0, 0, 0);
+    height: 20px;
+    left: 10px;
+    margin-top: -10px;
+    position: absolute;
+    top: 50%;
+    width: 20px;
+}
+.coupon_item .select.selected:before {
+    background-position: 0 -40px;
+}
+.cart_item {
+    border-radius: 5px;
+    height: 82px;
+    padding-left: 140px;
+}
+.cart_item:before {
+    border-left: 1px dashed rgba(255, 255, 255, 0.3);
+    height: 60px;
+    left: 128px;
+    position: absolute;
+    top: 12px;
+    width: 1px;
+}
+.cart_item .tag {
+    font-size: 14px;
+    left: 10px;
+    position: absolute;
+    top: 8px;
+}
+.cart_item .name {
+    font-size: 14px;
+    padding: 10px 0 5px;
+}
+.cart_item .count {
+    font-size: 30px;
+    left: 10px;
+    position: absolute;
+    top: 30px;
+}
+.cart_item .count em {
+    font-size: 12px;
+    margin-right: 5px;
+}
+.card_form {
+    padding: 15px 0;
+}
+.card_form .input_text, .card_form .input_code {
+    border: 1px solid #b7b7b7;
+    height: 40px;
+    text-indent: 10px;
+}
+.card_form .input_text {
+    display: block;
+    width: 100%;
+}
+.card_form .input_code {
+    width: 145px;
+}
+.card_form .row {
+    margin-bottom: 10px;
+    padding: 0 10px;
+}
+.card_form .code_image {
+    display: inline-block;
+    margin: 0 5px;
+}
+.card_form .code_link {
+    color: #3985ff;
+    font-size: 14px;
+    text-decoration: underline;
+}
+.mod_feedback {
+    text-align: center;
+}
+.mod_feedback .icon {
+    background: url("/wx/img/my/icon_result.png?t140716") no-repeat scroll 0 0 / 50px 200px rgba(0, 0, 0, 0);
+    display: block;
+    height: 50px;
+    margin: 0 auto 15px;
+    width: 50px;
+}
+.mod_feedback .title {
+    color: #444;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.card_text {
+    margin: 0 auto;
+    padding: 10px 0;
+    width: 300px;
+}
+.card_wx {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    position: relative;
+}
+.card_wx:after {
+    right: 10px;
+}
+
+	
+        a.coupon_item:visited {
+            color: #fff;
+        }
+    </style>
+
+</head>
+<body>
+<div class="page_bottom">
+<hgroup>
+  <h3 class="goods_car"><a href="javascript:history.go(-1);"><em></em></a><span><b>我的优惠券</b></span></h3>
+</hgroup> 
+
+
+<div id="coupon_content" class="wx_wrap">
+	#if($!json_map.coupon_list)
+    <!-- S 内容 -->
+    <div class="card_content">
+
+        <!-- S 待使用 -->
+        <div id="effective_coupon" class="card_content_pane">
+        
+            #foreach($obj in $json_map.coupon_list)
+             <a  href="javascript:void(0);" class="coupon_item">
+                <p class="date">优惠券编码 ：$!obj.coupon_sn</p>
+                <p class="date">$!obj.coupon_beginTime  -  $!obj.coupon_endTime</p>
+                <p title="$obj.coupon_name" class="name">$!obj.coupon_name 满$!obj.coupon_order_amount元使用</p>
+               <!-- <p class="id">ID: $!obj.coupon_id</p> -->
+                <p class="count"><em>¥</em>$!obj.coupon_amount</p>
+             </a>
+        	#end
+
+    </div>
+    </div>
+    #end
+</div><!-- wx_wrap -->
+ #if(!$!json_map.coupon_list)
+
+ <span class="goods_none"><img src="$!webPath/resources/style/weiXin/images/sigh.jpg" width="80"  height="62"/>
+<p>对不起，没有相应数据！</p>
+</span> 
+ #end
+</div>
+
+  $!httpInclude.include("/weiXin/footer.htm")
+
+
+</body>

@@ -1,0 +1,277 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="$!webPath/resources/style/mobileWap/css/style.css">
+<link href="$!webPath/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/platform.css" rel="stylesheet" type="text/css" />
+<title></title>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="$!webPath/resources/js/jquery.event.drag-1.5.min.js"></script>
+<script type="text/javascript" src="$!webPath/resources/js/jquery.touchSlider.js"></script>
+
+<script>
+
+function iosFun(cmd,para)
+{ 
+    document.location="objc://"+cmd+":/"+para;  //cmd代表objective-c中的的方法名，parameter1自然就是参数了
+}
+</script>
+<script>
+function save_search(){
+	jQuery("#searchForm").submit();
+}
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+
+	jQuery(".main_visual").hover(function(){
+		jQuery("#btn_prev,#btn_next").fadeIn()
+	},function(){
+		jQuery("#btn_prev,#btn_next").fadeOut()
+	});
+	
+	$dragBln = false;
+	
+	jQuery(".main_image").touchSlider({
+		flexible : true,
+		speed : 500,
+		btn_prev : jQuery("#btn_prev"),
+		btn_next : jQuery("#btn_next"),
+		paging : jQuery(".flicking_con a"),
+		counter : function (e){
+			jQuery(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+		}
+	});
+	
+	jQuery(".main_image").bind("mousedown", function() {
+		$dragBln = false;
+	});
+	
+	jQuery(".main_image").bind("dragstart", function() {
+		$dragBln = true;
+	});
+	
+	jQuery(".main_image a").click(function(){
+		if($dragBln) {
+			return false;
+		}
+	});
+	
+	timer = setInterval(function(){
+		jQuery("#btn_next").click();
+	}, 5000);
+	
+	jQuery(".main_visual").hover(function(){
+		clearInterval(timer);
+	},function(){
+		timer = setInterval(function(){
+			$("#btn_next").click();
+		},5000);
+	});
+	
+	jQuery(".main_image").bind("touchstart",function(){
+		clearInterval(timer);
+	}).bind("touchend", function(){
+		timer = setInterval(function(){
+			jQuery("#btn_next").click();
+		}, 5000);
+	});
+	
+});
+</script>
+
+</head>
+<body>
+
+ $!httpInclude.include("/mobileWap/h.htm")
+<div class="view-wp">
+ $!httpInclude.include("/mobileWap/advertInvoke.htm?advertPositionId=7")
+ 
+<div class="main_nav">
+  <ul>   
+    <li><a href="$!webPath/mobileWap/goods_cart1.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_j.png"></a><span id="asd">购物车</span></li>
+    <li><a href="$!webPath/mobileWap/buyer/index.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_h.png"></a><span>用户中心</span></li>
+    <li><a href="$!webPath/mobileWap/integral.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_t.png"></a><span>积分商城</span></li>
+    <li><a href="$!webPath/mobileWap/brand_list.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_c.png"></a><span>推荐品牌</span></li>
+  </ul>
+</div>
+<!--促销区-->
+<div class="main_sales">
+<div class="sales_wrap"><h1 class="sales_title"><i class="time_i"></i>限时促销</h1>
+<div class="time-item">
+	<span id="day_show0" class="sale_td">0</span>
+	<span id="day_show1" class="sale_td">0</span>
+	<span id="day_show2" class="sale_d">天</span>
+	<span id="hour_show0" class="sale_time">0</span>
+	<span id="hour_show1" class="sale_time">0</span>
+	<span class="sales_time_separator">:</span>
+	<span id="minute_show0" class="sale_time">0</span>
+	<span id="minute_show1" class="sale_time">0</span>
+	<span class="sales_time_separator">:</span>
+	<span id="second_show0" class="sale_time">0</span>
+	<span id="second_show1" class="sale_time">0</span>
+</div><!--倒计时模块-->
+</div>
+
+<script type="text/javascript">
+
+var intDiff = parseInt($!second);//倒计时总秒数量
+
+function timer(intDiff){
+	window.setInterval(function(){
+	var day=0,
+		hour=0,
+		minute=0,
+		second=0;//时间默认值		
+	if(intDiff > 0){
+		day = Math.floor(intDiff / (60 * 60 * 24));
+		hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+		minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+		second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+	}
+	
+	if (hour <= 9) hour = '0' + hour;
+	if (minute <= 9) minute = '0' + minute;
+	if (second <= 9) second = '0' + second;
+	if(day<=0){
+		$('#day_show0').attr("style" ,"display:none");
+		$('#day_show1').attr("style" ,"display:none");
+		$('#day_show2').attr("style" ,"display:none");
+	}
+	if(day>0){
+		$('#day_show0').html('<s id="d"></s>'+(day+"").substr(0, 1));
+	}
+	if(day>0 && day<9){
+		$('#day_show1').attr("style" ,"display:none");
+	}
+	if(day>9){
+		$('#day_show1').html('<s id="d"></s>'+(day+"").substr(1, 1));
+	}
+	$('#hour_show0').html('<s id="h"></s>'+(hour+"").substr(0, 1));
+	$('#hour_show1').html('<s id="h"></s>'+(hour+"").substr(1, 1));
+	$('#minute_show0').html('<s></s>'+(minute+"").substr(0, 1));
+	$('#minute_show1').html('<s></s>'+(minute+"").substr(1, 1));
+	$('#second_show0').html('<s></s>'+(second+"").substr(0, 1));
+	$('#second_show1').html('<s></s>'+(second+"").substr(1, 1));
+	intDiff--;
+	}, 1000);
+} 
+
+	timer(intDiff);
+</script>
+
+
+<div class="sales_list">
+<!--效果html开始-->
+<div class="main_visual">
+	<!-- 
+	<div class="flicking_con">
+		<a href="#">1</a>
+		<a href="#">2</a>
+		<a href="#">3</a>
+		<a href="#">4</a>
+		<a href="#">5</a>
+	</div>
+	 -->
+	<div class="main_image">
+		<ul class="sales_ul">
+		 #set($i=0)
+		 #foreach($obj in $ac_goods)
+		 	#set($i=$i+1)
+		 	#set($r = $i % 3) 
+		 	 #set($img="$!webPath/$!config.goodsImage.path/$!config.goodsImage.name")
+			      #if($!obj.goods_main_photo)
+			      #set($big="$!webPath/$!obj.goods_main_photo.path/$!obj.goods_main_photo.name")
+			      #set($img="$!{big}_middle.$!{obj.goods_main_photo.ext}")
+			      #end
+		 	#if($r==1)
+        	<li>
+        	#end
+		     
+		         <a href="$!webPath/mobileWap/goods.htm?id=$!obj.id">
+				     <p><img src="$!{img}"></p>
+				     <div class="sales_bottom"><span class="sales_left">满58包邮</span><span class="sales_right">￥$!obj.goods_current_price</span></div>
+				     </a>
+        	#if($r==0)
+        	</li>
+        	#end
+         #end
+       </ul>
+		<a href="javascript:;" id="btn_prev"></a>
+		<a href="javascript:;" id="btn_next"></a>
+	</div>
+</div>
+<!--效果html结束-->
+</div>
+</div>
+<!--超值购-->
+<div class="floor main-floor">
+<h2 class="mlist_title"><i class="mlist_title_r"></i>超值购</h2><span class="mlist_more"><a href="$!webPath/mobileWap/goods_list.htm?keyword=">MORE &gt</a></span>
+<div class="mlist_center">
+<div class="mlist_1 fl">
+<div class="good_img"><a href="$!webPath/mobileWap/goods.htm?id=17"><img src="$!webPath/resources/style/mobileWap/images/at1.jpg"></a></div>
+</div>
+<div class="mlist_2 fr">
+<div class="good_img fl"><a href="$!webPath/mobileWap/goods.htm?id=19"><img src="$!webPath/resources/style/mobileWap/images/at2.jpg"></a></div>
+</div>
+<div class="mlist_3 fr">
+<div class="good_img fr"><a href="$!webPath/mobileWap/goods.htm?id=18"><img src="$!webPath/resources/style/mobileWap/images/at3.jpg"></a></div>
+</div>
+</div>
+
+
+
+<div class="mlist_center">
+<div class="blist_1 blist_1_b fr">
+
+<div class="good_img"><a href="$!webPath/mobileWap/goods.htm?id=358"><img src="$!webPath/resources/style/mobileWap/images/bt1.jpg"></a></div>
+</div>
+<div class="blist_2 fl">
+
+<div class="good_img fr"><a href="$!webPath/mobileWap/goods.htm?id=45"><img src="$!webPath/resources/style/mobileWap/images/bt2.jpg"></a></div>
+</div>
+<div class="blist_3 fl">
+<div class="good_img fl"><a href="$!webPath/mobileWap/goods.htm?id=51"><img src="$!webPath/resources/style/mobileWap/images/bt3.jpg"></a></div>
+</div>
+</div>
+</div>
+<!--超值购 End-->
+
+
+<!--小横幅-->
+<div class="mlist-ad">
+$!httpInclude.include("/mobileWap/advertInvoke9.htm?advertPositionId=9")
+</div>
+
+<!--主题馆-->
+<div class="floor main-floor">
+<h2 class="mlist_title"><i class="mlist_title_r"></i>主题馆</h2>
+<div class="mlist_content">
+<ul class="mlist_ul">
+<li class="mlist_li"><a href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=6"><div class="mlist_item"><img src="$!webPath/resources/style/mobileWap/images/cg1.png"></div><img src="$!webPath/resources/style/mobileWap/images/abt_1.png"></a></li>
+<li class="mlist_li"><a href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=24"><div class="mlist_item"><img src="$!webPath/resources/style/mobileWap/images/cg2.png"></div><img src="$!webPath/resources/style/mobileWap/images/abt_2.png"></a></li>
+<li class="mlist_li"><a href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=45"><div class="mlist_item"><img src="$!webPath/resources/style/mobileWap/images/cg3.png"></div><img src="$!webPath/resources/style/mobileWap/images/abt_3.png"></a></li>
+<li class="mlist_li"><a href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=70"><div class="mlist_item"><img src="$!webPath/resources/style/mobileWap/images/cg4.png"></div><img src="$!webPath/resources/style/mobileWap/images/abt_4.png"></a></li>
+<li class="mlist_li"><a href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=104"><div class="mlist_item"><img src="$!webPath/resources/style/mobileWap/images/cg5.png"></div><img src="$!webPath/resources/style/mobileWap/images/abt_5.png"></a></li>
+<li class="mlist_li"><a href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=84"><div class="mlist_item"><img src="$!webPath/resources/style/mobileWap/images/cg6.png"></div><img src="$!webPath/resources/style/mobileWap/images/abt_6.png"></a></li>
+<li class="mlist_li"><a href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=94"><div class="mlist_item"><img src="$!webPath/resources/style/mobileWap/images/cg7.png"></div><img src="$!webPath/resources/style/mobileWap/images/abt_7.png"></a></li>
+<li class="mlist_li"><a href="$!webPath/mobileWap/goods_list.htm?queryType=goodsClass&gc_id=119"><div class="mlist_item"><img src="$!webPath/resources/style/mobileWap/images/cg8.png"></div><img src="$!webPath/resources/style/mobileWap/images/abt_8.png"></a></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+
+</body>
+</html>
+
+

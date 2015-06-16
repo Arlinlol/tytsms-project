@@ -1,0 +1,17 @@
+#if($!carts.size()>0) 
+<ul class="goodscar_list">
+#foreach($gc in $carts)
+#set($goods_url="$!webPath/goods_$!{gc.goods.id}.htm")
+#if($!config.second_domain_open && $!gc.goods.goods_type==1 && $!gc.goods.goods_store.store_second_domain!="")
+#set($goods_url="http://$!{gc.goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{gc.goods.id}.htm")
+#end  
+<li id="$!gc.id"><i><a href="$!goods_url" target="_blank"><img src="$!imageWebServer/$!gc.goods.goods_main_photo.path/$!{gc.goods.goods_main_photo.name}_small.$!{gc.goods.goods_main_photo.ext}" width="40" height="40" /></a></i> <span class="goodscar_listr">
+<h4><a href="$!goods_url" target="_blank" class="goodscar_n">$!CommUtil.substring("$!gc.goods.goods_name",12)</a><a href="javascript:void(0);" class="goodscar_del" onclick="cart_remove('$!gc.id','$!gc.goods.goods_store.id');">#springMessage("sms.cart_menu_detail.delete")<!--删除--></a></h4>
+<b class="goodscar_botm"><em>฿$!{gc.price}×$!{gc.count}</em>&nbsp;&nbsp;$!gc.spec_info</b></span> </li>
+#end        
+</ul>
+<span class="goodscar_total">#springMessage("sms.cart_menu_detail.shoppingcart_price")<!--购物车总价--><b id="cart_goods_price_top">฿$!{total_price}</b></span>
+<span><a href="$!webPath/goods_cart1.htm" class="see_car">#springMessage("sms.cart_menu_detail.look_ shoppingcart")<!--查看我的购物车--></a></span> 
+#else
+<b class="goodscar_none">#springMessage("sms.cart_menu_detail.shoppingcart_no_goods")<!--购物车还没有商品!--></b>
+#end

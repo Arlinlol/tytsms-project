@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("member.order_print.order_print") -  $!{config.poweredby}</title><!-- 订单打印  -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+</head>
+<body>
+<div class="print_box">
+  <div class="print_left">
+    <h1>$!obj.store.store_name</h1>
+    <ul>
+      <li>#springMessage("member.order_print.ship_name")<!-- 收货人： -->$!obj.addr.trueName</li>
+      <li>#springMessage("member.order_print.phone")<!-- 电话： -->$!obj.addr.telephone</li>
+      <li>#springMessage("member.order_print.mobile")<!-- 手机： -->$!obj.addr.mobile</li>
+      <li>#springMessage("member.order_print.location")<!-- 所在地： -->$!{obj.addr.area.parent.parent.areaName} $!{obj.addr.area.parent.areaName} $!{obj.addr.area.areaName}</li>
+      <li>#springMessage("member.order_print.address")<!-- 地址： -->$!{obj.addr.area_info}</li>
+      <li>#springMessage("member.order_print.zip")<!-- 邮编： -->$!{obj.addr.zip}</li>
+      <li>#springMessage("member.order_print.order")<!-- 订单号： -->$!obj.order_id</li>
+      <li>#springMessage("member.order_print.order_time")<!-- 下单时间： -->$!CommUtil.formatLongDate($!obj.addTime)</li>
+      <li>#springMessage("member.order_print.deliver_code")<!-- 发货单号： -->$!obj.shipCode</li>
+    </ul>
+    <div class="print_left_tb">
+      <table width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="7%" align="center">#springMessage("member.order_print.code")<!-- 序号 --></td>
+          <td width="55%">#springMessage("member.order_print.goods_name")<!-- 商品名称 --></td>
+          <td width="11%" align="center">#springMessage("member.order_print.standard")<!-- 规格 --></td>
+          <td width="10%" align="center">#springMessage("member.order_print.unit_price")<!-- 单价（元） --></td>
+          <td width="7%" align="center">#springMessage("member.order_print.number")<!-- 数量 --></td>
+          <td width="10%" align="center">#springMessage("member.order_print.subtotal")<!-- 小计（元） --></td>
+        </tr>
+        #set($allCount = 0)
+        #foreach($gc in $obj.gcs)
+        #set($allCount = $!allCount + $!gc.count)
+        <tr>
+          <td height="38" align="center">$!velocityCount</td>
+          <td>$!{gc.goods.goods_name}#if($!gc.goods.group_buy==2)<span style="color:#F00">(#springMessage("member.order_print.group_goods")<!-- 团购商品 -->)</span>#end</td>
+          <td align="center">$!gc.spec_info</td>
+          <td align="center">฿$!gc.price</td>
+          <td align="center">$!gc.count</td>
+          <td align="center"><strong style="color:#F90">฿#if($!gc.goods.group_buy==2)$!{gc.goods.group_goods.gg_price}#else $!{gc.goods.store_price}#end</strong></td>
+        </tr>
+        #end
+        <tr>
+          <td height="38" colspan="4" bgcolor="#eeeeee" style="padding-left:20px;">#springMessage("member.order_print.total")<!-- 合计  --></td>
+          <td align="center" bgcolor="#eeeeee">$!allCount</td>
+          <td align="center" bgcolor="#eeeeee">฿$!obj.goods_amount</td>
+        </tr>
+        <tr>
+          <td colspan="6" height="60"><ul>
+              <li>#springMessage("member.order_print.aggregate")<!-- 总计:￥ -->$!obj.goods_amount</li>
+              <li>#springMessage("member.order_print.freight")<!-- 运费:￥ -->$!{obj.ship_price}</li>
+              <li>#springMessage("member.order_print.order_total_amount")<!-- 订单总额：￥ -->$!{obj.totalPrice}</li>
+              <li>#springMessage("member.order_print.store_name")<!-- 店主名： -->$!obj.store.user.userName</li>
+              <li>#springMessage("member.order_print.store")<!-- 店铺： -->$!obj.store.store_name</li>
+              <li>#springMessage("member.order_print.phone")<!-- 电话： -->$!obj.store.store_telephone</li>
+              <li>QQ：$!obj.store.store_qq</li>
+            </ul></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="print_right">
+    <h1><span><a href="javascript:void(0);" onclick="window.print()">#springMessage("member.order_print.print")<!-- 打印 --></a></span></h1>
+    <p><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/print_02.jpg" /><em>Size:210mmx297mm</em><b>#springMessage("member.order_print.open_after")<!-- 当打印设置选择A4纸张、纵向打印、无边距时每张A4打印纸可输出1页订单。 --> </b> </p>
+  </div>
+</div>
+</body>
+</html>

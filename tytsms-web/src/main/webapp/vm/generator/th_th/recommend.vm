@@ -1,0 +1,52 @@
+<script type="text/javascript">
+ jQuery(document).ready(function(){
+	 var recommend_goods_random=1;
+	 jQuery("#sale_change").click(function(){
+	 var target = jQuery("#sale_change").attr("mark");
+	 recommend_goods_random=parseInt(jQuery(".index_sale_tab li[class='this']").attr("recommend_goods_random"));
+	 jQuery.ajax({
+		 		  type:'POST',
+		 		  url:'$!webPath/switch_'+target+'_goods.htm',
+		 		  data:{"recommend_goods_random":recommend_goods_random},
+	  			  beforeSend:function(){
+	  				     jQuery("#index_sale_con_"+target).empty();
+	  					 jQuery("#index_sale_box_"+target).html("<div style='width:100%;height:301px;text-align:center;'><img src='$!webPath/th_th/resources/style/common/images/loader.gif' style='margin-top:145px;' /></div>");
+	  				  },
+	  			  success:function(html){
+	  	                      jQuery("#index_sale_box_"+target).html(html);
+	  	                      recommend_goods_random++;
+	  						  if(target=="recommend"){
+	  							  if(recommend_goods_random>$!{store_recommend_goods_count}){
+	                                               recommend_goods_random=1;
+	  	                       		}
+	  						  } 
+	  						  if(target=="like"){
+	  						      if(recommend_goods_random>$!{store_recommend_goods_count}){
+	                                               recommend_goods_random=1;
+	  	                       		}
+	  						  }
+	  						  jQuery(".index_sale_tab li[class='this']").attr("recommend_goods_random",recommend_goods_random);
+	  					  }
+	  			 });
+			});
+ 	});
+  </script>
+
+<div class="index_sale_con" id="index_sale_con_recommend"> #foreach($!store_recommend_good in $store_recommend_goods)
+          <ul class="index_sale_two">
+            #if($!store_recommend_good.goods_main_photo)
+            #set($img="$!imageWebServer/$!{store_recommend_good.goods_main_photo.path}/$!{store_recommend_good.goods_main_photo.name}_middle.$!{store_recommend_good.goods_main_photo.ext}")
+            #else
+            #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+            #end
+            #set($goods_url="$!webPath/goods_$!{store_recommend_good.id}.htm")
+            #if($!config.second_domain_open && $!store_recommend_good.goods_type==1 && $!store_recommend_good.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{store_recommend_good.goods_store.store_second_domain}.$!{domainPath}/goods_$!{store_recommend_good.id}.htm")
+            #end
+            <li class="sale_two_img"> <a href="$!goods_url" target="_blank"> <span class="img_cspan">
+              <p><img src="$!img" width="170" height="170" /></p>
+              </span></a> </li>
+            <li class="sale_two_name"><a href="$!goods_url">$!store_recommend_good.goods_name</a></li>
+            <li class="sale_two_price">ราคาขาย#*售价*#：<strong>฿$!store_recommend_good.store_price</strong></li>
+          </ul>
+          #end </div>

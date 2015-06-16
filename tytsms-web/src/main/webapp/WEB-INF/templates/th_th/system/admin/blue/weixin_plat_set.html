@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    rules:{
+	  weixin_logo:{
+	    accept:"$!config.imageSuffix"
+	  },
+	   qr_img:{
+	    accept:"$!config.imageSuffix"
+	  }
+	 },
+	messages:{
+	  weixin_logo:{accept:"系统不允许上传该文件类型"},
+	  qr_img:{accept:"系统不允许上传该文件类型"}
+	}
+  });
+ 	//改变系统提示的样式
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+//鼠标经过logo图片显示
+	jQuery("img[src='$!webPath/th_th/resources/style/system/manage/blue/images/preview.jpg']").mouseover(function(){
+	jQuery(this).parent().parent().find(".bigimgpre").css('display','block');
+	});
+	jQuery("img[src='$!webPath/th_th/resources/style/system/manage/blue/images/preview.jpg']").mouseout(function(){
+	jQuery(this).parent().parent().find(".bigimgpre").css('display','none');
+	});
+//
+  jQuery("#weixin_logo").change(function(){
+	 jQuery("#textfield1").val(jQuery("#weixin_logo").val());
+   })
+    jQuery("#qr_img").change(function(){
+	 jQuery("#textfield2").val(jQuery("#qr_img").val());
+   })
+//
+  jQuery(":checkbox").click(function(){
+     var id=jQuery(this).attr("name");
+	 id=id.substring(0,id.length-3);
+	 if(jQuery(this).attr("checked")=="checked"){
+	    jQuery("#"+id).val("true");
+	 }else jQuery("#"+id).val("false");
+  });
+  //
+    jQuery("input[id^=img][type=file]").change(function(){
+	   var id=jQuery(this).attr("id");
+	   jQuery("#"+id+"_text").val(jQuery(this).val());
+   })
+  //
+  jQuery(":radio[value=$!config.sysLanguage]").attr("checked",true);
+});
+function saveForm(){
+	jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+<form action="$!webPath/admin/weixin_plat_set_save.htm" method="post" enctype="multipart/form-data" name="theForm" id="theForm">
+  <input name="id" id="id" type="hidden" value="$!config.id"/>
+  <div class="cont">
+    <h1 class="seth">微商城配置</h1>
+    <div class="nav_list">
+  
+      <ul>
+      <li><a href="$!webPath/admin/weixin_plat_set.htm" class="this" id="site_base"><b>基本信息</b></a> </li>
+      <li> <a href="$!webPath/admin/weixin_plat_menu.htm" id="site_menu"><b>微商城菜单</b></a></li>
+      </ul>
+   
+      </div>
+        <div class="edit">
+    <div class="editul setcont" id="base">
+      <ul class="set1">
+        <li class="setcont_bg">微商城开发URL</li>
+        <li><span class="webname">
+          $!weixin_develop_action
+          </span><span id="nothis"><strong class="q"></strong><strong class="w">请填写在微信公众账号管理中心对应的位置</strong><strong class="c"></strong></span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg">微商城账号</li>
+        <li> <span class="webname">
+          <input name="weixin_account" type="text" id="weixin_account" value="$!config.weixin_account" />
+          </span> <span id="nothis"> <strong class="q"></strong> <strong class="w">微商城公众账号</strong> <strong class="c"></strong> </span></li>
+          </ul>
+          <ul class="set1">
+        <li class="setcont_bg">微信Token</li>
+        <li> <span class="webname">
+          <input name="weixin_token" type="text" id="weixin_token" value="$!config.weixin_token" />
+          </span> <span id="nothis"> <strong class="q"></strong> <strong class="w">微商城公众账号Token，和公众账号管理中一致</strong></span></li>  
+          </ul>
+          <ul class="set1">
+        <li class="setcont_bg">微信AppId</li>
+        <li> <span class="webname">
+          <input name="weixin_appId" type="text" id="weixin_appId" value="$!config.weixin_appId" />
+          </span> <span id="nothis"> <strong class="q"></strong> <strong class="w">微商城公众账号appId，由公众账号提供</strong> <strong class="c"></strong> </span> </li>
+          </ul>
+          <ul class="set1">
+        <li class="setcont_bg">微信AppSecret</li>
+        <li> <span class="webname">
+          <input name="weixin_appSecret" type="text" id="weixin_appSecret" value="$!config.weixin_appSecret" />
+          </span> <span id="nothis"> <strong class="q"></strong> <strong class="w">微商城公众账号appSecret,由公众账号提供</strong> <strong class="c"></strong> </span> 
+        </li>
+        </ul>
+        <ul class="set1">
+        <li class="setcont_bg">微商城LOGO</li>
+        <li> <span class="size13" >
+          <input name="textfield" type="text" id="textfield1" />
+          </span> <span class="filebtn">
+          <input name="button" type="button" id="button1" value=""/>
+          </span> <span style="float:left;" class="file">
+          <input name="weixin_logo" type="file" id="weixin_logo" class="file-text" size="30"/>
+          </span> <span class="preview"> <img src="$!webPath/th_th/resources/style/system/manage/blue/images/preview.jpg" width="25" height="25"  id="logoShow" style="cursor:help"/> </span> <span id="nothis"><strong class="q"></strong><strong class="w">最佳颜色：白色背景透明，最佳尺寸:80px * 80px</strong><strong class="c"></strong></span>
+          <div class="bigimgpre" id="logoImg" style="display:none; background:#000;"><img #if($!config.store_weixin_logo)src="$!webPath/$!config.store_weixin_logo.path/$!config.store_weixin_logo.name"#else src="$!webPath/th_th/resources/style/weixin/default/images/logo.png" #end width="80" height="80" id="logoShow2"/> </div>
+        </li>
+        </ul>
+        <ul class="set1">
+        <li class="setcont_bg">微商城二维码</li>
+        <li> <span class="size13" >
+          <input name="textfield2" type="text" id="textfield2" />
+          </span> <span class="filebtn">
+          <input name="button" type="button" id="button1" value=""/>
+          </span> <span style="float:left;" class="file">
+          <input name="qr_img" type="file" id="qr_img" class="file-text" size="30"/>
+          </span> <span class="preview"> <img src="$!webPath/th_th/resources/style/system/manage/blue/images/preview.jpg" width="25" height="25"  id="logoShow" style="cursor:help"/> </span> <span id="nothis"><strong class="q"></strong><strong class="w">微商城二维码</strong><strong class="c"></strong></span>
+          #if($!config.weixin_qr_img)
+          <div class="bigimgpre" id="logoImg" style="display:none;">
+          <img src="$!webPath/$!config.weixin_qr_img.path/$!config.weixin_qr_img.name"  width="100" height="100" id="logoShow2" /> 
+          </div>
+          #end
+        </li>
+        </ul>
+        <ul class="set1">
+        <li class="setcont_bg">微信关注欢迎词：</li>
+        <li><span class="webtj">
+          <textarea name="weixin_welecome_content" cols="4" rows="6" id="weixin_welecome_content">$!config.weixin_welecome_content
+          </textarea>
+          </span><span id="nothis"><strong class="q"></strong><strong class="w">用户关注微商城后的欢迎词</strong><strong class="c"></strong></span></li>
+      </ul>
+    </div>  
+      </div>
+      <div class="submit">
+    <span class="pad120"><input name="" type="button" value="保存" style="cursor:pointer;" onclick="saveForm();"/></span>
+  </div>
+  </div>
+  
+</form>
+</body>
+</html>

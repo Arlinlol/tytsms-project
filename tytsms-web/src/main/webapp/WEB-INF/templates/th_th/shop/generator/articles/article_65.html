@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>联系我们 - 泰易淘-东南亚跨境电子商务平台 </title>
+<meta name="keywords" content="泰易淘，东南亚跨境电子商务平台，东南亚购物，跨境购，海淘购物，泰国进口，东南亚进口" />
+<meta name="description" content="泰易淘，改变您的生活！东南亚跨境购物平台，专注挖掘东南亚十国的特色文化、特色产品，秉承“真诚·极致”的服务理念，践行“源头供应、正品保证”的郑重承诺，以诚信、专业的态度打造便捷、轻松的购物环境，为用户提供最正宗、最丰富、最优质的特色商品。" />
+<meta name="generator" content="" />
+<meta name="author" content="">
+<meta name="copyright" content="">
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="http://localhost:8080/tytsms-web/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="http://localhost:8080/tytsms-web/resources/js/jquery-1.6.2.js"></script>
+
+<script>
+//异步加载头部内容优化性能
+jQuery(document).ready(function(){
+	 jQuery.ajax({
+		 type:'POST',
+		 dataType: "json",
+		 url:'http://localhost:8080/tytsms-web/ajax_head.htm',
+		 data:"",
+		 success:function(result){
+			 var html = "";
+			 if(result!=null && result.user){
+				 html +="<span>"+result.user_userName+" สวัสดีค่ะ /ครับ,ยินดีต้อนรับสู่taiyitao！" 
+				 if(result.user_userRole.indexOf("ADMIN")!=-1){
+					 html +="[<a href='http://localhost:8080/tytsms-web/admin/index.htm'>การจัดการระบบหลังร้านค้า</a>] "
+				 }
+				 html +="[<a href='http://localhost:8080/tytsms-web/iskyshop_logout.htm'>ออกจากระบบของมอลล์</a>]"
+				 html +="</span> ";
+				 jQuery("#replace").replaceWith(html);
+				 if(result.user_userRole.indexOf("SELLER")!=-1){
+					 jQuery(".top_collect").after("<b class='top_b'>|</b> <span class='top_shop'><a href='http://localhost:8080/tytsms-web/seller/index.htm'>การจัดการร้านค้า</a></span>"); 
+				 }
+			  }else{
+				jQuery(".top_collect").after("<b class='top_b'>|</b><span class='top_shop'><a href='http://localhost:8080/tytsms-web/seller/login.htm'>เข้าสู่ระบบร้านค้า</a></span> "); 
+			  }
+			}
+		 });
+		
+	});
+</script>
+</head>
+<body>
+<!--点击收藏-->
+<script type="text/javascript">
+jQuery(document).ready(function(){
+  jQuery(".top_pull").mouseover(function(){
+	jQuery(this).find("div").show();
+	jQuery(this).find("em").addClass("em_this");
+	jQuery(this).find("s").addClass("this");
+  	}).mouseleave(function(){
+    jQuery(this).find("div").hide();
+	jQuery(this).find("em").removeClass("em_this");
+	jQuery(this).find("s").removeClass("this");
+  });					
+								});
+var browserEvent = function (obj, url, title) {
+    var e = window.event || arguments.callee.caller.arguments[0];
+    var B = {
+        IE : /MSIE/.test(window.navigator.userAgent) && !window.opera
+        , FF : /Firefox/.test(window.navigator.userAgent)
+        , OP : !!window.opera
+    };
+    obj.onmousedown = null;
+    if (B.IE) {
+        obj.attachEvent("onmouseup", function () {
+            try {
+                window.external.AddFavorite(url, title);
+                window.event.returnValue = false;
+            } catch (exp) {}
+        });
+    } else {
+        if (B.FF || obj.nodeName.toLowerCase() == "a") {
+            obj.setAttribute("rel", "sidebar"), obj.title = title, obj.href = url;
+        } else if (B.OP) {
+            var a = document.createElement("a");
+            a.rel = "sidebar", a.title = title, a.href = url;
+            obj.parentNode.insertBefore(a, obj);
+            a.appendChild(obj);
+            a = null;
+        }
+    }
+};
+</script>
+
+
+
+<div class="top">
+  <div class="top_page">
+    <div class="top_right">
+		<span id="replace"> สวัสดีค่ะ/ครับ ,ยินดีต้อนรับสู่taiyitao！[<a href="http://localhost:8080/tytsms-web/user/login.htm">เข้าสู่ระบบของมอลล์</a>][<a href="http://localhost:8080/tytsms-web/register.htm">การลงทะเบียนฟรี</a>]</span>
+    	<b>|</b> <span class="top_pull"> <a href="http://localhost:8080/tytsms-web/buyer/order.htm">รายการสั่งซื้อของฉัน</a> </span> <b>|</b> 
+    	       <span class="top_pull">
+      <!--加em_this和top_this-->
+      <em class=""><i>มอลล์บนมือถือ</i><s class="this"></s></em>
+      <div class="top_this" style="display:none;">
+        <div class="top_this_box">
+          <div class="top_this_code"><img src="http://localhost:8080/tytsms-web//app/app_dowload.png" width="77" height="77" /></div>
+          <i class="top_this_i"><a href="itms-services://?action=download-manifest&url=https://dn-taiyitao.qbox.me/tytsms-1.0.1.plist" target="_blank"><img src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/app-store.png" width="111" height="37" /></a></i> <i class="top_this_i"><a href="http://shouji.baidu.com/software/item?docid=7517850&from=as" target="_blank"><img src="http://localhost:8080/tytsms-web/resources/style/system/front/default/images/android.png" width="111" height="37" /></a></i> </div>
+      </div>
+      </span> <b>|</b>       <span class="top_pull"> <em class="">บริการลูกค้า<s class="this"></s></em>
+      <div class="top_this" style="display:none;">
+        <ul class="top_pull_con_style2">
+          <li><a href="http://localhost:8080/tytsms-web/articlelist_help.htm" target="_blank">ศูนย์การให้ความช่วยเหลือ</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/doc_service.htm" target="_blank">บริการหลังการขาย</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/doc_online.htm" target="_blank">เจ้าหน้าที่บริการลูกค้าออนไลน์</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/doc_complaint.htm" target="_blank">ศูนย์การร้องเรียน</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/doc_email.htm" target="_blank">อีเมล์ของเจ้าหน้าที่บริการลูกค้า</a></li>
+          <li><a href="http://localhost:8080/tytsms-web/seller_apply.htm" target="_blank">ผู้ขายเปิดร้านค้าบนเว็บไซต์</a></li>
+        </ul>
+      </div>
+      </span> <b>|</b>        </div>
+	  <span class="top_collect"><a href="javascript:void(0);" onclick="browserEvent(this, 'http://localhost:8080/tytsms-web','taiyitao')">บันทึกเว็บไซต์นี้เป็นเว็บไซต์ที่ชื่นชอบ</a></span>
+     </div>
+</div>
+<script>
+jQuery(document).ready(function(){
+  //获取购物车商品数量
+  jQuery.ajax({
+		type:'POST',
+		url:'http://localhost:8080/tytsms-web/ajax_carts.htm',
+		data:'',
+	    success:function(data){
+	     jQuery("#cart_goods_count_top").html(data);
+		   }
+		});	
+		
+		
+	//鼠标经过用户中心
+   jQuery("#top_user_sp").mouseover(function(){
+		if(jQuery("#top_user_hb").size()==0){
+			jQuery.ajax({type:'POST',url:'http://localhost:8080/tytsms-web/head_ajax_usercenter.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#top_user_hid").html('<div class="top_user_hb" id="top_user_hb"><span class="top_user_loading"><img src="http://localhost:8080/tytsms-web/th_th/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#top_user_hid").show();
+							   },
+						  success:function(data){
+						     jQuery("#top_user_hid").empty();
+								 jQuery("#top_user_hid").html(data);
+							   }
+						});		
+		}else{
+			jQuery("#top_user_hid").show();
+			}
+	jQuery("#top_user_sp").addClass("top_user_sp_this");
+  	});
+   jQuery("#top_user").mouseleave(function(){
+    jQuery("#top_user_hid").hide();
+	jQuery("#top_user_sp").removeClass("top_user_sp_this");
+  });
+   
+   //鼠标经过购物车
+   jQuery("#goodscar_sp").mouseover(function(){
+			var gstatus =jQuery("#goodscar_con_box").attr("mark");
+			if(gstatus=="none")
+			  jQuery.ajax({type:'POST',url:'http://localhost:8080/tytsms-web/cart_menu_detail.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#goodscar_con_box").empty().html(' <div><span class="top_user_loading"><img src="http://localhost:8080/tytsms-web/th_th/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#goodscar_con_box").show();
+							   },
+						  success:function(data){
+							  jQuery("#goodscar_con_box").attr("mark","show");
+							     jQuery("#goodscar_con_box").empty();
+								 jQuery("#goodscar_con_box").html(data);
+							   }
+						});
+			  jQuery("#goodscar_sp").addClass("goodscar_sp_this");
+		   });
+		   jQuery("#goodscar").mouseleave(function(){
+			jQuery("#goodscar_con_box").attr("mark","none");
+			  jQuery("#goodscar_con_box").hide();
+			  jQuery("#goodscar_sp").removeClass("goodscar_sp_this");
+		   });
+});
+function search_form(){
+  var keyword=arguments[0];
+  var type=arguments[1];
+  if(keyword!=""&&keyword!=undefined){
+   jQuery("#keyword").val(keyword);
+  }
+  if(type!=""&&type!=undefined){
+    jQuery("#type").val(type);
+  }
+  jQuery("#searchForm").submit();	
+  jQuery("#keyword").val("");
+}
+		 var total_price=0;
+		 		 		function cart_remove(id){
+           jQuery.post("http://localhost:8080/tytsms-web/remove_goods_cart.htm",{"id":id},function(data){
+		   if(data.code=="100"){		
+		   jQuery("table[class=shopping_table] tr[id="+id+"]").remove();
+		   jQuery(".goodscar_list li[id="+id+"]").remove();
+           jQuery("#cart_goods_count_top").html(data.count);
+		   jQuery("#cart_goods_price_top").html(data.total_price);
+           jQuery("#total_price").html(data.total_price);
+		   if(data.count==0){//购物车页面没有商品
+		  	 jQuery("form[id=cart_form]").remove();
+			 jQuery(".goodscar_list").remove();
+			 jQuery(".shopping_car_none").show();//cart1-none-goods
+			 jQuery("#goodscar_con_box").html("<b class='goodscar_none'>购物车还没有商品!</b>");	
+		   }
+			}
+			 if(data.code=="200"){	
+			 alert("#springMessage('sms.head.retry')");
+			 }
+         
+         },"json");
+       }
+</script>
+<!--[if lt IE 9]>
+    <script src="http://localhost:8080/tytsms-web/th_th/resources/js/css3-mediaqueries.js"></script>
+<![endif]-->
+<div class="head_width" id="head_h">
+  <div class="head">         <h1 class="logo"><span>
+      <p><a href="http://localhost:8080/tytsms-web/index.htm"> <img src="http://localhost:8080/tytsms-web/upload/system/ee55c994-5d50-4ebc-a9bd-045eacd32a63.png" border="0" /> </a></p>
+      </span></h1>
+    <form action="http://localhost:8080/tytsms-web/search.htm" method="get"  id="searchForm">
+      <input name="type" type="hidden" id="type" value="" />
+      <div class="head_search"> <span class="head_seartxt">
+        <input name="keyword" type="text" id="keyword" placeholder="ลองใช้ปุ่มการค้นหา จะทำให้สะดวกมากขึ้น" x-webkit-speech lang="zh-CN" onwebkitspeechchange="jQuery('#searchForm').submit()" class="h_sear_txt" style="padding-left:5px;" />
+        <input name="" type="submit"  class="h_sear_btn" value=""/>
+        </span><span class="head_searstr">รายการค้นหายอดนิยม： </span></div>
+    </form>
+   
+    <!--用户中心开始-->
+    <div class="top_user" id="top_user">
+      <span class="top_user_sp" id="top_user_sp"><a onclick="location='http://localhost:8080/tytsms-web/buyer/index.htm'">ศูนย์รวมของผู้ใช้งาน</a><s></s></span>
+      <div class="top_user_hid" id="top_user_hid" style="display:none"> </div>
+    </div>
+    <div class="goodscar" id="goodscar">
+    
+    
+      <span class="goodscar_sp" id="goodscar_sp">
+      <span>
+      <i class="goodscar_img"></i>
+      <em class="goodscar_num"><b id="cart_goods_count_top">0</b></em><a href="http://localhost:8080/tytsms-web/goods_cart1.htm">ไปชำระเงินที่ตระกร้าสินค้า</a>
+      </span>
+      </span>
+      
+      
+      <div class="goodscar_con_box" id="goodscar_con_box" style="display:none" mark="none"> </div>
+    </div>
+    <!--购物车结束-->
+  </div>
+</div>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#navul li").each(function(){
+    var original_url=jQuery(this).attr("original_url");
+	if("".indexOf(original_url)>=0){
+	   jQuery(this).addClass("this");	
+	}
+  });
+  //鼠标经过左侧分类							
+  jQuery(".left_menu_dl").mouseover(function(){								 
+	var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){
+	 var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).addClass("left_menu_this").removeClass("left_menu_dt");	
+     jQuery("#child_"+id).show();			
+	}
+  }).mouseleave(function(){ 
+	 var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){ 
+     var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).removeClass("left_menu_this").addClass("left_menu_dt");	
+     jQuery("#child_"+id).hide();
+	}
+  });
+  jQuery(".nav_left").mouseover(function(){
+	  jQuery("#other_menu").show();
+	  });
+  jQuery(".nav_left").mouseleave(function(){
+	  jQuery("#other_menu").hide();	  
+		  });	 
+});
+</script>
+<div class="nav">
+<div class="nav_center">
+  <div class="nav_left">
+    <h2><a href="http://localhost:8080/tytsms-web/goods_class.htm"><span>ประเภทสินค้าทั้งหมด<em><img src="http://localhost:8080/tytsms-web/th_th/resources/style/system/front/default/images/nav_top.gif" width="10" height="5" /></em></span></a>
+    <div class="other_menu" style="display:none" id="other_menu">
+      <div class="left_menu" id="left_menu">
+            </div>
+    </div></h2>
+  </div>
+  <ul id="navul">
+      </ul>
+  </div>
+</div>
+<div class="main">
+  <div class="main_left">
+    <div class="article_class">
+      <h3><strong>ประเภทข้อความ</strong></h3>
+      <ul>
+         			<li><a href="http://localhost:8080/tytsms-web/articlelist_help_5.htm">服务条款</a></li>
+            			<li><a href="http://localhost:8080/tytsms-web/articlelist_help_4.htm">使用帮助</a></li>
+            			<li><a href="http://localhost:8080/tytsms-web/articlelist_help_12.htm">支付及配送</a></li>
+            			<li><a href="http://localhost:8080/tytsms-web/articlelist_help_7.htm">售后服务</a></li>
+            			<li><a href="http://localhost:8080/tytsms-web/articlelist_help_6.htm">关于我们</a></li>
+                  </ul>
+    </div>
+    <div class="article_news">
+      <h3><strong>ข่าวล่าสุด</strong></h3>
+      <ul>
+                       			    <li><a href="http://localhost:8080/tytsms-web/article_68.htm">加入泰易淘</a></li>
+                                         			    <li><a href="http://localhost:8080/tytsms-web/article_66.htm">商务合作</a></li>
+                                         			    <li><a href="http://localhost:8080/tytsms-web/article_65.htm">联系我们</a></li>
+                                         			    <li><a href="http://localhost:8080/tytsms-web/article_63.htm">关于泰易淘</a></li>
+                                         			    <li><a href="http://localhost:8080/tytsms-web/article_61.htm">开具发票</a></li>
+                                         			    <li><a href="http://localhost:8080/tytsms-web/article_60.htm">退货/退款政策</a></li>
+                                </ul>
+    </div>
+  </div>
+    	<div class="main_right">
+    <div class="article_details">
+      <h2 class="art_details_h2">联系我们</h2>
+      <h3 class="art_details_h3"> <div class="details_enjoy"><div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a><a title="分享到腾讯微博" href="#" class="bds_tqq" data-cmd="tqq"></a><a title="分享到人人网" href="#" class="bds_renren" data-cmd="renren"></a><a title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a></div>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script></div><span style="line-height:35px;">时间：</span></h3>
+      <div class="art_details_box"><blockquote>
+	<p>
+		<br />
+	</p>
+	<p>
+		<br />
+	</p>
+	<p class="MsoNormal">
+		<b><br />
+</b> 
+	</p>
+	<p class="MsoNormal">
+		<b></b> 
+	</p>
+	<p class="MsoNormal">
+		<b><b><span style="font-size:32px;">联系我们</span></b></b> 
+	</p>
+<b> 
+	<p class="MsoNormal">
+		<b><span style="font-size:18px;">CONTACT
+US</span></b> 
+	</p>
+	<p class="MsoNormal">
+		<b><span style="font-size:18px;"> </span></b>
+	</p>
+	<hr />
+	<p>
+		<br />
+	</p>
+<br />
+</b> 
+	<p>
+		<br />
+	</p>
+	<p class="MsoNormal">
+		<b>客服电话：<span>400-863-3551</span></b> 
+	</p>
+	<p class="MsoNormal">
+		<b>在线客服：<a href="tencent://message/?Menu=yes&uin=1273685323&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45" target="_blank">点击进入</a><span> (</span></b><b>服务时间：<span>09:00-18:00)</span></b> 
+	</p>
+	<p class="MsoNormal">
+		<b>客服邮箱：<span>customer_service@taiyitao.com</span></b> 
+	</p>
+	<p class="MsoNormal">
+		<b>商务合作<span> Bussiness Enquiries</span></b><b>：<span>mechant@taiyitao.com</span></b> 
+	</p>
+	<p class="MsoNormal">
+		<b>微博：<span>@</span></b><b>泰易淘</b> 
+	</p>
+	<p>
+		<br />
+	</p>
+</blockquote>
+<blockquote>
+	<p>
+		<br />
+	</p>
+</blockquote></div>
+    </div>
+    <div class="details_other">
+       <ul>
+			  			  		                    <li>บทที่แล้ว：<a href="http://localhost:8080/tytsms-web/article_63.htm" target="_blank">关于泰易淘</a></li>
+			  			  		                    <li>บทต่อไป：<a href="http://localhost:8080/tytsms-web/article_68.htm" target="_blank">加入泰易淘</a></li>
+            </ul>
+    </div>
+  </div>
+    <script>
+	jQuery(document).ready(function(){
+				//滚动条滚动事件
+		jQuery(window).scroll(function(){
+		var top = jQuery(document).scrollTop();
+		if(top==0){
+			  jQuery("#back_box").hide();
+			  jQuery(".back_box_x").hide();
+			}else{
+			  jQuery("#back_box").show();	
+		      jQuery(".back_box_x").show();
+			}
+		});	
+		//
+		jQuery("#toTop").click(function(){
+	       jQuery('body,html').animate({scrollTop:0},1000);
+	       return false;
+	    });
+	});
+	</script>
+	<div class="main">
+	  <div class="footer">
+	    <ul>
+	      	      	      <li class="hui2">	     
+	      	    
+	      </li>
+	      <li class="hui2">
+	      <img class="img " src="http://localhost:8080/tytsms-web/th_th/resources/style/system/front/default/images/u8_line.png" style="margin:5px;">
+	      Powered by Taiyitao 粤ICP备14092103号
+	      <img class="img " src="http://localhost:8080/tytsms-web/th_th/resources/style/system/front/default/images/u8_line.png" style="margin:5px;">
+	      </li>
+	       <li class="hui2" style="margin-top:-7px;">
+                      ลิขสิทธิ์โดย บริษัท ไทยี่เถา จำกัด&nbsp;&nbsp;|<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254438980'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254438980' type='text/javascript'%3E%3C/script%3E"));</script>
+          </li>
+          <li style="margin-top:10px;">
+                <a href="https://search.szfw.org/cert/l/CX20141203005780006030" target="_blank">  <img id="u2_img" class="img " src="http://localhost:8080/tytsms-web/th_th/resources/style/system/front/default/images/u2.jpg" ></a>
+                <img id="u4_img" class="img " src="http://localhost:8080/tytsms-web/th_th/resources/style/system/front/default/images/u4.png" style="margin-left:5px;">
+                <img id="u6_img" class="img " src="http://localhost:8080/tytsms-web/th_th/resources/style/system/front/default/images/u6.png" style="margin-left:5px;">
+          </li>
+	      <li><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254438980'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254438980%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));</script></li>
+	    </ul>
+	  </div>
+	</div>
+	
+	<!--返回最顶部-->
+	<div id="back_box" style="position:fixed;width:40px; height:118px; float:left; right:0; z-index:9999; display:none; bottom:150px; _position:absolute;/*兼容IE6的代码*/
+	_bottom:auto;/*兼容IE6的代码*/
+	_top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));">
+	  <div class="back_index"><a href="http://localhost:8080/tytsms-web/index.htm" target="_blank"  title="กลับไปหน้าแรก"></a></div>
+	  <div class="back_top"><a id="toTop" href="#" bosszone="hometop" style="display: block;"  title="กลับไปข้างบน" target="_self" ></a></div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=640, user-scalable=no, target-densitydpi=device-dpi">
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>泰易淘</title>
+<link href="$!webPath/resources/style/weiXin/css/style1.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/weiXin/css/phone.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="$!webPath/resources/js/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<style>
+
+body {
+    font-size: 1.3rem;
+}
+</style>
+</head>
+<script type="text/javascript">
+var InterValObj; //timer变量，控制时间  
+var count = 120; //间隔函数，1秒执行  
+var curCount;//当前剩余秒数  
+var code = ""; //验证码  
+var codeLength = 6;//验证码长度  
+
+function sendMessage() {  
+	var mobile = jQuery('#userName').val();
+	var reg= /^[1][358]\d{9}$/;
+    	curCount = count;  
+   	 var ret = true;
+    	var mobile = jQuery("#userName").val();//手机号码  
+    
+    	if (mobile == "") {
+    		alert("手机号码不能为空");
+    		return ;
+    	} else if (!reg.test(jQuery("#userName").val())) {
+    		alert("手机号码格式不正确");
+    		return ;
+    	}
+    	jQuery.ajax({
+    		async:false,
+    		type:"POST",
+    		dataType:"text",
+    		data:"mobile="+mobile,
+    		url:"$!webPath/weiXin/user/verify_mobile.htm",
+    		success:function(result){
+    			if (result == "true") {
+    					if(ret == true){  
+					        //产生验证码  
+					        for (var i = 0; i < codeLength; i++) {  
+					            code += parseInt(Math.random() * 9).toString();  
+					        }  
+					        //设置button效果，开始计时  
+					        //jQuery("#btnSendCode").attr("disabled", "true");  
+					        jQuery("#btnSendCode").val(curCount + "秒后重新获取");  
+					        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次  
+					        //向后台发送处理数据  
+					        jQuery.ajax({  
+					            type: "POST", //用POST方式传输  
+					            dataType: "json", //数据格式:JSON  
+					            url: '$!webPath/weiXin/user/sendMsg.htm', //目标地址  
+					            data: "mobile=" + mobile, 
+					            error: function (XMLHttpRequest, textStatus, errorThrown) { },  
+					            success: function (msg){ }  
+					        });  
+				   	 }
+    			} else {
+				   alert("手机号码已被注册");
+    			}
+    		}
+   	 });
+
+    
+} 
+//timer处理函数  
+function SetRemainTime() {  
+    if (curCount == 0) {                  
+        window.clearInterval(InterValObj);//停止计时器  
+        //jQuery("#btnSendCode").removeAttr("disabled");//启用按钮  
+        jQuery("#btnSendCode").html("重新发送验证码");  
+        code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效      
+    }  
+    else {  
+        curCount--;  
+        jQuery("#btnSendCode").html(curCount + "秒后重新获取");  
+    }  
+} 
+function submitForm(){
+    	var reg=true;
+	var ajaxCallUrl="$!webPath/weiXin/register_finish.htm";
+	var mobile=jQuery("#userName").val();
+	var password=jQuery("#password").val();
+	var repassword=jQuery("#repassword").val();
+	var code=jQuery("#sms").val();
+	if(mobile==""){
+		alert("请输入手机号码");
+		reg=false;
+		return;
+	}
+	if(password==""){
+		alert("请设定账户密码");
+		reg=false;
+		return;
+	}
+	if(password!=repassword){
+		alert("2次输入的密码不一样");
+		reg=false;
+		return;
+	}
+	if(code==""){
+		alert("请获手机取验证码");
+		reg=false;
+		return;
+	}
+	if(reg==true){
+		jQuery.post("$!webPath/weiXin/register_finish.htm",{"userName":mobile,"password":repassword,"sms":code},function(data){
+	
+	 	 		if(data.ret==false){
+		 	 		if(data.regErrorMsg=="parmError"){
+					    alert("验证吗输入错误");
+		 	 	 	}else if(data.regErrorMsg=="IsHave"){
+		 	 	 	    alert("手机号码已被注册");
+		 	 	 	}
+	 	 	 	}else if(data.ret==true){
+	 	 	 		window.location.href="$!webPath/weiXin/index.htm";
+	 	 	 	}
+	 			
+	 	},"json");
+	}
+}
+
+function inHtml(){
+	window.location.href='http://www.tianker.com/index.php?g=Wap&m=Lottery&a=index&token=lqmfdq1423648500&type=1&wecha_id=<%=openId%>&id=134';
+}
+</script>
+<body>
+<div class="wapper">
+<div class="main_a">
+  <div class="title"><img src="$!webPath/resources/style/weiXin/images/logo.jpg"></div>
+  <div class="content">
+    <div class="con_top"><img src="$!webPath/resources/style/weiXin/images/title_top.jpg"></div>
+    <div class="fm">
+ <form name="form1" id="form1">
+ 	 <div class="register_div">
+ 	 	<div class="register_name"><span>手&nbsp;机&nbsp;号</span>
+ 	 	<input  name="userName" type="text" id="userName"  size="10" type="text" class="mobile_input"/>
+ 	 	</div>
+ 	 	
+ 	 	<div class="register_name"><span>短信验证</span><input  name="sms" type="text" id="sms"  type="text" class="sms_input" /><a type="button" href="javascript:void(0);" id="btnSendCode" onclick="sendMessage()" type="button" class="send_sms_lk" >发送验证码</a></div>
+ 	 	<div class="register_name"><span>密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span><input  name="password" type="password" id="password" class="password_input" /></div>
+ 	 	<div class="register_name"><span>确认密码</span><input name="repassword" type="password" id="repassword"  class="repassword_input" /></div>
+ 	 </div>
+    </form>
+    </div>
+    
+    <div class="register_submit" onclick="submitForm()">注册并绑定微信</div>
+  </div>
+</div>
+
+</html>

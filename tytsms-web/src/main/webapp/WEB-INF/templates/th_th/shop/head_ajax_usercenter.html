@@ -1,0 +1,28 @@
+        <div class="top_user_hb" id="top_user_hb"> <span class="top_user_login">#if($!user)#springMessage("sms.head_ajax_usercenter.hello")<!--您好-->$!CommUtil.substring("$!{user.userName}",12)<a href="$!webPath/iskyshop_logout.htm" >#springMessage("sms.head_ajax_usercenter.exit_mall")<!--退出商城--></a>#else <a href="$!webPath/user/login.htm" >#springMessage("sms.head_ajax_usercenter.usr_login")<!--用户登录--></a> #end </span>
+        <ul class="top_user_ul">
+          <li><a href="$!webPath/buyer/order.htm?order_status=order_shipping">#springMessage("sms.head_ajax_usercenter.for_goods")<!--待收货-->></a>#if($!user)<span style="color:#F00">($!order_size_30)</span>#end</li>
+          <li><a href="$!webPath/buyer/order.htm">#springMessage("sms.head_ajax_usercenter.my_order")<!--我的订单-->></a></li>
+          <li><a href="$!webPath/buyer/order.htm?order_status=order_submit">#springMessage("sms.head_ajax_usercenter.payment_orders")<!--待付款订单-->></a>#if($!user)<span style="color:#F00">($!order_size_10)</span>#end</li>
+          <li><a href="$!webPath/buyer/order.htm?order_status=order_finish">#springMessage("sms.head_ajax_usercenter.buy_goods")<!--已购买商品-->></a>#if($!user)<span style="color:#F00">($!order_size_50)</span>#end</li>
+        </ul>
+        #if($!objs.size()>0)
+        <div class="top_user_browse">
+        <h3>#springMessage("sms.head_ajax_usercenter.browse_goods")<!--最近浏览的商品--></h3>
+        <span>  
+        #foreach($obj in $!objs)   
+        	  #set($goods_url="$!webPath/goods_$!{obj.id}.htm")
+              #if($!config.second_domain_open && $!obj.goods_type==1 && $!obj.goods_store.store_second_domain!="")
+              #set($goods_url="http://$!{obj.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.id}.htm")
+              #end   
+                  #if($!obj.goods_main_photo)              
+                  #set($img="$!imageWebServer/$!{obj.goods_main_photo.path}/$!{obj.goods_main_photo.name}_small.$!{obj.goods_main_photo.ext}")
+                  #else
+                  #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                  #end
+        		      <a href="$!goods_url" target="_blank"><img src="$!img" width="50" height="50"/></a>
+        #end
+        </span>
+        </div>
+        #end
+      </div>
+     

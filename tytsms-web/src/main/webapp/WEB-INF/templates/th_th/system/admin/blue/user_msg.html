@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+//
+#if($!userName)
+jQuery("#the_store_list").hide();
+jQuery("#the_user_list").show();
+jQuery(":radio[id='type']").eq(1).attr("checked","true");
+#end
+  jQuery("#theForm").validate({
+    rules:{
+	  users:{required:true},
+	  grades:{required:true},
+	  content:{
+	    required :true
+	  }
+	 },
+	messages:{
+	   users:{required:"至少填写一个会员"},
+	  grades:{required:"至少选择一个店铺等级"},
+	  content:{required:"通知内容不能为空"}
+	}
+  }); 	  
+  //
+  jQuery(":radio[id='type']").click(function(){
+      jQuery("#the_user_list").hide();
+	  jQuery("#the_store_list").hide();
+      var type=jQuery(":radio[id='type'][checked=true]").val();
+      jQuery("#"+type+"_list").show();
+  });
+  //
+});
+function saveForm(){
+ jQuery("#theForm").submit();
+}
+</script>
+</head>
+
+<body>
+<div class="cont">
+  <h1 class="seth">页面导航</h1>
+  <div class="nav_list">
+    <ul>
+      <li><a href="$!webPath/admin/user_msg.htm" class="this"><b>发送通知</b></a></li>
+    </ul>
+  </div>
+  <form name="theForm" id="theForm" action="$!webPath/admin/user_msg_send.htm" method=post>
+    <input name="list_url" type="hidden" id="list_url" #if($!list_url) value="$!list_url" #else value="$!webPath/admin/user_msg.htm" #end />
+    <div class="setcont">
+      <ul class="set1">
+        <li>发送对象 </li>
+        <li>
+          <label> <span class="use_code"><strong>
+            <input name="type" type="radio" id="type"  value="all_user" checked="checked"/>
+            </strong><strong class="usecode"> 所有会员</strong></span> </label>
+        </li>
+        <li>
+          <label> <span class="use_code"><strong>
+            <input name="type" id="type" type="radio" value="the_user" />
+            </strong><strong class="usecode"> 指定会员</strong></span> </label>
+        </li>
+        <li>
+        <label> <span class="use_code"><strong>
+          <input name="type" id="type" type="radio"  value="all_store"/>
+          </strong><strong class="usecode"> 所有店铺</strong></span> </label>
+        <label>
+        </li>
+        <li>
+          <label> <span class="use_code"><strong>
+            <input name="type" id="type" type="radio" style="border:none;width:16px;height:16px;" value="the_store"/>
+            </strong><strong class="usecode">指定店铺等级</strong></span> </label>
+        </li>
+      </ul>
+      <ul class="set1" id="the_store_list" style="display:none;">
+        <li  class="setcont_bg"><strong class="sred">*</strong>指定店铺等级</li>
+        <li><span class="webname">
+          <select name="grades" size="6" multiple="multiple" id="grades" style="width:270px;">
+            
+		   #foreach($grade in $grades)
+            
+            <option value="$!grade.id">$!grade.gradeName</option>
+            
+           #end		  
+          
+          </select>
+          </span><span id="nothis"><strong class="q"></strong><strong class="w">可以按住ctrl进行多选</strong><strong class="c"></strong></span> </li>
+      </ul>
+      <ul class="set1" id="the_user_list" style="display:none;">
+        <li  class="setcont_bg"><strong class="sred">*</strong>会员列表</li>
+        <li><span class="webname">
+          <textarea name="users" cols="40" rows="6" id="users">$!userName</textarea>
+          </span><span id="nothis"><strong class="q"></strong><strong class="w">输入会员名，每行一个</strong><strong class="c"></strong></span></li>
+      </ul>
+      <ul class="set1">
+        <li  class="setcont_bg"><strong class="sred">*</strong>通知内容</li>
+        <li><span class="webname">
+          <textarea name="content" cols="40" rows="6" id="content"></textarea>
+          </span></li>
+      </ul>
+    </div>
+  </form>
+  <div class="submit"> <span class="pad80">
+    <input name="save" type="button" value="提交" onclick="saveForm()" />
+    </span> </div>
+</div>
+</body>
+</html>

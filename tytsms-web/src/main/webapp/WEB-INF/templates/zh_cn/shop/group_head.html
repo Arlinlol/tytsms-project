@@ -1,0 +1,160 @@
+﻿<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script>
+jQuery(document).ready(function(){
+	#if($!type=="life")
+	 jQuery(".toph_bgsear li").find("a").first().html("生活惠<s></s>");
+	  jQuery("#searchForm").attr("action","$!{webPath}/grouplife/search.htm?type=life");
+		  jQuery(".toph_bgsear>li").last().attr("mark","goods");
+		   jQuery(".toph_bgsear li").find("a").last().html("商品惠");
+		  jQuery("#type").val("life");
+	#end
+    jQuery(".toph_bgsear li").mouseover(function(){
+      jQuery(".toph_bgsear>li").show();
+  }).mouseleave(function(){
+       jQuery(".toph_bgsear>li").last().hide();
+  }).click(function(){
+	 var index=jQuery(this).index();
+	 var mark = jQuery(this).attr("mark");
+	 if(mark=="life"){
+		 jQuery("#searchForm").attr("action","$!{webPath}/grouplife/search.htm");
+		  jQuery(".toph_bgsear>li").last().attr("mark","goods");
+		  jQuery("#type").val("life");
+		 }else{
+			 jQuery("#searchForm").attr("action","$!{webPath}/group/search.htm");
+			 jQuery(".toph_bgsear>li").last().attr("mark","life");
+			  jQuery("#type").val("goods");
+			 }
+	 if(index==1){
+	   var f_text=jQuery(".toph_bgsear li").find("a").first().text();
+       jQuery(".toph_bgsear li").find("a").first().html(jQuery(this).find("a").text()+"<s></s>");
+	   jQuery(".toph_bgsear li").find("a").last().text(f_text);
+	   jQuery(".toph_bgsear>li").last().hide();
+	 }
+  });
+
+	jQuery("#area_click").css("cursor","pointer").click(function(){
+      var show=jQuery("#group_areas").css("display");
+	  if(show=="none"){
+	   jQuery("#group_areas").show();
+	  }else{
+	   jQuery("#group_areas").hide();  
+	  }
+  });
+	
+	jQuery("#toph_bgsear").click(function(){
+		jQuery(this).children().show();								  
+										  });
+   
+   //鼠标经过购物车
+   jQuery("#goodscar_sp").mouseover(function(){
+			  jQuery.ajax({type:'POST',url:'$!webPath/cart_menu_detail.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#goodscar_con_box").empty().html(' <div><span class="top_user_loading"><img src="$!webPath/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#goodscar_con_box").show();
+							   },
+						  success:function(data){
+							     jQuery("#goodscar_con_box").empty();
+								 jQuery("#goodscar_con_box").html(data);
+							   }
+						});
+			  jQuery("#goodscar_sp").addClass("goodscar_sp_this");
+		   });
+		   jQuery("#goodscar").mouseleave(function(){
+			  jQuery("#goodscar_con_box").hide();
+			  jQuery("#goodscar_sp").removeClass("goodscar_sp_this");
+		   });
+		   
+});
+function search_form(){
+  var keyword=arguments[0];
+  var type=arguments[1];
+  if(keyword!=""&&keyword!=undefined){
+   jQuery("#keyword").val(keyword);
+  }
+  if(type!=""&&type!=undefined){
+    jQuery("#type").val(type);
+  }
+  jQuery("#searchForm").submit();	
+  jQuery("#keyword").val("");
+}
+		 var total_price=0;
+		 #set($total_price=0)
+		 #foreach($gc in $cart)
+		  #if($!gc.goods.group_buy==2)
+		    #set($total_price=$!{gc.goods.group_goods.gg_price}*$!{gc.count}+$total_price)
+		  #else
+		    #set($total_price=$!{gc.goods.store_price}*$!{gc.count}+$total_price)
+		  #end
+		 #end
+		function cart_remove(id){
+           jQuery.post("$!webPath/remove_goods_cart.htm",{"id":id},function(data){
+		   if(data.code=="100"){		
+		   jQuery("table[class=shopping_table] tr[id="+id+"]").remove();
+		   jQuery(".goodscar_list li[id="+id+"]").remove();
+           jQuery("#cart_goods_count_top").html(data.count);
+		   jQuery("#cart_goods_price_top").html(data.total_price);
+           jQuery("#total_price").html(data.total_price);
+		   if(data.count==0){//购物车页面没有商品
+		  	 jQuery("form[id=cart_form]").remove();
+			 jQuery(".goodscar_list").remove();
+			 jQuery(".shopping_car_none").show();//cart1-none-goods
+			 jQuery("#goodscar_con_box").html("<b class='goodscar_none'>购物车还没有商品!</b>");	
+		   }
+			}
+			 if(data.code=="200"){	
+			 alert("系统繁忙，请稍后重试！");
+			 }
+         
+         },"json");
+		}
+</script>
+<div class="head" style="margin-top:-20px;">
+  <h1 class="logo"><span class="img_cspan">
+   #if($!config.websiteLogo)
+    #set($img="$!imageWebServer/$!{config.websiteLogo.path}/$!{config.websiteLogo.name}")
+    #else
+    #set($img="$!webPath/resources/style/system/front/default/images/logo.jpg")
+    #end
+    #if($!type)
+    #if($!type==""||$!type=="goods")
+      #set($t="goods")
+      #else
+      #set($t="life")
+      #end
+    #else
+     #set($t="goods")
+    #end
+    <p><a href="$!webPath/index.htm"><img src="$!img" border="0" /></a></p>
+    </span></h1>
+  <div class="group_head"> <strong>团购</strong> <span class="change_address"><b><a href="javascript:void(0);">$!ga</a><a href="javascript:void(0);" id="area_click">[更换]</a></b>
+    <div class="change_hid" style="display:none;" id="group_areas"><em class="change_close"><a href="javascript:void(0);" onclick="jQuery('#group_areas').hide();"></a></em>
+      <ul>
+       <li><a href="$!webPath/group/index.htm?type=$!t">全国</a></li>
+      #foreach($ga in $gas)
+        <li><a href="$!webPath/group/index.htm?ga_id=$!ga.id&type=$!t">$!ga.ga_name</a></li>
+      #end
+      </ul>
+    </div>
+    </span> </div>
+    
+     <form name="searchForm" id="searchForm" action="$!webPath/group/search.htm" method="post" lang="zh-CN">
+     <input type="hidden" name="type" value="goods" id="type" />
+  <div class="head_search"> 
+  <span class="head_seartxt">
+ <b>
+  <ul class="toph_bgsear" id="toph_bgsear">
+        <li class="this" mark="goods"><a href="javascript:void(0);">商品惠<s></s></a></li>
+        <li style="display:none" mark="life"><a href="javascript:void(0);">生活惠</a></li>
+      </ul>
+    <input name="keyword" type="text" class="h_sear_txt" id="keyword" value="$!keyword" x-webkit-speech lang="zh-CN" onwebkitspeechchange="jQuery('#searchForm').submit()" charset="utf-8"/></b>
+    <input name="" type="button"  class="h_sear_btn" onclick="search_form();" value="搜索"/>
+    </span>
+    </div>
+    </form>
+  <!--购物车开始-->
+  <div class="goodscar" id="goodscar">
+      <span class="goodscar_sp" id="goodscar_sp"><span><i class="goodscar_img"></i><em class="goodscar_num"><b id="cart_goods_count_top">$!carts.size()</b></em><a href="$!webPath/goods_cart1.htm">去购物车结算</a></span></span>
+      <div class="goodscar_con_box" id="goodscar_con_box" style="display:none"> </div>
+    </div>
+  <!--购物车结束-->
+</div>

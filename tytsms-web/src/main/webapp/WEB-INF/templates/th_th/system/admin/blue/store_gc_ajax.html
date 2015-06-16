@@ -1,0 +1,11 @@
+﻿#if($!gcs)
+<li  class="setcont_bg"><strong class="sred"></strong>详细类目</li>
+<li> <span class="web_checkbox">
+#foreach($gc in $gcs)
+<label>
+<input id="" type="checkbox" name="gc_detail_ids" value="$!gc.id"/>
+<i>$!gc.className</i>
+</label>
+#end
+</span> </li>
+#end

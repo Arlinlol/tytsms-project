@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+function copyToClipBoard(txt)
+{
+    if(window.clipboardData)
+    { 
+        // the IE-manier
+        window.clipboardData.clearData();alert(txt);
+        window.clipboardData.setData("Text", txt);
+        alert("复制到剪贴板成功!");
+    }
+    else if(navigator.userAgent.indexOf("Opera") != -1)
+    {
+        window.location = txt;
+        alert("复制到剪贴板成功!");
+    }
+    else if (window.netscape)
+    {
+        try {
+            netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+        } catch (e) {
+            alert("被浏览器禁止了相关设置！\n请在浏览器地址栏输入\'about:config\'并回车\n然后将\'signed.applets.codebase_principal_support\'设置为\'true\'");
+            return false;
+        }
+        var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+        if (!clip){return;}
+        var trans = Components.classes['@mozilla.org/widget/transferable;1'].createInstance(Components.interfaces.nsITransferable);
+        if (!trans){return;}
+        trans.addDataFlavor('text/unicode');
+        var str = new Object();
+        var len = new Object();
+        str = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
+        var copytext = txt;
+        str.data = copytext;
+        trans.setTransferData("text/unicode",str,copytext.length*2);
+        var clipid = Components.interfaces.nsIClipboard;
+        if (!clip){return false;}
+        clip.setData(trans,null,clipid.kGlobalClipboard);
+        alert("复制到剪贴板成功!!");
+    }
+}
+function advert_invoke(obj){
+  var text=jQuery(obj).attr("url");
+  copyToClipBoard(text);
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">广告管理</h3>
+  <div class="nav_list">
+	<ul>
+    	<li><a href="$!webPath/admin/advert_list.htm"><b>所有广告</b></a></li>
+        <li><a href="$!webPath/admin/advert_list_audit.htm" ><b>未审核广告</b></a></li>
+        <li><a href="$!webPath/admin/advert_add.htm" ><b>新增广告</b></a></li>
+        <li><a href="$!webPath/admin/adv_pos_list.htm" class="this"><b>所有广告位</b></a></li>
+        <li><a href="$!webPath/admin/adv_pos_add.htm" ><b>新增广告位</b></a></li>
+    </ul>
+  </div>
+  <div class="operation">
+    <h3>友情提示</h3>
+    <ul>
+      <li>当广告位启用并且展示方式可以发布多条广告并随机展示时</li>
+      <li>商家可进行广告的购买</li>
+    </ul>
+  </div>
+  <form method="post" id="queryForm">
+  <div class="search">
+    <ul>
+      <li><span>广告名称</span> <span class="size250">
+        <input name="ap_title" type="text" id="ap_title" />
+        </span><span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+        </span></li>
+    </ul>
+  </div>
+  </form>
+  <form method="post" id="ListForm">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th  width="25%"><span class="form_btna">广告位名称</span></th>
+        <th  width="8%"><span class="form_btna">类别</span></th>
+        <th  width="8%"><span class="form_btna">宽度</span></th>
+        <th  width="8%"><span class="form_btna">高度</span></th>
+        <th  width="10%"><span class="form_btna">价格(金币/月)</span></th>
+        <th  width="8%"><span class="form_btna">广告类型</span></th>
+        <th  width="8%"><span class="form_btna">广告状态</span></th>
+        <th  align="center"><b class="form_btnb">操作</b></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr>
+        <td align="center">$!obj.ap_title</td>
+        #if($!obj.ap_type=="img")
+          #set($type="图片")
+        #end
+        #if($!obj.ap_type=="scroll")
+          #set($type="滚动")
+        #end
+        #if($!obj.ap_type=="slide")
+          #set($type="幻灯")
+        #end
+        #if($!obj.ap_type=="bg_slide")
+          #set($type="背景幻灯")
+        #end
+        #if($!obj.ap_type=="text")
+          #set($type="文字")
+        #end
+        <td align="center">$!type</td>
+        <td align="center">$!obj.ap_width</td>
+        <td align="center">$!obj.ap_height</td>
+        <td align="center">$!obj.ap_price</td>
+        #if($!obj.ap_show_type==0)
+          #set($show_type="固定广告")
+        #end
+        #if($!obj.ap_show_type==1)
+          #set($show_type="随机广告")
+        #end
+        <td align="center">$!show_type</td>
+        #if($!obj.ap_status==0)
+          #set($ap_status="关闭")
+        #end
+        #if($!obj.ap_status==1)
+          #set($ap_status="启用")
+        #end
+        <td align="center">$!ap_status</td>
+        <td  align="center" class="hui oprate_con"><a href="$!webPath/admin/adv_pos_edit.htm?id=$!obj.id" class="blue">编辑</a>#if($!obj.ap_sys_type==1)|<a href="javascript:void(0);" onclick="if(confirm('广告位删除后，对应的广告也会同步删除，是否继续？'))window.location.href='$!webPath/admin/adv_pos_del.htm?mulitId=$!obj.id'" class="blue">删除</a>#end |<a href="javascript:void(0);" onclick="advert_invoke(this);" url='<script src="$!webPath/advert_invoke.htm?id=$!obj.id"></script>' class="blue">调用代码</a></td>
+      </tr>
+      #end
+    </table>
+  </div>
+  <div class="operate_bar">
+    <div class="fenye">
+    	<input name="ap_title" type="hidden" id="ap_title" value="$!ap_title" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        $!gotoPageFormHTML
+    </div>
+  </div>
+  </form>
+</div>
+</body>
+</html>

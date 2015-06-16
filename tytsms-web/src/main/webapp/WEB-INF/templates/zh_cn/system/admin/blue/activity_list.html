@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+});
+function ajax_update(id,fieldName,obj){
+   var val=jQuery(obj).val();
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/activity_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }      
+              }
+	    });
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">活动管理</h3>
+  <div class="nav_list">
+  	 <ul>
+      <li><a href="$!webPath/admin/activity_list.htm" class="this"><b>所有活动</b></a></li>
+      <li><a href="$!webPath/admin/activity_add.htm" ><b>新增活动</b></a></li>
+     </ul>   
+  </div>
+  <form method="post" id="queryForm">
+  <div class="search">
+    <ul>
+      <li><span>活动标题</span> <span class="size150">
+        <input name="q_ac_title" type="text" id="q_ac_title" />
+        </span> <span>
+        <select name="ac_status" id="ac_status">
+          <option value="">活动状态</option>
+          <option value="1">启动中</option>
+          <option value="0">关闭中</option>
+        </select>
+        </span> <span>有效期</span> <span class="size100">
+        <input name="beginTime" type="text" id="beginTime" />
+        </span><span>—</span><span class="size100">
+        <input name="endTime" type="text" id="endTime" />
+        </span> <span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+        </span> </li>
+    </ul>
+  </div>
+  </form>
+  <form method="post" id="ListForm" action="$!webPath/admin/activity_list.htm">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="30"></th>
+        <th width="10%"><span class="form_btna">排序</span></th>
+        <th width="25%"><span class="form_btna">活动标题</span></th>
+        <th width="13%" ><span class="form_btna">横幅图片</span></th>
+        <th width="10%" align="center"><span class="form_btna">开始时间</span></th>
+        <th align="center" width="10%"><span class="form_btna">结束时间</span></th>
+        <th  align="center" width="10%"><span class="form_btna">状态</span></th>
+        <th width="150"  align="center"><span class="form_btna">操作</span></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr id="column_$!{obj.id}">
+        <td class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+        <td ><span class="size70">
+          <input name="ac_sequence" type="text" id="ac_sequence" title="可编辑" onblur="ajax_update('$!obj.id','ac_sequence',this)" value="$!obj.ac_sequence" size="20" />
+          </span></td>
+        <td><span class="size250">
+          <input name="ac_title" type="text" id="ac_title" title="可编辑" onblur="ajax_update('$!obj.id','ac_title',this)" value="$!obj.ac_title" size="30"  />
+        </span></td>
+        <td align="center"><span class="tpborder"><img src="$!webPath/$!{obj.ac_acc.path}/$!{obj.ac_acc.name}" width="90" height="33" /></span></td>
+        <td align="center">$!CommUtil.formatShortDate($!obj.ac_begin_time)</td>
+        <td align="center">$!CommUtil.formatShortDate($!obj.ac_end_time)</td>
+        #if($!obj.ac_status==0)
+          #set($status="关闭")
+        #end
+        #if($!obj.ac_status==1)
+          #set($status="启动")
+        #end
+        <td align="center">$!status</td>
+        <td  align="center" class="hui oprate_con"><a href="$!webPath/admin/activity_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">编辑</a>|<a href="$!webPath/admin/activity_goods_list.htm?act_id=$!obj.id" class="blue">申请列表</a>|<a href="javascript:void(0);" onclick="if(confirm('删除后不可恢复，是否继续？'))window.location.href='$!webPath/admin/activity_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="blue">删除</a></td>
+      </tr>
+      #end
+    </table>
+  </div>
+  <div class="operate_bar">
+    <div class="fenye">
+     <input name="endTime" type="hidden" id="endTime" value="$!endTime" />
+ 	 <input name="beginTime" type="hidden" id="beginTime" value="$!beginTime" />
+ 	 <input name="ac_status" type="hidden" id="ac_status" value="$!ac_status" />
+ 	 <input name="q_ac_title" type="hidden" id="q_ac_title" value="$!q_ac_title" />
+  	 <input type="hidden" name="mulitId" id="mulitId" />
+  	 <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+     $!gotoPageFormHTML
+    </div> 
+    <div class="shopbtn shopfx"><span class="oper_check"><input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部</span></div>
+    <div class="shop_btn_del shopbtn"><span class="oper_del"><input name="" type="button" value="删除" onclick="cmd('$!webPath/admin/activity_del.htm');"/></span></div>
+             
+ </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+function ajax_update(id,fieldName,obj){
+   var val=jQuery(obj).val();
+    jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/integral_goods_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }      
+              }
+	    });
+} 
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">积分商城</h1>
+  <div class="nav_list">
+    <ul>
+      <li> <a href="$!webPath/admin/integral_goods.htm"  class="this"><b>礼品列表</b></a></li>
+      <li> <a href="$!webPath/admin/integral_goods_add.htm" ><b>新增礼品</b></a></li>
+      <li> <a href="$!webPath/admin/integral_order.htm"><b>兑换列表</b></a></li>
+    </ul>
+  </div>
+  <form method="post" id="queryForm">
+    <div class="search"> <span>礼品名称</span><span class="size150">
+      <input name="ig_goods_name" type="text" id="ig_goods_name" />
+      </span> <span>
+      <select name="ig_show" id="ig_show">
+        <option value="">状态</option>
+        <option value="true">上架</option>
+        <option value="false">下架</option>
+      </select>
+      </span> <span>
+      <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+      </span> </div>
+  </form>
+  <form method="post" id="ListForm" name="ListForm">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="5%">&nbsp;</th>
+          <th width="15%"><span class="form_btna">礼品名称</span></th>
+          <th width="8%" align="center"><span class="form_btna">礼品编号</span></th>
+          <th width="8%" align="center"><span class="form_btna">兑换积分</span></th>
+          <th width="8%" align="center"><span class="form_btna">限制等级</span></th>
+          <th width="8%" align="center"><span class="form_btna">礼品原价</span></th>
+          <th width="8%" align="center"><span class="form_btna">库存</span></th>
+          <th width="8%" align="center"><span class="form_btna">浏览</span></th>
+          <th width="8%" align="center"><span class="form_btna">兑出</span></th>
+          <th width="8%" align="center"><span class="form_btna">上架</span></th>
+          <th width="8%" align="center"><span class="form_btna">推荐</span></th>
+          <th  align="center">操作</th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td><span class="check_position">
+            <input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" />
+            </span></td>
+          <td align="center"><a href="$!webPath/integral/view_$!{obj.id}.htm" target="_blank">$!{obj.ig_goods_name}</a></td>
+          <td align="center">$!{obj.ig_goods_sn}</td>
+          <td align="center">$!{obj.ig_goods_integral}</td>
+          #if($!obj.ig_user_Level==0)
+          #set($obj_level_name="铜牌及以上会员")
+          #end
+          #if($!obj.ig_user_Level==1)
+          #set($obj_level_name="银牌及以上会员")
+          #end
+          #if($!obj.ig_user_Level==2)
+          #set($obj_level_name="金牌及以上会员")
+          #end
+          #if($!obj.ig_user_Level==3)
+          #set($obj_level_name="超级会员专享")
+          #end
+          <td align="center">$!{obj_level_name}</td>
+          <td align="center">$!{obj.ig_goods_price}</td>
+          <td align="center">$!{obj.ig_goods_count}</td>
+          <td align="center">$!{obj.ig_click_count}</td>
+          <td align="center">$!{obj.ig_exchange_count}</td>
+          <td align="center"><img src="$!webPath/resources/style/system/manage/blue/images/$!{obj.ig_show}.png" width="21" height="23" onclick="ajax_update('$!obj.id','ig_show',this)"  style="cursor:pointer;" title="可编辑"/></td>
+          <td align="center"><img src="$!webPath/resources/style/system/manage/blue/images/$!{obj.ig_recommend}.png" width="21" height="23"  onclick="ajax_update('$!obj.id','ig_recommend',this)"  style="cursor:pointer;" title="推荐后会在积分商城首页显示"/></td>
+          <td align="center"  class="hui oprate_con"><a href="$!webPath/admin/integral_goods_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">编辑</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="$!webPath/admin/integral_goods_del.htm?mulitId=$!obj.id&currentPage=$!currentPage" class="blue">删除</a></td>
+        </tr>
+        #end
+      </table>
+    </div>
+    <div class="operate_bar">
+      <div class="fenye">
+        <input name="ig_show" type="hidden" id="ig_show" value="$!ig_show" />
+        <input name="ig_goods_name" type="hidden" id="ig_goods_name" value="$!ig_goods_name" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        <input type="hidden" name="mulitId" id="mulitId" />
+        $!gotoPageFormHTML</div>
+      <div class="oper_sp"> <span class="oper_check">
+        <label>
+          <input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>
+          全部</label>
+        </span>
+        <span class="oper_del">
+        <input name="" type="button" value="删除" onclick="cmd('$!webPath/admin/integral_goods_del.htm');" style="cursor:pointer;"/>
+        </span></div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

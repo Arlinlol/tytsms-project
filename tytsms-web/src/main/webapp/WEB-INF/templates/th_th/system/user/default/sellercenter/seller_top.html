@@ -1,0 +1,12 @@
+#if($!config.websiteLogo)
+#set($img="$!imageWebServer/$!{config.websiteLogo.path}/$!{config.websiteLogo.name}")
+#else
+#set($img="$!webPath/th_th/resources/style/system/front/default/images/logo.jpg")
+#end
+<div class="user_seller_head">
+  <div class="head_seller"> <span class="logo_login">欢迎您，<b>$!{user.userName}</b> 您已经登录商城<a href="$!webPath/iskyshop_logout.htm">退出</a></span>
+    <h1 class="logo" title=""><span>
+      <p><a href="$!webPath" target="_blank"><img src="$!img" width="209" height="70" /></a></p>
+      </span></h1>
+    <span class="logo_seller">商家中心</span> </div>
+</div>

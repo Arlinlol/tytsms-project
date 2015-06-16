@@ -1,0 +1,85 @@
+<script>
+jQuery(document).ready(function(){
+  jQuery("#navul li").each(function(){
+    var original_url=jQuery(this).attr("original_url");
+	if("$!{current_url}".indexOf(original_url)>=0){
+	   jQuery(this).addClass("this");	
+	}
+  });
+  //鼠标经过左侧分类							
+  jQuery(".left_menu_dl").mouseover(function(){								 
+	var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){
+	 var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).addClass("left_menu_this").removeClass("left_menu_dt");	
+     jQuery("#child_"+id).show();			
+	}
+  }).mouseleave(function(){ 
+	 var child_count = jQuery(this).attr("child_count");
+	if(child_count>0){ 
+     var id=jQuery(this).attr("id");
+	  jQuery("#dts_"+id).removeClass("left_menu_this").addClass("left_menu_dt");	
+     jQuery("#child_"+id).hide();
+	}
+  });
+  jQuery(".nav_left").mouseover(function(){
+	  jQuery("#other_menu").show();
+	  });
+  jQuery(".nav_left").mouseleave(function(){
+	  jQuery("#other_menu").hide();	  
+		  });	 
+});
+</script>
+<div class="nav">
+<div class="nav_center">
+  <div class="nav_left">
+    <h2><a href="$!webPath/goods_class.htm"><span>#springMessage("sms.nav.goods_classification")<!--全部商品分类--><em><img src="$!webPath/th_th/resources/style/system/front/default/images/nav_top.gif" width="10" height="5" /></em></span></a>
+    <div class="other_menu" style="display:none" id="other_menu">
+      <div class="left_menu" id="left_menu">
+      #foreach($gc in $!gcs)
+      #set($icon_img="$!webPath/th_th/resources/style/common/images/icon/default_icon.png")
+        <dl #if($!velocityCount%2==0)class="left_menu_dl double" #else class="left_menu_dl" #end child_count="$!gc.childs.size()" id="$!gc.id">
+          <!--left_menu_this经过状态，和left_menu_dt不经状态过交换-->
+          		#if($!gc.icon_type==0)
+                #if($!gc.icon_sys!="")
+                #set($icon_img="$!webPath/th_th/resources/style/common/images/icon/icon_$!{gc.icon_sys}.png")
+                #end
+                #else
+                #if($!gc.icon_acc)
+                #set($icon_img="$!webPath/$!gc.icon_acc.path/$!gc.icon_acc.name")
+                #end
+                #end
+          <dt class="left_menu_dt" id="dts_$!gc.id"><i class="left_menu_i"><img src="$!icon_img" width="16" height="16" /></i>
+          <strong class="left_menu_str"><a href="$!webPath/store_goods_list_$!{gc.id}.htm">$!gc.className</a></strong>
+          <b class="left_menu_str_b">#foreach($child_gc in $gcViewTools.query_third_rec("$!gc.id",3))<a href="$!webPath/store_goods_list_$!{child_gc.id}.htm">$!{child_gc.className}</a>  #end</b>
+          </dt>
+          <dd class="left_menu_dd" style="display:none" id="child_$!gc.id">
+            <div class="left_menu_con"> 
+            #foreach($gc1 in $gc.childs)
+            <span class="left_menu_sp">
+              <dl class="left_con_dl">
+                <dt><a href="$!webPath/store_goods_list_$!{gc1.id}.htm" target="_blank">$!gc1.className</a></dt>
+                <dd>#foreach($gc2 in $gc1.childs)#if($!gc2.display)<a href="$!webPath/store_goods_list_$!{gc2.id}.htm" target="_blank">$!gc2.className</a>#end #end</dd>
+              </dl>
+             </span> 
+            #end
+           </div>
+          </dd>
+        </dl>
+      #end
+      </div>
+    </div></h2>
+  </div>
+  <ul id="navul">
+  #set($navs=$!navTools.queryNav(0,-1))
+  #foreach($nav in $navs)
+    #if($!CommUtil.indexOf("$!nav.url","http://")>=0)
+      #set($url="$!nav.url")
+    #else
+      #set($url="$!webPath/$!{nav.url}")
+    #end
+    <li><a href="$!url" id="$!nav.id" #if($!nav.new_win==1)target="_blank"#end original_url="$!nav.original_url"><span>$!{nav.title}</span></a></li>
+    #end
+  </ul>
+  </div>
+</div>

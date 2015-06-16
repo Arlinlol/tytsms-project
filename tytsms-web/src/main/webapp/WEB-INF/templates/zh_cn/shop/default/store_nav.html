@@ -1,0 +1,20 @@
+<div class="store_nav_width">
+  <div class="main">
+    <div class="store_nav">
+      <ul>
+    #set($store_url="$!webPath/store_$!{store.id}.htm")
+    #if($!config.second_domain_open)
+    #set($store_url="http://$!{store.store_second_domain}.$!{domainPath}")
+    #end
+        <li><a href="$!store_url">店铺首页</a></li>
+        #foreach($nav in $navs)
+        	#set($url="$!webPath/store_url.htm?id=$!{nav.id}")
+    		#if($!{nav.url}&&$!{nav.url}!="") 
+      			#set($url="$!nav.url")
+    		#end
+        	<li  id="$!nav.id" ><a href="$!url" #if($!nav.win_type=="new_win") target="_blank" #end>$!nav.title</a></li>
+        #end
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>订单详情 </title>
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function(){
+	jQuery(".order_follow_top li").click(function(){
+				jQuery(".order_follow_box").hide();
+				jQuery(".order_follow_top li").removeClass("this");
+				jQuery(this).addClass("this");
+				jQuery(".order_follow_box").eq(jQuery(this).index()).show();								  
+			 });						
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="position"><a href="$!webPath/index.htm"><b>首页</b></a><i>></i><a href="$!webPath/buyer/order.htm">我的订单</a><i>></i>$!obj.order_id</div>
+  <div class="order_pay">
+    <div class="order_pay_note"> #if($!obj.coupon_info)
+      #set($map = $!orderFormTools.queryCouponInfo("$!obj.coupon_info"))
+      #end
+      #set($payment="未知")
+      #if($!obj.payment.mark=="alipay")
+      #set($payment="支付宝")
+      #end
+      #if($!obj.payment.mark=="wechatpay")
+      #set($payment="微信支付")
+      #end
+      #if($!obj.payment.mark=="alipay_wap")
+      #set($payment="手机网页支付宝")
+      #end
+      #if($!obj.payment.mark=="alipay_app")
+            #set($payment="手机支付宝APP")
+            #end 
+      #if($!obj.payment.mark=="bill")
+      #set($payment="快钱")
+      #end                 
+      #if($!obj.payment.mark=="tenpay")
+      #set($payment="财付通")
+      #end   
+      #if($!obj.payment.mark=="chinabank")
+      #set($payment="网银在线")
+      #end       
+      #if($!obj.payment.mark=="outline")
+      #set($payment="线下支付")
+      #end 
+      #if($!obj.payment.mark=="payafter")
+      #set($payment="货到付款")
+      #end                  
+      #if($!obj.payment.mark=="balance")
+      #set($payment="预存款支付")
+      #end 
+      #if($!obj.payment.mark=="paypal")
+      #set($payment="paypal")
+      #end
+      #if($!obj.payment.mark=="allinpay")
+      #set($payment="通联支付")
+      #end
+      #if($!obj.order_status==0)
+      #set($status="已取消")
+      #end
+      #if($!obj.order_status==10)
+      #set($status="待付款")
+      #end
+      #if($!obj.order_status==15)
+      #set($status="线下支付待审核")
+      #end
+      #if($!obj.order_status==16)
+      #set($status="货到付款待发货")
+      #end
+      #if($!obj.order_status==20)
+      #set($status="已付款")
+      #end
+      #if($!obj.order_status==30)
+      #set($status="已发货")        
+      #end                
+      #if($!obj.order_status==40)
+      #set($status="已收货")
+      #end
+      #if($!obj.order_status==50)
+      #set($status="已完成,已评价")                                              
+      #end
+      <h3><span>订单号：$!obj.order_id</span><span>状态：#if($!obj.order_status<20)<b style="color:#f00;">$!status</b> #else <b style="color:#3C3;">$!status</b> #end</span>#if($!obj.order_status==10)<span><a href="$!webPath/order_pay_view.htm?id=$!obj.id" class="pay">支付</a></span>#end</h3>
+    </div>
+    <div class="order_follow">
+      <ul class="order_follow_top">
+        <li class="this">付款信息</li>
+      </ul>
+      <div class="order_follow_box">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="order_follow_table">
+          <tr>
+            <td colspan="2">付款方式：$!payment</td>
+          </tr>
+          <tr>
+            <td width="280">商品金额：￥$!obj.goods_amount</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>应支付金额：￥$!obj.totalPrice</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="order_pay_info">
+      <h3>订单信息</h3>
+      <div class="order_pay_con">
+        <div class="order_pay_tab">
+          <h4>充值清单</h4>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="order_pay_table">
+            <tr>
+              <th width="100">商品图片</th>
+              <th>商品名称</th>
+              <th width="100">单价</th>
+              <th width="100">数量</th>
+              <th width="100">总价</th>
+            </tr>
+            #foreach($map in $!orderFormTools.queryGoodsInfo("$!obj.goods_info"))
+            #set($goods_id = "$!{map.get('goods_id')}")	
+            #set($goods_name = "$!{map.get('goods_name')}")
+            #set($goods_count = "$!{map.get('goods_count')}")
+            #set($goods_price = "$!{map.get('goods_price')}")
+            #set($goods_all_price = "$!{map.get('goods_all_price')}")
+            #set($goods_type = "$!{map.get('goods_type')}")
+            #set($goods_gsp_val = "$!{map.get('goods_gsp_val')}")
+            #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+            #set($img="$!webPath/$!{goods_mainphoto_path}")
+            <tr>
+              <td align="center"><img src="$!img" width="62" height="62" /></td>
+              <td align="left">$!{goods_name}</td>
+              <td align="center"><b class="red">￥$!goods_price</b></td>
+              <td align="center">$!goods_count</td>
+              <td align="center">￥$!obj.totalPrice</td>
+            </tr>
+            #end
+          </table>
+        </div>
+      </div>
+      <div class="order_pay_money">
+        <ul>
+          <li>商品总金额：￥$!obj.goods_amount</li>
+          <li><span>应付金额：<b>￥$!obj.totalPrice</b></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

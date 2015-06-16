@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    rules:{
+	 finance_userName:{required:true},
+	  reality_amount:{required:true}
+	 },
+    messages:{
+	 finance_userName:{required:"操作人姓名不能为空"},
+	  reality_amount:{required:"实际结算金额不能为空"}
+	}
+  });
+ 	//改变系统提示的样式
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+});
+  //
+</script>
+</head>
+<body>
+<form id="theForm" name="theForm" action="$!webPath/admin/payofflog_save.htm" method="post">
+  <div class="edit">
+    <div class="editul setcont" >
+      <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>账单流水号</li>
+        <li> <span class="webname"> $!obj.pl_sn </span></li>
+      </ul>
+        <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>账单商家名称</li>
+        <li> <span class="webname"> $!obj.seller.userName </span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>入账时间</li>
+        <li> <span class="webname"> $!CommUtil.formatLongDate($!obj.addTime) </span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>申请时间</li>
+        <li> <span class="webname"> $!CommUtil.formatLongDate($!obj.apply_time) </span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>销售金额</li>
+        <li> <span class="webname"> $!obj.order_total_price（元） </span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>销售佣金</li>
+        <li> <span class="webname"> $!obj.commission_amount（元） </span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>结算金额</li>
+        <li> <span class="webname"> $!obj.total_amount（元） </span></li>
+      </ul>
+       <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>实际结算</li>
+        <li> <span class="webname">
+          <input id="reality_amount" name="reality_amount" type="text" value="$!obj.reality_amount" style="width:150px"/>
+          </span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>结算财务</li>
+        <li> <span class="webname">
+          <input id="finance_userName" name="finance_userName" type="text" value="$!obj.finance_userName" style="width:150px"/>
+          </span><span id="nothis"><strong class="q"></strong><strong class="w">请填写结算该账单的财务人员姓名</strong><strong class="c"></strong></span></li>
+      </ul>
+      <ul class="set1">
+        <li class="setcont_bg"><strong class="sred"></strong>结算备注</li>
+        <li> <span class="webname">
+          <textarea id="payoff_remark" name="payoff_remark" ccols="4" rows="5">$!obj.payoff_remark</textarea>
+          </span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="submit">
+  <input id="id" name="id" type="hidden" value="$!obj.id"/>
+    <input  type="submit" value="结算完成" />
+  </div>
+</form>
+</div>
+</body>
+</html>

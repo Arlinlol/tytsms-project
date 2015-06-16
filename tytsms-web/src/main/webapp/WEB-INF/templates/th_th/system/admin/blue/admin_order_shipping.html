@@ -1,0 +1,71 @@
+<script>
+jQuery(document).ready(function(){
+jQuery.validator.addMethod("verify",function(value,element){
+var re = /^[0-9a-zA-Z]*$/;
+        if(re.test(jQuery("#shipCode").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }
+});								
+  jQuery("#theForm").validate({
+	   rules:{
+		   shipCode:{required:true,verify:true},
+		   ec_id:{required:true}
+		   },
+	   messages:{
+	       shipCode:{required:"单号不能为空",verify:"请正确填写单号"},
+		   ec_id:{required:"不能为空"}
+	   }
+	});
+});
+</script>
+<form action="$!webPath/admin/order_shipping_save.htm" method="post" id="theForm">
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    <tr>
+      <td colspan="2" align="center" valign="top" >请输入您的物流信息</td>
+    </tr>
+    <tr>
+      <td width="100" align="right" valign="top">订单号：
+        <input name="id" type="hidden" id="id" value="$!obj.id" />
+      </td>
+      <td align="left">$!obj.order_id</td>
+    </tr>
+	#if($!physicalGoods=="true")
+    <tr>
+      <td align="right" valign="top">物流公司：</td>
+      <td align="left">
+      <select name="ec_id" id="ec_id">
+      #foreach($expressCompany in $expressCompanys)
+      <option value="$!expressCompany.id">$!expressCompany.company_name</option>
+      #end
+      </select></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top">物流单号：</td>
+      <td align="left"><input name="shipCode" type="text" id="shipCode" size="30" /></td>
+    </tr>
+	#end
+	#foreach($dg in $deliveryGoods)<!--订单里面的虚拟商品-->
+	<tr>
+      <td align="right" valign="top">虚拟商品$!{velocityCount}：</td>
+      <td align="left">$!CommUtil.substring("$!dg.goods_name",15)</td>
+    </tr>
+     <tr>
+      <td align="right" valign="top">虚拟商品说明：</td>
+      <td align="left"><textarea name="order_seller_intro" id="order_seller_intro" cols="35" rows="5"></textarea></td>
+    </tr>
+	#end
+    <tr>
+      <td align="right" valign="top">操作说明：</td>
+      <td align="left"><textarea name="state_info" id="state_info" cols="35" rows="5"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><span class="inputbtn">
+        <input name="" type="submit" value="提交" style="cursor:pointer;"/>
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      </span></td>
+    </tr>
+  </table>
+</form>

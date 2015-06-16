@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("member.groupinfo_list.my_life") - $!config.title </title><!-- 我的生活购 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){
+	jQuery(".user_menu b").toggle(
+			function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+			},
+			function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+			});	
+								});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+    $!httpInclude.include("/buyer/nav.htm?op=group")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><span class="myorder_fright"></span><strong>#springMessage("member.groupinfo_list.life_order_details")<!-- 生活购订单详情 --></strong></h4>
+      </div>
+       <form action="$!webPath/buyer/lifeorder_view.htm" method="post" id="ListForm">
+       <input type="hidden" id="id" name="id" value="$!order.id" />
+      <div class="user_list">
+        <div class="user_list_title"> <span class="user_title_sp">
+          </span>
+          <ul class="user_title_ul">
+            <li><i></i><a href="$!webPath/buyer/group.htm">#springMessage("member.groupinfo_list.life_order")<!-- 生活购订单 --></a></li>
+           <li><i></i><a href="$!webPath/buyer/groupinfo_list.htm">#springMessage("member.groupinfo_list.consume_list")<!-- 消费码列表 --></a></li>
+            <li class="this"><i></i>#springMessage("member.groupinfo_list.life_order_details")<!-- 生活购订单详情 --></li>
+          </ul>
+        </div>
+        <div class="user_life_box">
+        <h3><em><a href="$!webPath/grouplife/view_$!{goods_id}.htm?type=life" target="_blank"><img src="$!webPath/$!goods.group_acc.path/$!goods.group_acc.name" width="50" height="50" /></a></em><span>#springMessage("member.order_cancel_listlog.orderno")<!-- 订单编号： --><b>$!order.order_id</b></span><strong>#springMessage("member.order_cancel_listlog.order_time")<!-- 下单时间: -->$!CommUtil.formatLongDate($!order.addTime)</strong></h3>
+          <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_life_table">
+            <tr>
+              <th width="20%">#springMessage("member.groupinfo_list.group_consume")<!-- 团购消费码 --></th>
+              <th width="20%">#springMessage("member.groupinfo_list.group_name")<!-- 团购名称 --></th>
+              <th width="20%">#springMessage("member.groupinfo_list.group_price")<!-- 团购单价 --></th>
+              <th width="20%">#springMessage("member.groupinfo_list.used_status")<!-- 使用状态 --></th>
+               <th>#springMessage("member.groupinfo_list.expire_time")<!-- 到期时间 --></th>
+            </tr>
+            #foreach($obj in $infos)
+            <tr>
+              <td align="center">$!obj.group_sn</td>
+              <td align="center">$!obj.lifeGoods.gg_name</td>
+              <td align="center">$!obj.lifeGoods.group_price</td>
+              <td align="center">#if($!obj.status==0)#springMessage("member.groupinfo_list.unused")<!-- 未使用 -->#end #if($!obj.status==1)#springMessage("member.groupinfo_list.been_used")<!--  已使用 --> #end #if($!obj.status==-1) #springMessage("member.groupinfo_list.expired")<!-- 已过期 --> #end #if($!obj.status==3||$!obj.status==5)#springMessage("member.groupinfo_list.refund")<!-- 退款中 -->#end #if($!obj.status==7)#springMessage("member.groupinfo_list.refunded")<!-- 已退款 -->#end</td>
+              <td align="center">$!CommUtil.formatLongDate($!goods.endTime)</td>
+            </tr>
+            #end
+          </table>
+        </div>
+        <div class="userlist_allop">
+          <div class="user_list_page"><span class="user_page_sp"><input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+                  $!gotoPageFormHTML</span>
+          </div>
+        </div>
+      </div>
+         </form>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+﻿<select name="$!mark" id="$!mark">
+	  <option value="">$!level</option>
+      #foreach($a in $area.childs)
+      <option value="$!a.id">$!a.areaName</option>
+      #end
+             <!-- "州县" -->
+</select>#if($!level=="#springMessage('sms.seller_store_ajax_select.zhou')")<b class="settedtab_b">#end</b>

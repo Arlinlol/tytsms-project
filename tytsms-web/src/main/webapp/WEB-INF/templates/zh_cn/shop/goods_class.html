@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>所有商品分类 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="class_all">
+    <ul class="cls_tab_ul">
+      <li class="this"><a href="$!webPath/goods_class.htm"><b>全部商品分类</b></a></li>
+      <li><a href="$!webPath/brand/index.htm"><b>全部品牌</b></a></li>
+      <li style="display:none"><a href="$!webPath/store_goods_list.htm"><b>全部商品</b></a></li>
+    </ul>
+    <div class="cls_all_top">
+      <h3>商品全部分类</h3>
+      <div class="cls_all_top_box">#foreach($gc in $recommend_gcs)<a href="$!webPath/store_goods_list_$!{gc.id}.htm" target="_blank">$!{gc.className}</a>#end</div>
+    </div>
+    <div class="class_all_bottom">
+      <div class="class_all_bhid">
+      #foreach($gc in $gcs)
+        <div class="class_all_one">
+          <h4> <span><a href="$!webPath/store_goods_list_$!{gc.id}.htm" target="_blank">$!{gc.className}</a></span></h4>
+          #foreach($c_gc in $gc.childs)
+          <dl>
+            <dt><a href="$!webPath/store_goods_list_$!{c_gc.id}.htm" target="_blank">$c_gc.className</a></dt>
+            <dd>#foreach($c_c_gc in $c_gc.childs)<a href="$!webPath/store_goods_list_$!{c_c_gc.id}.htm" target="_blank">$!c_c_gc.className</a>#end</dd>
+          </dl>
+          #end
+        </div>
+        #end
+      </div>
+    </div>
+  </div>
+ $!httpInclude.include("/footer.htm") 
+</div>
+</div>
+</body>
+</html>

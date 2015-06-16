@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("member.predeposit_view.recharge_details")-$!{config.title}-$!{config.poweredby}</title><!-- 充值详情 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter"> $!httpInclude.include("/buyer/nav.htm?op=predeposit")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>#springMessage("member.predeposit_view.account_recharge")<!-- 账户充值 --></strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li><i></i><a href="$!webPath/buyer/predeposit.htm">#springMessage("member.predeposit_view.account_recharge")<!-- 账户充值 --></a></li>
+            <li><i></i><a href="$!webPath/buyer/predeposit_list.htm">#springMessage("member.predeposit_view.recharge_list")<!-- 充值列表 --></a></li>
+            <li class="this"><i></i>#springMessage("member.predeposit_view.recharge_details")<!-- 充值详情 --></li>
+          </ul>
+        </div>       
+        <div class="add_usercenter">      
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_base_table">
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.recharge_code")<!-- 充值编号： --></td>
+              <td>$!obj.pd_sn</td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.recharge_amount")<!-- 充值金额： --></td>
+              <td>$!obj.pd_amount
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.recharge_time")<!-- 充值时间： --></td>
+              <td>$!CommUtil.formatLongDate($!obj.addTime)
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.pay_mode")<!-- 支付方式： --></td>
+              #if($!obj.pd_payment=="alipay")
+                      #set($pd_payment="#springMessage('member.predeposit_view.alipay')")<!-- 支付宝 -->
+                    #end
+                    #if($!obj.pd_payment=="bill")
+                      #set($pd_payment="#springMessage('member.predeposit_view.quick_money')")<!-- 快钱 -->
+                    #end
+                    #if($!obj.pd_payment=="chinabank")
+                      #set($pd_payment="#springMessage('member.predeposit_view.chinabank')")<!-- 网银在线 -->
+                    #end
+                    #if($!obj.pd_payment=="tenpay")
+                      #set($pd_payment="#springMessage('member.predeposit_view.tenpay')")<!-- 财付通 -->
+                    #end
+                    #if($!obj.pd_payment=="outline")
+                      #set($pd_payment="#springMessage('member.predeposit_view.offline_payment')")<!-- 线下支付 -->
+                    #end
+              <td>$!pd_payment
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.recharge_status")<!-- 充值状态： --></td>
+              #if($!obj.pd_status==0)
+                      #set($pd_status="#springMessage('member.predeposit_view.wait_pay')")<!-- 等待支付 -->
+                    #end
+                    #if($!obj.pd_status==1)
+                      #set($pd_status="#springMessage('member.predeposit_view.pay_complete')")<!-- 支付完成 -->
+                    #end
+              <td>$!pd_status
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.pay_status")<!-- 支付状态： --></td>
+              #if($!obj.pd_pay_status==0)
+                      #set($pd_pay_status="#springMessage('member.predeposit_view.wait_pay')")<!-- 等待支付 -->
+                    #end
+                    #if($!obj.pd_pay_status==1)
+                      #set($pd_pay_status="#springMessage('member.predeposit_view.wait_review')")<!-- 等待审核 -->
+                    #end
+                    #if($!obj.pd_pay_status==2)
+                      #set($pd_pay_status="#springMessage('member.predeposit_view.pay_complete')")<!-- 支付完成 -->
+                    #end
+              <td>$!pd_pay_status
+                </td>
+            </tr>
+            #if($!obj.pd_payment=="outline")
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.emit_name")<!-- 汇款人姓名： --></td>
+              <td>$!obj.pd_remittance_user
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.remit_bank")<!-- 汇款银行： --></td>
+              <td>$!obj.pd_remittance_bank
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.remit_time")<!-- 汇款日期： --></td>
+              <td>$!obj.pd_remittance_time
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.recharge_remark")<!-- 充值备注： --></td>
+              <td>$!obj.pd_remittance_info
+                </td>
+            </tr>
+            #end
+            #if($!obj.pd_admin)
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.operation_admin")<!-- 操作管理员： --></td>
+              <td>$!obj.pd_admin.userName
+                </td>
+            </tr>
+            #end
+            #if($!obj.pd_admin_info)
+            <tr>
+              <td align="right">#springMessage("member.predeposit_view.operation_remark")<!-- 操作备注： --></td>
+              <td>$!obj.pd_admin_info
+                </td>
+            </tr>
+            #end
+            <tr>
+              <td>&nbsp;</td>
+              <td>												<!-- 返回列表 -->
+                <input type="button" name="button"  value="#springMessage('member.predeposit_view.return_list')" style="cursor:pointer;"  class="save" onclick="window.location.href='$!webPath/buyer/predeposit_list.htm'" />
+              </td>
+            </tr> 
+          </table>
+        </div> 
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

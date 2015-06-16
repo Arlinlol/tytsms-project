@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台 - 我的广告-  $!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main"> 
+  <div class="seller_center"> $!httpInclude.include("/seller/nav.htm?op=advert")
+    <div class="seller_right">
+     <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>其他管理</b> ><b>广告管理</b></span></div>
+        <div class="seller_list">
+            <div class="seller_list_title">
+              <ul class="seller_title_ul">
+                <li><a href="$!webPath/seller/advert_list.htm"><i></i>广告列表</a></li>
+                 <li class="this"><a href="$!webPath/seller/advert_my.htm"><i></i>我的广告</a></li>
+              </ul>
+            </div>
+            <div class="user_list_box">
+               <form method="post" id="ListForm">
+                <div class="operation">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                     <tr id="opertitle">
+                    <td width="20%">广告标题</td>
+                    <td width="10%">广告类型</td>
+                    <td  width="15%">开始时间</td>
+                    <td width="15%">结束时间</td>
+                    <td width="10%">广告状态</td>
+                    <td align="left" width="10%">点击数</td>
+                    <td align="left">操作</td>
+                  </tr>
+                  #foreach($obj in $objs)
+                  <tr class="opertr">
+                    <td>$!obj.ad_title</td>
+                    #if($!obj.ad_ap.ap_type=="img")
+                      #set($type="图片")
+                    #end
+                   #if($!obj.ad_ap.ap_type=="scroll")
+                      #set($type="滚动")
+                   #end
+                   #if($!obj.ad_ap.ap_type=="slide")
+                     #set($type="幻灯")
+                  #end
+                  #if($!obj.ad_ap.ap_type=="text")
+                     #set($type="文字")
+                  #end
+                    <td>$!type</td>
+                    <td>$!obj.ad_begin_time </td>
+                    <td>$!obj.ad_end_time</td> 
+                    #if($!obj.ad_status==0)
+                      #set($ad_status="待审核")
+                    #end
+                    #if($!obj.ad_status==1)
+                      #set($ad_status="审核通过")
+                    #end
+                    #if($!obj.ad_status==-1)
+                      #set($ad_status="审核失败")
+                    #end 
+                    <td>$!ad_status</td>
+                    #if($!obj.ap_show_type==0)
+                      #set($ap_show_type="固定广告")
+                    #end
+                    #if($!obj.ap_show_type==1)
+                      #set($ap_show_type="随机广告")
+                    #end
+                    <td align="left">$!obj.ad_click_num</td>
+                    <td align="left"><a href="$!webPath/seller/advert_apply_edit.htm?id=$!obj.id">编辑</a> <a href="$!webPath/seller/advert_delay.htm?id=$!obj.id">延时</a></td>
+                  </tr>
+                  #end
+                  </table>
+                </div>
+                <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+                 <div class="seller_list_page">
+                <div  class="seller_page_sp">
+                  $!gotoPageFormHTML</div>
+              </div>
+              </form>
+            </div>
+      </div>
+  </div>
+  </div>
+   </div>
+  $!httpInclude.include("/footer.htm")
+</body>
+</html>

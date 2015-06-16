@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache>
+	<diskStore path="java.io.tmpdir" />
+	<cacheManagerPeerProviderFactory
+		class="net.sf.ehcache.distribution.jgroups.JGroupsCacheManagerPeerProviderFactory"
+		properties="connect=TCP(start_port=${ehcache.port}):
+        TCPPING(initial_hosts=${ehcache.hosts};port_range=10;timeout=3000;
+        num_initial_members=3;up_thread=true;down_thread=true):
+        VERIFY_SUSPECT(timeout=1500;down_thread=false;up_thread=false):
+        pbcast.NAKACK(down_thread=true;up_thread=true;gc_lag=100;
+		retransmit_timeout=3000):
+        pbcast.GMS(join_timeout=5000;join_retry_timeout=2000;shun=false;
+        print_local_addr=false;down_thread=true;up_thread=true)"
+		propertySeparator="::" />
+
+
+	<defaultCache maxElementsInMemory="10000" eternal="false"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+		clearOnFlush="true" memoryStoreEvictionPolicy="LFU">
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicateAsynchronously=true, replicatePuts=true,
+        replicateUpdates=true, replicateUpdatesViaCopy=false, replicateRemovals=true" />
+
+	</defaultCache>
+	<cache name="SimplePageFragmentCachingFilter"
+		maxElementsInMemory="100" maxElementsOnDisk="1000" eternal="false"
+		overflowToDisk="true" diskSpoolBufferSizeMB="20" timeToIdleSeconds="12000"
+		timeToLiveSeconds="12000" memoryStoreEvictionPolicy="LFU">
+
+		<cacheEventListenerFactory
+			class="net.sf.ehcache.distribution.jgroups.JGroupsCacheReplicatorFactory"
+			properties="replicateAsynchronously=true, replicatePuts=true,
+        	replicateUpdates=true, replicateUpdatesViaCopy=false, replicateRemovals=true" />
+	</cache>
+</ehcache>

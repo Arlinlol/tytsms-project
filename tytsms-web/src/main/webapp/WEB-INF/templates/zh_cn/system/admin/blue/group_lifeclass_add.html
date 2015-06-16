@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+#macro ( genericGroupClassTree $somelist ) 
+#foreach ( $some in $somelist )
+<option value="$!some.id">
+#if($!some.gc_level>0)
+#foreach($count in [0..$!some.gc_level])&nbsp;&nbsp;#end #end $!some.gc_name</option>
+#genericGroupClassTree($some.childs) 
+#end 
+#end
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+ 	//改变系统提示的样式
+	#if($!obj)
+	jQuery("#gc_type").val($!obj.gc_type);
+	#end
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+//
+  jQuery("#theForm").validate({
+    rules:{
+	  gc_name:{
+	    required :true,
+	    remote:{
+		    url: "$!webPath/admin/group_class_verify.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "gc_name": function(){return jQuery("#gc_name").val();},
+				  "id":function(){return jQuery("#id").val()},
+				  "pid":function(){return jQuery("#pid").val()}
+		     }
+			}
+	   }
+	 },
+	messages:{
+	  gc_name:{required:"分类名称不能为空",remote:"该分类已经存在"}
+	}
+  });	
+  //
+  jQuery("#pid").val("$!obj.parent.id");
+});
+
+function saveForm(method){
+   jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">团购分类</h1>
+  <div class="nav_list">
+  <ul>
+   <li><a href="$!webPath/admin/group_list.htm"><b>团购列表</b></a> </li>
+   <li><a href="$!webPath/admin/group_add.htm"><b>新增团购</b></a></li>
+   <li><a href="$!webPath/admin/group_class_list.htm?type=goods" ><b>商品团购分类</b></a> </li>
+   <li><a href="$!webPath/admin/group_class_list.htm?type=life" ><b>生活团购分类</b></a> </li>
+   <li><a href="$!webPath/admin/group_class_add.htm?type=goods" #if($!type=="goods"&&!$!edit) class="this" #end ><b>新增商品类分类</b></a></li>
+   <li><a href="$!webPath/admin/group_class_add.htm?type=life" #if($!type=="life"&&!$!edit) class="this" #end><b>新增生活类分类</b></a></li>
+   <li><a href="$!webPath/admin/group_area_list.htm" ><b>团购区域</b></a></li>
+   <li><a href="$!webPath/admin/group_area_add.htm"><b>新增区域</b></a></li>
+   <li><a href="$!webPath/admin/group_price_list.htm" ><b>价格区间</b></a></li>
+   <li><a href="$!webPath/admin/group_price_add.htm"><b>添加区间</b></a> </li>
+    #if($!edit)
+     <li><a href="javascript:void(0);" class="this"><b>编辑</b></a> </li>
+     #end
+  </ul>
+    </div>
+ <form name="theForm" id="theForm" action="$!webPath/admin/group_class_save.htm?gc_type=1" method="post">
+ <input name="id" type="hidden" id="id" value="$!obj.id" />
+  <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+  <div class="edit">
+  <div class="editul setcont">
+    <ul class="set1">
+      <li class="setcont_bg"><strong class="sred">*</strong>分类名称</li>
+      <li><span class="webname">
+        <input name="gc_name" type="text" id="gc_name" value="$!obj.gc_name" size="40" />
+      </span></li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">上级分类</li>
+      <li><span class="webnamesec sizese">
+        <select name="pid" id="pid">
+              <option value="">请选择...</option>
+			  #genericGroupClassTree($!gcs)
+         </select>
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">如果选择上级分类，那么新增的分类则为被选择上级分类的子分类</strong><strong class="c"></strong></span></li>
+    </ul>
+    <ul class="set1">
+      <li class="setcont_bg">排序</li>
+      <li><span class="size100">
+        <input name="gc_sequence" type="text" id="gc_sequence" value="$!obj.gc_sequence" />
+      </span><span id="nothis"><strong class="q"></strong><strong class="w">序号越小，分类显示越靠前</strong><strong class="c"></strong></span></li>
+    </ul>
+  </div>
+  </div>
+  </form>
+  <div class="submit">
+   <span class="pad120"> <input name="save" type="button" value="提交" onclick="saveForm()" /></span>
+  </div>
+</div>
+</body>
+</html>

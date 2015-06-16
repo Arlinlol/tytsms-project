@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!obj.gg_name - 团购信息 </title>
+<meta name="keywords" content="$!obj.gg_name" />
+<meta name="description" content="$!obj.gg_name" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/group_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.lazyload.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script type="text/javascript">
+function timeCount(remain_id){
+   function _fresh(){
+      var nowDate = new Date(),                                    //当前时间
+      endDate = new Date($('#'+remain_id).attr('endtime')),    //截止时间
+      totalS  = parseInt((endDate.getTime() - nowDate.getTime()) / 1000);     //总秒数
+      _day    = parseInt(totalS / 3600 / 24);
+      _hour   = parseInt((totalS / 3600) % 24);
+      _minute = parseInt((totalS / 60) % 60);
+      _second = parseInt(totalS % 60);
+     jQuery('#'+remain_id).html('<em>' + _day +'</em>天<em>' + _hour + '</em>小时<em>' + _minute + '</em>分<em>' + _second + '</em>秒');
+     if( totalS <= 0){
+       jQuery('#'+remain_id).html('该团购已结束');
+       clearInterval(sh);
+     }
+  }
+  _fresh();
+  var sh = setInterval(_fresh,1000);
+}
+jQuery(document).ready(function(){
+  timeCount("time_down_info");
+  jQuery("#group_click li").click(function(){
+				jQuery("#group_click li").removeClass("this");						   
+				jQuery(this).addClass("this");
+				jQuery(".group_introbox").hide();
+				jQuery(".group_introbox").eq(jQuery(this).index()).show();
+				var url=jQuery(this).attr("url");
+				var mark=jQuery(this).attr("mark");
+				jQuery.post(url,"",function(data){
+					jQuery("#"+mark).empty();
+					jQuery("#"+mark).append(data);
+	 									},"text");
+										   });
+});
+function ajaxPage(url,currentPage,obj){
+  jQuery.ajax({type:'POST',url:url,data:{"currentPage":currentPage,"goods_id":"$!obj.gg_goods.id","id":"obj.gg_goods.goods_store.id"},
+			  beforeSend:function(){
+			   },
+			  success:function(data){
+                 jQuery(".group_introbox").not("#info").empty();						
+                 jQuery(".group_introbox").not("#info").append(data);	
+				 }
+		})
+  }
+</script>
+<style type="text/css">
+body{ background:#fff;}
+.policy{display:none;}
+.head_width{width: 100%;background: #fff;}
+.top_user{ position:absolute; right:135px;top:30px;}
+.goodscar{position:absolute; right:0px;top:30px;}
+.head_search{ width:456px; margin-left:0px;}
+.head_seartxt .h_sear_txt{ width: 293px;}
+</style>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/group/head.htm")
+$!httpInclude.include("/group/nav.htm")
+<div class="group_bg">
+  <div class="main">
+    <div class="group_default">
+      <div class="group_default_left">
+        <div class="group_defleft_top">
+          <h2 class="group_h2"><a href="$!webPath/goods_$!{obj.gg_goods.id}.htm">$!obj.gg_name</a></h2>
+          <div class="group_defmid">
+            <div class="group_defmid_img"><a href="$!webPath/goods_$!{obj.gg_goods.id}.htm"><span class="img_cspan">
+              <p><img src="$!imageWebServer/$!obj.gg_img.path/$!obj.gg_img.name" width="440" height="292" /></p>
+              </span></a></div>
+            <div class="group_defmid_right">
+              <ul class="group_defmid_ul">
+                <li class="group_defmid_ulprice">¥$!{obj.gg_price}</li>
+                #set($save = $!{obj.gg_goods.goods_price}-$!{obj.gg_price})
+                #if($!obj.gg_status==1)
+                #if($!obj.gg_count>0)
+             #set($goods_url="$!webPath/goods_$!{obj.gg_goods.id}.htm")
+            #if($!config.second_domain_open && $!obj.gg_goods.goods_type==1 && $!obj.gg_goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{obj.gg_goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.gg_goods.id}.htm")
+            #end 
+                <li class="group_defmid_ulbtn"><a href="javascript:void(0);" onclick="window.location.href='$!{goods_url}'" />马上团</a></li>
+                #else
+                <li class="group_defmid_ulbtn_unable"><a href="javascript:void(0);">已售完</a></li>
+                #end
+                #else
+                <li class="group_defmid_ulbtn_unable"><a href="javascript:void(0);">已结束</a></li>
+                #end
+                <li class="group_defmid_ulmoney"><span class="ulmoney_spa"><em>原价</em><s>¥$!{obj.gg_goods.goods_price}</s></span><span class="ulmoney_spa"><em>折扣</em><b>$!{obj.gg_rebate}折</b></span><span class="ulmoney_spa"><em>节省</em><b>¥$!save</b></span></li>
+              </ul>
+              <span class="group_defbottom"><i><em>团购成功，已售出 <strong>$!obj.gg_selled_count</strong></em></i><b id="time_down_info" endTime="$!CommUtil.formatTime('MM/dd/yyyy HH:mm:ss',$!{obj.endTime})"><em>1</em>天<em>17</em>小时<em>35</em>分钟<em>30</em>秒</b></span> </div>
+          </div>
+          <div class="group_enjoy"><span class="enjoy_text">
+            <div style="float:left; line-height:30px;">分享到：</div>
+            <div style="float:left">$!{config.share_code} </div>
+            </span></div>
+        </div>
+        <div class="group_introduces">
+           #set($goods_url="$!webPath/goods_$!{obj.gg_goods.id}.htm")
+            #if($!config.second_domain_open && $!obj.gg_goods.goods_type==1 && $!obj.gg_goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{obj.gg_goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.gg_goods.id}.htm")
+            #end 
+          <div class="group_tab_top"><span class="group_addcar"><b>¥$!{obj.gg_price}</b><a href="$!goods_url">马上团</a></span>
+            <ul id="group_click">
+              <li class="this" style="cursor:pointer">商品介绍</li>
+              <li style="cursor:pointer" url="$!webPath/group_evaluation.htm?goods_id=$!{obj.gg_goods.id}&id=$!{obj.gg_goods.goods_store.id}" mark="evaluate">商品评价</li>
+              <li style="cursor:pointer" url="$!webPath/group_order.htm?goods_id=$!{obj.gg_goods.id}&id=$!{obj.gg_goods.goods_store.id}" mark="deal">成交记录</li>
+            </ul>
+          </div>
+          <div class="group_introbox" id="info">
+            <div class="group_contact"> $!obj.gg_content </div>
+          </div>
+          <div class="group_introbox" style="display:none" id="evaluate"> </div>
+          <div class="group_introbox" style="display:none" id="deal">
+            <div class="group_contact"> </div>
+          </div>
+        </div>
+      </div>
+      <div class="group_default_right">
+        <div class="group_hot">
+          <h3><span>热门团购</span></h3>
+          <div class="group_hot_box"> #foreach($gg in $hot_ggs)
+            <ul class="group_hot_one">
+              <li class="group_hot_img"><span class="img_cspan">
+                <p><a href="$!webPath/group/view_$!{gg.id}.htm?type=goods"><img src="$!imageWebServer/$!gg.gg_img.path/$!gg.gg_img.name" width="218" height="150" /></a></p>
+                </span><i></i></li>
+              <li class="group_hot_name"><a href="$!webPath/group/view_$!{gg.id}.htm?type=goods">$!gg.gg_name</a></li>
+              <li class="group_hot_price"><em><a href="$!webPath/group/view_$!{gg.id}.htm?type=goods">抢购</a></em><b>¥$!{gg.gg_price}</b><i>已售出<strong>$!{gg.gg_selled_count}</strong></i></li>
+            </ul>
+            #end </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

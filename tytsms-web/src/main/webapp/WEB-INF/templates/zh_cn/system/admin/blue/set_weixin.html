@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+ 	//改变系统提示的样式
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+ //
+   var state = jQuery("#weixin_store").val();
+   if(state=="true"){
+		jQuery("#weixin_store_status").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg");
+	}else{
+		jQuery("#weixin_store_status").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg");
+	}
+  jQuery("#weixin_store_status").css("cursor","pointer").click(function(){
+      state = jQuery("#weixin_store").val();
+	 if(state=="true"){
+		jQuery("#weixin_store").val("false");
+		jQuery("#weixin_store_status").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg");
+	}else{
+		jQuery("#weixin_store").val("true");
+		jQuery("#weixin_store_status").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg");
+	}
+  });
+});
+
+function saveForm(){
+	jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+<form action="$!webPath/admin/set_weixin_save.htm" method="post" enctype="multipart/form-data" name="theForm" id="theForm">
+<input name="id" type="hidden" id="id" value="$!config.id" />
+<div class="cont">
+    <h1 class="seth">微信商城</h1>
+    <div class="nav_list">
+
+	<ul>
+	<li><a href="$!webPath/admin/set_weixin.htm" class="this"><b>通用设置</b></a></li>
+    </ul>
+    </div>
+     <div class="edit">
+    <div class="editul setcont" id="base">
+    <ul class="set1">
+        <li><strong class="sred">*</strong>微信商城状态</li>
+        <li> <span class="webSwitch">
+          <input name="weixin_store" id="weixin_store" type="hidden" value="$!config.weixin_store" />
+          <img src="$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg" width="61" height="23" id="weixin_store_status"/> </span> <span id="nothis"><strong class="q"></strong><strong class="w">关闭或开启平台微信商城</strong><strong class="c"></strong></span></li>
+      </ul>
+    </div>
+    </div>
+    <div class="submit">
+   <span class="pad80"> <input name="" type="button" value="保存" style="cursor:pointer;" onclick="saveForm();"/></span>
+  </div>
+  </div>
+  
+</form>
+</body>
+</html>

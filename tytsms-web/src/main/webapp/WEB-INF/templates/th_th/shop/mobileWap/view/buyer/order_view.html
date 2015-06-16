@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>微信商城 - 订单详情</title>
+<link href="$!webPath/th_th/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script type="text/javascript">
+
+function order_cancel(){
+	jQuery.post("$!webPath/mobileWap/buyer_order_cancel.htm?",{"order_id":"$!json_map.order_id"},function(data){
+		if(data.code == 100){
+			window.location.href = "$!webPath/mobileWap/buyer_order.htm?order_status=10";
+		}
+	},"json");
+	
+	}
+
+</script>
+
+</head>
+<body class="article_bg">
+<div class="page_bottom">
+<hgroup>
+  <h3 class="goods_car"><a href="javascript:history.go(-1);"><em></em></a><span><b>订单详情</b></span></h3>
+</hgroup>
+<hgroup>
+
+ 			#if($!json_map.order_status==0)
+              #set($status="已取消")
+              #end
+              #if($!json_map.order_status==10)
+              #set($status="待付款")
+              #end
+              #if($!json_map.order_status==15)
+              #set($status="线下支付待审核")
+              #end
+              #if($!json_map.order_status==16)
+              #set($status="货到付款待发货")
+              #end
+              #if($!json_map.order_status==20)
+              #set($status="已付款")
+              #end
+              #if($!json_map.order_status==30)
+              #set($status="已发货")        
+              #end                
+              #if($!json_map.order_status==40)
+              #set($status="已收货")
+              #end
+              #if($!json_map.order_status==50)
+              #set($status="已完成,已评价")                                              
+              #end
+
+<h6 class="hgroup_h6"><b>支付方式 : $!json_map.payType</b><span>订单状态 : $!status</span></h6>
+</hgroup>
+<article class="order_article2">
+	#foreach($goods_info in $!json_map.goods_list)
+  <section class="article_list">
+		<div class="equal" style ="clear:both;padding: 10px;border-bottom: 1px solid #ddd;width: 96%;">
+    <div class="row">
+	        <div class="one">
+	        	<a href="$!webPath/mobileWap/goods.htm?id=$!goods_info.goods_id">
+			      <dt><img src="$!goods_info.goods_mainphoto_path" width="65" height="65"></dt>
+			      </a>
+		     </div>
+	        <div class="two">
+	        <p style="line-height:15px;width:100%;color:#000;padding-bottom: 6px;">$goods_info.goods_name</p>
+	        <span>$!goods_info.goods_gsp_val</span>
+	        <p><strong>¥$!goods_info.goods_price</strong>共1个宝贝</p>
+         </div>
+	    </div>
+	</div>
+   
+     </section>
+     #end
+  <address class="article_address2">
+  <h3>收货地址</h3>
+  <ul>
+    <li><span>地址</span>$!json_map.receiver_area $!json_map.receiver_area_info</li>
+    <li><span>邮编</span>$!json_map.receiver_zip</li>
+    <li><span>姓名</span>$!json_map.receiver_Name</li>
+    <li><span>电话</span>$!json_map.receiver_telephone</li>
+    <li><span>手机</span>$!json_map.receiver_mobile</li>
+  </ul>
+  </address>
+  <address class="article_address2">
+  <h3>订单信息</h3>
+  <ul>
+    <li><span>订单号</span>3298420150228153950</li>
+    <li><span>下单时间</span>$!json_map.addTime</li>
+  </ul>
+  </address>
+  
+   <address class="article_address2">
+  <h3>物流信息</h3>
+   #foreach($trans_list in $!json_map.trans_list)	
+	  #if($!trans_list.shipCode)
+		  <ul style="border-bottom: 1px solid #ddd;">
+		   <li style="font-size:16px;margin-top: 5px;"><span>物流公司:</span>$!trans_list.express_company</li>	
+		   <li style="font-size:16px;margin-bottom: 15px;"><span>物流单号:</span>$!trans_list.shipCode</li>
+		   #foreach($expressLogs in $!trans_list.expressLog)
+		  	#foreach($expressLog in $!expressLogs.content)	
+		  	 <li>$!expressLog.time</li>
+		    <li>$!expressLog.content</li>
+		    #end
+		     #end
+		  </ul>
+	  #end	
+  #end
+  </address>
+</article>
+<div class="car_operate">
+  <section class="car_operate_top"> 实付款¥$!json_map.order_total_price(含运费：¥$!json_map.ship_price)
+    <div class="car_go_box">
+    #if($!json_map.order_status == 10)
+     <span class="go_total"><a href="$!webPath/mobileWap/payment.htm?order_id=$!json_map.order_id">去结算</a></span>
+     <span class="go_del left"><a href="javascript:void(0);" onclick = "order_cancel()">取消</a></span>
+      #end
+   </div>
+  </section>
+</div>
+ <footer>
+  <ul>
+  </ul>
+</footer>
+<div style="clear:both"></div>
+</div>
+
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+</body>
+</html>

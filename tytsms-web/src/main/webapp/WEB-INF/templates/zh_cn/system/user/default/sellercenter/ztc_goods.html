@@ -1,0 +1,48 @@
+#if($!objs.size()>0)
+<script>
+function ajaxPage(url,currentPage,obj){	
+  jQuery.post(url,{"currentPage":currentPage},
+			      function(data){
+							  jQuery("#ztc_goods_info").empty().append(data);
+							 },"text");
+}
+function set_ztc_goods(obj){
+  var goods_name= jQuery(obj).attr("goods_name");
+  var goods_img=jQuery(obj).attr("goods_img");
+  var goods_current_price=jQuery(obj).attr("goods_current_price");
+  var goods_id=jQuery(obj).attr("goods_id");
+
+  var goods_id_temp = jQuery("img[ztc_goods_img=false]").attr("goods_id");
+  if(goods_id==goods_id_temp){
+	   alert("该商品已存在");
+	   return;
+	  }
+  jQuery("img[ztc_goods_img=false]").attr("src",goods_img);
+  jQuery("img[ztc_goods_img=false]").parent().parent().find("i").html(goods_name);
+  jQuery("img[ztc_goods_img=false]").attr("goods_id",goods_id);
+  jQuery("#goods_id").val(goods_id);
+}
+</script>
+<div class="main_body" >
+  <ul>
+    #foreach($obj in $objs)
+    #if($!obj.goods_main_photo)               
+    #set($img="$!imageWebServer/$!{obj.goods_main_photo.path}/$!{obj.goods_main_photo.name}_small.$!{obj.goods_main_photo.ext}")
+    #else
+    #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+    #end
+    
+    #set($goods_url="$!webPath/goods_$!{obj.id}.htm")
+    #if($!config.second_domain_open && $!obj.goods_type==1 && $!obj.goods_store.store_second_domain!="")
+    #set($goods_url="http://$!{obj.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.id}.htm")
+    #end
+    <li class="item"> <span> <a href="$!goods_url"><img src="$!img" goods_current_price="0" goods_id=""  combin_goods_img="false" width="110" height="110" /></a></span> <i>$!CommUtil.substring("$!obj.goods_name",8)</i>
+      <div class="add_gp">
+        <input type="button" value="添加直通车" class="add_ip" onClick="set_ztc_goods(this)" goods_img="$!img" goods_name='$!CommUtil.substring("$!obj.goods_name",8)' goods_current_price="$!obj.goods_current_price" goods_id="$!obj.id"/>
+      </div>
+    </li>
+    #end
+  </ul>
+  <div class="user_page_sp" style=" float:right; margin-top:10px;">$!gotoPageAjaxHTML</div>
+</div>
+#end

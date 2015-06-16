@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.qq_login_bind.qq_internet") - $!config.title - $!{config.poweredby}l</title><!-- QQ互联 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/layout.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+   jQuery(".login_success_m_top_right b").css("cursor","pointer").click(function(){
+	  jQuery(".login_success_m_top_right b").removeClass("this");
+	  jQuery(this).addClass("this");
+	  var tab_id=jQuery(this).attr("tab");
+	  jQuery(".login_success_m_b_c").hide();
+	  jQuery("#"+tab_id).fadeIn('normal');
+	});
+   jQuery("#theForm1").validate({
+      rules:{
+		   userName:{
+		   required:true,
+           remote:{
+		    url: "$!webPath/verify_username.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "userName": function(){return jQuery("#userName").val();},
+                  "id": function(){return jQuery("#userId").val();}
+		     }
+			}
+		},
+        password:{
+		  required:true,
+		  minlength:6,
+		  maxlength:20  
+		},
+		password1:{
+		  required:true,
+		  equalTo:"#password" 
+		},
+		email:{
+		  required:true,
+		  email:true,
+		  remote:{
+		    url: "$!webPath/verify_email.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "email": function(){return jQuery("#email").val();}
+		     }
+		  }
+		},
+		agree:{
+		  required:true
+		}
+		  },
+	  messages:{
+		    userName:{required:"#springMessage('sms.qq_login_bind.user_name_not_null')"/* "用户名不能为空" */,remote:"#springMessage('sms.qq_login_bind.user_name_exist')"/* 用户名已存在" */},
+			password:{required:"#springMessage('sms.qq_login_bind.password_not_null')"/* "密码不能为空" */,minlength:"密码长度至少6位",maxlength:"密码长度不能超过20位"},
+			password1:{required:"#springMessage('sms.qq_login_bind.repeat_password_not_null')"/*重复密码不能为空*/,equalTo:"#springMessage('sms.qq_login_bind.password_not_same')"/* 两次密码不一样 */},
+			email:{required:"#springMessage('sms.qq_login_bind.email_not_null')" /*Email不能为空*/,remote:"#springMessage('sms.qq_login_bind.email_exist')"/* Email已经存在 */,email:"格式不正确"},
+			agree:{required:"#springMessage('sms.qq_login_bind.accept_protocol')" /*请接受用户协议*/}
+		  }
+   });
+   
+   jQuery("#theForm2").validate({
+	   rules:{
+		   userName:{
+		     required:true
+		   },
+		   password:{
+		     required:true
+		     }
+		   },
+	    messages:{
+			userName:{required:"#springMessage('sms.qq_login_bind.user_name_not_null')"/* "用户名不能为空" */},
+			password:{required:"#springMessage('sms.qq_login_bind.password_not_null')"/* "密码不能为空" */}
+			}	   
+	});
+});
+function save_form1(){
+	jQuery("#theForm1").submit();
+};
+function save_form2(){
+	jQuery("#theForm2").submit();
+};
+</script>
+</head>
+<body>
+  $!httpInclude.include("/top.htm")
+<div class="main">
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+  <div class="login_success">
+    	<div class="login_success_m">
+        	<div class="login_success_m_top">
+            	<div class="login_success_m_top_left"><img src="$!webPath/th_th/resources/style/system/front/default/images/login_left.png" /></div>
+                <div class="login_success_m_top_right">
+                	<b class="this" tab="user_new">#springMessage("sms.qq_login_bind.complete_info")<!-- 完善账号信息 --></b>
+                    <b class="" tab="user_bind">绑定已有账号</b>
+                </div>
+            </div>
+            <div class="login_success_m_b">
+            	<form action="$!webPath/qq_login_bind_finish.htm" method="post" id="theForm1">
+            	<div class="login_success_m_b_c" id="user_new">
+            	<input name="userId" type="hidden" class="bind_txt" id="userId" value="$!user.id" />
+                	<ul>
+                    	<li>
+                        	<span class="login_success_m_b_c_name"><i><strong>*</strong>#springMessage("sms.qq_login_bind.user_name")<!-- 用户名： --></i><input name="userName" type="text" class="bind_txt" id="userName" value="$!user.userName" /></span>
+                        	<span class="error"></span>
+                        </li>
+                        <li>
+                        	<span class="login_success_m_b_c_password"><i><strong>*</strong>#springMessage("sms.qq_login_bind.set_password")<!-- 设置密码： --></i><input name="password" type="password" class="bind_txt" id="password" /></span>
+                        	<span class="error"></span>
+                        </li>
+                        <li>
+                        	<span class="login_success_m_b_c_password1"><i><strong>*</strong>#springMessage("sms.qq_login_bind.repeat_password")<!-- 重复密码： --></i><input name="password1" type="password" id="password1" class="bind_txt" /></span>
+                        	<span class="error"></span>
+                        </li>
+                        <li>
+                        	<span class="login_success_m_b_c_mail"><i><strong>*</strong>#springMessage("sms.qq_login_bind.email")<!-- 邮箱： --></i><input name="email" type="text" id="email" class="bind_txt" /></span>
+                        	<span class="error"></span>
+                        </li>
+                        <li class="login_button"><a href="javascript:void(0)" onclick="save_form1()">#springMessage("sms.qq_login_bind.comfirm_commit")<!-- 确认提交 --></a></li>
+                    </ul>
+                </div>
+                </form>
+                <form action="$!webPath/qq_login_bind_finish.htm" method="post" id="theForm2">
+            	<div class="login_success_m_b_c" id="user_bind" style="display:none;">
+                	<ul>
+                    	<li>
+                        	<span class="login_success_m_b_c_name"><i><strong>*</strong>#springMessage("sms.qq_login_bind.user_name")<!-- 用户名： --></i><input name="userName" type="text" id="userName" class="bind_txt" value="$!user.userName"/></span>
+                            <input name="bind_already" type="hidden" id="bind_already" value="yes" />
+                        	<span class="error"></span>
+                        </li>
+                        <li>
+                        	<span class="login_success_m_b_c_password"><i><strong>*</strong>#springMessage("sms.qq_login_bind.set_password")<!-- 设置密码： --></i><input name="password" type="password" class="bind_txt" id="password" /></span>
+                        	<span class="error"></span>
+                        </li>
+                        <li class="login_button"><a href="javascript:void(0)" onclick="save_form2()">#springMessage("sms.qq_login_bind.comfirm_commit")<!-- 确认提交 --></a></li>
+                    </ul>
+                </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

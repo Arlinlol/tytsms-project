@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-退货审核-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+   jQuery("#theForm").validate({
+	ignore: "",
+    rules:{
+	  self_address:{
+	    required :true
+	  }
+	 },
+	messages:{
+	  self_address:{required:"退货信息不能为空！"}
+	}
+  });
+});
+function saveForm(){
+	jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left">  $!httpInclude.include("/seller/nav.htm?op=return") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>交易管理</b>><b>退货管理</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+             <li><a href="$!webPath/seller/return.htm"><i></i>退货列表</a></li>
+              <li class="this"><a href="javascript:void(0);"><i></i>退货详情</a></li>
+          </ul>
+        </div>
+        <div class="add_usercenter"> 
+          <div class="box_logistics">
+          #if($!transInfo)
+		<div class="logistics">	
+        <ul>
+        #if($!transInfo.status==1)
+        #foreach($info in $transInfo.data)
+        #if($!VelocityCount==$!transInfo.data.size())
+        <li><b></b><span class="logistics_time">$!info.time</span><span class="logistics_over">$!info.context</span></li>
+        #else
+        <li><b></b><span class="logistics_time">$!info.time</span><span class="logistics_ads">$!info.context</span></li>
+        #end
+        #end
+        #end
+        #if($!transInfo.status==0)
+		<li class="this"><b></b><span class="logistics_time"></span><span class="logistics_over">$!transInfo.message</span></li>
+        #end 
+        #if($!transInfo.status==2)
+		<li class="this"><b></b><span class="logistics_time"></span><span class="logistics_over">$!transInfo.message</span></li>
+        #end     
+		</ul>
+		</div>
+  			#end
+              </div>
+          <form action="$!webPath/seller/return_check_save.htm" method="post" name="theForm" id="theForm">
+            <input name="id" type="hidden" id="id"  value="$!obj.id"/>
+            <input name="currentPage" type="hidden" id="currentPage"  value="$!currentPage"/>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+            #if($!transInfo)
+            <tr>
+                <td width="100" align="right">商品名称：</td>
+                <td><span class="user_base_info">$!obj.goods_name</span>
+                	</td>
+              </tr>
+            #end
+              <tr>
+                <td width="100" align="right">商品名称：</td>
+                <td><span class="user_base_info">$!obj.goods_name</span>
+                	</td>
+              </tr>
+              <tr>
+                <td align="right">申请者：</td>
+                <td><span class="user_base_info">$!obj.user_name</span>
+                  </td>
+              </tr>
+              <tr>
+                <td align="right">退货数量：</td>
+                <td ><span class="user_base_info">$!obj.goods_count</span>
+                  </td>
+              </tr>
+              <tr>
+                <td align="right">商品价格：</td>
+                <td><span class="user_base_info">$!obj.goods_price</span>
+                	</td>
+              </tr>
+              <tr>
+                <td align="right">总价：</td>
+                <td><span class="user_base_info">$!obj.goods_all_price</span>
+                	</td>
+              </tr>
+              <tr>
+                <td align="right" valign="top" style=" line-height:34px">商品图片：</td>
+                <td>                	
+                	<span class="user_base_info"><img src="$!webPath/$!obj.goods_mainphoto_path" width="160" height="160" /></span>
+               		</td>
+              </tr>
+              <tr>
+                <td align="right">退货说明：</td>
+                <td> <span class="user_base_info">$!obj.return_content</span>
+                	</td>
+              </tr>
+              #if($!obj.goods_return_status==7)
+              <tr>
+                <td align="right">快递名称：</td>
+                <td> <span class="user_base_info">$!express_company_name</span>
+                	</td>
+              </tr>
+              <tr>
+                <td align="right">快递号：</td>
+                <td><span class="user_base_info">$!obj.express_code</span>
+                	</td>
+              </tr>
+              #end
+               #if($!obj.goods_return_status==5)
+              <tr>
+                <td align="right" valign="top">退货信息：</td>
+                <td>
+                	<i class="base_i" style="width:100%; margin-left:0px; margin-bottom:5px;">此处请您详细填写：退货地址、收件人、联系电话、 买家通过此信息填</i>
+           	    <span style=" width:100%; display:block; float:left"><textarea name="self_address" id="self_address" rows="8" cols="60"></textarea></span>
+                	
+                    </td>
+              </tr>
+              <tr>
+                <td align="right">审核：</td>
+                <td><span class="user_info_radio">
+          <label><input type="radio" name="goods_return_status" value="6" checked="checked" />审核通过可退货</label></span>
+          <span class="user_info_radio"><label><input type="radio" name="goods_return_status" value="-1"  />审核未通过不可退货</label></span>
+                	</td>
+              </tr>
+              #end
+               #if($!obj.goods_return_status==5)
+              <tr>
+                <td>&nbsp;</td>
+                <td class="px10"><span class="setsub">
+                  <input type="button" onclick="saveForm()" value="保存" style="cursor:pointer;" class="seller_save"/>
+                  </span></td>
+              </tr>
+              #end
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

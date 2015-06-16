@@ -1,0 +1,96 @@
+﻿#if($!obj.ap_type=="img")  
+  document.write("<div style='float:left;overflow:hidden;text-align:center; width:100%;'>");
+  document.write("<a href='$!webPath/advert_redirect.htm?url=$!obj.ap_acc_url&id=$!obj.adv_id' target='_blank'>");
+  document.write("<img width='$!obj.ap_width' height='$!obj.ap_height' src='$!webPath/$!obj.ap_acc.path/$!obj.ap_acc.name' style='border:none; display:block;'/>");
+  document.write("</a>");
+  document.write("</div>"); 
+#end
+#if($!obj.ap_type=="slide")
+ #if($!obj.ap_location=="Mobile")
+  document.write("<div id='focus' class='focus'><div class='hd'><ul></ul></div><div class='bd'><ul>");
+  #foreach($adv in $obj.advs)
+    document.write("<li><a href='javascript:void(0);'><img src='$!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name' width='$!obj.ap_width' height='$!obj.ap_height' /></a></li>");
+  #end
+  document.write("</ul></div></div>");
+  document.write("<script\/>");
+  document.write("TouchSlide({slideCell:'#focus',titCell:'.hd ul',mainCell:'.bd ul',effect:'leftLoop',autoPlay:true,autoPage:true});");
+  document.write("</script>");
+ #else
+  document.write("<script\/>");
+  document.write("jQuery('document').ready(function(){");  
+  document.write("jQuery('.slideBox').slide({mainCell:'.bd ul',effect:'fold',autoPlay:true});");
+  document.write("})");
+  document.write("</script>");
+  document.write("<div class='slideBox' id='iskyshop_advert'>");  
+  document.write("<div class='hd'>");
+  document.write("<ul style='z-index:0;'>");
+  #foreach($adv in $obj.advs)
+    document.write("<li>$!{velocityCount}");
+    document.write("</li>");
+  #end
+  document.write("</ul>");
+  document.write("</div>");
+  document.write("<div class='bd'>");
+  document.write("<ul style='z-index:0;'>");
+  #foreach($adv in $obj.advs)
+    document.write("<li>");
+    document.write("<a href='$!webPath/advert_redirect.htm?url=$!adv.ad_url&id=$!adv.id' target='_blank'><img src='$!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name' width='$!obj.ap_width' height='$!obj.ap_height' /></a>");
+  document.write("</li>");
+  #end
+  document.write("</ul>");
+  document.write("</div>");
+  document.write("</div>");
+ #end
+#end
+#if($!obj.ap_type=="scroll")
+ #if($obj.advs.size()>0)
+  document.write("<script\/>");
+  document.write("jQuery('document').ready(function(){");  
+  document.write("jQuery('.picScroll').slide({ mainCell:'ul',autoPlay:true,effect:'left', vis:3, scroll:2, autoPage:true });");
+  document.write("jQuery('.picScroll').mouseover(function(){jQuery('.picScroll .next').show();jQuery('.picScroll .prev').show();}).mouseleave(function(){jQuery('.picScroll .next').hide();jQuery('.picScroll .prev').hide();});");
+  document.write("})");
+  document.write("</script>");
+  document.write("<div class='picScroll'>"); 
+  document.write("<ul>");
+  #foreach($adv_list in $CommUtil.toRowChildList($obj.advs,3))
+  #foreach($adv in $adv_list)
+  document.write("<li>");
+  document.write("<a href='$!webPath/advert_redirect.htm?url=$!adv.ad_url&id=$!adv.id' target='_blank'><span class='img_cspan'><p><img src='$!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name' width='$!obj.ap_width' height='$!obj.ap_width' /></p></span></a>");
+  document.write("</li>");
+  #end
+  #end
+  document.write("</ul>");
+  document.write("<a href='javascript:void(0);' class='next' style='display:none;'></a>");
+  document.write("<a href='javascript:void(0);' class='prev' style='display:none;'i></a>");
+  document.write("</div>");
+  #end
+#end
+#if($!obj.ap_type=="text")  
+  document.write("<div style='width='$!obj.ap_width';height='$!obj.ap_height';float:left;overflow:hidden;'>");
+  document.write("<a href='$!webPath/advert_redirect.htm?url=$!obj.ap_acc_url&id=$!obj.adv_id' target='_blank'>");
+  document.write("$!obj.ap_text");
+  document.write("</a>");
+  document.write("</div>"); 
+#end
+#if($!obj.ap_type=="bg_slide")
+  document.write("<script\/>");
+  document.write("jQuery('document').ready(function(){");  
+  document.write("jQuery('.top_mid_slide').slide({mainCell:'.top_mid_slider_ul',titCell:'.banner_top li',titOnClassName:'this',trigger:'mouseover',autoPlay:true});");
+  document.write("})");
+  document.write("</script>");
+   document.write("<div class='top_mid_slide'>");
+   document.write("<ul class='top_mid_slider_ul'>");
+   #foreach($adv in $obj.advs)
+   document.write(" <li class='top_mid_slider_ul_li'  style='background:url($!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name) no-repeat; background-position: 50% 0%;'><a style='height:485px; display:block;' href='$!webPath/advert_redirect.htm?url=$!adv.ad_url&id=$!adv.id'></a></li>");
+   #* document.write(" <li class='top_mid_slider_ul_li' ><div class='out'><div class='mid'><div class='in'><a style='display:block;' href='$!webPath/advert_redirect.htm?url=$!adv.ad_url&id=$!adv.id'><img src='$!webPath/$!adv.ad_acc.path/$!adv.ad_acc.name' /></a></div></div></div></li>");*#
+   #end
+   document.write("</ul>");
+   document.write("<div class='banner_top'>");
+   document.write("<ul>");
+	#foreach($adv in $obj.advs)
+   document.write("<li #if($!velocityCount==1) class='this' #end style='cursor:pointer;'></li>");
+    #end
+   document.write("</ul>");
+   document.write("</div>");
+   document.write("</div>");
+#end

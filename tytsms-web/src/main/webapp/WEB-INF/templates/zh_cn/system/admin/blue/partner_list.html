@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+</head>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<body>
+<div class="cont">
+  <h3 class="seth">合作伙伴</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/partner_list.htm"  class="this"><b>管理</b></a></li>
+        <li><a href="$!webPath/admin/partner_add.htm" ><b>新增</b></a></li>
+    </ul>
+  </div>
+  <form name="queryForm" id="queryForm" action="" method="post">
+  <div class="search">
+    
+    <span>标题</span> <span class="size250">
+        <input name="title" type="text" id="title" />
+        </span> <span class="btn_search">
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;"  class="search_btn" />
+        </span> 
+    
+  </div>
+  </form>
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="30">&nbsp;</th>
+        <th width="15%"><span class="form_btna">排序</span></th>
+        <th width="20%"><span class="form_btna">标题</span></th>
+        <th width="17%"><span class="form_btna">图片标识</span></th>
+        <th width="25%" ><span class="form_btna">链接</span></th>
+        <th  align="center"><b class="form_btnb">操作</b></th>
+      </tr>
+	  #foreach($obj in $objs)
+      <tr>
+        <td class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" style="border:none; width:16px; height:16px;"/></td>
+        <td align="center">
+          $!obj.sequence
+          </td>
+        <td align="center">$!obj.title</td>
+        <td align="center">#if($!obj.image)<img src="$!webPath/$!obj.image.path/$!obj.image.name" width="92" height="35" />#else 文字链接#end</td>
+        <td align="center">$!obj.url</td>
+        <td class="hui oprate_con" align="center">
+        	<a href="$!webPath/admin/partner_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">编辑</a> 
+            |<a href="javascript:void(0);" onclick="if(confirm('合作伙伴删除后不可恢复，是否继续删除?'))window.location.href='$!webPath/admin/partner_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="blue">删除</a>
+        </td>
+      </tr>
+	  #end
+    </table>
+  </div>
+  <div class="operate_bar">
+    <div class="fenye">$!gotoPageHTML
+    </div> 
+    <div class="oper_sp">
+    	<span class="oper_check">
+    		<input name="all" type="checkbox" id="all" value="" onclick="selectAll(this)" />全部
+        </span>
+        <span class="oper_del">
+        	<input name="" type="button" value="删除" style="cursor:pointer;" onclick="cmd('$!webPath/admin/partner_del.htm','currentPage=$!currentPage')"/>
+        </span>
+    </div>         
+ </div>
+</div>
+</body>
+</html>

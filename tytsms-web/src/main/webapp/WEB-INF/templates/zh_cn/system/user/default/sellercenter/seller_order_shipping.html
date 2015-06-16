@@ -1,0 +1,123 @@
+<link href="$!webPath/resources/style/common/css/overlay_blue.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/window.css" type="text/css" rel="stylesheet" />
+<script>
+jQuery(document).ready(function(){
+jQuery.validator.addMethod("verify",function(value,element){
+var re = /^[0-9a-zA-Z]*$/;
+        if(re.test(jQuery("#shipCode").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }
+});	
+jQuery("#theForm").validate({
+	   rules:{
+		   shipCode:{required:true,verify:true},
+		   ec_id:{required:true}
+		   },
+	   messages:{
+	       shipCode:{required:"单号不能为空",verify:"请正确填写单号"},
+		   ec_id:{required:"不能为空"}
+	   }
+	});
+});
+//bigen cty 修改时间2015-3-12 增加内容 
+jQuery("#seller_address").hide();
+jQuery("#consignee").hide();
+function checkradio(){
+   var item = jQuery("#order_type").is(':checked'); 
+   if(item){
+      jQuery("#seller_address").hide();
+      jQuery("#consignee").hide();
+   }else{
+      jQuery("#seller_address").show();
+      jQuery("#consignee").show();
+   }
+}
+function checkeSubimt(){
+   var item = jQuery("#order_type").is(':checked');
+   if(!item){
+	   var areaId = jQuery("#areaId").val();
+	   var area_id = jQuery("#area_id").val();
+	   if(areaId != area_id){
+	      jQuery("#theForm").submit();
+	   }else{
+	      alert("请选择正确的发货地!");
+	      return false;
+	   }
+   }else{
+	   jQuery("#theForm").submit();
+   }
+}
+//end
+</script>
+<form action="$!webPath/seller/order_shipping_save.htm" method="post" id="theForm">
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    <tr>
+      <td colspan="2" align="left" valign="top" >请输入您的物流信息</td>
+    </tr>
+    <tr>
+      <td width="100" align="right" valign="top">订单号：
+        <input name="id" type="hidden" id="id" value="$!obj.id" />
+      </td>
+      <td align="left">$!obj.order_id</td>
+    </tr>
+	#if($!physicalGoods=="true")
+	<!--bigen cty 修改时间2015-3-12 增加内容 -->
+	<input type="hidden" id="areaId" name="areaId" value="$!{consigneeid}">
+    <tr>
+      <td align="right" valign="top">发货类型：</td>
+      <td align="left"><label><input name="order_type" type="radio" id="order_type" checked="checked" onclick="checkradio();" size="30" value="1"/>国内 </label>&nbsp;&nbsp;
+      <label><input name="order_type" type="radio" id="order_type" onclick="checkradio();"  size="30" value="2"/>国际 </label></td>
+    </tr>
+    <tr id="seller_address">
+      <td align="right" valign="top">发货地：</td>
+      <td align="left">
+      <select name="area_id" id="area_id">
+     	 #foreach($area in $areas)
+            <option value="$!area.id" #if($!{area.id}==$!{areaId}) selected="selected"#end>$!area.areaName</option>
+         #end
+      </select></td>
+    </tr>
+    <tr id="consignee">
+      <td align="right" valign="top">收货地：</td>
+      <td align="left">$!consigneeName</td>
+    </tr>
+    <!--end -->
+    <tr>
+      <td align="right" valign="top">物流公司：</td>
+      <td align="left">
+      <select name="ec_id" id="ec_id">
+      #foreach($expressCompany in $expressCompanys)
+      <option value="$!expressCompany.id">$!expressCompany.company_name</option>
+      #end
+      </select></td>
+    </tr>
+    <tr>
+      <td align="right" valign="top">物流单号：</td>
+      <td align="left"><input name="shipCode" type="text" id="shipCode" size="30" /></td>
+    </tr>
+	#end
+	#foreach($dg in $deliveryGoods)<!--订单里面的虚拟商品-->
+	<tr>
+      <td align="right" valign="top">虚拟商品$!{velocityCount}：</td>
+      <td align="left">$!CommUtil.substring("$!dg.goods.goods_name",15) 数量：$!dg.count</td>
+    </tr>
+     <tr>
+      <td align="right" valign="top">虚拟商品说明：</td>
+      <td align="left"><textarea name="order_seller_intro" id="order_seller_intro" cols="35" rows="5"></textarea></td>
+    </tr>
+	#end
+    <tr>
+      <td align="right" valign="top">操作说明：</td>
+      <td align="left"><textarea name="state_info" id="state_info" cols="35" rows="5"></textarea></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><span class="inputbtn">
+        <input name="" type="button" value="提交" onclick="checkeSubimt();" style="cursor:pointer;" class="white_btn"/>
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      </span></td>
+    </tr>
+  </table>
+</form>

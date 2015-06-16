@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').attr("readonly","readonly").datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+});
+function ajax_update(id,fieldName,obj){
+   var val=jQuery(obj).val();
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/activity_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/th_th/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }      
+              }
+	    });
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">活动管理</h3>
+  <div class="nav_list">
+  	 <ul>
+      <li><a href="$!webPath/admin/activity_self.htm" class="this"><b>活动列表</b></a></li>
+      <li><a href="$!webPath/admin/activity_self_goods_list.htm" ><b>活动商品</b></a></li>
+     </ul>   
+  </div>
+  <form method="post" id="ListForm" action="$!webPath/admin/activity_self.htm">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="8%"><span class="form_btna">排序</span></th>
+        <th width="20%"><span class="form_btna">活动标题</span></th>
+        <th width="15%" ><span class="form_btna">横幅图片</span></th>
+        <th width="12%" align="center"><span class="form_btna">开始时间</span></th>
+        <th align="center" width="12%"><span class="form_btna">结束时间</span></th>
+        <th  align="center" width="10%"><span class="form_btna">状态</span></th>
+        <th   align="center"><span class="form_btna">操作</span></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr> 
+        <td  align="center"> $!obj.ac_sequence</td>
+        <td  align="center"> $!obj.ac_title</td>
+        <td align="center"><span class="tpborder"><img src="$!webPath/$!{obj.ac_acc.path}/$!{obj.ac_acc.name}" width="90" height="33" /></span></td>
+        <td align="center">$!CommUtil.formatShortDate($!obj.ac_begin_time)</td>
+        <td align="center">$!CommUtil.formatShortDate($!obj.ac_end_time)</td>
+        #if($!obj.ac_status==0)
+          #set($status="关闭")
+        #end
+        #if($!obj.ac_status==1)
+          #set($status="启动")
+        #end
+        <td align="center">$!status</td>
+        <td  align="center" class="hui oprate_con">
+        #if($!obj.ac_status==1)
+        <a href="$!webPath/admin/activity_self_apply.htm?id=$!obj.id" class="blue">参加活动</a>|
+        <a href="$!webPath/admin/activity_self_goods_list.htm?act_id=$!obj.id" class="blue">活动商品</a>
+        #end
+        </td>
+      </tr>
+      #end
+    </table>
+  </div>
+  <div class="operate_bar">
+    <div class="fenye">
+  	 <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+     $!gotoPageFormHTML
+    </div> 
+    <div class="shopbtn shopfx"><span class="oper_check"></span></div>
+    <div class="shop_btn_del shopbtn"><span class="oper_del"></span></div>
+             
+ </div>
+  </form>
+</div>
+</body>
+</html>

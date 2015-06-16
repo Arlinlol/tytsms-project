@@ -1,0 +1,53 @@
+﻿@charset "utf-8";
+/* CSS Document */
+h1, h2, h3, h4, h5, h6, pre, code, address, caption, cite, code, em, strong, table, th, td { font-style: normal; font-weight: normal;}
+button {border:1px}
+strong { font-weight: bold;}
+ul, ol { list-style: none outside none;}
+fieldset, img { border: medium none;}
+caption, th {  text-align: left;}
+table { border-collapse: collapse; border-spacing: 0;}
+
+
+.wapper{ height:100%; margin:0 auto;border:0 solid #000;position: relative;}
+.main_a{ display:block; width:100%;border:0px solid #000;}
+.main_a .title{ text-align:center; padding-top:8%; margin:0 auto;}
+.main_a .con{ text-align:center;}
+.content{ padding-top:2%;}
+.content .fm{ width:100%;}
+.fm_table{ margin:6% 7%;}
+.fm_table td{font-family: Tahoma;padding:4% 0;font-size:2em;height: 40px;}
+.fm_txt{text-align: left;float:left; margin-left:20px;}
+.fm_txt .text{font-family: Tahoma;width: 60%;background-color: #FFF;border: solid 1px;border-color: #d5d5d5;}
+.fm_txt .phone_code{font-family: Tahoma;width: 100%;background-color: #FFF;border: solid 1px;border-color: #d5d5d5;}
+.phone_code_btn{width: 100%;height:100%; color:orange; background:#fea92a;color:#fff;border:0px;background-image: url("../images/orange.jpg");}
+.register{padding-bottom:10%;}
+.register .register_btn{height:80px;font-size:2rem; color:#fff;text-align: center;width:80%;margin:3% 10%;border:0px;background-image: /*url("../images/orange.jpg");*/}
+table ,td{border:4px solid #ededed}
+
+.white_content {  display: none;  position: absolute;  top: 30%; left:4%; width:93%;   height: 40%;      background-color: white;z-index:1002;text-align:center;}
+
+.black_overlay{  display: none;  position: absolute;  top: 0%;  left: 0%;  width: 100%;  height:120%;  background-color: black;  z-index:1001;  -moz-opacity: 0.8;  opacity:.80;  filter: alpha(opacity=80);  }
+
+.cls{position:absolute; right:2%;top:1%;font-family:SimHei;}
+.cyhd_txt{margin-top:8% ;margin-left:auto;margin-right:auto; font-family: Tahoma; font-size:1.5rem;line-height:1.2rem;}
+.cyhd{font-family: Tahoma;margin-top:3%;}
+.cyhd_btn{font-size:2rem; color:#555; background:#fea92a;color:#fff;border:0px;padding:0.5rem;border-radius:0.2rem;background-image: url("../images/orange.jpg");}
+
+.register_div { margin:10% 2px; text-align:center;}
+.register_name { margin:5px 5px 20px; }
+
+a{ color:red; text-decoration:none;}
+.mobile_input{padding-left:10px;height:60px;width:65%;margin-left:10px; font-size:1.5rem;}
+.sms_input{padding-left:10px;height:60px;width:31%;margin-left:10px; font-size: 1.5rem;}
+.password_input{padding-left:10px;height:60px;width:65%;margin-left:10px; font-size: 1.5rem;}
+.repassword_input{padding-left:10px;height:60px;width:65%;margin-left:10px; font-size: 1.5rem;}
+.register_submit{border-radius:6px;width:81%;text-align:center;margin:10% 10% 30px;background-color:#FBAE23;height:70px;font-size:2rem;line-height:70px;}
+.send_sms_lk{display:inline-block;width:34%;padding-bottom:10px;padding-top:10px;}
+
+.bt{ background-color:#BB5517; border-radius:10px; line-height:80px;}
+a:hover{ color:orange; text-decoration:underline;}
+.input_div{ border-radius:8px; margin:2% 10%; background-color:#FFFFFF;}
+.login_span{font-size:2rem;width:20%;}
+.login_input{margin-left:5%;font-size:2rem;height:80px;width:60%;border:none;}
+

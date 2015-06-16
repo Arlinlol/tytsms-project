@@ -1,0 +1,116 @@
+﻿#foreach($obj in $orders)
+<table cellpadding="0" cellspacing="0" border="0">
+<tbody>
+<tr>
+<td width="30%" class="im_dt">订单状态：</td>
+#if($!obj.order_status==0)
+#set($status="已取消")
+#end
+
+#if($!obj.order_status==10)
+#set($status="待付款")
+#end
+
+#if($!obj.order_status==15)
+#set($status="线下支付待审核")
+#end
+
+#if($!obj.order_status==16)
+#set($status="货到付款待发货")
+#end
+
+#if($!obj.order_status==20)
+#set($status="已付款")
+#end
+
+#if($!obj.order_status==30)
+#set($status="已发货")        
+#end 
+
+#if($!obj.order_status==40)
+#set($status="已收货")
+#end
+
+#if($!obj.order_status==50)
+#set($status="已完成,已评价")                                              
+#end
+
+#if($!obj.order_status==60)
+#set($status="已结束")                                              
+#end 
+
+#if($!obj.order_status==65)
+#set($status="已结束，不可评价")                                              
+#end
+<td class="im_dd">$!{status}</td>
+</tr>
+<tr>
+<td class="im_dt">订单编号：</td>
+<td class="im_dd">$!obj.order_id</td>
+</tr>
+#if($!obj.order_cat==0)
+<tr>
+<td class="im_dt">下单商品：</td>
+<td class="im_dd"><ul class="im_order_goods">
+#foreach($map in $!orderformTools.queryGoodsInfo("$!obj.goods_info"))
+#set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+#set($img="$!webPath/$!{goods_mainphoto_path}")
+#set($goods_count = "$!{map.get('goods_count')}")
+#set($goods_price = "$!{map.get('goods_price')}")
+#set($goods_gsp_val = "$!{map.get('goods_gsp_val')}")
+<li><img src="$!img" width="50" height="50" /></li>
+#end	
+</ul></td>
+</tr>
+<tr>
+<td class="im_dt">商品单价：</td>
+<td class="im_dd">$!goods_price （元）</td>
+</tr>
+<tr>
+<td class="im_dt">下单数量：</td>
+<td class="im_dd">$!goods_count</td>
+</tr>
+<tr>
+<td class="im_dt">订单运费：</td>
+<td class="im_dd">$!obj.ship_price （元）</td>
+</tr>
+<tr>
+<td class="im_dt">订单总价：</td>
+#set($map=$!orderformTools.queryCouponInfo("$!obj.coupon_info"))
+<td class="im_dd">$!obj.totalPrice（元）#if($!obj.coupon_info!="")使用优惠券抵消$!{map.get('coupon_amount')} 元】 #end</td>
+</tr>
+#end
+#if($!obj.order_cat==2)
+<tr>
+<td class="im_dt">下单商品：</td>
+<td class="im_dd"><ul class="im_order_goods">
+#set($map=$!orderformTools.queryGroupInfo("$!obj.group_info"))
+#set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+#set($img="$!webPath/$!{goods_mainphoto_path}")
+#set($goods_count = "$!{map.get('goods_count')}")
+#set($goods_price = "$!{map.get('goods_price')}")
+#set($goods_name = "$!{map.get('goods_name')}")
+<li><img src="$!img" width="50" height="50" /></li>	
+</ul></td>
+</tr>
+<tr>
+<td class="im_dt">商品名称：</td>
+<td class="im_dd">$!goods_name</td>
+</tr>
+<tr>
+<td class="im_dt">商品单价：</td>
+<td class="im_dd">$!goods_price （元）</td>
+</tr>
+<tr>
+<td class="im_dt">下单数量：</td>
+<td class="im_dd">$!goods_count</td>
+</tr>
+<tr>
+<td class="im_dt">订单总价：</td>
+#set($map=$!orderformTools.queryCouponInfo("$!obj.coupon_info"))
+<td class="im_dd">$!obj.totalPrice（元）#if($!obj.coupon_info!="")使用优惠券抵消$!{map.get('coupon_amount')} 元】 #end</td>
+</tr>
+#end
+</tbody>
+</table>
+#end

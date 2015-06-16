@@ -1,0 +1,180 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>手机号码修改-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function() {
+	
+	jQuery.validator.setDefaults({         
+	    submitHandler: function(form) {      
+	        form.submit();      
+	    }         
+	});  
+
+    jQuery("#theForm").validate({
+        rules: {
+            mobile: {required: true},
+            mobile_verify_code: { required: true}
+        },
+        messages: {
+            mobile: {
+                required: "手机号码不能为空"
+            },
+            mobile_verify_code: {
+                required: "验证码不能为空"
+            }
+        },
+        /**//* 设置验证触发事件 */    
+        focusInvalid: false,     
+        onkeyup: false,   
+    });
+    
+    
+    jQuery(".user_menu b").toggle(function() {
+        jQuery(this).siblings().hide();
+        jQuery(this).find("i").removeClass("active");
+    },
+    function() {
+        jQuery(this).siblings().show();
+        jQuery(this).find("i").addClass("active");
+    });
+
+});
+
+
+function saveForm(){
+    jQuery("#theForm").submit();
+}
+
+			var time=60;
+			var time_id="";
+				
+			function generic_mobile_verify_code() {
+			    var mobile = jQuery("#mobile").val();
+			   
+			    if (mobile.length!=11 || !isMobil(mobile)) {
+			    	
+			        showDialog("msg_info","","请正确填写您的手机号码！",3,"warning","","");
+			        return;
+			    }
+			    //验证手机号码是否绑定
+			    jQuery.ajax({
+			        type: "POST",
+			        url: "$!webPath/verify_mobile.htm",
+			        data: {
+			            "mobile": mobile,
+			            "id": "$!user.id"
+			        },
+			        success: function(msg) {
+			            if (msg =='true') {
+			                 jQuery.post("$!webPath/buyer/account_mobile_sms.htm", {
+			                    "type": "mobile_vetify_code",
+			                    "mobile": mobile
+			                },
+			                function(data) {
+			                    if (data == "100") {
+			                        jQuery("#mobile_verify_code_generic").hide();
+			                        time_id = setInterval(countDown, 1000);
+			                    }
+			                    if (data == "200") {
+			                        showDialog("msg_info","","短信发送失败！",3,"warning","","");
+			                    }
+			                    if (data == "300") {
+			                        showDialog("msg_info","","商城未开启短信服务！",3,"warning","","");
+			                    }
+			                },
+			                "text"); 
+			            }else{
+			            	 showDialog("msg_info","","该手机号码已经绑定！",3,"warning","","");
+			            }
+			        }
+			    });
+			}
+			
+		   function countDown(){
+		     --time;
+			 jQuery("#time_out_generic").html(time+"秒后可以重新获取,验证码15分钟有效");
+			 if(time==0){
+			   clearInterval(time_id);
+			   jQuery("#time_out_generic").html("");
+			   jQuery("#mobile_verify_code_generic").show();
+               time=10;
+			 }
+		   }
+		   
+		   function isMobil(s) {
+	             var patrn = /(^0{0,1}1[3|4|5|6|7|8|9][0-9]{9}$)/;
+	             if (!patrn.exec(s)) {
+	                 return false;
+	             }
+	             return true;
+	            } 
+	
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=account")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>账户信息</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li><i></i><a href="$!webPath/buyer/account.htm">基本信息</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_password.htm">修改密码</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_email.htm">修改电子邮箱</a></li>
+            <li class="this"><i></i><a href="$!webPath/buyer/account_mobile.htm">修改手机号码</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_avatar.htm">修改头像</a></li>
+          </ul>
+        </div>       
+        <div class="add_usercenter">      
+             <form action="$!webPath/buyer/account_mobile_save.htm" method="post" name="theForm" id="theForm">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_base_table">
+            <tr>
+              <td width="170" align="right"><strong class="redstr"></strong>新手机号码：</td>
+              <td><span style="color:#F00"> <input name="mobile" type="text" id="mobile" class="base_txt"/></span><span id="time_out_generic"></span></td>
+            </tr>
+            <tr>
+            <td></td>
+            <td><a href="javascript:void(0);" onclick="generic_mobile_verify_code();" id="mobile_verify_code_generic" class="get_code_generic">获取验证码</a></td>
+            </tr>
+            <tr>
+              <td align="right">手机验证码：</td>
+              <td><span style="color:#F00"><input name="mobile_verify_code" type="text" id="mobile_verify_code" class="base_txt_code"/></span>
+                </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><input name="button" type="button" value="保存" class="save" onclick="saveForm()" /></td>
+            </tr> 
+          </table>
+            </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

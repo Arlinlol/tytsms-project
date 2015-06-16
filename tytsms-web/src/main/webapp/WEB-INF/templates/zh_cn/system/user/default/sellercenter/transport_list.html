@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-物流模板列表-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+  <div class="seller_center_left">
+  $!httpInclude.include("/seller/nav.htm?op=transport")    
+  </div>
+  <div class="seller_right">
+    <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>交易管理</b>><b>运费模板</b></span></div>
+    <div class="seller_list">
+      <div class="seller_list_title">
+        <ul class="seller_title_ul">
+          <li class="this"><a href="javascript:void(0);"><i></i>运费模板</a></li>
+          <li><a href="$!webPath/seller/transport_add.htm"><i></i>添加模板</a></li>
+        </ul>
+      </div>
+      <div class="user_list_box">
+        <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/transport_list.htm">
+          <div class="operation"> #foreach($obj in $objs)
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_order_table" >
+              <tr>
+                <td >$!{obj.trans_name} <span style="float:right;">最后编辑时间:$!CommUtil.formatLongDate($!obj.addTime) <a href="$!webPath/seller/transport_copy.htm?id=$!obj.id">复制模板</a>|<a href="$!webPath/seller/transport_edit.htm?id=$!obj.id">编辑</a>|<a href="javascript:void(0);" onclick="if(confirm('删除后不可恢复，是否继续?'))window.location.href='$!webPath/seller/transport_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'">删除</a></span></td>
+              </tr>
+            </table>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_order_table" >
+              #if($!obj.trans_type==0)
+              <tr id="opertitle">
+                <td width="12%" >配送方式</td>
+                <td>配送区域</td>
+                <td width="8%">首件(件)</td>
+                <td width="8%">运费(¥)</td>
+                <td width="8%" align="center">续件(件)</td>
+                <td width="8%" align="center">运费(¥)</td>
+              </tr>
+              #end
+              #if($!obj.trans_type==1)
+              <tr id="opertitle">
+                <td width="12%">配送方式</td>
+                <td>配送区域</td>
+                <td width="8%">首重(kg)</td>
+                <td width="8%">运费(¥)</td>
+                <td width="8%" align="center">续重(kg)</td>
+                <td width="8%" align="center">运费(¥)</td>
+              </tr>
+              #end
+              #if($!obj.trans_type==2)
+              <tr id="opertitle">
+                <td width="12%" >配送方式</td>
+                <td>配送区域</td>
+                <td width="8%">首体积(m³)</td>
+                <td width="8%">运费(¥)</td>
+                <td width="8%" align="center">续体积(m³)</td>
+                <td width="8%" align="center">运费(¥)</td>
+              </tr>
+              #end
+              #foreach($info in $transportTools.query_all_transprot("$!obj.trans_mail_info",0))
+              <tr>
+                <td>平邮</td>
+                <td>$!info.value("city_name")</td>
+                <td>$!info.value("trans_weight")</td>
+                <td>$!info.value("trans_fee")</td>
+                <td>$!info.value("trans_add_weight")</td>
+                <td>$!info.value("trans_add_fee")</td>
+              </tr>
+              #end
+              #foreach($info in $transportTools.query_all_transprot("$!obj.trans_express_info",0))
+              <tr>
+                <td>快递</td>
+                <td>$!info.value("city_name")</td>
+                <td>$!info.value("trans_weight")</td>
+                <td>$!info.value("trans_fee")</td>
+                <td>$!info.value("trans_add_weight")</td>
+                <td>$!info.value("trans_add_fee")</td>
+              </tr>
+              #end
+              #foreach($info in $transportTools.query_all_transprot("$!obj.trans_ems_info",0))
+              <tr>
+                <td>EMS</td>
+                <td>$!info.value("city_name")</td>
+                <td>$!info.value("trans_weight")</td>
+                <td>$!info.value("trans_fee")</td>
+                <td>$!info.value("trans_add_weight")</td>
+                <td>$!info.value("trans_add_fee")</td>
+              </tr>
+              #end
+            </table>
+            #end </div>
+          <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+          <div class="seller_list_page">
+            <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>  </div>
+  </div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

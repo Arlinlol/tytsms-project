@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessageText('member.account_bind.bind_account','')-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type=text/css rel=stylesheet />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+#if("$!error"=="true")
+<script>
+jQuery(document).ready(function(e) {
+	showDialog("msg_info","","#springMessageText('member.account_bind.bind_failure','')",3,"warning","","");
+});
+
+</script>
+#end
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=account_bind")
+    <div class="usercenter_right">
+      <div class="bound">
+      	#if($!user.qq_openid)
+        <div class="bound_box">
+          <h1>#springMessageText('member.account_bind.is_bind','')</h1>
+          <div class="bound_QQ">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/bound.jpg" /></span> <span class="QQ_pic_r"> <em>#springMessageText('member.account_bind.successfully_binding','')</em> <b class="QQ_btn"><a href="javascript:void(0);" onclick="if(confirm('#springMessageText('member.account_bind.relieve_bind','')'))window.location.href='$!webPath/buyer/account_bind_cancel.htm?account=qq'">#springMessageText('member.account_bind.unbundling','')</a></b> </span> </div>
+            <div class="bound_QQ_right"> <span class="bound_sq"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/sq.jpg" /></span> <span class="bound_acc"> <b>#springMessageText('member.account_bind.account_authorization','')</b>
+              <p class="acc_p">#springMessageText('member.account_bind.account_relationship_binding','')</p>
+              <p class="acc_m">#springMessageText('member.account_bind.account_emailx','')</p>
+              </span> </div>
+          </div>
+        </div>
+        #end
+        #if($!user.sina_openid)
+        <div class="bound_box">
+          <h1>#springMessageText('member.account_bind.is_bind','')</h1>
+          <div class="bound_QQ">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/sina.jpg" /></span> <span class="QQ_pic_r"> <em>#springMessageText('member.account_bind.successfully_binding','')</em> <b class="QQ_btn"><a href="javascript:void(0);" onclick="if(confirm('#springMessageText('member.account_bind.in_commission','')'))window.location.href='$!webPath/buyer/account_bind_cancel.htm?account=sina'">#springMessageText('member.account_bind.unbundling','')</a></b> </span> </div>
+            <div class="bound_QQ_right"> <span class="bound_sq"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/sq.jpg" /></span> <span class="bound_acc"> <b>#springMessageText('member.account_bind.account_authorization','')</b>
+              <p class="acc_p">#springMessageText('member.account_bind.account_relationship_binding','')</p>
+              <p class="acc_m">#springMessageText('member.account_bind.in_commission_sina','')</p>
+              </span> </div>
+          </div>
+        </div>
+        #end
+        #if($!config.qq_login)
+        #if(!$!user.qq_openid)
+        <div class="bound_box">
+          <h1>#springMessageText('member.account_bind.unbound','')</h1>
+          <div class="bound_sina">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter//bound.jpg" /></span> <span class="QQ_pic_r"> <em>#springMessageText('member.account_bind.account_relationship_binding','')</em> <em>#springMessageText('member.account_bind.binding_success','')</em></span> </div>
+            <div class="bound_sina_right"> <a href="$!webPath/qq_login_api.htm">#springMessageText('member.account_bind.promptly_bind','')</a> </div>
+          </div>
+        </div>
+        #end
+        #else
+        <div class="bound_box">
+          <h1>#springMessageText('member.account_bind.not_open','')</h1>
+          <div class="bound_sina">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter//bound.jpg" /></span>  </div>
+          </div>
+        </div>
+        #end
+        #if($!config.sina_login)
+        #if(!$!user.sina_openid)
+        <div class="bound_box" style="border-top:none;">
+          <h1>#springMessageText('member.account_bind.unbound','')</h1>
+          <div class="bound_sina">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter//sina.jpg" /></span> <span class="QQ_pic_r"> <em>#springMessageText('member.account_bind.account_relationship_binding','')</em> <em>#springMessageText('member.account_bind.binding_success_commission','')</em></span> </div>
+            <div class="bound_sina_right"> <a href="$!webPath/sina_login_api.htm">#springMessageText('member.account_bind.promptly_bind','')</a> </div>
+          </div>
+        </div>
+        #end 
+        #else
+        <div class="bound_box" style="border-top:none;">
+          <h1>#springMessageText('member.account_bind.not_open','')</h1>
+          <div class="bound_sina">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter//sina.jpg" /></span>  </div>
+            
+          </div>
+        </div>
+        #end
+        </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

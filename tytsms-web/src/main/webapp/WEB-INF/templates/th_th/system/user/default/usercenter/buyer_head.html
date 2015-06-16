@@ -1,0 +1,94 @@
+﻿<script>
+jQuery(document).ready(function(){
+  jQuery(".users_menu>li>em>a").mouseover(function(){
+    jQuery(".users_menu>li").removeClass();												
+	jQuery(this).parent().parent().addClass("hover_use");	
+	jQuery("div[class=users_navh]").hide();	
+    jQuery(this).parent().parent().find("div[class=users_navh]").show(); 
+  })
+  jQuery(".users_menu>li").mouseleave(function(){
+    jQuery("div[class=users_navh]").hide();																	 
+	 jQuery(".users_menu>li").removeClass();
+  });
+  jQuery("#search_type").mouseover(function(){
+    var clz=jQuery(this).attr("class");
+	if(clz=="sear_type"){
+	  jQuery(this).attr("class","sear_type active");
+	}
+	jQuery(this).find("ul li").show();	
+  }).mouseleave(function(){
+     jQuery(this).attr("class","sear_type");
+	 jQuery(this).find("ul li").hide();
+	  jQuery(this).find("ul li:first").show();
+  });
+
+  jQuery(".sear_type").find("ul li").click(function(){
+		var type =jQuery(this).attr("type");
+		jQuery("#type").val(type);
+		var ht =jQuery(this).find("a").html();
+		jQuery(this).parent().find("li:first").html(ht);
+		jQuery(this).parent().find("li").hide();
+		jQuery(this).parent().find("li:first").show();
+		 });
+  
+  jQuery(".user_ser_btn").click(function(){
+		var type =jQuery("#type").val();
+		if(type==""){
+			jQuery("#type").val("goods");
+			}
+		jQuery("#SearchForm").submit();													   
+		});
+});
+</script>
+<form action="$!webPath/search.htm" method="post" id="SearchForm">
+<input name="type" type="hidden" id="type" value="goods" />
+<div class="head">
+  <div class="logo"> #if($!config.websiteLogo) <a href="$!webPath/index.htm"><img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" /></a>#else<a href="$!webPath/index.htm"><img src="$!imageWebServer/th_th/resources/style/system/front/default/images/logo.png"  border="0" /></a>#end  </div>
+  <div class="usersearch">
+    <ul class="users_menu">
+      <li class="this"><em><a href="$!webPath/buyer/index.htm">#springMessage('member.buyer_head.buyer_home')</a></em></li>
+      <li ><em><a href="$!webPath/buyer/homepage.htm" target="_blank">#springMessage('member.buyer_head.personal_homepage')</a></em></li>
+      <!--hover_use经过下拉样式class="hover_use"-->
+      <li><em><a href="$!webPath/buyer/friend.htm">#springMessage('member.buyer_head.friend')<s></s></a></em>
+        <div class="users_navh" style="display:none;">
+          <div class="users_navh_box"><span>
+           <a href="$!webPath/buyer/friend_add.htm" target="_blank">#springMessage('member.buyer_head.someone')</a>
+          </span><span><a href="$!webPath/buyer/homepage/myattention.htm" target="_blank">#springMessage('member.buyer_head.attention')</a>
+          </span><span><a href="$!webPath/buyer/homepage/myfans.htm" target="_blank">#springMessage('member.buyer_head.fans')</a>
+          </span></div>
+        </div>
+      </li>
+      <li><em><a href="javascript:void(0);">#springMessage('member.buyer_head.transaction')<s></s></a></em>
+        <div class="users_navh" style="display:none">
+          <div class="users_navh_box"><span><a href="$!webPath/goods_cart1.htm">#springMessage('member.buyer_head.my_cart')</a></span> <span><a href="$!webPath/buyer/order.htm">#springMessage('member.buyer_head.have_buy_goods')</a></span> <span><a href="$!webPath/buyer/favorite_goods.htm">#springMessage('member.buyer_head.my_favorite')</a></span> <span><a href="$!webPath/buyer/complaint.htm">#springMessage('member.buyer_head.complaint_manage')</a></span></div>
+        </div>
+      </li>
+      <li><em><a href="javascript:void(0);">#springMessage('member.buyer_head.setting')<s></s></a></em>
+        <div class="users_navh" style="display:none">
+          <div class="users_navh_box"><span><a href="$!webPath/buyer/account.htm">#springMessage('member.buyer_head.personal_data')</a></span> <span><a href="$!webPath/buyer/address.htm">#springMessage('member.buyer_head.delivery_address')</a></span> </div>
+        </div>
+      </li>
+      <li><em><a href="javascript:void(0);">#springMessage('member.buyer_head.information')<s></s></a></em>
+        <div class="users_navh" style="display:none">
+          <div class="users_navh_box"> <span><a href="$!webPath/buyer/message.htm?type=0">#springMessage('member.buyer_head.system_information')</a></span><span><a href="$!webPath/buyer/message.htm">#springMessage('member.buyer_head.direct_messages')</a></span></div>
+        </div>
+      </li>
+    </ul>
+    <div class="user_ser">
+      <!--展开时加active-->
+      <div class="sear_type" id="search_type">
+        <ul>
+          <li><a href="javascript:void(0);">#springMessage('member.buyer_head.goods')</a></li>
+          <li type="goods" style="display:none" ><a href="javascript:void(0);">#springMessage('member.buyer_head.goods')</a></li>
+          <li type="store" style="display:none"><a href="javascript:void(0);">#springMessage('member.buyer_head.store')</a></li>
+        </ul>
+        <s></s></div>
+        
+      <div class="user_ser_box">
+        <input name="keyword" type="text" class="user_ser_txt" placeholder=" #springMessage('member.buyer_head.search_very_simple')！" id="keyword" x-webkit-speech lang="zh-CN" onwebkitspeechchange="jQuery('#SearchForm').submit()"/>
+        <input name="" type="button" class="user_ser_btn" style="cursor:pointer;" />
+      </div>
+    </div>
+  </div>
+</div>
+</form>

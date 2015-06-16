@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/aop
+         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+         http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+         http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context-3.0.xsd
+         http://www.springframework.org/schema/cache 
+         http://www.springframework.org/schema/cache/spring-cache.xsd">
+	<!-- 引入安全配置文件 -->
+	<import resource="applicationContext-security.xml" />
+	<!-- 配置事务管理器 -->
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 启用支持Annotation注解方式的事务管理 -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	<!-- 把标记了@Controller等注解的类转换为bean -->
+	<context:component-scan base-package="com.iskyshop" />
+	<context:component-scan base-package="com.taiyitao" />
+
+	<aop:config>
+		<aop:aspect id="catchLogin" ref="userIpService">
+			<aop:pointcut id="target"
+				expression="execution(* com.iskyshop.manage.admin.action.BaseManageAction.login_success(..))" />
+			<aop:before method="catchLoginInfo" pointcut-ref="target" />
+		</aop:aspect>
+	</aop:config>
+
+	<aop:config>
+		<aop:aspect id="catchRegister" ref="inviteRegisterAspect">
+			<aop:pointcut id="target1"
+				expression="execution(* com.iskyshop.view.web.action.LoginViewAction.register(..))" />
+			<aop:before method="doBefore" pointcut-ref="target1" />
+		</aop:aspect>
+	</aop:config>
+
+	<aop:config>
+		<aop:aspect id="catchAfterReg" ref="inviteRegisterAspect">
+			<aop:pointcut id="target2"
+				expression="execution(* com.iskyshop.view.web.action.LoginViewAction.register_finish(..))" />
+			<aop:after method="doAfterRegister" pointcut-ref="target2" />
+		</aop:aspect>
+	</aop:config>
+
+	<!-- 启动Spring MVC的注解功能，完成请求和注解POJO的映射 <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" 
+		/> -->
+	<!--文件上传设置 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize">
+			<value>10485760</value><!-- 文件上传最大为10M -->
+		</property>
+		<property name="maxInMemorySize" value="4096" />
+	</bean>
+	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
+	<bean id="velocityCongfig"
+		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath">
+			<value>/</value>
+		</property>
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.velocity.VelocityView" />
+		<property name="contentType">
+			<value>text/html;charset=UTF-8</value>
+		</property>
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>classpath:i18n/${i18n.language}/sms</value>
+				<value>classpath:i18n/${i18n.language}/member</value>
+				<value>classpath:i18n/${i18n.language}/oss</value>
+				<value>classpath:i18n/${i18n.language}/seller</value>
+				<value>classpath:i18n/${i18n.language}/inner</value>
+			</list>
+		</property>
+		<property name="cacheSeconds" value="3000" />
+	</bean>
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="defaultLocale" value="${i18n.language}" />
+	</bean>
+
+	<!-- property-placeholder是一个属性遍历器，定位一个属性文件，属性文件存放的是jdbc一些连接数据 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<!--配置velocity engine默认路径 -->
+	<bean id="velocityEngine"
+		class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+		<property name="resourceLoaderPath" value="/velocity/"></property>
+	</bean>
+	<!-- 配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="maxIdle" value="${maxIdle}" />
+		<property name="minIdle" value="${minIdle}" />
+	</bean>
+	<bean name="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		${spring.packagesToScan}
+		<property name="persistenceXmlLocation" value="classpath:persistence.xml" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="database" value="MYSQL" />
+				<property name="showSql" value="false" />
+				<!-- <property name="generateDdl" value="true" /> -->
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<!-- 二级缓存配置 -->
+				<prop key="hibernate.cache.provider_class">
+					net.sf.ehcache.hibernate.SingletonEhCacheProvider
+				</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">
+					true
+				</prop>
+				<prop key="hibernate.use_sql_comments">false</prop>
+				<prop key="hibernate.format_sql">false</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
+				<!-- <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+			</props>
+		</property>
+	</bean>
+	<!-- 定义了与实体相关的dao -->
+	<bean id="genericEntityDao" class="com.iskyshop.core.base.GenericEntityDao"
+		scope="singleton" lazy-init="false">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<!--使用泛型DAO作为抽象基类 abstract="true" -->
+	<bean id="genericDAO" class="com.iskyshop.core.base.GenericDAO"
+		abstract="true" depends-on="genericEntityDao">
+		<property name="geDao">
+			<ref bean="genericEntityDao" />
+		</property>
+	</bean>
+	<!-- 系统调度控制器 -->
+	<!-- <bean id="statTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		调用的类
+		<property name="targetObject" ref="shop_stat" />
+		调用类中的方法
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean> -->
+	
+	<bean id="statTask" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.taiyitao.quartz.JobDetailBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="shop_stat"></entry>
+				<entry key="targetMethod" value="execute"></entry>
+				<entry key="concurrent" value="false"></entry>
+				<entry key="emf" value-ref="entityManagerFactory"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="stat_cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="statTask" />
+		<property name="cronExpression" value="0 0/30 * * * ?" />
+	</bean>
+	
+	<!-- <bean id="jobTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		调用的类
+		<property name="targetObject" ref="shop_job" />
+		调用类中的方法
+		<property name="targetMethod" value="execute" />
+		<property name="concurrent" value="false" />
+	</bean> -->
+	
+	<bean id="jobTask" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.taiyitao.quartz.JobDetailBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="shop_job"></entry>
+				<entry key="targetMethod" value="execute"></entry>
+				<entry key="concurrent" value="false"></entry>
+				<entry key="emf" value-ref="entityManagerFactory"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean id="job_cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="jobTask" />
+		<property name="cronExpression" value="1 0 0 * * ?" />
+	</bean>
+	<bean id="schdulerFactory" lazy-init="false"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="stat_cronTrigger" />
+				<ref bean="job_cronTrigger" />
+			</list>
+		</property>
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+		${cluster.switch}
+	</bean>
+ 	<bean id="genHomePageSchdulerFactory" lazy-init="false"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="genHomePageTask_cronTrigger" />
+			</list>
+		</property>
+		<property name="applicationContextSchedulerContextKey" value="applicationContext" />
+	</bean> 
+
+	<bean id="generateHomePageJob" class="com.taiyitao.quartz.job.GenerateHomePageJob" />
+
+	<bean id="genHomePageTask" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>com.taiyitao.quartz.JobDetailBean</value>
+		</property>
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="targetObject" value="generateHomePageJob"></entry>	
+				<entry key="targetMethod" value="schedulHTML"></entry>
+				<entry key="concurrent" value="false"></entry>
+				<entry key="emf" value-ref="entityManagerFactory"></entry>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="genHomePageTask_cronTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail" ref="genHomePageTask"/>
+		<property name="startDelay" value="3000" />
+		<property name="repeatInterval" value="600000"/>
+	</bean>
+	<bean class="com.taiyitao.core.web.utils.InstantiationTracingBeanPostProcessor"/>
+</beans>

@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-导航新增-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script charset="utf-8" src="$!webPath/resources/editor/kindeditor.js"></script>
+<script charset="utf-8" src="$!webPath/resources/editor/lang/zh_CN.js"></script>
+<script>
+ jQuery(document).ready(function(){
+	var options = {
+        cssPath : '$!webPath/resources/editor/themes/default/default.css',
+        filterMode : true,
+		uploadJson:'$!webPath/upload.htm',
+		width : '700px',
+		height:'400px'
+    };
+	var editor = KindEditor.create('#content',options); 
+	//
+	jQuery("#theForm").validate({
+		errorPlacement: function(error, element) {  
+   			 error.appendTo(element.parent());  
+		},
+        rules:{
+	  	  title:{required :true}
+	  	 },
+	    messages:{
+	  	  title:{required:"标题不能为空"}
+	  	}
+     });
+	//
+	jQuery(":radio[value=$!obj.display]").attr("checked",true);
+	jQuery(":radio[value='$!obj.win_type']").attr("checked",true);
+ });
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    <div class="seller_center_left"> $!httpInclude.include("/seller/nav.htm?op=store_nav") </div>
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>我的店铺</b>><b>新增导航</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href="$!webPath/seller/store_nav.htm"><i></i>导航列表</a></li>
+            <li #if(!$!edit)class="this"#end><a href='$!webPath/seller/store_nav_add.htm'><i></i>新增导航</a></li>
+            #if($!edit)
+            <li class="this"><a href='$!webPath/seller/store_nav_edit.htm?id=$!obj.id'><i></i>编辑导航</a></li>
+            #end
+          </ul>
+        </div>
+        <div class="add_usercenter">
+          <form action="$!webPath/seller/store_nav_save.htm" method="post" name="theForm" id="theForm">
+            <input name="id" type="hidden" id="id"  value="$!obj.id"/>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+              <tr>
+                <td width="195" align="right"><strong class="redstr">*</strong>导航名称：</td>
+                <td width="510"><input name="title" type="text" id="title" value="$!obj.title" class="base_txt"/></td>
+              </tr>
+              <tr>
+                <td align="right">导航序号：</td>
+                <td><input name="sequence" type="text" id="sequence" value="$!obj.sequence" class="base_txt"/>
+                  <i class="base_i">序号越小越靠前</i></td>
+              </tr>
+              <tr>
+                <td align="right">导航URL：</td>
+                <td ><input name="url" type="text" id="url" value="$!obj.url" class="base_txt"/>
+                  <i class="base_i"> URL需要带http://,输入URL后导航内容不显示</i></td>
+              </tr>
+              <tr>
+                <td align="right">是否显示：</td>
+                <td><label>
+                    <input name="display" type="radio" id="display" value="true" checked="checked"  />
+                    是 </label>
+                  <label>
+                    <input type="radio" name="display" id="display" value="false" />
+                    否 </label></td>
+              </tr>
+              <tr>
+                <td align="right">打开方式：</td>
+                <td><label>
+                    <input name="win_type" type="radio" id="win_type"  value="cur_win" checked="checked"  />
+                    本页面 </label>
+                  <label>
+                    <input type="radio" name="win_type" id="win_type" value="new_win"/>
+                    新窗口 </label></td>
+              </tr>
+              <tr>
+                <td align="right" valign="top">导航内容：</td>
+                <td><textarea name="content" id="content" class="base_text">$!obj.content</textarea></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td class="px10"><span class="setsub">
+                  <input type="submit"  value="保存" style="cursor:pointer;" class="seller_save"/>
+                  </span></td>
+              </tr>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

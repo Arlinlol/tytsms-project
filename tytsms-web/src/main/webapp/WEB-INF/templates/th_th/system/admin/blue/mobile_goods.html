@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script>
+function ajax_update(id,fieldName,obj,value){
+		jQuery.post("$!webPath/admin/mobile_goods_ajax.htm",{
+					"id":id,
+					"fieldName":fieldName
+					},function(data){
+					jQuery(obj).attr("src","$!webPath/th_th/resources/style/system/manage/blue/images/"+data+".png");	
+						},"text");
+}
+jQuery(document).ready(function(){
+#if($!query_type)
+jQuery("#query_type").val("$!query_type");
+#end
+});
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">手机商品管理</h1>
+  <div class="nav_list">
+    <ul>
+      <li><a href="javascript:void(0);" class="this"><b>手机商品管理</b></a></li>
+    </ul>
+  </div>
+  <form name="ListForm" id="ListForm" action="" method="post">
+    <div class="search">
+      <ul>
+        <li> <span>商品名称</span> <span class="size150">
+          <input name="goods_name" type="text" id="goods_name"  value="$!goods_name" />
+          </span> <span>查询条件</span><span>
+          <select name="query_type" id="query_type">
+            <option value="">查询条件</option>
+            <option value="0">商城热卖</option>
+            <option value="1">商城推荐</option>
+          </select>
+          </span> <span>
+          <input name="" type="submit"  value="搜索" style="cursor:pointer;"  class="search_btn"/>
+          </span> </li>
+      </ul>
+    </div>
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="30"></th>
+          <th width="35%"><span class="form_btna">商品名称</span></th>
+          <th width="20%"><span class="form_btna">所在店铺</span></th>
+          <th width="8%" align="center"><span class="form_btna">查看次数</span></th>
+          <th width="8%" align="center"><span class="form_btna">商城热卖</span></th>
+          <th width="8%" align="center"><span class="form_btna">商城推荐</span></th>
+          <th align="center"><span class="form_btna">操作</span></th>
+        </tr>
+        #foreach($obj in $objs)
+        #set($img="$!webPath/$!config.goodsImage.path/$!config.goodsImage.name")
+        #if($!obj.goods_main_photo)
+        #set($big="$!webPath/$!obj.goods_main_photo.path/$!obj.goods_main_photo.name")
+     	#set($img="$!{big}_small.$!{obj.goods_main_photo.ext}")
+        #end
+           #set($goods_url="$!webPath/goods_$!{obj.id}.htm")
+            #if($!config.second_domain_open && $!obj.goods_type==1 && $!obj.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{obj.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.id}.htm")
+            #end 
+
+        <tr>
+          <td></td>
+          <td ><span class="memimg"><img src="$!img" width="45" height="49" /></span> <span class="mem_detail">
+            <ul style="width:400px; overflow:hidden; white-space:nowrap;text-overflow: ellipsis;">
+              <li>商品名称：<a href="$!goods_url" target="_blank" title="$!obj.gg_goods.goods_name">$!obj.goods_name</a></li>
+              <li>所在店铺：<a href="$!goods_url" target="_blank" title="$!obj.gg_goods.goods_store.store_name">#if($!obj.goods_store) $!CommUtil.substring("$!obj.goods_store.store_name",25) #else 平台自营 #end</a></li>
+            </ul>
+            </span></td>
+          <td align="center">#if($!obj.goods_store)$!obj.goods_store.store_name #else 平台自营 #end</td>
+          <td align="center">$!obj.goods_click</td>
+          #set($mobile_hot="false")
+          #if($!obj.mobile_hot==1)
+          #set($mobile_hot="true")
+          #end
+          #set($mobile_recommend="false")
+          #if($!obj.mobile_recommend==1)
+          #set($mobile_recommend="true")
+          #end
+          <td align="center"><img onclick="ajax_update('$!obj.id','mobile_hot',this,'$!obj.mobile_hot')" src="$!webPath/th_th/resources/style/system/manage/blue/images/$!{mobile_hot}.png" width="25" height="21" border="0" style="cursor:pointer;" title="设置后在手机端首页热卖商品位置显示"/></td>
+          <td align="center"><img onclick="ajax_update('$!obj.id','mobile_recommend',this,'$!obj.mobile_recommend')" src="$!webPath/th_th/resources/style/system/manage/blue/images/$!{mobile_recommend}.png" width="25" height="21" border="0" style="cursor:pointer;" title="设置后在手机端首页推荐商品位置显示"/></td>
+          <td class="hui oprate_con" align="center"><a href="$!goods_url" target="_blank">查看</a></td>
+        </tr>
+        #end
+      </table>
+      <div class="operate_bar">
+        <div class="fenye">
+          <input type="hidden" name="mulitId" id="mulitId" />
+          <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+          $!gotoPageFormHTML</div>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,658 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>税务及银行信息 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/shop_into.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/swfupload.js"></script>
+<script src="$!webPath/resources/js/swfupload.queue.js"></script>
+<script>
+var tax_reg_swf_upload;
+var tax_reg_photo_count=0;
+var tax_general_swf_upload;
+var tax_general_photo_count=0;
+var bank_permit_swf_upload;
+var bank_permit_photo_count=0;
+var count=0;
+jQuery(document).ready(function(e) {
+	jQuery("#tax_type").change(function(){
+		if(jQuery(this).val()=='小规模纳税人'){
+			count = tax_general_photo_count;
+			tax_general_photo_count=1;
+			jQuery("#tax_reg_swf").hide();
+			jQuery("#tax_type_code").empty();
+			jQuery("#tax_type_code").html("<option value='3%'>3%</option>");
+		}else{
+			tax_general_photo_count=count;
+			jQuery("#tax_reg_swf").show();
+			jQuery("#tax_type_code").empty();
+			jQuery("#tax_type_code").html("<option value='0%'>0%</option><option value='6%'>6%</option><option value='11%'>11%</option><option value='13%'>13%</option><option value='17%'>17%</option>");
+		}
+	})
+    <!--表单验证-->
+	jQuery("#theForm").validate({		
+		ignore: "",
+		errorPlacement: function(error, element) {
+				element.parent().find("b").html("");
+					error.appendTo(element.parent().find("b"));
+		},						  
+    	 rules: {
+	        tax_code:{required:true},
+			bank_account_name:{required:true},
+			bank_name:{required:true},
+			bank_c_account:{required:true},
+			bank_line_num:{required:true},
+			bid2:{required:true},
+			tax_reg:{required:true},
+			tax_general:{required:true},
+			bank_permit:{required:true}
+			},
+    	 messages: {
+	        tax_code:{required:"请填写纳税人识别号"},
+			bank_account_name:{required:"请填写银行开户名"},
+			bank_name:{required:"请填写开户银行支行名称"},
+			bank_c_account:{required:"请填写公司银行账号"},
+			bank_line_num:{required:"请填写开户行支行联行号"},
+			license_c_mobile:{required:"请填写紧急联系人手机"},
+			bid2:{required:"请选择开户行所在地"},
+			tax_reg:{required:"请上传税务登记证电子版"},
+			tax_general:{required:"请上传纳税人登记证电子版"},
+			bank_permit:{required:"请上传开户银行许可证电子版"}
+		  }
+		 
+  	});
+	<!--开户银行支行所在地-->
+	jQuery("select[id^='bid']").live("change",function(){
+		var val = jQuery(this).val();
+		var bid = jQuery(this).attr("id");
+		if(val==""){
+			jQuery("#bid0").children(":not(':first')").remove();
+			jQuery("#bid1").children(":not(':first')").remove();
+			jQuery("#bid2").children(":not(':first')").remove();
+			return;
+		}
+		jQuery.ajax({type:'POST',
+	              	url:'$!webPath/seller_license_area.htm',
+				  	data:{"value":val,"type":"b"},
+				beforeSend:function(){
+				  
+				},
+			   	success:function(data){
+			   		if(bid=="bid"){
+						jQuery("#bid1").children(":not(':first')").remove();
+						jQuery("#bank_area0").html(data);
+					}else if(bid=="bid0"){
+						jQuery("#bid2").children(":not(':first')").remove();
+						jQuery("#bank_area1").html(data);
+					}else if(bid=="bid1"){
+						jQuery("#bank_area2").html(data);
+					}    
+              }
+		});
+	})
+	<!--税务登记证电子版的swfupload上传插件实例化-->
+	var tax_reg_settings_object = {//定义参数配置对象
+        upload_url : "$!webPath/seller_apply_image_save.htm",
+        flash_url : "$!webPath/resources/flash/swfupload.swf",
+        file_post_name : "Filedata",
+        post_params : {
+			  "mark" : "tax_reg",
+			   "uid" : "$!user.id"
+        },
+		use_query_string : false,
+        requeue_on_error : false,
+		file_types : "*.tbi;*.png;*.bmp;*.jpeg;*.jpg;*.gif",
+		file_types_description: "税务登记证电子版",
+		file_size_limit : "1MB",
+		file_upload_limit : 1,
+		file_queue_limit : 1,
+		debug : false,
+        prevent_swf_caching : true,
+        preserve_relative_urls : false,
+     	button_placeholder_id : "tax_reg_swf_upload",
+        button_image_url : "$!webPath/resources/style/common/images/upload.jpg",
+		button_width : 160,
+		button_height : 28,
+        button_text :"<b></b> <span class='upload_text'>税务登记证电子版</span>",
+		button_text_style : ".upload_text { color: #666666;font-size:12px;margin-left:40px; }",
+		button_text_left_padding : 3,
+		button_text_top_padding : 5,
+        button_action : SWFUpload.BUTTON_ACTION.SELECT_FILES,
+		button_disabled : false,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		button_window_mode : SWFUpload.WINDOW_MODE.TRANSPARENT,
+		file_dialog_start_handler:fileDialogStart_tax_reg,//在文件选取窗口将要弹出时触发
+		file_dialog_complete_handler:fileDialogComplete_tax_reg,//添加到上传队列触发此事件
+		upload_success_handler:uploadSuccess_tax_reg,//文件上传成功后会触发该事件
+		upload_complete_handler:uploadComplete_tax_reg,//当一次文件上传的流程完成时会触发该事件
+		upload_progress_handler : upload_progress_tax_reg		
+    };   
+    tax_reg_swf_upload = new SWFUpload(tax_reg_settings_object);//实例化一个SWFUpload，传入参数配置对象
+	<!--纳税人资格证电子版的swfupload上传插件实例化-->
+	var tax_general_settings_object = {//定义参数配置对象
+        upload_url : "$!webPath/seller_apply_image_save.htm",
+        flash_url : "$!webPath/resources/flash/swfupload.swf",
+        file_post_name : "Filedata",
+        post_params : {
+			  "mark" : "tax_general",
+			   "uid" : "$!user.id"
+        },
+		use_query_string : false,
+        requeue_on_error : false,
+		file_types : "*.tbi;*.png;*.bmp;*.jpeg;*.jpg;*.gif",
+		file_types_description: "税务登记证电子版",
+		file_size_limit : "1MB",
+		file_upload_limit : 1,
+		file_queue_limit : 1,
+		debug : false,
+        prevent_swf_caching : true,
+        preserve_relative_urls : false,
+     	button_placeholder_id : "tax_general_swf_upload",
+        button_image_url : "$!webPath/resources/style/common/images/upload.jpg",
+		button_width : 160,
+		button_height : 28,
+        button_text :"<b></b> <span class='upload_text'>纳税人资格证电子版</span>",
+		button_text_style : ".upload_text { color: #666666;font-size:12px;margin-left:40px; }",
+		button_text_left_padding : 3,
+		button_text_top_padding : 5,
+        button_action : SWFUpload.BUTTON_ACTION.SELECT_FILES,
+		button_disabled : false,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		button_window_mode : SWFUpload.WINDOW_MODE.TRANSPARENT,
+		file_dialog_start_handler:fileDialogStart_tax_general,//在文件选取窗口将要弹出时触发
+		file_dialog_complete_handler:fileDialogComplete_tax_general,//添加到上传队列触发此事件
+		upload_success_handler:uploadSuccess_tax_general,//文件上传成功后会触发该事件
+		upload_complete_handler:uploadComplete_tax_general,//当一次文件上传的流程完成时会触发该事件
+		upload_progress_handler : upload_progress_tax_general	
+    };   
+    tax_general_swf_upload = new SWFUpload(tax_general_settings_object);//实例化一个SWFUpload，传入参数配置对象
+	<!--开户银行许可证电子版的swfupload上传插件实例化-->
+	var bank_permit_settings_object = {//定义参数配置对象
+        upload_url : "$!webPath/seller_apply_image_save.htm",
+        flash_url : "$!webPath/resources/flash/swfupload.swf",
+        file_post_name : "Filedata",
+        post_params : {
+			  "mark" : "bank_permit",
+			   "uid" : "$!user.id"
+        },
+		use_query_string : false,
+        requeue_on_error : false,
+		file_types : "*.tbi;*.png;*.bmp;*.jpeg;*.jpg;*.gif",
+		file_types_description: "开户银行许可证",
+		file_size_limit : "1MB",
+		file_upload_limit : 1,
+		file_queue_limit : 1,
+		debug : false,
+        prevent_swf_caching : true,
+        preserve_relative_urls : false,
+     	button_placeholder_id : "bank_permit_swf_upload",
+        button_image_url : "$!webPath/resources/style/common/images/upload.jpg",
+		button_width : 160,
+		button_height : 28,
+        button_text :"<b></b> <span class='upload_text'>开户银行许可证</span>",
+		button_text_style : ".upload_text { color: #666666;font-size:12px;margin-left:40px; }",
+		button_text_left_padding : 3,
+		button_text_top_padding : 5,
+        button_action : SWFUpload.BUTTON_ACTION.SELECT_FILES,
+		button_disabled : false,
+		button_cursor : SWFUpload.CURSOR.HAND,
+		button_window_mode : SWFUpload.WINDOW_MODE.TRANSPARENT,
+		file_dialog_start_handler:fileDialogStart_bank_permit,//在文件选取窗口将要弹出时触发
+		file_dialog_complete_handler:fileDialogComplete_bank_permit,//添加到上传队列触发此事件
+		upload_success_handler:uploadSuccess_bank_permit,//文件上传成功后会触发该事件
+		upload_complete_handler:uploadComplete_bank_permit,//当一次文件上传的流程完成时会触发该事件
+		upload_progress_handler : upload_progress_bank_permit	
+    };   
+    bank_permit_swf_upload = new SWFUpload(bank_permit_settings_object);//实例化一个SWFUpload，传入参数配置对象
+    //初始化相关数据
+	if("$!store.bank_area"){
+		jQuery("#bid2").val("$!store.bank_area.id");
+		jQuery("#bid1").val("$!store.bank_area.parent.id");
+		jQuery("#bid0").val("$!store.bank_area.parent.parent.id");
+	}
+	jQuery("#tax_type_code").val("$!user.store.tax_type_code");
+	jQuery("#tax_type").val("$!store.tax_type");
+	jQuery("#tax_type_code").val("$!store.tax_type_code");
+	#if("$!store.tax_type"=="小规模纳税人")
+	   jQuery("#tax_reg_swf").hide();
+	   jQuery("#tax_type_code").empty();
+	   jQuery("#tax_type_code").html("<option value='3%'>3%</option>");
+	#end
+});<!--end-->
+<!--税务登记证电子版的swfupload上传事件-->
+function fileDialogComplete_tax_reg(numFilesSelected, numFilesQueued) {
+	try {
+		if(numFilesSelected==0){
+			return;
+		}
+	    var upload=0;
+		var stats = this.getStats();
+		var select_count=1-tax_reg_photo_count;
+		if (select_count!=0&&numFilesSelected > select_count) {
+		    alert("您已经上传税务登记证电子版照片了");	
+			this.cancelQueue();
+			upload=1;
+		}
+		if(stats.successful_uploads>=1){
+			alert("您已经上传税务登记证电子版照片了");		
+			this.cancelQueue();
+			upload=1;
+		}
+		if(upload==0){
+		   this.startUpload();//进行上传
+		}
+	} catch (ex)  {
+        this.debug(ex);
+	}
+    }
+function fileDialogStart_tax_reg(){
+	  var stats = this.getStats();
+	  stats.successful_uploads=tax_reg_photo_count;
+	  this.setStats(stats);
+}
+function uploadSuccess_tax_reg(file, serverData){//单个图片上传成功
+	  var obj=eval("("+serverData+")");
+	  tax_reg_photo_count++;
+	  var stats = this.getStats();
+	  jQuery(".setable_img1").show();
+	  jQuery("#tax_reg_img").attr("src","$!webPath/"+obj.url);
+	  jQuery("#tax_reg_show").attr("href",obj.url);   
+	  jQuery("#tax_reg").val(obj.id);
+	  jQuery("#tax_reg_wait").hide();  
+}
+function uploadComplete_tax_reg(file) {
+	try {
+		if (this.getStats().files_queued == 0) {
+		} else {	
+		   if(this.getStats.successful_uploads>=1){
+			   this.cancelQueue();
+		   }else{
+		       this.startUpload();
+		   }
+		}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+function upload_progress_tax_reg(){
+	jQuery("#tax_reg_wait").show();
+}
+<!--税务登记证电子版的swfupload上传事件end-->
+<!--纳税人资格证电子版的swfupload上传事件-->
+function fileDialogComplete_tax_general(numFilesSelected, numFilesQueued) {
+	try {
+		if(numFilesSelected==0){
+			return;
+		}
+	    var upload=0;
+		var stats = this.getStats();
+		var select_count=1-tax_general_photo_count;
+		if (select_count!=0&&numFilesSelected > select_count) {
+		    alert("您已经上传纳税人资格证电子版照片了");	
+			this.cancelQueue();
+			upload=1;
+		}
+		if(stats.successful_uploads>=1){
+			alert("您已经上传纳税人资格证电子版照片了");		
+			this.cancelQueue();
+			upload=1;
+		}
+		if(upload==0){   
+		   this.startUpload();//进行上传
+		}
+	} catch (ex)  {
+        this.debug(ex);
+	}
+    }
+function fileDialogStart_tax_general(){
+	  var stats = this.getStats();
+	  stats.successful_uploads=tax_general_photo_count;
+	  this.setStats(stats);
+}
+function uploadSuccess_tax_general(file, serverData){//单个图片上传成功
+	  var obj=eval("("+serverData+")");
+	  tax_general_photo_count++;
+	  var stats = this.getStats();
+	  jQuery(".setable_img2").show();
+	  jQuery("#tax_general").val(obj.id);
+	  jQuery("#tax_general_show").attr("href",obj.url);     	  
+	  jQuery("#tax_general_img").attr("src","$!webPath/"+obj.url);
+	  jQuery("#tax_general_wait").hide();    
+}
+function uploadComplete_tax_general(file) {
+	try {
+		if (this.getStats().files_queued == 0) {
+		} else {	
+		   if(this.getStats.successful_uploads>=1){
+			   this.cancelQueue();
+		   }else{
+		       this.startUpload();
+		   }
+		}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+function upload_progress_tax_general(){
+	jQuery("#tax_general_wait").show();
+}
+<!--纳税人资格证电子版的swfupload上传事件end-->
+<!--开户银行许可证电子版的swfupload上传事件-->
+function fileDialogComplete_bank_permit(numFilesSelected, numFilesQueued) {
+	try {
+		if(numFilesSelected==0){
+			return;
+		}
+	    var upload=0;
+		var stats = this.getStats();
+		var select_count=1-bank_permit_photo_count;
+		if (select_count!=0&&numFilesSelected > select_count) {
+		    alert("您已经上传开户银行许可证电子版照片了");	
+			this.cancelQueue();
+			upload=1;
+		}
+		if(stats.successful_uploads>=1){
+			alert("您已经上传开户银行许可证电子版照片了");		
+			this.cancelQueue();
+			upload=1;
+		}
+		if(upload==0){
+		   this.startUpload();//进行上传
+		}
+	} catch (ex)  {
+        this.debug(ex);
+	}
+    }
+function fileDialogStart_bank_permit(){
+	  var stats = this.getStats();
+	  stats.successful_uploads=bank_permit_photo_count;
+	  this.setStats(stats);
+}
+function uploadSuccess_bank_permit(file, serverData){//单个图片上传成功
+	  var obj=eval("("+serverData+")");
+	  bank_permit_photo_count++;
+	  var stats = this.getStats();
+	  jQuery(".setable_img3").show();
+	  jQuery("#bank_permit").val(obj.id);
+	  jQuery("#bank_permit_show").attr("href",obj.url);     
+	  jQuery("#bank_permit_img").attr("src","$!webPath/"+obj.url);
+	  jQuery("#bank_permit_wait").hide();  
+}
+function uploadComplete_bank_permit(file) {
+	try {
+		if (this.getStats().files_queued == 0) {
+		} else {	
+		   if(this.getStats.successful_uploads>=1){
+			   this.cancelQueue();
+		   }else{		   
+		       this.startUpload();
+		   }
+		}
+	} catch (ex) {
+		this.debug(ex);
+	}
+}
+function upload_progress_bank_permit(){
+	jQuery("#bank_permit_wait").show();
+}
+<!--开户银行许可证电子版的swfupload上传事件end-->
+function saveForm(){
+  if(jQuery("#tax_type").val()=="小规模纳税人"){
+    jQuery("#tax_general").val("-1");
+  }
+  jQuery("#theForm").submit();
+}
+function backwards(step){
+	window.location.href="$!webPath/seller_apply.htm?op=back&step="+step;
+}
+<!--照片删除-->
+function image_del(mark){
+  if(confirm("删除后不可恢复，是否继续？")){	 
+	jQuery.post("$!webPath/seller_apply_image_del.htm",{"mark":mark,"uid":$!user.id},function(data){
+	    if(data.result==true){
+			if(mark=="tax_reg"){
+				 var stats = tax_reg_swf_upload.getStats();
+				 stats.successful_uploads--;
+		 		 tax_reg_swf_upload.setStats(stats);
+		  		 tax_reg_photo_count--;
+		  		 jQuery(".setable_img1").hide();
+				 jQuery("#tax_reg").val("");
+			}
+			if(mark=="tax_general"){
+				 var stats = tax_general_swf_upload.getStats();
+				 stats.successful_uploads--;
+		 		 tax_general_swf_upload.setStats(stats);
+		  		 tax_general_photo_count--;
+		  		 jQuery(".setable_img2").hide();
+				 jQuery("#tax_general").val("");
+			}
+			if(mark=="bank_permit"){
+				var stats = bank_permit_swf_upload.getStats();
+				stats.successful_uploads--;
+				bank_permit_swf_upload.setStats(stats);
+				bank_permit_photo_count--;
+				jQuery(".setable_img3").hide();
+				jQuery("#bank_permit").val("");
+			}
+		}else alert("删除失败，请重新删除！");
+	},"json");
+  }
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="head">
+  <h1 class="logo" title=""> #if($!config.websiteLogo) <a href="$!webPath/index.htm"><img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" width="209" height="70"/></a> #else <a href="$!webPath/index.htm"><img src="$!webPath/resources/style/system/front/default/images/logo.jpg" width="209" height="70"/> </a> #end </h1>
+  <span class="head_into">商家入驻</span> <a href="$!webPath/doc.htm?mark=apply_help" target="_blank" class="head_help">入驻帮助</a> </div>
+<div class="nav_into">
+  <ul>
+    <li><a href="javascript:void(0)" onclick="backwards(1)">入驻协议</a></li>
+    <li><a href="javascript:void(0)" class="this">公司信息提交</a></li>
+    <li><a href="javascript:void(0)">店铺信息提交</a></li>
+    <li><a href="javascript:void(0)">审核日志查询</a></li>
+  </ul>
+</div>
+<div class="main">
+  <div class="settled_box">
+    <h3>
+      <div class="settled_step"><span><em class="setstep_light_blue"></em><b class="strong_light_two"></b><strong class="strong_blue">入驻须知</strong></span><span><em class="setstep_strong_blue"></em><b class="strong_blue_two"></b><strong class="strong_blue">公司信息认证</strong></span><span><em class="setstep_grey"></em><b class="strong_grey_three"></b><strong class="grey">店铺信息认证</strong></span><span><em class="setstep_grey"></em><b class="strong_grey_four"></b><strong class="grey">等待审核</strong></span></div>
+      <span class="settled_title">公司信息提交</span></h3>
+    <div class="settled_white">
+    <form action="$!webPath/seller_apply_step4_save.htm" method="post" id="theForm">
+      <div class="settled_white_box">
+        <div class="settled_warning"><span>以下所需要上传电子版资质仅支持JPG、GIF、PNG格式的图片，大小不超过1M。</span></div>
+        <div class="settled_form">
+          <h4>税务登记证<b></b></h4>
+          <table width="630" border="0" cellpadding="0" cellspacing="0" class="settled_table">
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">
+                <input name="step" type="hidden" id="step" value="5" />
+                纳税人识别号：</span><strong class="sred">*</strong></td>
+              <td><input name="tax_code" type="text"  class="size200" id="tax_code" value="$!store.tax_code"/>
+                <b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">纳税人类型：</span><strong class="sred">*</strong></td>
+              <td><span class="settled_select">
+                <select name="tax_type" id="tax_type">
+                	<option value="一般纳税人">一般纳税人</option>
+                	<option value="小规模纳税人">小规模纳税人</option>
+                </select>
+                </span><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">纳税类型税码：</span><strong class="sred">*</strong></td>
+              <td><span class="settled_select">
+                <select name="tax_type_code" id="tax_type_code">
+                	<option value="0%">0%</option>
+                    <option value="6%">6%</option>
+                    <option value="11%">11%</option>
+                    <option value="13%">13%</option>
+                    <option value="17%">17%</option>
+                </select>
+                </span><b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">税务登记证电子版：</span><strong class="sred">*</strong></td>
+              <td>
+              	<span class="setable_img1" #if(!$!store.tax_reg_card)style="display:none"#end>
+                    <b class="setable_b">
+                        <a href="$!webPath/$!store.tax_reg_card.path/$!store.tax_reg_card.name" id="tax_reg_show" target="_blank">
+                        <img src="$!webPath/$!store.tax_reg_card.path/$!store.tax_reg_card.name" width="100" height="60" id="tax_reg_img" />
+                        查看</a>
+                        |<a href="javascript:void(0);" onclick="image_del('tax_reg')" id="tax_reg_del">删除</a>
+                    </b>
+                </span>
+                <span id="tax_reg_swf_upload" class="swf_upload"></span>
+                <b class="settedtab_b"><img style="display:none" id="tax_reg_wait" src="$!wenPath/resources/style/system/manage/blue/images/photo/loader.gif" /></b>
+                <span>
+                <input type="hidden" value="$!store.tax_reg_card.id" name="tax_reg" id="tax_reg"/><b class="settedtab_b"></b>	
+                </span>			
+              </td>
+            </tr>
+            <tr id="tax_reg_swf">
+              <td align="right" width="170" valign="top"><span class="sred_span">一般纳税人资格证电子版：</span><strong class="sred">*</strong></td>
+              <td>
+              	<span class="setable_img2" #if(!$!store.tax_general_card)style="display:none"#end>
+                    <b class="setable_b">
+                        <a href="$!webPath/$!store.tax_general_card.path/$!store.tax_general_card.name" id="tax_general_show" target="_blank">
+                        <img src="$!webPath/$!store.tax_general_card.path/$!store.tax_general_card.name" width="100" height="60" id="tax_general_img" />
+                        查看</a>
+                        |<a href="javascript:void(0);" onclick="image_del('tax_general')" id="tax_general_del">删除</a>
+                    </b>
+                </span>
+                
+                <span id="tax_general_swf_upload" class="swf_upload"></span>
+                <b class="settedtab_b"><img style="display:none" id="tax_general_wait" src="$!wenPath/resources/style/system/manage/blue/images/photo/loader.gif" /></b>
+                 <span>
+                <input type="hidden" value="$!store.tax_general_card.id" name="tax_general" id="tax_general"/><b class="settedtab_b"></b>	
+                </span>				
+              </td>
+            </tr>
+          </table>
+          <span class="license"><b><a href="$!webPath/resources/style/system/front/default/images/3.jpg" target="_blank"><em><img src="$!webPath/resources/style/system/front/default/images/3.jpg" width="310" height="220"/></em>查看大图</a></b></span> </div>
+        <div class="settled_form">
+          <h4>开户银行许可证<b></b></h4>
+          <table width="630" border="0" cellpadding="0" cellspacing="0" class="settled_table">
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">银行开户名：</span><strong class="sred">*</strong></td>
+              <td><input name="bank_account_name" type="text"  class="size200" id="bank_account_name" value="$!store.bank_account_name"/>
+                <b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">公司银行账号：</span><strong class="sred">*</strong></td>
+              <td><input name="bank_c_account" type="text"  class="size200" id="bank_c_account" value="$!store.bank_c_account"/>
+                <b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">开户银行支行名称：</span><strong class="sred">*</strong></td>
+              <td><input name="bank_name" type="text"  class="size200" id="bank_name" value="$!store.bank_name"/>
+                <b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">开户行支行联行号：</span><strong class="sred">*</strong></td>
+              <td><input name="bank_line_num" type="text"  class="size200" id="bank_line_num" value="$!store.bank_line_num"/>
+                <b class="settedtab_b"></b></td>
+            </tr>
+            <tr>
+              <td align="right" width="150" valign="top"><span class="sred_span">开户银行支行所在地：</span><strong class="sred">*</strong></td>
+              <td>
+              	#if($!store.bank_area)
+              	<span class="settled_select" id="bank_area">
+                	<select name="bid" id="bid">
+                    	<option value="">国籍</option>
+                    	#foreach($area in $areas)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+                <span class="settled_select" id="bank_area0">
+                	<select name="bid0" id="bid0">
+                    	<option value="">省份</option>
+                    	#foreach($area in $areas.parent)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+                <span class="settled_select" id="bank_area1">
+                	<select name="bid1" id="bid1">
+                   	#foreach($bid1 in $store.bank_area.parent.parent.childs)
+                    	<option value="$!bid1.id">$!bid1.areaName</option>
+                    #end
+                	</select>
+                </span>
+                <span class="settled_select" id="bank_area2">
+                	<select name="bid2" id="bid2">
+                    #foreach($bid2 in $store.bank_area.parent.childs)
+                    	<option value="$!bid2.id">$!bid2.areaName</option>
+                    #end
+                	</select>
+                    <b class="settedtab_b"></b>
+                </span>
+                #else
+                <span class="settled_select" id="bank_area">
+                	<select name="bid" id="bid">
+                    	<option value="">国籍</option>
+                    	#foreach($area in $areas)
+                        <option value="$!area.id">$!area.areaName</option>
+                        #end
+                	</select>
+                </span>
+                <span class="settled_select" id="bank_area0">
+                	<select name="bid0" id="bid0">
+                    	<option value="">省份</option>
+                	</select>
+                </span>
+                <span class="settled_select" id="bank_area1">
+                	<select name="bid1" id="bid1">
+                    	<option value="">城市</option>
+                	</select>
+                </span>
+                <span class="settled_select" id="bank_area2">
+                	<select name="bid2" id="bid2">
+                    	<option value="">州县</option>
+                	</select>
+                    <b class="settedtab_b"></b>
+                </span>
+                #end
+              </td>
+            </tr>
+            <tr>
+              <td align="right" width="160" valign="top"><span class="sred_span">银行开户许可证电子版：</span><strong class="sred">*</strong></td>
+              <td>
+              	<span class="setable_img3" #if(!$!store.bank_permit_image)style="display:none"#end>
+                	<span id="bank_permit_name"></span>
+                    <b class="setable_b">
+                        <a href="$!webPath/$!store.bank_permit_image.path/$!store.bank_permit_image.name" id="bank_permit_show" target="_blank">
+                        <img src="$!webPath/$!store.bank_permit_image.path/$!store.bank_permit_image.name" width="100" height="60" id="bank_permit_img" />
+                        查看</a>
+                        |<a href="javascript:void(0);" onclick="image_del('bank_permit')" id="bank_permit_del">删除</a>
+                    </b>
+                </span>
+                
+                <span id="bank_permit_swf_upload" class="swf_upload"></span>
+                <b class="settedtab_b"><img style="display:none" id="bank_permit_wait" src="$!wenPath/resources/style/system/manage/blue/images/photo/loader.gif" /></b>
+                 <span>
+                <input type="hidden" value="$!store.bank_permit_image.id" name="bank_permit" id="bank_permit"/><b class="settedtab_b"></b>	
+                </span>				
+              </td>
+            </tr>
+          </table>
+          <span class="license"><b><a href="$!webPath/resources/style/system/front/default/images/4.jpg" target="_blank"><em><img src="$!webPath/resources/style/system/front/default/images/4.jpg" width="310" height="220"/></em>查看大图</a></b></span> </div>
+      </div>
+      <div class="settled_bottom"><span><a href="javascript:void(0)" class="up_step_btn" onclick="backwards(3)">上一步</a><a onclick="saveForm()" href="javascript:void(0)" class="settled_btn"><b><em>下一步，完善店铺信息</em></b></a></span></div>
+     </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

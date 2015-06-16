@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessageText('member.activity_apply.through_train_apply','')-  $!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+//
+	jQuery("#theForm").validate({
+        rules:{
+	  	  goods_id:{required :true},
+		  ztc_price:{required:true,digits:true,min:$!config.ztc_price,max:$!{user.gold}},
+		  ztc_begin_time:{required :true},
+		  ztc_gold:{required:true,digits:true,min:$!config.ztc_price,max:$!{user.gold}}
+	  	 },
+	    messages:{
+	  	  goods_id:{required:"#springMessageText('member.activity_apply.through_train_goods_not_empty','')"},
+		  ztc_price:{required:"#springMessageText('member.activity_apply.through_train_price_not_empty','')",digits:"#springMessageText('member.activity_apply.through_train_price_only_integer','')",min:"#springMessageText('member.activity_apply.through_train_price_less_than','')$!{config.ztc_price}",max:"#springMessageText('member.activity_apply.gold_cannot_more_than','')$!{user.gold}"},
+		  ztc_begin_time:{required :"#springMessageText('member.activity_apply.bigentime_not_empty','')"},
+		  ztc_gold:{required:"#springMessageText('member.activity_apply.through_train_gold_not_empty','')",digits:"#springMessageText('member.activity_apply.through_train_gold_only_integer','')",min:"#springMessageText('member.activity_apply.through_train_gold_less_than','')$!{config.ztc_price}",max:"#springMessageText('member.activity_apply.gold_cannot_more_than','')$!{user.gold}"}
+	  	}
+     });
+    jQuery('#ztc_begin_time').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true,
+	  minDate:1, maxDate: "+10D", 
+	  onSelect:function(dateText,inst){
+
+	  }
+  });
+ });
+ function activity_goods(){
+   var goods_name=jQuery("#goods_name").val();
+   if(goods_name!=""){
+	  jQuery.post("$!webPath/seller/activity_goods.htm",{"goods_name":goods_name},function(data){
+		   jQuery("#goods_ids").empty();																			  
+	       jQuery.each(data,function(index,item){
+			   jQuery("#goods_ids").append("<option value='"+item.goods_id+"'>"+item.goods_name+"</option>");
+		   });
+	  },"json");
+   }
+ }
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="main">
+  $!httpInclude.include("/seller/nav_head.htm")
+  <div class="user_center">
+    <table width="1000" border="0" cellspacing="0" cellpadding="0" class="user_table">
+      <tr>
+        $!httpInclude.include("/seller/nav.htm?op=activity")
+        <td id="centerbg" valign="top">
+         <div class="buyer_position"><div class="buyer_p_box"><a href="$!webPath/seller/index.htm">#springMessageText('member.activity_apply.business_center','')</a> > <span>#springMessageText('member.activity_apply.apply_participation','')</span></div></div>
+        <div class="productmain">
+            <div class="ordernav">
+              <ul class="orderul">
+                <li class="other"><a href="$!webPath/seller/activity.htm">#springMessageText('member.activity_goods_list.activity_lisst','')</a></li>
+                <li class="this"><a href="$!webPath/seller/activity_apply.htm?id=$!act.id">#springMessageText('member.activity_apply.apply_participation','')</a></li>
+              </ul>
+            </div>
+            <div class="ordercon">
+              <div class="addnav">
+                <form action="$!webPath/seller/activity_apply_save.htm" method="post" name="theForm" id="theForm">
+                  <table width="98%" border="0" cellspacing="0" cellpadding="0" class="addnavtable">
+                    <tr>
+                      <td align="right">#springMessageText('member.activity_apply.activity_name','')：</td>
+                      <td class="px10">$!act.ac_title</td>
+                    </tr>
+					<tr>
+                      <td align="right">#springMessageText('member.activity_apply.activity_explain','')：</td>
+                      <td class="px10">$!act.ac_content</td>
+                    </tr>
+                    <tr>
+                      <td width="141" align="right">#springMessageText('member.activity_apply.goods_name','')：</td>
+                      <td width="651" class="px10"><span class="setinput">
+                        <input name="goods_name" type="text" id="goods_name" />
+                        <input name="search" type="button" style="cursor:pointer;width:60px;"  value="#springMessageText('member.activity_apply.seek','')" onclick="activity_goods();" />
+                      </span></td>
+                    </tr>
+                    <tr>
+                      <td align="right" valign="top">&nbsp;</td>
+                      <td  class="px10">
+                      <select name="goods_ids" size="10" multiple="multiple" id="goods_ids" style="width:500px; height:200px;">
+                      </select>
+                      #springMessageText('member.activity_apply.hold_down','')</td>
+                    </tr>
+                    <tr>
+                      <td>&nbsp;</td>
+                      <td class="px10"><span class="setsub">
+                        <input type="submit"  value="#springMessageText('member.activity_apply.save','')" style="cursor:pointer;"/>
+                        <input name="activity_session" type="hidden" id="activity_session" value="$!activity_session" />
+                        <input name="act_id" type="hidden" id="act_id" value="$!act.id" />
+                      </span></td>
+                    </tr>
+                  </table>
+                </form>
+              </div>
+            </div>
+          </div></td>
+      </tr>
+    </table>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

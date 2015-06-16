@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.integral_exchange3.integral_mall") -$!config.title </title><!--积分商城-->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/layout.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.iskyshop.validate.js" type="text/javascript"></script>
+<script src="$!webPath/th_th/resources/js/jquery.card.js" type="text/javascript"></script>
+<script>
+jQuery.validator.addMethod("mobile_telephone",function(value,element){
+  if(jQuery("#telephone").val()==""&&jQuery("#mobile").val()==""){
+     return false; 
+  }else return true;
+});
+jQuery(document).ready(function(){
+  jQuery(":radio[id^=addr_id]").click(function(){
+    if(jQuery(this).val()=="new"){
+	  jQuery("#new_address").show();
+	}else{
+      jQuery("#new_address").hide();
+	}
+  });
+  //
+  jQuery("#theForm").validate({
+    rules:{
+	  trueName:{required :true},
+	  area_id:{required :true},
+	  zip:{required :true},
+	  area_info:{required :true},
+	  telephone:{isTel:true,mobile_telephone:true},
+	  mobile:{isPhone:true}
+	 },
+	messages:{
+	  trueName:{required :"#springMessage('sms.integral_exchange2.consignee_no_empty')"},//收货人不能为空
+	  area_id:{required :"#springMessage('sms.integral_exchange2.region_detail')"},//请选择详细区域
+	  zip:{required :"#springMessage('sms.integral_exchange2.zip_code_no_empty')"},//邮政编码不能为空
+	  area_info:{required :"#springMessage('sms.integral_exchange2.detailed_address_no_empty')"},//详细地址不能为空
+	  telephone:{isTel:"#springMessage('sms.integral_exchange2.wrong_format')",mobile_telephone:"#springMessage('sms.integral_exchange2.phone_least')"},//联系电话格式不对,区号+电话号   ,  电话号与手机号码至少填写一个
+	  mobile:{isPhone:"#springMessage('sms.integral_exchange2.phone_number_format')"}//手机号码格式不对	  
+	}
+  });
+  //
+  jQuery("select").change(function(){
+     var level=jQuery(this).attr("level");
+	 var id=jQuery(this).val();
+	 if(id!=""){
+	  jQuery.post("$!webPath/load_area.htm",{"pid":id},function(data){
+	     jQuery("#area"+level).empty();
+		  jQuery("#area"+level).append("<option value='#springMessage('sms.integral_exchange2.choose')'></option>");//请选择
+	    jQuery.each(data, function(index,item){
+		  jQuery("#area"+level).append("<option value='"+item.id+"'>"+item.areaName+"</option>");
+		  jQuery("#area"+level).show();
+		});
+	  },"json");
+	 }else{
+	   for(var i=level;i<=3;i++){
+	    jQuery("#area"+i).empty();
+	    jQuery("#area"+i).hide();
+	   }
+	 }
+  });
+  //
+  //cty 修改时间2015-3-12 增加内容 
+ jQuery("#area4").change(function(){
+   var id=jQuery(this).val();
+   jQuery("#area_id").val(id);
+ });
+ //
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="main"> $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+  <div class="index">
+    <div class="inte_step">
+      <div class="stepcenter"> <span class="inte_step1a"></span> <span class="inte_step2"></span> <span class="inte_step3a"></span> </div>
+    </div>
+    <div class="integ_transport">
+    <form action="$!webPath/integral/exchange3.htm" method="post" id="theForm">
+      <div class="trans_left">
+        <h1><span class="trans_sp"><i class="transa"></i>#springMessage("sms.integral_exchange2.consignee_address")<!--收货人地址--></span></h1>
+        <ul class="trans_ads">
+           #foreach($addr in $addrs)
+           <li>
+           <label style="cursor:pointer">
+            <b> 
+            <input name="addr_id" id="addr_id" type="radio" value="$!addr.id" #if($!velocityCount==1) checked="checked"#end/>
+            </b>
+            <!--cty 修改时间2015-3-12 增加内容 -->
+            <span class="transad"> $!{addr.area.parent.parent.parent.areaName}$!{addr.area.parent.parent.areaName}$!{addr.area.parent.areaName}$!{addr.area.areaName} $!{addr.area_info}</span><span class="transuser">#springMessage("sms.integral_exchange2.consignee_name")<!--收货人姓名-->: $!addr.trueName</span><span class="transtel">#springMessage("sms.integral_exchange2.phone")<!--电话-->:$!addr.mobile</span>
+            </label>
+            </li>
+            #end
+          <li class="this">
+          	<label style="cursor:pointer">
+            <b>
+            <input name="addr_id" id="addr_id" type="radio" value="new" #if(!$!addrs)checked="checked" #end/>
+            </b><span>#springMessage("sms.integral_exchange2.new_address")<!--使用新的收货地址--></span>
+          	</label>
+          </li>
+        </ul>
+        <div class="transtable" id="new_address" #if($!addrs)style="display:none;"#end>
+          <table width="740" border="0" cellspacing="0" cellpadding="0" class="trans_table">
+            <tr>
+              <td width="90"><span class="transtab_name"><strong>*</strong>#springMessage("sms.integral_exchange2.true_name")<!--填写真实姓名-->:</span></td>
+              <td>
+                <span class="size200"><input name="trueName" type="text" id="trueName" /></span>
+             </td>
+            </tr>
+            <tr>
+              <td><span class="transtab_name"><strong>*</strong>#springMessage("sms.integral_exchange2.area")<!--所在地区-->:</span></td>
+              <td>
+                <select name="area1" id="area1" level="2" style="width:100px;">
+                    <option value="" selected="selected">#springMessage("sms.integral_exchange2.choose_area")<!--请选择地区--></option>
+ 				  #foreach($area in $areas)
+                     <option value="$!area.id">$!area.areaName</option>
+				  #end
+                   </select>
+                    <select name="area2" id="area2" style="display:none;width:60px;" level="3">
+                  </select>
+                <select name="area3" id="area3" style="display:none;width:60px;" level="4">
+                  </select>
+                <!--cty 修改时间2015-3-12 增加内容 -->
+                <select name="area4" id="area4" style="display:none;width:60px;" level="5">
+                  </select>
+                  <input name="area_id" type="hidden" id="area_id"  value=""/>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="transtab_name"><strong>*</strong>#springMessage("sms.integral_exchange2.zip_code")<!--邮政编码--></span></td>
+              <td>
+                 <span class="size200"><input name="zip" type="text" id="zip"/></span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="transtab_name"><strong>*</strong>#springMessage("sms.integral_exchange2.detailed_address")<!--详细地址-->:</span></td>
+              <td>
+                 <span class="size200"><input name="area_info" type="text" id="area_info" size="50" /></span>
+              </td>
+            </tr>
+             <tr>
+              <td><span class="transtab_name"><strong>*</strong>#springMessage("sms.integral_exchange2.mobile_phone_number")<!--手机号码-->:</span></td>
+              <td>
+                 <span class="size200"><input name="mobile" type="text" id="mobile"/></span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="transtab_name"><strong>*</strong>#springMessage("sms.integral_exchange2.phone_number")<!--电话号码-->:</span></td>
+              <td>
+                 <span class="size200"><input name="telephone" type="text" id="telephone" size="30" /></span>
+              </td>
+            </tr>    
+          </table>
+        </div>
+        <h1><span class="trans_sp"><i class="transb"></i>#springMessage("sms.integral_exchange2.message")<!--我要留言--></span></h1>
+        <div class="trans_text">
+          <textarea name="igo_msg" cols="" rows="" id="igo_msg" ></textarea>
+        </div>
+        <div class="trans_integ">#springMessage("sms.integral_exchange2.total_integral")<!--所需总积分-->:<strong>$!{total_integral}</strong>#springMessage("sms.integral_exchange2.points_freight")<!--分,运费-->：<strong>$!{trans_fee}</strong>#springMessage("sms.index.yuan")<!--元--></div>
+        <div class="trans_integ"><span class="trans_submit">  
+          <input name="" type="submit"  value="#springMessage('sms.integral_exchange2.conversion')" style="cursor:pointer;"/><!--完成兑换-->
+          </span>
+          <input name="trans_fee" type="hidden" id="trans_fee" value="$!trans_fee" />
+          <input name="integral_order_session" type="hidden" id="integral_order_session" value="$!integral_order_session" />
+        </div>
+      </div>
+      </form>
+      <div class="trans_right">
+        <h1><span class="trans_sp"><i class="transc"></i>#springMessage("sms.integral_exchange2.selected_gift")<!--已选礼品--></span></h1>
+        <ul>
+          #foreach($igc in $igcs)
+           #if($!igc.goods.ig_goods_img)
+             #set($img="$!imageWebServer/$!{igc.goods.ig_goods_img.path}/$!{igc.goods.ig_goods_img.name}_small.$!{igc.goods.ig_goods_img.ext}")
+           #else
+             #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+           #end          
+          <li><span><a href="$!webPath/integral/view_$!{igc.goods.id}.htm" target="_blank"><img src="$!img" width="65" height="65" /></a></span>
+            <h2><a href="$!webPath/integral/view_$!{igc.goods.id}.htm" target="_blank">$!{igc.goods.ig_goods_name}</a></h2>
+            <i>$!igc.count#springMessage("sms.integral_list.a")<!-- 个 -->=<strong>$!{igc.integral}#springMessage("sms.integral_list.point")<!-- 分 --></strong></i></li>
+          #end          
+        </ul>
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

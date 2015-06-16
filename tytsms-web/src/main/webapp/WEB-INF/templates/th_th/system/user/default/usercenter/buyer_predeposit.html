@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("member.predeposit.deposit_prepaid")-$!{config.title}-$!{config.poweredby}</title><!-- 预存款充值 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+       rules: {
+			pd_payment:{required:true},
+			pd_amount:{required:true,range:[0.01,1000000000]},
+			pd_remittance_user:{required:true},
+			pd_remittance_bank:{required:true},
+			pd_remittance_time:{required:true}
+		  },
+	   messages: {
+		    pd_payment:{required:"#springMessage('member.predeposit.mode_payment_not_empty')"},/* 支付方式不能为空 */
+			pd_amount:{required:"#springMessage('member.predeposit.credit_not_empty')",range:"#springMessage('member.predeposit.greater_than_amount','50000')"},/* 充值金额不能为空 *//* 请输入大于{0}的金额数字 */
+			pd_remittance_user:{required:"#springMessage('member.predeposit.remitter_not_empty')"},/* 汇款人不能为空 */
+			pd_remittance_bank:{required:"#springMessage('member.predeposit.remitter_bank_not_empty')"},/* 汇款银行不能为空 */
+			pd_remittance_time:{required:"#springMessage('member.predeposit.remitter_time_not_empty')"}/* 汇款时间不能为空 */
+	     }
+  });
+  //
+ jQuery('#pd_remittance_time').datepicker({
+        dateFormat:"yy-mm-dd",
+		yearRange:"1950:2020",
+		changeMonth: true,
+		changeYear: true
+  });
+ //
+ jQuery("#pd_payment").change(function(){
+    var val=jQuery(this).val();
+	if(val=="outline"){
+	  jQuery("tr[id^=pd_remittance_]").show();
+	  jQuery("tr[id^=pd_remittance_] input").show();
+	}else{
+	  jQuery("tr[id^=pd_remittance_]").hide();
+	   jQuery("tr[id^=pd_remittance_] input").hide();
+	}
+  });
+});
+function saveForm(){
+    jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+    $!httpInclude.include("/buyer/nav.htm?op=predeposit")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>#springMessage("member.predeposit.recharge")<!-- 账户充值 --></strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li class="this"><i></i><a href="$!webPath/buyer/predeposit.htm">#springMessage("member.predeposit.recharge")<!-- 账户充值 --></a></li>
+            <li><i></i><a href="$!webPath/buyer/predeposit_list.htm">#springMessage("member.predeposit.recharge_list")<!-- 充值列表 --></a></li>
+          </ul>
+        </div>       
+        <div class="add_usercenter">      
+             <form action="$!webPath/buyer/predeposit_save.htm" method="post" name="theForm" id="theForm">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_base_table">
+              <tr>
+              <td align="right"><strong class="redstr"></strong>#springMessage("member.predeposit.credit_available")<!-- 可用余额： --></td>
+              <td>￥#if($!user.availableBalance) $!user.availableBalance #else 0 #end
+                </td>
+            </tr>
+            <tr>
+              <td width="170" align="right"><strong class="redstr">*</strong>#springMessage("member.predeposit.mode_payment")<!-- 支付方式： --></td>
+              <td><span style="color:#F00"><select name="pd_payment" id="pd_payment"  class="base_select_check">
+                          <option value="" selected="selected">#springMessage("member.predeposit.please_choose_mode_payment")<!-- 请选择支付方式 --></option>                          
+                      #foreach($payment in $payments)                      
+                          <option value="$!payment.mark">$!payment.name</option>                          
+                      #end                    
+                        </select></span></td>
+            </tr>
+            <tr>
+              <td align="right"><strong class="redstr">*</strong>#springMessage("member.predeposit.pay_amount")<!-- 支付金额： --></td>
+              <td><span style="color:#F00"> <input name="pd_amount" type="text" id="pd_amount"  class="base_txt"/></span>
+                </td>
+            </tr>
+            <tr style="display:none;" id="pd_remittance_1">
+              <td align="right"><strong class="redstr">*</strong>#springMessage("member.predeposit.remitter_name")<!-- 汇款人姓名： --></td>
+              <td><span style="color:#F00"> <input name="pd_remittance_user" type="text" id="pd_remittance_user" style="display:none;" class="base_txt"/></span>
+                </td>
+            </tr>
+            <tr style="display:none;" id="pd_remittance_2">
+              <td align="right"><strong class="redstr">*</strong>#springMessage("member.predeposit.remitter_bank")<!-- 汇款银行： --></td>
+              <td><span style="color:#F00"> <input name="pd_remittance_bank" type="text" id="pd_remittance_bank"  style="display:none;" class="base_txt"/></span>
+                </td>
+            </tr>
+            <tr style="display:none;" id="pd_remittance_3">
+              <td align="right" ><strong class="redstr">*</strong>#springMessage("member.predeposit.remitter_date")<!-- 汇款日期： --></td>
+              <td><span style="color:#F00"> <input name="pd_remittance_time" type="text" id="pd_remittance_time" readonly="readonly"  style="display:none;" class="base_txt"/></span>
+                </td>
+            </tr>
+            <tr>
+              <td align="right">#springMessage("member.predeposit.pay_remark")<!-- 支付备注： --></td>
+              <td><span style="color:#F00"> <textarea style="border:1px solid #CCC;" name="pd_remittance_info" cols="40" rows="6" id="pd_remittance_info"></textarea></span>
+                </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>										<!-- 保存 -->
+              <td><input name="button" type="button" value="#springMessage('member.predeposit.save')" class="save" onclick="saveForm()" /></td>
+            </tr> 
+          </table>
+            </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+});
+function stat_user(){
+  var beginTime=jQuery("#beginTime").val();
+  var endTime=jQuery("#endTime").val();
+  jQuery.ajax({type:'POST',
+			   url:'$!webPath/admin/stat_user_done.htm',
+			   data:{"beginTime":beginTime,"endTime":endTime},
+			   beforeSend:function(){
+				    jQuery("#stat_result").html("<div style='text-align:center;padding-top:100px;padding-bottom:100px;'><img src='$!webPath/resources/style/common/images/loader.gif' /></div>");
+				   },
+			   success:function(data){
+				    jQuery("#stat_result").empty().html(data);
+				   }
+  });
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">商城统计</h3>
+  <div class="nav_list">
+    <ul>
+      <li><a href="javascript:void(0);" class="this"><b>用户统计</b></a></li>
+    </ul>
+  </div>
+  <div class="operation">
+    <h3>操作提示</h3>
+    <ul>
+      <li>请选取需要统计的时间段，系统默认统计时间段不能超过90天</li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/stat_user_done.htm" method="post" id="queryForm" >
+    <div class="search">
+      <ul>
+        <li> <span>统计区间</span><span class="size100">
+          <input name="beginTime" type="text" id="beginTime"  readonly="readonly" placeholder="开始时间" />
+          </span><span>—</span><span class="size100">
+          <input name="endTime" type="text" id="endTime" readonly="readonly" placeholder="结束时间" />
+          </span><span >
+          <input name="stat" type="button" class="search_btn" style="cursor:pointer;"  value="开始统计" id="stat" onclick="stat_user();" />
+          </span> </li>
+      </ul>
+    </div>
+  </form>
+  <div id="stat_result">
+     
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>账号绑定-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type=text/css rel=stylesheet />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+#if("$!error"=="true")
+<script>
+jQuery(document).ready(function(e) {
+	showDialog("msg_info","","绑定失败！",3,"warning","","");
+});
+
+</script>
+#end
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=account_bind")
+    <div class="usercenter_right">
+      <div class="bound">
+      	#if($!user.qq_openid)
+        <div class="bound_box">
+          <h1>已绑定</h1>
+          <div class="bound_QQ">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/resources/style/system/front/default/images/usercenter/bound.jpg" /></span> <span class="QQ_pic_r"> <em>您已成功绑定</em> <b class="QQ_btn"><a href="javascript:void(0);" onclick="if(confirm('接触QQ绑定后将不能使用QQ账号登录商城，是否继续?'))window.location.href='$!webPath/buyer/account_bind_cancel.htm?account=qq'">解绑</a></b> </span> </div>
+            <div class="bound_QQ_right"> <span class="bound_sq"><img src="$!webPath/resources/style/system/front/default/images/usercenter/sq.jpg" /></span> <span class="bound_acc"> <b>账户授权</b>
+              <p class="acc_p">账户关系绑定</p>
+              <p class="acc_m">可使用QQ账号直接登录泰易淘</p>
+              </span> </div>
+          </div>
+        </div>
+        #end
+        #if($!user.sina_openid)
+        <div class="bound_box">
+          <h1>已绑定</h1>
+          <div class="bound_QQ">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/resources/style/system/front/default/images/usercenter/sina.jpg" /></span> <span class="QQ_pic_r"> <em>您已成功绑定</em> <b class="QQ_btn"><a href="javascript:void(0);" onclick="if(confirm('接触新浪微博绑定后将不能使用新浪微博账号登录商城，是否继续?'))window.location.href='$!webPath/buyer/account_bind_cancel.htm?account=sina'">解绑</a></b> </span> </div>
+            <div class="bound_QQ_right"> <span class="bound_sq"><img src="$!webPath/resources/style/system/front/default/images/usercenter/sq.jpg" /></span> <span class="bound_acc"> <b>账户授权</b>
+              <p class="acc_p">账户关系绑定</p>
+              <p class="acc_m">可使用新浪微博直接登录泰易淘</p>
+              </span> </div>
+          </div>
+        </div>
+        #end
+        #if($!config.qq_login)
+        #if(!$!user.qq_openid)
+        <div class="bound_box">
+          <h1>未绑定</h1>
+          <div class="bound_sina">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/resources/style/system/front/default/images/usercenter//bound.jpg" /></span> <span class="QQ_pic_r"> <em>账户关系绑定</em> <em>绑定成功后可使用QQ直接登录泰易淘</em></span> </div>
+            <div class="bound_sina_right"> <a href="$!webPath/qq_login_api.htm">立即绑定</a> </div>
+          </div>
+        </div>
+        #end
+        #else
+        <div class="bound_box">
+          <h1>平台未开启</h1>
+          <div class="bound_sina">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/resources/style/system/front/default/images/usercenter//bound.jpg" /></span>  </div>
+          </div>
+        </div>
+        #end
+        #if($!config.sina_login)
+        #if(!$!user.sina_openid)
+        <div class="bound_box" style="border-top:none;">
+          <h1>未绑定</h1>
+          <div class="bound_sina">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/resources/style/system/front/default/images/usercenter//sina.jpg" /></span> <span class="QQ_pic_r"> <em>账户关系绑定</em> <em>绑定成功后可使用新浪微博直接登录泰易淘</em></span> </div>
+            <div class="bound_sina_right"> <a href="$!webPath/sina_login_api.htm">立即绑定</a> </div>
+          </div>
+        </div>
+        #end 
+        #else
+        <div class="bound_box" style="border-top:none;">
+          <h1>平台未开启</h1>
+          <div class="bound_sina">
+            <div class="bound_QQ_left"> <span class="QQ_pic"><img src="$!webPath/resources/style/system/front/default/images/usercenter//sina.jpg" /></span>  </div>
+            
+          </div>
+        </div>
+        #end
+        </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#apply_beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#apply_endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  
+    jQuery('#addTime_beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#addTime_endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  
+    jQuery('#complete_beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#complete_endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  
+  jQuery("#type").val("$!type");
+  //
+});
+
+function payoff_excel(){
+	#if($!objs.size()>0)	
+		var type = jQuery("#type").val();
+		var type_data = jQuery("#type_data").val();
+		var addTime_beginTime = jQuery("#addTime_beginTime").val();
+		var addTime_endTime = jQuery("#addTime_endTime").val();
+		var apply_beginTime = jQuery("#apply_beginTime").val();
+		var apply_endTime = jQuery("#apply_endTime").val();
+		var complete_beginTime = jQuery("#complete_beginTime").val();
+		var complete_endTime = jQuery("#complete_endTime").val();
+		var begin_price = jQuery("#begin_price").val();
+		var end_price = jQuery("#end_price").val();
+		window.location.href="$!webPath/admin/payofflog_excel.htm?type="+type+"&type_data="+type_data+"&addTime_beginTime="+addTime_beginTime+"&addTime_endTime="+addTime_endTime+"&apply_beginTime="+apply_beginTime+"&apply_endTime="+apply_endTime+"&complete_beginTime="+complete_beginTime+"&complete_endTime="+complete_endTime+"&begin_price="+begin_price+"&end_price="+end_price+"&status=$!{status}";
+	#else
+		alert("当前没有可以导出的数据！");
+	#end		
+}
+//统计数据
+function stat_date(){
+var type = jQuery("#type").val();
+var type_data = jQuery("#type_data").val();
+var addTime_beginTime = jQuery("#addTime_beginTime").val();
+var addTime_endTime = jQuery("#addTime_endTime").val();
+var apply_beginTime = jQuery("#apply_beginTime").val();
+var apply_endTime = jQuery("#apply_endTime").val();
+var complete_beginTime = jQuery("#complete_beginTime").val();
+var complete_endTime = jQuery("#complete_endTime").val();
+var begin_price = jQuery("#begin_price").val();
+var end_price = jQuery("#end_price").val();
+jQuery.post("$!webPath/admin/payofflog_stat.htm",
+			{"type":type,
+			"type_data":type_data,
+			"addTime_beginTime":addTime_beginTime,
+			"addTime_endTime":addTime_endTime,
+			"apply_beginTime":apply_beginTime,
+			"apply_endTime":apply_endTime,
+			"complete_beginTime":complete_beginTime,
+			"complete_endTime":complete_endTime,
+			"begin_price":begin_price,
+			"end_price":end_price,
+			"status":"$!{status}"},
+			function(data){
+				if(data.code==true){
+				jQuery(".stat_div").show();
+				jQuery("#data_size").html(data.data_size);
+				jQuery("#all_order_price").html(data.all_order_price);
+				jQuery("#all_commission_price").html(data.all_commission_price);
+				jQuery("#all_total_amount").html(data.all_total_amount);
+					}else{
+					alert("当前没有可以统计的数据");	
+						}
+				},"json");
+	
+	
+}
+</script>
+</head>
+<body>
+
+<div class="cont">
+  <h3 class="seth">结算管理</h3>
+  <h4 class="seth_total">平台运营至今<span>  平台总销售额：<b>#if($!{config.payoff_all_sale})$!{config.payoff_all_sale}#else 0 #end </b>元</span><span>   平台总销售佣金：<b>#if($!{config.payoff_all_commission})$!{config.payoff_all_commission}#else 0 #end </b>元</span><span>应向商家结算<b> #if($!{config.payoff_all_amount})$!{config.payoff_all_amount}#else 0 #end</b> 元</span>  <span>实际向商家结算<b> #if($!{config.payoff_all_amount_reality})$!{config.payoff_all_amount_reality}#else 0 #end</b> 元</span></h4>
+  <div class="operation">
+      <h3>友情提示</h3>
+      <ul>
+        <li>根据筛选条件筛选相应数据后，可以使用"导出Excel"功能将筛选的数据导出到Excel中</li>
+        <li>统计数据可以统计当前筛选条件下的所有数据，如果没有设置筛选条件，默认统计所有数据</li>
+        <li>系统默认显示本月的账单</li>
+      </ul>
+    </div>
+    
+  <div class="nav_list">
+  	<ul>
+   		<li><a href="$!webPath/admin/payofflog_list.htm?status=0" #if(!$!status || $!status==0) class="this" #end><b>未结算账单</b></a></li>
+    	<li><a href="$!webPath/admin/payofflog_list.htm?status=3" #if($!status==3) class="this" #end><b>可结算账单</b></a></li>
+        <li><a href="$!webPath/admin/payofflog_list.htm?status=6" #if($!status==6) class="this" #end><b>已结算账单</b></a></li>
+        <li><a class="add_btn" onclick="payoff_excel()" href="javascript:void(0);"> <b class="add_btn_b">导出Excel</b></a></li>
+        <li><a class="add_btn" onclick="stat_date()" href="javascript:void(0);"> <b class="add_btn_b">统计数据</b></a></li>
+        <li style="cursor:auto">
+        	<div class="stat_div" style="display:none">
+            	<div class="stat_01">本次统计数据:<span id="data_size"></span>条</div>
+                <div class="stat_01">总销售金额:<span id="all_order_price"></span>元</div>
+                <div class="stat_01">总销售佣金:<span id="all_commission_price"></span>元</div>
+                <div class="stat_01">总结算金额:<span id="all_total_amount"></span>元</div>
+            </div>
+        </li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/payofflog_list.htm" method="post" name="ListForm" id="ListForm" >
+  <div class="search">
+    <ul>
+      <li>
+       <span>店铺名称</span>
+       <span class="size200">
+          <input name="store_name" type="text" id="store_name" value="$!store_name" />
+       </span>
+       
+       <span>类型</span>
+       <span>
+          <select name="type" id="type">
+             <option value="payoff">流水号</option>
+             <option value="order">订单号</option>
+             <option value="seller">商家姓名</option>
+          </select>
+        </span>
+        <span class="size200">
+          <input name="type_data" type="text" id="type_data" value="$!type_data" />
+        </span>
+       </li>
+        
+      <li> 
+      #if($!status==0 ||!$!status)
+      <span>生成时间</span><span class="size100">
+        <input name="addTime_beginTime" type="text" id="addTime_beginTime"  readonly="readonly" value="$!addTime_beginTime"/>
+        </span><span>—</span><span class="size100">
+        <input name="addTime_endTime" type="text" id="addTime_endTime" readonly="readonly" value="$!addTime_endTime"/>
+        </span> 
+       #end 
+      #if($!status==3)
+      <span>申请时间</span><span class="size100">
+        <input name="apply_beginTime" type="text" id="apply_beginTime"  readonly="readonly" value="$!apply_beginTime"/>
+        </span><span>—</span><span class="size100">
+        <input name="apply_endTime" type="text" id="apply_endTime" readonly="readonly" value="$!apply_endTime"/>
+        </span> 
+       #end 
+        #if($!status==6)
+      <span>完成时间</span><span class="size100">
+        <input name="complete_beginTime" type="text" id="complete_beginTime"  readonly="readonly" value="$!complete_beginTime"/>
+        </span><span>—</span><span class="size100">
+        <input name="complete_endTime" type="text" id="complete_endTime" readonly="readonly" value="$!complete_endTime" />
+        </span> 
+       #end  
+       
+        <span>结算金额</span><span class="size100">
+        <input name="begin_price" type="text" id="begin_price" value="$!begin_price" />
+        </span><span>—</span><span class="size100">
+        <input name="end_price" type="text" id="end_price" value="$!end_price" />
+        </span> <span >
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn"/>
+      </span> 
+   
+      </li>
+    </ul>
+  </div>
+    <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="12%"><span class="form_btna">账单流水号</span></th>
+        <th width="12%"><span class="form_btna">对应订单号</span></th>
+        <th width="8%"><span class="form_btna">商家姓名</span></th>
+        <th width="8%"><span class="form_btna">店铺名称</span></th>
+        <th width="8%"><span class="form_btna">账单说明</span></th>
+        #if($!status==0||!$!status)
+        <th  width="8%"><span class="form_btna">入账时间</span></th>
+        #end
+        #if($!status==3)
+        <th  width="8%"><span class="form_btna">申请时间</span></th>
+        #end
+         #if($!status==6)
+         <th  width="8%"><span class="form_btna">结算时间</span></th>
+          #end
+        <th width="8%"><span class="form_btna">销售金额(元)</span></th>
+        <th width="8%"><span class="form_btna">销售佣金(元)</span></th>
+        <th width="8%"><span class="form_btna">结算金额(元)</span></th>
+        #if($!status==6) 
+        <th width="8%"><span class="form_btna">结算财务</span></th>
+        <th width="8%"><span class="form_btna">操作管理员</span></th>
+         #end
+        <th align="center"><b class="form_btnb">操作</b></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr #if($!obj.payoff_type==-1)style="color:#F00" #end>
+        <td align="center">$!obj.pl_sn</td>
+        <td align="center">$!obj.order_id</td>
+        <td align="center">$!obj.seller.userName</td>
+        <td align="center">
+          <a href="$!webPath/admin/store_payofflog_list.htm?username=$!obj.seller.userName" class="this" style=" color:#00F" >
+          $!{obj.seller.store.store_name}
+          </a>
+        </td>
+        <td align="center">$!obj.pl_info</td>
+        #if($!status==0||!$!status)
+        <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+        #end
+         #if($!status==3)
+        <td align="center">$!CommUtil.formatLongDate($!obj.apply_time)</td>
+        #end
+         #if($!status==6)
+         <td align="center">$!CommUtil.formatLongDate($!obj.complete_time)</td>
+          #end
+       
+         <td align="center">$!obj.order_total_price</td>
+          <td align="center">$!obj.commission_amount</td>
+        <td align="center">$!obj.total_amount</td>
+          #if($!status==6) 
+          <td align="center">$!obj.finance_userName</td>
+          <td align="center">$!obj.admin.userName</td>
+          #end
+        <td align="center" class="hui oprate_con">
+        <a href="$!webPath/admin/payofflog_view.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">详情</a>
+         #if($!status==3) |
+        <a href="$!webPath/admin/payofflog_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">结算</a>
+         #end
+        </td>
+      </tr>
+     #end
+    </table>
+  </div>
+  <div class="operate_bar2">
+    <div class="fenye">
+        <input name="status" type="hidden" id="status" value="$!status" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        $!gotoPageFormHTML
+    </div>   
+  </div>
+  </form>
+</div>
+</body>
+</html>

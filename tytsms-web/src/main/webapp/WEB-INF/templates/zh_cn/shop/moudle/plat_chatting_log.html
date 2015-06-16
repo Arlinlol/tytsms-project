@@ -1,0 +1,57 @@
+﻿<script>
+#if(!$!chatting_session)
+var session = jQuery("#div_session").attr("session");
+	if(session=="true"){
+	window.setInterval(close_window,1000);
+	jQuery("#div_session").attr("session","false");
+	alert("由于长时间没有操作，系统正将会话窗口关闭，请确认");	
+		}
+#end
+function close_window(){
+	window.close();
+	}
+</script>
+#foreach($obj in $objs)        
+			  #if(!$!obj.store_id && !$!obj.user_id || $!obj.store_id!="")
+             <!--im-kf-->
+             <li>
+              <div class="im_me">
+                <div class="im_me_icon">
+                  <p><img src="$!webPath/resources/style/im/images/im_others_icon.png" width="40" height="33" /></p>
+                </div>
+                <div class="im_me_dialogue">
+                  <table class="im_msg_me" cellpadding="0" cellspacing="0">
+                    <tbody>
+                      <tr>
+                        <td><span class="im_others_name">$!{obj.chatting.config.kf_name}</span><span class="im_time">&nbsp;&nbsp;$!CommUtil.formatLongDate($!obj.addTime)</span></td>
+                      </tr>
+                      <tr>
+                        <td><span  style="color:$!{obj.font_colour}; font-family:$!{obj.font}; font-size:$!{obj.font_size}px">$!CommUtil.htmlUnescape($!obj.content)</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <span class="im_arrow_me"></span> </div>
+              </div>
+            </li>
+            #else         <!--im-user--> 
+           <li>
+              <div class="im_others">
+                <div class="im_others_icon">
+                  <p><img src="$!webPath/resources/style/im/images/im_me_icon.png" width="40" height="40" /></p>
+                </div>
+                <div class="im_others_dialogue">
+                  <table class="im_msg_others" cellpadding="0" cellspacing="0">
+                    <tbody>
+                      <tr>
+                        <td><span class="im_others_name">$!obj.chatting.user_name</span><span class="im_time">&nbsp;&nbsp;$!CommUtil.formatLongDate($!obj.addTime)</span></td>
+                      </tr>
+                      <tr>
+                        <td><span  style="color:$!{obj.font_colour}; font-family:$!{obj.font}; font-size:$!{obj.font_size}px">$!CommUtil.htmlUnescape($!obj.content)</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <span class="im_arrow_others"></span> </div>
+              </div>
+            </li>
+            #end
+#end

@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+    #if($!refund_status)
+  jQuery("#refund_status").val($!{refund_status});
+  #end
+  //
+});
+
+function refund_excel(){
+	#if($!objs.size()>0)
+		var order_id = jQuery("#order_id").val();
+		var name = jQuery("#name").val();
+		var user_name = jQuery("#user_name").val();
+		var refund_status = jQuery("#refund_status").val();
+		window.location.href="$!webPath/admin/refund_excel.htm?order_id="+order_id+"&name="+name+"&user_name="+user_name+"&refund_status="+refund_status;
+	#else
+	   alert("当前没有可以导出的数据！");
+    #end
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">商品退款</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/refund_list.htm" class="this"><b>商品退款</b></a></li>
+            <li><a href="$!webPath/admin/groupinfo_refund_list.htm"><b>消费码退款</b></a></li>
+            <li><a href="$!webPath/admin/refundlog_list.htm"><b>退款日志</b></a></li>
+            <li><a class="add_btn" onclick="refund_excel()" href="javascript:void(0);"> <b class="add_btn_b">导出Excel</b></a></li>
+        </ul>
+  </div>
+	<form name="queryForm" id="queryForm" action="$!webPath/admin/refund_list.htm" method="post">
+    <div class="search">
+    
+      <span>订单号</span> 
+      <span class="size150">
+         <input name="order_id" type="text" id="order_id" value="$!order_id" />
+      </span>
+      
+      <span>商品名称</span> 
+      <span class="size150">
+         <input name="name" type="text" id="name" value="$!name" />
+      </span>
+      
+      <span>申请者</span>
+      <span class="size150">
+         <input name="user_name" type="text" id="user_name" value="$!user_name" />
+      </span>
+       
+      <span>退款状态</span> 
+      <span class="size150">
+         <select name="refund_status" id="refund_status">
+	          <option value="">请选择..</option>
+	          <option value="0">未退款</option>
+	          <option value="1">已退款</option>
+         </select>
+      </span>
+      
+      <span>
+         <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn" />
+      </span> 
+    </div>
+  </form>
+  <form name="ListForm" id="ListForm" action="$!webPath/admin/refund_list.htm" method="post">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="9%">订单号</th>
+          <th width="24%">商品名称</th>
+          <th width="10%">店铺名称</th>
+          <th width="20%">退款原因</th>
+          <th width="9%">申请者</th>
+          <th width="8%">商品单价</th>
+          <th width="6%">商品数量</th>
+          <th width="6%">商品总价</th>
+          <th >操作</th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td align="center">$!obj.order_id</td>
+          <td>
+            <span class="size70">
+              <a href="$!webPath/goods_$!{obj.goods_id}.htm" target="_blank" style=" color:#00F">$!CommUtil.substring("$!obj.goods_name",35)</a>
+            </span>
+          </td>
+          <td align="center">$!obj.store_name</td>
+          <td align="center">$!obj.return_content</td>
+          <td align="center">$!obj.user_name</td>
+          <td align="center">$!obj.goods_price</td> 
+          <td align="center">$!obj.goods_count</td>     
+          <td align="center">$!obj.goods_all_price</td>
+          <td class="hui oprate_con" align="center">
+          		#if($!obj.refund_status==0)
+          		<a href="$!webPath/admin/refund_view.htm?id=$!obj.id&currentPage=$!currentPage" class="blue">退款</a>
+                #end
+                #if($!obj.refund_status==1)
+          		<a href="javascript:void(0);">退款完成</a>
+                #end
+                <a href="$!webPath/admin/refund_reason.htm?id=$!obj.id" class="blue">退款原因</a>
+          </td>
+        </tr>
+        #end
+    </table>
+    
+    <div class="operate_bar">
+        <div class="fenye" id="queryCondition">
+            <input name="mulitId" type="hidden" id="mulitId" />
+            <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+           $!gotoPageFormHTML
+        </div> 
+        <div class="oper_sp">
+        </div>         
+ 	</div>
+  </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>企业注册 -$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/login.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+
+<script type="text/javascript">  
+/*-------------------------------------------*/  
+var InterValObj; //timer变量，控制时间  
+var count = 120; //间隔函数，1秒执行  
+var curCount;//当前剩余秒数  
+var code = ""; //验证码  
+var codeLength = 6;//验证码长度  
+function sendMessage() {  
+    curCount = count;  
+    var reg = true;
+    var mobile = $("#mobile").val();//手机号码  
+    jQuery.ajax({
+    	async:false,
+    	type:"POST",
+    	dataType:"json",
+    	data:"mobile="+mobile,
+    	url:"$!webPath/verify_mobile.htm",
+    	success:function(result) {
+    		if (result == true) {
+    			
+    		} else {
+    			reg = false;
+    		}
+    	}
+    });
+    if(mobile != "" && reg == true){  
+        //产生验证码  
+        for (var i = 0; i < codeLength; i++) {  
+            code += parseInt(Math.random() * 9).toString();  
+        }  
+        //设置button效果，开始计时  
+        $("#btnSendCode").attr("disabled", "true");  
+        $("#btnSendCode").val(curCount + "秒后重新获取");  
+        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次  
+    //向后台发送处理数据  
+        jQuery.ajax({  
+            type: "POST", //用POST方式传输  
+            dataType: "json", //数据格式:JSON  
+            url: '$!webPath/sendMsg.htm', //目标地址  
+            data: "mobile=" + mobile, 
+            error: function (XMLHttpRequest, textStatus, errorThrown) { },  
+            success: function (msg){ }  
+        });  
+    }else if (mobile == ""){  
+        alert("手机号码不能为空！");  
+    }  else if (reg == false){
+    	alert("手机号码已被注册");
+    }
+}  
+//timer处理函数  
+function SetRemainTime() {  
+    if (curCount == 0) {                  
+        window.clearInterval(InterValObj);//停止计时器  
+        $("#btnSendCode").removeAttr("disabled");//启用按钮  
+        $("#btnSendCode").val("重新发送验证码");  
+        code = ""; //清除验证码。如果不清除，过时间后，输入收到的验证码依然有效      
+    }  
+    else {  
+        curCount--;  
+        $("#btnSendCode").val(curCount + "秒后重新获取");  
+    }  
+}  
+</script>  
+<script> 
+jQuery(document).ready(function(){
+ //
+ jQuery.validator.addMethod("verify",function(value,element){
+	    var re =  /^([0-9a-zA-Z]|[\u4E00-\u9FA5])+$/;
+        if(re.test(jQuery("#userName").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }		  
+});
+
+jQuery.validator.addMethod("mobile",function(value,element){
+	    var re =  /^[1][358]\d{9}$/;
+        if(re.test(jQuery("#mobile").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }		  
+			  
+});
+
+ jQuery.validator.addMethod("sms",function(value,element){
+	    var re =  /^[1][358]\d{9}$/;
+        if(re.test(jQuery("#sms").val())){			
+			return true;
+		  } 
+		  else {
+		    return false;
+			  }		  
+			  
+});
+
+ jQuery("#theForm").validate({
+	   errorPlacement:function(error, element) {
+			   element.parent().parent().find("s").html(error); 
+           },						 
+	ignore: "",
+	  rules:{
+	  sms:{
+	    	required:true,
+	  		 sms:true,
+	  		 remote:{
+	  		 	url:"$!webPath/verify_sms.htm",
+	  		 	type:"post",
+	  		 	dataType:"json",
+	  		 	data:{
+	  		 		"sms":function(){return jQuery("#sms").val();}
+	  		 	}
+	  		 }
+	    },
+	  	mobile:{
+	  		 required:true,
+	  		 mobile:true,
+	  		 remote:{
+	  		 	url:"$!webPath/verify_mobile.htm",
+	  		 	type:"post",
+	  		 	dataType:"json",
+	  		 	data:{
+	  		 		"mobile":function(){return jQuery("#mobile").val();}
+	  		 	}
+	  		 }
+	  	},
+	    userName:{
+		  required:true,
+		  verify:true,
+          remote:{
+		    url: "$!webPath/verify_username.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "userName": function(){return jQuery("#userName").val();}
+		     }
+			}
+		},
+        password:{
+		  required:true,
+		  minlength:6,
+		  maxlength:20  
+		},
+		repassword:{
+		  required:true,
+		  equalTo:"#password" 
+		},
+		department:{
+			 required:true
+			},
+		company_name:{
+		  required:true
+		},
+		company_address:{
+		  required:true
+		},
+		telephone:{
+		  required:true
+		},
+		area_id:{
+		  required:true
+		},
+		  contact_user:{
+		  required:true
+		},
+		email:{
+		  required:true,
+		  email:true,
+		  remote:{
+		    url: "$!webPath/verify_email.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "email": function(){return jQuery("#email").val();}
+		     }
+		  }
+		},
+		agree:{
+		  required:true
+		}#if($!config.securityCodeRegister),
+		code:{
+		  required:true,
+		  remote:{
+		    url: "$!webPath/verify_code.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "code": function(){return jQuery("#code").val();}
+		     }
+		  }
+		}
+		#end
+	  },
+	  messages:{
+	  sms:{
+	  	  required:"手机验证码不能为空",
+		  sms:"验证码格式错误",
+		  remote:"验证码错误或者失效"
+	  	},
+	  	mobile:{
+	  	  required:"手机号码不能为空",
+		  mobile:"手机号码格式不正确",
+		  remote:"此号码已被注册"
+	  	},
+	    userName:{
+		  required:"用户名不能为空",
+		  verify:"不可使用特殊字符",
+		  remote:"用户名已存在"
+		},
+        password:{
+		  required:"密码不能为空",
+		  minlength:"密码不能小于{0}个字符",
+		  maxlength:"密码不能大于{0}个字符" 
+		},
+		repassword:{
+		  required:"重复密码不能为空",
+		  equalTo:"两次输入密码不一致"
+		},
+			department:{
+			 required:"请选择所在部门"
+			},
+		company_name:{
+		  required:"公司名称不能为空"
+		},
+		company_address:{
+		  required:"公司地址不能为空"
+		},
+		telephone:{
+		  required:"联系人电话不能为空"
+		},
+		area_id:{
+		  required:"请选择公司所在地"
+		},
+		 contact_user:{
+		  required:"联系人姓名不能为空"
+		},
+		email:{
+		  required:"email不能为空",
+		  email:"email格式不正确",
+		  remote:"该email已经存在"
+		},
+		agree:{
+		  required:"请接受用户协议"
+		}#if($!config.securityCodeRegister),
+		code:{
+		  required:"验证码不能为空",
+		  remote:"验证码不正确"
+		}
+		#end
+	  }
+	});
+ jQuery("#department_select").change(function(){
+		jQuery("#department").val(jQuery(this).val());									  
+		});
+ //
+ 	jQuery("select[id^=select_area_]").change(function(){
+		jQuery("#area_id").val("");											   
+		var mark = jQuery(this).attr("mark");
+		if(mark==1){
+		jQuery("#select_area_3").html("<option value=''>请选择</option>");
+			}
+		var mark2 = mark - 0 + 1;
+		if(mark<3){
+				jQuery.ajax({type:'POST',
+						url:'$!webPath/load_area.htm',
+						data:{"pid":jQuery(this).val()},
+						success:function(data){
+							var list = jQuery.parseJSON(data);
+							jQuery("#select_area_"+mark2).html("<option value=''>请选择</option>");
+							jQuery.each(list,function(index,obj){
+								jQuery("#select_area_"+mark2).append("<option value="+obj.id+">"+obj.areaName+"</option>");
+							}); 
+						}
+				});	
+		}else{
+			jQuery("#area_id").val(jQuery(this).val());
+		}
+	});
+	jQuery("#area_id").val("");
+ //
+});
+function save(){
+	var company_purpose="";
+	jQuery("#theForm").find(":checkbox:checked").each(function(){
+	  if(jQuery(this).val()!=""){	  
+	    company_purpose+=jQuery(this).val()+",";
+	  }
+	});
+	jQuery("#company_purpose").val(company_purpose);
+	jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="login_head" id="login_head">
+  <h1><span>#if($!config.websiteLogo) <a href="$!webPath/index.htm"> <img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" /> </a> #else <a href="$!webPath/index.htm"><img src="$!webPath/resources/style/system/front/default/images/logo.jpg"  /> </a> #end</span><strong>企业用户注册</strong></h1>
+</div>
+<div class="regist_box">
+  <div class="regist_box_tab"><span class="regist_login">我已经注册，现在就<a href="$!webPath/user/login.htm">登录</a></span>
+    <ul class="regist_box_ul">
+      <li ><a href="$!webPath/register.htm">个人用户注册</a></li>
+      <li class="this">企业用户注册</li>
+    </ul>
+  </div>
+  <div class="regist_business">
+    <h3><strong>欢迎注册成为企业用户</strong></h3>
+    <div class="regist_business_top"> <span>
+      <h4>周到服务</h4>
+      <ul>
+        <li>1.订单下达后，客服专员服务；</li>
+        <li>2.快递绿色通道，专属快递服务；</li>
+        <li>3.零订单积压，第一时间发货；</li>
+      </ul>
+      </span> <span>
+      <h4>专项五大特权</h4>
+      <ul>
+        <li> 1. 支付方式更灵活；</li>
+        <li>2. 全款全额增值税票；</li>
+        <li>3. 大批采购，价格再优惠；</li>
+        <li>4. 大额订单，专车配送；</li>
+        <li>5. 可享受大金额优惠券。</li>
+      </ul>
+      </span> <span>
+      <h4>申请条件</h4>
+      <ul>
+        <li>必须是能提供合法的营业执照及法人代表身份证的单位或公司，单次消费金额在10000元（含）以上或年采购10万元以上客户。</li>
+      </ul>
+      </span></div>
+        <form action="$!webPath/register_finish.htm" method="post" name="theForm" id="theForm">
+    <div class="regist_business_box">
+      <h5><strong>账户信息</strong></h5>
+      <div class="regist_business_content">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="business_table">
+          <tr>
+            <td width="230" align="right"><i class="redstr">*</i><span class="font14">账户名</span></td>
+            <td><input name="userName" type="text" class="regist_txt" id="userName" />
+              <input name="user_type" type="hidden" id="user_type" value="1" /><s></s></td>
+          </tr>
+          <tr>
+            <td align="right"><i class="redstr">*</i><span class="font14">请设置密码</span></td>
+            <td><input name="password" type="password" class="regist_txt" id="password" /><s></s></td>
+          </tr>
+          <tr>
+            <td align="right"><i class="redstr">*</i><span class="font14">请确认密码</span></td>
+            <td><input name="repassword" type="password" class="regist_txt" id="repassword" /><s></s></td>
+          </tr>
+        </table>
+      </div>
+      <h5><strong>联系人信息</strong></h5>
+      <div class="regist_business_content">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="business_table">
+          <tr>
+            <td width="230" align="right"><i class="redstr">*</i><span class="font14">联系人姓名</span></td>
+            <td><input name="contact_user" type="text" class="regist_txt" id="contact_user" /><s></s></td>
+          </tr>
+          <tr>
+            <td align="right"><i class="redstr">*</i><span class="font14">所在部门</span></td>
+            <td><select  class="regist_select" id="department_select" name="department_select" >
+                <option selected="selected"  value="">请选择</option>
+                <option value="办公室">办公室</option>
+                <option value="市场部">市场部</option>
+                <option value="采购部">采购部</option>
+                <option value="技术部">技术部</option>
+                <option value="人力资源部">人力资源部</option>
+              </select>
+              <input name="department" type="hidden" value="" class="regist_txt" id="department" />
+              <s></s></td>
+          </tr>
+          <tr>
+            <td align="right"><i class="redstr">*</i><span class="font14">固定电话</span></td>
+            <td><input name="telephone" type="text" class="regist_txt" id="telephone" /><s></s></td>
+          </tr>
+          
+          
+           <!--手机验证-->   
+          <tr>
+            <td  align="right"><i class="redstr">*</i><span class="font14">验证手机</span></td>
+            <td><div class="regist_form_txt"><input name="mobile" type="text" id="mobile"  class="regist_txt" /></div></td>
+          </tr>   
+             
+            <tr>
+            <td  align="right"><i class="redstr">*</i><span class="font14">验证码</span></td>
+            <td>
+            <div class="regist_form_txt"><input name="sms" type="text" class="phone_code" id="sms" /></div>
+                            
+                            <input id="btnSendCode" type="button" value="发送验证码" onClick="sendMessage()" class="phone_code_btn" />  
+                            </td>
+          </tr>
+          
+          <tr>
+            <td align="right"><i class="redstr">*</i><span class="font14">联系人邮箱</span></td>
+            <td><input name="email" type="text" class="regist_txt" id="email" /><s></s></td>
+          </tr>
+        </table>
+      </div>
+      <h5><strong>公司信息</strong></h5>
+      <div class="regist_business_content">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0" class="business_table">
+          <tr>
+            <td width="230" align="right"><i class="redstr">*</i><span class="font14">公司名称</span></td>
+            <td><input name="company_name" type="text" class="regist_txt" id="company_name" /><s></s></td>
+          </tr>
+          <tr>
+            <td align="right"><i class="redstr">*</i><span class="font14">公司所在地</span></td>
+            <td><select id="select_area_1" class="regist_select" mark="1">
+                <option value="">请选择</option>
+                #foreach($obj in $areas)
+                <option value="$!obj.id">$!obj.areaName</option>
+                #end
+              </select>
+              <select id="select_area_2" class="regist_select" mark="2">
+                 <option value="">请选择</option>
+              </select>
+              <select id="select_area_3" class="regist_select" mark="3">
+                <option value="">请选择</option>
+              </select>
+              <input id="area_id" name="area_id" type="hidden" value=""/>
+             <s></s> </td>
+          </tr>
+          <tr>
+            <td align="right"><i class="redstr">*</i><span class="font14">公司地址</span></td>
+            <td><input name="company_address" type="text" class="regist_txt" id="company_address" /><s></s></td>
+          </tr>
+          <tr>
+            <td align="right"><span class="font14">购买类型/用途</span></td>
+            <td><div class="buy_use"><span class="regist_check">
+            <label>
+                <input name="" type="checkbox" value="IT设备"/>
+                IT设备</label></span><span class="regist_check">
+               <label> <input name="" type="checkbox" value="数码通讯"/>
+                数码通讯</label></span><span class="regist_check">
+                <label><input name="" type="checkbox" value="办公用品耗材"/>
+                办公用品耗材</label></span><span class="regist_check">
+                <label><input name="" type="checkbox" value="大家电" />
+                大家电</label></span><span class="regist_check">
+                <label><input name="" type="checkbox" value="项目合作-政府采购"/>
+                项目合作-政府采购</label></span></div></td>
+             <input value="" name="company_purpose" id="company_purpose" type="hidden" />   
+          </tr>
+          <tr>
+            <td align="right"><span class="font14">公司网址</span></td>
+            <td><input name="company_url" type="text" class="regist_txt" id="company_url" /></td>
+          </tr>
+          <tr>
+            <td align="right"><span class="font14">企业人数</span></td>
+            <td><select name="company_person_num" class="regist_select" id="company_person_num">
+                <option selected="selected" value="">请选择</option>
+                <option value="1-49">1-49</option>
+                <option value="50-99">50-99</option>
+                <option value="100-499">100-499</option>
+                <option value="500-999">500-999</option>
+                <option value="1000以上">1000以上</option>
+              </select></td>
+          </tr>
+          <tr>
+            <td align="right"><span class="font14">公司行业</span></td>
+            <td><select name="company_trade" class="regist_select"  id="company_trade">
+                <option value="">请选择</option>
+                 <option value="互联网/电子商务">互联网/电子商务</option>
+                  <option value="旅游/酒店">旅游/酒店</option>
+                   <option value="法律/服务">法律/服务</option>
+                    <option value="媒体/传播">媒体/传播</option>
+                     <option value="计算机软件">计算机软件</option>
+                      <option value="财务/统计">财务/统计</option>
+                      <option value="其他">其他</option>
+              </select></td>
+          </tr>
+          <tr>
+            <td align="right"><span class="font14">公司性质</span></td>
+            <td><select name="company_nature" class="regist_select" id="company_nature">
+                <option value="">请选择</option>
+                <option value="政府机关/事业单位">政府机关/事业单位</option>
+                <option value="国营">国营</option>
+                <option value="私营">私营</option>
+                <option value="中外合资">中外合资</option>
+                <option value="外资">外资</option>
+                <option value="其他">其他</option>
+              </select></td>
+          </tr>
+                   #if($!config.securityCodeRegister)
+              <script>
+                 function refreshCode(){
+	                 jQuery("#code_img").attr("src","$!webPath/verify.htm?d"+new Date().getTime());
+                 }
+             </script>
+          <tr>
+            <td  align="right">验证码：</td>
+            <td>
+            <div class="regist_form_txt"><input name="code" type="text" class="regist_code" id="code" /></div>
+             #if($!config.securityCodeType=='voice')
+            <script>
+				   function readCode(id){
+                         var  s = "<embed id='sound_play' name='sound_play' src='$!webPath/resources/flash/soundPlayer.swf?" + (new Date().getTime()) + "' FlashVars='url=$!webPath"+ "' width='0'   height='0' allowScriptAccess='always' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' /></embed>";
+                    jQuery("#"+id).html(s);
+                    }
+			 </script>
+              <b class="regist_code_img"><img id="code_img" src="$!webPath/verify.htm" width="59" height="27" style="display:none;" /></b>
+              <a href="javascript:void(0);" onclick="readCode('player')" title="朗读验证码" class="code_speech"></a>
+              <a href="javascript:void(0);" onclick="refreshCode();"  class="code_refresh"></a>
+              <span id="player"></span>
+             #else
+               <b class="regist_code_img"><img id="code_img" src="$!webPath/verify.htm" width="59" height="27" /></b><a href="javascript:void(0);" onclick="refreshCode();" class="code_refresh"></a>
+             #end  
+               </td>
+          </tr>
+          #end
+          <tr>
+            <td align="right">&nbsp;</td>
+            <td class="font12">
+              <span style="float:left;"><input name="agree" id="agree" type="checkbox" value="" class="regist_check" />
+              我已阅读并同意<a href="javascript:void(0)" onclick="jQuery('#agree_article').show();jQuery('.black_overlay').css('height',jQuery('body')[0].scrollHeight)" class="blue2">《商城在线服务协议》</a></span>
+             <s style="float:left;"></s></td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td><input type="button" onclick="save()" class="regist_btn" value="立即注册"/></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+<div style="display:none;" id="agree_article">
+  <div class="white_content_box" style="position:fixed; top:20%;"> <a href="javascript:void(0);"  onclick="jQuery('#agree_article').hide();" class="white_close"><img src="$!webPath/resources/style/system/front/default/images/login/close.gif" width="16" height="16" /></a>
+    <div class="white_con">
+      <h3 class="white_title"><span>用户注册协议</span></h3>
+      <div class="white_box">
+        <div class="white_box_contant"> $!doc.content </div>
+      </div>
+      <div class="white_box_btn">
+        <input name="" type="button" value="同意并继续" onclick="jQuery('#agree_article').hide();" />
+      </div>
+    </div>
+  </div>
+  <div class="black_overlay"></div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

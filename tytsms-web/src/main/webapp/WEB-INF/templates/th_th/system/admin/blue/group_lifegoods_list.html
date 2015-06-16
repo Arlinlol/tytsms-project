@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js" charset="UTF-8"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">团购管理</h1>
+  <div class="nav_list">
+  
+
+  <ul>
+   <li><a href="$!webPath/admin/group_goods_list.htm?group_id=$!group_id&gg_status=0&type=life" #if($!gg_status==0)class="this"#end><b>待审核</b></a> </li>
+   <li><a href="$!webPath/admin/group_goods_list.htm?group_id=$!group_id&gg_status=1&type=life" #if($!gg_status==1)class="this"#end><b>已审核</b></a></li>
+   <li><a href="$!webPath/admin/group_goods_list.htm?group_id=$!group_id&gg_status=-1&type=life" #if($!gg_status==-1)class="this"#end><b>已拒绝</b></a></li>
+   <li><a href="$!webPath/admin/group_list.htm"><b>团购列表</b></a></li>
+   </ul> 
+
+   
+   </div>
+  <form method="post" id="ListForm">
+  <div class="fshoptb">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="30"></th>
+        <th width="35%"><span class="form_btna">团购商品</span></th>
+        <th width="15%"><span class="form_btna">团购标题</span></th>
+        <th width="10%" align="center"><span class="form_btna">开始时间</span></th>
+        <th align="center" width="10%"><span class="form_btna">结束时间</span></th>
+        <th align="center" width="10%"><span class="form_btna">状态</span></th>
+        <th align="center"><span class="form_btna">推荐</span></th>
+        <th align="center"><span class="form_btna">操作</span></th>
+      </tr>
+      #foreach($obj in $objs)
+      <tr>
+        <td><span class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></span></td>
+        <td >
+        <span class="memimg"><img  src="$!webPath/$!obj.group_acc.path/$!obj.group_acc.name" width="45" height="49" /></span> <span class="mem_detail">
+            <ul>
+              <li>团购标题：<a href="$!webPath/grouplife/view_$!{obj.id}.htm?type=life" target="_blank" title="$!obj.gg_name">$!CommUtil.substring("$!obj.gg_name",25)</a></i></li>            
+              #if($!obj.user.store)
+              <li>所在店铺：<a href="$!webPath/grouplife/view_$!{obj.id}.htm?type=life" target="_blank" title="$!obj.gg_goods.goods_store.store_name">$!CommUtil.substring("$!obj.user.store.store_name",25)</a></li>#else <li>自营团购</li>           #end
+            </ul>
+            </span>
+        </td>
+        <td><a href="$!webPath/grouplife/view_$!{obj.id}.htm?type=life" target="_blank" title="$!obj.gg_name">$!CommUtil.substring("$!obj.gg_name",25)</a></td>
+        <td align="center">$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!obj.beginTime)</td>
+        <td align="center">$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!obj.endTime)</td>
+          #if($!obj.group_status==0)
+            #set($status="待审核")
+          #end
+          #if($!obj.group_status==1)
+            #set($status="审核通过")
+         #end
+         #if($!obj.group_status==-1)
+            #set($status="审核拒绝")
+         #end
+          #if($!obj.group_status==-2)
+            #set($status="已过期")
+         #end
+        <td align="center">$!status</td>
+        <td  align="center" class="aoprater"><a href="$!webPath/admin/group_lifegoods_recommend.htm?mulitId=$!obj.id&group_id=$!group_id&gg_status=$!gg_status&currentPage=$!currentPage"><img src="$!webPath/th_th/resources/style/system/manage/blue/images/$!{obj.group_recommend}.png" width="21" height="23" style="cursor:pointer;" title="推荐后会在团购详细页右侧显示"/></a></td>
+        <td  align="center" class="aoprater"><a href="$!webPath/grouplife/view_$!{obj.id}.htm?type=life" target="_blank" class="blue">查看</a>#if($!obj.group_status!=1)<a href="javascript:void(0);" onclick="if(confirm('确定审核通过团购商品吗？'))window.location.href='$!webPath/admin/group_lifegoods_audit.htm?mulitId=$!obj.id&group_id=$!group_id&gg_status=$!gg_status&currentPage=$!currentPage'" class="blue"> 通过</a>#end #if($!obj.group_status!=-1)<a href="javascript:void(0);" onclick="if(confirm('确定拒绝通过团购商品吗？'))window.location.href='$!webPath/admin/group_lifegoods_refuse.htm?mulitId=$!obj.id&group_id=$!group_id&gg_status=$!gg_status&currentPage=$!currentPage'" class="blue"> 拒绝</a>#end</td>
+      </tr>
+      #end
+      
+    </table>
+    
+    <div class="operate_bar">
+    <div class="fenye"> 
+         
+<input type="hidden" name="mulitId" id="mulitId" />
+          <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+          $!gotoPageFormHTML</div> 
+    
+    <div class="oper_sp"> <span class="oper_check"><input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部</span>
+           <span class="oper_del">   #if($!gg_status!=1)
+            <input type="button" value="通过" onclick="cmd('$!webPath/admin/group_lifegoods_audit.htm??group_id=$!group_id');" style="cursor:pointer;" />
+            #end</span>
+            
+            <span class="oper_del">
+            
+                        #if($!gg_status!=-1)
+            <input type="button" value="拒绝" onclick="cmd('$!webPath/admin/group_lifegoods_refuse.htm?group_id=$!group_id');" style="cursor:pointer;" />
+            #end
+            </span>
+            </div>
+             
+ </div>
+  </div>
+  </form>
+</div>
+</body>
+</html>

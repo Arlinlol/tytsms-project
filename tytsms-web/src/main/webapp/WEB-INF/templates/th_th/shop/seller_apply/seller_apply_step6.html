@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.seller_apply_step6.store_type") - $!config.title </title><!-- 店铺类目及资质 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/shop_into.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function(e) {
+	<!--店铺类型-->
+	jQuery("#storeGrades").change(function(){
+		var id = jQuery(this).attr("value");
+		jQuery("b[id^='settedtab_b_']").hide();	
+		jQuery("#settedtab_b_"+id).show();
+	})
+    <!--店铺经营类目-->
+	jQuery("#goodsClass").live("change",function(){
+		var cid = jQuery(this).val();
+		m = jQuery("#storeGrades").find("option:selected").attr("mark");
+		if(cid==""){
+			jQuery("#settled_gc").html('');
+			return;
+		}
+		jQuery.ajax({type:'POST',
+	              	url:'$!webPath/seller_goodsclass_ajax.htm',
+				  	data:{"cid":cid
+						,"uid":$!user.id
+						,"mark":m},
+			   	success:function(data){
+					jQuery("#settled_gc").html(data);    
+              }
+		});
+	})
+});<!--end-->
+function saveForm(){
+	jQuery("#theForm").submit();
+}
+function backwards(step){
+	window.location.href="$!webPath/seller_apply.htm?op=back&step="+step;
+}
+function goodsclass_show(){
+	jQuery(".settled_box_pop").show();
+}
+function goodsclass_hide(){
+	jQuery(".settled_box_pop").hide();
+}
+<!--店铺详细类目删除操作-->
+function goodsclass_delete(gc_id){
+	jQuery.ajax({type:'POST',
+	              	url:'$!webPath/seller_goodsclass_del.htm',
+				  	data:{"gc_id":gc_id},
+			   	success:function(data){
+					jQuery("#gc_list").html(data);   
+              }
+		});	
+}
+<!--店铺详细类目保存保存-->
+function goodsclass_save(){
+	var uid=$!user.id;
+	var check = jQuery("input[name='gc_id']:checked");
+ 	var gc_ids="";
+ 	check.each(function(i){       
+   		 gc_ids = gc_ids+','+jQuery(this).val();
+		
+  	});
+	if(check.length==0){
+		return;
+	}
+	jQuery.ajax({
+					type:'POST',
+	              	url:'$!webPath/seller_goodsclass_save.htm',
+				  	data:{"gc_ids":gc_ids
+						 ,"uid":uid},
+			   		success:function(data){
+						#if($!goodsClass)
+						jQuery("#goodsClass").val("");
+						jQuery("#settled_gc").html("");
+						#end
+						jQuery(".settled_box_pop").hide();
+						jQuery("#gc_list").html(data);
+             		}
+				});
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="head">
+  <h1 class="logo" title=""> #if($!config.websiteLogo) <a href="$!webPath/index.htm"><img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" width="209" height="70"/></a> #else <a href="$!webPath/index.htm"><img src="$!webPath/th_th/resources/style/system/front/default/images/logo.jpg" width="209" height="70"/> </a> #end </h1>
+  <span class="head_into">#springMessage("sms.seller_apply_step6.merchant_enter")<!-- 商家入驻 --></span> <a href="$!webPath/doc.htm?mark=apply_help" target="_blank" class="head_help">#springMessage("sms.seller_apply_step6.enter_help")<!-- 入驻帮助 --></a> </div>
+<div class="nav_into">
+  <ul>
+    <li><a href="javascript:void(0)" onclick="backwards(1)">#springMessage("sms.seller_apply_step6.enter_protocol")<!-- 入驻协议 --></a></li>
+    <li><a href="javascript:void(0)" onclick="backwards(3)">#springMessage("sms.seller_apply_step6.company_info_commit")<!-- 公司信息提交 --></a></li>
+    <li><a href="javascript:void(0)" class="this">#springMessage("sms.seller_apply_step5.store_info_commit")<!-- 店铺信息提交 --></a></li>
+    <li><a href="javascript:void(0)">#springMessage("sms.seller_apply_step6.waitting_check")<!-- 审核日志查询 --></a></li>
+  </ul>
+</div>
+<div class="main">
+  <div class="settled_box">
+    <h3>
+      <div class="settled_step"><span><em class="setstep_light_blue"></em><b class="strong_light_two"></b><strong class="strong_blue">#springMessage("sms.seller_apply_step5.enter_must_know")<!-- 入驻须知 --></strong></span><span><em class="setstep_light_blue"></em><b class="light_blue_two"></b><strong class="strong_blue">#springMessage("sms.seller_apply_step6.company_info_comfirm")<!-- 公司信息认证 --></strong></span><span><em class="setstep_strong_blue"></em><b class="strong_blue_three"></b><strong class="grey">#springMessage("sms.seller_apply_step6.store_info_comfirm")<!-- 店铺信息认证 --></strong></span><span><em class="setstep_grey"></em><b class="strong_grey_four"></b><strong class="grey">#springMessage("sms.seller_apply_step6.waitting_check")<!-- 等待审核 --></strong></span></div>
+      <span class="settled_title">#springMessage("sms.seller_apply_step6.store_type_and_info")<!-- 店铺类目及类目信息 --></span></h3>
+    <div class="settled_box_pop" style="display:none">
+      <h4><a href="javascript:void(0)" class="settled_pop_close" onclick="goodsclass_hide()"></a></h4>
+      <div class="settled_pop_inbox">
+        <input type="hidden" name="gc_main_h" value="" />
+        <input type="hidden" name="sg_h" value="" />
+        #if($!goodsClass)
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="70" align="left" valign="top">#springMessage("sms.seller_apply_step6.first_type")<!-- 一级类目 --></td>
+            <td align="left" width="230"><select name="goodsClass" id="goodsClass">
+                <option value="">#springMessage("sms.seller_apply_step6.select")<!-- 请选择 --></option>
+                
+                    #foreach($gc in $goodsClass)
+                    
+                <option value="$!gc.id">$!gc.className</option>
+                
+                    #end  
+              
+              </select></td>
+          </tr>
+          <tr>
+            <td align="left" valign="top">#springMessage("sms.seller_apply_step6.second_type")<!-- 二级类目 --></td>
+            <td align="left"><div class="settled_gc" id="settled_gc"> </div></td>
+          </tr>
+        </table>
+        #else
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td align="left" valign="top" width="80">#springMessage("sms.seller_apply_step6.second_type")<!-- 二级类目 --></td>
+            <td align="left">
+            <div class="settled_gc" id="settled_gc"> 
+            	#foreach($child in $gc.childs)
+                    <span class="settled_check">
+                    <label style="cursor:pointer"><input name="gc_id" type="checkbox" value="$!child.id" />
+                     $!child.className</label>
+                    </span> 
+                #end 
+            </div>
+            </td>
+          </tr>
+        </table>
+        #end </div>
+      <div class="settled_pop_btn"><span><a href="javascript:void(0)" class="setable_add" onclick="goodsclass_save()">#springMessage("sms.seller_apply_step6.add")<!-- 添加 --></a><a href="javascript:void(0)" class="setable_add" onclick="goodsclass_hide()">#springMessage("sms.seller_apply_step6.cancel")<!-- 取消 --></a></span></div>
+    </div>
+    <form action="$!webPath/seller_apply_step6_save.htm" method="post" id="theForm">
+      <input name="step" type="hidden" id="step" value="7" />
+      <div class="settled_white">
+        <div class="settled_white_box">
+          <div class="settled_form">
+            <h4><span>#springMessage("sms.seller_apply_step6.select_can_manage_type")<!-- 选择可经营类目 --></span>
+            	#if($!goodsClass)
+                	<b class="settled_warning"><em>$!store.grade.gradeName#springMessage("sms.seller_apply_step6.manage_different_type")<!-- 店铺可以经营不同一级类目下的若干二级类目 --></em></b>
+                #else
+                	<b class="settled_warning"><em>$!store.grade.gradeName#springMessage("sms.seller_apply_step6.must_belong_first_type")<!-- 店铺所经营的类目必须共属一个一级类目 --></em></b>
+                #end
+            </h4>
+            <ul class="settled_white_ul">
+              <li> <span class="settled_ul_dt">#springMessage("sms.seller_apply_step6.detail_type")<!-- 详细类目： --></span> <span class="settled_ul_dd"><a href="javascript:void(0)" class="setable_add" onclick="goodsclass_show()">#springMessage("sms.seller_apply_step6.add")<!-- 添加 --></a> <b class="settedtab_b"><a href="$!webPath/seller_apply_money.htm" target="_blank">#springMessage("sms.seller_apply_step6.type_cost_standard")<!-- 查看类目费用标准 --></a></b> </span> </li>
+              <li> <span class="settled_ul_dt">&nbsp;</span> <span class="settled_ul_dd">
+                <div class="class_settle" style="float:left;" id="gc_list">
+                  <table width="695" border="0" cellpadding="0" cellspacing="0" class="class_settle_table">
+                    <tr>
+                      <th align="center" valign="middle">#springMessage("sms.seller_apply_step6.sequence")<!-- 序号 --></th>
+                      <th  align="center" valign="middle">#springMessage("sms.seller_apply_step6.first_types")<!-- 一级类目 --></th>
+                      <th  align="center" valign="middle">#springMessage("sms.seller_apply_step6.second_type")<!-- 二级类目 --></th>
+                      <th  align="center" valign="middle">#springMessage("sms.seller_apply_step6.operate")<!-- 操作 --></th>
+                    </tr>
+                    #foreach($gc_de in $details_gcs)
+                    <tr id="gc_de_$!{gc_de.id}">
+                      <td  align="center">$!velocityCount</td>
+                      <td  align="center">$!gc_de.parent.className</td>
+                      <td  align="center">$!gc_de.className</td>
+                      <td  align="center"><a href="javascript:void(0)" class="blue" onclick="goodsclass_delete($!{gc_de.id})">#springMessage("")<!-- 删除 --></a></td>
+                    </tr>
+                    #end
+                  </table>
+                </div>
+                </span> </li>
+            </ul>
+          </div>
+        </div>
+        <div class="settled_bottom"><span><a href="javascript:void(0)" class="up_step_btn" onclick="backwards(5)">#springMessage("sms.seller_apply_step6.before")<!-- 上一步 --></a><a onclick="saveForm()" href="javascript:void(0)" class="settled_btn"><b><em>#springMessage("sms.seller_apply_step6.comfirm_service")<!-- 下一步，确认在线服务协议 --></em></b></a></span></div>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

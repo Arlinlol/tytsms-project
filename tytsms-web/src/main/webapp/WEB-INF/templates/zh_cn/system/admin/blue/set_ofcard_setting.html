@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+	var state = jQuery("#ofcard").val();
+	if(state=="true"){
+		jQuery("#ofcard_on").show();
+		jQuery("#ofcard_off").hide();
+	}else{
+		jQuery("#ofcard_on").hide();
+		jQuery("#ofcard_off").show();
+	}
+	//改变系统提示的样式
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+  //
+  jQuery("#theForm").validate({
+    rules:{
+	  ofcard_mobile_profit:{required :true,number:true}
+	 },
+	messages:{
+	  ofcard_mobile_profit:{required:"不能为空",number:"只能是整数或者小数"}
+	}
+   });
+//
+});
+function ofcard_state(){
+	var state = jQuery("#ofcard").val();
+	if(state=="true"){
+		jQuery("#ofcard").val("false");
+		jQuery("#ofcard_off").show();
+		jQuery("#ofcard_on").hide();
+	}else{
+		jQuery("#ofcard").val("true");
+		jQuery("#ofcard_off").hide();
+		jQuery("#ofcard_on").show();
+	}
+}
+function smsSave(){
+	jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">充值设置</h1>
+  <div class="nav_list">
+    <ul>
+      <li> <a href="javascript:void(0);" class="this"><b>充值设置</b></a> </li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/set_ofcard_save.htm" method="post" enctype="multipart/form-data" name="theForm" id="theForm">
+    <input name="id" id="id" type="hidden" value="$!config.id"/>
+    <div class="edit">
+      <div class="editul setcont">
+        <ul class="set1">
+          <li class="setcont_bg">充值功能开启</li>
+          <li> <span class="webSwitch">
+            <input name="ofcard" id="ofcard" type="hidden" value="$!config.ofcard" />
+            <img src="$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg" width="61" height="23" style="cursor:pointer" onclick="ofcard_state();" id="ofcard_on"/> <img src="$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg" width="61" height="23" style="cursor:pointer" onclick="ofcard_state();" id="ofcard_off"/> </span> <span id="nothis"><strong class="w">设置是否启用手机充值功能，目前系统仅支持预存款充值，请确认<a href="$!webPath/admin/operation_base_set.htm">预存款</a>已经开启</strong></span></li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">充值平台账户编号</li>
+          <li><span class="webname">
+            <input name="ofcard_userid" type="text" id="ofcard_userid" value="$!config.ofcard_userid"  autocomplete="off" />
+            </span><span id="nothis"><strong class="q"></strong><strong class="w">充值平台账号，<a href="http://www.iskyshop.com" target="_blank">向ISkyShop申请</a></strong><strong class="c"></strong></span></li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">充值平台密码</li>
+          <li><span class="webname">
+            <input name="ofcard_userpws" type="password" id="ofcard_userpws" value="$!config.ofcard_userpws" autocomplete="off" />
+            </span><span id="nothis"><strong class="q"></strong><strong class="w">充值平台密码</strong><strong class="c"></strong></span></li>
+        </ul>
+        <ul class="set1">
+          <li class="setcont_bg">手机充值单笔交易利润</li>
+          <li><span class="webname">
+            <input name="ofcard_mobile_profit" type="text" id="ofcard_mobile_profit" value="$!config.ofcard_mobile_profit"  autocomplete="off" />
+            </span><span id="nothis"><strong class="q"></strong><strong class="w">单笔手机充值的利润额，如0.2元，假如充值电信100元第三方收取98.3元，平台则向用户收取98.5元，上限不超过充值金额</strong><strong class="c"></strong></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="submit"> <span class="pad80">
+      <input name="" type="button" value="提交" onclick="smsSave();" style="cursor:pointer;"/>
+      </span> </div>
+  </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+<link href="$!webPath/resources/style/mobileWap/css/style.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/platform.css" rel="stylesheet" type="text/css" />
+<title></title>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/TouchSlide.1.1.js"></script>
+<script type="text/javascript" src="$!webPath/resources/js/jquery.event.drag-1.5.min.js"></script>
+<script type="text/javascript" src="$!webPath/resources/js/jquery.touchSlider.js"></script>
+
+<script>
+
+function iosFun(cmd,para)
+{ 
+    document.location="objc://"+cmd+":/"+para;  //cmd代表objective-c中的的方法名，parameter1自然就是参数了
+}
+</script>
+<script>
+function save_search(){
+	jQuery("#searchForm").submit();
+}
+</script>
+
+<script type="text/javascript">
+jQuery(document).ready(function(){
+
+	jQuery(".main_visual").hover(function(){
+		jQuery("#btn_prev,#btn_next").fadeIn()
+	},function(){
+		jQuery("#btn_prev,#btn_next").fadeOut()
+	});
+	
+	$dragBln = false;
+	
+	jQuery(".main_image").touchSlider({
+		flexible : true,
+		speed : 500,
+		btn_prev : jQuery("#btn_prev"),
+		btn_next : jQuery("#btn_next"),
+		paging : jQuery(".flicking_con a"),
+		counter : function (e){
+			jQuery(".flicking_con a").removeClass("on").eq(e.current-1).addClass("on");
+		}
+	});
+	
+	jQuery(".main_image").bind("mousedown", function() {
+		$dragBln = false;
+	});
+	
+	jQuery(".main_image").bind("dragstart", function() {
+		$dragBln = true;
+	});
+	
+	jQuery(".main_image a").click(function(){
+		if($dragBln) {
+			return false;
+		}
+	});
+	
+	timer = setInterval(function(){
+		jQuery("#btn_next").click();
+	}, 5000);
+	
+	jQuery(".main_visual").hover(function(){
+		clearInterval(timer);
+	},function(){
+		timer = setInterval(function(){
+			$("#btn_next").click();
+		},5000);
+	});
+	
+	jQuery(".main_image").bind("touchstart",function(){
+		clearInterval(timer);
+	}).bind("touchend", function(){
+		timer = setInterval(function(){
+			jQuery("#btn_next").click();
+		}, 5000);
+	});
+	
+});
+</script>
+</head>
+<body>
+
+ $!httpInclude.include("/mobileWap/h.htm")
+ 
+<div class="view-wp"> 
+ $!httpInclude.include("/mobileWap/advertInvoke.htm?advertPositionId=7")
+
+<!--品牌商品区-->
+<div class="floor">
+<div class="brand_goods">
+<div class="brand_top"><img src="$!webPath/resources/style/mobileWap/images/hot_title.png"></div>
+<!--促销区-->
+<div class="brand_wrap"><h1 class="brand_title"><i class="mlist_title_r"></i>猜你喜欢</h1></div>
+<div class="sales_list">
+<!--效果html开始-->
+<div class="main_visual">
+	<div class="main_image brand_im">
+		<ul class="sales_ul">
+		
+		 #set($i=0)
+		 #foreach($obj in $ac_goods)
+		 	#set($i=$i+1)
+		 	#set($r = $i % 3) 
+		 	 #set($img="$!webPath/$!config.goodsImage.path/$!config.goodsImage.name")
+			      #if($!obj.goods_main_photo)
+			      #set($big="$!webPath/$!obj.goods_main_photo.path/$!obj.goods_main_photo.name")
+			      #set($img="$!{big}_middle.$!{obj.goods_main_photo.ext}")
+			      #end
+		 	#if($r==1)
+        	<li>
+        	#end
+		        <a href="$!webPath/mobileWap/goods.htm?id=$!obj.id"><img src="$!{img}"/></a>
+        	#if($r==0)
+        	</li>
+        	#end
+         #end
+		
+       </ul>
+		<a href="javascript:;" id="btn_prev"></a>
+		<a href="javascript:;" id="btn_next"></a>
+	</div>
+</div>
+</div>
+
+</div>
+</div>
+
+<!--品牌商品区end -->
+
+
+<!--品牌区 -->
+<div class="floor main-floor bra">
+<div class="brand_content">
+<ul class="brand_ul"> 
+	#foreach($gb in $!brands)
+<li><a name="$!gb.name" href="$!webPath/mobileWap/goods_list.htm?queryType=goods_brand&gc_id=$!{gb.id}"><img src="$!webPath/$!gb.brandLogo.path/$!gb.brandLogo.name"></a></li>
+ #end
+</ul>
+</div>
+
+</div>
+</div>
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+
+</body>
+</html>
+
+

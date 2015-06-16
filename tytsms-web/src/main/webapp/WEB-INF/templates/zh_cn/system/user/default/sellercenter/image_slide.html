@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>图片空间 </title>
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay_blue.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+		jQuery(".picture_slider").slide({ titCell:".smallImg li", mainCell:".bigImg", effect:"fold", autoPlay:true,delayTime:200,
+			startFun:function(i,p){
+				if(i==0){ jQuery(".picture_slider .sPrev").click() } else if( i%7==0 ){ jQuery(".picture_slider .sNext").click()}
+			}
+		});
+		jQuery(".picture_slider .smallScroll").slide({ mainCell:"ul",delayTime:100,vis:7,scroll:1,effect:"left",autoPage:true,prevCell:".sPrev",nextCell:".sNext",pnLoop:false });							
+								});	
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    $!httpInclude.include("/seller/nav.htm?op=album")
+    <div class="seller_right">
+     <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a>><b>图片空间</b>><b>图片详情</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+             <li><i></i><a href="$!webPath/seller/album.htm">我的相册</a></li>
+              <li class="this"><i></i><a href="javascript:void(0);">图片轮播</a></li>
+            <li><i></i><a href="$!webPath/seller/watermark.htm">水印管理</a></li>
+          </ul>
+        </div>
+        <div class="user_list_box">
+          <div class="picture_slider">
+	 <ul class="bigImg">
+      #foreach($photo in $album.photos)
+		<li>
+			<a href="$!webPath/$!{photo.path}/$!{photo.name}" target="_blank"><img src="$!webPath/$!{photo.path}/$!{photo.name}" /></a>
+		</li>
+      #end
+	</ul>
+
+	<div class="smallScroll">
+		<a class="sPrev" href="javascript:void(0)">←</a>
+		<div class="smallImg">
+				 <ul>
+                 #foreach($photo in $album.photos)
+					<li><a><img src="$!webPath/$!{photo.path}/$!{photo.name}_small.$!{photo.ext}" /></a></li>
+                 #end
+	
+				</ul>
+		</div>
+		<a class="sNext" href="javascript:void(0)">→</a>
+	</div>
+	<div class="pageState"></div>
+</div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

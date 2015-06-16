@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessageText('member.account_email.modify_email','')-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+ jQuery(document).ready(function(){
+	jQuery("#theForm").validate({
+       rules: {
+			password:{required:true},
+			email:{required:true,
+			       email:true,
+			       remote:{
+				        url: "$!webPath/verify_email.htm",     //后台处理程序
+                        type: "post",               //数据发送方式
+                        dataType: "json",           //接受数据格式   
+                        data: {                     //要传递的数据
+                           "email": function(){return jQuery("#email").val();},"id":"$!user.id"
+		                    }
+				     } 
+			     }
+		  },
+	   messages: {
+		    password:{required:"#springMessageText('member.account_email.password_not_empty','')"},
+			email:{required:"#springMessageText('member.account_email.email_not_empty','')",email:"#springMessageText('member.account_email.email_not_wrong','')",remote:"#springMessageText('member.account_email.email_exists','')"}
+		}
+  });
+	  jQuery(".user_menu b").toggle(
+			function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+			},
+			function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+			});
+	
+ });
+function saveForm(){
+    jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+     $!httpInclude.include("/buyer/nav.htm?op=account")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><strong>#springMessageText('member.account_email.account','')</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title">
+          <ul class="user_title_ul">
+            <li><i></i><a href="$!webPath/buyer/account.htm">#springMessageText('member.account_email.basic_information','')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_password.htm">#springMessageText('member.account_email.modify_password','')</a></li>
+            <li class="this"><i></i><a href="$!webPath/buyer/account_email.htm">#springMessageText('member.account_email.modify_emai','')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_mobile.htm">#springMessageText('member.account_email.modify_mobile_phone','')</a></li>
+            <li><i></i><a href="$!webPath/buyer/account_avatar.htm">#springMessageText('member.account_email.modify_head','')</a></li>
+          </ul>
+        </div>       
+        <div class="add_usercenter">      
+             <form action="$!webPath/buyer/account_email_save.htm" method="post" name="theForm" id="theForm">
+              <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_base_table">
+            <tr>
+              <td width="170" align="right"><strong class="redstr"></strong>#springMessageText('member.account_email.your_password','')：</td>
+              <td><span style="color:#F00"><input name="password" type="password" id="password" class="base_txt"/></span></td>
+            </tr>
+            <tr>
+              <td align="right">#springMessageText('member.account_email.email','')：</td>
+              <td><span style="color:#F00"><input name="email" type="text" id="email" class="base_txt"/></span>
+                </td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><input name="button" type="button" value="#springMessageText('member.account_email.save','')" class="save" onclick="saveForm()" /></td>
+            </tr> 
+          </table>
+            </form>
+        </div> 
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>用户登录 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/login.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    errorPlacement: function(error, element){
+            var error_li = element.parent('li');
+            error_li.append(error);
+        },
+	rules: {
+			username: "required",
+			password: "required"#if($!config.securityCodeLogin),
+			code:"required"#end},
+		messages: {
+			username: "用户名不能为空",
+			password: "密码不能为空"#if($!config.securityCodeLogin),
+			code:"验证码不能为空"#end
+					}
+  });
+});
+</script>
+</head>
+<body>
+<div class="login_bg">
+  <div class="login_head">
+<h1><span><em class="img_cspan">#if($!config.websiteLogo) <a href="$!webPath/index.htm"> <img src="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name" border="0" /> </a> #else <a href="$!webPath/index.htm"><img src="$!webPath/resources/style/system/front/default/images/logo.jpg"   /> </a> #end</em></span><strong>用户登录</strong></h1>
+</div>
+  <div class="login_box">
+  #set($img="$!webPath/$!imageViewTools.random_login_img()")
+    <div class="login_left_adv"><img src="$!img" width="490" height="400" /> </div>
+    <div class="login_box_right">
+      <form action="$!httpsWebPath/iskyshop_login.htm" method="post" name="theForm" id="theForm">
+        <div class="login_box_left">
+          <h3 class="login_box_h3">用户登录</h3>
+          <ul class="login_ul">
+            <li class="login_ul_li"><span>邮箱/用户名/已验证手机</span>
+              <input name="username" type="text" id="username" class="login_input_name" />
+            </li>
+            <li class="login_ul_li"><span>登录密码</span>
+              <input  name="password" type="password" id="password"  autocomplete="off" class="login_input_pwd" />
+            </li>
+            #if($!config.securityCodeLogin)
+             <script>
+                 function refreshCode(){
+	                 jQuery("#code_img").attr("src","$!webPath/verify.htm?d"+new Date().getTime());
+                 }
+             </script>
+            <li class="login_auto"><span>验证码：</span><input  name="code" type="text" id="code"  autocomplete="off"  class="login_code" />
+           
+            #if($!config.securityCodeType=='voice')
+            <script>
+				   function readCode(id){
+                         var  s = "<embed id='sound_play' name='sound_play' src='$!webPath/resources/flash/soundPlayer.swf?" + (new Date().getTime()) + "' FlashVars='url=$!webPath"+ "' width='0'   height='0' allowScriptAccess='always' type='application/x-shockwave-flash' pluginspage='http://www.macromedia.com/go/getflashplayer' /></embed>";
+                    jQuery("#"+id).html(s);
+                    }
+			 </script>
+              <img id="code_img" src="$!webPath/verify.htm" width="70" height="32" style="display:none;" />
+             <a href="javascript:void(0);" onclick="readCode('player')" title="朗读验证码" class="code_speech"></a>
+             <a href="javascript:void(0);" onclick="refreshCode();"  class="code_refresh"></a>
+             <span id="player"></span>
+            #else
+             <b>
+            <img id="code_img" src="$!webPath/verify.htm" width="70" height="32" />
+            </b>
+            <a href="javascript:void(0);" onclick="refreshCode();" class="code_refresh"></a>
+            #end
+            </li>
+            #end
+          </ul>
+         
+          <div class="login_btn">
+			<br>
+            <input name="" type="submit"  value="立即登录"/>
+            <input name="login_role" type="hidden" id="login_role" value="user" />
+          </div>
+		  <div class="reg_psd">
+			<a href="$!webPath/register.htm" class="free_resgist">免费注册</a>
+			<a href="$!webPath/forget1.htm" class="forget_psd">忘记密码？</a>
+          </div>
+          #if($!{config.sina_login}||$!{config.qq_login})
+          <div class="login_other">
+            <h4>使用合作网站账号登录：</h4>
+            <div class="login_other_box"> #if($!{config.qq_login}) <a href="$!webPath/qq_login_api.htm" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/login_qq.png" /></a>#end
+              #if($!{config.sina_login}) <a href="$!webPath/sina_login_api.htm" target="_blank"><img src="$!webPath/resources/style/system/front/default/images/login_web.png" /></a>#end </div>
+          </div>
+          #end </div>
+      </form>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+$!uc_logout_js
+</body>
+</html>

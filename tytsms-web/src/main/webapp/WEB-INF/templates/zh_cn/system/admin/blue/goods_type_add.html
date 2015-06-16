@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="../../../../resources/style/system/manage/blue/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    rules:{
+	  name:{
+	    required :true,
+	     remote:{
+		    url: "$!webPath/admin/goods_type_verify.htm",     //后台处理程序
+            type: "post",               //数据发送方式
+            dataType: "json",           //接受数据格式   
+            data: {                     //要传递的数据
+                  "name": function(){return jQuery("#name").val();},
+				  "id":function(){return jQuery("#id").val()}
+		     }
+			}
+	  }
+	 },
+	messages:{
+	  name:{required:"类型名称不能为空",remote:"该类型已经存在"}
+	}
+  });
+});
+function saveForm(){
+  var gss="";
+  var gbs="";
+  jQuery(":checkbox:checked[id^='gs_']").each(function(){
+    gss=gss+","+jQuery(this).val();
+  });
+  jQuery(":checkbox:checked[id^='gb_']").each(function(){
+    gbs=gbs+","+jQuery(this).val();
+  });
+  jQuery("#spec_ids").val(gss);
+  jQuery("#brand_ids").val(gbs);
+  jQuery("#count").val(count);
+  jQuery("#theForm").submit();
+}
+</script>
+</head>
+<body>
+<form name="theForm" id="theForm" action="$!webPath/admin/goods_type_save.htm" method="post">
+  <input name="id" id="id" type="hidden" value="$!obj.id"/>
+  <input name="cmd" id="cmd" type="hidden"/>
+  <input name="add_url" type="hidden" id="add_url" value="$!webPath/admin/goods_type_add.htm" />
+  <input name="list_url" type="hidden" id="list_url" value="$!webPath/admin/goods_type_list.htm" />
+  <input name="spec_ids" type="hidden" id="spec_ids" />
+  <input name="brand_ids" type="hidden" id="brand_ids" />
+  <input name="count" type="hidden" id="count" />
+  <div class="cont">
+    <h1 class="seth">类型管理</h1>
+    <div class="nav_list">
+   
+     <ul>
+    <li> <a href="$!webPath/admin/goods_type_list.htm"><b>列表</b></a> </li>
+      <li><a href="$!webPath/admin/goods_type_add.htm"  #if(!$!edit) class="this" #end ><b>新增</b></a> </li>
+     #if($!edit)
+	  <li>  <a href="javascript:void(0);" class="this"><b>编辑</b></a></li>
+	   #end
+       </ul>
+        </div>
+        <div class="operation">
+    <h3>友情提示</h3>
+    <ul>
+      <li>商品属性值填写时，各个值之间使用半角逗号分隔，如：红色,白色,蓝色,粉色，发布商品时候可以选择属性值，前端商品列表页会显示该筛选属性列表，以方便用户精确选择</li>
+      <li>互斥属性值表示选择该属性时，互斥属性将不显示，如：操作系统有“安卓”，“苹果”，价格有“0-500”，“501-2000”，“2000-6000”，“苹果手机”价存在2000元以下价格，则在手机操作系统互相属性中填写：苹果#价格:0-500,501-2000，用户一旦选择“苹果”操作系统，对应的互斥属性将不会出现在筛选条件中</li>
+      <li>互斥属性默认是单向互斥，比如“操作系统”配置了互斥属性“价格”，默认“价格”是不会互斥“操作系统”</li>
+      <li>系统默认只支持一组互斥属性，互斥多组需二次开发，配置的互斥属性不能发生数据冲突</li>
+    </ul>
+  </div>
+    <div class="edit">
+      <div class="editul setcont">
+        <ul class="set3">
+          <li><strong class="sred">*</strong>类型名称</li>
+          <li><span class="size250">
+            <input name="name" type="text" id="name" value="$!obj.name" />
+            </span></li>
+        </ul>
+        <ul class="set3">
+          <li>排序</li>
+          <li><span class="size250">
+            <input name="sequence" type="text" id="sequence" value="$!obj.sequence"/>
+            </span><span id="nothis"><strong class="q"></strong><strong class="w">请填写整数。类型列表将会根据排序进行由小到大排列显示。</strong><strong class="c"></strong></span></li>
+        </ul>
+      </div>
+      <div class="specification">
+        <h2>选择关联品牌</h2>
+        #foreach($gbc in $gbcs)
+        <ul class="spec_sports">
+         #if($!gbc.brands.size()>0) <h3>$!gbc.name</h3>
+          #foreach($gb in $gbc.brands)
+          #set($ret=0)
+          #foreach($info in $obj.gbs)
+          #if($!info.id==$!gb.id)
+          #set($ret=1)
+          #end
+          #end
+          <li> <span class="span1">
+          <label>
+            <input name="gb_$!{gb.id}" type="checkbox" id="gb_$!{gb.id}" value="$!gb.id" #if($!ret==1) checked="checked"#end/>　
+            $!gb.name
+          </label>
+            </span> </li>
+          #end
+         #end</ul>
+        #end </div>
+      <div class="specification">
+        <h2>新增属性</h2>
+         <div class="fshoptb">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+          <tr id="goods_type_property_">
+            <th width="70"><span class="form_btna"><strong>排序</strong></span></th>
+            <th width="270"><span class="form_btna"><strong>属性名称</strong></span></th>
+            <th width="270"><span class="form_btna"><strong>属性可选值(多个属性值用“,”分割)</strong></span></th>
+            <th width="270"><span class="form_btna"><strong>互斥属性</strong></span></th>
+            <th width="100"><span class="form_btna"><strong>显示</strong></span></th>
+            <th width="100"><span class="form_btna"><strong>操作</strong></span></th>
+          </tr>
+          #if($!obj)
+          #foreach($gtp in $obj.properties)
+          <tr id="goods_type_property_">
+            <td><span class="size70">
+              <input name="gtp_sequence_$!velocityCount" type="text" id="gtp_sequence_$!velocityCount" value="$!gtp.sequence"/>
+              <input name="gtp_id_$!velocityCount" type="hidden" id="gtp_id_$!velocityCount" value="$!gtp.id" />
+              </span></td>
+            <td><span class="size200">
+              <input name="gtp_name_$!velocityCount" type="text" id="gtp_name_$!velocityCount" value="$!gtp.name"/>
+              </span></td>
+            <td><span class="size250">
+              <input name="gtp_value_$!velocityCount" type="text" id="gtp_value_$!velocityCount" value="$!gtp.value"/>
+              </span></td>
+            <td><span class="size250">
+              <input name="gtp_value_hc_$!velocityCount" type="text" id="gtp_value_hc_$!velocityCount" value="$!gtp.hc_value"/>
+              </span></td>
+            <td align="center"><input name="gtp_display_$!velocityCount" type="checkbox" id="gtp_display_$!velocityCount" value="true" #if($!gtp.display==true)checked="checked"#end /></td>
+            <td class="hui oprate_con" align="center"><a href="javascript:void(0);" onclick="remove_gtp(this.parentNode.parentNode,'$!gtp.id')" class="blue">删除</a></td>
+          </tr>
+          #end
+          #else
+          <tr id="goods_type_property_">
+            <td><span class="size70">
+              <input name="gtp_sequence_1" type="text" id="gtp_sequence_1" />
+              </span></td>
+            <td><span class="size200">
+              <input name="gtp_name_1" type="text" id="gtp_name_1" />
+              </span></td>
+            <td><span class="size250">
+              <input name="gtp_value_1" type="text" id="gtp_value_1" />
+              </span></td>
+            <td><span class="size250">
+              <input name="gtp_value_hc_1" type="text" id="gtp_value_hc_1" />
+              </span></td>  
+            <td align="center"><input name="gtp_display_1" type="checkbox" id="gtp_display_1" value="true" checked="checked" /></td>
+            <td class="hui oprate_con" align="center"><a href="javascript:void(0);" onclick="remove_gtp(this.parentNode.parentNode,'')" class="blue">删除</a></td>
+          </tr>
+          #end
+          <tr>
+            <td colspan="2"><span class="newclass"><a href="javascript:void(0);" onclick="add_gtp();">新增一个属性</a></span></td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+        </div>
+      </div>
+      <script>
+	  #if($!obj&&$!obj.properties.size()>1)
+	  var count=$!obj.properties.size();
+	  #else
+	  var count=1;
+	  #end
+	   function remove_gtp(obj,id){
+	     jQuery.post("$!webPath/admin/goods_type_property_delete.htm",{"id":id},function(data){
+            if(data=="true"){
+	          jQuery(obj).remove();
+              count--;
+	        }else alert("规格值删除失败！");
+          },"text");
+	   }
+	   function add_gtp(){
+	     count++;
+	     var gtp="<tr id='goods_type_property_'> <td><span class='size70'><input name='gtp_sequence_count' type='text' id='gtp_sequence_count' /></span></td><td><span class='size200'><input name='gtp_name_count' type='text' id='gtp_name_count' /></span></td><td><span class='size250'><input name='gtp_value_count' type='text' id='gtp_value_count' /></span></td><td><span class='size250'> <input name='gtp_value_hc_count' type='text' id='gtp_value_hc_count' /></span></td>  <td align='center'><input name='gtp_display_count' type='checkbox' checked='checked' id='gtp_display_count' value='true' /></td><td class='hui oprate_con' align='center'><a href='javascript:void(0);' onclick='remove_gtp(this.parentNode.parentNode,\"\")' class='blue'>删除</a></td></tr>";		 
+		 jQuery("tr[id^=goods_type_property_]:last").after(gtp.replace(/count/g,count));
+	   }
+	  </script>
+    </div>
+    <div class="submit">
+      <input name="" type="button" value="提交" onclick="saveForm();"/>
+    </div>
+  </div>
+</form>
+</body>
+</html>

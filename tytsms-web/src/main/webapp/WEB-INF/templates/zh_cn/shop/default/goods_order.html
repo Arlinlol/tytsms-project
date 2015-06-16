@@ -1,0 +1,33 @@
+﻿#if($!rows==0)
+ <div class="novalue"> 还没有成交记录 </div>
+#else
+
+<div class="okcode" id="strike_tab" style="margin-top:10px;" >
+  <ul>
+     <li>
+      <table width="797" border="0" cellspacing="0" cellpadding="0" class="okcodetable">
+        <tr style=" background:#EEEDED; font-weight:bold">
+          <td width="130">买家</td>
+          <td width="80">商品价格</td>
+          <td width="100">商品规格</td>
+          <td width="80">购买数量</td>
+          <td width="100">成交时间</td>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td class="blue" valign="middle" width="130">$!{obj.evaluate_user.userName}</td>
+          <td><strong class="orange">¥$!{obj.goods_price}</strong></td>
+          <td>$!obj.goods_spec</td>
+          <td>$!obj.goods_num</td>
+          <td>$!CommUtil.formatLongDate($!obj.addTime)</td>
+        </tr>
+        #end
+      </table>
+      
+    </li>
+  </ul>
+</div>
+<div class="details_discus_page">
+  <span>$!gotoPageAjaxHTML</span>
+</div>
+#end

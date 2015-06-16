@@ -1,0 +1,46 @@
+﻿#foreach($obj in $returnlogs)
+<table cellpadding="0" cellspacing="0" border="0">
+<tbody>
+<tr>
+<td width="30%" class="im_dt">退单编号：</td>
+<td class="im_dd">$!obj.return_service_id</td>
+</tr>
+#set($status="退货申请中")
+#if($!obj.goods_return_status==-1)
+#set($status="退货申请被拒绝")
+#end
+#if($!obj.goods_return_status==5)
+#set($status="退货申请中")
+#end
+#if($!obj.goods_return_status==6)
+#set($status="退货申请审核通过")
+#end
+#if($!obj.goods_return_status==7)
+#set($status="买家退货中")
+#end
+#if($!obj.goods_return_status==10)
+#set($status="退货完成")
+#end
+<tr>
+<td class="im_dt">当前状态：</td>
+<td class="im_dd">$!{status}</td>
+</tr>
+<tr>
+<td class="im_dt">申请时间：</td>
+<td class="im_dd">$!CommUtil.formatLongDate($!obj.addTime)</td>
+</tr>
+<tr>
+<td class="im_dt">退货商品：</td>
+<td class="im_dd">$!obj.goods_name</td>
+</tr>
+<tr>
+<td class="im_dt">商品单价：</td>
+<td class="im_dd">$!obj.goods_price （元）</td>
+</tr>
+<tr>
+<td class="im_dt">退货总价：</td>
+<td class="im_dd">$!{obj.goods_price} X $!{obj.goods_count} =  $!{obj.goods_all_price} （元）</td>
+</tr>
+</tbody>
+</table>
+#end

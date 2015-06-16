@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type=text/css rel=stylesheet />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){	
+	var ul_nums = jQuery("#goods_box ul").length;
+	jQuery("#goods_box").width(ul_nums*185);
+		var tempLengths = 0; //临时变量,当前移动的长度
+		var viewNums = 4; //设置每次显示图片的个数量
+		var moveNums = 1; //每次移动的数量
+		var moveTimes = 300; //移动速度,毫秒
+		var scrollDivs = jQuery("#goods_box"); //进行移动动画的容器
+		var scrollItemss = jQuery("#goods_box ul"); //移动容器里的集合
+		var moveLengths = (scrollItemss.eq(0).width()+20) * moveNums; //计算每次移动的长度
+		var countLengths = (scrollItemss.length - viewNums) * (scrollItemss.eq(0).width()+20); //计算总长度,总个数*单个长度
+		//下一张
+		jQuery("#goods_right").bind("click",function(){	
+			if(tempLengths < countLengths){
+				if((countLengths - tempLengths) > moveLengths){
+					scrollDivs.animate({left:"-=" + moveLengths + "px"}, moveTimes);
+					tempLengths += moveLengths;
+					
+				}else{
+					scrollDivs.animate({left:"-=" + (countLengths - tempLengths) + "px"}, moveTimes);
+					tempLengths += (countLengths - tempLengths);
+				}
+			}
+		});
+		//上一张
+		jQuery("#goods_left").bind("click",function(){
+			if(tempLengths > 0){
+				if(tempLengths > moveLengths){
+					scrollDivs.animate({left: "+=" + moveLengths + "px"}, moveTimes);
+					tempLengths -= moveLengths;
+				}else{
+					scrollDivs.animate({left: "+=" + tempLengths + "px"}, moveTimes);
+					tempLengths = 0;
+				}
+			}
+		});
+		
+	var sul_nums = jQuery("#store_box ul").length;
+	jQuery("#store_box").width(sul_nums*185);
+		var stempLengths = 0; //临时变量,当前移动的长度
+		var sviewNums = 4; //设置每次显示图片的个数量
+		var smoveNums = 1; //每次移动的数量
+		var smoveTimes = 300; //移动速度,毫秒
+		var sscrollDivs = jQuery("#store_box"); //进行移动动画的容器
+		var sscrollItemss = jQuery("#store_box ul"); //移动容器里的集合
+		var smoveLengths = (sscrollItemss.eq(0).width()+20) * smoveNums; //计算每次移动的长度
+		var scountLengths = (sscrollItemss.length - sviewNums) * (sscrollItemss.eq(0).width()+20); //计算总长度,总个数*单个长度
+		//下一张
+		jQuery("#store_right").bind("click",function(){	
+			if(stempLengths < scountLengths){
+				if((scountLengths - stempLengths) > smoveLengths){
+					sscrollDivs.animate({left:"-=" + smoveLengths + "px"}, smoveTimes);
+					stempLengths += smoveLengths;
+					
+				}else{
+					sscrollDivs.animate({left:"-=" + (scountLengths - stempLengths) + "px"}, smoveTimes);
+					stempLengths += (scountLengths - stempLengths);
+				}
+			}
+		});
+		//上一张
+		jQuery("#store_left").bind("click",function(){
+			if(stempLengths > 0){
+				if(stempLengths > smoveLengths){
+					sscrollDivs.animate({left: "+=" + smoveLengths + "px"}, smoveTimes);
+					stempLengths -= smoveLengths;
+				}else{
+					sscrollDivs.animate({left: "+=" + stempLengths + "px"}, smoveTimes);
+					stempLengths = 0;
+				}
+			}
+		});
+								});
+
+</script>
+</head>
+<body>
+  $!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter">
+   $!httpInclude.include("/buyer/nav.htm") 
+    <div class="usercenter_right">
+      <div class="usercenter_index_top">
+        <dl class="user_info">
+        #set($level_name=$integralViewTools.query_user_level_name("$!user.id"))
+        #set($level_img=$integralViewTools.query_user_level_img("$!user.id"))
+          <dt><img src="#if($!user.photo)$!webPath/$!user.photo.path/$!user.photo.name #elseif($!SysConfig.memberIcon && !$!user.photo) $!webPath/$!SysConfig.memberIcon.path/$!SysConfig.memberIcon.name #else $!webPath/resources/style/system/manage/blue/images/default_user_photo.gif #end" width="100" height="100" /><b><a href="$!webPath/buyer/account.htm">编辑资料</a></b></dt>
+          <dd>
+            <h3><b>$!user.username</b><span><img src="$!webPath/resources/style/common/images/$!{level_img}" width="35" height="55" /><div class="level">$!level_name</div></span></h3>
+            <div class="user_info_money"><span><b>预存款：#if($!{user.availableBalance})$!{user.availableBalance} #else 0 #end</b><a href="$!webPath/buyer/predeposit.htm" class="add_money">充值</a></span><span><b>优惠劵： $!couponInfos</b></span><span><b>积分： #if($!{user.integral})$!{user.integral} #else 0 #end</b></span><span><b>站内信息：$!msg_size <a href="$!webPath/buyer/message.htm" class="blue">点击查看</a></b></span></div>
+          </dd>
+        </dl>
+      </div>
+      <div class="usercenter_index_myorder">
+        <h3><a href="$!webPath/buyer/order.htm" class="see_all_order">查看全部订单</a><strong>我的订单</strong><span class="idx_myorder_sp">
+        #foreach($param in ${orders_status.keySet()})  
+        <a href="$!webPath/buyer/order.htm?order_status=$param">#if($!velocityCount==1)待付款 #elseif($!velocityCount==2) 待收货 #else 已完成 #end ${orders_status.get($param)}</a>
+        #end
+		</span></h3>
+        <div class="usercener_index_mytable">
+          <table width="100%" border="0" cellpadding="0" cellspacing="0">
+         #foreach($f in $orderForms)
+         		#set($payment="未知")
+                #if($!f.payment.mark=="alipay")
+                #set($payment="支付宝")
+                #end
+                #if($!f.payment.mark=="wechatpay")
+                #set($payment="微信支付")
+                #end
+                #if($!f.payment.mark=="alipay_wap")
+                #set($payment="手机网页支付宝")
+                #end
+                #if($!obj.payment.mark=="alipay_app")
+                #set($payment="手机支付宝APP")
+                #end
+                #if($!f.payment.mark=="tenpay")
+                #set($payment="财付通")
+                #end
+                #if($!f.payment.mark=="bill")
+                #set($payment="快钱")
+                #end                 
+                #if($!f.payment.mark=="chinabank")
+                #set($payment="网银在线")
+                #end       
+                #if($!f.payment.mark=="outline")
+                #set($payment="线下支付")
+                #end                  
+                #if($!f.payment.mark=="balance")
+                #set($payment="预存款支付")
+                #end
+                #if($!f.payment.mark=="payafter")
+                #set($payment="货到付款")
+                #end
+                #if($!f.payment.mark=="paypal")
+                #set($payment="paypal")
+                #end
+                #if($!f.payment.mark=="allinpay")
+                #set($payment="通联支付")
+                #end
+                
+                #if($!f.order_status==0)
+                #set($status="已取消")
+                #end
+                #if($!f.order_status==10)
+                #set($status="待付款")
+                #end
+                #if($!f.order_status==15)
+                #set($status="线下支付待审核")
+                #end
+                #if($!f.order_status==16)
+                #set($status="货到付款待发货")
+                #end
+                #if($!f.order_status==20)
+                #set($status="已付款")
+                #end
+                #if($!f.order_status==30)
+                #set($status="已发货")        
+                #end                
+                #if($!f.order_status==40)
+                #set($status="已收货")
+                #end
+                #if($!f.order_status==45)
+                #set($status="买家申请退货")
+                #end
+                #if($!f.order_status==46)
+                #set($status="退货中")
+                #end
+                #if($!f.order_status==47)
+                #set($status="退货完成，已结束")
+                #end
+                #if($!obj.order_status==48)
+                #set($status="商家拒绝退货")
+                #end
+                #if($!f.order_status==49)
+                #set($status="退货失败")
+                #end
+                #if($!f.order_status==50)
+                #set($status="已完成,已评价")                                              
+                #end
+                #if($!f.order_status==65)
+                #set($status="已结束，不可评价")                                              
+                #end
+            <tr>
+              <td width="40%">
+              <ul class="usercenter_idx_ul">
+            #foreach($map in $!orderFormTools.queryGoodsInfo("$!f.goods_info"))
+            #set($goods_id = "$!{map.get('goods_id')}")	
+            #set($goods_name = "$!{map.get('goods_name')}")
+            #set($goods_count = "$!{map.get('goods_count')}")
+            #set($goods_price = "$!{map.get('goods_price')}")
+            #set($goods_gsp_val = "$!{map.get('goods_gsp_val')}")
+            #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+            #set($goods_domainPath = "$!{map.get('goods_domainPath')}")	
+            #set($img="$!webPath/$!{goods_mainphoto_path}")
+              <li><span class="idx_myorder_img"><a href="$!goods_domainPath" target="_blank"><img src="$!img" width="50" height="50" /></a></span>
+              <a style="width:260px; float:left; height:35px; overflow:hidden;" href="$!goods_domainPath" target="_blank">$!{goods_name}</a>
+              <span style="width:65px; float:left; color:#999;">数量:$!{goods_count}</span>
+              <span style="color:#999;">$!{goods_gsp_val}</span></li>
+              #end
+              </ul></td>
+              <td width="10%" align="center">$!user.username</td>
+              <td width="10%%" align="center"><span class="ucidx_tab_sp">￥$!{f.totalPrice}</span><span class="ucidx_tab_sp">$!payment</span></td>
+              <td width="15%"  align="center">$!CommUtil.formatLongDate($!f.addTime)</td>
+              <td width="15%" align="center">$!status</td>
+              <td  align="center"><a href="$!webPath/buyer/order_view.htm?id=$!f.id" target="_blank">查看</a></td>
+            </tr>
+         #end
+          </table>
+        </div>
+      </div>
+      <div class="user_guess">
+        <h3 class="idx_myorder_h3"><a href="$!webPath/buyer/favorite_goods.htm" class="see_all_order">查看更多</a><strong>我关注的商品</strong><span class="idx_myorder_sp"></span></h3>
+        <div class="user_guess_box"> <span class="guess_left" id="goods_left" style="cursor:pointer"></span>
+          <div class="guess_like_box">
+          #if($!favorite_goods.size()>0)
+          <div id="goods_box" style="position:relative; float:left">
+          #foreach($f_goods in $favorite_goods)
+           					#if($!f_goods.goods.goods_main_photo)                
+                            #set($img="$!webPath/$!{f_goods.goods.goods_main_photo.path}/$!{f_goods.goods.goods_main_photo.name}_small.$!{f_goods.goods.goods_main_photo.ext}")
+                            #else
+                            #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                            #end
+            #set($goods_url="$!webPath/goods_$!{f_goods.goods.id}.htm")
+            #if($!config.second_domain_open && $!f_goods.goods.goods_type==1 && $!f_goods.goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{f_goods.goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{f_goods.goods.id}.htm")
+            #end 
+                            
+            <ul class="guess_like_one">
+              <li class="guess_img"><a href="$!goods_url" target="_blank"><span class="img_cspan">
+                <p><img src="$!img" width="165" height="165" /></p>
+                </span></a></li>
+              <li class="guess_name"><a href="$!goods_url" target="_blank">$!{f_goods.goods.goods_name}</a></li>
+              <li class="guess_price">价格：<strong>￥$!{f_goods.goods.store_price}</strong></li>
+            </ul> 
+          #end 
+          </div>
+          #else
+          <div class="guess_like_box_none">您还没有关注的商品</div>
+          #end
+          </div>
+          <span class="guess_right" id="goods_right" style="cursor:pointer"></span> </div>
+      </div>
+      <div class="user_guess">
+        <h3 class="idx_myorder_h3"><a href="$!webPath/buyer/favorite_store.htm" class="see_all_order">查看更多</a><strong>我关注的店铺</strong><span class="idx_myorder_sp"></span></h3>
+        <div class="user_guess_box"> <span class="guess_left" id="store_left" style="cursor:pointer"></span>
+          <div class="guess_like_box">
+           #if($!favorite_stores.size()>0)
+            <div id="store_box" style="position:relative; float:left">
+            #foreach($f_store in $favorite_stores)
+        	#if($!f_store.store.store_logo)
+        	#set($store_logo="$!webPath/$!{f_store.store.store_logo.path}/$!{f_store.store.store_logo.name}")
+        	#else
+       		#set($store_logo="$!webPath/$!config.storeImage.path/$!config.storeImage.name")
+        	#end 
+             #set($store_url="$!webPath/store_$!{f_store.store.id}.htm")
+      	  #if($!config.second_domain_open && $!f_store.store.store_second_domain!="")
+           #set($store_url="http://$!{f_store.store.store_second_domain}.$!{domainPath}")
+       	 #end
+            <ul class="guess_like_one">
+              <li class="guess_img"><a href="$!store_url" target="_blank"><span class="img_cspan">
+                <p><img src="$!store_logo" width="165" height="63" /></p>
+                </span></a></li>
+              <li class="guess_name"><a href="$!store_url" target="_blank">$!f_store.store.store_name</a></li>
+            </ul>
+            #end
+            </div>   
+            #else
+            <div class="guess_like_box_none">您还没有关注的店铺</div>
+            #end
+          </div>
+          <span class="guess_right" id="store_right" style="cursor:pointer"></span> </div>
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

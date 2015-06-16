@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  #if($!refund_status)
+  jQuery("#refund_status").val($!{refund_status});
+  #end
+  //
+});
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">消费码退款</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/refund_list.htm"><b>商品退款</b></a></li>
+            <li><a href="$!webPath/admin/groupinfo_refund_list.htm" class="this"><b>消费码退款</b></a></li>
+            <li><a href="$!webPath/admin/refundlog_list.htm"><b>退款日志</b></a></li>
+        </ul>
+  </div>
+	<form name="queryForm" id="queryForm" action="$!webPath/admin/groupinfo_refund_list.htm" method="post">
+    <div class="search">
+      
+      <span>订单号</span> 
+      <span class="size150">
+         <input name="order_id" type="text" id="order_id" value="$!order_id" />
+      </span>
+    
+      <span>消费码</span> 
+      <span class="size150">
+          <input name="group_sn" type="text" id="group_sn" value="$!group_sn" />
+      </span>
+           
+      <span>申请者</span>
+      <span class="size150">
+          <input name="user_name" type="text" id="user_name" value="$!user_name" />
+      </span> 
+      
+      <span>退款状态</span> 
+  	  <span class="size150">
+        <select name="refund_status" id="refund_status">
+          <option value="">请选择..</option>
+          <option value="5">未退款</option>
+          <option value="7">已退款</option>
+        </select>
+      </span>
+          
+      <span>
+        <input name="" type="submit"  value="搜索" style="cursor:pointer;" class="search_btn" />
+      </span> 
+ 
+    </div>
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="25%">商品名称</th>
+          <th width="20%">退款原因</th>
+          <th width="15%">消费码</th>
+          <th width="9%">申请者</th>
+          <th width="9%">退款价格</th>
+          <th width="9%">状态</th>
+          <th >操作</th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td align="center">$!obj.lifeGoods.gg_name</td>
+          <td align="center">$!obj.refund_reasion</td>
+          <td align="center">$!obj.group_sn</td> 
+          <td align="center">$!obj.user_name</td>
+           <td align="center">$!obj.lifeGoods.group_price</td>     
+          <td align="center">#if($!obj.status==5)未退款#end #if($!obj.status==7)退款完成 #end</td>
+          <td class="hui oprate_con" align="center">
+          		#if($!obj.status==5)
+          	<a href="$!webPath/admin/refund_view.htm?id=$!obj.id&type=groupinfo" class="blue">退款</a>
+                #end
+                #if($!obj.status==7)
+          		退款完成
+                #end
+                </td>
+        </tr>
+        #end
+    </table>
+    
+    <div class="operate_bar">
+        <div class="fenye" id="queryCondition">
+            <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+           $!gotoPageFormHTML
+        </div> 
+        <div class="oper_sp">
+        </div>         
+ 	</div>
+  </div>
+  </form>
+</div>
+</body>
+</html>

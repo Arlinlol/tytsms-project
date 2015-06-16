@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery('#beginTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  jQuery('#endTime').datepicker({
+	  dateFormat:"yy-mm-dd",
+	  changeMonth: true,
+	  changeYear: true
+  });
+  //
+});
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">金币购买</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/gold_record.htm"><b>购买记录</b></a></li>
+        <li><a href="$!webPath/admin/gold_log.htm" class="this"><b>购买日志</b></a></li>
+    </ul>
+  </div>
+  <form action="$!webPath/admin/gold_log.htm" method="post" id="queryForm">
+    <div class="search">
+      <ul>
+        <li> <span>购买时间</span><span class="size150">
+          <input name="beginTime" type="text" id="beginTime" />
+          </span>—<span class="size150">
+          <input name="endTime" type="text" id="endTime" />
+          </span><span>
+          <input name="" type="submit"  value="搜索" style="cursor:pointer;"  class="search_btn" />
+          </span> </li>
+      </ul>
+    </div>
+    </form>
+    <form action="$!webPath/admin/gold_log.htm" method="post" id="ListForm">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0"  class="fshop_table">
+        <tr>
+          <th width="15%" align="center"><span class="form_btna">操作时间</span></th>
+          <th width="15%" align="left"><span class="form_btna">店铺名称</span></th>
+          <th width="10%" align="center"><span class="form_btna">会员名</span></th>
+          <th width="10%" align="center"><span class="form_btna">金币数量（枚）</span></th>
+          <th width="10%" align="center"><span class="form_btna">类型</span></th>
+          <th  align="center"><span class="form_btna">描述</span></th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+          <td align="left">$!obj.gl_user.store.store_name</td>
+          <td align="center"> $!obj.gl_user.userName</td>
+          <td align="center">$!obj.gl_count</td>
+          #if($!obj.gl_type==0)
+            #set($type="增加")
+          #end
+          #if($!obj.gl_type==-1)
+            #set($type="减少")
+          #end
+          <td align="center">$!type</td>
+          <td align="center">$!obj.gl_content</td>
+          </tr>
+        #end
+      </table>
+    </div>
+    
+  <div class="operate_bar">
+    <div class="fenye">
+      <input name="endTime" type="hidden" id="endTime" value="$!endTime" />
+      <input name="beginTime" type="hidden" id="beginTime" value="$!beginTime" />
+	  <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      $!gotoPageFormHTML
+    </div> 
+  </div>
+  </form>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,457 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>即时对话窗口 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/im/css/im.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/common/css/jquery.bigcolorpicker.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/ajaxfileupload.js"></script>
+<script src="$!webPath/resources/js/jquery.bigcolorpicker.js"></script>
+<script>
+var uid="";
+jQuery(document).ready(function(){
+jQuery("#font_colour").bigColorpicker(function(el,color){
+	jQuery("#content").css("color",color);
+	jQuery(el).val(color);
+	});								
+window.setInterval(refresh_Message,5000);
+window.setInterval(refresh_Users,30000);
+jQuery("#content").html("");
+jQuery("#chatt_id").val("");
+  jQuery("#content").keydown(function(){
+	text = jQuery.trim(jQuery(this).html());
+	var last=360-text.length;
+	if(last>=0){
+	jQuery(".im_limit").html("还可以输入<b>"+last+"</b>字");	
+		}else{
+		jQuery(".im_limit").html("<b style='color:#F00'>超出字数限制</b>");
+			}
+	});
+	//关闭联系人
+	jQuery(".im_seller_list img[mark='close']").live("click",function(){
+		var	chatting_id =jQuery(this).attr("chatting_id");													 
+	    if(confirm("删除该联系用户也将关闭与其的对话窗口，是否继续？")){
+		jQuery.post("$!webPath/admin/plat_chatting_close.htm",{
+				"chatting_id":chatting_id
+				},function(data){
+					if(data=="true"){
+					jQuery("#chatt_id").val("");
+					jQuery("span.im_name").html("当前没有联系人");
+					jQuery(".im_chat_list ul").html("");
+					jQuery("li[cid="+chatting_id+"]").remove();
+						}
+					},"text");	
+			}												
+		});
+	//自动回复开关闭
+	jQuery("li[mark='relpy_open'] img").click(function(){
+	 	jQuery.post("$!webPath/admin/plat_chatting_set.htm",
+			{"chattingConfig_id":"$!{chattingConfig.id}",
+			"reply_open":jQuery(this).attr("mark")},
+			function(data){
+			if(data==1){
+				jQuery("li[mark='relpy_open'] img").attr("src","$!webPath/resources/style/im/images/im_on.png");	
+				jQuery("li[mark='relpy_open'] img").attr("mark","0");	
+				}else{
+				jQuery("li[mark='relpy_open'] img").attr("src","$!webPath/resources/style/im/images/im_off.png");	
+				jQuery("li[mark='relpy_open'] img").attr("mark","1");
+			}
+			},"text");
+		});
+	//打开表情、字体、设置、图片窗口
+jQuery(".im_edit_h1 img[id^='chatting_']").click(function(){											  
+			var cls = jQuery(this).parent().attr("class");
+			if(cls=="im_this"){
+			jQuery(".im_edit_h1 img[id^='chatting_']").parent().removeClass("im_this");
+			jQuery("div[mark^=chatting_]").hide();
+			jQuery("#div_log").show();
+			jQuery("#div_history").html("").hide(); 
+				}else{
+				jQuery(".im_edit_h1 img[id^='chatting_']").parent().removeClass("im_this");
+				jQuery(this).parent().addClass("im_this");
+				var mark =jQuery(this).attr("mark");
+				jQuery("div[mark^=chatting_]").hide();
+				jQuery("div[mark=chatting_"+mark+"]").show();
+					  if(mark=="history"){
+						    var cid = jQuery("#chatt_id").val();
+	 						 if(cid!=""){		
+						 jQuery("#div_log").hide();
+						 var loading = "<img src='$!webPath/resources/style/im/images/waiting.gif' />";
+						 jQuery("#div_history").show().css("text-align","center").html(loading+"<p>历史加载中...</p>");	
+							  jQuery.post("$!webPath/admin/plat_show_history.htm",{
+								  "chatting_id":cid
+								  },function(data){
+									  if(data!=""){
+									   jQuery("#div_log").hide();
+										jQuery("#div_history").css("text-align","left").html("").append(data);   
+									   }else{
+										jQuery("#div_history").find("td").html("<p>没有聊天记录！</p>");    
+										   }
+									},"text");	
+							  }else{
+								alert("请选择一个用户");
+								}
+					    }
+			   }
+});
+	
+	//鼠标点击表情
+	jQuery(".im_emo_ul img").click(function(){
+	  var emoNum = jQuery(this).attr("emoNum");
+      var content = jQuery("#content").html();
+	  var emo = "<img src='$!webPath/resources/style/im/images/emo/"+emoNum+".gif'/>";
+	  jQuery("#content").html(content+emo);
+	  jQuery(".im_edit_h1 img[id^='chatting_']").parent().removeClass("im_this");
+	  jQuery("div[mark^=chatting_]").hide();
+	});	
+	
+	//图片上传
+	jQuery("#image").live("change",function(){
+		var cid = jQuery("#chatt_id").val();
+		if(cid!=""){
+		var now=new Date();
+		var date  = now.getFullYear()+"-"+now.getMonth()+"-"+now.getDay()+" "+now.getHours()+":"+now.getMinutes()+":"+now.getSeconds();	
+		var msg = "<li><div class='im_me'><div class='im_me_icon'><p><img src='$!webPath/resources/style/im/images/im_others_icon.png' width='40' height='33' /></p></div><div 	class='im_me_dialogue'><table class='im_msg_me' cellpadding='0' cellspacing='0'><tbody><tr><td><span class='im_others_name'>$!{chattingConfig.kf_name}</span><span class='im_time'>&nbsp;&nbsp;"+date+"</span></td> </tr><tr><td align='center'><img id='waiting_img' src='$!webPath/resources/style/im/images/waiting.gif' onclick='show_image(this)' style='max-height:50px;cursor:pointer'/></td> </tr></tbody></table><span class='im_arrow_me'></span></div></div></li>";
+			jQuery(".im_chat_list ul").append(msg); 
+			 scrollToBottom();
+			jQuery.ajaxFileUpload({
+                 url:'$!webPath/admin/plat_img_upload.htm?cid='+cid,
+                 fileElementId:'image',      
+                 dataType: 'text',                
+                 success: function (data){
+				 if(data=="error"){
+					 jQuery("img[id='waiting_img']").last().attr("src","$!webPath/resources/style/im/images/load_error.jpg").removeAttr("onclick");
+					 }else{	 
+					jQuery("img[id='waiting_img']").last().attr("src",data);
+					 }         
+				}
+			});
+		}else{
+		alert("请选择一个用户");
+		}
+	});
+		//字体颜色大小改变
+	jQuery("#font").change(function(){
+		var val =jQuery(this).val();
+		jQuery("#content").css("font-family",val);
+		});
+	jQuery("#font_size").change(function(){								
+		var val =jQuery(this).val();
+		jQuery("#content").css("font-size",val+"px");
+		});
+	//
+	#if($!{chattingConfig.font})
+	jQuery("#font").val("$!{chattingConfig.font}");
+	#end	
+	#if($!{chattingConfig.font_size})
+	jQuery("#font_size").val("$!{chattingConfig.font_size}")
+	#end	
+	#if($!{chattingConfig.font_colour})
+	jQuery("#font_colour").val("$!{chattingConfig.font_colour}")
+	#end
+
+});////
+//打开联系人
+function open_new_chatting(obj){
+			var	cid =jQuery(obj).attr("cid");
+			var	status =jQuery(obj).attr("status");
+			if(status=="false"){
+				jQuery("#chatt_id").val(cid);
+				var loading = "<img src='$!webPath/resources/style/im/images/waiting.gif' />";
+				jQuery(".im_chat_list ul").html("<li style='text-align:center;position:absolute;top:50%;margin-top:-25px'>"+loading+"<p>消息加载中，请稍后...</p></li>");
+				jQuery(".im_seller_list li div").removeClass("this").attr("status","false");
+				jQuery(obj).addClass("this").find("span[mark=this]").show();
+				jQuery(obj).attr("status","true").find("span[mark=notthis]").hide();
+				jQuery.post("$!webPath/admin/plat_chatting_open.htm",{
+					"chatting_id":cid
+					},function(data){
+						jQuery("#div_log").show();//
+						jQuery("#div_history").hide();//关闭历史
+						jQuery(".im_chat_list ul").html(data);
+						scrollToBottom();
+						},"text");
+				}
+
+	}
+
+
+//发送消息
+function send_Message(){
+	var font = jQuery("#font").val();
+	var font_size = jQuery("#font_size").val();
+	var font_colour = jQuery("#font_colour").val();
+	var chatting_id = jQuery("#chatt_id").val();
+	if(chatting_id!=""){
+	var text = jQuery.trim(jQuery("#content").html());
+	text=text.replace("<br>","");
+	var last=360-text.length;
+		if(text!="" && last>=0 && last<=360){
+		jQuery.post("$!webPath/admin/plat_chatting_save.htm",{
+				"font":font,
+				"font_size":font_size,
+				"font_colour":font_colour,
+				"chatting_id":chatting_id,
+				"text":text
+				},function(data){
+					jQuery("#content").html("");
+					jQuery(".im_chat_list ul").append(data);
+					jQuery(".im_limit b").html("360");
+					scrollToBottom();
+					},"text");	
+		 }
+	 }else{
+			alert("请选择一个用户！");
+			}
+	}	
+ //聊天设置提交
+ function set_chatting(){
+	var content = jQuery.trim(jQuery("#quick_reply_content").val());
+	var kf_name = jQuery("#kf_name").val();
+	 	jQuery.post("$!webPath/admin/plat_chatting_set.htm",
+			{"chattingConfig_id":"$!{chattingConfig.id}",
+			"kf_name":kf_name,
+			"content":content},
+			function(data){
+				if(data){
+					var a = jQuery("img[mark='set']").parent();		
+					jQuery(a).removeClass("im_this");									 
+					jQuery("div[mark^=chatting_]").hide();	
+					}	
+			},"text");
+	 }	
+//即时刷新聊天记录
+function refresh_Message(){
+	var session = jQuery("#div_session").attr("session");
+	if(session=="true"){
+	var chatting_id = jQuery("#chatt_id").val();
+	if(chatting_id!=""){
+		jQuery.post("$!webPath/admin/plat_chatting_refresh.htm",
+			{
+			"chatting_id":chatting_id
+				},
+			function(data){
+			if(data!=""){
+			jQuery(".im_chat_list ul").append(data);
+			scrollToBottom();
+			}
+			},"text");
+		}
+	}
+}
+//刷新咨询用户列表,每30秒刷新一次
+function refresh_Users(){
+	var session = jQuery("#div_session").attr("session");
+	if(session=="true"){
+		jQuery.post("$!webPath/plat_refresh_users.htm",
+			{},
+			function(data){
+				if(data!=""){
+				jQuery(".im_seller_list").html(data);
+				}
+			},"text");
+	}
+}
+ function scrollToBottom() {
+     var scrollTop = jQuery("#div_log ul")[0].scrollHeight;
+    jQuery("#div_log ul").scrollTop(scrollTop);
+ }
+ //图片放大
+  function show_image(obj) {
+  var src =jQuery(obj).attr("src");
+  var img = "<img src='"+src+"'/>";
+	jQuery(".white_content_opa,.white_content").fadeIn().find(".white_box table td[valign='middle']").html(img);
+ }
+ //历史记录ajax分页
+function ajaxPage(url,currentPage,obj){
+  var chatting_id = jQuery("#chatt_id").val();
+  jQuery.ajax({type:'POST',url:url,data:{"currentPage":currentPage,"chatting_id":+chatting_id},
+			  beforeSend:function(){
+				 var loading = "<img src='$!webPath/resources/style/im/images/waiting.gif' />";
+				jQuery("#div_history").show().css("text-align","center").html(loading+"<p>历史加载中...</p>");	 
+			   },
+			  success:function(data){
+				 jQuery("#div_log").hide();
+				 jQuery("#div_history").css("text-align","left").html("").append(data);   
+			 }
+		})
+  } 
+</script>
+<script>
+    jQuery(document).keyup(function(e){
+        var key =  e.which;
+		if(key==13){
+			send_Message();
+			}
+    });
+</script>	
+</head>
+<body>
+<div class="im_wrap">
+
+  <!--im-头部-->
+  <div class="im_head">
+    <div class="im_head_box">
+      <div class="im_head_left"> <span class="im_portrait">
+      <img src="$!webPath/resources/style/im/images/im_portrait.png" width="52" height="52"/>
+      </span> <span class="im_name">当前没有联系人</span> </div>
+      <div class="im_head_right">  </div>
+    </div>
+  </div>
+  <!--im-主体-->
+  <div class="im_main">
+    <div class="im_main_box">
+      <!--im-主体-左侧-->
+      <div class="im_main_left" style=" margin-right:310px;">
+        <div class="im_chat_list" id="div_log">
+        <ul></ul>
+        </div>
+	    <div class="im_chat_list img_chat_img" id="div_history" style=" display:none"> 
+		</div>
+        <!--im-主体-输入框-->
+        <div class="im_edit">
+          <div class="im_edit_h1">
+            <ul>
+              <li><a href="javascript:void(0);"><img src="$!webPath/resources/style/im/images/im_edit_01.png" width="33" height="29" id="chatting_font" mark="font" /></a>
+                <!--字体弹出层-->
+                <div class="im_font_tier" style="display:none;" mark="chatting_font">
+                  <select class="im_family" id="font">
+                    <option value="宋体">宋体</option>
+                    <option value="黑体">黑体</option>
+                    <option value="微软雅黑">微软雅黑</option>
+                    <option value="楷体">楷体</option>
+                  </select>
+                  <select class="im_size" id="font_size">
+                    <option value="12">12</option>
+                    <option value="14">14</option>
+                    <option value="16">16</option>
+                    <option value="18">18</option>
+                    <option value="20">20</option>
+                    <option value="22">22</option>
+                    <option value="24">24</option>
+                    <option value="26">26</option>
+                    <option value="28">28</option>
+                    <option value="30">30</option>
+                  </select>
+                 <span class="im_color">字体颜色：<input name="font_colour" type="text" id="font_colour" value="$!chattingConfig.font_colour" style="cursor:pointer" readonly="readonly"/></span> </div>
+              </li>
+              <li><a href="javascript:void(0);"><img src="$!webPath/resources/style/im/images/im_edit_02.png" width="33" height="29" id="chatting_emo" mark="emo" /></a> 
+              <!--表情弹出层-->
+              <div class="im_satis_tier" style="display:none" mark="chatting_emo">
+              	<ul class="im_emo_ul">
+                #foreach($count in [1..98])
+                	<li><a href="javascript:void(0);"><img src="$!webPath/resources/style/im/images/emo/$!{count}.gif" emoNum="$!{count}"/></a></li>
+               	#end
+                </ul>
+              </div>
+              </li>
+              
+              <li><a href="javascript:void(0);" title="图片上传" class="file_img_a"><img src="$!webPath/resources/style/im/images/im_edit_03.png" width="33" height="29" id="chatting_img" mark="img"/><input  name="image" id="image" value=""  type="file" class="file_img_upload"/></a></li>
+              <li><a href="javascript:void(0);" title="聊天记录"><img src="$!webPath/resources/style/im/images/im_edit_06.png" width="33" height="29" id="chatting_history" mark="history"/></a></li>
+              <li><a href="javascript:void(0);"><i><img src="$!webPath/resources/style/im/images/im_edit_07.png" id="chatting_set" mark="set"  /></i></a>
+                <!--满意度弹出层-->
+                <div class="im_satis_tier" mark="chatting_set" style=" display:none">
+                  <div class="im_choose">
+                  <span class="im_satis_span">客服名称：</span>
+                  <span class="im_satis_span_ta"> <input class="im_input220" id="kf_name" name="kf_name" type="text" value="$!chattingConfig.kf_name" /></span>
+                  </div>
+                  <div class="im_satis_textarea">
+                  <span class="im_satis_span">自动回复：</span>
+                  <span class="im_satis_span_ta"><textarea placeholder="可编辑自动回复信息" style="resize: none;" id="quick_reply_content" name="quick_reply_content">$!chattingConfig.quick_reply_content</textarea></span>
+                  </div>
+                  <div class="im_statis_sub">
+                    <input onclick="set_chatting()" type="button" value="提 交" />
+                     </div>
+                </div>
+              </li>
+              #if($!chattingConfig.quick_reply_open==0)
+              <li mark="relpy_open"><a href="javascript:void(0);"><i class="im_off"><img src="$!webPath/resources/style/im/images/im_off.png" mark="1"/></i><b>自动回复</b></a>
+              </li>  
+              #else
+                 <li mark="relpy_open"><a href="javascript:void(0);"><i class="im_off"><img src="$!webPath/resources/style/im/images/im_on.png" mark="0"/></i><b>自动回复</b></a>
+              </li>  
+			  #end
+            </ul>
+          </div>
+          <div class="im_textarea_box">
+          	<div class="im_textarea" style="overflow:auto;">
+            <div id="content" style="width:100%; height:100%;font-size:$!{chattingConfig.font_size}px; color:$!{chattingConfig.font_colour};font-family:$!{chattingConfig.font};" contenteditable="true"></div>
+            </div>
+          </div>
+          <div class="im_area_btn">
+           <a class="im_save" href="javascript:void(0);" onclick="send_Message()">发 送</a> 
+            <a class="im_over" href="javascript:void(0);"  onclick="if(confirm('是否要关闭聊天窗口？'))window.close();">结束对话</a>
+            <span class="im_limit">还可以输入<b>360</b>字</span> </div>
+        </div>
+      </div>
+      <!--im-主体-右侧-->
+      <!--im-主体-商家右侧-->
+            <div class="im_main_right im_main_seller" style=" width:300px;">
+            	<div class="im_tab">
+                	<ul>
+                    	<li class="this" mark="0"><a href="javascript:void(0);">全部联系人</a></li>
+                    </ul>
+                </div>
+                  <div class="im_right_detail" style=" width:100%;">
+                <div style="height:65%; overflow:auto;">
+                	<div class="im_seller_list">
+                    	<ul>
+                                  <!--未读信息-->
+                           #foreach($chatt in $chattings)
+                           #set($new=0)
+                           #foreach($log in $logs)
+                           #if(${log.chatting.id}==$!{chatt.id})
+                           #set($new=$!{new} + 1)
+                           #end
+                           #end
+                            <li cid="$!chatt.id">
+                            	<div style="width:87%; float:left;" onclick="open_new_chatting(this)" cid="$!chatt.id" status="false">
+                                <span><a href="javascript:void(0);">$!CommUtil.substring("$!chatt.user_name",15)</a></span>
+                                #if($!{new}>0)
+                                <span class="im_seller_horn" mark="notthis"><img src="$!webPath/resources/style/im/images/im_horn.gif" /></span>
+                                #end
+                                <span class="im_seller_horn" mark="this" style="display:none"><img src="$!webPath/resources/style/im/images/im_this.png" /></span>
+                                </div>
+                                <span class="im_seller_close"><a href="javascript:void(0);"><img mark="close" chatting_id="$!chatt.id" src="$!webPath/resources/style/im/images/im_close.gif" width="23" height="17" /></a></span>
+                            </li>
+              				#end
+                        </ul>
+                    </div>
+                </div>
+                <div class="im_right_goods">
+                    	<h1>最近咨询商品</h1>
+                        <table width="100%">
+                        	<tr>
+                          <td width="100%" align="center">最近没有咨询的商品！</td>
+                            </tr>
+                        </table>
+                    </div>
+                    </div>
+           	
+            <input id="chatt_id" name="chatt_id" value="" type="hidden"/>
+    </div>
+  </div>
+</div>
+
+<div class="white_content_opa" style="display:none" ></div>
+<div class="white_content" style="display:none">
+	<a class="white_close" href="javascript:void(0);" onclick="jQuery('.white_content,.white_content_opa').fadeOut();"></a>
+    <div class="white_box">
+    	<table width="100%" height="100%">
+        	<tbody>
+            	<tr>
+                	<td valign="middle"></td>
+                </tr>
+        	</tbody>
+        </table>
+    </div>
+</div> 
+<div id="div_session" session="true" style="display:none"></div>   
+</body>
+</body>
+</html>

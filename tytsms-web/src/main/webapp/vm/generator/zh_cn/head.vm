@@ -1,0 +1,143 @@
+<script>
+jQuery(document).ready(function(){
+  //获取购物车商品数量
+  jQuery.ajax({
+		type:'POST',
+		url:'$!current_webPath/ajax_carts.htm',
+		data:'',
+	    success:function(data){
+	     jQuery("#cart_goods_count_top").html(data);
+		   }
+		});	
+		
+		
+	//鼠标经过用户中心
+   jQuery("#top_user_sp").mouseover(function(){
+		if(jQuery("#top_user_hb").size()==0){
+			jQuery.ajax({type:'POST',url:'$!current_webPath/head_ajax_usercenter.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#top_user_hid").html('<div class="top_user_hb" id="top_user_hb"><span class="top_user_loading"><img src="$!webPath/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#top_user_hid").show();
+							   },
+						  success:function(data){
+						     jQuery("#top_user_hid").empty();
+								 jQuery("#top_user_hid").html(data);
+							   }
+						});		
+		}else{
+			jQuery("#top_user_hid").show();
+			}
+	jQuery("#top_user_sp").addClass("top_user_sp_this");
+  	});
+   jQuery("#top_user").mouseleave(function(){
+    jQuery("#top_user_hid").hide();
+	jQuery("#top_user_sp").removeClass("top_user_sp_this");
+  });
+   
+   //鼠标经过购物车
+   jQuery("#goodscar_sp").mouseover(function(){
+			var gstatus =jQuery("#goodscar_con_box").attr("mark");
+			if(gstatus=="none")
+			  jQuery.ajax({type:'POST',url:'$!current_webPath/cart_menu_detail.htm',data:'',
+						   beforeSend:function(){
+							     jQuery("#goodscar_con_box").empty().html(' <div><span class="top_user_loading"><img src="$!webPath/resources/style/system/front/default/images/loading.gif" /></span><b class="top_user_warning">加载中，请稍后...</b></div>');
+							     jQuery("#goodscar_con_box").show();
+							   },
+						  success:function(data){
+							  jQuery("#goodscar_con_box").attr("mark","show");
+							     jQuery("#goodscar_con_box").empty();
+								 jQuery("#goodscar_con_box").html(data);
+							   }
+						});
+			  jQuery("#goodscar_sp").addClass("goodscar_sp_this");
+		   });
+		   jQuery("#goodscar").mouseleave(function(){
+			jQuery("#goodscar_con_box").attr("mark","none");
+			  jQuery("#goodscar_con_box").hide();
+			  jQuery("#goodscar_sp").removeClass("goodscar_sp_this");
+		   });
+});
+function search_form(){
+  var keyword=arguments[0];
+  var type=arguments[1];
+  if(keyword!=""&&keyword!=undefined){
+   jQuery("#keyword").val(keyword);
+  }
+  if(type!=""&&type!=undefined){
+    jQuery("#type").val(type);
+  }
+  jQuery("#searchForm").submit();	
+  jQuery("#keyword").val("");
+}
+		 var total_price=0;
+		 #set($total_price=0)
+		 #foreach($gc in $cart)
+		  #if($!gc.goods.group_buy==2)
+		    #set($total_price=$!{gc.goods.group_goods.gg_price}*$!{gc.count}+$total_price)
+		  #else
+		    #set($total_price=$!{gc.goods.store_price}*$!{gc.count}+$total_price)
+		  #end
+		 #end
+		function cart_remove(id){
+           jQuery.post("$!current_webPath/remove_goods_cart.htm",{"id":id},function(data){
+		   if(data.code=="100"){		
+		   jQuery("table[class=shopping_table] tr[id="+id+"]").remove();
+		   jQuery(".goodscar_list li[id="+id+"]").remove();
+           jQuery("#cart_goods_count_top").html(data.count);
+		   jQuery("#cart_goods_price_top").html(data.total_price);
+           jQuery("#total_price").html(data.total_price);
+		   if(data.count==0){//购物车页面没有商品
+		  	 jQuery("form[id=cart_form]").remove();
+			 jQuery(".goodscar_list").remove();
+			 jQuery(".shopping_car_none").show();//cart1-none-goods
+			 jQuery("#goodscar_con_box").html("<b class='goodscar_none'>购物车还没有商品!</b>");	
+		   }
+			}
+			 if(data.code=="200"){	
+			 alert("系统繁忙，请稍后重试！");
+			 }
+         
+         },"json");
+       }
+</script>
+<!--[if lt IE 9]>
+    <script src="$!webPath/resources/js/css3-mediaqueries.js"></script>
+<![endif]-->
+<div class="head_width" id="head_h">
+  <div class="head"> #if($!config.websiteLogo)
+    #set($img="$!imageWebServer/$!{config.websiteLogo.path}/$!{config.websiteLogo.name}")
+    #else
+    #set($img="$!webPath/resources/style/system/front/default/images/logo.jpg")
+    #end
+    <h1 class="logo"><span>
+      <p><a href="$!webPath/index.htm"> <img src="$!img" border="0" /> </a></p>
+      </span></h1>
+    <form action="$!webPath/search.htm" method="post" id="searchForm">
+      <input name="type" type="hidden" id="type" value="$!type" />
+      <div class="head_search"> <span class="head_seartxt">
+        <input name="keyword" type="text" id="keyword" placeholder="让嘴巴去旅行！" x-webkit-speech lang="zh-CN" onwebkitspeechchange="jQuery('#searchForm').submit()" class="h_sear_txt" style="padding-left:5px;" />
+        <input name="" type="submit"  class="h_sear_btn" value="搜索"/>
+        </span><span class="head_searstr">#if($!config.hotSearch!="")热门搜索：#foreach($info in $CommUtil.splitByChar("$!config.hotSearch",",")) <a href="javascript:void(0);" onclick="search_form('$info','goods');">$!info</a> #end #end</span></div>
+    </form>
+   
+    <!--用户中心开始-->
+    <div class="top_user" id="top_user">
+      <span class="top_user_sp" id="top_user_sp"><a onclick="location='$!webPath/buyer/index.htm'">用户中心</a><s></s></span>
+      <div class="top_user_hid" id="top_user_hid" style="display:none"> </div>
+    </div>
+    <div class="goodscar" id="goodscar">
+    
+    
+      <span class="goodscar_sp" id="goodscar_sp">
+      <span>
+      <i class="goodscar_img"></i>
+      <em class="goodscar_num"><b id="cart_goods_count_top">0</b></em><a href="$!webPath/goods_cart1.htm">去购物车结算</a>
+      </span>
+      </span>
+      
+      
+      <div class="goodscar_con_box" id="goodscar_con_box" style="display:none" mark="none"> </div>
+    </div>
+    <!--购物车结束-->
+  </div>
+</div>

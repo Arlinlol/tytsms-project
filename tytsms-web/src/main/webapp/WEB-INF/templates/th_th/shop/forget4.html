@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.forget4.success") </title><!-- 找回密码成功 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/login.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="login_head"> #if($!config.websiteLogo)
+  #set($img="$!imageWebServer/$!{config.websiteLogo.path}/$!{config.websiteLogo.name}")
+  #else
+  #set($img="$!webPath/th_th/resources/style/system/front/default/images/logo.jpg")
+  #end
+  <h1><span><a href="$!webPath"><img src="$!img" width="209" height="70" /></a></span><strong>#springMessage("sms.forget.retrieve_password")<!--找回密码--></strong></h1>
+</div>
+<div class="forget_page">
+  <h3><span>#springMessage("sms.forget.retrieve_password")<!--找回密码--></span></h3>
+  <div class="forget_page_box">
+    <ul class="forget_step">
+      <li class="forget_thised_first">#springMessage("sms.forget.fill_account_name")<!--填写账户名--></li>
+      <li class="forget_thised_first">#springMessage("sms.forget.authenticate")<!--验证身份--></li>
+      <li class="forget_thised">#springMessage("sms.forget.set_new_password")<!--设置新密码--></li>
+      <li class="forget_last_this">#springMessage("sms.forget.complete")<!--完成--></li>
+    </ul>
+    <div class="forget_common">
+    <div style="height:180px;overflow:hidden; margin-left:auto; margin-right:auto; margin-top:10px;">
+      <div style="font-size:16px; color:#666666;margin-top:60px; padding-left:20%;">
+      <span style="float:left;">
+      <img src="$!webPath/th_th/resources/style/common/images/icon/succeed.png" />
+      </span>
+      <span style=" padding-top:10px; line-height:30px; float:left;">$!{op_title}！</span>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+    <script>
+	  var count=3;
+	  window.setInterval(go,1000);
+	  function go(){
+	    count--;
+	    if(count==0) window.location.href="$!url";
+	  }
+	</script>
+<div class="main"> $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

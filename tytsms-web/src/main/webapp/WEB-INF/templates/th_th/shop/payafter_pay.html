@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.payafter_pay.cash_on_delivery") </title><!--货到付款-->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/good_cart.css" type="text/css" rel="stylesheet">
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    rules:{
+		pay_msg:{required:true}
+	},
+	messages:{
+	    pay_msg:{
+			required:"#springMessage('sms.payafter_pay.payment_instructions_not_null')" //付款说明不能为空
+		}
+	}
+ });
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+ <form action="$!webPath/order_pay_payafter.htm" method="post" id="theForm">
+  <div class="payfor_box">
+    <h3>#springMessage("sms.payafter_pay.cash_on_delivery")<!--货到付款--></h3>
+    <h4>$!paymentTools.queryStorePayment("payafter").get("content")</h4>
+    <h5>#springMessage("sms.payafter_pay.sure")<!--确定使用“货到付款”吗？--></h5>
+    <h5>#springMessage("sms.payafter_pay.delivery_instructions")<!--送货说明-->：</h5>
+    <span class="payfor_textarea">
+    <textarea name="pay_msg" cols="" rows="6" id="pay_msg"></textarea>
+    </span>
+     <span class="payfor_btn">                      <!--提交-->
+    <input name="" type="submit"  value="#springMessage('sms.outline_pay.submit')" style="cursor:pointer;"/>
+     <input name="order_id" type="hidden" id="order_id" value="$!{order.id}" />
+            <input name="pay_session" type="hidden" id="pay_session" value="$!pay_session" />
+    </span> </div>
+    </form>
+  $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

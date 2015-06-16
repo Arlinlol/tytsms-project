@@ -1,0 +1,89 @@
+<link href="$!webPath/th_th/resources/style/common/css/window.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+	   rules:{
+		   return_goods_content:{required:true}
+		   },
+	   messages:{
+		   return_goods_content:{required:"#springMessage('member.order_return_apply.write_instructions')"}/* 请填写说明 */
+	   }
+	});
+});
+</script>
+#if($!view)
+<form action="$!webPath/buyer/order_return_apply_cancel.htm" method="post" id="theForm">
+<h4 class="white_table_h4">#springMessage("member.order_return_apply.submit_application")<!-- 提交申请后请及时与商家联系，商家同意退货后可填写退货物流信息  --> </h4>
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="">
+    #if($!goods.goods_main_photo)
+                  #set($img="$!webPath/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_middle.$!{goods.goods_main_photo.ext}")
+                  #else
+                  #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                  #end
+  <tr>
+      <td width="15%" align="right" valign="top">#springMessage("member.order_return_apply.goods_info")<!-- 商品信息： -->
+      </td>
+      <style type="text/css">
+	  .return_apply_name { width:100%; line-height:24px; display:block;float:left;}
+	  .return_apply_num { width:100%; float:left; color:#999;}
+	  .return_apply_ul li { width:100%; float:left; margin-bottom:5px;}
+	  </style>
+      <td width="15%" align="left"><img width="70" height="70" src="$!img"/>
+      </td>
+      <td align="left" valign="top">
+      <span class="return_apply_num">#springMessage("member.order_return_apply.goods_name")<!-- 名称： -->$!goods.goods_name</span>
+      </td>
+    </tr>
+<tr>
+      <td height="78" align="right" valign="center">#springMessage("member.order_return_apply.return_instructions")<!-- 退货说明： --></td>
+      </td>
+      <td align="left" colspan="2">$!return_content</td>
+    </tr>
+    <tr>
+      <td height="50" align="center" colspan="3"><span class="inputbtn">
+        <input name="" type="submit" value="#springMessage('member.order_return_apply.cancel_return')" style="cursor:pointer;" class="white_btn"/>      
+      </span></td>								<!-- 取消退货 -->
+    </tr>
+  </table>
+        <input name="return_goods_count" type="hidden" value="$!return_count" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        <input type="hidden" value="$!goods_gsp_ids" name="goods_gsp_ids" />
+        <input name="id" type="hidden" id="id" value="$!oid" />
+        <input name="goods_id" type="hidden" id="goods_id" value="$!goods.id" /> 
+</form> 
+
+#else
+<form action="$!webPath/buyer/order_return_apply_save.htm" method="post" id="theForm">
+ <h4 class="white_table_h4">#springMessage("member.order_return_apply.submit_application")<!-- 提交申请后请及时与商家联系，商家同意退货后可填写退货物流信息 --></h4>      
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="white_table">
+  				  #if($!goods.goods_main_photo)
+                  #set($img="$!webPath/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_middle.$!{goods.goods_main_photo.ext}")
+                  #else
+                  #set($img="$!webPath/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                  #end
+  <tr>
+      <td height="78" align="right" valign="top">#springMessage("member.order_return_apply.goods_info")<!-- 商品信息： -->
+      </td>
+      <td align="left"><img width="70" height="70" src="$!img"/><span style="display:block; margin-top:10px;"><a href="$!webPath/goods_$!{goods.id}.htm">$!goods.goods_name</a></span></td>
+    </tr>
+    <tr>
+      <td height="78" align="right" valign="top">#springMessage("member.order_return_apply.application_instructions")<!-- 申请说明: --></td>
+      </td>
+      <td align="left"><textarea name="return_goods_content" cols="55" rows="5" id="return_goods_content"></textarea></td>
+    </tr>
+    <tr>
+      <td height="50" align="center" colspan="2"><span class="inputbtn"><!-- 提交 -->
+        <input name="" type="submit" value="#springMessage('member.order_return_apply.submit')" style="cursor:pointer;" class="white_btn"/>
+        <input name="return_goods_count" type="hidden" value="$!return_count" />
+        <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+        <input type="hidden" value="$!goods_gsp_ids" name="goods_gsp_ids" />
+        <input name="id" type="hidden" id="id" value="$!oid" />
+        <input name="original_id" type="hidden" value="$!original_id">
+        <input name="goods_id" type="hidden" id="goods_id" value="$!goods.id" />       
+      </span></td>
+    </tr>
+  </table>
+</form>
+#end

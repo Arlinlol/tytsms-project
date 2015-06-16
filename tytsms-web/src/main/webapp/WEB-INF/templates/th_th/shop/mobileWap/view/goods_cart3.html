@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>微信商城 - 选择支付方式</title>
+<link href="$!webPath/th_th/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+//返回当前页面高度
+function order_pay(){
+  var payType =  jQuery('input[type="radio"]:checked').val();
+   if(payType=='wechatpay'){
+	  var order_id = jQuery('#order_id').val();
+	  var redirect_uri = encodeURIComponent("$!webPath/mobileWap/order_pay.htm?order_id="+order_id+"&payType="+payType);
+	  var action = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx67d0e4bea02e051d&redirect_uri="+redirect_uri+"&response_type=code&scope=snsapi_base&state=123#wechat_redirect";
+	  jQuery('#theForm').attr('action',action);
+  } 
+  jQuery('#theForm').submit();
+}
+jQuery(document).ready(function(){
+    jQuery(":radio[value=]").attr("checked",true).parent().parent().find("span.bankimg").addClass("this").find("div.this_ok").show();
+	  //
+   jQuery("label").click(function(){
+	   jQuery("span.bankimg").removeClass("this").find("div.this_ok").hide();  
+	   jQuery(this).find("span.bankimg").addClass("this").find("div.this_ok").show();
+	});
+	jQuery(":radio[checked=true]").parent().parent().find("span.bankimg").addClass("this").find("div.this_ok").show();
+});
+
+</script>
+</head>
+<body>
+<div class="page_bottom2">
+  <form action="$!webPath/order_pay.htm" method="post" target="_blank" id="theForm">
+    <div class="payorder">
+      <div class="paybot">
+        <h1><span>订单信息如下</span></h1>
+        #if($!json_map.verify)
+        <ul>
+          <li><strong>订单编号：</strong><strong class="orange">$!json_map.order_num</strong></li>
+          <li><strong>应付金额：</strong><strong class="orange">¥$!json_map.all_of_price</strong></li>
+        </ul>
+        #end
+        <h3>#if(!$!json_map.verify)<font color = "red">订单已提交。请勿重复提交！</font> <p> #end 您可以在用户中心中<a href="$!webPath/mobileWap/buyer_order.htm">“我的订单”</a>查看该订单</h3>
+      </div>
+        #if($!json_map.verify)
+      <div class="bank">
+        <div class="banktitle">
+          <h1><span>您可以选择付款方式</span></h1>
+        </div>
+        <div class="bankcar">
+          <ul>
+             <li>
+              <div class="bankone">
+                <label>
+                <span class="banksp">
+                <input name="payType" type="radio" value="wechatpay"   checked="checked" />
+                </span> <span class="bankimg">微信支付
+                <div class="this_ok" style="display:none"></div>
+                </span>
+                </label>
+              </div>
+               </li>
+          </ul>
+        </div>
+        <div class="banknextbtn">
+          <input name="" type="button"  value="确认支付" onClick="order_pay();" style="cursor:pointer;"/>
+          <input name="order_id" type="hidden" id="order_id" value="$!json_map.order_id" />
+        </div>
+      </div>
+      #end
+    </div>
+  </form>
+</div>
+
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+
+</body>
+</html>

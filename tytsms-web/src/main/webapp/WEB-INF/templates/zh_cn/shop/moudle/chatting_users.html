@@ -1,0 +1,27 @@
+﻿<script>
+var chatting_id = jQuery("#chatt_id").val();
+jQuery(".im_seller_list li div").removeClass("this").attr("status","false");
+jQuery(".im_seller_list li[cid="+chatting_id+"] div").addClass("this").find("span[mark=this]").show();
+jQuery(".im_seller_list li[cid="+chatting_id+"] div").attr("status","true").find("span[mark=notthis]").hide();
+</script>
+<ul>
+      <!--未读信息-->
+#foreach($chatt in $chattings)
+#set($new=0)
+    #foreach($log in $logs)
+        #if(${log.chatting.id}==$!{chatt.id})
+        #set($new=$!{new} + 1)
+        #end
+    #end
+<li cid="$!chatt.id">
+    <div style="width:87%; float:left;" onclick="open_new_chatting(this)" cid="$!chatt.id" status="false">
+    <span><a href="javascript:void(0);">$!CommUtil.substring("$!chatt.user_name",15)</a></span>
+    #if($!{new}>0)
+    <span class="im_seller_horn" mark="notthis"><img src="$!webPath/resources/style/im/images/im_horn.gif" /></span>
+    #end
+    <span class="im_seller_horn" mark="this" style="display:none"><img src="$!webPath/resources/style/im/images/im_this.png" /></span>
+    </div>
+    <span class="im_seller_close"><a href="javascript:void(0);"><img mark="close" chatting_id="$!chatt.id" src="$!webPath/resources/style/im/images/im_close.gif" width="23" height="17" /></a></span>
+</li>
+#end
+</ul>

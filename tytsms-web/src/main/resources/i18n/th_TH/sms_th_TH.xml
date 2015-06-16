@@ -1,0 +1,2010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>商城子系统国际化配置</comment>
+	<entry key="sms.home.shangchengdenglu">เข้าสู่ระบบของมอลล์</entry><!--商城登陆 -->
+	<!-- #springMessage("sms.home.userlogin") -->
+	<!-- goods_consult.html -->
+	<entry key="sms.consult.content_not_null">เนื้อหาสอบถามไม่สามารถเว้นว่าง</entry><!--咨询内容不能为空 -->
+	<entry key="sms.consult.no_content">ยังไม่มีข้อความที่สอบถาม</entry><!--还没有咨询内容 -->
+	<entry key="sms.consult.content">ข้อความที่สอบถาม</entry><!--咨询内容： -->
+	<entry key="sms.consult.hide">ไม่ระบุชื่อ</entry><!--匿名 -->
+	<entry key="sms.consult.reply">คำตอบจากร้านค้า</entry><!--店家回复： -->
+	<entry key="sms.consult.vcode_null">กรุณากรอกรหัสยืนยันตัวตน</entry><!--验证码不能为空 -->
+	<entry key="sms.consult.vcode_error">รหัสยืนยันตัวตนไม่ถูกต้อง</entry><!-- 验证码不正确 -->
+	<entry key="sms.consult.consult">ข้อความที่อยากสอบถาม:</entry><!--我要咨询： -->
+	<entry key="sms.consult.email">อีเมล์</entry><!-- 电子邮件： -->
+	<entry key="sms.consult.vcode">รหัสยืนยันตัวตน</entry><!--验证码： -->
+	<entry key="sms.consult.read_vcode">รหัสยืนยันตัวตนแบบเสียง</entry><!-- 朗读验证码 -->
+	<entry key="sms.consult.appear_anonymously">แสดงความคิดเห็นโดยไม่ระบุชื่อ</entry><!--匿名发表 -->
+	<entry key="sms.consult.published_consulting">แสดงคำถามที่ต้องการสอบถาม</entry><!--发表咨询 -->
+
+	<!-- goods_evaluation.html -->
+	<entry key="sms.evaluation.reviews">ข้อความของความพึงพอใจเกี่ยวกับสินค้า</entry><!--商品评价 -->
+	<entry key="sms.evaluation.rating">ระดับความพึงพอใจ</entry><!--好评度： -->
+	<entry key="sms.evaluation.good_review">ดี</entry><!--好评： -->
+	<entry key="sms.evaluation.medium_review">ปานกลาง</entry><!--中评： -->
+	<entry key="sms.evaluation.bad_review">แย่</entry><!-- 差评： -->
+	<entry key="sms.evaluation.not_review">ยังไม่มีข้อความ เกี่ยวกับความพึงพอใจสินค้า</entry><!-- 
+		还没有评价内容 -->
+	<!-- 400.html/500.html  -->
+	<entry key="sms.evaluation.what_wait">พวกเราเลือกสินค้าอย่างดีให้ท่าน  ยังรออะไรอีกนะ</entry><!-- 我们为您挑选了如此棒的商品，还在等什么? -->
+	<entry key="sms.evaluation.you_can">ท่านสามารถ  ลองใหม่อีกครั้ง หรือ </entry><!-- 您可以：稍后再试或 -->
+	<entry key="sms.evaluation.contact_clinet">ติดต่อการบริการลูกค้า</entry><!-- 联系客服  -->
+	<entry key="sms.evaluation.turn">วินาทีจะไปโดยอัตโนมัติ</entry><!-- 秒后自动转到-->
+	<entry key="sms.evaluation.will">หลังจาก</entry><!--将在 -->
+	<entry key="sms.evaluation.store_index">หน้าแรก</entry><!-- 商城首页 -->
+	<entry key="sms.evaluation.waitting">กรุณารอสักครู่</entry><!-- ，请稍候... -->		
+
+	<!--goods_list.html -->
+	<entry key="sms.goods_list.can_not_store">ไม่สามารถบันทึกร้านค้าของตัวเองเป็นร้านค้าที่ชื่นชอบได้</entry><!-- 不能收藏自己的店铺 -->
+	<entry key="sms.goods_list.store_success">บันทึกร้านค้าเป็นร้านค้าที่ชื่นชอบสำเร็จ</entry><!-- 店铺收藏成功！ -->
+	<entry key="sms.goods_list.store_collect">ร้านค้านี้ถูกบันทึกเป็นร้านค้าที่ชื่นชอบแล้ว</entry><!--该店铺已经被收藏！ -->
+	<entry key="sms.goods_list.score_detail">รายละเอียดเกี่ยวกับการให้คะแนน</entry><!--评分详细 -->
+	<entry key="sms.goods_list.compared_industry">การเปรียบเทียบสายงานเดียวกัน</entry><!--与行业相比 -->
+	<entry key="sms.goods_list.goods_score">คะแนนความพึงพอใจที่ให้สินค้า</entry><!--商品评分： -->
+	<entry key="sms.goods_list.point">คะแนน</entry><!-- 分 -->
+	<entry key="sms.goods_list.service_score">คะแนนความพึงพอใจการบริการ</entry><!--服务评分： -->
+	<entry key="sms.goods_list.limitation_score">ตัดคะแนนภายในเวลาที่กำหนด</entry><!--时效评分： -->
+	<entry key="sms.goods_list.store_name">ชื่อร้านค้า</entry><!-- 店铺名称： -->
+	<entry key="sms.goods_list.company_name">ชื่อบริษัท</entry><!--公司名称： -->
+	<entry key="sms.goods_list.phone">เบอร์โทรติดต่อ</entry><!--联系电话： -->
+	<entry key="sms.goods_list.store_address">ที่อยู่ร้านค้า</entry><!-- 店铺地址： -->
+	<entry key="sms.goods_list.detail_address">ที่อยู่ที่ชัดเจน</entry><!--详细地址： -->
+	<entry key="sms.goods_list.on_line">เจ้าหน้าที่บริการลูกค้าไม่ได้ออนไลน์ในขณะนี้ต้องการดำเนินต่อไหม</entry><!-- 客服当前不在线，是否继续 -->
+	<entry key="sms.goods_list.store_index">หน้าแรกของร้านค้า</entry><!-- 店铺首页 -->
+	<entry key="sms.goods_list.description">รายละเอียดสินค้า</entry><!--描述相符： -->
+	<entry key="sms.goods_list.service_attitude">การบริการ</entry><!--服务态度： -->
+	<entry key="sms.goods_list.delivery_speed">การส่งสินค้า</entry><!--发货速度： -->
+	<entry key="sms.goods_list.location">ที่อยู่ของร้านค้า</entry><!-- 所在地： -->
+	<entry key="sms.goods_list.goods_category">ประเภทสินค้า</entry><!--商品分类 -->
+	<entry key="sms.goods_list.top">ลำดับสินค้าขายดี</entry><!--热销排行 -->
+	<entry key="sms.goods_list.sales_volume">ยอดขาย</entry><!-- 销量 -->
+	<entry key="sms.goods_list.price">ราคา</entry><!-- 价格 -->
+	<entry key="sms.goods_list.rating">ระดับความพึงพอใจของสินค้า</entry><!--好评度 -->
+	<entry key="sms.goods_list.register_date">เวลาที่สินค้าขึ้นหน้าเว็บไซต์</entry><!--上架时间 -->
+	<entry key="sms.goods_list.evaluate">มีความคิดเห็น….. ข้อ</entry><!--条评价 -->
+	<entry key="sms.goods_list.store_info">ข้อมูลของร้านค้า</entry><!--店铺信息 -->
+	<entry key="sms.goods_list.contact_number">เบอร์โทรติดต่อ</entry><!--联系电话： -->
+												
+	<!-- goods_order.html -->
+	<entry key="sms.goods_order.no_record">ยังไม่มีข้อมูลการสั่งสินค้า</entry><!--还没有成交记录 -->
+	<entry key="sms.goods_order.buyer">ผู้ซื้อ</entry><!--买家 -->
+	<entry key="sms.goods_order.goods_price">ราคาสินค้า</entry><!--商品价格 -->
+	<entry key="sms.goods_order.goods_specification">ขนาดของสินค้า</entry><!--商品规格 -->
+	<entry key="sms.goods_order.purchase_quantity">จำนวนที่ซื้อ</entry><!-- 购买数量 -->
+	<entry key="sms.goods_order.turnover_time">เวลาที่ทำรายการสั่งซื้อสินค้า</entry><!--成交时间 -->
+
+	<!--store_eva.html -->
+	<entry key="sms.store_eva.evaluate">คำประเมินความพึงพอใจ</entry><!--评价 -->
+	<entry key="sms.store_eva.content">ข้อความ</entry><!--内容 -->
+	<entry key="sms.store_eva.goods">สินค้า</entry><!--商品 -->
+	<entry key="sms.store_eva.money">จำนวนเงิน</entry><!--金额 -->
+	<entry key="sms.store_eva.buyer">ผู้ชื่อ</entry><!-- 买家 -->
+	<entry key="sms.store_eva.time">เวลา</entry><!-- 时间 -->
+	<entry key="sms.store_eva.high_praise">ดี</entry><!-- 好评 -->
+	<entry key="sms.store_eva.medium_praise">ปานกลาง</entry><!-- 中评 -->
+	<entry key="sms.store_eva.bad_praise">ควรปรับปรุง</entry><!--差评 -->
+	<entry key="sms.store_eva.say_nothing">ไม่ได้ประเมินความพึงพอใจ</entry><!--这家伙什么都没说 -->
+
+	<!-- store_goods_search.html -->
+	<entry key="sms.store_goods_search.contain">ประกอบด้วย</entry><!-- 包含 -->
+	<entry key="sms.store_goods_search.goods_search_result">ผลการค้นหาสินค้า</entry><!--商品搜索结果 -->
+	<entry key="sms.store_goods_search.search_result">ผลการค้นหา</entry><!--搜索结果 -->
+	<entry key="sms.store_goods_search.detail">เรียกดูรายบละเอียดสินค้า</entry><!--查看详情 -->
+	<entry key="sms.store_goods_search.recent_record">การสั่งซื้อสินค้าล่าสุด</entry><!-- 最近成交 -->
+	<entry key="sms.store_goods_search.no_info">ขออภัยไม่มีข้อมูลสินค้าที่เกี่ยวข้อง</entry><!-- 对不起，没有对应商品信息！ -->
+
+
+	<!--store_goods.html -->
+	<entry key="sms.store_goods.inventory">สต๊อกสินค้า</entry><!-- 库存： -->
+	<entry key="sms.store_goods.bronze_member">สมาชิกระดับเหรียญทองแดง</entry><!--铜牌会员 -->
+	<entry key="sms.store_goods.silver_member">สมาชิกระดับเหรียญเงิน</entry><!-- 银牌会员 -->
+	<entry key="sms.store_goods.gold_member">สมาชิกระดับเหรียญทอง</entry><!--金牌会员 -->
+	<entry key="sms.store_goods.super_member">สมาชิกระดับซุปเปอร์</entry><!--超级会员 -->
+	<entry key="sms.store_goods.loading">พยายามอัพโหลดอยู่</entry><!--努力加载 -->
+	<entry key="sms.store_goods.can_not_collect">ไม่สามารถบันทึกสินค้าตัวเองเป็นสินค้าที่ชื่นชอบได้</entry><!--不能收藏自己的商品 -->
+	<entry key="sms.store_goods.collect_success">บันทึกสินค้าเป็นสินค้าที่ชื่นชอบสำเร็จ</entry><!-- 商品收藏成功！ -->
+	<entry key="sms.store_goods.already_collect">บันทึกสินค้ารายการนี้เป็นสินค้าที่ชื่นชอบแล้ว</entry><!--已经收藏该商品！ -->
+	<entry key="sms.store_goods.no_buy_own_goods">ไม่สามารถซื้อสินค้าจากร้านค้าตัวเองได้</entry><!-- 不能购买自己的商品！ -->
+	<entry key="sms.store_goods.least_buy_one">ซื้อสินค้าอย่างน้อย 1 รายการ</entry><!-- 至少购买一件商品 -->
+	<entry key="sms.store_goods.inventory_zero">สต๊อกสินค้าเท่ากับ 0 ไม่สามารถซื้อสินค้ารายการนี้ได้ </entry><!--商品库存为0,不能购买! -->
+	<entry key="sms.store_goods.goods_detail">รายละเอียดของรูปภาพของสินค้า</entry><!--商品细节图 -->
+	<entry key="sms.store_goods.member_login">เข้าสูระบบสมาชิก</entry><!-- 会员登录 -->
+	<entry key="sms.store_goods.share_out">แบ่งปันสินค้าถึง เว็บไซต์อื่น</entry><!--分享商品到：站外 -->
+	<entry key="sms.store_goods.share_goods">แบ่งปันสินค้า</entry><!--分享商品 -->
+	<entry key="sms.store_goods.login_after_enjoy_sales">ช่วงนี้เป็นสินค้าโปรโมชั่น,เมื่อเข้าสู่ระบบถึงจะได้รับราคาโปรโมชั่น</entry><!--当前商品为促销商品，用户登录后方可享受促销价格！ -->
+	<entry key="sms.store_goods.groupons">สินค้าตอนนี้เป็นสินค้าแบบกรุ๊ปบาย</entry><!--当前商品为团购商品 -->
+	<entry key="sms.store_goods.rp">ราคาอ้างอิง</entry><!-- 参考价格： -->
+	<entry key="sms.store_goods.gp">ราคาสินค้าแบบกรุ๊ปบาย</entry><!--团购价格 -->
+	<entry key="sms.store_goods.sp">ราคาสินค้าจากมอลล์</entry><!-- 商城价格 -->
+	<entry key="sms.store_goods.pp">ราคาโปรโมชั่น</entry><!--促销价格： -->
+	<entry key="sms.store_goods.here_is">ท่านตอนนี้เป็น….</entry><!--您当前为 -->
+	<entry key="sms.store_goods.enjoy_store_sales">ใช้สิทธิพิเศษราคาจากมอลล์</entry><!--，享受商城价格 -->
+	<entry key="sms.store_goods.discount">ส่วนลด…. เปอร์เซ็นต์</entry><!-- 折的优惠 -->
+	<entry key="sms.store_goods.goods_evaluate">คำประเมินความพึงพอใจสินค้า</entry><!-- 商品评价： -->
+	<entry key="sms.store_goods.already">มี….</entry><!--已有 -->
+	<entry key="sms.store_goods.evaluate">คน ให้ความพึงพอใจ</entry><!--人评价 -->
+	<entry key="sms.store_goods.online_customer_service">เจ้าหน้าที่บริการลูกค้าออนไลน์</entry><!--在线客服 -->
+	<entry key="sms.store_goods.is_continue">ตอนนี้เจ้าหน้าที่บริการลูกค้าไม่ได้ออนไลน์จะดำเนินการต่อหรือไม่</entry><!-- 客服当前不在线，是否继续 -->
+	<entry key="sms.store_goods.delivery_to">จัดส่งไปถึง….</entry><!-- 配 送 至： -->
+	<entry key="sms.store_goods.select_city">เลือกเมืองรับสินค้าของท่าน</entry><!--选择你的收货城市 -->
+	<entry key="sms.store_goods.current_place">ที่อยู่ปัจจุบันของท่าน</entry><!--您当前所在地： -->
+	<entry key="sms.store_goods.merchant_assume">ผู้ขายรับผิดชอบ</entry><!--商家承担 -->
+	<entry key="sms.store_goods.surface_mail">ส่งสินค้าแบบธรรมดา</entry><!--平邮 -->
+	<entry key="sms.store_goods.express_delivery">สินค้าแบบด่วน</entry><!--快递 -->
+	<entry key="sms.store_goods.sale_situation">สถานะการขาย</entry><!--销售情况： -->
+	<entry key="sms.store_goods.work_off">ขายได้</entry><!-- 售出 -->
+	<entry key="sms.store_goods.piece">ชิ้น</entry><!--件 -->
+	<entry key="sms.store_goods.buy_counts">จำนวนที่ซื้อ</entry><!--购买数量： -->
+	<entry key="sms.store_goods.aready_select">เลือกแล้ว</entry><!--已选择 -->
+	<entry key="sms.store_goods.add_to_cart">หยิบลงตะกร้า</entry><!--加入购物车 -->
+	<entry key="sms.store_goods.immediately_buy">ซื้อสินค้าทันที</entry><!--立即购买 -->
+	<entry key="sms.store_goods.grade_detail">ข้อมูลการคะแนน</entry><!--评分详细 -->
+	<entry key="sms.store_goods.compareto_same_industry">การเปรียบเทียบ</entry><!--与同行业相比 -->
+	<entry key="sms.store_goods.descript_coincide">สินค้าจริงตรงกับรายละเอียดสินค้า</entry><!--描述相符： -->
+	<entry key="sms.store_goods.serve_attitude">ทัศนคติของบริการ</entry><!--服务态度： -->
+	<entry key="sms.store_goods.deliver_speed">ความเร็วในการส่งสินค้า</entry><!-- 发货速度： -->
+	<entry key="sms.store_goods.shop_client_service">เจ้าหน้าที่บริการลูกค้าจากมอลล์</entry><!-- 商城客服： -->
+	<entry key="sms.store_goods.client_service_not_here">ตอนนี้เจ้าหน้าที่บริการลูกค้าไม่ได้ออนไลน์จะดำเนินการต่อไหม</entry><!--客服当前不在线，是否继续 -->
+	<entry key="sms.store_goods.click_consult">คลิกสอบถาม</entry><!--点击咨询 -->
+	<entry key="sms.store_goods.click_here_send_message">คลิกตรงนี้เพื่อส่งข้อความให้ฉัน</entry><!-- 点击这里给我发消息 -->
+	<entry key="sms.store_goods.company_name">ชื่อบริษัท</entry><!-- 公司名称： -->
+	<entry key="sms.store_goods.not_fill_in">ยังไม่ได้กรอกข้อมูล</entry><!-- 暂未填写 -->
+	<entry key="sms.store_goods.enter_merchant_shop">เข้าสู่ร้านค้า</entry><!--进入商家店铺 -->
+	<entry key="sms.store_goods.correlation_classify">ประเภทที่เกี่ยวข้อง</entry><!--相关分类 -->
+	<entry key="sms.store_goods.same_other_brands">ประเภทเดียวกันแต่แบรนด์อื่น</entry><!--同类其他品牌 -->
+	<entry key="sms.store_goods.commodity_list">จัดอันดับสินค้า</entry><!-- 商品排行 -->
+	<entry key="sms.store_goods.hot_seller_ranking">จสินค้าขายดี</entry><!-- 热销商品排行 -->
+	<entry key="sms.store_goods.hot_collection_ranking">สินค้าที่ชื่นชอบ</entry><!--热门收藏排行 -->
+	<entry key="sms.store_goods.sell">ขาย</entry><!-- 出售： -->
+	<entry key="sms.store_goods.collect">การบันทึกสินค้า</entry><!--收藏： -->
+	<entry key="sms.store_goods.mall_selling">สินค้ายอดนิยมจากมอลล์</entry><!--商城热卖 -->
+	<entry key="sms.store_goods.reference_price">ราคาอ้างอิง</entry><!-- 参考价：¥ -->
+	<entry key="sms.store_goods.shop_price">ราคาจากมอลล์</entry><!--商城价： -->
+	<entry key="sms.store_goods.goods_detail">รายละเอียดข้อมูลสินค้า</entry><!--商品详情 -->
+	<entry key="sms.store_goods.goods_evaluate">ความพึงพอใจเกี่ยวกับสินค้า</entry><!--商品评价 -->
+	<entry key="sms.store_goods.trading_record">ข้อมูลรายการการซื้อขาย</entry><!-- 成交记录 -->
+	<entry key="sms.store_goods.goods_consult">ข้อความสอบถามสินค้า</entry><!--产品咨询 -->
+	<entry key="sms.store_goods.collect_goods">เพิ่มสินค้าเข้ารายการโปรด</entry><!--收藏商品 -->
+	<entry key="sms.store_goods.group_buy_balance">จำนวนที่เหลือของกลู่มผู้ชื้อ</entry><!-- 团购剩余 -->
+	<entry key="sms.store_goods.seller">ผู้ขาย</entry><!--卖家： -->
+	<entry key="sms.store_goods.online_client">การบริการลูกค้าออนไลน์</entry><!--在线客服： -->
+	<entry key="sms.store_goods.in_the_place">สถานที่</entry><!-- 所在地： -->
+	<entry key="sms.store_goods.repertory">สต็อก</entry><!--库存-->
+
+
+	<!-- store_index.html -->
+	<entry key="sms.store_index.cannot_collect_own_shop">ไม่สามารถบันทึกร้านค้าตัวเองได้เป็นร้านค้าที่ชื่นชอบได้</entry><!-- 不能收藏自己的店铺 -->
+	<entry key="sms.store_index.success_collect_shop">บันทึกร้านค้าเป็นร้านค้าชื่นชอบสำเร็จ</entry><!-- 店铺收藏成功！ -->
+	<entry key="sms.store_index.aready_collect_shop">ร้านค้านี้ถูกบันทึกเป็นร้านค้าที่ชื่นชอบแล้ว</entry><!-- 
+		该店铺已经被收藏！ -->
+	<entry key="sms.store_index.grade_detail">ข้อมูลรายละเอียดการให้คะแนน</entry><!-- 评分详细 -->
+	<entry key="sms.store_index.compareto_same_industry">การเปรียบเทียบสายงานเดียวกัน</entry><!--与同行业相比 -->
+	<entry key="sms.store_index.descript_coincide">ร้านค้าจริงตรงกับรายละเอียดของร้านค้า</entry><!-- 描述相符： -->
+	<entry key="sms.store_index.point">คะแนน</entry><!--分 -->
+	<entry key="sms.store_index.serve_attitude">ทัศนคติของการบริการ</entry><!-- 服务态度： -->
+	<entry key="sms.store_index.deliver_speed">ความเร็วในการส่งสินค้า</entry><!--发货速度： -->
+	<entry key="sms.store_index.shop_name">ชื่อร้านค้า</entry><!-- 店铺名称： -->
+	<entry key="sms.store_index.company_name">ชื่อบริษัท</entry><!-- 公司名称： -->
+	<entry key="sms.store_index.contact_number">เบอร์โทรติดต่อ</entry><!--联系电话： -->
+	<entry key="sms.store_index.shop_address">ที่อยู่ร้านค้า</entry><!-- 店铺地址： -->
+	<entry key="sms.store_index.detail_address">ที่อยุ่ที่ชัดเจน</entry><!-- 详细地址： -->
+	<entry key="sms.store_index.is_continue">เจ้าหน้าที่บริการลูกค้าไม่ได้ออนไลน์ จะดำเนินการต่อไหม</entry><!-- 客服当前不在线，是否继续 -->
+	<entry key="sms.store_index.shop_home_page">หน้าแรกร้านค้า</entry><!-- 店铺首页 -->
+	<entry key="sms.store_index.price">ราคา</entry><!--价格： -->
+	<entry key="sms.store_index.immedicately_buy">ซื้อสินค้าทันที</entry><!-- 立即抢购 -->
+	<entry key="sms.store_index.in_the_place">สถานที่ตั้งของร้านค้า</entry><!--所在地： -->
+	<entry key="sms.store_index.goods_classify">ประเภทสินค้า</entry><!-- 商品分类 -->
+	<entry key="sms.store_index.hot_sell_charts">การจัดอันดับสินค้าที่ขายดี</entry><!-- 热销排行 -->
+	<entry key="sms.store_index.evaluate_count">มีคำประเมินความพึงพอใจ.....ข้อ</entry><!-- 条评价 -->
+	<entry key="sms.store_index.member_login">เข้าสู่ระบบสมาชิก</entry><!-- 会员登录 -->
+	<entry key="sms.store_index.popularity_goods">สินค้ายอดนิยม</entry><!--人气单品 -->
+	<entry key="sms.store_index.hot_recommend">แนะนำสินค้าที่นิยม</entry><!-- 热门推荐 -->
+	<entry key="sms.store_index.store_info">ข้อมูลร้านค้า</entry><!-- 店铺信息 -->
+	<entry key="sms.store_index.collect_store">เพิ่มร้านค้าเข้ารายการโปรด</entry><!-- 收藏店铺-->
+
+
+	<!-- store_nav.html -->
+	<entry key="sms.store_nav.index">หน้าแรกของร้านค้า</entry><!-- 店铺首页 -->
+
+	<!-- store_url.html -->
+	<entry key="sms.store_url.score_detail">รายละเอียดข้อมูลการให้คะแนน</entry><!-- 评分详细 -->
+	<entry key="sms.store_url.compared_industry">การเปรียบเทียบสายงานเดียวกัน</entry><!--与行业相比 -->
+	<entry key="sms.store_url.goods_rate">คะแนนความพึงพอใจสินค้า</entry><!-- 商品评分： -->
+	<entry key="sms.store_url.service_rate">คะแนนความพึงพอใจบริการ</entry><!--服务评分： -->
+	<entry key="sms.store_url.limit_rate">ตัดคะแนนภายในเวลาที่กำหนด</entry><!-- 时效评分： -->
+	<entry key="sms.store_url.store_name">ชื่อร้านค้า</entry><!-- 店铺名称： -->
+	<entry key="sms.store_url.company_name">ชื่อบริษัท</entry><!--公司名称： -->
+	<entry key="sms.store_url.phone">เบอร์โทรติดต่อ</entry><!-- 联系电话： -->
+	<entry key="sms.store_url.store_address">ที่อยู่ร้านค้า</entry><!--店铺地址： -->
+	<entry key="sms.store_url.detail_address">ที่อยู่ที่ชัดเจน</entry><!-- 详细地址： -->
+	<entry key="sms.store_url.not_online">เจ้าหน้าที่บริการลูกค้าไม่ได้ออนไลน์จะดำเนินการต่อไหม</entry><!--客服当前不在线，是否继续 -->
+	<entry key="sms.store_url.description">ร้านค้าจริงตรงกับรายละเอียดของร้านค้า</entry><!-- 描述相符： -->
+	<entry key="sms.store_url.service_attitude">ทัศนคติของบริการ</entry><!--服务态度： -->
+	<entry key="sms.store_url.delivery_speed">ความเร็วจในการส่งของ</entry><!--发货速度： -->
+	<entry key="sms.store_url.location">สถานที่ตั้ง</entry><!-- 所在地： -->
+	<entry key="sms.store_url.member_login">เข้าสู่ระบบสมาชิก</entry><!--会员登录 -->
+	<entry key="sms.store_url.goods_category">ประเภทสินค้า</entry><!-- 商品分类 -->
+	<entry key="sms.store_url.sales_ranking">ลำดับสินค้าขายดี</entry><!-- 热销排行 -->
+	<entry key="sms.store_url.store_inoformation">ข้อมูลร้านค้า</entry><!-- 店铺信息 -->
+	<entry key="sms.store_url.points">คะแนน</entry><!--分 -->
+	<entry key="sms.store_url.collect_store">คะแนน</entry><!--收藏店铺 -->
+
+	<!-- plat_chatting_log.html -->
+	<entry key="sms.plat_chatting_log.window_close">เนื่องจากไม่มีการใช้งานเกินเวลาที่กำหนด ,ระบบจะทำการปิดหน้าต่างสนทนา กรุณายืนยันด้วย</entry><!--由于长时间没有操作，系统正将会话窗口关闭，请确认 -->
+
+	<!-- plat_chatting_open.html -->
+	<entry key="sms.plat_chatting_open.with">....กับ</entry><!-- 与 -->
+	<entry key="sms.plat_chatting_open.communicate">ระหว่างสนทนา</entry><!--对话中 -->
+	<entry key="sms.plat_chatting_open.no_consult_goods_current">ไม่มีรายการสินค้าที่จะสอบถามในช่วงนี้</entry><!--最近没有咨询的商品！ -->
+
+	<!-- plat_chatting.html /store_chatting.html -->
+	<entry key="sms.plat_chatting.immediately_dialog">หน้าต่างสนทนาทางลัด</entry><!-- 即时对话窗口 -->
+	<entry key="sms.plat_chatting.can_enter">ยังสามารถพิมพ์ข้อความเข้าไปได้</entry><!--还可以输入 -->
+	<entry key="sms.plat_chatting.character">คำ</entry><!-- 字 -->
+	<entry key="sms.plat_chatting.out_off_limit">จำนวนอักษรเกินกว่าที่กำหนด</entry><!--超出字数限制 -->
+	<entry key="sms.plat_chatting.delete_is_continute">ลบข้อมูลผู้ใช้รายการนี้แล้วหน้าต่างสนทนาจะปิดการทำงานเวลาเดียวกัน ท่านจะดำเนินการต่อหรือไม่</entry><!--删除该联系用户也将关闭与其的对话窗口，是否继续？ -->
+	<entry key="sms.plat_chatting.no_contactor">ตอนนี้ยังไม่มีผู้ติดต่อ</entry><!--当前没有联系人 -->
+	<entry key="sms.plat_chatting.load_history">กำลังอัพโหลดประวัติข้อมูลเดิม</entry><!--历史加载中 -->
+	<entry key="sms.plat_chatting.no_chatting_record">ไม่มีประวัติข้อมูลการสนทนา</entry><!-- 没有聊天记录！ -->
+	<entry key="sms.plat_chatting.select_one_user">เลือกผู้ใช้รายการหนึ่ง</entry><!-- 请选择一个用户 -->
+	<entry key="sms.plat_chatting.please_waiting">กำลังอัพโหลดข้อความกรุณารอสักครู่</entry><!-- 消息加载中，请稍后 -->
+	<entry key="sms.plat_chatting.select_one_user_symbol">เลือกชื่อผู้ใช้รายการหนึ่ง</entry><!-- 请选择一个用户！ -->
+	<entry key="sms.plat_chatting.song_typeface">ชื่อแบบอักษรภาษาจีน Songstyle</entry><!--宋体 -->
+	<entry key="sms.plat_chatting.black_typeface">แบบอักษรภาษาจีนตัวหน้า</entry><!-- 黑体 -->
+	<entry key="sms.plat_chatting.Microsoft_YaHei">ชื่อแบบตัวอักษรไมโครซอฟท์คอร์</entry><!-- 微软雅黑 -->
+	<entry key="sms.plat_chatting.regular_script">แบบตัวอักษรภาษาจีตัวเอียง</entry><!--楷体 -->
+	<entry key="sms.plat_chatting.font_color">สีตัวอักษร</entry><!-- 字体颜色： -->
+	<entry key="sms.plat_chatting.picture_upload">อัพโหลดรูปภาพ</entry><!-- 图片上传 -->
+	<entry key="sms.plat_chatting.chatting_record">ประวัติข้อมูลการสนทนา</entry><!--聊天记录 -->
+	<entry key="sms.plat_chatting.client_name">ชื่อเจ้าหน้าที่บริการลูกค้า</entry><!-- 客服名称： -->
+	<entry key="sms.plat_chatting.auto_reply_symbol">การตอบกลับแบบอัตโนมัติ</entry><!--自动回复： -->
+	<entry key="sms.plat_chatting.editure_auto_reply">สามารถแก้ไขข้อความ ตอบกลับอัตโนมัติ</entry><!--可编辑自动回复信息 -->
+	<entry key="sms.plat_chatting.commit">ตกลง</entry><!--提 交 -->
+	<entry key="sms.plat_chatting.auto_reply">การตอบกลับแบบอัตโนมัติ</entry><!--自动回复 -->
+	<entry key="sms.plat_chatting.send">ส่งข้อความ</entry><!--发 送 -->
+	<entry key="sms.plat_chatting.is_close">จะปิดหน้าต่างการสนทนาไหม</entry><!--是否要关闭聊天窗口？ -->
+	<entry key="sms.plat_chatting.end_communicate">สิ้นสุดการสนทนา</entry><!-- 结束对话 -->
+	<entry key="sms.plat_chatting.can_enter_yet">ยังสามารถพิมพ์ข้อความได้อีก....</entry><!--还可以输入 -->
+	<entry key="sms.plat_chatting.characters">คำ</entry><!--字 -->
+	<entry key="sms.plat_chatting.all_contactor">รายชื่อผู้ติดต่อทั้งหมด</entry><!-- 全部联系人 -->
+	<entry key="sms.plat_chatting.consult_goods_current">รายการสินค้าที่สอบถามช่วงนี้</entry><!-- 最近咨询商品 -->
+	<entry key="sms.plat_chatting.no_consult_goods_current">ช่วงนี้ไม่มีรายการสินค้าที่สอบถามช่วงนี้</entry><!--最近没有咨询的商品！ -->
+
+	<!--store_chatting_log.html/user_chatting_log.html -->
+	<entry key="sms.store_chatting_log.no_opernating_long_closing">เนื่องจากไม่มีการใช้งานเกินเวลาที่กำหนด ,ระบบจะทำการปิดหน้าต่างสนทนา,กรุณายืนยันด้วย</entry><!-- 由于长时间没有操作，系统正将会话窗口关闭，请确认 -->
+
+	<!-- store_chatting_open.html -->
+	<entry key="sms.store_chatting_open.with">....กับ.....</entry><!-- 与 -->
+	<entry key="sms.store_chatting_open.communicating">กำลังสนทนาอยู่</entry><!-- 对话中 -->
+	<entry key="sms.store_chatting_open.no_consult_goods_current">ช่วงนี้ไม่มีรายการสินค้าที่สอบถาม</entry><!-- 最近没有咨询的商品！ -->
+
+	<!-- user_chatting.html -->
+	<entry key="sms.user_chatting.immediately_dialog">หน้าต่างการสนทนา ทางลัด</entry><!-- 即时对话窗口 -->
+	<entry key="sms.user_chatting.bronze_member">สมาชิกระดับเหรียญทองแดง</entry><!--铜牌会员 -->
+	<entry key="sms.user_chatting.silver_member">สมาชิกระดับเหรียญเงิน</entry><!--银牌会员 -->
+	<entry key="sms.user_chatting.gold_member">สมาชิกระดับเหรียญทอง</entry><!--金牌会员 -->
+	<entry key="sms.user_chatting.super_member">สมาชิกระดับซุปเปอร์</entry><!--超级会员 -->
+	<entry key="sms.user_chatting.can_enter_yet">ยังสามารถพิมพ์ได้ …. คำ</entry><!--还可以输入 -->
+	<entry key="sms.user_chatting.characters">คำ</entry><!-- 字 -->
+	<entry key="sms.user_chatting.out_off_limit">จำนวนอักษรเกินกว่าที่กำหนด</entry><!-- 超出字数限制 -->
+	<entry key="sms.user_chatting.no_chatting_record">ไม่มีข้อมูลการสนทนา</entry><!-- 没有聊天记录！ -->
+	<entry key="sms.user_chatting.font_editing">การแก้ไขแบบตัวอักษร</entry><!--字体编辑 -->
+	<entry key="sms.user_chatting.song_typeface">ชื่อแบบอักษร ภาษาจีน Song Style</entry><!-- 宋体 -->
+	<entry key="sms.user_chatting.black_typeface">แบบอักษรตัวหนา</entry><!-- 黑体 -->
+	<entry key="sms.user_chatting.Microsoft_YaHei">ชื่อแบบอักษร ไมโครซอฟท์คอร์</entry><!-- 微软雅黑 -->
+	<entry key="sms.user_chatting.regular_script">แบบตัวอักษรภาษาจีนตัวเอียง</entry><!-- 楷体 -->
+	<entry key="sms.user_chatting.font_color">สีตัวอักษร</entry><!--字体颜色： -->
+	<entry key="sms.user_chatting.chatting_expression">แบบอักษรอิโมชั่น</entry><!-- 聊天表情 -->
+	<entry key="sms.user_chatting.picture_upload">อัพโหลดรูปภาพ</entry><!-- 图片上传 -->
+	<entry key="sms.user_chatting.chatting_record">ประวัติข้อมูลการสนทนา</entry><!-- 聊天记录 -->
+	<entry key="sms.user_chatting.is_satisfaction_of_client">ท่านประทับใจในการบริการของเจ้าหน้าที่บริการลูกค้าในช่วงนี้หรือไม่</entry><!--您对当前客服人员服务满意吗？ -->
+	<entry key="sms.user_chatting.very_satisfaction">ดีมาก</entry><!--非常满意 -->
+	<entry key="sms.user_chatting.satisfaction">ดี</entry><!-- 满意 -->
+	<entry key="sms.user_chatting.general">ปานกลาง</entry><!-- 一般 -->
+	<entry key="sms.user_chatting.no_satisfaction">ควรปรับปรุง</entry><!-- 不满意 -->
+	<entry key="sms.user_chatting.very_bad">แย่</entry><!--非常不满意 -->
+	<entry key="sms.user_chatting.more_healthy"></entry><!--发货更健康 -->
+	<entry key="sms.user_chatting.commit">ตกลง</entry><!--提 交 -->
+	<entry key="sms.user_chatting.can_enter_character">ยังไม่สามารถพิมพ์ข้อความได้ 200 อักษร</entry><!--还可以输入200字 -->
+	<entry key="sms.user_chatting.send">ส่งข้อความ</entry><!-- 发 送 -->
+	<entry key="sms.user_chatting.is_closing">ต้องการปิดหน้าต่างที่การสนทนาหรือไม่</entry><!--是否要关闭聊天窗口？ -->
+	<entry key="sms.user_chatting.end_dialog">การสิ้นสุดสนทนา</entry><!--结束对话 -->
+	<entry key="sms.user_chatting.consult_goods">สอบถามข้อมูลเกี่ยวกับสินค้า</entry><!--咨询商品 -->
+	<entry key="sms.user_chatting.merchant_hot_sell">สินค้ายอดนิยมจากร้านค้า</entry><!--商家热卖 -->
+	<entry key="sms.user_chatting.store_inoformation">ข้อมูลร้านค้า</entry><!-- 店铺信息 -->
+	<entry key="sms.user_chatting.my_order">รายการสั่งซื้อสินค้า</entry><!--我的订单 -->
+	<entry key="sms.user_chatting.my_return_order">รายการคืนสินค้า</entry><!--我的退货单 -->
+	<entry key="sms.user_chatting.add_cart">หยิบลงตะกร้า</entry><!-- 加入购物车 -->
+	<entry key="sms.user_chatting.price">ราคา</entry><!-- 价 格 -->
+	<entry key="sms.user_chatting.repertory">สต๊อกสินค้า</entry><!-- 库 存 -->
+	<entry key="sms.user_chatting.evaluate">คำประเมินพึงพอใจ</entry><!-- 评 价 -->
+	<entry key="sms.user_chatting.evaluate_count">มีคำประเมินความพึงพอใจมี.....ข้อ</entry><!-- 条评论 -->
+	<entry key="sms.user_chatting.good_reputation">ความพึงพอใจที่ดี</entry><!--好评 -->
+	<entry key="sms.user_chatting.bronze_members">สมาชิกระดับเหรียญทองแดง</entry><!--铜牌会员 -->
+	<entry key="sms.user_chatting.silver_members">สมาชิกระดับเหรียญเงิน</entry><!-- 银牌会员 -->
+	<entry key="sms.user_chatting.gold_members">สมาชิกระดับเหรียญทอง</entry><!-- 金牌会员 -->
+	<entry key="sms.user_chatting.super_members">สมาชิกระดับซุปเปอร์</entry><!--超级会员 -->
+	<entry key="sms.user_chatting.merchant_store">ร้านค้าของผู้ขาย</entry><!--商家店铺： -->
+	<entry key="sms.user_chatting.grade_detail">รายละเอียดข้อมูลการให้คะแนน</entry><!-- 评分详细 -->
+	<entry key="sms.user_chatting.compare_to_same_industry">การเปรียบเทียบสายงานเดียวกัน</entry><!--与同行业相比 -->
+	<entry key="sms.user_chatting.desciption">คำอธิบายสินค้าตรงกับสินค้าจริง</entry><!-- 描述相符： -->
+	<entry key="sms.user_chatting.serve_attitude">ทัศนคติของการบริการ</entry><!--服务态度： -->
+	<entry key="sms.user_chatting.deliver_speed">ความเร็วในการส่งสินค้า</entry><!--发货速度： -->
+	<entry key="sms.user_chatting.loading">กำลังอัพโหลด</entry><!--加载中 -->
+	<entry key="sms.user_chatting.up_page">หน้าที่แล้ว</entry><!--上页 -->
+	<entry key="sms.user_chatting.down_page">หน้าถัดไป</entry><!-- 下页 -->
+	<entry key="sms.user_chatting.order_status">สถานะการสั่งซื้อสินค้า</entry><!--订单状态： -->
+	<entry key="sms.user_chatting.aready_cancel">ยกเลิกแล้ว</entry><!-- 已取消 -->
+	<entry key="sms.user_chatting.waiting_payment">รอการดำเนินการชำระเงิน</entry><!--待付款 -->
+	<entry key="sms.user_chatting.outline_pay_check">การตรวจสอบการชำระเงินแบบออฟไลน์</entry><!--线下支付待审核 -->
+	<entry key="sms.user_chatting.payment_after_arrive">ชำระเงินปลายทาง กำลังรอการส่งสินค้าจากร้านค้า</entry><!--货到付款待发货 -->
+	<entry key="sms.user_chatting.aready_pay">ชำระเงินแล้ว</entry><!--已付款 -->
+	<entry key="sms.user_chatting.aready_deliver">ส่งสินค้าสำเร็จ</entry><!--已发货 -->
+	<entry key="sms.user_chatting.aready_recive">ได้รับสินค้าแล้ว</entry><!-- 已收货 -->
+	<entry key="sms.user_chatting.finish_evaluate">ขั้นตอนการสั่งซื้อสินค้าสำเร็จให้คำประเมินความพึงพอใจเรียบร้อย</entry><!--已完成,已评价 -->
+	<entry key="sms.user_chatting.aready_end">สิ้นสุดแล้ว</entry><!--已结束 -->
+	<entry key="sms.user_chatting.end_can_not_evaluate">สิ้นสุดแล้ว,ไม่สามารถให้คำประเมินความพึงพอใจได้</entry><!--已结束，不可评价 -->
+	<entry key="sms.user_chatting.order_code">รหัสรายการสั่งซื้อสินค้า</entry><!-- 订单编号： -->
+	<entry key="sms.user_chatting.buy_goods">สินค้าที่สั่งซื้อ</entry><!--下单商品： -->
+	<entry key="sms.user_chatting.goods_price">ราคาต่อหน่วย</entry><!--商品单价： -->
+	<entry key="sms.user_chatting.count">จำนวนที่สั่งซื้อ</entry><!--下单数量： -->
+	<entry key="sms.user_chatting.order_carriage">ค่าส่งของรายการสั่งซื้อสินค้า</entry><!-- 订单运费： -->
+	<entry key="sms.user_chatting.order_sum_price">ยอดเงินทั้งหมดของรายการสั่งซื้อสินค้า</entry><!-- 订单总价： -->
+	<entry key="sms.user_chatting.use_discount_coupon">ใช้คูปองส่วนลดแลกซื้อ</entry><!--使用优惠券抵消 -->
+	<entry key="sms.user_chatting.yuan">หยวน</entry><!-- 元 -->
+	<entry key="sms.user_chatting.goods_name">ชื่อสินค้า</entry><!--商品名称： -->
+	<entry key="sms.user_chatting.no_data">ยังไม่มีข้อมูล</entry><!-- 暂无数据！ -->
+	<entry key="sms.user_chatting.xxx">รหัสบิลคืนสินค้า</entry><!-- -->
+	<entry key="sms.user_chatting.return_the_application">กำลังยื่นคำร้องคืนสินค้า</entry><!-- 退货申请中 -->
+	<entry key="sms.user_chatting.return_refuse">คำร้องคืนสินค้าไม่สำเร็จ</entry><!--退货申请被拒绝 -->
+	<entry key="sms.user_chatting.return_application_pass">คำร้องคืนสินค้าตรวจสอบผ่านเรียบร้อย</entry><!--退货申请审核通过 -->
+	<entry key="sms.user_chatting.buy_returnning">ขั้นตอนการคืนสินค้าจากลูกค้า</entry><!-- 买家退货中 -->
+	<entry key="sms.user_chatting.return_finish">การคืนสินค้าเรียบร้อย</entry><!-- 退货完成 -->
+	<entry key="sms.user_chatting.current_status">สถานะปัจจุบัน</entry><!-- 当前状态： -->
+	<entry key="sms.user_chatting.application_time">เวลาที่ยื่นคำร้อง</entry><!-- 申请时间： -->
+	<entry key="sms.user_chatting.return_goods">สินค้าที่คืน</entry><!--退货商品： -->
+	<entry key="sms.user_chatting.return_sum_price">ยอดรวมสินค้าที่คืน</entry><!--退货总价： -->
+	<entry key="sms.user_chatting.window_close">เนื่องจากไม่มีการใช้งานเกินเวลาที่กำหนด,ระบบจะทำการปิดหน้าต่างสนทนา,กรุณายืนยันด้วย</entry><!--由于长时间没有操作，系统正将会话窗口关闭，请确认 -->
+	<entry key="sms.user_chatting.history">กำลังดาวน์โหลดประวัติ</entry><!-- 历史加载中 -->
+	<entry key="sms.user_chatting.select_user">กรุณาเลือกผู้ใช้หนึ่งอัน</entry><!-- 请选择一个用户 -->
+	<entry key="sms.user_chatting.not_buy_own_goods">ไม่สามารถซื้อสินค้าของตัวเอง</entry><!-- 不能购买自己的商品 -->
+	<entry key="sms.user_chatting.not_buy">สินค้าสต็อกเป็น 0 ไม่สามารถสั่งซื้อได้ในขนาดนี้</entry><!--商品库存为0,不能购买! -->
+	<entry key="sms.user_chatting.a">(ชิ้น)</entry><!--（件） -->
+	<entry key="sms.user_chatting.good">อัตราการแสดงความคิดเห็นดี</entry><!-- 好评率： -->
+	<entry key="sms.user_chatting.normal_problem">ปัญหาที่พบบ่อย</entry><!-- 常见问题 -->
+	<entry key="sms.user_chatting.grade">คะแนน</entry><!-- 分 -->
+	<entry key="sms.user_chatting.return_code">รหัสใบคืนสินค้า</entry><!--退单编号： -->
+	
+	
+	<!-- user_order_ajax.html -->
+	<entry key="sms.user_order_ajax.order_status">สถานะรายการสั่งซื้อสินค้า</entry><!--订单状态： -->
+	<entry key="sms.user_order_ajax.aready_cancel">ยกเลิกแล้ว</entry><!-- 已取消 -->
+	<entry key="sms.user_order_ajax.waiting_pay">รอการชำระเงิน</entry><!-- 待付款 -->
+	<entry key="sms.user_order_ajax.outline_payment">รอการชำระเงินแบบออฟไลน์</entry><!--线下支付待审核 -->
+	<entry key="sms.user_order_ajax.payment_after_arrive">ชำระเงินปลายทาง รอการจัดส่งสินค้า</entry><!--货到付款待发货 -->
+	<entry key="sms.user_order_ajax.aready_pay">ชำระเงินเรียบร้อย</entry><!--已付款 -->
+	<entry key="sms.user_order_ajax.aready_send">ส่งสินค้าเรียบร้อย</entry><!-- 已发货 -->
+	<entry key="sms.user_order_ajax.aready_recive">รับสินค้าเรียบร้อย</entry><!-- 已收货 -->
+	<entry key="sms.user_order_ajax.finish_evaluate">สิ้นสุดการทำรายการและประเมินความพึงพอใจเรียบร้อย</entry><!-- 已完成,已评价 -->
+	<entry key="sms.user_order_ajax.aready_end">สิ้นสุดแล้ว</entry><!-- 已结束 -->
+	<entry key="sms.user_order_ajax.end_can_not_evaluate">สิ้นสุดการทำรายการและ ไม่สามารถประเมินความพึงพอใจได้</entry><!--已结束，不可评价 -->
+	<entry key="sms.user_order_ajax.buy_goods">สินค้าที่สั่งซื้อ</entry><!-- 下单商品： -->
+	<entry key="sms.user_order_ajax.order_code">รหัสบิลการสั่งซื้อสินค้า</entry><!--订单编号： -->
+	<entry key="sms.user_order_ajax.goods_price">ราคาต่อหน่วย</entry><!-- 商品单价： -->
+	<entry key="sms.user_order_ajax.count">จำนวนที่สั่งซื้อ</entry><!-- 下单数量： -->
+	<entry key="sms.user_order_ajax.order_carriage">ค่าส่งของรายการสั่งซื้อสินค้า</entry><!--订单运费： -->
+	<entry key="sms.user_order_ajax.order_sum_price">ยอดเงินทั้งหมดของรายการสั่งซื้อสินค้า</entry><!-- 订单总价： -->
+	<entry key="sms.user_order_ajax.use_discount_coupon">ใช้คูปองส่วนลดสินค้า</entry><!-- 使用优惠券抵消 -->
+	<entry key="sms.user_order_ajax.yuan">หยวน</entry><!--元 -->
+	<entry key="sms.user_order_ajax.goods_name">ชื่อสินค้า</entry><!-- 商品名称： -->
+
+	<!-- user_return_ajax.html -->
+	<entry key="sms.user_return_ajax.return_code">รหัสบิลการคืนสินค้า</entry><!-- 退单编号： -->
+	<entry key="sms.user_return_ajax.return_the_application">กำลังยื่นคำร้องขอคืนสินค้า</entry><!--退货申请中 -->
+	<entry key="sms.user_return_ajax.return_refuse">คำร้องขอคืนสินค้าไม่สำเร็จ</entry><!--退货申请被拒绝 -->
+	<entry key="sms.user_return_ajax.return_application_pass">คำร้องขอคืนสินค้าผ่านการตรวจสอบ</entry><!--退货申请审核通过 -->
+	<entry key="sms.user_return_ajax.buy_returnning">ขั้นตอนการคืนสินค้าจากลูกค้า</entry><!-- 买家退货中 -->
+	<entry key="sms.user_return_ajax.return_finish">คืนสินค้าเรียบร้อย</entry><!-- 退货完成 -->
+	<entry key="sms.user_return_ajax.current_status">สถานะปัจจุบัน</entry><!-- 当前状态： -->
+	<entry key="sms.user_return_ajax.application_time">เวลาที่ยื่นคำร้อง</entry><!-- 申请时间： -->
+	<entry key="sms.user_return_ajax.return_goods">สินค้าที่คืน</entry><!-- 退货商品： -->
+	<entry key="sms.user_return_ajax.goods_price">ราคาต่อหน่วย</entry><!-- 商品单价： -->
+	<entry key="sms.user_return_ajax.return_sum_price">ราคาทั้งหมดที่คืนสินค้า</entry><!--退货总价： -->
+
+	<!-- seller_apply_money.html -->
+	<entry key="sms.seller_apply_money.price_standard">มาตรฐานค่าใช้จ่าย ของแต่ละประเภทสินค้า</entry><!--类目费用标准 -->
+	<entry key="sms.seller_apply_money.merchant_enter">ผู้ขายเปิดบริการใช้งานของระบบ</entry><!-- 商家入驻 -->
+	<entry key="sms.seller_apply_money.enter_helper">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!-- 入驻帮助 -->
+	<entry key="sms.seller_apply_money.enter_protocol">ข้อตกลงการเปิดร้านค้าบนระบบ</entry><!-- 入驻协议 -->
+	<entry key="sms.seller_apply_money.company_information_commit">ส่งข้อมูลของบริษัท</entry><!--公司信息提交 -->
+	<entry key="sms.seller_apply_money.store_information_commit">ส่งข้อมูลของร้านค้า</entry><!-- 店铺信息提交 -->
+	<entry key="sms.seller_apply_money.check_log_search">สอบถามรายงานการตรวจสอบ</entry><!--审核日志查询 -->
+	<entry key="sms.seller_apply_money.store_type">ประเภทร้านค้า</entry><!--店铺类目 -->
+	<entry key="sms.seller_apply_money.second_type">ประเภทระดับที่ 2</entry><!--二级类目 -->
+	<entry key="sms.seller_apply_money.rental">ค่านายหน้า</entry><!--佣金 -->
+	<entry key="sms.seller_apply_money.promise_cash">ค่าประกันสินค้า : (หน่วยเงิน:หยวน)</entry><!--保证金（单位：元） -->
+	<entry key="sms.seller_apply_money.complete_store_type">กรุณากรอกข้อมูลเกี่ยวกับประเภทร้านค้าและข้อมูลประเภทให้ครบถ้วน</entry><!--完善店铺类目及类目信息 -->
+
+	<!-- seller_apply_step0.html -->
+	<entry key="sms.seller_apply_step0.enter_protocol">ข้อตกลงการเปิดร้านค้าบนระบบ</entry><!-- 入驻协议 -->
+	<entry key="sms.seller_apply_step0.merchant_enter">ผู้ขายเปิดบริการใช้งานของระบบ</entry><!--商家入驻 -->
+	<entry key="sms.seller_apply_step0.enter_helper">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!--入驻帮助 -->
+	<entry key="sms.seller_apply_step0.enter_must_know">กติกาการเปิดร้านค้าบนระบบ</entry><!-- 入驻须知 -->
+	<entry key="sms.seller_apply_step0.company_information_commit">ส่งข้อมูลบริษัท</entry><!--公司信息提交 -->
+	<entry key="sms.seller_apply_step0.store_information_commit">ส่งข้อมูลร้านค้า</entry><!-- 店铺信息提交 -->
+	<entry key="sms.seller_apply_step0.check_log_search">สอบถามรายงานการตรวจสอบ</entry><!-- 审核日志查询 -->
+	<entry key="sms.seller_apply_step0.protocol_comfirm">การยืนยันข้อตกลง</entry><!-- 协议确定 -->
+	<entry key="sms.seller_apply_step0.agree_before_protocol">เห็นด้วยกับข้อตกลง,ขั้นตอนต่อไป</entry><!-- 同意以上协议，下一步 -->
+	<entry key="sms.seller_apply_step0.aready_read_and_agree">ฉันได้อ่านข้อตกลงอย่างละเอียดแล้วและเห็นด้วยกับข้อตกลง</entry><!-- 我已仔细阅读并同意协议 -->
+
+	<!-- seller_apply_step1.html -->
+	<entry key="sms.seller_apply_step1.enter_must_know">กติกาการเปิดร้านค้าบนเว็บไซต์</entry><!--入驻须知 -->
+	<entry key="sms.seller_apply_step1.company_information_commit">ส่งข้อมูลบริษัท</entry><!-- 公司信息提交 -->
+	<entry key="sms.seller_apply_step1.store_information_commit">ส่งข้อมูลของร้านค้า</entry><!-- 店铺信息提交 -->
+	<entry key="sms.seller_apply_step1.check_log_search">สอบถามรายงานการตรวจสอบ</entry><!-- 审核日志查询 -->
+	<entry key="sms.seller_apply_step1.company_information_comfirm">การรับรองข้อมูลบริษัท</entry><!-- 公司信息认证 -->
+	<entry key="sms.seller_apply_step1.store_information_comfirm">การรับรองข้อมูลร้านค้า</entry><!-- 店铺信息认证 -->
+	<entry key="sms.seller_apply_step1.waitting_check">รอการตรวจสอบ</entry><!-- 等待审核 -->
+	<entry key="sms.seller_apply_step1.start_commit">เริ่มต้นการส่งเอกสาร</entry><!-- 开始提交 -->
+
+	<!-- seller_apply_step2.html -->
+	<entry key="sms.seller_apply_step2.contact_information">ข้อมูลติดต่อ</entry><!-- 联系信息 -->
+	<entry key="sms.seller_apply_step2.write_contactor_name">กรุณากรอกชื่อและนามสกุลของผู้ติดต่อ</entry><!-- 请填写联系人姓名 -->
+	<entry key="sms.seller_apply_step2.write_contactor_phone">กรุณากรอกเบอร์โทรศัพท์ของผู้ติดต่อ</entry><!-- 请填写联系人电话 -->
+	<entry key="sms.seller_apply_step2.uncorrect_phone">รูปแบบเบอร์โทรไม่ถูกต้อง</entry><!-- 电话号码格式不对 -->
+	<entry key="sms.seller_apply_step2.write_contactor_email">กรุณากรอกอีเมล์ของผู้ติดต่อ</entry><!-- 请填写联系人邮箱 -->
+	<entry key="sms.seller_apply_step2.write_correct_eamil">กรุณากรอกอีเมล์ที่ถูกต้อง</entry><!-- 请填写正确的邮箱 -->
+	<entry key="sms.seller_apply_step2.merchant_enter">ผู้ขายเปิดบริการใช้งานของระบบ</entry><!--商家入驻 -->
+	<entry key="sms.seller_apply_step2.enter_help">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!-- 入驻帮助 -->
+	<entry key="sms.seller_apply_step2.enter_must_know">กติกาการเปิดร้านค้าบนระบบ</entry><!--入驻须知 -->
+	<entry key="sms.seller_apply_step2.company_information_commit">ส่งข้อมูลบริษัท</entry><!--公司信息提交 -->
+	<entry key="sms.seller_apply_step2.store_information_commit">ส่งข้อมูลของร้านค้า</entry><!-- 店铺信息提交 -->
+	<entry key="sms.seller_apply_step2.check_log_search">สอบถามรายงานการตรวจสอบ</entry><!--审核日志查询 -->
+	<entry key="sms.seller_apply_step2.company_information_comfirm">รับรองข้อมูลของบริษัท</entry><!-- 公司信息认证 -->
+	<entry key="sms.seller_apply_step2.store_information_comfirm">รับรองข้อมูลของร้านค้า</entry><!-- 店铺信息认证 -->
+	<entry key="sms.seller_apply_step2.waitting_check">รอการตรวจสอบ</entry><!--等待审核 -->
+	<entry key="sms.seller_apply_step2.contact_way">วิธีการติดต่อ</entry><!--联系方式 -->
+	<entry key="sms.seller_apply_step2.mechant_enter_contactor_info">ข้อมูลผู้ติดต่อของร้านค้า</entry><!--商家入驻联系人信息 -->
+	<entry key="sms.seller_apply_step2.recive_return_message">ใช้กับการรับข้อความที่ตีกลับสำหรับการเปิดร้านค้าบนเว็บไซต์,กรุณากรอกข้อมูลให้ถูกต้อง</entry><!--用于入驻过程中接收反馈的入驻通知，请务必正确填写。 -->
+	<entry key="sms.seller_apply_step2.contactor_name">ชื่อ-นามสกุล ผู้ติดต่อ</entry><!-- 联系人姓名： -->
+	<entry key="sms.seller_apply_step2.contactor_phone">เบอร์โทรของผู้ติดต่อ</entry><!--联系人电话： -->
+	<entry key="sms.seller_apply_step2.contactor_email">อีเมล์ของผู้ติดต่อ</entry><!-- 联系人电子邮箱： -->
+	<entry key="sms.seller_apply_step2.complete_company_info">ขั้นตอนต่อไปกรุณากรอกข้อมูลบริษัทให้ครบถ้วน</entry><!--下一步，完善公司信息 -->
+
+	<!-- seller_apply_step3.html -->
+	<entry key="sms.seller_apply_step3.company_info">ข้อมูลบริษัท</entry><!--公司信息 -->
+	<entry key="sms.seller_apply_step3.write_company_name">กรุณากรอกชื่อบริษัท</entry><!-- 请填写公司名称 -->
+	<entry key="sms.seller_apply_step3.write_register_number">กรุณากรอกรหัสการลงทะเบียน</entry><!-- 请填写注册号 -->
+	<entry key="sms.seller_apply_step3.write_business_license_address">กรุณากรอกที่อยู่ให้ชัดเจนสำหรับใบอนุญาตประกอบกิจการ</entry><!--请填写营业执照详细地址 -->
+	<entry key="sms.seller_apply_step3.establish_time">กรุณากรอกวันที่ก่อตั้งบริษัท</entry><!--请填写成立日期 -->
+	<entry key="sms.seller_apply_step3.write_business_license_limit">กรุณากรอกอายุของการประกอบการ</entry><!--请填写营业期限 -->
+	<entry key="sms.seller_apply_step3.write_register_money">กรุณากรอกเงินทุนการจดทะเบียน</entry><!-- 请填写注册资本 -->
+	<entry key="sms.seller_apply_step3.register_money_must_integer">เงินทุนที่จดทะเบียนไม่สามารถกรอกเป็นเลขทศนิยมได้</entry><!--注册资本只能是整数 -->
+	<entry key="sms.seller_apply_step3.write_business_scope">กรุณาระบุขอบเขตของกิจการ</entry><!-- 请填写经营范围 -->
+	<entry key="sms.seller_apply_step3.company_detail_address">กรุณากรอกที่อยู่ที่ชัดเจนของบบริษัท</entry><!--请填写公司详细地址 -->
+	<entry key="sms.seller_apply_step3.company_phone">กรุณากรอกเบอร์โทรของบริษัท</entry><!-- 请填写公司电话 -->
+	<entry key="sms.seller_apply_step3.uncorrect_telephone">รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง</entry><!-- 电话号码格式不对 -->
+	<entry key="sms.seller_apply_step3.urgency_contactor">กรุณาระบุชื่อผู้ที่สามารถติดต่อฉุกเฉินได้</entry><!--请填写紧急联系人 -->
+	<entry key="sms.seller_apply_step3.urgency_contactor_phone">กรุณาระบุเบอร์โทรที่สามารถติดต่อฉุกเฉินได้</entry><!-- 
+		请填写紧急联系人手机 -->
+	<entry key="sms.seller_apply_step3.uncorrect_phone">รูปแบบเบอร์มือถือไม่ถูกต้อง</entry><!--手机号码格式不正确 -->
+	<entry key="sms.seller_apply_step3.organization_code">กรุณากรอกรหัสขององค์กร</entry><!-- 请填写组织机构代码 -->
+	<entry key="sms.seller_apply_step3.select_business_limit_start_time">กรุณาเลือกเวลาเริ่มต้นของการประกอบการ</entry><!--请选择营业期限开始时间 -->
+	<entry key="sms.seller_apply_step3.select_business_limit_end_time">กรุณาเลือกเวลาสิ้นสุดของการประกอบการ</entry><!--请选择营业期限结束时间 -->
+	<entry key="sms.seller_apply_step3.correct_business_license_limit">กรุณากรอกอายุของการประกอบการที่ถูกต้อง</entry><!--请填写正确的营业期限 -->
+	<entry key="sms.seller_apply_step3.select_business_license_address">กรุณาเลือกสถานที่ภูมิภาคของใบอนุญาตประกอบธุรกิจ</entry><!-- 
+		请选择营业执照所在地 -->
+	<entry key="sms.seller_apply_step3.select_company_address">กรุณาเลือกสถานที่ภูมิภาคของบริษัท</entry><!-- 请选择公司所在地 -->
+	<entry key="sms.seller_apply_step3.upload_corporate_ID_card">กรุณาอัพโหลดเอกสารบัตรประชาชนของกรรมการ</entry><!-- 请选择上传法人身份证 -->
+	<entry key="sms.seller_apply_step3.please_upload_business_license_electron">กรุณาอัพโหลดไฟล์เอกสารใบอนุญาตประกอบการ</entry><!--请上传营业执照电子版 -->
+	<entry key="sms.seller_apply_step3.upload_organization_code_electron">กรุณาอัพโหลดไฟล์รหัสขององค์กร</entry><!--请上传组织机构代码证电子版 -->
+	<entry key="sms.seller_apply_step3.identity_card_electron">ไฟล์เอกสารบัตประชาชน</entry><!-- 身份证电子版 -->
+	<entry key="sms.seller_apply_step3.upload_identity_card_electron">อัพโหลดไฟล์เอกสารบัตรประชาชน</entry><!--上传身份证电子版 -->
+	<entry key="sms.seller_apply_step3.business_license_electron">ไฟล์เอกสารใบอนุญาตประกอบการ</entry><!-- 营业执照电子版 -->
+	<entry key="sms.seller_apply_step3.upload_business_license_electron">อัพโหลดเอกสารใบอนุญาตประกอบกิจการ</entry><!--上传营业执照电子版 -->
+	<entry key="sms.seller_apply_step3.organization_code_electron">ไฟล์เอกสารรหัสองค์กร</entry><!--组织机构代码证电子版 -->
+	<entry key="sms.seller_apply_step3.upload_organization_code">อัพโหลดไฟล์เอกสารรหัสองค์กร</entry><!-- 上传组织机构代码证 -->
+	<entry key="sms.seller_apply_step3.aready_upload_ID_card">ท่านเคยอัพโหลดไฟล์รูปภาพบัตรประชาชนแล้ว</entry><!-- 您已经上传过身份证电子版照片了 -->
+	<entry key="sms.seller_apply_step3.aready_upload_business_license">ท่านเคยอัพโหลดไฟล์เอกสารประกอบธุรกิจแล้ว</entry><!-- 您已经上传过营业执照电子版了 -->
+	<entry key="sms.seller_apply_step3.aready_upload_organization_code">ท่านเคยอัพโหลดเอกสารรหัสองค์กรแล้ว</entry><!-- 您已经上传组织机构代码证了 -->
+	<entry key="sms.seller_apply_step3.xxx">ท่านเคยอัพโหลดเอกสารรหัสองค์กรแล้ว</entry><!--您已经上传过组织机构代码证了 -->
+	<entry key="sms.seller_apply_step3.delete_is_continue">เอกสารลบทิ้งแล้วไม่สามารถเรียกข้อมูลได้จะดำเนินการต่อหรือไม่?</entry><!-- 删除后不可恢复，是否继续？ -->
+	<entry key="sms.seller_apply_step3.delete_fail">ลบทิ้งไม่สำเร็จ กรุณาลบทิ้งอีกครั้ง</entry><!--删除失败，请重新删除！ -->
+	<entry key="sms.seller_apply_step3.merchant_enter">ผู้ขายเปิดบริการใช้งานบนระบบ</entry><!--商家入驻 -->
+	<entry key="sms.seller_apply_step3.enter_help">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!-- 入驻帮助 -->
+	<entry key="sms.seller_apply_step3.enter_protocol">กติกาการเปิดร้านค้าบนเว็บไซต์</entry><!--入驻协议 -->
+	<entry key="sms.seller_apply_step3.company_info_commit">ส่งข้อมูลของบริษัท</entry><!-- 公司信息提交 -->
+	<entry key="sms.seller_apply_step3.store_info_commit">ส่งข้อมูลของร้านค้า</entry><!--店铺信息提交 -->
+	<entry key="sms.seller_apply_step3.check_log">สอบถามรายงานการตรวจสอบ</entry><!--审核日志查询 -->
+	<entry key="sms.seller_apply_step3.enter_must_know">กติกาการเปิดร้านค้าบนเว็บไซต์</entry><!-- 入驻须知 -->
+	<entry key="sms.seller_apply_step3.company_info_comfirm">การรับรองข้อมูลบริษัท</entry><!--公司信息认证 -->
+	<entry key="sms.seller_apply_step3.store_info_comfirm">การรับรองข้อมูลของร้านค้า</entry><!--店铺信息认证 -->
+	<entry key="sms.seller_apply_step3.waitting_check">รอการตรวจสอบ</entry><!-- 等待审核 -->
+	<entry key="sms.seller_apply_step3.upload_resource">การอัพโหลดรูปภาพการรับรองคุณสมบัติองค์กรต้องเป็นรูปแบบ jpg,gif,png ขนาดไม่สามารถมากกว่า 1 M,ต้องมีตราประทับสีขององค์กรประกอบด้วย</entry><!--以下所需要上传电子版资质仅支持JPG、GIF、PNG格式的图片，大小不超过1M，且必须加盖企业彩色公章。 -->
+	<entry key="sms.seller_apply_step3.business_license_info">ข้อมูลใบอนุญาตประกอบธุรกิจ</entry><!-- 营业执照信息 -->
+	<entry key="sms.seller_apply_step3.register_code">รหัสใบอนุญาตประกอบธุรกิจ</entry><!--注册号(营业执照号)： -->
+	<entry key="sms.seller_apply_step3.legal_ID_card_electron">ไฟล์เอกสารบัตรประชาชนของกรรมการ</entry><!--法人身份证电子版： -->
+	<entry key="sms.seller_apply_step3.check">เรียกดูข้อมูล</entry><!--查看 -->
+	<entry key="sms.seller_apply_step3.delete">ลบทิ้ง</entry><!-- 删除 -->
+	<entry key="sms.seller_apply_step3.business_license_address_symbol">สถานที่ภูมิภาคของใบอนุญาตประกอบกิจการ</entry><!--营业执照所在地： -->
+	<entry key="sms.seller_apply_step3.province">มณฑล</entry><!-- 省份 -->
+	<entry key="sms.seller_apply_step3.city">เมือง</entry><!-- 城市 -->
+	<entry key="sms.seller_apply_step3.zhou">อำเภอ</entry><!-- 州县 -->
+	<entry key="sms.seller_apply_step3.business_detail_address_symbol">ที่อยู่ที่ชัดเจอของใบอนุญาตประกอบการ</entry><!--营业执照详细地址： -->
+	<entry key="sms.seller_apply_step3.establish_date">เวลาที่ก่อตั้งบริษัท</entry><!--成立日期： -->
+	<entry key="sms.seller_apply_step3.business_limit_symbol">อายุของประกอบการ</entry><!-- 营业期限： -->
+	<entry key="sms.seller_apply_step3.register_money_symbol">เงินทุนที่จดทะเบียน</entry><!--注册资本： -->
+	<entry key="sms.seller_apply_step3.business_scope_symbol">ของเขตของการประกอบกิจการ</entry><!-- 经营范围： -->
+	<entry key="sms.seller_apply_step3.wan_yuan">หมื่นหยวน</entry><!--万元 -->
+	<entry key="sms.seller_apply_step3.business_license_copy">ไฟล์สำเนาของเอกสารประกอบกิจการ</entry><!-- 营业执照副本电子版： -->
+	<entry key="sms.seller_apply_step3.company_detail_address_symbol">ที่อยู่ที่ชัดเจนของบริษัท</entry><!--公司详细地址： -->
+	<entry key="sms.seller_apply_step3.company_phone_symbol">เบอร์โทรบริษัท</entry><!--公司电话： -->
+	<entry key="sms.seller_apply_step3.company_urgency_contactor">ผู้ติดต่อฉุกเฉินของบริษัท</entry><!-- 公司紧急联系人： -->
+	<entry key="sms.seller_apply_step3.company_urgency_contactor_phone">เบอร์โทรติดต่อของผู้ที่ติดต่อฉุกเฉินของบริษัท</entry><!--公司紧急联系人手机： -->
+	<entry key="sms.seller_apply_step3.organization_code_card">เอกสารรหัสขององค์กร</entry><!--组织结构代码证 -->
+	<entry key="sms.seller_apply_step3.organization_code_symbol">รหัสขององค์กร</entry><!-- 组织机构代码： -->
+	<entry key="sms.seller_apply_step3.see_big_picture">ดูรูปภาพขนาดใหญ่</entry><!-- 查看大图 -->
+	<entry key="sms.seller_apply_step3.organization_code_card_symbol">ไฟล์เอกสารรหัสขององค์กร</entry><!--组织机构代码证电子版： -->
+	<entry key="sms.seller_apply_step3.complete_tax">ขั้นตอนถัดไป,ให้กรอกข้อมูลของธนาคารและสรรพากร ให้ครบ</entry><!--下一步，完善税务及银行信息 -->
+	<entry key="sms.seller_apply_step3.company_name">ชื่อบริษัท</entry><!-- 公司名称：-->
+	<entry key="sms.seller_apply_step3.country">ประเทศ</entry><!-- 国籍 -->
+	<entry key="sms.seller_apply_step3.company_place">สถานที่บริษัท</entry><!-- 公司所在地： -->
+	<entry key="sms.seller_apply_step3.before">ขั้นตอนที่แล้ว</entry><!-- 上一步 -->
+
+	<!-- seller_apply_step4.html -->
+	<entry key="sms.seller_apply_step4.tax_bank_info">ข้อมูลของสรรพากรและธนาคาร</entry><!-- 税务及银行信息 -->
+	<entry key="sms.seller_apply_step4.small_scope_taxpayer">ผู้เสียภาษีขนาดเล็ก</entry><!-- 小规模纳税人 -->
+	<entry key="sms.seller_apply_step4.write_taxpayer_code">กรุณากรอกรหัสของผู้เสียภาษี</entry><!-- 请填写纳税人识别号 -->
+	<entry key="sms.seller_apply_step4.bank_open_name">กรุณากรอกชื่อที่เปิดบัญชีของธนาคาร</entry><!-- 请填写银行开户名 -->
+	<entry key="sms.seller_apply_step4.write_bank_brance_name">กรุณากรอกชื่อสาขาธนาคารที่เปิดบัญชี</entry><!-- 请填写开户银行支行名称 -->
+	<entry key="sms.seller_apply_step4.write_company_number">กรุณากรอกหมายเลขบัญชีธนาคารของบริษัท</entry><!--请填写公司银行账号 -->
+	<entry key="sms.seller_apply_step4.write_correspondent_num">กรุณากรอกรหัสสาขาธนาคารที่เปิดบัญชี</entry><!-- 请填写开户行支行联行号 -->
+	<entry key="sms.seller_apply_step4.write_urgency_contact_phone">กรุณากรอกเบอร์โทรมือถือผู้ติดต่อฉุกเฉิน</entry><!--请填写紧急联系人手机 -->
+	<entry key="sms.seller_apply_step4.sel_bank_place">กรุณาเลือกภูมิภาคของธนาคารที่เปิดบัญชี</entry><!-- 请选择开户行所在地 -->
+	<entry key="sms.seller_apply_step4.upload_tax_authority_electron">กรุณาอัพโหลดไฟล์เอกสารของการจดทะเบียนในสรรพากร</entry><!--请上传税务登记证电子版 -->
+	<entry key="sms.seller_apply_step4.upload_taxpayer_electron">กรุณาอัพโหลดไฟล์ใบจดทะเบียนของผู้เสียภาษี</entry><!--请上传纳税人登记证电子版 -->
+	<entry key="sms.seller_apply_step4.upload_bank_admit_electron">กรุณาอัพโหลดไฟล์เอกสารใบอนุญาตของธนาคารที่เปิดบัญชี</entry><!-- 
+		请上传开户银行许可证电子版 -->
+	<entry key="sms.seller_apply_step4.tax_register_electron">ไฟล์เอกสารการจดทะเบียนในสรรพากร</entry><!--税务登记证电子版 -->
+	<entry key="sms.seller_apply_step4.xxx">ไฟล์เอกสารการจดทะเบียนในสรรพากร</entry><!--税务登记证电子版 -->
+	<entry key="sms.seller_apply_step4.taxpayer_admin_electron">ไฟล์เอกสารใบรับรองของผู้เสียภาษี</entry><!-- 纳税人资格证电子版 -->
+	<entry key="sms.seller_apply_step4.bank_admit_card">ใบอนุญาตของธนาคารที่เปิดบัญชี</entry><!--开户银行许可证 -->
+	<entry key="sms.seller_apply_step4.aready_tax_authority_electron">ท่านเคยอัพโหลดไฟล์รูปภาพของการจดทะเบียนบริษัทในสรรพากรแล้ว</entry><!--您已经上传税务登记证电子版照片了 -->
+	<entry key="sms.seller_apply_step4.aready_taxpayer_admit_electron">ท่านเคยอัพโหลดไฟล์รูปภาพรับรองของผู้เสียภาษีแล้ว</entry><!-- 
+		您已经上传纳税人资格证电子版照片了 -->
+	<entry key="sms.seller_apply_step4.aready_bank_admit_pic">ท่านเคยอัพโหลดไฟล์รูปภาพใบอนุญาตของธนาคารที่เปิดบัญชี</entry><!-- 
+		您已经上传开户银行许可证电子版照片了 -->
+	<entry key="sms.seller_apply_step4.small_scope_taxpayers">ผู้เสียภาษีขนาดเล็ก</entry><!-- 小规模纳税人 -->
+	<entry key="sms.seller_apply_step4.is_continute">ข้อมูลลบทิ้งแล้วไม่สามารถกู้คืนได้จะดำเนินการต่อไหม</entry><!--删除后不可恢复，是否继续？ -->
+	<entry key="sms.seller_apply_step4.delete_fail">ลบทิ้งเอกสารไม่สำเร็จ กรุณาลบทิ้งอีกครั้ง!</entry><!--删除失败，请重新删除！ -->
+	<entry key="sms.seller_apply_step4.merchant_enter">ผู้ขายเปิดบริการใช้งานบนระบบ</entry><!--商家入驻 -->
+	<entry key="sms.seller_apply_step4.enter_help">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!-- 入驻帮助 -->
+	<entry key="sms.seller_apply_step4.company_info_commit">ส่งข้อมูลของบริษัท</entry><!-- 公司信息提交 -->
+	<entry key="sms.seller_apply_step4.store_info_commit">ส่งข้อมูลของร้านค้า</entry><!-- 店铺信息提交 -->
+	<entry key="sms.seller_apply_step4.check_log">สอบถามรายงานการตรวจสอบ</entry><!--审核日志查询 -->
+	<entry key="sms.seller_apply_step4.enter_must_know">กติกาการเปิดร้านค้าบนเว็บไซต์</entry><!--入驻须知 -->
+	<entry key="sms.seller_apply_step4.company_info_comfirm">การรับรองข้อมูลของบริษัท</entry><!--公司信息认证 -->
+	<entry key="sms.seller_apply_step4.store_info_comfirm">การรับรองข้อมูลของร้านค้า</entry><!-- 店铺信息认证 -->
+	<entry key="sms.seller_apply_step4.waitting_check">การรอขั้นตอนการตรวจสอบ</entry><!--等待审核 -->
+	<entry key="sms.seller_apply_step4.uoload_resource">การอัพโหลดรูปภาพการรับรององค์กร ต้องเป็นรูปแบบjpg,gif,png ขนาดไม่สามารถมากกว่า 1 M,ต้องมีตราประทับสีขององค์กรประกอบด้วย</entry><!--以下所需要上传电子版资质仅支持JPG、GIF、PNG格式的图片，大小不超过1M。 -->
+	<entry key="sms.seller_apply_step4.taxpayer_code">รหัสของใบผู้เสียภาษี</entry><!-- 纳税人识别号： -->
+	<entry key="sms.seller_apply_step4.taxpayer_type">ประเภทผู้เสียภาษี</entry><!-- 纳税人类型： -->
+	<entry key="sms.seller_apply_step4.xxx">ผู้เสียภาษีขนาดเล็ก</entry><!--小规模纳税人 -->
+	<entry key="sms.seller_apply_step4.tax_type_code">รหัสประเภทการเสียภาษี</entry><!-- 纳税类型税码： -->
+	<entry key="sms.seller_apply_step4.tax_register_electron">ไฟล์เอกสารลงทะเบียนสรรพากร</entry><!--税务登记证电子版： -->
+	<entry key="sms.seller_apply_step4.delete">ลบทิ้ง</entry><!-- 删除 -->
+	<entry key="sms.seller_apply_step4.gernate_taxpayer_electron">ไฟล์เอกสารรับรองผู้เสียภาษีทั่วไป</entry><!-- 一般纳税人资格证电子版： -->
+	<entry key="sms.seller_apply_step4.open_bank_admit">เอกสารใบอนุญาตของธนาคารทีเปิดบัญชี</entry><!-- 开户银行许可证 -->
+	<entry key="sms.seller_apply_step4.bank_user_name">ชื่อที่เปิดบัญชีของธนาคาร</entry><!-- 银行开户名： -->
+	<entry key="sms.seller_apply_step4.company_bank_num_symbol">หมายเลขบัญชีธนาคารของบริษัท</entry><!-- 公司银行账号： -->
+	<entry key="sms.seller_apply_step4.bank_brance_name">ชื่อสาขาธนาคารที่เปิดบัญชี</entry><!-- 开户银行支行名称： -->
+	<entry key="sms.seller_apply_step4.bank_brance_place">ภูมิภาคสถานที่ของสาขาธนาคารที่เปิดบัญชี</entry><!--开户银行支行所在地： -->
+	<entry key="sms.seller_apply_step4.province">มนฑล</entry><!--省份 -->
+	<entry key="sms.seller_apply_step4.city">เมือง</entry><!--城市 -->
+	<entry key="sms.seller_apply_step4.zhou">อำเภอ</entry><!--州县 -->
+	<entry key="sms.seller_apply_step4.bank_admit_electron">ไฟล์เอกสารใบอนุญาตเปิดบัญชีธนาคาร</entry><!-- 银行开户许可证电子版： -->
+	<entry key="sms.seller_apply_step4.complete_info">ขั้นตอนถัดไป กรุณากรอกข้อมูลร้านค้าให้ครบถ้วน</entry><!--下一步，完善店铺信息 -->
+	<entry key="sms.seller_apply_step4.tax_register">ใบรับรองจดทะเบียนภาษี</entry><!--税务登记证 -->
+	<entry key="sms.seller_apply_step4.tax_people">ผู้เสียภาษีทั่วไป</entry><!--一般纳税人 -->
+	<entry key="sms.seller_apply_step4.open_bank_code">รหัสสาขาธนาคารที่เปิดบัญชี</entry><!--开户行支行联行号： -->
+	<entry key="sms.seller_apply_step4.country">ประเทศ</entry><!--国籍 -->
+	<entry key="sms.seller_apply_step4.before">ขั้นตอนที่แล้ว</entry><!--上一步 -->
+
+
+	<!-- seller_apply_step5.html -->
+	<entry key="sms.seller_apply_step5.store_base_info">ข้อมูลทั่วไปของร้านค้า</entry><!--店铺基本信息 -->
+	<entry key="sms.seller_apply_step5.write_store_name">กรุณากรอกชื่อของร้านค้า</entry><!-- 请填写店铺名称 -->
+	<entry key="sms.seller_apply_step5.store_name_exist">ชื่อร้านค้านี้มีอยู่แล้ว</entry><!-- 店铺名已经存在 -->
+	<entry key="sms.seller_apply_step5.write_real_name">กรุณากรอกชื่อ นามสกุลจริงของเจ้าของร้าน</entry><!-- 请填写店主真实姓名 -->
+	<entry key="sms.seller_apply_step5.store_not_null">กรุณากรอกภูมิภาคสถานที่ของที่ตั้งร้านค้า</entry><!-- 店铺区域不能为空 -->
+	<entry key="sms.seller_apply_step5.write_shop_owner_ID">กรุณากรอกหมายเลขบัตรประชาชนของเจ้าของร้าน</entry><!--请填写店主的身份证号 -->
+	<entry key="sms.seller_apply_step5.ID_format_uncorrect">รูปแบบของหมายเลขบัตรประชาชนไม่ถูกต้อง</entry><!--身份证号格式不对 -->
+	<entry key="sms.seller_apply_step5.write_store_detail_address">กรุณากรอกที่อยู่ร้านค้าให้ชัดเจน</entry><!--请填写店铺的详细地址 -->
+	<entry key="sms.seller_apply_step5.write_store_postalcode">กรุณากรอกรหัสไปรษณีย์ของร้านค้า</entry><!-- 请填写店铺的邮编 -->
+	<entry key="sms.seller_apply_step5.postalcode_uncorrect">รูปแบบรหัสไปรษณีย์ไม่ถูกต้อง</entry><!-- 邮编格式不对 -->
+	<entry key="sms.seller_apply_step5.write_store_contact_phone">กรุณากรอกเบอร์โทรที่ติดต่อของร้านค้า</entry><!-- 请填写店铺的联系电话 -->
+	<entry key="sms.seller_apply_step5.phone_format_uncorrect">รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง</entry><!--电话号码格式不对 -->
+	<entry key="sms.seller_apply_step5.write_store_phone_num">กรุณากรอกเบอร์โทรของร้านค้า</entry><!-- 请填写店铺的联系电话 -->
+	<entry key="sms.seller_apply_step5.phone_format_uncorrected">รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง</entry><!--电话号码格式不对 -->
+	<entry key="sms.seller_apply_step5.merchant_enter">ผู้ขายเปิดบริการใช้งานของระบบ</entry><!-- 商家入驻 -->
+	<entry key="sms.seller_apply_step5.enter_help">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!--入驻帮助 -->
+	<entry key="sms.seller_apply_step5.enter_protocol">ข้อตกลงการเปิดร้านค้าบนระบบ</entry><!-- 入驻协议 -->
+	<entry key="sms.seller_apply_step5.company_info_commit">ส่งข้อมูลของบริษัท</entry><!-- 公司信息提交 -->
+	<entry key="sms.seller_apply_step5.store_info_commit">ส่งข้อมูลของร้านค้า</entry><!-- 店铺信息提交 -->
+	<entry key="sms.seller_apply_step5.check_log">สอบถามรายงานการตรวจสอบ</entry><!-- 审核日志查询 -->
+	<entry key="sms.seller_apply_step5.enter_must_know">กติกาการเปิดร้านค้าบนระบบ</entry><!--入驻须知 -->
+	<entry key="sms.seller_apply_step5.company_info_comfirm">การรับรองข้อมูลของบริษัท</entry><!--公司信息认证 -->
+	<entry key="sms.seller_apply_step5.store_info_comfirm">การรับรองข้อมูลของร้านค้า</entry><!--店铺信息认证 -->
+	<entry key="sms.seller_apply_step5.waitting_check">รอการตรวจสอบ</entry><!-- 等待审核 -->
+	<entry key="sms.seller_apply_step5.store_info">ข้อมูลของร้านค้า</entry><!--店铺信息 -->
+	<entry key="sms.seller_apply_step5.store_name">ชื่อร้านค้า</entry><!--店铺名称： -->
+	<entry key="sms.seller_apply_step5.shop_own_real_name">ชื่อ นามสกุลจริงของเจ้าของร้านค้า</entry><!-- 店主真实姓名： -->
+	<entry key="sms.seller_apply_step5.shop_own_identify_num">หมายเลขบัตรประชาชนของเจ้าของร้าน</entry><!--店主身份证号： -->
+	<entry key="sms.seller_apply_step5.live_place">สถานที่ภูมิภาคของที่ตั้งร้านค้า</entry><!--所在地区： -->
+	<entry key="sms.seller_apply_step5.province">มนฑล</entry><!--省份 -->
+	<entry key="sms.seller_apply_step5.city">เมือง</entry><!--城市 -->
+	<entry key="sms.seller_apply_step5.zhou">อำเภอ</entry><!--州县 -->
+	<entry key="sms.seller_apply_step5.detail_address">ที่อยู่ที่ชัดเจน</entry><!-- 详细地址： -->
+	<entry key="sms.seller_apply_step5.store_postalcode">รหัสไปรษณีย์ของร้านค้า</entry><!--店铺邮编： -->
+	<entry key="sms.seller_apply_step5.contact_phone">เบอร์โทรศัพท์ติดต่อ</entry><!--联系电话： -->
+	<entry key="sms.seller_apply_step5.contact_qq">ติดต่อทาง QQ</entry><!--联系QQ： -->
+	<entry key="sms.seller_apply_step5.contact_MSN">ติดต่อทาง MSN</entry><!-- 联系MSN： -->
+	<entry key="sms.seller_apply_step5.alitalk">อาลีวังวัง</entry><!--阿里旺旺： -->
+	<entry key="sms.seller_apply_step5.select_store_type">เลือกประเภทของร้านค้า</entry><!--选择店铺类型 -->
+	<entry key="sms.seller_apply_step5.hope_store_type">ประเภทของร้านค้าที่ต้องการ</entry><!--期望店铺类型： -->
+	<entry key="sms.seller_apply_step5.store_time_limit">ระยะเวลาการใช้งานของร้านค้า</entry><!-- 店铺有效期： -->
+	<entry key="sms.seller_apply_step5.main_business_type">ประเภทสินค้าหลักๆ ของร้านค้า</entry><!--主营类目： -->
+	<entry key="sms.seller_apply_step5.complete_info">ขั้นตอนถัดไป,กรุณากรอกข้อมูลประเภทร้านค้าและประเภทสินค้า ของร้านค้าให้ครบถ้วน</entry><!--下一步，完善店铺类型与经营类目 -->
+	<entry key="sms.seller_apply_step5.before">ขั้นตอนที่แล้ว</entry><!--上一步 -->
+
+	<!--seller_apply_step6.html -->
+	<entry key="sms.seller_apply_step6.store_type">ประเภทและคุณสมบัติของร้านค้า</entry><!-- 店铺类目及资质 -->
+	<entry key="sms.seller_apply_step6.merchant_enter">ผู้ขายเปิดบริการใช้งานของระบบ</entry><!--商家入驻 -->
+	<entry key="sms.seller_apply_step6.enter_help">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!--入驻帮助 -->
+	<entry key="sms.seller_apply_step6.enter_protocol">ข้อตกลงการเปิดร้านค้าบนระบบ</entry><!-- 入驻协议 -->
+	<entry key="sms.seller_apply_step6.company_info_commit">ส่งข้อมูลของบริษัท</entry><!-- 公司信息提交 -->
+	<entry key="sms.seller_apply_step6.check_log">สอบถามรายงานการตรวจสอบ</entry><!--审核日志查询 -->
+	<entry key="sms.seller_apply_step6.company_info_comfirm">การรับรองข้อมูลของบริษัท</entry><!-- 公司信息认证 -->
+	<entry key="sms.seller_apply_step6.store_info_comfirm">การรับรองข้อมูลของร้านค้า</entry><!-- 店铺信息认证 -->
+	<entry key="sms.seller_apply_step6.waitting_check">การรอการตรวจสอบ</entry><!--等待审核 -->
+	<entry key="sms.seller_apply_step6.store_type_and_info">ประเภทร้านค้าและข้อมูลประเภทของร้านค้า</entry><!--店铺类目及类目信息 -->
+	<entry key="sms.seller_apply_step6.first_type">ประเภทระดับที่ 1</entry><!--一级类目 -->
+	<entry key="sms.seller_apply_step6.select">กรุณาเลือก</entry><!-- 请选择 -->
+	<entry key="sms.seller_apply_step6.second_type">ประเภทระดับที่ 2</entry><!-- 二级类目 -->
+	<entry key="sms.seller_apply_step6.add">เพิ่มข้อมูล</entry><!--添加 -->
+	<entry key="sms.seller_apply_step6.cancel">ยกเลิก</entry><!--取消 -->
+	<entry key="sms.seller_apply_step6.select_can_manage_type">เลือกประเภทร้านค้าที่สามารถดำเนินการได้</entry><!--选择可经营类目 -->
+	<entry key="sms.seller_apply_step6.manage_different_type">ร้านค้าสามารถขายสินค้าประเภทระดับที่ 2โดยไม่จำกัดจำนวนแต่สินค้าต้องต่างกันจากประเภทที่ 1</entry><!--gradeName店铺可以经营不同一级类目下的若干二级类目 -->
+	<entry key="sms.seller_apply_step6.must_belong_first_type">ประเภทสินค้าของร้านค้าที่ขายต้องเป็นสินค้าประเภทเดียวกันของประเภทระดับที่1</entry><!--gradeName店铺所经营的类目必须共属一个一级类目 -->
+	<entry key="sms.seller_apply_step6.detail_type">ข้อมูลรายละเอียดของสินค้า</entry><!--详细类目： -->
+	<entry key="sms.seller_apply_step6.type_cost_standard">เรียกดูมาตรฐานค่าใช้จ่ายของสินค้า</entry><!-- 查看类目费用标准 -->
+	<entry key="sms.seller_apply_step6.sequence">ลำดับ</entry><!--序号 -->
+	<entry key="sms.seller_apply_step6.first_types">ประเภทระดับที่ 1</entry><!-- 一级类目 -->
+	<entry key="sms.seller_apply_step6.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="sms.seller_apply_step6.delete">ลบทิ้ง</entry><!-- 删除 -->
+	<entry key="sms.seller_apply_step6.before">ขั้นตอนที่แล้ว</entry><!-- 上一步 -->
+	<entry key="sms.seller_apply_step6.comfirm_service">ขั้นตอนถัดไปให้ยืนยันข้อตกลงการใช้บริการออนไลน์</entry><!-- 
+		下一步，确认在线服务协议 -->
+
+
+	<!-- seller_apply_step7.html -->
+	<entry key="sms.seller_apply_step7.protocol_comfirm">ยืนยันข้อตกลง</entry><!-- 协议确认 -->
+	<entry key="sms.seller_apply_step7.read_agree_protocol">กรุณาอ่านและยินยอมข้อตกลง</entry><!--请阅读并同意协议 -->
+	<entry key="sms.seller_apply_step7.merchant_enter">ผู้ขายเปิดบริการใช้งานบนระบบ </entry><!--商家入驻 -->
+	<entry key="sms.seller_apply_step7.enter_help">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!-- 入驻帮助 -->
+	<entry key="sms.seller_apply_step7.enter_protocol">ข้อตกลงการใช้บริการบนระบบ</entry><!--入驻协议 -->
+	<entry key="sms.seller_apply_step7.company_info_commit">ส่งข้อมูลบริษัท</entry><!--公司信息提交 -->
+	<entry key="sms.seller_apply_step7.store_info_commit">ส่งข้อมูลร้านค้า</entry><!-- 店铺信息提交 -->
+	<entry key="sms.seller_apply_step7.check_log">สอบถามรายงานการตรวจสอบ</entry><!--审核日志查询 -->
+	<entry key="sms.seller_apply_step7.inline_comfirm">ยินยอมข้อตกลงสัญญาออนไลน์</entry><!-- 在线合同协议确认 -->
+	<entry key="sms.seller_apply_step7.commit_enter_apply">ส่งคำร้องเปิดร้านค้าออนไลน์บนระบบ</entry><!--提交入驻申请 -->
+	<entry key="sms.seller_apply_step7.agree_protocol">ฉันได้อ่านข้อตกลงครบถ้วนแล้วและยินยอมตามข้อตกลง</entry><!--我已仔细阅读并同意协议 -->
+	<entry key="sms.seller_apply_step7.xxx">ส่งคำร้องเปิดร้านค้าออนไลน์บนระบบ</entry><!--提交入驻申请 -->
+	<entry key="sms.seller_apply_step7.store_enter">เจ้าของธุรกิจเข้าร่วมสำเร็จ</entry><!--商家入驻成功-->
+
+
+	<!-- seller_apply_wait.html -->
+	<entry key="sms.seller_apply_wait.apply_aready_commit">ยื่นคำร้องเปิดร้านค้าบนเว็บไซต์แล้ว</entry><!--入驻申请已提交 -->
+	<entry key="sms.seller_apply_wait.merchant_enter">ผู้ขายเปิดใช้บริการบนระบบ</entry><!-- 商家入驻 -->
+	<entry key="sms.seller_apply_wait.enter_help">การช่วยเหลือการเปิดร้านค้าบนระบบ</entry><!--入驻帮助 -->
+	<entry key="sms.seller_apply_wait.company_info_commit">ส่งข้อมูลของบริษัท</entry><!-- 公司信息提交 -->
+	<entry key="sms.seller_apply_wait.store_info_commit">ส่งข้อมูลของร้านค้า</entry><!-- 店铺信息提交 -->
+	<entry key="sms.seller_apply_wait.check_log">สอบถามรายงานการตรวจสอบ</entry><!--审核日志查询 -->
+	<entry key="sms.seller_apply_wait.consult_check">สอบถามการตรวจสอบ</entry><!--咨询审核 -->
+	<entry key="sms.seller_apply_wait.check_time">ระยะเวลาที่ตรวจสอบการรับรองคุณสมบัติของร้านค้าเบื้องต้นใช้เวลา7 วันทำการ ,ตรวจสอบซ้ำ 1-15 วันทำการ,การออกใบอนุญาตแก้ร้านค้าใช้เวลา1-3 วันทำการ</entry><!-- 1、审核时效：资质初审7个工作日，复审1-15个工作日，店铺授权1-3个工作日。 -->
+	<entry key="sms.seller_apply_wait.login_check_status">ท่านสามารถเข้าสู่ระบบเรียกดูสถานะการตรวจสอบและสามารถเรียกดูความคืบหน้าของการเปิดร้านค้าบนเว็บไซต์ผ่านทางอีเมลล์ของหน่วยงาน</entry><!--2、您可登陆查看审核状态，也可通过商务联系人邮箱了解入驻进度。 -->
+	<entry key="sms.seller_apply_wait.store_after_open">หลังจากร้านค้าเปิดบริการแล้วชื่อผู้ใช้และรหัสผ่านในการเข้าสู่ระบบของระบบหลังร้านจะส่งไปที่อีเมล์ที่ท่านได้ลงทะเบียนไว้</entry><!-- 3、店铺开通后，登陆商家管理后台的用户名和密码会发送到您入驻时填写的联系人邮箱中。 -->
+	<entry key="sms.seller_apply_wait.check_progress">ความคืบหน้าในการตรวจสอบ</entry><!-- 审核进度 -->
+	<entry key="sms.seller_apply_wait.commit_enter_apply">ส่งคำร้องขอเปิดใช้บริการบนระบบ</entry><!--提交入驻申请 -->
+	<entry key="sms.seller_apply_wait.comfirming_company_info">กำลังจัดทำรับรองข้อมูลของบริษัท</entry><!-- 正在认证公司信息 -->
+	<entry key="sms.seller_apply_wait.comfirming_store_info">กำลังจัดททำรับรองข้อมูลของร้านค้า</entry><!-- 正在认证店铺信息 -->
+	<entry key="sms.seller_apply_wait.xxx">กำลังจัดททำรับรองข้อมูลของร้านค้า</entry><!--正在认证店铺信息 -->
+
+	<!--seller_apply_wait1.html -->
+	<entry key="sms.seller_apply_wait1.merchant_enter_success">ผู้ขายเปิดร้านค้าบนเว็บไซต์สำเร็จ</entry><!--商家入驻成功 -->
+	<entry key="sms.seller_apply_wait1.check_log">รายงานการตรวจสอบ</entry><!-- 审核日志 -->
+	<entry key="sms.seller_apply_wait1.aready_commit_apply">การยื่นคำร้องสำเร็จแล้ว</entry><!--您已成功提交入驻申请 -->
+	<entry key="sms.seller_apply_wait1.company_info_check_refuse">การตรวจสอบข้อมูลบริษัทไม่ผ่าน</entry><!--公司信息审核拒绝 -->
+	<entry key="sms.seller_apply_wait1.refuse_reason">เหตุผลที่ถูกปฏิเสธ</entry><!-- 拒绝原因： -->
+	<entry key="sms.seller_apply_wait1.re_commit_info">ยื่นข้อมูลของบริษัท อีกครั้ง</entry><!-- 重新提交公司信息 -->
+	<entry key="sms.seller_apply_wait1.enter_check">ตรวจสอบการเข้าร่วม</entry><!-- 入驻审核 -->
+	<entry key="sms.seller_apply_wait1.check_progress">เช็คสถานะการตรวจสอบ</entry><!-- 审核进度查询 -->
+
+	<!-- seller_apply_wait2.html -->
+	<entry key="sms.seller_apply_wait2.comfirming_company_info">กำลังจัดทำการรับรองข้อมูลบริษัท</entry><!--正在认证公司信息 -->
+	<entry key="sms.seller_apply_wait2.comfirm_pass">ผ่านการตรวจสอบข้อมูลของบริษัทแล้ว</entry><!--公司信息审核通过 -->
+	<entry key="sms.seller_apply_wait2.store_check_refuse">การตรวจสอบข้อมูลของร้านค้าไม่ผ่าน</entry><!-- 店铺信息审核拒绝 -->
+	<entry key="sms.seller_apply_wait2.refuse_reason">เหตุผลที่ถูกปฏิเสธ</entry><!-- 拒绝原因： -->
+	<entry key="sms.seller_apply_wait2.restart_commit_info">ยื่นข้อมูลของร้านค้าอีกครั้ง</entry><!-- 重新提交店铺信息 -->
+	<entry key="sms.seller_apply_wait2.enter_check">ตรวจสอบการเข้าร่วม</entry><!-- 入驻审核 -->
+	<entry key="sms.seller_apply_wait2.check_progress">เช็คสถานะการตรวจสอบ</entry><!-- 审核进度查询 -->
+
+	<!-- seller_apply_wait3.html -->
+	<entry key="sms.seller_apply_wait3.aready_commit_apply">ท่านได้ยื่นคำร้องเปิดร้านค้าออนไลน์สำเร็จแล้ว</entry><!--您已成功提交入驻申请 -->
+	<entry key="sms.seller_apply_wait3.comfirming_company_info">กำลังจัดทำการรับรองข้อมูลของบริษัท</entry><!--正在认证公司信息 -->
+	<entry key="sms.seller_apply_wait3.comfirm_pass">การตรวจสอบข้อมูลของบริษัทผ่านแล้ว</entry><!--公司信息审核通过 -->
+	<entry key="sms.seller_apply_wait3.comfirming_store_info">กำลังจัดทำการรับรองข้อมูลของร้านค้า</entry><!--正在认证店铺信息 -->
+	<entry key="sms.seller_apply_wait3.xxx">การตรวจสอบข้อมูลของร้านค้าผ่านแล้ว</entry><!--店铺信息审核通过 -->
+	<entry key="sms.seller_apply_wait3.you_enter_success">ท่านได้เปิดร้านค้าออนไลน์สำเร็จแล้ว</entry><!-- 您已成功入驻 -->
+	<entry key="sms.seller_apply_wait3.statement">การอธิบาย:</entry><!-- 说明： -->
+	<entry key="sms.seller_apply_wait3.exist_login">กรุณาออกจากระบบ,แล้วเข้าสู่ระบบโดยใช้เมนู"การเข้าสู่ระบบร้านค้า" ที่อยู่บนมุมซ้ายมือของหน้าแรก</entry><!--请退出登陆状态，然后在首页左上方“商家登陆”的入口登陆。 -->
+
+
+	<!--seller_store_ajax_select.html -->
+	<entry key="sms.seller_store_ajax_select.zhou">อำเภอ</entry><!-- 州县-->
+
+	<!--seller_store_gc_list.html -->
+	<entry key="sms.seller_store_gc_list.sequence">ลำดับ</entry><!--序号 -->
+	<entry key="sms.seller_store_gc_list.first_type">ประเภทเลเวล 1 </entry><!--一级类目 -->
+	<entry key="sms.seller_store_gc_list.second_type">ประเภทเลเวล 2 </entry><!--二级类目 -->
+	<entry key="sms.seller_store_gc_list.operate">การดำเนินการ</entry><!--操作 -->
+	<entry key="sms.seller_store_gc_list.delete">ลบทิ้ง</entry><!--删除  -->
+
+
+	<!-- activity.html页面国际化 -->
+	<entry key="sms.activity.yuan">......หยวน</entry><!-- 元 -->
+	<entry key="sms.activity.sales">จำนวนยอดขาย</entry><!--销量： -->
+	<entry key="sms.activity.lowest_price">ราคาต่ำสุด</entry><!--最低价： -->
+	<entry key="sms.activity.no_activities">ขออภัย ,ยังไม่มีสินค้าที่เข้าร่วมกิจกรรม</entry><!--抱歉，没有相应的活动商品！ -->
+	<entry key="sms.activity.returns_homepage">กลับไปหน้าแรกของมอลล์</entry><!--返回商城首页 -->
+
+	<!-- article_list.html/article.html页面国际化 -->
+	<entry key="sms.article.article_classification">ประเภทข้อความ</entry><!--文章分类 -->
+	<entry key="sms.article.latest_news">ข่าวล่าสุด</entry><!--最新新闻 -->
+	<entry key="sms.article.article_lists">รายการข้อความ</entry><!-- 文章列表 -->
+	<entry key="sms.article.before">บทที่แล้ว</entry><!--上一篇-->
+	<entry key="sms.article.next">บทต่อไป</entry><!-- 下一篇 -->
+
+	<!-- balance_pay.html页面国际化 -->
+	<entry key="sms.balance_pay.advance_payment">ชำระเงินแบบมัดจำ</entry><!--预付款支付 -->
+	<entry key="sms.balance_pay.payment_noempty">กรุณากรอกคำอธิบายการชำระเงิน</entry><!--付款说明不能为空 -->
+	<entry key="sms.balance_pay.payment_amount">จำนวนเงินที่ต้องชำระ</entry><!--付款金额:¥ -->
+	<entry key="sms.balance_pay.enter_advance_message">กรุณากรอกข้อความการชำระเงินแบบมัดจำ(ข้อความสำหรับการชำระเงินมัดจำจะช่วยให้ผู้ขายทราบว่าเงินมาจากลูกค้าท่านไหนท่านยังสามารถไปชำระเงินที่ เมนู "ใบสั่งซื้อ"ในศูนย์รวมผู้ใช้ภายหลัง)</entry><!-- 请输入预存款留言信息 (预存款留言有利于商家迅速辨别买家，您也可以稍后在用户中心“我的订单”中进行付款)： -->
+
+	<!-- brand_goods.html页面国际化 -->
+	<entry key="sms.brand_goods.promotion_goods">ส่งเสริมการขายสินค้า</entry><!--推广商品 -->
+	<entry key="sms.brand_goods.original_price">ราคาเดิม:</entry><!--原价：¥ -->
+	<entry key="sms.brand_goods.reference_price">ราคาอ้างอิง:</entry><!-- 参考价：¥ -->
+	<entry key="sms.brand_goods.buying_price">ราคาโปรโมชั่น:</entry><!--抢购价： -->
+	<entry key="sms.brand_goods.snapped_immediately">ซื้อสินค้าทันที</entry><!--立即抢购 -->
+	<entry key="sms.brand_goods.total">ทั้งหมดมี</entry><!--共 -->
+	<entry key="sms.brand_goods.commodity">สินค้า......ชิ้น</entry><!-- 个商品 -->
+	<entry key="sms.brand_goods.sorting">เรียงลำดับ</entry><!--排序： -->
+	<entry key="sms.brand_goods.default">ยืนยันโดยอัตโนมัติ</entry><!-- 默认 -->
+	<entry key="sms.brand_goods.sales">จำนวนยอดขาย</entry><!-- 销量 -->
+	<entry key="sms.brand_goods.high_praise">ความพึงพอใจที่ดี</entry><!--好评 -->
+	<entry key="sms.brand_goods.price">ราคา</entry><!-- 价格 -->
+	<entry key="sms.brand_goods.inventory">สต๊อกสินค้า</entry><!-- 库存： -->
+	<entry key="sms.brand_goods.all">ทั้งหมด</entry><!-- 全部 -->
+	<entry key="sms.brand_goods.show_only_available">แค่แสดงว่ายังมีสินค้า</entry><!--仅显示有货 -->
+	<entry key="sms.brand_goods.commodity_type">ประเภทสินค้า</entry><!-- 商品类型： -->
+	<entry key="sms.brand_goods.mall_proprietary">สินค้าของมอลล์ที่ขายเอง</entry><!--商城自营 -->
+	<entry key="sms.brand_goods.merchants_goods">สินค้าจากผู้ขาย</entry><!--商家商品 -->
+	<entry key="sms.brand_goods.existing">มีอยู่แล้ว</entry><!--已有 -->
+	<entry key="sms.brand_goods.evaluation">ความพึงพอใจ</entry><!-- 评价 -->
+	<entry key="sms.brand_goods.proprietary_products">สินค้าที่ขายเอง</entry><!--自营商品 -->
+	<entry key="sms.brand_goods.no_qualified_goods">ขออภัย,ยังไม่เจอสินค้าที่ต้องการ</entry><!-- 抱歉，没有找到符合条件的商品！ -->
+	<entry key="sms.brand_goods.look_all_goods">เรียกดูสินค้าทั้งหมด</entry><!-- 查看全部商品 -->
+	
+	<entry key="sms.brand_goods.store_price">ราคาห้างสรรพสินค้า</entry><!--商城价 -->
+	<entry key="sms.brand_goods.hot">แนะนำขายดี</entry><!--热卖推荐 -->
+	<entry key="sms.brand_goods.popular">ยอดนิยม</entry><!-- 人气-->
+	
+	<!-- brand.html页面国际化 -->
+	<entry key="sms.brand.brand_mall">แบรนสินค้าของมอลล์</entry><!--商城品牌 -->
+	<entry key="sms.brand.recommended_brand">แบรนสินค้าแนะนำ</entry><!-- 推荐品牌 -->
+	<entry key="sms.brand.classification">ประเภท</entry><!-- 分类： -->
+	<entry key="sms.brand.all">ทั้งหมด</entry><!--全部 -->
+	<entry key="sms.brand.letter">ตัวอักษร</entry><!--字母 -->
+
+	<!-- cart_address.html页面国际化 -->
+	<entry key="sms.cart_address.consignee_no_empty">กรุณากรอกผู้รับสินค้า</entry><!--收货人不能为空 -->
+	<entry key="sms.cart_address.select_region">กรุณาเลือกสถานที่ภูมิภาคที่ชัดเจน</entry><!--请选择详细区域 -->
+	<entry key="sms.cart_address.address_no_empty">กรุณากรอกที่อยู่ที่ชัดเจน</entry><!--详细地址不能为空 -->
+	<entry key="sms.cart_address.code_no_empty">กรุณากรอกรหัสไปรษณีย์</entry><!--邮政编码不能为空 -->
+	<entry key="sms.cart_address.right_code">กรุณากรอกรหัสไปรษณีย์ให้ถูกต้อง</entry><!--请正确填写邮政编码 -->
+	<entry key="sms.cart_address.mobile_phone_least">กรุณากรอกเบอร์โทรศัพท์หรือเบอร์มือถือ</entry><!--联系电话、手机至少填写一项 -->
+	<entry key="sms.cart_address.right_phone_number">กรุณากรอกเบอร์มือถือให้ถูกต้อง</entry><!-- 请正确填写手机号码 -->
+	<entry key="sms.cart_address.choose">กรุณาเลือก</entry><!--请选择 -->
+	<entry key="sms.cart_address.edit_address">พิมพ์ข้อมูลที่อยู่</entry><!--编辑地址 -->
+	<entry key="sms.cart_address.add_address">เพิ่มที่อยู่</entry><!-- 添加地址 -->
+	<entry key="sms.cart_address.consignee_name">ชื่อ-นามสกุลของผู้รับสินค้า</entry><!--收货人姓名 -->
+	<entry key="sms.cart_address.area">ที่อยู่สถานที่ของผู้รับสินค้า</entry><!--所在区域： -->
+	<entry key="sms.cart_address.choose_area">กรุณาเลือกเขตที่อยู่</entry><!--请选择地区 -->
+	<entry key="sms.cart_address.modify">แก้ไข</entry><!-- 修改 -->
+	<entry key="sms.cart_address.detailed_address">ที่อยู่ที่ชัดเจน</entry><!-- 详细地址 -->
+	<entry key="sms.cart_address.zip_code">รหัสไปรษณีย์</entry><!-- 邮政编码 -->
+	<entry key="sms.cart_address.phone_number">เบอร์โทรติดต่อ</entry><!--联系电话 -->
+	<entry key="sms.cart_address.mobile_phone_number">หมายเลขเบอร์มือถือ</entry><!--手机号码 -->
+	<entry key="sms.cart_address.submit">ตกลง</entry><!--提交 -->
+
+	<!-- cart_menu_detail.html页面国际化 -->
+	<entry key="sms.cart_menu_detail.delete">ลงทิ้ง</entry><!--删除 -->
+	<entry key="sms.cart_menu_detail.shoppingcart_price">ราคารวมในตระกร้าสินค้า</entry><!-- 购物车总价： -->
+	<entry key="sms.cart_menu_detail.look_ shoppingcart">เรียกดูตระกร้าสินค้า</entry><!--查看我的购物车 -->
+	<entry key="sms.cart_menu_detail.shoppingcart_no_goods">ยังไม่มีสินค้าฝฃใสตระกร้าสินค้า</entry><!--购物车还没有商品! -->
+
+	<!-- close.html页面国际化 -->
+	<entry key="sms.close.home_page">หน้าแรก</entry><!-- 首页 -->
+	<entry key="sms.close.recruiting_talent">รับสมัครงาน</entry><!-- 招聘英才 -->
+	<entry key="sms.close.advertising_cooperation">การร่วมงานของโฆษณา</entry><!--广告合作 -->
+	<entry key="sms.close.contact_us">ติดต่อเรา</entry><!--联系我们 -->
+	<entry key="sms.close.about">เกี่ยวดับ </entry><!--关于 -->
+
+
+	<!-- company_register.html页面国际化 -->
+	<entry key="sms.company_register.username_no_empty">กรุณากรอกชื่อของผู้ใช้</entry><!--用户名不能为空 -->
+	<entry key="sms.company_registervity.special_characters">ไม่อนุญาตให้ใช้เครื่องหมายพิเศษ</entry><!--不可使用特殊字符 -->
+	<entry key="sms.company_register.username_exists">ชื่อผู้ใช้มีอยู่แล้ว</entry><!--用户名已存在 -->
+	<entry key="sms.company_register.password_no_empty">กรุณากรอกรหัสผ่าน</entry><!-- 密码不能为空 -->
+	<entry key="sms.company_register.password_too_short">จำนวนรหัสผ่านต้องไม่น้อยกว่า {0} คำ</entry><!--密码不能小于{0}个字符 -->
+	<entry key="sms.company_register.password_too_long">จำนวนรหัสผ่านต้องไม่เกิน{0}คำ</entry><!--密码不能大于{0}个字符 -->
+	<entry key="sms.company_register.repeat_password_not_empty">กรุณากรอกยืนยันรหัสผ่านอีกครั้ง</entry><!--重复密码不能为空 -->
+	<entry key="sms.company_register.passwords_no_match">รหัสผ่านไม่ตรงกัน</entry><!-- 两次输入密码不一致 -->
+	<entry key="sms.company_register.choose_department">กรุณาเลือกหน่วยงานที่สังกัด</entry><!-- 请选择所在部门 -->
+	<entry key="sms.company_register.company_name_no_empty">กรุณากรอกชื่อบริษัท</entry><!--公司名称不能为空 -->
+	<entry key="sms.company_register.company_address_no_empty">กรุณากรอกที่อยู่ของบริษัท</entry><!--公司地址不能为空 -->
+	<entry key="sms.company_register.telephone_no_emtpy">กรุณากรอกเบอร์โทรศัพท์ของผู้ติดต่อ</entry><!-- 联系人电话不能为空 -->
+	<entry key="sms.company_register.company_located">กรุณาเลือกสถานที่ภูมิภาคของที่ตั้งบริษัท</entry><!-- 请选择公司所在地 -->
+	<entry key="sms.company_register.contact_name_no_empty">กรุณากรอกชื่อผู้ติดต่อ</entry><!-- 联系人姓名不能为空 -->
+	<entry key="sms.company_register.email_no_empty">กรุณากรอกอีเมล์</entry><!-- email不能为空 -->
+	<entry key="sms.company_register.email_format_no_right">รูปแบบอีเมล์ไม่ถูกต้อง</entry><!--email格式不正确 -->
+	<entry key="sms.company_register.email_exists">อีเมล์นี้มีอยู่แล้ว</entry><!--该email已经存在 -->
+	<entry key="sms.company_register.accept_agreement">กรุณาตอบรับข้อตกลงของผู้ใช้</entry><!--请接受用户协议 -->
+	<entry key="sms.company_register.verification_no_empty">กรุณากรอกรหัสยืนยันตัวตน</entry><!--验证码不能为空 -->
+	<entry key="sms.company_register.verification_no_right">รหัสยืนยันตัวตนไม่ถูกต้อง</entry><!-- 验证码不正确 -->
+	<entry key="sms.company_register.choose">กรุณาเลือก</entry><!-- 请选择 -->
+	<entry key="sms.company_register.already_registered">ฉันสมัครสมาชิกเรียบร้อยแล้ว,กำลัง.....</entry><!--我已经注册，现在就 -->
+	<entry key="sms.company_register.login">เข้าสู่ระบบ</entry><!--登录 -->
+	<entry key="sms.company_register.individual_user_registration">ลงทะเบียนแบบบุคคล</entry><!--个人用户注册 -->
+	<entry key="sms.company_register.enterprise_user_registration">ลงทะเบียนแบบองค์กร</entry><!--企业用户注册 -->
+	<entry key="sms.company_register.welcome_register">ยินดีต้อนรับทุกท่านสมัครเป็นสมาชิกแบบองค์กร</entry><!--欢迎注册成为企业用户 -->
+	<entry key="sms.company_register.considerate_service">บริการดีเยี่ยม</entry><!--周到服务 -->
+	<entry key="sms.company_register.customer_service">ทำรายการสั่งซื้อแล้ว,จะมีเจ้าหน้าที่ให้บริการลูกค้าเฉพาะทางดูแล</entry><!--1.订单下达后，客服专员服务； -->
+	<entry key="sms.company_register.courier_service">ช่องทางด่วนสีเขียวทางขนส่ง,เป็นบริการพิเศษของทางขนส่ง</entry><!--2.快递绿色通道，专属快递服务； -->
+	<entry key="sms.company_register.first_shipment">ไม่มีการค้างรายการสั่งซื้อสินค้าจัดส่งทันที</entry><!--3.零订单积压，第一时间发货； -->
+	<entry key="sms.company_register.five_privilege">สิทธิพิเศษ 5 ประเภท</entry><!--专项五大特权 -->
+	<entry key="sms.company_register.payment_flexible">1.รูปแบบการชำระเงินมีหลากหลายช่องทาง</entry><!--1. 支付方式更灵活； -->
+	<entry key="sms.company_register.full_tickets">2.ใบเสร็จมูลค่าเพิ่มแบบจำนวนเต็ม</entry><!--2. 全款全额增值税票； -->
+	<entry key="sms.company_register.preferential_price">จัดซื้อสินค้ารายใหญ่,จะมีส่วนลดจำนวนมาก</entry><!-- 3. 大批采购，价格再优惠； -->
+	<entry key="sms.company_register.car_distribution">รายการสั่งซื้อรายใหญ่,จะมีการขนส่งเฉพาะให้</entry><!-- 4. 大额订单，专车配送； -->
+	<entry key="sms.company_register.amount_coupons">สามารถใช้คูปองส่วนลดที่มีมูลค่าจำนวนมาก</entry><!--5. 可享受大金额优惠券。 -->
+	<entry key="sms.company_register.application_requirements">เงื่อนไขการยื่นคำร้อง</entry><!-- 申请条件 -->
+	<entry key="sms.company_register.legal">ต้องเป็นหน่วยงานหรือบริษัทที่สามารถแสดงใบอนุญาตประกอบกิจการอย่างถูกต้องและบัตรประชาชนของกรรมการลูกค้าที่ใช้สอยจำนวน 1 หมื่นหยวน หรือมากกว่านั้นต่อครั้งหรือเป็นลูกค้าจัดซื้อสินค้า 1 แสนหยวนขึ้นไป</entry><!-- 必须是能提供合法的营业执照及法人代表身份证的单位或公司，单次消费金额在10000元（含）以上或年采购10万元以上客户。 -->
+	<entry key="sms.company_register.account_information">ข้อมูลบัญชี</entry><!--账户信息 -->
+	<entry key="sms.company_register.account_name">ชื่อบัญชี</entry><!-- 账户名 -->
+	<entry key="sms.company_register.set_password">กรุณาตั้งค่ารหัสผ่าน</entry><!--请设置密码 -->
+	<entry key="sms.company_register.confirm_password">กรุณายืนยันรหัสผ่าน</entry><!-- 请确认密码 -->
+	<entry key="sms.company_register.contact_information">ข้อมูลติดต่อ</entry><!--联系人信息 -->
+	<entry key="sms.company_register.contact_name">ชื่อนามสกุลของผู้ติดต่อ</entry><!--联系人姓名 -->
+	<entry key="sms.company_register.at_department">หน่วยงานที่สังกัด</entry><!-- 所在部门 -->
+	<entry key="sms.company_register.office">สำนักงานออฟฟิต</entry><!-- 办公室 -->
+	<entry key="sms.company_register.marketing_department">ฝ่ายการตลาด</entry><!-- 市场部 -->
+	<entry key="sms.company_register.purchasing_department">ฝ่ายจัดซื้อ</entry><!--采购部 -->
+	<entry key="sms.company_register.technical_department">ฝ่ายเทคนิค</entry><!-- 技术部 -->
+	<entry key="sms.company_register.human_department">ฝ่ายทรัพยาการบุคคล</entry><!-- 人力资源部 -->
+	<entry key="sms.company_register.fixed_telephone">เบอร์โทรศัพท์ประจำ</entry><!-- 固定电话 -->
+	<entry key="sms.company_register.mobile_phone">มือถือ</entry><!-- 手机 -->
+	<entry key="sms.company_register.contact_email">อีเมล์ของผู้ติดต่อ</entry><!-- 联系人邮箱 -->
+	<entry key="sms.company_register.company_information">ข้อมูลบริษัท</entry><!--公司信息 -->
+	<entry key="sms.company_register.company_name">ชื่อบริษัท</entry><!-- 公司名称 -->
+	<entry key="sms.company_register.company_located">สถานที่ภูมิภาคของที่ตั้ง</entry><!-- 公司所在地 -->
+	<entry key="sms.company_register.company_address">ที่อยู่ของบริษัท</entry><!-- 公司地址 -->
+	<entry key="sms.company_register.buy_type">ประเภทการจัดซื้อ/วัตถุประสงค์การใช้</entry><!-- 购买类型/用途 -->
+	<entry key="sms.company_register.it_equipment">อุปกรณ์ IT</entry><!--IT设备 -->
+	<entry key="sms.company_register.digital_communications">การสื่อสารแบบดิจิตอล</entry><!--数码通讯 -->
+	<entry key="sms.company_register.office_consumables">เครื่องใช้สำนักงาน วัสดุสิ้นเปลือง</entry><!--办公用品耗材 -->
+	<entry key="sms.company_register.home_appliance">เครื่องใช้ไฟฟ้าชิ้นใหญ่</entry><!--大家电 -->
+	<entry key="sms.company_register.government_procurement">โครงการการร่วมมือ-การจัดซื้อของรัฐบาล</entry><!-- 项目合作-政府采购 -->
+	<entry key="sms.company_register.company_web_site">เว็บไซต์ของบริษัท</entry><!-- 公司网址 -->
+	<entry key="sms.company_register.number_companies">จำนวนคนขององค์กร</entry><!--企业人数 -->
+	<entry key="sms.company_register.more_than_1000">มากกว่า 1000 คน</entry><!-- 1000以上 -->
+	<entry key="sms.company_register.company_industry">ประเภทธุกกิจของบริษัท</entry><!--公司行业 -->
+	<entry key="sms.company_register.electronic_commerce">อินเตอร์เน็ต/อีคอมเมิร์ช</entry><!-- 互联网/电子商务 -->
+	<entry key="sms.company_register.tourism_hotel">ท่องเที่ยว/โรงแรม</entry><!-- 旅游/酒店 -->
+	<entry key="sms.company_register.legal_services">กฎหมาย /บริการ</entry><!-- 法律/服务 -->
+	<entry key="sms.company_register.media_communications">สื่อมวลชน/การกระจายข้อมูล</entry><!--媒体/传播 -->
+	<entry key="sms.company_register.computer_software">ซอฟแวร์ของคอมพิวเตอร์</entry><!-- 计算机软件 -->
+	<entry key="sms.company_register.financial_statistics">การเงิน/สถิติ</entry><!-- 财务/统计 -->
+	<entry key="sms.company_register.other">อื่นๆ</entry><!--其他 -->
+	<entry key="sms.company_register.company_nature">ลักษณะของบริษัท</entry><!--公司性质 -->
+	<entry key="sms.company_register.government_institutions">หน่วยงานของรัฐบาล/หน่วยงานเอกชน</entry><!-- 政府机关/事业单位 -->
+	<entry key="sms.company_register.state_run">ของรัฐบาล</entry><!--国营 -->
+	<entry key="sms.company_register.private_run">ของเอกชน</entry><!--私营 -->
+	<entry key="sms.company_register.sino_foreign">การลงทุนระหว่างจีนกับชาวต่างชาติ</entry><!--中外合资 -->
+	<entry key="sms.company_register.foreign">ทุนต่างชาติ</entry><!--外资 -->
+	<entry key="sms.company_register.xxx">อื่นๆ</entry><!--其他 -->
+	<entry key="sms.company_register.verification_code">รหัสยืนยันตัวตน</entry><!--验证码： -->
+	<entry key="sms.company_register.read_captcha">รหัสยืนยันตัวตนแบบเสียง</entry><!-- 朗读验证码 -->
+	<entry key="sms.company_register.read_agreed">ฉันได้อ่านข้อความเรียบร้อยและยินยอมตามข้อตกลง</entry><!-- 我已阅读并同意 -->
+	<entry key="sms.company_register.shopping_agreement">ข้อตกลงบริการออนไลน์ของมอลล์</entry><!-- 《商城在线服务协议》 -->
+	<entry key="sms.company_register.registration_agreement">ข้อตกลงการลงทะเบียนของผู้ใช้</entry><!-- 用户注册协议 -->
+	<entry key="sms.company_register.agree_continue">ยินยอมและทำขั้นตอนต่อไป</entry><!--同意并继续 -->
+	
+	<entry key="sms.company_register.enterprise_register">ลงทะเบียนแบบบริษัท</entry><!--企业注册 -->
+	<entry key="sms.company_register.second_get">หลังจาก วินาทีแล้วต้องขอใหม่</entry><!--秒后重新获取 -->
+	<entry key="sms.company_register.phone_not_null">เบอร์มือถือไม่สามารถเว้นว่าง</entry><!--手机号码不能为空！ -->
+	<entry key="sms.company_register.phone_register">เบอร์มือถือเคยลงทะเบียนแล้ว</entry><!--手机号码已被注册 -->
+	<entry key="sms.company_register.re_send">ส่งรหัสยืนยันใหม่</entry><!--重新发送验证码 -->
+	<entry key="sms.company_register.check_code_not_null">รหัสยืนยันมือถือไม่สามารถเว้นว่าง</entry><!--手机验证码不能为空 -->
+	<entry key="sms.company_register.check_code_uncorrect">รูปแบบรหัสยืนยันผิดพลาด</entry><!--验证码格式错误 -->
+	<entry key="sms.company_register.timeout">รหัสยืนยันผิดพลาดหรือหมดเวลามีผล</entry><!--验证码错误或者失效 -->
+	<entry key="sms.company_register.phone_format_uncorrect">รูปแบบเบอร์มือถือไม่ถูกต้อง</entry><!--手机号码格式不正确 -->
+	<entry key="sms.company_register.this_register">เบอร์มือถือเคยสมัครแล้ว</entry><!--此号码已被注册 -->
+	<entry key="sms.company_register.send_code">ส่งรหัสยืนยัน</entry><!--发送验证码 -->
+	<entry key="sms.company_register.register_register">ลงทะเบียนทันที</entry><!--立即注册-->
+	
+	
+
+	<!-- doc.html页面国际化 -->
+	<entry key="sms.doc.registration_agreement">ข้อตกลงการลงทะเบียนของผู้ใช้</entry><!--用户注册协议 -->
+	<entry key="sms.doc.article_classification">ประเภทข้อความ</entry><!-- 文章分类 -->
+	<entry key="sms.doc.latest_news">ข่าวสารล่าสุด</entry><!--最新新闻 -->
+	<entry key="sms.doc.current_position">สถานที่ปัจจุบัน</entry><!-- 当前位置： -->
+	<entry key="sms.doc.home_page">หน้าแรก</entry><!--首页 -->
+
+
+	<!-- error.html页面国际化 -->
+	<entry key="sms.error.system_prompt">- คำแจ้งเตือนจากระบบ</entry><!-- 系统提示 -->
+
+
+	<!-- exception.html页面国际化 -->
+	<entry key="sms.exception.exception_prompt">คำแจ้งเตือนการขัดข้องของระบบ</entry><!--系统异常提示 -->
+	<entry key="sms.exception.system_abnormal">ระบบขัดข้อง</entry><!--系统出现异常！ -->
+
+	<!-- floor.html页面国际化 -->
+	<entry key="sms.floor.sold">ขายแล้ว</entry><!--已售 -->
+	<entry key="sms.floor.a">ชิ้น</entry><!--件 -->
+
+	<!-- footer.html页面国际化 -->
+	<entry key="sms.footer.return_home_page">กลับไปหน้าแรก</entry><!-- 返回主页 -->
+	<entry key="sms.footer.return_top">กลับไปข้างบน</entry><!-- 返回顶部 -->
+	<entry key="sms.footer.tyt_version">ลิขสิทธิ์โดย บริษัท ไทยี่เถา จำกัด</entry><!--广州泰易淘网络科技有限公司  版权所有-->
+
+
+	<!-- forget common国际化内容 -->
+	<entry key="sms.forget.retrieve_password">กู้คืนรหัสผ่าน</entry><!--找回密码 -->
+	<entry key="sms.forget.fill_account_name">กรอกชื่อผู้ใช้</entry><!-- 填写账户名 -->
+	<entry key="sms.forget.authenticate">ยืนยันตัวตน</entry><!-- 验证身份 -->
+	<entry key="sms.forget.set_new_password">ตั้งค่ารหัสผ่านใหม่</entry><!--设置新密码 -->
+	<entry key="sms.forget.complete">เรียบร้อย</entry><!--完成 -->
+	<entry key="sms.forget.submit">ตกลง</entry><!--提交 -->
+	<entry key="sms.forget.next_step">ขั้นตอนถัดไป</entry><!--下一步 -->
+	
+	
+
+	<!-- forget1.html页面国际化 -->
+	<entry key="sms.forget1.username_no_empty">กรุณากรอกชื่อผู้ใช้</entry><!--用户名不能为空 -->
+	<entry key="sms.forget1.verification_no_empty">กรอกรหัสยืนยันตัวตน</entry><!-- 验证码不能为空 -->
+	<entry key="sms.forget1.name_account">ชื่อบัญชี</entry><!-- 账户名称： -->
+	<entry key="sms.forget1.input">กรุณากรอกชื่อผู้ใช้/อีเมล์/เบอร์มือถือที่ผ่านการยืนยันตัวตนแล้ว</entry><!--请输入用户名/邮箱/已验证手机号 -->
+	<entry key="sms.forget1.verification">รหัสยืนยันตัวตน</entry><!--验证码 -->
+	<entry key="sms.forget1.first">ขั้นตอนที่ 1ลืมรหัสผ่าน </entry><!--找回密码第一步 -->
+	<entry key="sms.forget1.check_code_uncorrect">รหัสยืนยันไม่ถูกต้อง</entry><!--验证码不正确 -->
+
+	<!-- forget2.html页面国际化 -->
+	<entry key="sms.forget2.retrieve_password">ลืมรหัสผ่าน ขั้นตอนที่ 2</entry><!-- 找回密码第二步 -->
+	<entry key="sms.forget2.effective_verification">อีก......วินาทีท่านจะได้รับรหัสผ่านใหม่รหัสผ่านจะมีอายุการใช้งาน 30 นาที</entry><!-- 秒后可以重新获取,验证码30分钟有效 -->
+	<entry key="sms.forget2.system_busy">ระบบไม่ว่าง, การส่งข้อมูลไม่สำเร็จ</entry><!--系统繁忙，发送失败 -->
+	<entry key="sms.forget2.username">ชื่อผู้ใช้</entry><!--用户名： -->
+	<entry key="sms.forget2.receiving_mode">กรุณาเลือกวิธีการรับรหัสยืนยันตัวตน</entry><!-- 请选择验证码接收方式： -->
+	<entry key="sms.forget2.mail_received">รับรหัสผ่านทางอีเมล์</entry><!-- 邮箱接收 -->
+	<entry key="sms.forget2.verify_phone_reception">รับรหัสผ่านทางมือถือ</entry><!-- 验证手机接收 -->
+	<entry key="sms.forget2.get_verification">ได้รับรหัสยืนยันตัวตน</entry><!--获得验证码 -->
+	<entry key="sms.forget2.received_verification">รหัสยืนยันตัวตนที่ได้รับ….</entry><!-- 收到的验证码： -->
+	<entry key="sms.forget2.effective">รหัสยืนยันตัวตนมีอายุการใช้งาน 30 นาที</entry><!--验证码30分钟有效 -->
+
+	<!-- forget3.html页面国际化 -->
+	<entry key="sms.forget3.password_no_empty">กรุณากรอก รหัสผ่าน</entry><!-- 密码不能为空 -->
+	<entry key="sms.forget3.password_length_6">ความยาวของรหัสผ่าน , ต้องมีตั้งแต่ 6 ตัวอักษรขึ้นไป</entry><!--密码长度最小为6位字母 -->
+	<entry key="sms.forget3.repeat_password_no_empty">กรุณากรอกรหัสผ่านอีกครั้งหนึ่ง</entry><!--重复密码不能为空 -->
+	<entry key="sms.forget3.password_no_match">รหัสผ่านไม่ครบถ้วน</entry><!-- 两次输入密码不一致 -->
+	<entry key="sms.forget3.new_password">รหัสผ่านใหม่</entry><!-- 新密码： -->
+	<entry key="sms.forget3.repeat_password">ยืนยันรหัสผ่านใหม่อีกครั้ง</entry><!--重复密码： -->
+	<entry key="sms.forget3.update_password">แก้ไขรหัสผ่าน</entry><!--修改密码 -->
+	<entry key="sms.forget3.third">ขั้นตอนที่ 2 ลืมรหัสผ่าน</entry><!--找回密码第三步 -->
+	<entry key="sms.forget4.success">ขอคืนรหัสผ่านสำเร็จ</entry><!--找回密码成功-->
+	
+	<!-- goods_cart0.html页面国际化 -->
+	<entry key="sms.goods_cart0.goods_add_cart">สินค้าหยิบใส่ตะกร้าสำเร็จ</entry><!-- 商品已经成功加入购物车 -->
+	<entry key="sms.goods_cart0.continue_shopping">เลือกซื้อสินค้าเพิ่มเติม</entry><!-- 继续购物 -->
+	<entry key="sms.goods_cart0.settlement">ไปชำระค่าสินค้าที่ตระกร้าสินค้า</entry><!-- 去购物车结算 -->
+	<entry key="sms.goods_cart0.other_goods">ท่านอาจจะยังต้องการสินค้ารายการอื่น</entry><!-- 您可能还需要其他商品 -->
+	<entry key="sms.goods_cart0.also_buy">ผู้ใช้ที่ซื้อสินค้านี้ยังซื้อ</entry><!-- 购买该商品的用户还购买了-->
+
+	<!-- goods_cart1.html页面国际化 -->
+	<entry key="sms.goods_cart1.my_cart">ตะกร้าสินค้า</entry><!-- 我的购物车 -->
+	<entry key="sms.goods_cart1.Insufficient_inventory">สต๊อกสินค้าไม่พอ,กรุณากรอกจำนวนใหม่!</entry><!--库存不足，请重新选择数量！ -->
+	<entry key="sms.goods_cart1.choose_number">จำนวนสต๊อกกรุ๊ปบายไม่พอ,กรุณาเลือกจำนวนใหม่อีกครั้ง</entry><!--团购库存不足，请重新选择数量！ -->
+	<entry key="sms.goods_cart1.collect_their_goods">ไม่สามารถบันทึกสินค้าที่ขายเอง เป็นสินค้าที่ชื่นชอบ</entry><!--不能收藏自己的商品 -->
+	<entry key="sms.goods_cart1.collection_success">บันทึกสินค้าเป็นสินค้าที่ชื่นชอบสำเร็จ</entry><!-- 收藏成功! -->
+	<entry key="sms.goods_cart1.collect_the_goods">ท่านเคยบันทึกสินค้ารายการนี้เป็นสินค้าที่ชื่นชอบแล้ว</entry><!--您已经收藏过该商品! -->
+	<entry key="sms.goods_cart1.login_collect">ต้องเข้าสู่ระบบก่อนถึงจะบันทึกสินค้าที่ชื่นชอบได้,ท่านจะเข้าสู่ระบบตอนนี้หรือไม่</entry><!--登录后才可收藏商品，现在登录？ -->
+	<entry key="sms.goods_cart1.xxx">ตะกร้าสินค้า</entry><!--1.我的购物车 -->
+	<entry key="sms.goods_cart1.check_order_information">กรุณากรอกข้อมูลการตรวจสอบรายการสั่งซื้อสินค้า</entry><!--2.填写核对订单信息 -->
+	<entry key="sms.goods_cart1.order_submitted">ส่งรายการสั่งซื้อสินค้าสำเร็จ</entry><!--3.成功提交订单 -->
+	<entry key="sms.goods_cart1.xxx">ตะกร้าสินค้า</entry><!--我的购物车 -->
+	<entry key="sms.goods_cart1.all">เลือกสินค้าทั้งหมด</entry><!--全选 -->
+	<entry key="sms.goods_cart1.goods_name">ชื่อสินค้า</entry><!--商品名称 -->
+	<entry key="sms.goods_cart1.unit_price">ราคาต่อหน่วย</entry><!--单价 -->
+	<entry key="sms.goods_cart1.number">จำนวน</entry><!--数量 -->
+	<entry key="sms.goods_cart1.subtotal">ยอดรวมย่อย (หยวน)</entry><!-- 小计(元) -->
+	<entry key="sms.goods_cart1.operation">การดำเนินการ</entry><!-- 操作 -->
+	<entry key="sms.goods_cart1.bulk">(กรุ๊ปบาย)</entry><!--(团购) -->
+	<entry key="sms.goods_cart1.sales_promotion">(การส่งเสริมการขาย)</entry><!--(促销) -->
+	<entry key="sms.goods_cart1.collection">การบันทึกสินค้าที่ชื่นชอบ</entry><!-- 收藏 -->
+	<entry key="sms.goods_cart1.delete">ลบทิ้ง</entry><!--删除 -->
+	<entry key="sms.goods_cart1.goods_total_price">ยอดเงินรวมของสินค้า (ไม่รวมคาส่ง)</entry><!--商品总价（不含运费）： -->
+	<entry key="sms.goods_cart1.yuan">.....หยวน</entry><!--元 -->
+	<entry key="sms.goods_cart1.member_login">เข้าสูระบบสมาชิก</entry><!--会员登录 -->
+	<entry key="sms.goods_cart1.settle_accounts">ไปชำระเงิน</entry><!-- 去结算 -->
+	<entry key="sms.goods_cart1.cart_empty">ตะกร้าสินค้าของท่านยังไม่มีรายการสินค้า,กลับไปเลือกซื้อสินค้า</entry><!--您的购物车还是空的，赶紧行动吧！ -->
+	<entry key="sms.goods_cart1.view_order">เรียกดูรายการสั่งซื้อสินค้า</entry><!--查看订单 -->
+	<entry key="sms.goods_cart1.or">หรือ</entry><!-- ，或者是 -->
+	<entry key="sms.goods_cart1.casually">เลือกดูสินค้าเรื่อยๆ</entry><!-- 随便看看 -->
+	<entry key="sms.goods_cart1.other_goods">ท่านอาจจะยังต้องการสินค้ารายการอื่น</entry><!-- 您可能还需要其他商品 -->
+	<entry key="sms.goods_cart1.you_can">ท่านสามารถ</entry><!--您可以-->
+
+	<!-- goods_cart2.html页面国际化 -->
+	<entry key="sms.goods_cart2.order_confirmation">ยืนยันรายการสั่งซื้อสินค้า</entry><!--订单确认 -->
+	<entry key="sms.goods_cart2.preferential">ส่วนลด</entry><!--优惠 -->
+	<entry key="sms.goods_cart2.address_no_right">ข้อมูลที่อยู่ไม่ถูกต้อง</entry><!--地址信息不正确 -->
+	<entry key="sms.goods_cart2.order_error">ข้อมูลรายการสั่งซื้อสินค้าไม่ถูกต้องให้ทำรายการสั่งซื้อสินค้าอีกครั้ง</entry><!-- 订单信息错误！请重新下单 -->
+	<entry key="sms.goods_cart2.my_cart">ตะกร้าสินค้า</entry><!-- 1.我的购物车 -->
+	<entry key="sms.goods_cart2.check_order">กรอกข้อมูลการตรวจสอบรายการสั่งซื้อสินค้า</entry><!--2.填写核对订单信息 -->
+	<entry key="sms.goods_cart2.submit_order">ส่งรายการสั่งซื้อสินค้าสำเร็จ</entry><!--3.成功提交订单 -->
+	<entry key="sms.goods_cart2.shipping_address">ข้อมูลที่อยู่ของผู้รับสินค้า</entry><!-- 收货地址信息 -->
+	<entry key="sms.goods_cart2.add_address">เพิ่มที่อยู่ใหม่</entry><!-- 新增地址 -->
+	<entry key="sms.goods_cart2.address_management">การจัดการที่อยู่</entry><!--地址管理 -->
+	<entry key="sms.goods_cart2.edit">แก้ไข</entry><!--编辑 -->
+	<entry key="sms.goods_cart2.delete">ลบทิ้ง</entry><!--删除 -->
+	<entry key="sms.goods_cart2.no_information">ยังไม่มีข้อมูลใด</entry><!-- 暂无信息 -->
+	<entry key="sms.goods_cart2.update_goods">กลับไปเปลี่ยนสินค้าในตะกร้าสินค้า</entry><!--回购物车修改商品 -->
+	<entry key="sms.goods_cart2.order_information">ข้อมูรายละเอียดรายการสั่งซื้อสินค้า</entry><!-- 订单详细信息 -->
+	<entry key="sms.goods_cart2.goods_name">ชื่อสินค้า</entry><!--商品名称 -->
+	<entry key="sms.goods_cart2.goods_price">ราคาต่อหน่วยของสินค้า</entry><!--商品单价 -->
+	<entry key="sms.goods_cart2.number">จำนวน</entry><!-- 数量 -->
+	<entry key="sms.goods_cart2.product_specifications">ขนาดของสินค้า</entry><!--商品规格 -->
+	<entry key="sms.goods_cart2.cost_subtotal">ค่าใช้จ่ายร่วมย่อย</entry><!--费用小计 -->
+	<entry key="sms.goods_cart2.proprietary_products">สินค้าขายเอง</entry><!--自营商品 -->
+	<entry key="sms.goods_cart2.store">ร้านค้า</entry><!-- 店铺 -->
+	<entry key="sms.goods_cart2.sales_promotion">การส่งเสริมการขาย</entry><!-- （促销） -->
+	<entry key="sms.goods_cart2.bulk">กรุ๊ปบาย</entry><!-- （团购） -->
+	<entry key="sms.goods_cart2.a">(ชิ้น)</entry><!-- （件） -->
+	<entry key="sms.goods_cart2.message_businesses">ข้อความถึงผู้ขาย</entry><!--给商家留言： -->
+	<entry key="sms.goods_cart2.shipping_method">วิธีการจัดส่ง</entry><!--运送方式： -->
+	<entry key="sms.goods_cart2.invoice_type">ประเภทใบเสร็จ</entry><!--发票类型： -->
+	<entry key="sms.goods_cart2.commercial_invoice">ใบเสร็จทั่วไป</entry><!--普通发票 -->
+	<entry key="sms.goods_cart2.vat_invoice">ใบเสร็จภาษีมูลค่าเพิ่ม</entry><!--增值税发票 -->
+	<entry key="sms.goods_cart2.invoice_head">หัวใบเสร็จ</entry><!--发票抬头： -->
+	<entry key="sms.goods_cart2.personal">บุคคล</entry><!--个人 -->
+	<entry key="sms.goods_cart2.use_coupons">ใช้คูปองส่วนลด</entry><!--使用优惠券 -->
+	<entry key="sms.goods_cart2.available_coupons">สามารถใช้คูปองส่วนลด</entry><!--可用优惠劵 -->
+	<entry key="sms.goods_cart2.select_coupon">กรุณาเลือกคูปองส่วนลด</entry><!-- 请选择优惠券 -->
+	<entry key="sms.goods_cart2.store_total_cost">ค่าใช้จ่ายรวมของร้านค้า</entry><!-- 店铺合计费用： -->
+	<entry key="sms.goods_cart2.amount_goods">ยอดเงินของสินค้า</entry><!-- 商品金额：¥ -->
+	<entry key="sms.goods_cart2.coupons">คูปองส่วนลด</entry><!--优惠券：¥ -->
+	<entry key="sms.goods_cart2.freight">ค่าส่ง</entry><!-- 运费：¥ -->
+	<entry key="sms.goods_cart2.amount_payable">ยอดเงินที่ต้องชำระ</entry><!-- 应付金额： -->
+	<entry key="sms.goods_cart2.commit_order">ยื่นเสนอในสั่งซื้อ</entry><!-- 提交订单-->
+
+	<!-- goods_cart3.html页面国际化 -->
+	<entry key="sms.goods_cart3.shopping_cart">ตะกร้าสินค้า</entry><!--购物车 -->
+	<entry key="sms.goods_cart3.my_cart">ตะกร้าสินค้า</entry><!--1.我的购物车 -->
+	<entry key="sms.goods_cart3.check_order">กรอกข้อมูลการตรวจสอบรายการสั่งซื้อสินค้า</entry><!--2.填写核对订单信息 -->
+	<entry key="sms.goods_cart3.submit_order">ส่งรายการสั่งซื้อสินค้าสำเร็จ</entry><!--3.成功提交订单 -->
+	<entry key="sms.goods_cart3.order_success">ส่งรายการสั่งซื้อสินค้าสำเร็จ</entry><!--订单提交成功 -->
+	<entry key="sms.goods_cart3.method_payment">รายการสั่งซื้อสินค้าของท่านบันทึกสำเร็จ,กรุณาชำระเงินด้วยวิธีของท่านที่ต้องการ</entry><!-- 您的订单已成功生成，选择您想用的支付方式进行支付 -->
+	<entry key="sms.goods_cart3.amount_payable">ยอดเงินที่ต้องชำระ</entry><!--应付金额： -->
+	<entry key="sms.goods_cart3.user_center">ท่านสามารถไปที่ในศูนย์รวมผู้ใช้</entry><!--您可以在用户中心 -->
+	<entry key="sms.goods_cart3.xxx">ท่านสามารถไปที่ในศูนย์รวมผู้ใช้</entry><!-- 您可以在用户中心 -->
+	<entry key="sms.goods_cart3.my_order">ใบสั่งซื้อ</entry><!-- 我的订单 -->
+	<entry key="sms.goods_cart3.look_order">เลือกรายการสั่งซื้อสินค้า</entry><!--查看订单 -->
+	<entry key="sms.goods_cart3.choose_payment">วิธีชำระเงินที่ท่านสามารถเลือกได้</entry><!-- 您可以选择的付款方式 -->
+	<entry key="sms.goods_cart3.online_payment">ชำระเงินออนไลน์</entry><!-- 在线支付 -->
+	<entry key="sms.goods_cart3.cash_on_delivery">ชำระเงินปลายทาง</entry><!-- 货到付款 -->
+	<entry key="sms.goods_cart3.advance_payment">ชำระเงินแบบมัดจำ</entry><!-- 预存款支付 -->
+	<entry key="sms.goods_cart3.confirm_payment">ยืนยังการชำระเงิน</entry><!-- 确认支付 -->
+	<entry key="sms.goods_cart3.pay_remind">การแจ้งชำระเงิน</entry><!--支付提醒 -->
+	<entry key="sms.goods_cart3.complete_payment">ชำระเงินเรียบร้อยแล้ว</entry><!-- 已经完成支付！ -->
+	<entry key="sms.goods_cart3.payment_problems">การชำระเงินขัดข้อง</entry><!-- 支付出现问题！ -->
+	
+	<entry key="sms.goods_cart3.pay">สแกน QR code โดยชำระ</entry><!--扫描二维码支付-->
+	<entry key="sms.goods_cart3.weixin_pay_tip">แจ้งเตือนการชำระผ่านวีแชท</entry><!-- 微信支付提醒 -->
+	<entry key="sms.goods_cart3.please_use">กรุณาใช้วีแชทสแกน</entry><!-- 请使用微信扫一扫 -->
+
+
+	<!-- goods_class.html页面国际化 -->
+	<entry key="sms.goods_class.goods_classification1">สินค้าทั้งหมด </entry><!-- 所有商品分类 -->
+	<entry key="sms.goods_class.goods_classification2">สินค้าทั้งหมด</entry><!--全部商品分类 -->
+	<entry key="sms.goods_class.all_brand">แบรนด์ทั้งหมด</entry><!--全部品牌 -->
+	<entry key="sms.goods_class.all_goods">สินค้าทั้งหมด</entry><!--全部商品 -->
+	<entry key="sms.goods_class.goods_classification3">ประเภททั้งหมดของสินค้า</entry><!--商品全部分类 -->
+
+
+
+	<!-- goods_list_bottom.html页面国际化 -->
+	<entry key="sms.goods_list_bottom.recent_browse">การเยี่ยมชมล่าสุด</entry><!--最近浏览 -->
+	<entry key="sms.goods_list_bottom.guess_you_like">คาดว่าท่านจะชื่นชอบ….โดยใช้ข้อมูลประวัติการเยี่ยมชมของท่าน</entry><!--根据浏览猜你喜欢 -->
+	<entry key="sms.goods_list_bottom.existing">มีอยู่แล้ว………..</entry><!--已有 -->
+	<entry key="sms.goods_list_bottom.evaluate">คน ให้ความพึงพอใจ</entry><!--人评价 -->
+
+
+	<!-- goods_share.html页面国际化 -->
+	<entry key="sms.goods_share.system_prompt">คำแจ้งเตือนจากระบบ</entry><!-- 系统提示 -->
+	<entry key="sms.goods_share.too_long">จำนวนที่สามารถพิมพ์ได้ต้องไม่เกิน 140 ตัวอักษร</entry><!--输入字数不能多于140个字！ -->
+	<entry key="sms.goods_share.too_short">จำนวนที่พิมพ์ต้องไม่น้อยกว่า 5 อักษร</entry><!-- 请输入不少于5个字！ -->
+	<entry key="sms.goods_share.release_success">ประกาศสำเร็จ</entry><!--发布成功！ -->
+	<entry key="sms.goods_share.release_failure">ประกาศไม่สำเร็จ</entry><!-- 发布失败 -->
+	<entry key="sms.goods_share.goods_name">ชื่อสินค้า</entry><!-- 商品名称 -->
+	<entry key="sms.goods_share.market_price">ราคาตลาด</entry><!-- 市场价格 -->
+	<entry key="sms.goods_share.store_price">ราคาในร้านค้า</entry><!--店铺价格 -->
+	<entry key="sms.goods_share.share">แบ่งปัน</entry><!-- 分享 -->
+
+
+	<!-- group_evaluate.html页面国际化 -->
+	<entry key="sms.group_evaluate.product_evaluation">ความพึงพใจของสินค้า</entry><!--商品评价 -->
+	<entry key="sms.group_evaluate.rating">ระดับความพึงพอใจ</entry><!--好评度： -->
+	<entry key="sms.group_evaluate.high_praise">ดี</entry><!-- 好评： -->
+	<entry key="sms.group_evaluate.evaluation">ปานกลาง</entry><!-- 中评： -->
+	<entry key="sms.group_evaluate.bad_review">ควรปรับปรุง</entry><!-- 差评： -->
+	<entry key="sms.group_evaluate.no_evaluation">ยังไม่มีความพึงพอใจ</entry><!--暂时没有评价 -->
+
+
+
+	<!-- group_head.html页面国际化 -->
+	<entry key="sms.group_head.xxx">ส่วนลดของกรุ๊ปบายสินค้าใช้ประจำวัน</entry><!--生活惠 -->
+	<entry key="sms.group_head.xxx">ส่วนลดกรุ๊ปบายของสินค้า</entry><!--商品惠 -->
+	<entry key="sms.group_head.again_later">ระบบยังไม่ว่าง กรุณาใช้งานภายหลัง</entry><!--系统繁忙，请稍后重试！ -->
+	<entry key="sms.group_head.bulk">กรุ๊ปบาย</entry><!--团购 -->
+	<entry key="sms.group_head.replace">เปลี่ยน</entry><!-- [更换] -->
+	<entry key="sms.group_head.national">ทั่วประเทศ</entry><!--全国 -->
+	<entry key="sms.group_head.commodity_hui">ส่วนลดกรุ๊ปบายของสินค้าที่ใช้ประจำวัน</entry><!-- 商品惠 -->
+	<entry key="sms.group_head.life_hui">ส่วนลดกรุ๊ปบายของสินค้า</entry><!--生活惠 -->
+	<entry key="sms.group_head.search">ค้นหา</entry><!--搜索 -->
+	<entry key="sms.group_head.shopping_settlement">ไปชำระเงินที่ตะกร้าสินค้า</entry><!-- 去购物车结算 -->
+	<entry key="sms.group_head.load">กำลังดาวน์โหลด กรุณารอสักครู่</entry><!--加载中，请稍后... -->
+	<entry key="sms.group_head.not_goods">ในรถเข็นยังไม่มีสินค้า</entry><!--购物车还没有商品! -->
+
+	<!-- group_life.html页面国际化 -->
+	<entry key="sms.group_life.bulk_information">ข่าวสารกรุ๊ปบาย</entry><!--团购信息 -->
+	<entry key="sms.group_life.classification">ประเภท</entry><!--分类： -->
+	<entry key="sms.group_life.no_limit">ไม่จำกัด</entry><!--不限 -->
+	<entry key="sms.group_life.sorting">เรียงลำดับ</entry><!-- 排序： -->
+	<entry key="sms.group_life.default">การยืนยันอัตโนมัติ</entry><!--默认 -->
+	<entry key="sms.group_life.price">ราคา</entry><!-- 价格 -->
+	<entry key="sms.group_life.discount">ส่วนลด</entry><!-- 折扣 -->
+	<entry key="sms.group_life.sales">จำนวนยอดขาย</entry><!--销量 -->
+	<entry key="sms.group_life.view_detailed">เรียกดูข้อมูลรายละเอียด</entry><!--查看详细 -->
+	<entry key="sms.group_life.sold">ขายไปแล้ว….</entry><!-- 已售出 -->
+
+
+	<!-- group_list.html页面国际化 -->
+	<entry key="sms.group_list.bulk_information">ข่าวสารกรุ๊ปบาย</entry><!--团购信息 -->
+	<entry key="sms.group_list.current_group">กรุ๊ปบายปัจจุบัน</entry><!--当前团购 -->
+	<entry key="sms.group_list.about_begin">กำลังจะเริ่มต้น</entry><!--即将开始 -->
+	<entry key="sms.group_list.past_bank">กรุ๊ปบายที่ผ่านมา</entry><!-- 往期团购 -->
+	<entry key="sms.group_list.xxx">กำลังจะเริ่มต้น</entry><!-- 即将开始 -->
+	<entry key="sms.group_list.remember_snap_up">ไปร่วมกิจกรรม ซื้อสินค้าทันทีนะ</entry><!--记得抢购哦 -->
+	<entry key="sms.group_list.original_price">ราคาเดิม</entry><!-- 原价: -->
+	<entry key="sms.group_list.discount">ส่วนลด</entry><!-- 折扣: -->
+	<entry key="sms.group_list.present_price">ราคาปัจจุบัน</entry><!--现价: -->
+	<entry key="sms.group_list.save">ประหยัด</entry><!--节省: -->
+	<entry key="sms.group_list.end">สิ้นสุดแล้ว</entry><!-- 已经结束 -->
+	<entry key="sms.group_list.next_time">รอรอบการสั่งซื้อสินค้าใหม่นะ</entry><!--期待下次吧 -->
+	<entry key="sms.group_list.bulk_end">ยังไม่มีกิจกรรมกรุ๊ปบายที่กำลังจะเริ่มต้น</entry><!--没有即将开始团购活动 -->
+	<entry key="sms.group_list.no_bulk">ไม่มีกิจกรรมกรุ๊ปบายเหมือนที่ผ่านมา</entry><!--没有往期团购活动 -->
+
+
+	<!-- group_nav.html页面国际化 -->
+	<entry key="sms.group_nav.all_goods_classification">สินค้าทั้งหมด</entry><!-- 全部商品分类 -->
+	<entry key="sms.group_nav.all_goods">สินค้าทั้งหมด</entry><!-- 全部商品 -->
+	<entry key="sms.group_nav.mall_homepage">หน้าแรกของมอลล์</entry><!--商城首页 -->
+	<entry key="sms.group_nav.commodity_hui">ส่วนลดกรุ๊ปบายของสินค้า</entry><!--商品惠 -->
+	<entry key="sms.group_nav.life_hui">ส่วนลดกรุ๊ปบายของสินค้าประจำวัน</entry><!--生活惠 -->
+
+	<!-- group_order.html页面国际化 -->
+	<entry key="sms.group_order.buyers">ลูกค้า</entry><!-- 买家 -->
+	<entry key="sms.group_order.product_price">ราคาสินค้า</entry><!--商品价格 -->
+	<entry key="sms.group_order.product_specifications">ขนาดสินค้า</entry><!--商品规格 -->
+	<entry key="sms.group_order.buy_number">จำนวนสินค้าที่สั่งซื้อ</entry><!-- 购买数量 -->
+	<entry key="sms.group_order.clinch_time">เวลาที่ทำรายการสั่งซื้อสินค้า</entry><!--成交时间 -->
+
+
+	<!-- group_view.html页面国际化 -->
+	<entry key="sms.group_view.bulk_information">ข่าวสารกรุ๊ปบาย</entry><!--团购信息 -->
+	<entry key="sms.group_view.day">วัน</entry><!--天 -->
+	<entry key="sms.group_view.hour">ชั่วโมง</entry><!--小时 -->
+	<entry key="sms.group_view.second">วินาที</entry><!-- 秒 -->
+	<entry key="sms.group_view.minutes">นาที</entry><!--分钟 -->
+	<entry key="sms.group_view.group_purchase_end">กรุ๊ปบายรอบนี้สิ้นสุดแล้ว</entry><!--该团购已结束 -->
+	<entry key="sms.group_view.immediately_regiment">กรุ๊ปบาย แบบเข้าร่วมทันที</entry><!--马上团 -->
+	<entry key="sms.group_view.sold_out">ขายหมดแล้ว</entry><!--已售完 -->
+	<entry key="sms.group_view.end">สิ้นสุดแล้ว</entry><!-- 已结束 -->
+	<entry key="sms.group_view.original_price">ราคาเดิม</entry><!--原价 -->
+	<entry key="sms.group_view.discount">ส่วนลด</entry><!--折扣 -->
+	<entry key="sms.group_view.fold">เปอร์เซ็นต์</entry><!-- 折 -->
+	<entry key="sms.group_view.save">ประหยัด</entry><!-- 节省 -->
+	<entry key="sms.group_view.group_purchase_success">กรุ๊ปบายสำเร็จ, ขายออกไปได้….</entry><!--团购成功，已售出 -->
+	<entry key="sms.group_view.share">แบ่งปันไปถึง</entry><!-- 分享到： -->
+	<entry key="sms.group_view.goods_introduce">คำแนะนำของสินค้า</entry><!-- 商品介绍 -->
+	<entry key="sms.group_view.goods_evaluation">ความพึงพอใจของสินค้า</entry><!--商品评价 -->
+	<entry key="sms.group_view.clinch_record">ประวัติข้อมูลการสั่งซื้อสินค้า</entry><!--成交记录 -->
+	<entry key="sms.group_view.hot_deals">กรุ๊ปบายยอดนิยม</entry><!--热门团购 -->
+	<entry key="sms.group_view.snap_up">ซื้อสินค้าทันที</entry><!-- 抢购 -->
+	<entry key="sms.group_view.sold">ขายออกไปได้แล้ว...</entry><!--已售出 -->
+
+
+	<!-- group.html页面国际化 -->
+	<entry key="sms.group.group_purchase_information">ข่าวสารกรุ๊ปบาย</entry><!--团购信息 -->
+	<entry key="sms.group.classification">ประเภท</entry><!--分类： -->
+	<entry key="sms.group.no_limit">ไม่จำกัด</entry><!--不限 -->
+	<entry key="sms.group.price">ราคา</entry><!--价格： -->
+	<entry key="sms.group.sorting">เรียงลำดับ</entry><!--排序： -->
+	<entry key="sms.group.default">ยืนยันแบบอัตโนมัติ</entry><!--默认 -->
+	<entry key="sms.group.price">ราคา</entry><!--价格 -->
+	<entry key="sms.group.discount">ส่วนลด</entry><!--折扣 -->
+	<entry key="sms.group.sales">จำนวนที่ขาย</entry><!--销量 -->
+	<entry key="sms.group.fold">เปอร์เซ็นต์</entry><!--折 -->
+	<entry key="sms.group.view_detailed">เรียกดูข้อมูลรายละเอียด</entry><!--查看详细 -->
+	<entry key="sms.group.sold">ขายออกไปแล้ว...</entry><!--已售出 -->
+
+	<!-- grouplife_view.html页面国际化 -->
+	<entry key="sms.grouplife_view.member_login">เข้าสู่ระบบสมาชิก</entry><!--会员登录 -->
+	<entry key="sms.grouplife_view.Immediately_regiment">กรุ๊ปบายแบบเข้าร่วมทันที</entry><!--马上团 -->
+	<entry key="sms.grouplife_view.sold_out">ขายหมดแล้ว</entry><!-- 已售完 -->
+	<entry key="sms.grouplife_view.ended">สิ้นสุดแล้ว</entry><!--已结束 -->
+	<entry key="sms.grouplife_view.original_price">ราคาเดิม</entry><!--原价 -->
+	<entry key="sms.grouplife_view.discount">ส่วนลด</entry><!-- 折扣 -->
+	<entry key="sms.grouplife_view.fold">เปอร์เซ็นต์</entry><!--折 -->
+	<entry key="sms.grouplife_view.save">ประหยัด</entry><!--节省 -->
+	<entry key="sms.grouplife_view.no_refund">ไม่สนับสนุนการคืนเงิน</entry><!--不支持退款 -->
+	<entry key="sms.grouplife_view.refund_any_ime">คืนเงินได้ทุกเวลาหลังจากซื้อสินค้าภายใน.....วัน</entry><!--天内随时退款 -->
+	<entry key="sms.grouplife_view.sold">ขายออกไปแล้ว</entry><!-- 已售出 -->
+	<entry key="sms.grouplife_view.share">แบ่งปันไปถึง</entry><!-- 分享到： -->
+	<entry key="sms.grouplife_view.goods_introduction">คำแนะนำขายสินค้า</entry><!--商品介绍 -->
+	<entry key="sms.grouplife_view.hot_a_ bulk">กรุ๊ปบายยอดนิยม</entry><!-- 热门团购 -->
+	<entry key="sms.grouplife_view.snap_up">ซื้อของแบบทันที</entry><!--抢购 -->
+	<entry key="sms.grouplife_view.sold">ขายออกไปแล้ว</entry><!--已售出 -->
+
+
+	<!-- head_ajax_usercenter.html页面国际化 -->
+	<entry key="sms.head_ajax_usercenter.hello">สวัสดีค่ะ/ครับ</entry><!--您好 -->
+	<entry key="sms.head_ajax_usercenter.exit_mall">ออกจากระบบ</entry><!-- 退出商城 -->
+	<entry key="sms.head_ajax_usercenter.usr_login">เข้าสู่ระบบผู้ใช้</entry><!-- 用户登录 -->
+	<entry key="sms.head_ajax_usercenter.for_goods">รอการรับสินค้า</entry><!--待收货 -->
+	<entry key="sms.head_ajax_usercenter.my_order">ใบสั่งซื้อ</entry><!-- 我的订单 -->
+	<entry key="sms.head_ajax_usercenter.payment_orders">รายการสินค้าที่รอการชำระเงิน</entry><!--待付款订单 -->
+	<entry key="sms.head_ajax_usercenter.buy_goods">สินค้าที่สั่งซื้อแล้ว</entry><!--已购买商品 -->
+	<entry key="sms.head_ajax_usercenter.browse_goods">สินค้าที่เยี่ยมชมล่าสุด</entry><!--最近浏览的商品 -->
+
+
+	<!-- head.html页面国际化 -->
+	<entry key="sms.head.load">กรุณารอสักครู่</entry><!-- 加载中，请稍后... -->
+	<entry key="sms.head.no_goods">ไม่มีสินค้าในตะกร้าสินค้า</entry><!-- 购物车还没有商品! -->
+	<entry key="sms.head.retry">ระบบไม่ว่าง กรุณากลับมาอีกภายหลัง</entry><!--系统繁忙，请稍后重试！ -->
+	<entry key="sms.head.search">ค้นหา</entry><!--试试搜索，更加方便！ -->
+	<entry key="sms.head.hot_search">รายการค้นหายอดนิยม</entry><!--热门搜索 -->
+	<entry key="sms.head.user_center">ศูนย์กลางผู้ใช้</entry><!--用户中心 -->
+	<entry key="sms.head.settlement">รถเข็น</entry><!--去购物车结算 -->
+
+	<!-- index.html页面国际化 -->
+	<entry key="sms.index.merchant_manage">การจัดการร้านค้า</entry><!--商家管理 -->
+	<entry key="sms.index.welcome">ยินดีต้อนรับสู่ </entry><!--您好,欢迎来到 -->
+	<entry key="sms.index.management_background">การจัดการระบบหลังร้านค้า</entry><!--管理后台 -->
+	<entry key="sms.index.exit_mall">ออกจากระบบ</entry><!--退出商城 -->
+	<entry key="sms.index.xxx">ยินดีต้อนรับสู่ </entry><!--您好，欢迎来到 -->
+	<entry key="sms.index.login_mall">เข้าสู่ระบบ</entry><!--登录商城 -->
+	<entry key="sms.index.free_registration">สมัครสมาชิก</entry><!-- 免费注册 -->
+	<entry key="sms.index.my_order">ใบสั่งซื้อ</entry><!--我的订单 -->
+	<entry key="sms.index.micro_mall">มอลล์บน Wechat</entry><!--微信商城 -->
+	<entry key="sms.index.focus_micro">ติดตามมอลล์ในวีแชท</entry><!--关注微信商城 -->
+	<entry key="sms.index.mobile_phone_mall">App</entry><!--手机商城 -->
+	<entry key="sms.index.customer_service">บริการลูกค้า</entry><!-- 客户服务 -->
+	<entry key="sms.index.help_center">ศูนย์ช่วยเหลือ</entry><!--帮助中心 -->
+	<entry key="sms.index.after_sales_service">บริการหลังการขาย</entry><!--售后服务 -->
+	<entry key="sms.index.online_customer_service">สอบถาม</entry><!--在线客服 -->
+	<entry key="sms.index.complaint_center">ศูนย์ร้องเรียน</entry><!-- 投诉中心 -->
+	<entry key="sms.index.customer_service_email">ฝากข้อความ E-mail</entry><!-- 客服邮箱 -->
+	<entry key="sms.index.tenants">เข้าร่วมธุรกิจ</entry><!-- 商家入驻 -->
+	<entry key="sms.index.site_navigation">การนำทางของเว็บไซต์</entry><!--网站导航 -->
+	<entry key="sms.index.collect_site">รายการโปรด</entry><!--收藏本站 -->
+	<entry key="sms.index.merchant_login">เข้าสู่ระบบร้านค้า</entry><!--商家登录 -->
+	<entry key="sms.index.merchant_login">เข้าสู่ระบบร้านค้า</entry><!--商家登录 -->
+	<entry key="sms.index.announcement">ประกาศ</entry><!-- 公告 -->
+	<entry key="sms.index.rules">กติกา</entry><!--规则 -->
+	<entry key="sms.index.security">ปลอดภัย</entry><!--安全 -->
+	<entry key="sms.index.guide">คำแนะนำ</entry><!--指南 -->
+	<entry key="sms.index.login_immediately">เข้าสู่ระบบทันที</entry><!-- 马上登录 -->
+	<entry key="sms.index.investment">เชิญชวนให้ลูกค้ามาใช้บริการบนเว็บไซต์</entry><!-- 招商入驻 -->
+	<entry key="sms.index.login">เข้าสู่ระบบ</entry><!--登录 -->
+	<entry key="sms.index.registered">ลงทะเบียน</entry><!--注册 -->
+	<entry key="sms.index.welcome_you">ยินดีต้อนรับ</entry><!--欢迎您 -->
+	<entry key="sms.index.advance_deposit">เงินมัดจำ</entry><!-- 预存款 -->
+	<entry key="sms.index.integral">คะแนนสะสม</entry><!--积分 -->
+	<entry key="sms.index.apply_tenants">ยี่นคำร้องเปิดร้านค้าในเว็บไซต์</entry><!--申请商家入驻 -->
+	<entry key="sms.index.business_center">เข้าสู่ศูนย์กลางการจัดการผู้ขาย</entry><!--登录商家管理中心 -->
+	<entry key="sms.index.enter_phone_number">กรุณากรอกเบอร์โทรศัพท์</entry><!--请输入手机号 -->
+	<entry key="sms.index.phone_format_no_right">รูปแบบเบอร์มือถือไม่ถูกต้อง</entry><!--手机号格式不正确 -->
+	<entry key="sms.index.yuan">หยวน</entry><!--元 -->
+	<entry key="sms.index.system_error">ระบบขัดข้อง</entry><!-- 系统错误 -->
+	<entry key="sms.index.more_credit">เติมเงินค่าโทรศัพท์</entry><!-- 话费充值 -->
+	<entry key="sms.index.mobile_phone">เบอร์โทรศัพท์มือถือ</entry><!--手机号： -->
+	<entry key="sms.index.support">สนับสนุนเครือข่ายโทรศัพท์ yidong,liantong,dianxing</entry><!--支持移动、联通、电信 -->
+	<entry key="sms.index.face_value">มูลค่า</entry><!--面值： -->
+	<entry key="sms.index.xxx">หยวน</entry><!--元 -->
+	<entry key="sms.index.click_top_up">คลิกเติมเงิน</entry><!--点击充值 -->
+	<entry key="sms.index.recommend_commodities">สินค้าแนะนำ</entry><!--推荐商品 -->
+	<entry key="sms.index.guess_you_like">สินค้าที่คุณอาจสนใจ </entry><!--猜您喜欢 -->
+	<entry key="sms.index.price">ราคาที่ขาย</entry><!-- 售价： -->
+	<entry key="sms.index.more">more</entry><!-- 更多 -->
+	<entry key="sms.index.recommended_brand">สินค้าแนะนำ</entry><!-- 推荐品牌 -->
+	<entry key="sms.index.link">การแลกลิ้งค์เพื่อนบ้าน</entry><!--友情链接 -->
+	
+	<entry key="sms.index.merchant_manage">การจัดการเจ้าของธุรกิจ</entry><!--商家管理 -->
+	<entry key="sms.index.change">ถัดไป</entry><!-- 换一组 -->
+	<entry key="sms.index.guarantee">รับรองเป็นสินค้าแท้</entry><!-- 正品保证 -->
+	<entry key="sms.index.tax">ทัณฑ์บน</entry><!-- 保税 -->
+	<entry key="sms.index.logistics">คลังสินค้าโลจิสติกส์</entry><!--仓库物流 -->
+	<entry key="sms.index.conveniency">สะดวก</entry><!--便捷 -->
+	<entry key="sms.index.safe_pay">การชำระปลอดภัย</entry><!-- 安全支付 -->
+	<entry key="sms.index.merchant">เจ้าของธุรกิจ</entry><!-- 商家 -->
+	<entry key="sms.index.comfirm_authority">ผู้มีอำนาจในการรับรอง</entry><!-- 权威认证 -->
+	<entry key="sms.index.gay_cooperation">พันธมิตร</entry><!--合作伙伴 -->
+	<entry key="sms.index.click_into">คลิกเข้าเพื่อสอบถามเพิ่มเติมออนไลน์</entry><!--点击进入在线咨询 -->
+	<entry key="sms.index.week">วันจันทร์ถึงวันเสาร์</entry><!-- 周一至周六 -->
+	<entry key="sms.index.weibo">weibo ทางการ</entry><!-- 官方微博 -->
+	<entry key="sms.index.hot">กำลังดำเนินธุรกิจที่ร้อนแรง</entry><!-- 热火招商进行中 -->
+	<entry key="sms.index.weixin">วีแชททางการ</entry><!--官方微信-->
+	
+	
+	
+
+	<!-- integral_balance_pay.html页面国际化 -->
+	<entry key="sms.integral_balance_pay.advance_payment">ชำระเงินแบบมัดจำ</entry>
+	<entry key="sms.integral_balance_pay.instructions_no_empty">กรุณากรอกคำอธิบายการชำระเงิน</entry><!--付款说明不能为空 -->
+	<entry key="sms.integral_balance_pay.deposit">การแลกซื้อสินค้าโดยใช้คะแนนที่สะสมชำระเงินแบบมัดจำ</entry><!--积分兑换预存款支付 -->
+	<entry key="sms.integral_balance_pay.introduce">กรุณากรอกข้อมูลการโอนเงิน( เช่น หมายเลขบัญชี,เวลาที่โอนเงิน และอื่นๆท่านยังสามารถไปชำระเงินที่เมนูใบสั่งซื้อในศูนย์ร่วมผู้ใช้ภายหลังได้)</entry><!-- 
+		请输入汇款信息 (如转账的账号、时间等，您也可以稍后在用户中心“我的订单”中进行付款)： -->
+
+
+	<!-- integral_exchange1.html页面国际化 -->
+	<entry key="sms.integral_exchange1.exchange_gifts">เลือกของขวัญที่แลกซื้อแล้ว</entry><!-- 已选择兑换的礼品 -->
+	<entry key="sms.integral_exchange1.gifts_name">ชื่อของขวัญ</entry><!-- 礼品名称 -->
+	<entry key="sms.integral_exchange1.exchange_integral">คะแนนที่แลกซื้อ</entry><!-- 兑换积分 -->
+	<entry key="sms.integral_exchange1.postage">คำสั่งทางไปรษณีย์</entry><!-- 邮费 -->
+	<entry key="sms.integral_exchange1.exchange_number">จำนวนที่แลกซื้อ</entry><!--兑换数量 -->
+	<entry key="sms.integral_exchange1.integral_subtotal">คะแนนสะสมย่อย</entry><!--积分小计 -->
+	<entry key="sms.integral_exchange1.operation">การดำเนินการ</entry><!--操作 -->
+	<entry key="sms.integral_exchange1.delete">ลบทิ้ง</entry><!-- 删除 -->
+	<entry key="sms.integral_exchange1.operation_again">ลบทิ้งไม่สำเร็จ,กรุณาดำเนินการอีกครั้ง!</entry><!--删除失败，请尝试重新操作！ -->
+	<entry key="sms.integral_exchange1.you_integral">คะแนนที่สะสมของท่านปัจจุบัน</entry><!-- 您当前积分 -->
+	<entry key="sms.integral_exchange1.points">คะแนน</entry><!--分 -->
+	<entry key="sms.integral_exchange1.need_integral">คะแนนสะสมรวมที่ต้องการ</entry><!--所需总积分 -->
+	<entry key="sms.integral_exchange1.continue_exchange">ทำรายการการแลกซื้อต่อไป</entry><!--继续兑换 -->
+	<entry key="sms.integral_exchange1.confirm_exchange">ยืนยันการแลกซื้อ</entry><!-- 确认兑换 -->
+	<entry key="sms.integral_exchange1.shopping_cart_empty">ตะกร้าสินค้ายังไม่มีรายการสั่งซื้อสินค้า,กลับไปเลือกซื้อสินค้าใหม่อีกครั้ง</entry><!--您的购物车还是空的,赶紧行动吧 -->
+	<entry key="sms.integral_exchange1.casually">เลือกดูสินค้าเรื่อยๆ</entry><!--随便看看 -->
+	<entry key="sms.integral_exchange1.no_login">ท่านยังไม่ได้เข้าสู่ระบบ,อาจจะทำให้ไม่สามารถบันทึกรายการสินค้าลงในตะกร้าสินค้าได้  </entry><!--您还未登陆，可能导致购物车为空 -->
+	<entry key="sms.integral_exchange1.login_immediately">เข้าสู่ระบบทันที</entry><!--马上登陆 -->
+	<entry key="sms.integral_exchange1.integral_conversion">คะแนนแลกเปลี่ยน</entry><!--积分兑换 -->
+	
+
+	<!-- integral_exchange2.html页面国际化 -->
+	<entry key="sms.integral_exchange2.consignee_no_empty">กรุณากรอกผู้รับสินค้า</entry><!--收货人不能为空 -->
+	<entry key="sms.integral_exchange2.region_detail">กรุณาเลือกสถานที่ภูมิภาคที่ชัดเจน</entry><!-- 请选择详细区域 -->
+	<entry key="sms.integral_exchange2.zip_code_no_empty">กรุณากรอกรหัสไปรษณีย์</entry><!-- 邮政编码不能为空 -->
+	<entry key="sms.integral_exchange2.detailed_address_no_empty">กรุณากรอกที่อยู่ที่ชัดเจน</entry><!-- 详细地址不能为空 -->
+	<entry key="sms.integral_exchange2.wrong_format">รูปแบบเบอร์โทรศัพท์ไม่ถูกต้อง,ควรใช้หมายเลขพื้อนที่+เบอร์โทรศัพท์  </entry><!--联系电话格式不对,区号+电话号 -->
+	<entry key="sms.integral_exchange2.phone_least">กรุณากรอกเบอร์โทรศัพท์หรือเบอร์มือถือ</entry><!--电话号与手机号码至少填写一个 -->
+	<entry key="sms.integral_exchange2.phone_number_format">รูปแบบเบอร์มือถือไม่ถูกต้อง</entry><!--手机号码格式不对 -->
+	<entry key="sms.integral_exchange2.choose">กรุณาเลือก</entry><!--请选择 -->
+	<entry key="sms.integral_exchange2.consignee_address">ที่อยู่ผู้รับสินค้า</entry><!-- 收货人地址 -->
+	<entry key="sms.integral_exchange2.consignee_name">ชื่อ-นามสกุลของผู้รับสินค้า</entry><!--收货人姓名 -->
+	<entry key="sms.integral_exchange2.phone">เบอร์โทรศัพท์</entry><!--电话 -->
+	<entry key="sms.integral_exchange2.new_address">ใช้ที่อยู่ใหม่ในการรับสินค้า</entry><!-- 使用新的收货地址 -->
+	<entry key="sms.integral_exchange2.true_name">กรอกชื่อ-นามสกุลจริง</entry><!-- 填写真实姓名 -->
+	<entry key="sms.integral_exchange2.area">สถานที่ภูมิภาคที่อยู่</entry><!--所在地区 -->
+	<entry key="sms.integral_exchange2.choose_area">กรุณาเลือกสถานที่ภูมิภาค</entry><!--请选择地区 -->
+	<entry key="sms.integral_exchange2.zip_code">รหัสไปรษณีย์</entry><!--邮政编码 -->
+	<entry key="sms.integral_exchange2.detailed_address">ที่อยู่ที่ชัดเจน</entry><!--详细地址 -->
+	<entry key="sms.integral_exchange2.mobile_phone_number">เบอร์มือถือ</entry><!-- 手机号码 -->
+	<entry key="sms.integral_exchange2.phone_number">เบอร์โทรศัพท์</entry><!--电话号码 -->
+	<entry key="sms.integral_exchange2.message">ฉันจะฝากข้อความ</entry><!--我要留言 -->
+	<entry key="sms.integral_exchange2.total_integral">คะแนนสะสมรวมที่ต้องการ</entry><!--所需总积分 -->
+	<entry key="sms.integral_exchange2.points_freight">คะแนน,ค่าส่ง</entry><!--分,运费 -->
+	<entry key="sms.integral_exchange2.conversion">การแลกซื้อสำเร็จ</entry><!--完成兑换 -->
+	<entry key="sms.integral_exchange2.selected_gift">เลือกของขวัญเรียบร้อยแล้ว</entry><!--已选礼品 -->
+
+
+	<!-- integral_exchange3.html页面国际化 -->
+	<entry key="sms.integral_exchange3.integral_mall">มอลล์ที่ใช้สะสมคะแนน</entry><!--积分商城 -->
+	<entry key="sms.integral_exchange3.gift_exchange">การแลกซื้อของขวัญเรียบร้อยแล้ว!รหัสบิลเป็น......</entry><!--礼品兑换完成!订单编号为 -->
+
+
+	<!-- integral_exchange4.html页面国际化 -->
+	<entry key="sms.integral_exchange4.shopping_cart">ตะกร้าสินค้า</entry><!-- 购物车 -->
+	<entry key="sms.integral_exchange4.submit_order">ส่งรายการสั่งซื้อสินค้าสำเร็จ</entry><!--订单提交成功 -->
+	<entry key="sms.integral_exchange4.payment_method">ทำรายการสั่งซื้อสินค้าสำเร็จ,กรุณาชำระเงินด้วยวิธีที่ท่านต้องการ</entry><!--您的订单已成功生成，选择您想用的支付方式进行支付 -->
+	<entry key="sms.integral_exchange4.order_number">รหัสรายการสั่งซื้อสินค้า</entry><!--订单编号 -->
+	<entry key="sms.integral_exchange4.amount_payable">ยอดเงินที่ต้องชำระ</entry><!--应付金额 -->
+	<entry key="sms.integral_exchange4.user_center">ท่านสามารถไปที่ในศูนย์รวมผู้ใช้</entry><!--您可以在用户中心 -->
+	<entry key="sms.integral_exchange4.my_order">ใบสั่งซื้อ</entry><!--我的订单 -->
+	<entry key="sms.integral_exchange4.look_order">เรียกดูรายการสั่งซื้อ</entry><!--查看订单 -->
+	<entry key="sms.integral_exchange4.choose_amount_payable">ท่านสามารถเลือกวิธีชำระเงินได้</entry><!--您可以选择的付款方式 -->
+	<entry key="sms.integral_exchange4.online_payment">ชำระเงินออนไลน์</entry><!--在线支付 -->
+	<entry key="sms.integral_exchange4.next">ขั้นตอนถัดไป</entry><!--下一步 -->
+	<entry key="sms.integral_exchange4.pay_remind">การแจ้งเตือนชำระเงิน</entry><!--支付提醒 -->
+	<entry key="sms.integral_exchange4.finish_pay">การชำระเงินเรียบร้อยแล้ว</entry><!--已经完成支付！ -->
+	<entry key="sms.integral_exchange4.payment_problems">การชำระเงินขัดข้อง!</entry><!--支付出现问题！ -->
+
+
+	<!-- integral_list.html页面国际化 -->
+	<entry key="sms.integral_list.gift_list">รายการของขวัญ</entry><!--礼品列表 -->
+	<entry key="sms.integral_list.integral_mall">มอลล์ที่ใช้คะแนนสะสม</entry><!--积分商城 -->
+	<entry key="sms.integral_list.mall_integral_information">ข่าวสารการสะสมคะแนนของมอลล์</entry><!--商城积分信息 -->
+	<entry key="sms.integral_list.integral_situation">เข้าสู่ระบบและแสดงผลการสะสมคะแนน</entry><!--登陆显示积分情况 -->
+	<entry key="sms.integral_list.member_login">เข้าสู่ระบบสมาชิก</entry><!--会员登录 -->
+	<entry key="sms.integral_list.login">เข้าสู่ระบบ</entry><!--登 陆 -->
+	<entry key="sms.integral_list.integral">คะแนนสะสม</entry><!--积分 -->
+	<entry key="sms.integral_list.level">ระดับผู้ใช้</entry><!-- 等级 -->
+	<entry key="sms.integral_list.exchange_instructions">คำอธิบายการและซื้อด้วยคะแนนสะสม</entry><!-- 积分兑换说明 -->
+	<entry key="sms.integral_list.exchange_list">ลำดับสินค้าที่แลกซื้อ</entry><!--兑换排行榜 -->
+	<entry key="sms.integral_list.market_price">ราคาในท้องตลาด</entry><!--市场价格 -->
+	<entry key="sms.integral_list.exchange_integral">คะแนนสะสมการแลกซื้อ</entry><!--兑换积分 -->
+	<entry key="sms.integral_list.point">คะแนน</entry><!--分 -->
+	<entry key="sms.integral_list.exchange_number">จำนวนที่แลกซื้อ</entry><!-- 兑换数量 -->
+	<entry key="sms.integral_list.a">ชิ้น</entry><!--个 -->
+	<entry key="sms.integral_list.exchange_choose">ตัวเลือกคะแนนสะสม</entry><!--积分选择区 -->
+	<entry key="sms.integral_list.all">ทั้งหมด</entry><!--全部 -->
+	<entry key="sms.integral_list.following">ต่ำกว่า…. คะแนน</entry><!--分以下 -->
+	<entry key="sms.integral_list.above">มากกว่า…..คะแนน</entry><!--分以上 -->
+	<entry key="sms.integral_list.bronze_medal">ระดับสมาชิกเหรียญทองแดงหรือสูงกว่า</entry><!-- 铜牌及以上会员 -->
+	<entry key="sms.integral_list.silver_medal">ระดับสมาชิกเหรียญเงินหรือสูงกว่า</entry><!-- 银牌及以上会员 -->
+	<entry key="sms.integral_list.gold_medal">ระดับสมาชิกเหรียญทองหรือสูงกว่า</entry><!--金牌及以上会员 -->
+	<entry key="sms.integral_list.super_member">ใช้เฉพาะสมาชิกระดับซุปเปอร์</entry><!--超级会员专享 -->
+	<entry key="sms.integral_list.need">ต้องการ</entry><!--需要 -->
+	<entry key="sms.integral_list.xxx">คะแนนที่สะสม</entry><!--积分 -->
+	<entry key="sms.integral_list.exchange">แลกซื้อ</entry><!-- 兑换 -->
+
+	<!-- integral_order_finish.html页面国际化 -->
+	<entry key="sms.integral_order_finish.order_number">รหัสรายการสั่งซื้อสินค้า</entry><!--订单编号 -->
+	<entry key="sms.integral_order_finish.amount_payable">ยอดเงินที่ต้องชำระ</entry><!--应付金额 -->
+	<entry key="sms.integral_order_finish.cancelled">ยกเลิกแล้ว</entry><!--已取消 -->
+	<entry key="sms.integral_order_finish.payment">รอการชำระเงิน</entry><!--待付款 -->
+	<entry key="sms.integral_order_finish.audit">รอการตรวจสอบชำระเงินแบบออฟไลน์</entry><!-- 线下支付待审核 -->
+	<entry key="sms.integral_order_finish.payment_success">ชำระเงินสำเร็จ</entry><!--付款成功 -->
+	<entry key="sms.integral_order_finish.shipped">ส่งสินค้าเรียบร้อยแล้ว</entry><!--已发货" -->
+	<entry key="sms.integral_order_finish.goods">ได้รับสินค้าแล้ว</entry><!--已收货 -->
+	<entry key="sms.integral_order_finish.finish">การดำเนินการสำเร็จ</entry><!--已完成 -->
+	<entry key="sms.integral_order_finish.payment_situation">สถานะการชำระเงิน</entry><!--支付情况 -->
+	<entry key="sms.integral_order_finish.pay_agin">กลับไปชำระเงินอีกครั้ง</entry><!--返回重新支付 -->
+	<entry key="sms.integral_order_finish.look_order_information">เรียกดูรายการสั่งซื้อสินค้า</entry><!--查看订单信息 -->
+	<entry key="sms.integral_order_finish.result">ผลการชำระใบสั่งซื้อของคะแนน</entry><!--积分订单支付结果 -->
+	
+	<!-- integral_outline_pay.html页面国际化 -->
+	<entry key="sms.integral_outline_pay.offline_remittance">การโอนเงินแบบออฟไลน์</entry><!--线下汇款 -->
+	<entry key="sms.integral_outline_pay.payment_instructions_no_empty">กรุณากรอกคำอธิบายการชำระเงิน</entry><!-- 付款说明不能为空 -->
+	<entry key="sms.integral_outline_pay.remittance_information">กรุณากรอกข้อมูลการโอนเงิน(เช่นหมายเลขบัญชี,เวลาที่โอนเงิน และอื่นๆท่านยังสามารถไปชำระเงินที่เมนูใบสั่งซื้อในศูนย์รวมผู้ใช้ภายหลังได้)</entry><!-- 
+		请输入汇款信息 (如转账的账号、时间等，您也可以稍后在用户中心“我的订单”中进行付款) -->
+
+
+	<!-- integral_view.html页面国际化 -->
+	<entry key="sms.integral_view.integral_mall">มอลล์ที่ใช้คะแนนสะสม</entry><!--积分商城 -->
+	<entry key="sms.integral_view.exchange_number_no_empty">กรุณากรอกจำนวนที่แลกซื้อ</entry><!--兑换数量不能为空 -->
+	<entry key="sms.integral_view.only_integer">จำนวนที่แลกซื้อต้องเป็นจำนวนเต็มเท่านั้น</entry><!--只能为整数 -->
+	<entry key="sms.integral_view.more_exchange">จำนวนที่แลกซื้อมากที่สุดเป็น ....</entry><!-- 最多兑换 -->
+	<entry key="sms.integral_view.least_exchange">การแลกซื้ออย่างน้อย 1 ชิ้นขึ้นไป</entry><!--最少兑换1件 -->
+	<entry key="sms.integral_view.goods_number">รหัสสินค้า</entry><!--商品编号 -->
+	<entry key="sms.integral_view.shelf_time">เวลาที่สินค้าขึ้นเว็บไซต์</entry><!-- 上架时间 -->
+	<entry key="sms.integral_view.exchange_time">เวลาที่แลกซื้อ</entry><!-- 兑换时间 -->
+	<entry key="sms.integral_view.to">ถึง</entry><!--至 -->
+	<entry key="sms.integral_view.no_limit">ไม่จำกัด</entry><!-- 无限制 -->
+	<entry key="sms.integral_view.exchange_limit">ข้อจำกัดการแลกซื้อ</entry><!--兑换限制 -->
+	<entry key="sms.integral_view.member_exchange">สมาชิกทุกท่านสามารถแลกซื้อมากที่สุดได้ ....</entry><!--每名会员最多兑换 -->
+	<entry key="sms.integral_view.xxx">ไม่จำกัด</entry><!-- 无限制 -->
+	<entry key="sms.integral_view.market_price">ราคาท้องตลาด</entry><!--市场价格 -->
+	<entry key="sms.integral_view.my_integral">คะแนนสะสม</entry><!-- 我的积分 -->
+	<entry key="sms.integral_view.not_logged">ยังไม่ได้เข้าสู่ระบบ</entry><!--尚未登录 -->
+	<entry key="sms.integral_view.consumption_integral">คะแนนสะสมที่ใช้แล้ว</entry><!--消耗积分 -->
+	<entry key="sms.integral_view.postage">ค่าส่ง</entry><!--邮费 -->
+	<entry key="sms.integral_view.businessmen_assume">ผู้ขายรับผิดชอบ</entry><!--商家承担 -->
+	<entry key="sms.integral_view.bronze_medal">ระดับสมาชิกเหรียญทองแดงหรือสูงกว่า</entry><!-- 铜牌及以上会员 -->
+	<entry key="sms.integral_view.silver_medal">ระดับสมาชิกเหรียญเงินหรือสูงกว่า</entry><!--银牌及以上会员 -->
+	<entry key="sms.integral_view.gold_medal">ระดับสมาชิกเหรียญทองหรือสูงกว่า</entry><!--金牌及以上会员 -->
+	<entry key="sms.integral_view.super_member">ใช้เฉพาะสมาชิกระดับซุปเปอร์</entry><!--超级会员专享 -->
+	<entry key="sms.integral_view.level">ระดับที่ต้องการ</entry><!--要求等级: -->
+	<entry key="sms.integral_view.exchange_number">จำนวนที่แลกซื้อ</entry><!-- 兑换数量 -->
+	<entry key="sms.integral_view.remaining">เหลือ</entry><!--剩余 -->
+	<entry key="sms.integral_view.a">ชิ้น</entry><!--件 -->
+	<entry key="sms.integral_view.exchange">ฉันอยากแลกซื้อ</entry><!--我要兑换 -->
+	<entry key="sms.integral_view.share_gift">จะแบ่งปันของขวัญนี้ไปถึง</entry><!--分享该礼品到 -->
+	<entry key="sms.integral_view.gift_introduce">คำแนะนำของขวัญ</entry><!--礼品介绍 -->
+	<entry key="sms.integral_view.gift_record">ประวัติข้อมูการแลกซื้อของขวัญ</entry><!-- 礼品兑换记录 -->
+	<entry key="sms.integral_view.get_integral">ทำยังไงถึงจะได้คะแนนฟรี</entry><!--如何免费获取积分 -->
+	<entry key="sms.integral_view.use_integral">ใช้คะแนน</entry><!--使用积分-->
+
+	<!-- integral.html页面国际化 -->
+	<entry key="sms.integral.integral_mall">มอลล์ที่ใช้คะแนนสะสม</entry><!--积分商城 -->
+	<entry key="sms.integral.integral_mall_information">ข่าวสารการสะสมคะแนนของมอลล์</entry><!--商城积分信息 -->
+	<entry key="sms.integral.integral_situation">เข้าสู่ระบบและแสดงผลของคะแนนที่สะสม</entry><!--登陆显示积分情况 -->
+	<entry key="sms.integral.member_login">เข้าสู่ระบบสมาชิก</entry><!-- 会员登录 -->
+	<entry key="sms.integral.login">เข้าสู่ระบบ</entry><!--登 陆 -->
+	<entry key="sms.integral.integral">คะแนนที่สะสม</entry><!--积分 -->
+	<entry key="sms.integral.level">ลำดับ</entry><!--等级 -->
+	<entry key="sms.integral.integral_instructions">คำอธิบายการแลกซื้อด้วยคะแนนสะสม</entry><!--积分兑换说明 -->
+	<entry key="sms.integral.choose_integral">ตัวเลือกคะแนนสะสม</entry><!-- 积分选择区 -->
+	<entry key="sms.integral.all">ทั้งหมด</entry><!--全部 -->
+	<entry key="sms.integral.exchange_list">ลำดับสินค้าที่แลกซื้อ</entry><!--兑换排行榜 -->
+	<entry key="sms.integral.exchange_goods">สินค้าแลกซื้อที่แนะนำ</entry><!--推荐兑换商品 -->
+	<entry key="sms.integral.more">เพิ่มเติม</entry><!-- 更多 -->
+	<entry key="sms.integral.xxx">เข้าสู่ระบบสมาชิก</entry><!--会员登录 -->
+	<entry key="sms.integral.need">ต้องการ</entry><!--需要 -->
+	<entry key="sms.integral.xxx">คะแนนที่สะสม</entry><!--积分 -->
+	<entry key="sms.integral.exchange">การแลกซื้อ</entry><!-- 兑换 -->
+	
+
+	<!-- integral1.html页面国际化 -->
+	<entry key="sms.integral1.recommended_goods">แนะนำสินค้าที่แลกซื้อ</entry><!--推荐兑换商品 -->
+	<entry key="sms.integral1.more">เพิ่มเติม</entry><!--更多 -->
+	<entry key="sms.integral1.market_price">ราคาท้องตลาด</entry><!--市场价格 -->
+	<entry key="sms.integral1.want_exchange">ฉันอยากแลกซื้อ</entry><!--我要兑换 -->
+	<entry key="sms.integral1.new_exchange_goods">สินค้าที่แลกซื้อล่าสุด</entry><!-- 最新兑换商品 -->
+	<entry key="sms.integral1.mall_integral_information">ข่าวสารการสะสมคะแนนของมอลล์</entry><!-- 商城积分信息 -->
+	<entry key="sms.integral1.integral_situation">เข้าสู่ระบบและแสดงผลของคะแนนสะสม</entry><!-- 登录显示积分情况 -->
+	<entry key="sms.integral1.member_login">เข้าสู่ระบบสมชิก</entry><!--会员登录 -->
+	<entry key="sms.integral1.you_integral">คะแนนสะสมของท่านคือ</entry><!-- 您的积分是 -->
+	<entry key="sms.integral1.choose_gift">เลือกของขวัญที่แลกซื้อแล้ว</entry><!-- 已选择兑换礼品 -->
+	<entry key="sms.integral1.point">คะแนน</entry><!--分 -->
+	<entry key="sms.integral1.a">ชิ้น</entry><!--个 -->
+	<entry key="sms.integral1.integral_detailed_rules">กติกาของการสะสมคะแนน</entry><!-- 积分细则 -->
+	<entry key="sms.integral1.exchange_instructions">คำอธิบายการแลกซื้อด้วยคะแนนสะสม</entry><!--积分兑换说明 -->
+	<entry key="sms.integral1.choose_integral">ตัวเลือกคะแนนสะสม</entry><!--积分选择区 -->
+	<entry key="sms.integral1.exchange_sorting">ลำดับสินค้าที่แลกซื้อ</entry><!--兑换排行榜 -->
+	<entry key="sms.integral1.market_price">ราคาท้องตลาด</entry><!--市场价格 -->
+	<entry key="sms.integral1.exchange_integral">คะแนนสะสมที่แลกซื้อ</entry><!--兑换积分 -->
+	<entry key="sms.integral1.exchange_number">จำนวนที่แลกซื้อ</entry><!--兑换数量 -->
+	<entry key="sms.integral1.sorry">ขออภัยค่ะ ยังไม่มีข้อมูลที่เกี่ยวข้อง</entry><!-- 对不起，没有对应的数据 -->
+
+	<!--life_order.html页面国际化 -->
+	<entry key="sms.life_order.life_purchase">การสั่งซื้อสินค้าประจำวัน</entry><!--生活购 -->
+	<entry key="sms.life_order.Insufficient_inventory">สต็อกสินค้าไม่เพียงพอ,กรุณาเลือกจำนวนที่ต้องการอีกครั้งหนึ่ง!</entry><!--库存不足，请重新选择数量！ -->
+	<entry key="sms.life_order.check_order_information">1. กรอกข้อมูลการตรวจสอบรายการสั่งซื้อสินค้า</entry><!--1.填写核对订单信息 -->
+	<entry key="sms.life_order.submit_order">2. ส่งรายการสั่งซื้อสินค้าสำเร็จ</entry><!-- 2.成功提交订单 -->
+	<entry key="sms.life_order.order_information">ยืนยันข้อมูลรายการสั่งซื้อสินค้า</entry><!--订单信息确认 -->
+	<entry key="sms.life_order.contact_way">วิธีติดต่อ</entry><!-- 联系方式 -->
+	<entry key="sms.life_order.phone">เบอร์มือถือ</entry><!--手机号 -->
+	<entry key="sms.life_order.commodity_list">รายการสินค้า</entry><!--商品清单 -->
+	<entry key="sms.life_order.commodity_name">ชื่อสินค้า</entry><!--商品名称 -->
+	<entry key="sms.life_order.price">ราคาต่อหน่วย</entry><!--单价 -->
+	<entry key="sms.life_order.number">จำนวน</entry><!-- 数量 -->
+	<entry key="sms.life_order.subtotal">ยอดเงินรวมย่อย (หยวน)</entry><!--小计(元) -->
+	<entry key="sms.life_order.commodity_price">ราคารวมของสินค้า</entry><!--商品总价 -->
+	<entry key="sms.life_order.settle_accounts">ไปชำระเงิน</entry><!--去结算 -->
+
+
+	<!--line_pay.html页面国际化 -->
+	<entry key="sms.line_pay.secure_payment_links">กำลังเข้าสู่ระบบการชำระเงินที่ปลอดภัย ,กรุณารอ….</entry><!-- 正在生成安全支付链接，请等待...... -->
+	<entry key="sms.line_pay.paying">กำลังชำระ</entry><!--正在支付 -->
+	
+	<!--login.html页面国际化 -->
+	<entry key="sms.login.user_login">เข้าสู่ระบบผู้ใช้</entry><!-- 用户登录 -->
+	<entry key="sms.login.user_name_not_null">กรุณากรอกชื่อผู้ใช้</entry><!-- 用户名不能为空 -->
+	<entry key="sms.login.password_not_null">กรุณากรอกรหัสผ่าน</entry><!-- 密码不能为空 -->
+	<entry key="sms.login.security_code_not_null">กรุณากรอกรหัสยืนยันตัวตน </entry><!-- 验证码不能为空 -->
+	<entry key="sms.login.aready_check">อีเมล์/ชื่อผู้ใช้/โทรศัพท์มือถือที่ยืนยันตัวตนแล้ว</entry><!-- 邮箱/用户名/已验证手机 -->
+	<entry key="sms.login.login_password">รหัสผ่านเข้าสู่ระบบ</entry><!--登录密码 -->
+	<entry key="sms.login.security_code">รหัสยืนยันตัวตน</entry><!-- 验证码 -->
+	<entry key="sms.login.speak_security_code">รหัสยืนยันตัวตนแบบเสียง</entry><!--朗读验证码 -->
+	<entry key="sms.login.forget_password">ลืมรหัสผ่าน?</entry><!-- 忘记密码？ -->
+	<entry key="sms.login.use_cooperation_login">เข้าสู่ระบบด้วยบัญชีที่ใช้ร่วมกัน</entry><!-- 使用合作网站账号登录 -->
+	<entry key="sms.login.free_register">ลงทะเบียนแบบฟรี</entry><!--免费注册 -->
+	<entry key="sms.login.login_immdecately">เข้าสู่ระบบทันที</entry><!--立即登录 -->
+	
+	<!--nav.html页面国际化 -->
+	<entry key="sms.nav.goods_classification">สินค้าทั้งหมด</entry><!--全部商品分类  -->
+
+
+	<!--order_finish.html页面国际化 -->
+	<entry key="sms.order_finish.pay_results">ผลการชำระเงิน</entry><!-- 支付结果 -->
+	<entry key="sms.order_finish.order_number">รหัสรายการสั่งซื้อสินค้า</entry><!--订单编号 -->
+	<entry key="sms.order_finish.amount_payable">ยอดเงินที่ต้องชำระ</entry><!-- 应付金额 -->
+	<entry key="sms.order_finish.cancel">ยกเลิกแล้ว</entry><!--已取消 -->
+	<entry key="sms.order_finish.payment">รอการชำระเงิน</entry><!--待付款 -->
+	<entry key="sms.order_finish.offline_payment_approval">รอการตรวจสอบการชำระเงินแบบออฟไลน์</entry><!--线下支付待审核 -->
+	<entry key="sms.order_finish.payment_success">การชำระเงินสำเร็จ</entry><!--付款成功 -->
+	<entry key="sms.order_finish.shipped">ส่งสินค้าเรียบร้อย</entry><!--已发货 -->
+	<entry key="sms.order_finish.have_goods">ได้รับสินค้าแล้วเรียบร้อย</entry><!-- 已收货 -->
+	<entry key="sms.order_finish.evaluation">ดำเนินการสำเร็จและประเมินความพึงพอใจเรียบร้อย</entry><!--已完成,已评价 -->
+	<entry key="sms.order_finish.finish">การดำเนินการสำเร็จ</entry><!-- 已结束 -->
+	<entry key="sms.order_finish.payments_situation">สถานะการชำระเงิน</entry><!--支付情况 -->
+	<entry key="sms.order_finish.payment_again">กลับไปชำระเงินอีกครั้ง</entry><!-- 返回重新支付 -->
+	<entry key="sms.order_finish.look_order">เรียกดูข้อมูลการสั่งซื้อสินค้า</entry><!-- 查看订单信息 -->
+
+	<!--order_pay.html页面国际化 -->
+	<entry key="sms.order_pay.my_shopping_cart">ตะกร้าสินค้า</entry><!-- 1.我的购物车 -->
+	<entry key="sms.order_pay.check_order_information">กรอกข้อมูลการตรวจสอบรายการสั่งซื้อสินค้า</entry><!--2.填写核对订单信息 -->
+	<entry key="sms.order_pay.submit_order_success">ส่งรายการสั่งซื้อสินค้าสำเร็จ</entry><!-- 3.成功提交订单 -->
+	<entry key="sms.order_pay.order_submit_success">ส่งรายการสั่งซื้อสินค้าสำเร็จ</entry><!--订单提交成功 -->
+	<entry key="sms.order_pay.choose_payment_method">ทำรายการสั่งซื้อสินค้าของทานสำเร็จ,กรุณาชำระเงินด้วยวิธีที่ท่านต้องการ</entry><!-- 您的订单已成功生成，选择您想用的支付方式 进行支付 -->
+	<entry key="sms.order_pay.order_number">รหัสรายการสั่งซื้อสินค้า</entry><!--订单编号 -->
+	<entry key="sms.order_pay.amount_payable">ยอดเงินที่ต้องชำระ</entry><!--应付金额 -->
+	<entry key="sms.order_pay.use_center">ท่านสามารถไปที่ในศูนย์รวมผู้ใช้</entry><!-- 您可以在用户中心 -->
+	<entry key="sms.order_pay.my_order">ใบสั่งซื้อ</entry><!-- 我的订单 -->
+	<entry key="sms.order_pay.look_order">เรียกดูรายการสั่งซื้อสินค้า</entry><!--查看订单 -->
+	<entry key="sms.order_pay.choose_payment">วิธีชำระเงินที่ท่านสามารถเลือกได้</entry><!-- 您可以选择的付款方式 -->
+	<entry key="sms.order_pay.payment_online">การชำระเงินแบบออฟไลน์</entry><!-- 在线支付 -->
+	<entry key="sms.order_pay.confirm_payment">ยืนยันการชำระเงิน</entry><!-- 确认支付 -->
+	<entry key="sms.order_pay.pay_remind">การแจ้งเตือนการชำระเงิน</entry><!--支付提醒 -->
+	<entry key="sms.order_pay.pay_finish">การชำระเงินเรียบร้อยแล้ว</entry><!--已经完成支付！ -->
+	<entry key="sms.order_pay.pay_problem">การชำระเงินขัดข้อง</entry><!--支付出现问题！ -->
+	
+	<entry key="sms.order_pay.pay_remind">หากพบปัญหาเมื่อยื่นเสนอชำระ【กำลังชำระ】สามารถยื่นเสนอใหม่ในหน้านี้</entry><!--提交支付【正在支付】如遇问题，可在本页重新提交支付-->
+	<entry key="sms.order_pay.pay_finish">สแกน QR code โดยชำระ</entry><!--扫码支付 -->
+	<entry key="sms.order_pay.pay_problem">กรุณาใช้วีแชทสแกน</entry><!--请使用微信扫一扫 -->
+	<entry key="sms.order_pay.pay_remind">การแจ้งเตือนการชำระเงิน</entry><!--支付提醒 -->
+	<entry key="sms.order_pay.pay_finish">แจ้งเตือนการชำระผ่านวีแชท</entry><!--微信支付提醒 -->
+	<entry key="sms.order_pay.pay_problem">สแกน QR code โดยชำระ</entry><!--扫描二维码支付 -->
+	
+
+	<!--outline_pay.html页面国际化 -->
+	<entry key="sms.outline_pay.offline_remittance">การโอนเงินแบบออฟไลน์</entry><!--线下汇款 -->
+	<entry key="sms.outline_pay.payment_instructions_not_null">กรุณกรอกคำอธิบายการชำระเงิน</entry><!--付款说明不能为空 -->
+	<entry key="sms.outline_pay.payment_amount">ยอดเงินที่ต้องชำระ</entry><!-- 付款金额: -->
+	<entry key="sms.outline_pay.remittance_information">กรุณากรอกข้อมูลการโอนเงิน (เช่น หมายเลขบัญชี,เวลาที่โอนเงิน,และอื่นๆท่านยังสามารถไปชำระเงินที่เมนูรายการสั่งซื้อสินค้าในศูนย์รวมผู้ใช้ภายหลังได้)</entry><!--请输入汇款信息 
+		(如转账的账号、时间等，您也可以稍后在用户中心“我的订单”中进行付款) -->
+	<entry key="sms.outline_pay.submit">ตกลง</entry><!--提交 -->
+
+
+	<!--payafter_pay.html页面国际化 -->
+	<entry key="sms.payafter_pay.cash_on_delivery">การชำระเงินปลายทาง</entry><!-- 货到付款 -->
+	<entry key="sms.payafter_pay.payment_instructions_not_null">กรุณากรอกคำอธิบาย การชำระเงิน</entry><!--付款说明不能为空 -->
+	<entry key="sms.payafter_pay.xxx">การชำระเงินแบบปลายทาง</entry><!--货到付款 -->
+	<entry key="sms.payafter_pay.sure">ท่านแน่ใจหรือว่า จะเลือกใช้วิธีการชำระเงินแบบปลายทาง?</entry><!-- 
+		确定使用“货到付款”吗？ -->
+	<entry key="sms.payafter_pay.delivery_instructions">การอธิบายการส่งสินค้า</entry><!-- 送货说明： -->
+
+
+	<!--qq_login_api.html页面国际化 -->
+	<entry key="sms.qq_login_api.cooperation_login">เข้าสู่ระบบด้วยบัญชีที่ใช้ร่วมกัน</entry><!-- 合作伙伴账号登录 -->
+	<entry key="sms.qq_login_api.third_login">กำลังดำเนินการเข้าสู่ระบบโดยบัญชีขององค์กรที่สาม  กรุณารอสักครู่</entry><!-- 正在进行第三方账号登录，请等待...... -->
+
+	<!--qq_login_bind.html页面国际化 -->
+	<entry key="sms.qq_login_bind.qq_internet">เชื่อมต่อกับ QQ</entry><!-- QQ互联 -->
+	<entry key="sms.qq_login_bind.user_name_not_null">กรุณากรอกชื่อผู้ใช้</entry><!-- 用户名不能为空 -->
+	<entry key="sms.qq_login_bind.user_name_exist">ชื่อผู้ใช้นี้มีอยู่แล้ว</entry><!-- 用户名已存在 -->
+	<entry key="sms.qq_login_bind.password_not_null">กรุณากรอกรหัสผ่าน</entry><!-- 密码不能为空 -->
+	<entry key="sms.qq_login_bind.repeat_password_not_null">กรุณายืนยันรหัสผ่านอีกครั้ง</entry><!--重复密码不能为空 -->
+	<entry key="sms.qq_login_bind.password_not_same">รหัสไม่ตรงกัน</entry><!--两次密码不一样 -->
+	<entry key="sms.qq_login_bind.email_not_null">กรุณากรอกอีเมล์</entry><!--Email不能为空 -->
+	<entry key="sms.qq_login_bind.email_exist">อีเมล์นี้มีผู้ใช้อยู่แล้ว</entry><!--Email已经存在 -->
+	<entry key="sms.qq_login_bind.accept_protocol">กรุณายินยอมข้อตกลงสำหรับผู้ใช้</entry><!--请接受用户协议 -->
+	<entry key="sms.qq_login_bind.complete_info">กรุณากรอกข้อมูลบัญชีให้ครบถ้วน</entry><!-- 完善账号信息 -->
+	<entry key="sms.qq_login_bind.bind_info">บัญชีนี้มีอยู่แล้ว การเชื่อมต่อบัญชี</entry><!--已有账号！绑定我的账号 -->
+	<entry key="sms.qq_login_bind.qq_login">เข้าสู่ระบบโดยการใช้ QQ สำเร็จ,รหัสผ่านจากระบบเป็น"123456" กรุณาแก้ไขรหัสผ่านอีกครั้ง</entry><!--QQ账号登录成功，默认用户密码为123456，请自行修改 -->
+	<entry key="sms.qq_login_bind.user_name">ชื่อผู้ใช้</entry><!--用户名： -->
+	<entry key="sms.qq_login_bind.set_password">ตั้งค่ารหัสผ่าน</entry><!-- 设置密码： -->
+	<entry key="sms.qq_login_bind.repeat_password">กรุณากรอกรหัสผ่านอีกครั้ง</entry><!--重复密码： -->
+	<entry key="sms.qq_login_bind.email">อีเมล์</entry><!--邮箱： -->
+	<entry key="sms.qq_login_bind.agree_protocol">เห็นด้วยกับข้อตกลงสำหรับผู้ใช้</entry><!-- 同意用户协议 -->
+	<entry key="sms.qq_login_bind.comfirm_commit">การยืนยันส่งข้อมูล</entry><!--确认提交 -->
+	<entry key="sms.qq_login_bind.xxx">ชื่อผู้ใช้</entry><!--用户名： -->
+	<entry key="sms.qq_login_bind.password">รหัสผ่าน</entry><!--密码： -->
+	<entry key="sms.qq_login_bind.xxx">การยืนยันส่งข้อมูล</entry><!--确认提交 -->
+
+	<!--recharge_order.html/recharge_success.html页面国际化 -->
+	<entry key="sms.recharge_order.phone_recharge">เติมเงินผ่านมือถือ</entry><!-- 手机充值 -->
+	<entry key="sms.recharge_order.xxx">เติมเงินผ่านมือถือ</entry><!--手机充值 -->
+	<entry key="sms.recharge_order.pay_order">บริการเติมเงินผ่านมือถือ>ชำระเงินในการสั่งซื้อสินค้า</entry><!--手机充值服务>支付订单 -->
+	<entry key="sms.recharge_order.write_recharge_info">กรอกข้อมูลการเติมเงิน</entry><!-- 1.填写充值信息 -->
+	<entry key="sms.recharge_order.comfirm_order">ยืนยันข้อมูลการสั่งซื้อสินค้า</entry><!--2.确认订单信息 -->
+	<entry key="sms.recharge_order.pay">ชำระเงิน</entry><!--3.支付 -->
+	<entry key="sms.recharge_order.recharge_complete">การเติมเงินเรียบร้อยแล้ว</entry><!--4.充值完成 -->
+	<entry key="sms.recharge_order.deposit">จำนวนเงินแบบมัดจำในบัญชี</entry><!-- 账户预存款： -->
+	<entry key="sms.recharge_order.fresh">โหลดใหม่</entry><!-- 刷新 -->
+	<entry key="sms.recharge_order.advance_deposit">เติมเงินแบบเงินมัดจำ</entry><!--预存款充值 -->
+	<entry key="sms.recharge_order.phone_num">เบอร์มือถือ</entry><!-- 手机号码： -->
+	<entry key="sms.recharge_order.recharge_amount">มูลค่าเติมเงิน</entry><!--充值面值： -->
+	<entry key="sms.recharge_order.recharge_price">ราคาการเติมเงิน</entry><!-- 充值价格： -->
+	<entry key="sms.recharge_order.yuan">หยวน</entry><!-- 元 -->
+	<entry key="sms.recharge_order.comfirm_recharge">ยืนยันการเติมเงิน</entry><!-- 确认充值 -->
+	<entry key="sms.recharge_order.commit">ตกลง</entry><!-- 提交 -->
+	<entry key="sms.recharge_order.tips">การแจ้งเตือนแบบมิตรภาพ</entry><!-- 温馨提示 -->
+	<entry key="sms.recharge_order.busy">ถ้าระบบไม่ว่าง,เงินที่เข้าบัญชีอาจเกิดความล่าช้า</entry><!-- 如遇运营商系统繁忙，到账时间会有延迟。 -->
+	<entry key="sms.recharge_order.recharge_serveral_part">ยอดเงินที่เติมจะเข้าบัญชีแบ่งเป็นหลายครั้งได้</entry><!--充值金额可能会分多次到账。 -->
+	<entry key="sms.recharge_order.no_attend_activity">การเติมเงินครั้งนี้ไม่ร่วมกิจกรรมของผู้ประกอบการท้องถิ่น</entry><!--本充值不参加当地运营商活动。 -->
+	<entry key="sms.recharge_order.support_country">สนับสนุนไปถึงทุกมณฑลในประเทศ (ไม่รวมพื้นที่ฮ่องกง,มาเก้า,ไต้หวัน)</entry><!-- 支持全国各省市（不包括港、澳、台地区）。 -->
+	<entry key="sms.recharge_order.serveral_part_not_recharge">พื้นที่บางพื้นที่ไม่สามารถออกใบเสร็จการเติมเงินได้,กรุณาเติมเงินด้วยความระมัดระวัง</entry><!--部分地区无法提供充值发票，请谨慎购买。 -->
+	<entry key="sms.recharge_order.call_operators">การสอบถามสถานะการเติมเงินโทรศัพท์กรุณาโทรสอบถามที่เบอร์บริการลูกค้าของผู้ประกอบการ yidong10086,liantong 10010 , dianxing 10000</entry><!--话费到账情况请拨打运营商客服电话查询（移动：10086，联通：10010，电信：10000）。 -->
+	<entry key="sms.recharge_order.client_service">การบริการลูกค้า</entry><!-- 客户服务 -->
+	<entry key="sms.recharge_order.client_phone">เบอร์โทรติดต่อที่ให้บริการลูกค้า</entry><!--客服电话： -->
+	<entry key="sms.recharge_order.servise_time">เวลาที่เปิดบริการ</entry><!--服务时间： -->
+	
+	<entry key="sms.recharge_order.phone_recharge_service">บริการเติมเงินโทรศัพท์</entry><!--手机充值服务 -->
+	<entry key="sms.recharge_order.comfirm_info">ยืนยันข้อมูล</entry><!--确认信息 -->
+	<entry key="sms.recharge_order.recharge_complete">เติมเงินเรียบร้อย แต่ละค่ายอาจจะมีล่าช้า</entry><!--充值完成，不同运营商充值可能有所延迟。 -->
+	<entry key="sms.recharge_order.password_less">ความยาวของรหัสผ่านอย่างน้อย 6 ตัว</entry><!-- 密码长度至少6位 -->
+	<entry key="sms.recharge_order.password_more">ความยาวของรหัสผ่านไม่สามารถเกิน 20 ตัว</entry><!--密码长度不能超过20位 -->
+	<entry key="sms.recharge_order.format_uncorrect">เวลาที่เปิดบริการ</entry><!--格式不正确 -->
+	<entry key="sms.recharge_order.bind">เชื่อมต่อบัญชีที่มีอยู่</entry><!--绑定已有账号 -->
+
+	<!--recharge.html页面国际化 -->
+	<entry key="sms.recharge.recharge_num_comfirm">ให้ตรวจสอบหมายเลขการเติมเงินโดยละเอียด,การเติมเงินเข้าผิดเบอร์จะไม่สามารถคืนเงินได้</entry><!-- 请仔细核对充值号码，充错号将无法退款 -->
+	<entry key="sms.recharge.phone_format_uncorrect">รูปแบบเบอร์มือถือไม่ถูกต้อง</entry><!--手机号格式不正确 -->
+	<entry key="sms.recharge.recharge_amount">กรุณาเลือกยอดเงินที่เติมเงิน</entry><!--请选择充值金额 -->
+	<entry key="sms.recharge.please_ready_comfirm">กรุณาตรวจสอบเบอร์ที่เติมเงินให้ถูกต้อง,ถ้าเงินเข้าผิดเบอร์จะไม่สามารถคืนเงินได้</entry><!-- 请准确核对充值号码，充错号将无法退款 -->
+	<entry key="sms.recharge.write_recharge_info">กรอกข้อมูลการเติมเงิน</entry><!-- 1.填写充值信息 -->
+	<entry key="sms.recharge.comfirm_order">ยืนยันข้อมูลการสั่งซื้อสินค้า</entry><!--2.确认订单信息 -->
+	<entry key="sms.recharge.pay">ชำระเงิน</entry><!--3.支付 -->
+	<entry key="sms.recharge.recharge_complete">การเติมเงินเรียบร้อยแล้ว</entry><!--4.充值完成 -->
+	<entry key="sms.recharge.phone_num">เบอร์มือถือ</entry><!-- 手机号码： -->
+	<entry key="sms.recharge.amount">มูลค่า</entry><!-- 面值 -->
+	<entry key="sms.recharge.alter">แก้ไข</entry><!-- 修改 -->
+	<entry key="sms.recharge.price">ราคา</entry><!-- 价格： -->
+	<entry key="sms.recharge.yuan">หยวน</entry><!-- 元 -->
+	<entry key="sms.recharge.statement">คำอธิบาย</entry><!-- 说明： -->
+	<entry key="sms.recharge.platform_support">เนื่องจากค่าธรรมเนียมในระบบค่อนข้างสูง,ระบบแค่สนับสนุน.....</entry><!-- 由于平台收款存在较高手续费，系统仅支持 -->
+	<entry key="sms.recharge.advance_deposits">เงินแบบมัดจำ</entry><!--【预存款】 -->
+	<entry key="sms.recharge.recharge">เติมเงิน</entry><!-- 充值 -->
+	<entry key="sms.recharge.tips">การแจ้งเตือนแบบมิตรภาพ</entry><!-- 温馨提示 -->
+	<entry key="sms.recharge.busy">ถ้าระบบไม่ว่าง,เงินที่เข้าบัญชีอาจเกิดความล่าช้า</entry><!-- 如遇运营商系统繁忙，到账时间会有延迟。 -->
+	<entry key="sms.recharge.recharge_serveral_part">ยอดเงินที่เติมจะเข้าบัญชีแบ่งเป็นหลายครั้งได้</entry><!--充值金额可能会分多次到账。 -->
+	<entry key="sms.recharge.no_attend_activity">การเติมเงินครั้งนี้ไม่ร่วมกิจกรรมของผู้ประกอบการท้องถิ่น</entry><!--本充值不参加当地运营商活动。 -->
+	<entry key="sms.recharge.support_country">สนับสนุนไปถึงทุกมณฑลในประเทศ (ไม่รวมพื้นที่ฮ่องกง,มาเก้า,ไต้หวัน)</entry><!-- 支持全国各省市（不包括港、澳、台地区）。 -->
+	<entry key="sms.recharge.serveral_part_not_recharge">พื้นที่บางพื้นที่ไม่สามารถออกใบเสร็จการเติมเงินได้,กรุณาเติมเงินด้วยความระมัดระวัง</entry><!--部分地区无法提供充值发票，请谨慎购买。 -->
+	<entry key="sms.recharge.call_operators">การสอบถามสถานะการเติมเงินโทรศัพท์กรุณาโทรสอบถามที่เบอร์บริการลูกค้าของผู้ประกอบการ yidong10086,liantong 10010 , dianxing 10000</entry><!--话费到账情况请拨打运营商客服电话查询（移动：10086，联通：10010，电信：10000）。 -->
+	<entry key="sms.recharge.client_service">บริการลูกค้า</entry><!--客户服务 -->
+	<entry key="sms.recharge.client_phone">เบอร์โทรติดต่อที่ให้บริการลูกค้า</entry><!--客服电话： -->
+	<entry key="sms.recharge.server_time">เวลาที่เปิดบริการ</entry><!--服务时间： -->
+	
+	<entry key="sms.recharge.phone_recharge_service">บริการเติมเงินโทรศัพท์</entry><!--手机充值服务 -->
+	<entry key="sms.recharge.comfirm_info">ยืนยันข้อมูล</entry><!--确认信息 -->
+	<entry key="sms.recharge.commit_order">ยืนให้สั่งซื้อ</entry><!--提交订单 -->
+	
+	<!--register.html页面国际化 -->
+	<entry key="sms.register.user_register">จดทะเบียนผู้ใช้</entry><!--用户注册 -->
+	<entry key="sms.register.user_name_not_null">กรุณากรอกชื่อผู้ใช้</entry><!--用户名不能为空 -->
+	<entry key="sms.register.not_use_special_symbol">ไม่อนุญาตให้ใช้เครื่องหมายพิเศษ</entry><!-- 不可使用特殊字符 -->
+	<entry key="sms.register.user_name_aready_exist">ชื่อผู้ใช้นี้มีอยู่แล้ว</entry><!--用户名已存在 -->
+	<entry key="sms.register.password_not_null">กรุณากรอกรหัสผ่าน</entry><!-- 密码不能为空 -->
+	<entry key="sms.register.password_less">รหัสผ่านไม่สามารถน้อยกว่า{0}คำ</entry><!--密码不能小于{0}个字符 -->
+	<entry key="sms.register.password_more">รหัสผ่านไม่สามารถมากกว่า{0}คำ</entry><!-- 密码不能大于{0}个字符 -->
+	<entry key="sms.register.repeat_password_not_null">กรุณากรอกรหัสผ่านอีกครั้ง</entry><!--重复密码不能为空 -->
+	<entry key="sms.register.password_different">รหัสผ่านไม่ตรงกัน</entry><!--两次输入密码不一致 -->
+	<entry key="sms.register.email_not_null">กรุณากรอกอีเมล์</entry><!-- email不能为空 -->
+	<entry key="sms.register.emial_format_uncorrect">รูปแบบอีเมล์ไม่ถูกต้อง</entry><!-- email格式不正确 -->
+	<entry key="sms.register.emial_exist">อีเมล์นี้มีอยู่แล้ว</entry><!-- 该email已经存在 -->
+	<entry key="sms.register.accept_protocol">กรุณาตอบรับข้อตกลงของผู้ใช้</entry><!--请接受用户协议 -->
+	<entry key="sms.register.security_code_not_null">กรุณากรอกรหัสยืนยันตัวตน</entry><!--验证码不能为空 -->
+	<entry key="sms.register.security_code_uncorrect">รหัสยืนยันตัวตนไม่ถูกต้อง</entry><!--验证码不正确 -->
+	<entry key="sms.register.user_register">ลงทะเบียนผู้ใช้</entry><!--用户注册 -->
+	<entry key="sms.register.aready_register">ฉันได้ลงทะเบียนแล้ว,กำลังจะ....</entry><!-- 我已经注册，现在就 -->
+	<entry key="sms.register.login">เข้าสู่ระบบ</entry><!--登录 -->
+	<entry key="sms.register.person_user_register">ลงทะเบียนแบบรายบุคคล</entry><!--个人用户注册 -->
+	<entry key="sms.register.enterprise_user_register">ลงทะเบียนแบบองค์กร</entry><!-- 企业用户注册 -->
+	<entry key="sms.register.login_name">ชื่อบัญชี</entry><!-- 账户名称： -->
+	<entry key="sms.register.lgoin_password">รหัสผ่านเข้าสู่ระบบ</entry><!-- 登录密码： -->
+	<entry key="sms.register.comfirm_password">ยืนยันรหัสผ่าน</entry><!-- 确认密码： -->
+	<entry key="sms.register.security_code">รหัสยืนยันตัวตน</entry><!--验证码： -->
+	<entry key="sms.register.read_agree">ฉันได้อ่านแล้วยอมรับ</entry><!-- 我已阅读并同意 -->
+	<entry key="sms.register.shop_protocol">ข้อตกลงบริการออนไลน์ของมอลล์</entry><!--《商城在线服务协议》 -->
+	<entry key="sms.register.register_immedicately">ลงทะเบียนทันที</entry><!--立即注册 -->
+	<entry key="sms.register.user_register_protocol">ข้อตกลงการลงทะเบียนของผู้ใช้</entry><!--用户注册协议 -->
+	<entry key="sms.register.agree_continue">เห็นด้วยทำรายการต่อ</entry><!--同意并继续 -->
+	
+	<entry key="sms.register.phone_not_null">เบอร์มือถีอไม่สามารถเว้นว่าง</entry><!-- 手机号码不能为空 -->
+	<entry key="sms.register.second_get">หลังจาก วินาทีแล้วขอใหม่</entry><!-- 秒后重新获取 -->
+	<entry key="sms.register.phone_aready_register">รหัสผ่านเข้าสู่ระบบ</entry><!-- 手机号码已被注册 -->
+	<entry key="sms.register.send_again">ส่งรหัสยืนยันใหม่</entry><!-- 重新发送验证码 -->
+	<entry key="sms.register.write_correct_num">รหัสยืนยันตัวตน</entry><!--请输入正确的手机号码 -->
+	<entry key="sms.register.test_code_not_null">รหัสยืนยันมือถือไม่สามารถเว้นว่าง</entry><!-- 手机验证码不能为空 -->
+	<entry key="sms.register.test_format">รูปแบบรหัสยืนยันผิดพลาด</entry><!-- 验证码格式错误 -->
+	<entry key="sms.register.test_code_timeout">รหัสยืนยันผิดพลาดหรือหมดเวลามีผล</entry><!-- 验证码错误或者失效 -->
+	<entry key="sms.register.this_phone_aready_register">เบอร์มือถือเคยสมัครแล้ว</entry><!-- 此号码已被注册 -->
+	<entry key="sms.register.check_phone">ยืนยันมือถือ</entry><!--验证手机： -->
+	<entry key="sms.register.send_code">ส่งรหัสยืนยัน</entry><!--发送验证码 -->
+
+	<!--search_goods_list.html页面国际化 -->
+	<entry key="sms.search_goods_list.search_result">ผลการค้นหา</entry><!-- 搜索结果 -->
+	<entry key="sms.search_goods_list.search_goods">ค้นหาสินค้า</entry><!-- 搜索商品 -->
+	<entry key="sms.search_goods_list.all_result">ผลการค้นหาทั้งหมด</entry><!--全部结果 -->
+	<entry key="sms.search_goods_list.all_type">สินค้าทั้งหมด</entry><!-- 所有类目 -->
+	<entry key="sms.search_goods_list.generalize_goods">การส่งเสริมการขายสินค้า</entry><!--推广商品 -->
+	<entry key="sms.search_goods_list.original_price">ราคาเดิม</entry><!--原价： -->
+	<entry key="sms.search_goods_list.shop_price">ราคาของมอลล์ </entry><!--商城价： -->
+	<entry key="sms.search_goods_list.hot_recommend">แนะนำสินค้าขายดี</entry><!-- 热卖推荐 -->
+	<entry key="sms.search_goods_list.reference_price">ราคาอ้างอิง</entry><!--参考价： -->
+	<entry key="sms.search_goods_list.rob_price">ราคาโปรฯ</entry><!-- 抢购价： -->
+	<entry key="sms.search_goods_list.immedicately_buy">ซื้อแบบทันที</entry><!-- 立即抢购 -->
+	<entry key="sms.search_goods_list.sum">ทั้งหมดมีสินค้า</entry><!--共 -->
+	<entry key="sms.search_goods_list.piece_goos">….. ชิ้น</entry><!-- 个商品 -->
+	<entry key="sms.search_goods_list.sort">เรียงลำดับ</entry><!-- 排序： -->
+	<entry key="sms.search_goods_list.default">การยืนยันแบบอัตโนมัติ</entry><!--默认 -->
+	<entry key="sms.search_goods_list.sale">จำนวนยอดขาย</entry><!-- 销量 -->
+	<entry key="sms.search_goods_list.popularity">จำนวนคนเข้าเยี่ยมชมเว็บไซต์</entry><!-- 人气 -->
+	<entry key="sms.search_goods_list.good">ความพึงพอใจที่ดี</entry><!--好评 -->
+	<entry key="sms.search_goods_list.price">ราคา</entry><!-- 价格 -->
+	<entry key="sms.search_goods_list.repertory">สต๊อกสินค้า</entry><!--库存： -->
+	<entry key="sms.search_goods_list.all">ทั้งหมด</entry><!--全部 -->
+	<entry key="sms.search_goods_list.display_have">แค่แสดงว่ายังมีสินค้าอยู่</entry><!--仅显示有货 -->
+	<entry key="sms.search_goods_list.goods_type">ประเภทสินค้า</entry><!-- 商品类型： -->
+	<entry key="sms.search_goods_list.xxx">ทั้งหมด</entry><!--全部 -->
+	<entry key="sms.search_goods_list.shop_business">สินค้าของมอลล์ขายเอง</entry><!--商城自营 -->
+	<entry key="sms.search_goods_list.shop_goods">สินค้าจากผู้ขาย</entry><!--商家商品 -->
+	<entry key="sms.search_goods_list.fall">ลดลงอย่างรวดเร็ว</entry><!--直降 -->
+	<entry key="sms.search_goods_list.goods_sale_count">จำนวนยอดขายของสินค้า</entry><!-- 商品销量 -->
+	<entry key="sms.search_goods_list.user_comment">ความคิดเห็นจากลูกค้า</entry><!--用户评论 -->
+	<entry key="sms.search_goods_list.member_login">เข้าสู่ระบบสมาชิก</entry><!--会员登录 -->
+	<entry key="sms.search_goods_list.inline_client">เจ้าหน้าที่บริการลูกค้าออนไลน์</entry><!--在线客服 -->
+	<entry key="sms.search_goods_list.own_goods">สินค้าขายเอง</entry><!-- 自营商品 -->
+	<entry key="sms.search_goods_list.sorry">ขออภัย, ยังไม่มีสินค้าที่ต้องการ!</entry><!--抱歉，没有找到符合条件的商品！ -->
+	<entry key="sms.search_goods_list.search_all_goods">เรียกดูสินค้าทั้งหมด</entry><!--查看全部商品 -->
+
+
+	<!--search_group_list.html/search_grouplife_list.html页面国际化 -->
+	<entry key="sms.search_group_list.group_purchase">ข้อมูลกรุ๊ปบาย</entry><!--团购信息 -->
+	<entry key="sms.search_group_list.classify">ประเภท</entry><!--分类： -->
+	<entry key="sms.search_group_list.not_limit">ไม่จำกัด</entry><!--不限 -->
+	<entry key="sms.search_group_list.price_symbol">ราคา</entry><!-- 价格： -->
+	<entry key="sms.search_group_list.sort">เรียงลำดับ</entry><!-- 排序： -->
+	<entry key="sms.search_group_list.default">ยืนยันแบบอัตโนมัติ</entry><!--默认 -->
+	<entry key="sms.search_group_list.price">ราคา</entry><!-- 价格 -->
+	<entry key="sms.search_group_list.discount">ส่วนลด</entry><!-- 折扣 -->
+	<entry key="sms.search_group_list.sale_count">จำนวนยอดขาย</entry><!--销量 -->
+	<entry key="sms.search_group_list.search_detail">เรียกดูข้อมูลรายละเอียด</entry><!-- 查看详细 -->
+	<entry key="sms.search_group_list.aready_sale_count">ขายไปแล้ว</entry><!-- 已售出 -->
+	<entry key="sms.search_group_list.discount_one">ส่วนลด</entry><!-- 折 -->
+												
+	<!--sina_login_api.html页面国际化 -->
+
+	<entry key="sms.sina_login_api.cooperation_login">เข้าสู่ระบบโดยใช้บัญชีร่วมกัน </entry><!-- 合作伙伴账号登录 -->
+	<entry key="sms.sina_login_api.login">กำลังเข้าสู่ระบบบัญชีขององค์กรที่สาม กรุณารอสักครู่ </entry><!-- 正在进行第三方账号登录，请等待 -->
+
+
+	<!--sina_login_bind.html页面国际化 -->
+	<entry key="sms.comsina_login_bindx">เข้าสู่ระบบโดยใช้ SinaWe chat</entry><!-- 新浪微博登录 -->
+	<entry key="sms.sina_login_bind.user_name_not_null">กรุณากรอกชื่อผู้ใช้</entry><!-- 用户名不能为空 -->
+	<entry key="sms.sina_login_bind.user_name_exist">ชื่อผู้ใช้นี้มีอยู่แล้ว</entry><!--用户名已存在 -->
+	<entry key="sms.sina_login_bind.password_not_null">กรุณากรอกรหัสผ่าน</entry><!--密码不能为空 -->
+	<entry key="sms.sina_login_bind.repeat_password_not_null">กรอกรหัสอีกครั้ง</entry><!-- 重复密码不能为空 -->
+	<entry key="sms.sina_login_bind.password_different">รหัสผ่านไม่ตรงกัน</entry><!--两次密码不一样 -->
+	<entry key="sms.sina_login_bind.Email_not_null">กรุณากรอกอีเมล์</entry><!--Email不能为空 -->
+	<entry key="sms.sina_login_bind.Email_exist">อีเมล์นี้มีอยู่แล้ว</entry><!-- Email已经存在 -->
+	<entry key="sms.sina_login_bind.accept_protocol">กรุณาตอบรับข้อตกลงของผู้ใช้</entry><!--请接受用户协议 -->
+	<entry key="sms.sina_login_bind.sina">บัญชี SinaWechat</entry><!--新浪微博账户 -->
+	<entry key="sms.sina_login_bind.complete_login_info">กรุณากรอกข้อมูลบัญชีให้ครบถ้วน</entry><!--完善账号信息 -->
+	<entry key="sms.sina_login_bind.bind_login_name">มีบัญชีนี้แล้ว การเชื่อมต่อบัญชี</entry><!--已有账号！绑定我的账号 -->
+	<entry key="sms.sina_login_bind.sina_login">เข้าสู่ระบบสำเร็จโดยใช้ WeChat Sina , รหัสจากระบบเป็น"123456" กรุณาแก้ไขรหัสผ่านอีกครั้ง</entry><!--新浪微博登录成功，默认密码为123456，请自行修改 -->
+	<entry key="sms.sina_login_bind.user_name">ชื่อผู้ใช้</entry><!-- 用户名： -->
+	<entry key="sms.sina_login_bind.set_password">ตั้งค่ารหัสผ่าน</entry><!--设置密码： -->
+	<entry key="sms.sina_login_bind.repeat_password">กรุณากรอกรหัสผ่านอีกครั้ง</entry><!--重复密码： -->
+	<entry key="sms.sina_login_bind.email">อีเมล์</entry><!-- 邮箱： -->
+	<entry key="sms.sina_login_bind.agree_protocol">ยืนยันข้อตกลงสำหรับผู้ใช้</entry><!-- 同意用户协议 -->
+	<entry key="sms.sina_login_bind.comfirm_commit">เห็นด้วยและส่งข้อมูล</entry><!--确认提交 -->
+	<entry key="sms.sina_login_bind.password_less">ความยาวของรหัสผ่านอย่างน้อย 6 ตัว</entry><!-- 密码长度至少6位 -->
+	<entry key="sms.sina_login_bind.password_more">ความยาวของรหัสผ่านไม่สามารถเกิน 20 ตัว</entry><!--密码长度不能超过20位 -->
+	<entry key="sms.sina_login_bind.format">รูปแบบไม่ถูกต้อง</entry><!--格式不正确 -->
+	<entry key="sms.sina_login_bind.bind">เชื่อมต่อบัญชีที่มีอยู่</entry><!-- 绑定已有账号 -->
+
+
+
+	<!--store_goods_list.html -->
+	<entry key="sms.store_goods_list.generalize_goods">การส่งเสริมการขายสินค้า</entry><!--推广商品 -->
+	<entry key="sms.store_goods_list.original_price">ราคาเดิม</entry><!-- 原价： -->
+	<entry key="sms.store_goods_list.shop_price">ราคาจากเว็บไซต์</entry><!--商城价： -->
+	<entry key="sms.store_goods_list.reference_price">ราคาอ้างอิง</entry><!-- 参考价： -->
+	<entry key="sms.store_goods_list.rob_price">ราคาแบบซื้อทันที</entry><!-- 抢购价： -->
+	<entry key="sms.store_goods_list.immedicately_rob">ซื้อสินค้าทันที</entry><!-- 立即抢购 -->
+	<entry key="sms.store_goods_list.repeat_factor">ตั้งค่าเงื่อนไขการคัดเลือกสินค้า</entry><!--重置筛选条件 -->
+	<entry key="sms.store_goods_list.goods_filter">คัดเลือกสินค้า</entry><!-- 商品筛选 -->
+	<entry key="sms.store_goods_list.aready_select">ท่านเลือก....แล้ว</entry><!--您已选择： -->
+	<entry key="sms.store_goods_list.expand">เปิดการใช้งาน</entry><!--展开 -->
+	<entry key="sms.store_goods_list.retract">ปิดการใช้งาน</entry><!--收起 -->
+	<entry key="sms.store_goods_list.brank">แบรนด์สินค้า</entry><!--品牌： -->
+	<entry key="sms.store_goods_list.more">เพิ่มเติม</entry><!-- 更多 -->
+	<entry key="sms.store_goods_list.sum">ทั้งหมด</entry><!-- 共 -->
+	<entry key="sms.store_goods_list.piece_goods">มีสินค้า…. ชิ้น</entry><!-- 个商品 -->
+	<entry key="sms.store_goods_list.sort">เรียงลำดับ</entry><!--排序： -->
+	<entry key="sms.store_goods_list.default">การยืนยันแบบอัตโนมัติ</entry><!-- 默认 -->
+	<entry key="sms.store_goods_list.sale_count">จำนวนยอดขาย</entry><!--销量 -->
+	<entry key="sms.store_goods_list.good">ความพึงพอใจที่ดี</entry><!--好评 -->
+	<entry key="sms.store_goods_list.price">ราคา</entry><!-- 价格 -->
+	<entry key="sms.store_goods_list.repertory">สต๊อกสินค้า</entry><!--库存： -->
+	<entry key="sms.store_goods_list.all">ทั้งหมด</entry><!-- 全部 -->
+	<entry key="sms.store_goods_list.display_have">แค่แสดงผลว่ามีสินค้า</entry><!--仅显示有货 -->
+	<entry key="sms.store_goods_list.goods_type">ประเภทสินค้า</entry><!-- 商品类型： -->
+	<entry key="sms.store_goods_list.shop_business">สินค้าที่มอลล์ขายเอง</entry><!--商城自营 -->
+	<entry key="sms.store_goods_list.shop_goods">สินค้าจากผู้ขาย</entry><!-- 商家商品 -->
+	<entry key="sms.store_goods_list.fall">ลดลงอย่างรวดเร็ว</entry><!-- 直降 -->
+	<entry key="sms.store_goods_list.goods_sale_count">จำนวนยอดขายของสินค้า</entry><!--商品销量 -->
+	<entry key="sms.store_goods_list.user_comment">ความคิดเห็นจากผู้ใช้</entry><!-- 用户评论 -->
+	<entry key="sms.store_goods_list.inline_client">เจ้าหน้าที่บริการลูกค้าออนไลน์</entry><!-- 在线客服 -->
+	<entry key="sms.store_goods_list.member_login">สมาชิกเข้าสู่ระบบ</entry><!-- 会员登录 -->
+	<entry key="sms.store_goods_list.sorry">ขออภัย, ไม่พบสินค้าที่ต้องการ</entry><!--抱歉，没有找到符合条件的商品！ -->
+	<entry key="sms.store_goods_list.search_all_goods">เรียกดูสินค้าทั้งหมด</entry><!--查看全部商品 -->
+
+
+	<!--store_head.html -->
+	<entry key="sms.store_head.member_login">สมาชิกเข้าสู่ระบบ</entry><!-- 会员登录 -->
+	<entry key="sms.store_head.store_grade">ให้คะแนนสำหรับการจัดกิจกรรมของร้านค้า</entry><!--店铺动态评分 -->
+	<entry key="sms.store_head.compare_same_industry">เปรียบเทียบสายงานเดียวกัน</entry><!--与同行业相比 -->
+	<entry key="sms.store_head.describe">คำอธิบายของร้านค้าตรงกับร้านค้าจริง</entry><!--描述相符： -->
+	<entry key="sms.store_head.service_attitude">ทัศนคติการบริการ</entry><!--服务态度： -->
+	<entry key="sms.store_head.deliver_speed">ความเร็วในการส่งสินค้า</entry><!--发货速度： -->
+	<entry key="sms.store_head.store_comfirm">การรับรองของร้านค้า</entry><!-- 店铺认证 -->
+	<entry key="sms.store_head.store_info">ข้อมูลของร้านค้า</entry><!--店铺信息 -->
+	<entry key="sms.store_head.goods_count">จำนวนของสินค้า</entry><!--商品数量： -->
+	<entry key="sms.store_head.piece">ชิ้น</entry><!-- 件 -->
+	<entry key="sms.store_head.good_rate">ระดับคะแนนความพึงพอใจ</entry><!--好评率： -->
+	<entry key="sms.store_head.create_time">เวลาที่สร้างร้านค้า</entry><!-- 创店时间： -->
+	<entry key="sms.store_head.collect_popularity">จำนวนคนที่เก็บร้านค้าเป็นร้านค้าที่ชื่นชอบ</entry><!-- 收藏人气： -->
+	<entry key="sms.store_head.search_all">ค้นหาทั่วเว็บไซต์</entry><!-- 搜全站 -->
+	<entry key="sms.store_head.search_this_store">ค้นหาร้านค้านี้</entry><!-- 搜本店 -->
+	<entry key="sms.store_head.not_collect_own_store">ไม่สามารถบันทึกร้านค้าตัวเองเป็นร้านค้าที่ชื่นชอบได้</entry><!-- 不能收藏自己的店铺 -->
+	<entry key="sms.store_head.collect_success">บันทึกร้านค้าชื่นชอบสำเร็จ</entry><!-- 店铺收藏成功！ -->
+	<entry key="sms.store_head.aready_collect">ร้านค้านี้ถูกบันทึกเป็นร้านค้าที่ชื่นชอบแล้ว</entry><!--该店铺已经被收藏！ -->
+	<entry key="sms.store_head.click_here">คลิกที่นี่ ส่งข้อความให้ฉัน</entry><!--点击这里给我发消息 -->
+	<entry key="sms.store_head.click_collect">คลิกเพิ่มรายการโปรด</entry><!-- 点击收藏 -->
+
+
+	<!--store_head.html -->
+	<entry key="sms.store_head.xxx">การแจ้งเตื่อนจากระบบ</entry><!--系统提示 -->
+
+
+	<!--switch_like_goods.html -->
+	<entry key="sms.switch_like_goods.sell_price">ราคาขาย</entry><!-- 售价： -->
+
+
+	<!--top.html -->
+	<entry key="sms.top.welcome">สวัสดีค่ะ /ครับ ยินดีต้อนรับ</entry><!--您好,欢迎来到 -->
+	<entry key="sms.top.manage_back">การจัดการระบบหลังร้าน</entry><!--管理后台 -->
+	<entry key="sms.top.exit_shop">ออกจากระบบ</entry><!--退出商城 -->
+	<entry key="sms.top.xxx">สวัสดีค่ะ/ครับ ยินดีต้อนรับ</entry><!--您好，欢迎来到 -->
+	<entry key="sms.top.login_shop">เข้าสู่ระบบ</entry><!--登录商城 -->
+	<entry key="sms.top.free_register">ลงทะเบียนแบบฟรี</entry><!--免费注册 -->
+	<entry key="sms.top.my_order">ใบสั่งซื้อ</entry><!--我的订单 -->
+	<entry key="sms.top.wechat_shop">มอลล์บน WeChat</entry><!--微信商城 -->
+	<entry key="sms.top.attention_wechat_shop">ติดตาม มอลล์บน WeChat ของระบบ</entry><!--关注微信商城 -->
+	<entry key="sms.top.phone_shop">มอลล์บนมือถือ</entry><!-- 手机商城 -->
+	<entry key="sms.top.client_service">บริการลูกค้า</entry><!--客户服务 -->
+	<entry key="sms.top.help_center">ศูนย์การช่วยเหลือ</entry><!--帮助中心 -->
+	<entry key="sms.top.service_after_sell">บริการหลังการขาย</entry><!--售后服务 -->
+	<entry key="sms.top.inline_service">เจ้าหน้าที่บริการลูกค้าออนไลน์</entry><!--在线客服 -->
+	<entry key="sms.top.complain_center">ศูนย์การร้องเรียน</entry><!--投诉中心 -->
+	<entry key="sms.top.client_email">อีเมล์ของเจ้าหน้าที่บริการลูกค้า</entry><!--客服邮箱 -->
+	<entry key="sms.top.merchant_enter">ผู้ขายเปิดร้านค้าบนระบบ</entry><!--商家入驻 -->
+	<entry key="sms.top.web_nav">การนำทางของเว็บไซต์</entry><!--网站导航 -->
+	<entry key="sms.top.collect_shop">บันทึกเว็บไซต์เป็นเว็ไซต์ที่ชื่นชอบ</entry><!--收藏本站 -->
+	<entry key="sms.top.merchant_login">ร้านค้าเข้าสู่ระบบ</entry><!-- 商家登录 -->
+	<entry key="sms.top.merchant_manage">การจัดการร้านค้า</entry><!--商家管理 -->
+
+	<!--user_dialog_login.html -->
+	<entry key="sms.user_dialog_login.user_name_not_null">กรุณากรอกชื่อผู้ใช้</entry><!-- 用户名不能为空 -->
+	<entry key="sms.user_dialog_login.login_fail">ขื้อผู้ใช้ หรือ รหัสผ่านไม่ถูกต้อง  เข้าสู่ระบบล้มเหลว</entry><!-- 用户名、密码错误，登录失败！ -->
+	<entry key="sms.top.see_fuzzy">อ่านไม่ออก เปลี่ยนรูปใหม่</entry><!--看不清？换一张 -->
+	<entry key="sms.top.login_immediately">เข้าสู่ระบบทันที</entry><!--立即登录 -->
+
+
+</properties>

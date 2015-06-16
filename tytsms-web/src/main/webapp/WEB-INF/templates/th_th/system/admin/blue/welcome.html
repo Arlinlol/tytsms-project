@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!{config.title}-商城系统后台管理</title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+</head>
+<body>
+<div class="cont">
+  <h1 class="seth">欢迎页面</h1>
+  <div class="system_top">
+    <div class="welcome"><strong>您好,<span style="color:#06F">$!user.userName</span>,欢迎使用<span style="color:#F60"><strong style="color:#25B6E2">Taiyitao</strong></span>商城系统. 您上次登录的时间：$!CommUtil.formatLongDate($!user.lastLoginDate),上次登录IP:$!user.lastLoginIp</strong> <span class="welcome_sp"><b>[本次统计：<strong>$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!stat.addTime)</strong></b>,<b>下次统计：<strong>$!CommUtil.formatTime("yyyy-MM-dd HH:mm",$!stat.next_time)</strong>]</b></span> </div>
+    <div class="wela">
+      <h2>一周动态</h2>
+      <ul>
+        <li><a href="$!webPath/admin/sys_tip_list.htm"><em>重要提醒</em><i><b class="wela_bg_red">$!{sts.size()}</b></i></a></li>
+        <li><em>新增会员数</em><i><b class="wela_bg_yellow">$!{stat.week_user}</b></i></li>
+        <li><em>新增商品数</em><i><b class="wela_bg_orange">$!{stat.week_goods}</b></i></li>
+        <li><em>新增店铺数</em><i><b class="wela_bg_blue">$!{stat.week_store}</b></i></li>
+        <li><em>新增订单数</em><i><b class="wela_bg_green">$!{stat.week_order}</b></i></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/complaint_list.htm?status=new','main_workspace','complaint_manage_op','about_trade')"><em>待处理投诉</em><i><b class="wela_bg_pink2">$!{stat.week_complaint}</b></i></a></li>
+        <li><em>本周活跃会员</em><i><b class="wela_bg_pink3">$!{stat.week_live_user}</b></i></li>
+      </ul>
+    </div>
+    <div class="wela">
+      <h2>商城统计</h2>
+      <ul>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/user_list.htm','main_workspace','member_manage_op','about_member')"><em>会员总数</em><i><b class="wela_bg_blue2"> $!{stat.all_user}</b></i></a></li>
+        <li ><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/store_list.htm','main_workspace','store_manage_op','about_store')"><em>店铺总数 </em><i> <b class="wela_bg_pink"> $!{stat.all_store}</b></i></a></li>
+        <li><em>店铺待审核</em><i><b class="wela_bg_pink2">$!{stat.store_audit}</b></i></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/goods_list.htm','main_workspace','goods_manage_op','about_goods')"><em>商品总数</em><i><b class="wela_bg_pink3">$!{stat.all_goods}</b></i></a></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/payofflog_list.htm?status=0','main_workspace','payoff_list_op','sys_payoff')"><em>未结算账单</em><i><b class="wela_bg_green">$!{stat.not_payoff_num}</b></i></a></li>
+        <li><em>总销售金额</em><i><b class="wela_bg_blue">¥$!{stat.all_sale_amount}</b></i></li>
+        <li><em>总销售佣金</em><i><b class="wela_bg_orange">¥$!{stat.all_commission_amount}</b></i></li>
+        <li><em>总结算</em><i><b class="wela_bg_yellow">¥$!{stat.all_payoff_amount}</b></i></li>
+        <li><em>实际结算</em><i><b class="wela_bg_green">¥$!{stat.all_payoff_amount_reality}</b></i></li>
+        <li><em>会员总预存款</em><i><b class="wela_bg_blue2">¥$!{stat.all_user_balance}</b></i></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/refund_list.htm','main_workspace','return_manage_op','about_trade')"><em>商品退款</em><i><b class="wela_bg_red">$!{stat.not_refund}</b></i></a></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/groupinfo_refund_list.htm','main_workspace','return_manage_op','about_trade')"><em>消费码退款</em><i><b class="wela_bg_orange">$!{stat.not_grouplife_refund}</b></i></a></li>
+      </ul>
+    </div>
+    <div class="wela">
+      <h2>自营统计</h2>
+      <ul>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/goods_self_list.htm?goods_status=0','main_workspace','goods_self_manage_op','about_self')"><em>出售中的商品</em><i><b class="wela_bg_red">$!{stat.self_goods}</b></i></a></li>
+        <li> <a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/goods_self_list.htm?goods_status=1','main_workspace','goods_self_manage_op','about_self')"><em>仓库中的商品</em><i><b class="wela_bg_yellow">$!{stat.self_storage_goods}</b></i></a></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/goods_self_list.htm?goods_status=-2','main_workspace','goods_self_manage_op','about_self')"><em>违规下架的商品</em><i><b class="wela_bg_green">$!{stat.self_out_goods}</b></i></a></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/self_order.htm?order_status=order_pay','main_workspace','self_order_op','about_self')"><em>待发货订单</em><i><b class="wela_bg_blue">$!{stat.self_order_shipping}</b></i></a></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/self_order.htm?order_status=order_submit','main_workspace','self_order_op','about_self')"><em>待付款订单</em><i><b class="wela_bg_pink">$!{stat.self_order_pay}</b></i></a></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/self_order.htm?order_status=order_evaluate','main_workspace','self_order_op','about_self')"><em>待评价订单</em><i><b class="wela_bg_orange">$!{stat.self_order_evaluate}</b></i></a></li>
+        <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/self_return.htm','main_workspace','self_return_op','about_self')"><em>商品退货</em><i><b class="wela_bg_red2">$!{stat.self_return_apply}</b></i></a></li>
+         <li><a href="javascript:void(0);" onclick="window.parent.openURL('url','$!webPath/admin/grouplife_selfinfo.htm','main_workspace','group_self_op','about_self')"><em>消费码退款</em><i><b class="wela_bg_blue">$!{stat.self_grouplife_refund}</b></i></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="system_info">
+    <h3>系统信息</h3>
+    <div class="system_info_box"> <span><strong>服务器操作系统：$!os</strong></span> <span><strong>Web服务器：$!web_server_version</strong></span> <span><strong>JAVA版本：$!java_version </strong></span> <span><strong>数据库版本信息：$!database_version</strong></span> <span><strong>系统版本号：$!shop_version</strong></span> <span><strong>安装日期：$!CommUtil.formatLongDate($!config.addTime)</strong></span> </div>
+  </div>
+</div>
+</body>
+</html>

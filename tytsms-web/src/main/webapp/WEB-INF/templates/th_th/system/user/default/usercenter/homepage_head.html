@@ -1,0 +1,144 @@
+<script>
+//添加关注
+jQuery(document).ready(function(){
+	jQuery("#add_atten").click(function(){
+	var user_id= jQuery(this).attr("user_id");
+		 jQuery.post("$!webPath/buyer/homepage_add_attention.htm",
+				   {
+				    "user_id":user_id
+				   },
+				   function(data){
+					 if(data=="true"){					/* 系统提示 */												/* 	关注成功！ */
+						 showDialog("share_sns","#springMessage('member.homepage_head.system_prompt')","#springMessage('member.homepage_head.attention_user')",0,"succeed",3);
+						 }else{
+						showDialog("share_sns","#springMessage('member.homepage_head.system_prompt')","#springMessage('member.homepage_head.attention_user')",0,"error",3);
+							 }						/* 系统提示 */											/* 您已经关注过该用户！ */
+	   					},"text");	  
+	});
+	
+	//点击发布按钮
+	jQuery("#fabu").click(function(){
+		jQuery("#share_select_mark").val("");		/* 我要发布 */				   
+		showDialog("share_sns","#springMessage('member.homepage_head.my_release')","",2,"succeed",3,select_method);
+	});
+
+});
+//个人主页选择分享方式，三种分享方式，分享宝贝，分享店铺，分享新鲜事
+function select_method(){
+	var mark = jQuery("#share_select_mark").val();
+	if(mark==3){
+	jQuery("#over").show();
+	jQuery(".black_overlay").css("height",jQuery(document).height());
+	query_babys();
+	}	
+	if(mark==4){
+	jQuery("#over").show();
+	jQuery(".black_overlay").css("height",jQuery(document).height());
+	query_stores();
+	}	
+	if(mark==5){									/* 分享新鲜事 */
+		showDialog("select_dynamic_mark_5","#springMessage('member.homepage_head.share_things')","",5,"succeed","",select_dynamic_save);//第四个参数为5，弹出分享新鲜事窗口
+		}
+	};
+//个人主页分享保存方法	
+function select_dynamic_save(){
+	var content =jQuery("#share_select_content").val();	
+ 		jQuery.post("$!webPath/buyer/dynamic_save.htm",
+				   {
+				    "content":content
+				   },
+				   function(data){
+					   if(data){								/* 系统提示 */										/* 发布成功！ */
+                          showDialog("share_sns","#springMessage('member.homepage_head.system_prompt')","#springMessage('member.homepage_head.release_success')",0,"succeed",5);
+						   }
+	   					},"text");	  
+	};
+//查询已经购买的宝贝和已经收藏的宝贝	
+function query_babys(){
+		jQuery.post("$!webPath/buyer/homepage_query_goods.htm",
+				   function(data){
+					   if(data){
+						 jQuery("#over").hide();
+                        jQuery("body").append(data);
+						   }
+	   					},"text");	 
+			};	
+function query_stores(){
+		jQuery.post("$!webPath/buyer/homepage_query_stores.htm",
+				   {
+				   },
+				   function(data){
+					   if(data){
+						jQuery("#over").hide();
+                        jQuery("body").append(data);   
+						   }
+	   					},"text");	 
+	};	
+</script>
+<input id="share_select_mark"  name="share_select_mark" type="hidden" value=""/>
+<input id="share_select_content"  name="share_select_content" type="hidden" value=""/>
+<div style="width:100%; background:url($!webPath/th_th/resources/style/system/front/default/images/usercenter/top_bg.jpg) no-repeat top center; height:232px; padding-top:20px; clear:both;">
+  <div class="main">
+    <div class="head">
+      <div class="logo"> #if($!config.websiteLogo)
+        #set($logoImg="$!imageWebServer/$!config.websiteLogo.path/$!config.websiteLogo.name")
+        #else
+        #set($logoImg="$!imageWebServer/th_th/resources/style/system/front/default/images/logo.png")
+        #end <a href="$!webPath/index.htm"> <img src=$!logoImg width="200"/> </a></div>
+     
+       #if($!owner.id==$!user.id)
+        <div class="release">
+      <a href="javascript:void(0);" id="fabu"><strong> +</strong> <i>#springMessage("member.homepage_head.release")<!-- 发布 --></i></a>
+      </div>
+      #else
+     <div class="release_ta">
+      <a href="$!webPath/buyer/homepage.htm"><strong> « </strong> <i>#springMessage("member.homepage_head.return_main")<!-- 返回我的个人主页 --></i></a>
+      </div>
+      #end
+
+      <div class="attention">
+        <div class="attention_hd"> #set($userImg="$!webPath/$!config.memberIcon.path/$!config.memberIcon.name")
+          #if($!owner.photo)
+          #set($userImg="$!webPath/$!owner.photo.path/$!owner.photo.name")
+          #end
+          
+          #if($!owner.id!=$!user.id)
+          <a href="$!webPath/buyer/homepage.htm?uid=$!{owner.id}"> 
+          <img class="attention_hd_pic" src=$!userImg width="69" height="79" /> 
+          </a>
+          #else
+             <a href="$!webPath/buyer/homepage.htm"> 
+          <img class="attention_hd_pic" src=$!userImg width="69" height="79" /> 
+          </a>
+          #end
+          </div>
+        <div class="attention_mid">
+          <div class="attention_mid_left">
+            <p><strong>$!owner.userName </strong></p>
+            <div class="attention_mid_left_bt"> <span>#springMessage("member.homepage_head.sex")<!-- 性别： -->#if($!owner.sex==-1)#springMessage("member.homepage_head.secrecy")<!-- 保密  -->#end #if($!owner.sex==1)#springMessage("member.homepage_head.man")<!-- 男 --> #end #if($!owner.sex==0)#springMessage("member.homepage_head.wonman")<!-- 女 -->#end #if(!$!owner.sex)#springMessage("member.homepage_head.not_available_info")<!-- 暂无信息 -->#end </span></br><i>  #springMessage("member.homepage_head.birthday")<!-- 生日： -->#if($!owner.birthday)$!CommUtil.formatShortDate($!owner.birthday)#else#springMessage("member.homepage_head.not_available_info")<!-- 暂无信息 -->#end</i> </div>
+          </div>
+          <div class="attention_right"> #if($!owner.id!=$!user.id)
+            <p class="attention_btn"> <i><a href="javascript:void(0);" id="add_atten" user_id = $!owner.id><strong>+</strong>#springMessage("member.homepage_head.add_attention")<!-- 加关注 --></a></i> </p>
+            #end
+             #if($!owner.id!=$!user.id)
+            <ul class="attention_fans">
+              <li>
+              <a href="$!webPath/buyer/homepage/myfans.htm?uid=$!owner.id"><strong>$!fans_num</strong><span>#springMessage("member.homepage_head.fan")<!-- 粉丝 --></span></a></li>
+              <p></p>
+              <li><a href="$!webPath/buyer/homepage/myattention.htm?uid=$!owner.id"><strong>$!attentions_num</strong><span>#springMessage("member.homepage_head.attention")<!-- 关注 --></span></a></li>
+            </ul>
+             #else
+               <ul class="attention_fans">
+              <li>
+              <a href="$!webPath/buyer/homepage/myfans.htm"><strong>$!fans_num</strong><span>#springMessage("member.homepage_head.fan")<!-- 粉丝 --></span></a></li>
+              <p></p>
+              <li><a href="$!webPath/buyer/homepage/myattention.htm"><strong>$!attentions_num</strong><span>#springMessage("member.homepage_head.attention")<!-- 关注 --></span></a></li>
+            </ul>
+              #end
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="over" style="display:none">  <div class="black_overlay"><img style="top:20%; left:50%; z-index:999; position:absolute;" src="$!webPath/th_th/resources/style/common/images/loading.gif" /></div></div>

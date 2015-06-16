@@ -1,0 +1,37 @@
+#if($!op_title)
+<table style="float:left;" width="390" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    <tr>
+      <td colspan="2" align="center" valign="top">$!op_title</td>
+    </tr>
+</table>
+#else
+<table style="float:left;" width="390" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    <tr>
+      <td width="100" align="right" valign="top">订单编号：
+      </td>
+      <td align="left">$!obj.order_id</td>
+    </tr>
+        <tr>
+      <td align="right" valign="top">物流公司：</td>
+      <td align="left">$!express_company_name</td>
+      </td>
+    </tr>
+    <tr>
+      <td align="right" valign="top">物流单号：</td>
+          <td align="left">$!obj.return_shipCode</td>
+    </tr>
+    #if($!transInfo.status==1)
+    #foreach($info in $transInfo.data)
+    <tr>
+      <td align="right" valign="top">&nbsp;&nbsp;</td>
+      <td align="left">$!info.time $!info.context</td>
+    </tr>
+    #end
+    #else
+     <tr>
+      <td align="right" valign="top">&nbsp;&nbsp;</td>
+      <td align="left">$!transInfo.message</td>
+    </tr>
+    #end
+</table>
+#end

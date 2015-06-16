@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function(){
+var data='$!config.user_level';
+var obj=eval("("+data+")");	 
+ jQuery.each(obj, function(id,val){
+    jQuery("#"+id).val(val);
+ });
+//
+});
+</script>
+</head>
+<body>
+<form action="$!webPath/admin/user_level_save.htm" method="post" name="theForm" id="theForm">
+  <div class="cont">
+    <h1 class="seth">会员等级
+      <input name="id" type="hidden" id="id" value="$!config.id" />
+      <input name="list_url" type="hidden" id="list_url" value="$!webPath/admin/user_level.htm" />
+    </h1>
+    <div class="nav_list">
+      <ul>
+        <li><a href="javascript:void(0);" class="this"><b>会员等级</b></a></li>
+      </ul>
+      
+    </div>
+        <div class="operation">
+      <h3>友情提示</h3>
+      <ul>
+        <li>用户消费金额(元)达到相应区间后获得相应会员等级，会员等级永不回滚</li>
+        <li>不同等级的会员，购买商城活动商品时可以享有不同的折扣优惠</li> 
+        <li>不同等级的会员，使用系统积分可以兑换不同的积分商城礼品</li> 
+      </ul>
+    </div>
+    <div class="reputh">消费总额</div>
+    <div class="reputation">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="reputation_table">
+        <tr>
+          <td width="315"><strong>等级</strong></td>
+          <td><strong>总额介于</strong></td>
+        </tr>
+        <tr>
+          <td class="spoprat"><span style="float:left"><img src="$!webPath/resources/style/common/images/userlevel_0.png" width="20" height="35" /></span><b style="float:left; margin-top:10px; font-size:14px; padding-left:10px;">铜牌会员</b></td>
+          <td class="spoprat"><div style="float:left"><span class="size100">
+              <input name="creditrule0" type="text" id="creditrule0" value="0" disabled="true"/>
+              </span><span>-</span><span class="size100">
+              <input name="creditrule1" type="text" id="creditrule1" />
+              </span></div>
+            <span id="nothis"><strong class="q"></strong><strong class="w">会员等级计算时包含前后数值</strong><strong class="c"></strong></span></td>
+        </tr>
+        <tr>
+          <td class="spoprat"><span style="float:left"><img src="$!webPath/resources/style/common/images/userlevel_1.png" width="20" height="35" /></span><b style="float:left; margin-top:10px; font-size:14px; padding-left:10px;">银牌会员</b></td>
+          <td class="spoprat"><div style="float:left"><span class="size100">
+              <input name="creditrule2" type="text" id="creditrule2" />
+              </span><span>-</span><span class="size100">
+              <input name="creditrule3" type="text" id="creditrule3" />
+              </span></div>
+            <span id="nothis"><strong class="q"></strong><strong class="w">会员等级计算时包含前后数值</strong><strong class="c"></strong></span></td>
+        </tr>
+        <tr>
+          <td class="spoprat"><span style="float:left"><img src="$!webPath/resources/style/common/images/userlevel_2.png" width="20" height="35" /></span><b style="float:left; margin-top:10px; font-size:14px; padding-left:10px;">金牌会员</b></td>
+          <td class="spoprat"><div style="float:left"><span class="size100">
+              <input name="creditrule4" type="text" id="creditrule4" />
+              </span><span>-</span><span class="size100">
+              <input name="creditrule5" type="text" id="creditrule5" />
+              </span></div>
+            <span id="nothis"><strong class="q"></strong><strong class="w">会员等级计算时包含前后数值</strong><strong class="c"></strong></span></td>
+        </tr>
+        <tr>
+          <td class="spoprat"><span style="float:left"><img src="$!webPath/resources/style/common/images/userlevel_3.png" width="20" height="35" /></span><b style="float:left; margin-top:10px; font-size:14px; padding-left:10px;">超级会员</b></td>
+          <td class="spoprat"><span class="size100">
+            <input name="creditrule6" type="text" id="creditrule6" />
+            </span><span>以上</span></td>
+        </tr>
+      </table>
+    </div>
+    <div class="submit">
+      <input name="" type="submit" value="提交" />
+    </div>
+  </div>
+</form>
+</body>
+</html>

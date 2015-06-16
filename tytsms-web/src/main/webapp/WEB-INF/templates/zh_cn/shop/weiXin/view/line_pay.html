@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>正在支付 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+</head>
+<body>
+<div class="main">
+  <div class="payfor_waitting">
+    <ul>
+      <li><img src="$!webPath/resources/style/system/front/default/images/wait.gif"  /></li>
+      <li>正在生成安全支付链接，请等待......</li>
+    </ul>
+  </div>
+</body>
+</html>
+#if($!type=="goods")
+  #set($id="$!order_id")
+#end
+#if($!type=="cash")
+  #set($id="$!cash_id")
+#end
+#if($!type=="gold")
+  #set($id="$!gold_id")
+#end
+#if($!type=="integral")
+  #set($id="$!integral_order_id")
+#end
+#if($!type=="group")
+  #set($id="$!{order_id}")
+#end
+
+#if($!{payType}=="alipay")
+ $!payTools.genericAlipay("$!url","$!payment_id","$!type","$!id")
+#end
+#if($!{payType}=="bill")
+$!payTools.generic99Bill("$!url","$!payment_id","$!type","$!id")
+#end
+
+#if($!{payType}=="tenpay")
+<script>
+ window.location.href='$!webPath/tenpay.htm?type=$!type&payment_id=$!payment_id&id=$!id';
+</script>
+#end
+#if($!{payType}=="chinabank")
+$!payTools.genericChinaBank("$!url","$!payment_id","$!type","$!id")
+#end
+#if($!{payType}=="paypal")
+$!payTools.genericPaypal("$!url","$!payment_id","$!type","$!id")
+#end
+#if($!{payType}=="allinpay")
+$!payTools.genericAllinpay("$!url","$!payment_id","$!type","$!id")
+#end
+#if($!{payType}=="wechatpay")
+<script>
+window.location.href='$!webPath/weiXin/wechatpay.htm?type=$!type&payment_id=$!payment_id&id=$!id&url=$!url&code=$!code';
+</script>
+#end

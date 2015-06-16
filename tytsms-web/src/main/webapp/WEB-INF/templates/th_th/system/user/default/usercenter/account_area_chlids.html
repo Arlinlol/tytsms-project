@@ -1,0 +1,7 @@
+#if(!$!childs)
+ <option >#springMessageText('member.account_area_chlids.please_choose','')</option>
+#end
+ 	<option >#springMessageText('member.account_area_chlids.please_choose','')</option>
+   #foreach($area in $childs)
+    <option value="$!area.id">$!area.areaName</option>
+ #end

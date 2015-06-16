@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.lazyload.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.SuperSlide.2.1.1.js"></script>
+<script src="$!store_second_url/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.iskyshop.validate.js" type="text/javascript"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="active_page">
+    <div class="active_banner">
+      <div class="active_b_left"> <span class="active_b_big"><img src="$!webPath/$!act.ac_acc.path/$!act.ac_acc.name" width="737" height="320" /></span> <span class="active_b_small"><img src="$!webPath/$!act.ac_acc2.path/$!act.ac_acc2.name" width="200" height="320" /></span></div>
+      <div class="active_b_right"> <b> <img src="$!webPath/$!act.ac_acc3.path/$!act.ac_acc3.name" width="250" height="320" /> </b>
+        <h3>#springMessage("member.activity.activity_detail")<!-- 活动详情 --></h3>
+        <p><a href="javascript:void(0);">$!act.ac_content</a> </p>
+      </div>
+    </div>
+    <form id="ListForm" name="ListForm" action="" method="post">
+      <div class="active_page_pro">
+      <div class="active_pro_hid"> #foreach($!obj in $!objs)
+        #if($!obj.ag_goods.goods_main_photo)
+        #set($bigimg="$!imageWebServer/$!{obj.ag_goods.goods_main_photo.path}/$!{obj.ag_goods.goods_main_photo.name}")
+        #set($img="$!{bigimg}_middle.$!{obj.ag_goods.goods_main_photo.ext}")
+        #else
+        #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+        #end
+        #set($goods_url="$!webPath/goods_$!{obj.ag_goods.id}.htm")
+        #if($!config.second_domain_open && $!obj.ag_goods.goods_type==1 && $!obj.ag_goods.goods_store.store_second_domain!="")
+        #set($goods_url="http://$!{obj.ag_goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.ag_goods.id}.htm")
+        #end
+        
+        <div class="active_pro_one">
+          <ul>
+            <li class="active_pro_img"> <a href="$!{goods_url}"><span class="img_cspan">
+              <p><img src="$!{img}" height="226" width="226" /></p>
+              </span><em></em><i class="act_em_i"></i> 
+              <strong> 
+              <b> <img src="$!webPath/th_th/resources/style/common/images/userlevel_3.png" width="25" height="35" /></br>
+              $!obj.ag_goods.activity_price3 #springMessage("sms.activity.yuan")</b>
+               <b><img src="$!webPath/th_th/resources/style/common/images/userlevel_2.png" width="25" height="35" /></br >
+              $!obj.ag_goods.activity_price2 #springMessage("sms.activity.yuan")</b>
+              <b><img src="$!webPath/th_th/resources/style/common/images/userlevel_1.png" width="25" height="35" /></br >
+              $!obj.ag_goods.activity_price1 #springMessage("sms.activity.yuan")</b>
+              <b><img src="$!webPath/th_th/resources/style/common/images/userlevel_0.png" width="25" height="35" /></br >
+              $!obj.ag_goods.activity_price #springMessage("sms.activity.yuan")</b> </strong> </a> </li>
+            <li class="active_pro_name"><a href="$!goods_url">$!obj.ag_goods.goods_name</a></li>
+            <li class="active_pro_price"><b>#springMessage("sms.activity.sales")：$!obj.ag_goods.goods_salenum</b><span><s>¥</s>$!obj.ag_goods.activity_price3</span></li>
+          </ul>
+        </div>
+        #end 
+        
+        #if($!objs.size()==0||!$!objs)
+        <div class="main_list_box">
+          <div class="main_list_none"> <span class="main_none_box"> <i></i>
+            <p> #springMessage("sms.activity.no_activities")！<a href="$!webPath/index.htm">#springMessage("sms.activity.returns_homepage")</a></p>
+            </span></div>
+        </div>
+        #end </div>
+      <div class="fenye"><span>$!gotoPageFormHTML</span></div>
+      <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+    </form>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

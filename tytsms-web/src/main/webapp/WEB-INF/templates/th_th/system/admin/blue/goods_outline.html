@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script>
+//
+function ajax_update(id,fieldName,obj,value){
+   var val;
+   if(value==undefined){
+	 val=jQuery(obj).val();
+   }else val=value; 
+   jQuery.ajax({type:'POST',
+	              url:'$!webPath/admin/goods_ajax.htm',
+				  data:{"id":id,"fieldName":fieldName,"value":val},
+				beforeSend:function(){
+				  
+				},
+			   success:function(data){
+	             if(val==""){
+				   jQuery(obj).attr("src","$!webPath/th_th/resources/style/system/manage/blue/images/"+data+".png");
+				 }else{
+				   jQuery(obj).val(val);
+				 }    
+				 if(value!=undefined){
+				   jQuery(obj.parentNode.parentNode).remove();
+				 }
+              }
+	    });
+}
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">商品管理</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="$!webPath/admin/goods_list.htm"><b>所有商品</b></a></li>
+        <li><a href="$!webPath/admin/goods_list.htm?status=-5" #if($!status==-5)class="this"#end><b>未审核商品</b></a></li>
+        <li><a href="$!webPath/admin/goods_outline.htm" class="this"><b>违规下架商品</b></a></li>
+    </ul>
+  </div>
+	<form name="queryForm" id="queryForm" action="" method="post">
+    <div class="search">
+   <span>商品名称</span>
+    <span class="size150">
+          <input name="goods_name" type="text" id="goods_name" value="$!{goods_name}"/>
+          </span> <span>品牌名称</span> 
+         <span> <select name="gb_id" id="gb_id">
+          <option value="">所有品牌</option>
+          #foreach($gb in $gbs)
+          <option value="$!gb.id" #if("$!{gb_id}"=="$!{gb.id}") selected="selected" #end>$!gb.name</option>
+          #end
+          </select></span>
+          <span>类别</span>
+         <span> <select name="gc_id" id="gc_id">
+            <option value="">所有分类</option>
+            #foreach($gc in $gcs)
+            <option value="$!gc.id" #if("$!{gc_id}"=="$!{gc.id}") selected="selected" #end >$!gc.className</option>
+            #foreach($child in $gc.childs)
+           	<option value="$!child.id" #if("$!{gc_id}"=="$!{child.id}") selected="selected" #end >&nbsp;&nbsp;$!child.className</option>
+            #end
+            #end
+          </select></span>
+          <span class="btn_search">
+          <input name="" type="submit"  value="搜索" style="cursor:pointer;"  class="search_btn"/>
+          </span>
+    
+    </div>
+  </form>
+  <div class="operation">
+    <h3>友情提示</h3>
+    <ul>
+      <li>所有商品，在商城前台所有访客均可查看，管理员和商家都可以设置商品上架状态</li>
+      <li>未审核商品，商家无论新发布商品还是编辑商品，都需要通过管理员审核通过后才能上架</li>
+      <li>违规商品，管理员根据商城访客举报结合实际情况设定违规，违规商品前台不可显示，只能管理员能取消违规</li>
+    </ul>
+  </div>
+  <form name="ListForm" id="ListForm" action="" method="post">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="30">&nbsp;</th>
+          <th width="37%"><span class="form_btna">商品名称</span></th>
+          <th width="15%" align="center"><span class="form_btna">品牌</span></th>
+          <th width="15%" align="center"><span class="form_btna">分类名</span></th>
+          <th width="10%" align="center"><span class="form_btna">上架</span></th>
+          <th width="10%" align="center"><span class="form_btna">查看次数</span></th>
+          <th width="10%" align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+      #foreach($obj in $objs)
+          #set($goods_url="$!webPath/goods_$!{obj.id}.htm")
+#if($!config.second_domain_open && $!obj.goods_type==1 && $!obj.goods_store.store_second_domain!="")
+#set($goods_url="http://$!{obj.goods_store.store_second_domain}.$!{domainPath}/goods_$!{obj.id}.htm")
+#end 
+        <tr>
+          <td class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+          <td><label>
+            <textarea name="textarea" cols="40" rows="3"  title="可编辑" onblur="ajax_update('$!obj.id','goods_name',this)">$!obj.goods_name</textarea>
+          </label></td>
+          <td align="center">$!obj.goods_brand.name</td>
+          <td align="center">$!obj.gc.className</td>
+          <td align="center"><img onclick="ajax_update('$!obj.id','goods_status',this,'0')"  src="$!webPath/th_th/resources/style/system/manage/blue/images/tops.jpg"  border="0" style="cursor:pointer;" title="可编辑"/> </td>
+          <td align="center">$!obj.goods_click</td>
+          <td class="hui oprate_con" align="center">
+          	<a href="$!goods_url" target="_blank" class="blue">查看</a>
+          </td>
+        </tr>
+     #end
+    </table>
+    </div>
+    <div class="operate_bar">
+    	<div class="fenye">
+       		<input name="mulitId" type="hidden" id="mulitId" />
+    		<input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+      		$!gotoPageFormHTML
+    	</div> 
+    <div class="oper_sp">
+    	<span class="oper_check"><input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部</span>
+        <span class="oper_del"><input name="" type="button" value="删除" onclick="cmd('$!webPath/admin/goods_del.htm');"/></span>
+    </div>         
+ </div>
+  </form>
+</div>
+</body>
+</html>

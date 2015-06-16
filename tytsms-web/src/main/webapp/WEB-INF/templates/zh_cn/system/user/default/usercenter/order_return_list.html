@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>返修/退换货 - $!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script type="text/javascript" src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script type="text/javascript" src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script>
+jQuery(document).ready(function(){
+	jQuery(".user_menu b").toggle(
+		 function(){
+			jQuery(this).siblings().hide();	
+			jQuery(this).find("i").removeClass("active");
+		  },
+		 function(){
+			jQuery(this).siblings().show();	
+			jQuery(this).find("i").addClass("active");
+		 });	
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter"> $!httpInclude.include("/buyer/nav.htm?op=return")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><span class="myorder_fright"></span><strong>商品退货</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title"> <span class="user_title_sp"> </span>
+          <ul class="user_title_ul">
+            <li class="this"><i></i>商品退货</li>
+            <li><i></i><a href="$!webPath/buyer/group_life_return.htm">生活购退款</a></li>
+            <li><i></i><a href="$!webPath/buyer/order_return_listlog.htm">查看返修/退换货记录</a></li>
+          </ul>
+        </div>
+        #if($!data.size()>0)
+        <form action="$!webPath/buyer/order_return_list.htm" method="post" id="ListForm">
+          <div class="user_list_box">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_order_table">
+              <tr>
+                <th width="20%">订单编号</th>
+                <th width="40%">商品</th>
+                <th>下单时间</th>
+              </tr>
+              #foreach($obj in $!data)
+              <tr>
+                <td align="center"><b class="blue2"><a href="$!webPath/buyer/order_view.htm?id=$!obj.id" target="_blank">$!obj.order_id</a></b></td>
+                
+				<td>
+					<dl class="return_goods">
+                        #foreach($map in $!obj.info)
+    				    #if($!map.order_status>=40)
+						#set($goods_mainphoto_path = "$!map.goods_mainphoto_path")
+						#set($img="$!webPath/$!{goods_mainphoto_path}")
+                        #if($!map.goods_choice_type=="1")
+                        <dt> <a href="$!webPath/goods_$!{map.goods_id}.htm" target="_blank"><img src="$!img" width="55" height="55" /></a> <a href="javascript:void(0);" class="return_goods_b">退货</a> </dt>
+                        #else
+                        #if($!map.goods_return_status=="" || $!map.goods_return_status==5)
+                        <dt> <a href="$!webPath/goods_$!{map.goods_id}.htm" target="_blank"><img src="$!img" width="55" height="55" /></a> <a dialog_id="order_cancel" dialog_height="100" dialog_width="530" dialog_title="申请退货" dialog_uri="$!webPath/buyer/order_return_apply.htm?id=$!map.goods_id&oid=$!map.id&original_id=$!obj.id&order_id=$!map.order_id&currentPage=$!currentPage&goods_gsp_ids=$!map.goods_gsp_ids" href="javascript:void(0);" class="return_goods_a">#if($!map.goods_return_status==5)退货中#else退货#end</a> </dt>
+                        #else
+                        	#if($!map.goods_return_status==6 || $!map.goods_return_status==7 || $!map.goods_return_status==8)
+                       		#set($return_mark="退货中")
+                            	#if($!map.goods_return_status==8)
+                                #set($return_mark="退货完成")
+                                #end
+                        	#else
+                      		 #set($return_mark="退货")
+                            #end
+                        <dt> <a href="$!webPath/goods_$!{map.goods_id}.htm" target="_blank"><img src="$!img" width="55" height="55" /></a> <a href="javascript:void(0);" class="return_goods_b">$!{return_mark}</a> </dt>
+                        #end 
+                         
+    					#end
+    					#end
+    					#end
+                  </dl>
+				</td>
+                <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+              </tr>
+              #end
+            </table>
+          </div>
+          <div class="userlist_allop">
+            <div class="user_list_page"><span class="user_page_sp">
+              <input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+              $!gotoPageFormHTML</span> </div>
+          </div>
+        </form>
+        <div class="user_explain">
+          <h3>退货常见问题</h3>
+          <div class="user_explain_box"> “退货”按钮若为灰色，可能是因为订单尚未完成或该商品正在返修/退换货中；虚拟商品也无法进行退货。 </div>
+          <div class="user_explain_box"> &nbsp;&nbsp;&nbsp;退货流程：买家申请退货→商家同意→买家提交退货物流→商家确认→平台退款→至买家账户。 </div>
+          <div class="user_explain_box"> &nbsp;&nbsp;&nbsp;退款到达时间：5至7个工作日，退货款项将以预存款的形式存入买家的账户中，预存款可抵消同等价值的人民币。 </div>
+        </div>
+        #else
+         <div class="nothing">
+            <div class="nothing_left"><img src="$!webPath/resources/style/system/front/default/images/nothing.png" /></div>
+            <div class="nothing_right">您目前还没有商品退货记录！</div>
+          </div>
+        #end
+      </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

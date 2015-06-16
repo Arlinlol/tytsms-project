@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-商家品牌列表-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.zh.cn.js" charset="utf-8"></script>
+<script src="$!webPath/th_th/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+   $!httpInclude.include("/seller/nav.htm?op=goods_brand") 
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>商品管理</b> > <b>品牌列表</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href="$!webPath/seller/goods_brand_list.htm"><i></i>品牌列表</a></li>
+            <li ><a href="$!webPath/seller/goods_brand_add.htm"><i></i>申请品牌</a></li>
+          </ul>
+        </div>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/goods_brand_list.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="139">品牌名称</th>
+                  <th width="128">品牌标志</th>
+                  <th width="125">审核状态</th>
+                  <th width="100" align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                #if($!obj.audit==-1)
+                #set($status = "审核未通过")
+                #end
+                #if($!obj.audit==0)
+                #set($status = "待审核")
+                #end
+                #if($!obj.audit==1)
+                #set($status = "审核通过")
+                #end
+                <tr >
+                  <td align="center">$!obj.name</td>
+                  <td align="center"><img src="$!webPath/$!obj.brandLogo.path/$!obj.brandLogo.name" height="44px" width="88px"/></td>
+                  <td align="center">$!status</td>
+                  <td align="center" class="del_operate"> #if($!obj.audit==-1) <a href="$!webPath/seller/goods_brand_delete.htm?id=$!obj.id&currentPage=$!currentPage" class="del_a"> 删除</a> #end 
+                    #if($!obj.audit==0)<a href="$!webPath/seller/goods_brand_edit.htm?id=$!obj.id" class="del_a">编辑</a> | <a href="$!webPath/seller/goods_brand_delete.htm?id=$!obj.id&currentPage=$!currentPage" class="del_a">删除</a> #end </td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp"> $!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+ $!httpInclude.include("/footer.htm")
+</body>
+</html>

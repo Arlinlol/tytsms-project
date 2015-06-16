@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.group_list.bulk_information")</title><!--团购信息--> 
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/groupbuy.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.lazyload.js"></script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="main"> $!httpInclude.include("/group_head.htm")
+  $!httpInclude.include("/nav.htm")
+  <div class="index">
+    <div class="index2">
+      <div class="gp_goodstop">
+        <div class="gp_topbar">
+          <h2><a href="$!webPath/group.htm">#springMessage("sms.group_list.current_group")<!--当前团购--></a>|<a href="$!webPath/group_list.htm?time=soon" #if($time=="soon")class="this"#end>#springMessage("sms.group_list.about_begin")<!--即将开始--></a>|<a href="$!webPath/group_list.htm?time=history" #if($time=="history")class="this"#end>#springMessage("sms.group_list.past_bank")<!--往期团购--></a></h2>
+        </div>
+      </div>
+     #if($!objs.size()>0) 
+     <form method="post" id="ListForm">
+      #foreach($obj in $objs)
+      <div class="before_tuan">
+        <h4 class="before_h4"><span class="beforeh_sp">$!{obj.group_name}</span></h4>
+        <div class="before_box">
+          <div class="before_intbox">
+            #if($!time=="soon")
+            #foreach($!gg in $!groupViewTools.query_goods("$!obj.id",6))
+            <dl class="before_d">
+              <dt>$!gg.gg_name</dt>
+              <dd>
+                <ul class="before_u">
+                  <!--act_one\act_two\act_three-->
+                  <li class="before_act"><span class="act_one">#springMessage("sms.group_list.about_begin")<!--即将开始--></span></li>
+                  <li class="before_shu">#springMessage("sms.group_list.remember_snap_up")<!--记得抢购哦--></li>
+                  <li class="before_money">#springMessage("sms.group_list.original_price")<!--原价-->:<b><s>¥$!{gg.gg_goods.store_price}</s></b></li>
+                  <li class="before_money">#springMessage("sms.group_list.discount")<!--折扣-->:<strong>$!{gg.gg_rebate}#springMessage("sms.group_list.discount")<!--折--></strong></li>
+                  <li class="before_money">#springMessage("sms.group_list.present_price")<!--现价-->:<b>$!{gg.gg_price}</b></li>
+                  #set($save_money=$!obj.gg_goods.goods_price - $!obj.gg_price)
+                  <li class="before_money">#springMessage("sms.group_list.save")<!--节省-->:<b>$!{save_money}</b></li>
+                </ul>
+                <div class="befoue_spimg"><span class="gp_img_cspan">
+                  <p><img src="$!imageWebServer/$!gg.gg_img.path/$!gg.gg_img.name" width="190" height="190" /></p>
+                  </span></div>
+              </dd>
+            </dl>
+            #end
+            #end
+            #if($!time=="history")
+             #foreach($!gg in $!groupViewTools.query_goods("$!obj.id",6))
+            <dl class="before_d">
+              <dt>$!gg.gg_name</dt>
+              <dd>
+                <ul class="before_u">
+                  <!--act_one\act_two\act_three-->
+                  <li class="before_act"><span class="act_two">#springMessage("sms.group_list.end")<!--已经结束--></span></li>
+                  <li class="before_shu">#springMessage("sms.group_list.next_time")<!--期待下次吧--></li>
+                  <li class="before_money">#springMessage("sms.group_list.original_price")<!--原价-->:<b><s>¥$!{gg.gg_goods.goods_price}</s></b></li>
+                  <li class="before_money">#springMessage("sms.group_list.discount")<!--折扣-->:<strong>$!{gg.gg_rebate}#springMessage("sms.group_list.discount")<!--折--></strong></li>
+                  <li class="before_money">#springMessage("sms.group_list.present_price")<!--现价-->:<b>$!{gg.gg_price}</b></li>
+                  #set($save_money=$!obj.gg_goods.goods_price - $!obj.gg_price)
+                  <li class="before_money">#springMessage("sms.group_list.save")<!--节省-->:<b>$!{save_money}</b></li>
+                </ul>
+                <div class="befoue_spimg"><span class="gp_img_cspan">
+                  <p><img src="$!imageWebServer/$!gg.gg_img.path/$!gg.gg_img.name" width="190" height="190" /></p>
+                  </span></div>
+              </dd>
+            </dl>
+            #end
+            #end
+          </div>
+        </div>
+      </div>
+      #end
+      <div class="fenye">
+            <div class="fenyes">
+              <input name="time" type="hidden" id="time" value="$!time" />
+              <input type="hidden" name="currentPage" id="currentPage" />
+              $!gotoPageFormHTML </div>
+          </div>
+      </form>
+     #else
+     <div class="index_w">
+        <div class="tuan_empty"> 
+         <i><img src="$!imageWebServer/th_th/resources/style/system/front/default/images/group/empty.jpg" width="120" height="109" /></i>
+         #if($!time=="soon")
+         <span>#springMessage("sms.group_list.bulk_end")<!--没有即将开始团购活动--></span> 
+         #end
+         #if($!time=="history")
+         <span>#springMessage("sms.group_list.no_bulk")<!--没有往期团购活动--></span> 
+         #end
+        </div>
+      </div>
+     #end
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

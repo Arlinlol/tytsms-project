@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>收货地址-$!{config.title}-$!{config.poweredby}</title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/public_auto.css" type="text/css" rel="stylesheet" />
+<script type="text/javascript" src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.iskyshop.validate.js"></script>
+<script  type="text/javascript" >
+jQuery(document).ready(function(){
+ jQuery("#ajax_add").live("click",function(){
+	jQuery.ajax({type:'POST',url:'$!webPath/buyer/address_add.htm?currentPage=$!currentPage',data:'',success:function(data){
+	jQuery("#contant").html(data); 
+  }});	
+ });
+			
+ jQuery("#ajax_edit").live("click",function(){
+	var id = jQuery(this).attr("mark");
+	jQuery.ajax({type:'POST',url:'$!webPath/buyer/address_edit.htm?currentPage=$!currentPage',data:{"id":id},success:function(data){
+	jQuery("#contant").html(data); 
+ }});	
+});
+									  
+jQuery(".user_menu b").toggle(
+	function(){
+	  jQuery(this).siblings().hide();	
+	  jQuery(this).find("i").removeClass("active");
+	 },
+	function(){
+	  jQuery(this).siblings().show();	
+	  jQuery(this).find("i").addClass("active");
+	});					
+});
+			
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <div class="usercenter"> $!httpInclude.include("/buyer/nav.htm?op=address")
+    <div class="usercenter_right">
+      <div class="myorder">
+        <h4><span class="myorder_fright"></span><strong>收货地址</strong></h4>
+      </div>
+      <div class="user_list">
+        <div class="user_list_title"> <span class="user_list_t_btn"><a href="javascript:void(0);" class="newadd" id="ajax_add"><b><i class="newadd_i"></i>新增地址</b></a></span>
+          <ul class="user_title_ul">
+            <li class="this"><i></i><a href="javascript:void(0);">收货地址</a></li>
+          </ul>
+        </div>
+        #if($!objs.size()>0)
+        <div class="user_explain">
+          <h3>介绍说明</h3>
+          <div class="user_explain_box">填写自己的收货地址，在下订单时方便选择收货地址。</div>
+        </div>
+        <form method="post" id="ListForm">
+          <div class="user_list_box">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="user_order_table">
+              <tr>
+                <th width="10%">收货人名</th>
+                <th width="18%">所在地区</th>
+                <th width="28%">详细地址</th>
+                <th width="8%">邮政编码</th>
+                <th width="13%">电话号码</th>
+                <th width="13%">手机电话</th>
+                <th>操作</th>
+              </tr>
+              #foreach($obj in $objs)
+              <tr id="$!obj.id">
+                <td align="center">$!obj.trueName</td>
+                <!--cty 修改时间2015-3-12 增加内容 -->
+                #set($address="$!obj.area.parent.parent.parent.areaName $!obj.area.parent.parent.areaName $!obj.area.parent.areaName $!obj.area.areaName")
+                <td align="center" area_info_id="$!obj.id">$!address</td>
+                <td align="center"><b class="blue">$!obj.area_info</b></td>
+                <td align="center">$!obj.zip</td>
+                <td align="center">#if($!obj.telephone && $!obj.telephone!="") $!obj.telephone #else 未填写#end</td>
+                <td align="center">#if($!obj.mobile && $!obj.mobile!="") $!obj.mobile #else 未填写#end</td>
+                <td align="center" class="del_operate"><a href="javascript:void(0);" onclick="if(confirm('删除后不可恢复，是否继续?'))window.location.href='$!webPath/buyer/address_del.htm?mulitId=$!obj.id&currentPage=$!currentPage'" class="del_a">删除</a>|<a href="javascript:void(0);" id="ajax_edit" mark="$!obj.id" page="$!currentPage" class="del_a">编辑</a></td>
+              </tr>
+              #end
+            </table>
+          </div>
+          <div class="userlist_allop">
+            <div class="user_list_page"><span class="user_page_sp">$!gotoPageFormHTML</span> </div>
+          </div>
+        </form>
+        #else
+        <div class="nothing">
+          <div class="nothing_left"><img src="$!webPath/resources/style/system/front/default/images/nothing.png" /></div>
+          <div class="nothing_right">您目前还没有收货地址信息！</div>
+        </div>
+        #end </div>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+<div id="contant"> </div>
+</body>
+</html>

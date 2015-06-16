@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-团购管理-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+  $!httpInclude.include("/seller/nav.htm?op=group")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销推广</b> ><b>团购管理</b></span></div>
+      <div class="seller_list">
+          <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href='$!webPath/seller/group.htm'><i></i>商品类团购商品列表</a></li>
+            <li><a href='$!webPath/seller/group.htm?type=life'><i></i>生活类团购商品列表</a></li>
+            <li><a href='$!webPath/seller/group_add.htm?type=goods'><i></i>新增商品类团购</a></li>
+             <li class="this"><a href='$!webPath/seller/grouplife_selforder.htm'><i></i>生活购订单列表</a></li>
+            <li><a href='$!webPath/seller/group_add.htm?type=life'><i></i>新增生活类团购</a></li>
+            <li><a href='$!webPath/seller/grouplife_selfinfo.htm'><i></i>团购消费码列表</a></li>
+            <li><a href='$!webPath/seller/group_meal.htm'><i></i>团购套餐购买</a></li>
+          </ul>
+        </div>
+         <form action="$!webPath/seller/grouplife_selforder.htm" method="post" id="queryForm">
+        <div class="user_sp_right"> <span class="user_title_sp">
+        <select name="status" id="status">
+          <option value="">订单状态</option>
+          <option value="0" #if($!status==0) selected="selected" #end>已取消</option>
+            <option value="10" #if($!status==10) selected="selected" #end>待支付</option>
+              <option value="20" #if($!status==20) selected="selected" #end>已支付</option>
+          </select>
+            <input name="order_id" type="text" class="user_title_txt" id="order_id" placeholder="订单号" value="$!order_id"/>
+            <input name="" type="submit" class="user_sear_btn" value="查询"/>
+        </span> </div>
+        </form>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/grouplife_selforder.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                 <th width="15%">订单编号</th>
+         		 <th width="25%">订单商品</th>
+          		<th width="8%">购买数量</th>
+          		<th width="8%">商品单价</th>
+          		<th width="15%">下单时间</th>
+          		<th width="10%">订单状态</th>
+          		<th align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                <tr > 
+                  <td align="center">$!obj.order_id</td>
+            #set($map = $!orderFormTools.queryGroupInfo("$!obj.group_info"))
+              #set($goods_id = "$!{map.get('goods_id')}")	
+              #set($goods_name = "$!{map.get('goods_name')}")	
+              #set($goods_mainphoto_path = "$!{map.get('goods_mainphoto_path')}")
+              #set($img = "$!webPath/$!{goods_mainphoto_path}")
+              #set($goods_count = "$!{map.get('goods_count')}")
+              #set($goods_price = "$!{map.get('goods_price')}")
+          <td align="center">$!goods_name</td>
+          <td align="center">$!goods_count</td>
+          <td align="center">$!goods_price</td>
+          <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+          <td align="center"> #if($!obj.order_status==0) 已取消 #end #if($!obj.order_status==10) 未支付 #end #if($!obj.order_status==20) 已支付 #end</td>
+          <td align="center">#if($!obj.order_status==0) 无法操作 #end #if($!obj.order_status==10)<a href="javascript:void(0);" onclick="if(confirm('是否确定取消编号为：$!obj.order_id 订单？'))window.location.href='$!webPath/seller/lifeorder_cancel.htm?id=$!obj.id'">取消</a> #end</td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp">$!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

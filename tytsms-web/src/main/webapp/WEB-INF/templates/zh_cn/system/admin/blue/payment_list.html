@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+</head>
+
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script>
+jQuery(document).ready(function(){
+	jQuery("a[id^=pay_]").click(function(){
+	  	var id = jQuery(this).attr("id");
+		var css = jQuery(this).attr("class");
+		if(css=="this") return false;
+	jQuery.each(jQuery("a[id^=pay_]"), function(){
+		if(jQuery(this).attr("id")==id){
+			jQuery(this).addClass("this");
+			var pid = "#"+jQuery(this).attr("id").substring(4);
+			jQuery(pid).show();
+		}else{
+			jQuery(this).removeClass("this");
+			var pid = "#"+jQuery(this).attr("id").substring(4);
+			jQuery(pid).hide();
+		}
+		})
+	})
+	#if($!op)
+	  jQuery.each(jQuery("a[id^=pay_]"), function(){
+	    var pid = "#"+jQuery(this).attr("id").substring(4);
+	    jQuery(pid).hide();
+	  })
+	  jQuery("a[id^=pay_]").removeClass("this");
+	  jQuery("#pay_$!op").addClass("this");
+	  jQuery("#$!op").show();
+	#end
+		
+  jQuery("img[id='config_payment_type']").click(function(){
+     var type = jQuery("#config_payment_type").val();	
+	 if(type=="0"){
+		jQuery("#config_payment_type").val("1");
+		jQuery("img[id='config_payment_type']").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg");
+	}else{
+		jQuery("#config_payment_type").val("0");
+		jQuery("img[id='config_payment_type']").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg");
+	}
+  });  
+  #if($!config.config_payment_type=="0")
+  jQuery("#config_payment_type").val("0");
+  jQuery("img[id='config_payment_type']").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/off.jpg");
+  #else
+  jQuery("#config_payment_type").val("1");
+  jQuery("img[id='config_payment_type']").attr("src","$!webPath/resources/style/system/manage/$!{config.websiteCss}/images/on.jpg");
+  #end
+  //
+  jQuery("span .w").mousemove(function(){
+	var id=jQuery(this.parentNode).attr("id");
+	if(id="nothis"){
+	   jQuery(this.parentNode).attr("id","this")
+	}
+  }).mouseout(function(){
+     var id=jQuery(this.parentNode).attr("id");
+	 if(id="this"){
+	   jQuery(this.parentNode).attr("id","nothis")
+	 }
+  });
+
+});
+</script>
+<body>
+<div class="cont">
+  <h1 class="seth">支付方式</h1>
+  <div class="nav_list">
+ 
+   <ul> 
+   <li><a href="javascript:void(0);"  class="this" id="pay_platform"><b>支付方式列表</b></a> </li>
+   </ul>
+   
+    </div>
+  <div class="fshoptb" id="platform">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+      <tr>
+        <th width="17%"><span class="form_btna">支付方式名称</span></th>
+        <th width="60%" align="center"><span class="form_btna">支付方式描述</span></th>
+        <th width="8%" align="center"><span class="form_btna">启用</span></th>
+        <th width="15%" align="center"><span class="form_btna">操作</span></th>
+      </tr>
+      <tr>
+        <td>预存款支付</td>
+        <td align="left">预存款支付，使用商城预存款支付，需要商城开启预存款功能</td>
+        #set($pay=$!paymentTools.queryPayment("balance"))
+        <td align="center">#if($!pay)是#else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=balance&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=balance&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=balance&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>支付宝</td>
+        <td align="left">支付宝网站(<a href="http://www.alipay.com" target="_blank">www.alipay.com</a>) 是国内先进的网上支付平台<br /></td>
+        #set($pay=$!paymentTools.queryPayment("alipay"))
+        <td align="center">#if($!pay)是#else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=alipay&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=alipay&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=alipay&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>支付宝手机网页支付</td>
+        <td align="left">支付宝网站(<a href="http://www.alipay.com" target="_blank">www.alipay.com</a>) 是国内先进的网上支付平台<br /></td>
+        #set($pay=$!paymentTools.queryPayment("alipay_wap"))
+        <td align="center">#if($!pay)是#else 否 #end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=alipay_wap&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=alipay_wap&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=alipay_wap&type=admin" class="blue">编辑</a></td>
+      </tr>
+         <tr>
+        <td>支付宝手机APP支付</td>
+        <td align="left">支付宝网站(<a href="http://www.alipay.com" target="_blank">www.alipay.com</a>) 是国内先进的网上支付平台<br /></td>
+        #set($pay=$!paymentTools.queryPayment("alipay_app"))
+        <td align="center">#if($!pay)是#else 否 #end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=alipay_app&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=alipay_app&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=alipay_app&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>财付通</td>
+        <td align="left">财付通(<a href="http://www.tenpay.com" target="_blank">www.tenpay.com</a>) - 本即时到账接口无需预付费，任何订单金额均即时到达您的账户，只收单笔 1% 手续费。</td>
+        #set($pay=$!paymentTools.queryPayment("tenpay"))
+        <td align="center">#if($!pay)是#else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=tenpay&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=tenpay&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=tenpay&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>快钱支付</td>
+        <td align="left">快钱(<a href="http://www.99bill.com" target="_blank">www.99bill.com</a>) - 本即时到账接口无需预付费，任何订单金额均即时到达您的账户，只收单笔 1% 手续费。</td>
+        #set($pay=$!paymentTools.queryPayment("bill"))
+        <td align="center">#if($!pay)是#else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=bill&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=bill&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=bill&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>网银支付</td>
+        <td align="left">网银在线(<a href="http://www.chinabank.com.cn" target="_blank">www.chinabank.com.cn</a>)以网上转账方式将相应交易款划转到商户指定银行账号中。</td>
+        #set($pay=$!paymentTools.queryPayment("chinabank"))
+        <td align="center">#if($!pay)是#else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=chinabank&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=chinabank&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=chinabank&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>Paypal</td>
+        <td align="left">Paypal(<a href="https://www.paypal.com" target="_blank">www.paypal.com</a>)全球信用卡快捷安全支付。</td>
+        #set($pay=$!paymentTools.queryPayment("paypal"))
+        <td align="center">#if($!pay)是#else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=paypal&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=paypal&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=paypal&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>通联支付</td>
+        <td align="left">通联支付(<a href="http://www.allinpay.com" target="_blank">www.allinpay.com</a>)全国前十支付，全支付牌照第二家。</td>
+        #set($pay=$!paymentTools.queryPayment("allinpay"))
+        <td align="center">#if($!pay)是#else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=allinpay&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=allinpay&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=allinpay&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>货到付款</td>
+        <td>货到付款</td>
+        #set($pay=$!paymentTools.queryPayment("payafter"))
+        <td align="center">#if($!pay==true)是 #else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=payafter&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=payafter&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=payafter&type=admin" class="blue">编辑</a></td>
+      </tr>
+      <tr>
+        <td>微信支付</td>
+        <td align="left">微信支付(<a href="https://mp.weixin.qq.com" target="_blank">mp.weixin.qq.com</a>)是国内先进的网上支付平台。</td>
+        #set($pay=$!paymentTools.queryPayment("wechatpay"))
+        <td align="center">#if($!pay)是#else 否#end</td>
+        <td align="center" class="hui oprate_con">#if($!pay)<a href="$!webPath/admin/payment_set.htm?mark=wechatpay&type=admin&pay=$!pay" class="blue">禁用</a>#else<a href="$!webPath/admin/payment_set.htm?mark=wechatpay&type=admin&pay=$!{pay}" class="blue">启用</a>#end|<a href="$!webPath/admin/payment_edit.htm?mark=wechatpay&type=admin" class="blue">编辑</a></td>
+      </tr>
+    </table>
+  </div>
+</div>
+</body>
+</html>

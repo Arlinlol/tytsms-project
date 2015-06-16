@@ -1,0 +1,23 @@
+<form action="$!webPath/seller/album_transfer_save.htm" method="post" id="theForm">
+  <table style="float:left;" width="100%" border="0" cellspacing="0" cellpadding="0" class="box_table">
+    
+    <tr>
+      <td width="100" align="right" valign="top"><span class="hui_table">转移到:</span></td>
+      <td align="left"><span class="dia_txt">
+        <select name="to_album_id" id="to_album_id">
+              #foreach($obj in $objs)
+                    <option value="$!obj.id">$!obj.album_name</option>
+              #end 
+              </select>
+      </span></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center"><span class="inputbtn">
+        <input type="submit" value="转移相册" style="cursor:pointer;"/>
+        <span class="batch_op">
+        <input name="album_id" type="hidden" id="album_id" value="$!album_id" />
+        <input name="mulitId" type="hidden" id="mulitId" value="$!mulitId" />
+        </span></span></td>
+    </tr>
+  </table>
+</form>

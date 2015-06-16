@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script>
+function query_form(){
+jQuery("#ListForm").submit();
+	}
+</script>
+
+</head>
+<body scroll="yes">
+<div class="cont">
+  <h3 class="seth">被举报禁售商品</h3>
+  <div class="nav_list">
+  		<ul>
+        	<li><a href="$!webPath/admin/goods_self_list.htm?goods_status=0"><b>出售中的商品</b></a></li>
+            <li><a href="$!webPath/admin/goods_self_list.htm?goods_status=1"><b>仓库中的商品</b></a></li>
+            <li><a href="$!webPath/admin/goods_self_list.htm?goods_status=-2"><b>违规下架商品</b></a></li>
+            <li style="display:none"><a href="$!webPath/admin/goods_self_report.htm" class="this"><b>被举报禁售商品</b></a></li>
+        </ul>
+  </div>
+  <form name="ListForm" id="ListForm" action="" method="post">
+    <div class="search">
+      <span>商品名称</span> <span class="size100">
+          <input name="goods_name" type="text" id="goods_name" value="$!goods_name" />
+          </span> 
+          <span>
+          <input name="" type="button"  value="搜索" style="cursor:pointer;" onclick="query_form()" class="search_btn"/>
+        </span> 
+     
+    </div>
+     <div class="operation">
+    <h3>友情提示</h3>
+    <ul>
+      <li>出售中的商品，在商城前台所有访客均可查看</li>
+      <li>仓库中的商品，暂时没有出售的商品，前台所有游不可查看</li>
+      <li>违规下架商品，管理员根据商城访客举报结合实际情况设定违规，违规商品前台不可显示，只能管理员能取消违规</li>
+      <li style="display:none">被举报禁售商品，管理员根据用户举报信息对商品设定为举报并且禁止销售商品</li>
+    </ul>
+  </div>
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="20%"><span class="form_btna">商品名称</span></th>
+          <th width="10%"><span class="form_btna">举报类型</span></th>
+          <th width="10%"><span class="form_btna">举报主题</span></th> 
+          <th width="10%"><span class="form_btna">举报图片</span></th> 
+          <th width="10%"><span class="form_btna">举报时间</span></th> 
+          <th width="8%"><span class="form_btna">状态</span></th> 
+          <th width="10%" align="center"><span class="form_btna">处理结果</span></th>
+          <th align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+     #foreach($obj in $objs)
+        <tr>
+          <td> $!obj.goods.goods_name</td>
+          <td align="center">$!obj.subject.type.name</td> 
+          <td align="center">$!obj.subject.title</td> 
+          <td align="center"><a href="$!webPath/admin/report_img.htm?id=$!obj.id" target="_blank" class="blue">查看图片</a></td>
+          <td align="center">$!CommUtil.formatLongDate($!obj.addTime)</td>
+           #if($!obj.status==0)#set($status="未处理")#end
+                      #if($!obj.status==1)#set($status="已处理")#end
+                      #if($!obj.status==-1)#set($status="已取消")#end
+                       <td align="center">$!status</td>
+                         #set($result="等待处理")
+                      #if($!obj.result==1)
+                        #set($result="有效举报")
+                      #end
+                      #if($!obj.result==-1)
+                        #set($result="无效举报")
+                      #end
+                      #if($!obj.result==-2)
+                        #set($result="恶意举报")
+                      #end
+                        <td align="center">$!result</td>
+          <td class="hui oprate_con" align="center">
+          	<a href="javascript:void(0);" onclick="javascript:jQuery('#content_1').show();">详细</a>
+          </td>
+        </tr>
+        <tr id="content_1" style="display:none;">
+                  <td colspan="8"><div class="banreport">
+                      <div class="report1">
+                        <h1><a class="close" href="javascript:void(0);" onclick="javascript:jQuery('#content_1').hide();"><img src="$!webPath/resources/style/system/manage/blue/images/close.jpg" width="12" height="13" /></a>举报内容</h1>
+                        <div class="rep">$!obj.content</div>
+                      </div>
+                      <div class="report2">
+                        <h1>处理意见</h1>
+                        <div class="rep">$!obj.handle_info</div>
+                      </div>
+                    </div></td>
+                </tr>
+    	#end
+    </table>
+    </div>
+    <div class="operate_bar">
+        <div class="fenye">
+            <span id="queryCondition" style="display:none">
+            </span>
+            <input name="mulitId" type="hidden" id="mulitId" />
+        	<input name="currentPage" type="hidden" id="currentPage" value="$!currentPage" />
+       		$!gotoPageFormHTML      
+        </div> 
+   		<div class="oper_sp">
+        </div>          
+ 	</div>
+  </form>
+</div>
+</body>
+</html>

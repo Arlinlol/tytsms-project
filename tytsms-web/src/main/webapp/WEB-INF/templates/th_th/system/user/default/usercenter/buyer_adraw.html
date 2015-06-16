@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("member.buyer_adraw.integral_lottery")</title><!-- 积分抽奖 -->
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_auto.css" type=text/css rel=stylesheet />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script type="text/javascript" src="$!webPath/th_th/resources/js/jquery.min.js"></script>
+<script type="text/javascript" src="$!webPath/th_th/resources/js/jQueryRotate.2.2.js"></script>
+<script type="text/javascript" src="$!webPath/th_th/resources/js/jquery.easing.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+ var webPath= "$!webPath";
+</script>
+<script src="$!webPath/th_th/resources/js/award.js"></script>
+</head>
+
+<body>
+<div id="adraw_mask"></div>
+  $!httpInclude.include("/top.htm")
+  $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+
+<div class="main">
+  <input type="hidden" id="token" name="token" value="$!Token">
+  <div class="usercenter">
+   $!httpInclude.include("/buyer/nav.htm?op=adraw") 
+    <div class="usercenter_right">
+      <div class="user_adraw">
+        <div class="user_adraw_top">
+          <div class="user_adraw_left">
+	    <input type="hidden" name="islgin" id="islgin" value="$!user"> 
+            <div class="outer-cont">
+              <div id="adraw_outer"><img id="imgs" src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/s1.png" viewbox="0 0 352 30" ></div>
+            </div>
+            <div class="inner-cont">
+              <div id="adraw_inner"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/s2.png"></div>
+            </div>
+          </div>
+          <div class="user_adraw_right">
+            <div class="title"><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/title_b.png"></div>
+            <div class="user_adraw_share">
+              <h3>#springMessage("member.buyer_adraw.turn_continue")<!-- 转盘转转 好礼不断 --></h3>
+              <div class="sp">
+              <span class="sp_left">
+              <dl>
+              <dt>1.</dt>
+                <dd class="sp_p1">#springMessage("member.buyer_adraw.share_activity")<!-- 分享活动 --></dd>
+                <dd class="sp_p2">#springMessage("member.buyer_adraw.get_one_integral")<!-- 获得100积分 --></dd>
+                </dl>
+                </span>
+                <span class="sp_right"><a class="share_box_btn">#springMessage("member.buyer_adraw.share_immediately")<!-- 立即分享 --></a></span>
+                 <div class="share_box">
+	                 <div class="bdsharebuttonbox"><!-- 分享到QQ空间 -->
+						<a title="#springMessage('member.buyer_adraw.share_to_qq')" href="#" class="bds_qzone" data-cmd="qzone"></a>
+						<a title="#springMessage('member.buyer_adraw.share_to_sina_blog')" href="#" class="bds_tsina" data-cmd="tsina"></a><!-- 分享到新浪微博 -->
+						<a title="#springMessage('member.buyer_adraw.share_to_tencent_blog')" href="#" class="bds_tqq" data-cmd="tqq"></a><!-- 分享到腾讯微博 -->
+						<a title="#springMessage('member.buyer_adraw.share_people')" href="#" class="bds_renren" data-cmd="renren"></a><!-- 分享到人人网 -->
+						<a title="#springMessage('member.buyer_adraw.share_to_weixin')" href="#" class="bds_weixin" data-cmd="weixin"></a><!-- 分享到微信 -->
+						<a href="#" class="bds_more" data-cmd="more"></a></div>
+                 </div>
+                </div>
+              <div class="sp"><span class="sp_left">
+               <dl>
+              <dt>2.</dt>
+                <dd class="sp_p1">#springMessage("member.buyer_adraw.invite_register")<!-- 邀请注册 --></dd>
+                <dd class="sp_p2">#springMessage("member.buyer_adraw.get_two_integral")<!-- 获得200积分 --></dd>
+                </dl>
+                </span><span class="sp_right"><a class="sp_right_register">#springMessage("member.buyer_adraw.register_immediately")<!-- 立即注册 --></a></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="user_adraw_main">
+          <div class="adraw_present">
+            <div class="title">
+              <h2>#springMessage("member.buyer_adraw.the_time_award")<!-- 本期奖品 --></h2>
+            </div>
+            <div class="present_list">
+              <ul>
+                <li><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/pt_10000.png"></li>
+                <li><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/pt_5000.png"></li>
+                <li><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/pt_2000.png"></li>
+                <li><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/pt_1000.png"></li>
+                <li><img src="$!webPath/th_th/resources/style/system/front/default/images/usercenter/pt_500.png"></li>
+              </ul>
+            </div>
+          </div>
+          <div class="adraw_order">
+            <div class="adraw_order_left">
+              <div class="adraw_mode">
+                <div class="title">#springMessage("member.buyer_adraw.participate_way")<!-- 参与方式 --></div>																					<!-- 泰易淘 -->
+                <div class="adraw_step"><span>#springMessage("member.buyer_adraw.tyt_web")<!-- 在泰易淘官方网站 -->（<a href="http://www.taiyitao.com" target="_blank" title="#springMessage('member.buyer_adraw.tyt')">www.taiyitao.com</a>）#springMessage("member.buyer_adraw.click_activity")<!-- 点击活动页面“立即抽奖”按钮可以立即参与活动。 --></span></div>
+              </div>
+              <div class="adraw_mode">
+                <div class="title">#springMessage("member.buyer_adraw.lottery_rule")<!-- 抽奖规则 --></div>
+                <div class="adraw_step"><span>
+                <p>#springMessage("member.buyer_adraw.lottery_count")<!-- 1. 20积分抽奖一次，抽奖次数30次； --></p>
+				<p>#springMessage("member.buyer_adraw.lottery_goods")<!-- 2. 抽奖商品，非质量问题不接受退换货，亦不折现； --></p>
+				<p>#springMessage("member.buyer_adraw.illegal_method")<!-- 3. 对于任何使用不当手法的参与者，泰易淘有权取消其抽奖资格； --></p>
+                </span></div>
+              </div>
+            </div>
+            <div class="adraw_order_right">
+              <div class="adraw_info_top"><span class="title">#springMessage("member.buyer_adraw.award_name")<!-- 中奖名单 --></span> <span class="adraw_info"><a id="adraw_info_btn">#springMessage("member.buyer_adraw.my_lottery")<!-- 我的奖品 --></a></span></div>
+              <div class="adraw_listbox">
+                <marquee behavior="scroll" direction="up" height="200" onmouseout="this.start()" onmouseover="this.stop()">
+                <ul  id="userlist">
+                </ul>
+                </marquee>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+     <!--提示框-->
+     <div class="adraw_dialog">
+     <div class="adraw_dialog_title"><span>#springMessage("member.buyer_adraw.tips")<!-- 提示 --></span></div>
+	    <div class="adraw_dialog_content">        
+   		</div>				<!-- 关闭 -->
+   		<a title="#springMessage('member.buyer_adraw.close')"  class="adraw_dialog_close"><span></span></a> 
+    </div>
+    <!--提示框 end-->
+    
+    <!--积分框-->
+    <div class="adraw_record">
+    <div class="adraw_record_title"><span>#springMessage("member.buyer_adraw.lottery_record")<!-- 中奖记录 --></span></div>
+      <div class="adraw_record_content">
+      <div class="adraw_record_sp"><span>#springMessage("member.buyer_adraw.user_name")<!-- 用户名 --></span><span>#springMessage("member.buyer_adraw.award_present")<!-- 中奖礼品 --></span><span>#springMessage("member.buyer_adraw.lottery_time")<!-- 抽奖时间 --></span></div>
+        <ul class="recordlist">
+        </ul>
+      </div>								<!-- 关闭 -->
+      <a class="adraw_record_close" title="#springMessage('member.buyer_adraw.close')"><span></span></a>
+    </div>
+    <!--积分框 end-->
+</div>
+  $!httpInclude.include("/footer.htm")
+</body>
+</html>

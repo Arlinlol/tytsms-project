@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>$!obj.ig_goods_name - #springMessage("sms.integral_view.integral_mall")</title><!--积分商城--> 
+<meta name="keywords" content="$!obj.ig_seo_keywords" />
+<meta name="description" content="$!obj.ig_seo_description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/layout.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.lazyload.js"></script>
+<script>
+jQuery(document).ready(function(){
+  #if($!obj.ig_limit_type==true)
+    #set($max=$!{obj.ig_limit_count})
+  #else
+    #set($max=$!{obj.ig_goods_count})
+  #end
+  jQuery("#theForm").validate({
+      rules:{
+		   exchange_count:{required:true,digits:true,max:$!{max},min:1}
+		  },
+	  messages:{                                                           //兑换数量不能为空                                                                                                         //只能为整数                                                                                                                        //最多兑换                                                                              //最少兑换1件
+		    exchange_count:{required:"#springMessage('sms.integral_view.exchange_number_no_empty')",digits:"#springMessage('sms.integral_view.only_integer')",max:"#springMessage('sms.integral_view.more_exchange'){0}",min:"#springMessage('sms.integral_view.least_exchange')"}
+		  }
+   });
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="main"> $!httpInclude.include("/head.htm")
+  $!httpInclude.include("/nav1.htm")
+  <div class="index">
+    <div class="integ_details">
+    <form action="$!webPath/integral/exchange1.htm" method="post" id="theForm">
+      <div class="details_in">
+        <h1>$!obj.ig_goods_name</h1>
+        <div class="integ_img"> <img src="$!imageWebServer/$!{obj.ig_goods_img.path}/$!{obj.ig_goods_img.name}" width="384" height="384" /> </div>
+        <ul class="detailsul">
+          <li><span class="detulsp">#springMessage("sms.integral_view.goods_number")<!--商品编号-->:</span><span>$!{obj.ig_goods_sn}</span></li>
+          <li><span class="detulsp">#springMessage("sms.integral_view.shelf_time")<!--上架时间-->:</span><span>$!CommUtil.formatShortDate($!obj.addTime)</span></li>
+          <li><span class="detulsp">#springMessage("sms.integral_view.exchange_time")<!--兑换时间-->:</span>#if($!{obj.ig_time_type})<span>$!CommUtil.formatShortDate($!obj.ig_begin_time)#springMessage("sms.integral_view.to")<!--至-->$!CommUtil.formatShortDate($!obj.ig_end_time)</span>#else<span>#springMessage("sms.integral_view.no_limit")<!--无限制--></span>#end</li>
+          <li><span class="detulsp">#springMessage("sms.integral_view.exchange_limit")<!--兑换限制-->:</span>#if($!{obj.ig_limit_type})<span>#springMessage("sms.integral_view.member_exchange")<!--每名会员最多兑换-->$!obj.ig_limit_count #springMessage("sms.integral_view.a")<!--件--></span>#else<span>#springMessage("sms.integral_view.no_limit")<!--无限制--></span>#end</li>
+          <li><span class="detulsp">#springMessage("sms.integral_view.market_price")<!--市场价格-->:</span><span>¥$!{obj.ig_goods_price}</span></li>
+          <li><span class="detulsp">#springMessage("sms.integral_view.my_integral")<!--我的积分-->:</span><span><b>#if($!user)$!{user.integral}#springMessage("sms.integral_list.point")<!--分-->#else #springMessage("sms.integral_view.not_logged")<!--尚未登录--> #end</b></span></li>
+          <li><span class="detulsp">#springMessage("sms.integral_view.consumption_integral")<!--消耗积分-->:</span><span><strong class="font_size">$!{obj.ig_goods_integral}</strong><a href="$!webPath/article_freeintegral.htm" target="_blank" class="detula">#springMessage("sms.integral_view.get_integral")<!-- 如何免费获取积分? --></a></span></li>
+          <li><span class="detulsp">#springMessage("sms.integral_view.postage")<!--邮费-->:</span><span>#if($!obj.ig_transfee_type=="1")¥<strong>$!{obj.ig_transfee}</strong>#else #springMessage("sms.integral_view.businessmen_assume")<!--商家承担-->#end</span></li>
+			#if($!obj.ig_user_Level==0)
+            #set($obj_level_name="#springMessage('sms.integral_view.bronze_medal')")<!--铜牌及以上会员-->
+            #end
+            #if($!obj.ig_user_Level==1)
+            #set($obj_level_name="#springMessage('sms.integral_view.silver_medal')")<!--银牌及以上会员-->
+            #end
+            #if($!obj.ig_user_Level==2)
+            #set($obj_level_name="#springMessage('sms.integral_view.gold_medal')")<!--金牌及以上会员-->
+            #end
+            #if($!obj.ig_user_Level==3)
+            #set($obj_level_name="#springMessage('sms.integral_view.super_member')")<!--超级会员专享-->
+            #end
+          <li><span class="detulsp">#springMessage("sms.integral_view.level")<!--要求等级-->:</span><span>$!obj_level_name</span></li>
+          <li><span class="detulsp">#springMessage("sms.integral_view.exchange_number")<!--兑换数量-->:</span><span><i class="txt_detul">
+            <input name="exchange_count" type="text" id="exchange_count" value="1" />
+            </i>#springMessage("sms.integral_view.remaining")<!--剩余--><em>$!{obj.ig_goods_count}</em>#springMessage("sms.integral_view.a")<!--件--></span></li>
+          <li><i class="detspan">                  <!-- 我要兑换-->
+            <input name="" type="submit"  value="#springMessage('sms.integral_view.exchange')" style="cursor:pointer;"/>
+            </i>
+            <input name="id" type="hidden" id="id" value="$!obj.id" />
+          </li>
+          #if($!{config.share_code}&&$!{config.share_code}!="")
+          	<li><i class="collection">#springMessage("sms.integral_view.share_gift")<!--分享该礼品到-->：</i>$!config.share_code</li>
+          #end
+        </ul>
+      </div>
+      </form>
+      <div class="gift_explain">
+        <h1><span>#springMessage("sms.integral_view.gift_introduce")<!--礼品介绍--></span></h1>
+        <div class="explain_det">$!CommUtil.htmlUnescape($!{obj.ig_content})</div>
+      </div>
+    </div>
+    <div class="gift_recode">
+      <h1>#springMessage("sms.integral_view.gift_record")<!--礼品兑换记录--></h1>
+      <ul>
+        #foreach($gc in $gcs)
+          <li> <span><a href="$!webPath/integral/view_$!{gc.goods.id}.htm" target="_blank">$!{gc.order.igo_user.userName}#springMessage("sms.integral_list.exchange")<!--兑换-->：$!CommUtil.substring("$!{gc.goods.ig_goods_name}",12)</a></span> <span><b>#springMessage("sms.integral_view.use_integral")<!-- 使用积分： --><strong> $!{gc.integral} #springMessage("sms.integral_list.point")<!--分--></strong></b> <i>$!CommUtil.formatLongDate($!gc.addTime)</i></span> </li>
+        #end
+      </ul>
+    </div>
+  </div>
+  $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

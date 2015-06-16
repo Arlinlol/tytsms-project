@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台 - 商家规格新增-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery-ui-1.8.21.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+ jQuery("#theForm").validate({
+		errorPlacement: function(error, element){
+		var error_li = element.parent().find('.base_i');
+		error_li.html(error);
+		},
+    rules:{
+	  name:{ required :true},
+	 sequence:{required:true,digits:true},
+	 gc_id:{required:true}
+	 },
+	messages:{
+	  name:{required:"规格名称不能为空"},
+	  sequence:{required:"序号不能为空",digits:"序号必须为整数"},
+	  gc_id:{required:"请选择类目"}
+	}
+  });
+ 
+    jQuery("#gc_id").change(function(){
+	var gc_id = jQuery(this).val();							   
+	jQuery.post("$!webPath/seller/spec_gc_load.htm",
+				{"gc_id":gc_id,
+				"id":"$!obj.id"
+				},
+				function(data){
+					if(data!=""){
+						jQuery("#gc_detail").show().html(data);
+						}else{
+						jQuery("#gc_detail").hide()	
+							}
+					},"text");
+	});
+	
+	
+
+  #if($!obj)
+   var type="$!obj.type";
+   if(type=="text"){
+     jQuery("#type1").attr("checked",true);
+   }else{
+     jQuery("#type2").attr("checked",true);
+   }
+   jQuery("#gc_id").val("$!obj.goodsclass.id");
+  #end
+  
+  #foreach($gc in $obj.spec_goodsClass_detail)
+  jQuery("input[type='checkbox'][value='"+$!{gc.id}+"']").attr("checked",true);
+  #end	
+  
+});
+function saveForm(){
+	jQuery("#count").val(count);
+	jQuery("#theForm").submit();
+}
+function change_img(obj){
+  var sequence=jQuery(obj).attr("id").substring(10);
+  var path=jQuery(obj).val();
+  var src=getFullPath(jQuery(obj)[0]);
+  jQuery("#image_"+sequence).attr("src",src);
+  jQuery("#textfield_"+sequence).val(path);
+}
+
+function selectAllOverRead(obj){
+	var status=jQuery(obj).attr("checked");
+	var id=jQuery(obj).attr("id");
+  	if(status=="checked"){
+		jQuery(":checkbox[id!="+id+"]").attr("checked","checked");
+	}else{
+	    jQuery(":checkbox[id!="+id+"]").attr("checked",false);	
+	}
+}
+</script>
+<script>
+#if($!obj&&$!obj.properties.size()>1)
+var count=$!obj.properties.size();
+#else
+var count=1;
+#end
+function img_spec(status){
+  if(status=="1"){
+    jQuery("span[id^=goods_spec_property_img_]").show();
+  }
+  if(status=="0"){
+    jQuery("span[id^=goods_spec_property_img_]").hide();
+  }
+}
+function remove_goods_spec_property(obj,id){
+   jQuery.post("$!webPath/seller/goods_property_delete.htm",{"id":id},function(data){
+     if(data=="true"){
+	    jQuery(obj).remove();
+        count--;
+	 }else alert("规格值删除失败！");
+   },"text");
+}
+function add_goods_spec_property(){
+count++;
+ var goods_spec_property_img="<tr id='goods_spec_'><td width='100'><span class='size70'><input name='sequence_count' id='sequence_count' value='' type='text'></span></td><td width='271'><span class='size200'><input name='value_count' id='value_count' value='' type='text'></span></td><td class='liul' width='558'><span id='goods_spec_property_img_' class='size13'><input name='textfield_count' id='textfield_count' type='text'></span> <span class='filebtn' id='goods_spec_property_img_'><input name='button' id='button1' value='' type='button'></span> <span id='goods_spec_property_img_' style='float:left;' class='file'><input name='specImage_count' id='specImage_count' size='30' type='file' onchange='change_img(this);'></span><span id='goods_spec_property_img_' class='seller_spec'><img id='image_count' name='image_count' src='$!webPath/resources/style/common/images/transparent.gif' height='16' width='16'></span></td><td class='hui oprate_con' align='center' width='116'><a href='javascript:void(0);' onclick='remove_goods_spec_property(this.parentNode.parentNode,\"\")'>删除</a></td></tr>";
+  var goods_spec_property_text="<tr id='goods_spec_'><td width='100'><span class='size70'><input name='sequence_count' id='sequence_count' value='' type='text'></span></td><td width='271'><span class='size200'><input name='value_count' id='value_count' value='' type='text'></span></td><td class='liul' width='558'><span id='goods_spec_property_img_' style='display:none;' class='size13'><input name='textfield_count' id='textfield_count' type='text'></span> <span class='filebtn' id='goods_spec_property_img_'  style='display:none;'><input name='button' id='button1' value='' type='button'></span> <span id='goods_spec_property_img_'  style='float:left;display:none;' class='file'><input name='specImage_count' id='specImage_count' size='30' type='file'  onchange='change_img(this);'></span><span id='goods_spec_property_img_'  style='display:none;' class='seller_spec'><img   id='image_count' name='image_count' src='$!webPath/resources/style/common/images/transparent.gif' height='16' width='16'></span></td><td class='hui oprate_con' align='center' width='116'><a href='javascript:void(0);' onclick='remove_goods_spec_property(this.parentNode.parentNode,\"\")'>删除</a></td></tr>";
+  var type=jQuery(":radio:checked").val();
+  if(type=="img"){
+    jQuery(".fshop_table2 tr[id^=goods_spec_]").last().after(goods_spec_property_img.replace(/count/g,count));
+  }else{
+    jQuery(".fshop_table2 tr[id^=goods_spec_]").last().after(goods_spec_property_text.replace(/count/g,count));
+  }
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center"> $!httpInclude.include("/seller/nav.htm?op=goods_spec_list")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>商品管理</b> > <b>新增规格</b></span></div>
+      <div class="seller_list">
+        <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li><a href="$!webPath/seller/goods_spec_list.htm"><i></i>规格列表</a></li>
+            <li class="this"><a href="$!webPath/seller/goods_spec_add.htm"><i></i>新增规格</a></li>
+          </ul>
+        </div>
+        <div class="add_usercenter">
+          <form action="$!webPath/seller/goods_spec_save.htm" method="post" enctype="multipart/form-data" name="theForm" id="theForm">
+            <input name="id" type="hidden" id="id"  value="$!obj.id"/>
+            <input name="count" type="hidden" id="count" />
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" class="user_base_table">
+              <tr>
+                <td align="right"><strong class="redstr">*</strong>关联类目：</td>
+                <td >
+           
+                <select id="gc_id" name="gc_id"  class="user_base_select">
+                <option value="">请选择...</option>
+                #foreach($gc in $gcs)
+                 <option value="$!gc.id">$!gc.className</option>
+                #end
+                </select>
+             
+                <label>
+                
+               <span class="span_base"> <input type="checkbox" onclick="selectAllOverRead(this)"/>关联所有下级</span>
+                </label>
+                  <i class="base_i"></i></td>
+              </tr>
+             
+              <tr id="gc_detail" #if(!$!obj || $!obj.spec_goodsClass_detail.size()==0) style="display:none" #end>
+                <td align="right"><strong class="redstr"></strong>详细类目：</td>
+                <td >#foreach($detail in $gc_details)
+                  <ul class="user_base_ul">
+                    <li>
+                    <label>
+                      <input id="" name="goodsClass_detail_ids" type="checkbox" value="$!detail.id" />
+                      <span>$!detail.className</span>
+                      </label>
+                      </li>
+                  </ul>
+                  #end </td>
+              </tr>
+              <tr>
+                <td align="right"><strong class="redstr">*</strong>规格名称：</td>
+                <td ><input name="name" type="text" id="name"  value="$!obj.name" class="base_txt"/>
+                  <i class="base_i">请填写常用的商品规格的名称；例如：颜色；尺寸等。</i></td>
+              </tr>
+              <tr>
+                <td align="right"><strong class="redstr">*</strong>规格序号：</td>
+                <td><input name="sequence" type="text" id="sequence"  value="$!obj.sequence" class="base_txt"/>
+                  <i class="base_i">请填写整数。</i></td>
+              </tr>
+              <tr >
+                <td align="right">规格类型：</td>
+                <td><div class="spec_radio">
+                    <label>
+                      <input name="type" id="type1" type="radio" checked="checked" value="text"  onclick="img_spec('0')"/>
+                      文字 </label>
+                    <label>
+                      <input name="type" id="type2" type="radio" value="img" onclick="img_spec('1')"/>
+                      图片 </label>
+                  </div>
+                  <i class="base_i" style="margin-top:5px;">例如填写颜色规格时，可用对应的色彩图片来表现其各种颜色值</i></td>
+              </tr>
+            </table>
+            <div class="specification">
+              <h2>新增规格值</h2>
+              <div class="fshoptb2 ">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table2">
+                  <tr id="goods_spec_">
+                    <th width="82"><span class="form_btna"><strong>排序</strong></span></th>
+                    <th width="271"><span class="form_btna"><strong>规格值</strong></span></th>
+                    <th width="558"><span class="form_btna"><strong><span id="goods_spec_property_img_" #if(!$!obj||$!obj.type=="text")style="display:none;"#end>规格图片</span></strong></span></th>
+                    <th  align="center">操作</th>
+                  </tr>
+                  #if($!obj)
+                  #foreach($info in $obj.properties)
+                  <tr id="goods_spec_property">
+                    <td width="82" ><span class="size70">
+                      <input name="sequence_$!velocityCount" type="text" id="sequence_$!velocityCount" value="$!info.sequence"/>
+                      <input name="id_$!velocityCount" type="hidden" id="id_$!velocityCount" value="$!info.id" />
+                      </span></td>
+                    <td ><span class="size200">
+                      <input name="value_$!velocityCount" type="text" id="value_$!velocityCount" value="$!info.value"/>
+                      </span></td>
+                    <td width="558" class="liul"><span class="size13" id="goods_spec_property_img_" #if(!$!obj||$!obj.type=="text")style="display:none;"#end >
+                      <input name="textfield_$!velocityCount" type="text" id="textfield_$!velocityCount" />
+                      </span><span class="filebtn" id="goods_spec_property_img_"  #if(!$!obj||$!obj.type=="text")style="display:none;"#end>
+                      <input name="button" type="button" id="button1" value=""/>
+                      </span> <span id="goods_spec_property_img_" style="float:left;" class="file" >
+                      <input  name="specImage_$!velocityCount" type="file" id="specImage_$!velocityCount" onchange="change_img(this);" size="30"/>
+                      </span> <span id="goods_spec_property_img_" class="seller_spec"  #if(!$!obj||$!obj.type=="text")style="display:none;"#end ><img id="image_$!velocityCount" name="image_$!velocityCount" src="$!webPath/$!info.specImage.path/$!info.specImage.name" width="16" height="16"/></span></td>
+                    <td width="116" align="center" class="hui oprate_con"><a href="javascript:void(0);" onclick="remove_goods_spec_property(this.parentNode.parentNode,'$!info.id')" class="blue">删除</a></td>
+                  </tr>
+                  #end
+                  #else
+                  <tr id="goods_spec_property">
+                    <td width="82"><span class="size70">
+                      <input name="sequence_1" type="text" id="sequence_1" value=""/>
+                      </span></td>
+                    <td width="271"><span class="size200">
+                      <input name="value_1" type="text" id="value_1" value=""/>
+                      </span></td>
+                    <td width="558" class="liul" ><span class="size13" id="goods_spec_property_img_"  style="display:none;">
+                      <input name="textfield_1" type="text" id="textfield_1" />
+                      </span> <span class="filebtn" id="goods_spec_property_img_"  style="display:none;">
+                      <input name="button" type="button" id="button1" value=""/>
+                      </span> <span style="float:left;" class="file" >
+                      <input name="specImage_1" type="file" id="specImage_1" size="30"  onchange="change_img(this);"/>
+                      </span> <span class="seller_spec" id="goods_spec_property_img_"  style="display:none;"><img id="image_1" name="image_1" src="$!webPath/resources/style/common/images/transparent.gif" width="16" height="16"/></span></td>
+                    <td width="116" align="center" class="hui oprate_con"><a href="javascript:void(0);" onclick="remove_goods_spec_property(this.parentNode.parentNode,'')" class="blue">删除</a></td>
+                  </tr>
+                  #end
+                  <tr>
+                  	<td>&nbsp;</td>
+                    <td colspan="2"><span class="newclass"><a href="javascript:void(0);" onclick="add_goods_spec_property();">新增规格值</a></span></td>
+                    <td>&nbsp;</td>
+                  </tr>
+                  <tr>
+                  	<td colspan="2">&nbsp;</td>
+                    <td><input name="" type="button" value="提交" onclick="saveForm();" style="cursor:pointer;" class="seller_save"/></td>
+                    <td>&nbsp;</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

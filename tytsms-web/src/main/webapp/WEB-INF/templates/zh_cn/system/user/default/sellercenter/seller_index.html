@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-首页-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+    $!httpInclude.include("/seller/nav.htm")
+    <div class="seller_right">
+      <div class="seller_position"><span><a href="$!webPath/seller/index.htm">商家中心</a>><b>首页</b></span></div>
+      <div class="seller_info"> <span class="seller_info_img">
+      #if($!user.photo)
+       #set($photo="$!imageWebServer/$!{store.user.photo.path}/$!{store.user.photo.name}")
+      #else
+       #set($photo="$!imageWebServer/$!config.memberIcon.path/$!config.memberIcon.name")
+      #end
+      <strong><img  width="113" height="113" src="$!photo" /></strong>
+      <em><b></b></em></span> <span class="seller_info_time"><em>上次登录时间：#if($!user.lastLoginDate)$!CommUtil.formatLongDate($!user.lastLoginDate)#else 第一次登录 #end</em></span>
+        <ul class="seller_info_ul">
+          <li class="seller_info_h"><strong>店铺名称：<b>$!{user.store.store_name}</b></strong></li>
+          <li class="seller_info_con"><span>用户名：<b>$!{user.userName}</b></span><span>店主姓名：<b>$!{user.store.store_ower}</b></span><span>商家类型：<b>$!{user.store.grade.gradeName}</b></span><span>店铺到期：<b>#if($!{user.store.validity}) $!CommUtil.formatShortDate($!{user.store.validity})#else 永久#end</b></span></li>
+            
+            #set($store_url="$!webPath/store_$!{user.store.id}.htm")
+            #if($!config.second_domain_open && $!user.store.store_second_domain!="")
+            #set($store_url="http://$!{user.store.store_second_domain}.$!{domainPath}")
+            #end
+          <li class="shop_into"><a href="$!store_url" target="_blank">进入店铺</a></li>
+        </ul>
+        <div class="seller_info_pay">
+          <h3>本次结算</h3>
+          <ul>
+            <li><span>总销售金额：<b>#if(!$!{store.store_sale_amount})0 #else $!{store.store_sale_amount}#end 元</b></span></li>
+            <li><span>总订单佣金：<b>#if(!$!{store.store_commission_amount})0 #else $!{store.store_commission_amount}#end 元</b></span></li>
+            <li><span>应结算金额：<b>#if(!$!{store.store_payoff_amount})0 #else $!{store.store_payoff_amount}#end 元</b></span></li>
+          </ul>
+          <span class="seller_pay_sp"> <em><i><a href="$!webPath/seller/payofflog_list.htm"></a></i><a href="$!webPath/seller/payofflog_list.htm" class="must_get">马上结算</a></em> <b><i><a href="$!webPath/seller/payofflog_list.htm?status=already"></a></i><a href="$!webPath/seller/payofflog_list.htm?status=already" class="see_get">已结算账单</a></b> </span> </div>
+        <div class="seller_info_list">
+
+         <span><a href="$!webPath/seller/consult.htm?reply=false"><strong>咨询提示：</strong>给商家的留言<b>($!{msgs.size()})</b></a></span>
+         <span><a href="$!webPath/seller/complaint.htm"><strong>投诉提示：</strong>新增投诉<b>($!{complaints.size()})</b></a></span>
+         #set($goods_num1=0)
+         #set($goods_num2=0)
+         #set($goods_num3=0)
+         #foreach($goods in $store.goods_list)
+           #if($goods.goods_status==0)
+             #set($goods_num1=$goods_num1+1)
+           #end
+           #if($goods.goods_status==1)
+             #set($goods_num2=$goods_num2+1)
+           #end
+           #if($goods.goods_status==-2)
+             #set($goods_num3=$goods_num3+1)
+           #end
+         #end
+         <span> <a href="$!webPath/seller/goods.htm"><strong>出售中的商品：</strong><b>($!{goods_num1})件</b></a></span>
+         <span> <a href="$!webPath/seller/goods_storage.htm"><strong>仓库中的商品：</strong><b>($!{goods_num2})件</b></a></span>
+         <span> <a href="$!webPath/seller/goods_out.htm"><strong>违规下架的商品：</strong><b>($!{goods_num3})件</b></a></span>
+         <span> <a href="$!webPath/seller/gold_record.htm"><strong>可用金币数：</strong><b>( $!user.gold )</b></a></span>
+        </div>
+      </div>
+      <div class="seller_bottom">
+        <div class="seller_bottom_left">
+          <div class="seller_bleft_box">
+          #set($order_pay_count=0)
+          #set($order_evaluate_count=0)
+          #set($order_ship_count=0)
+          #set($order_confirm_count=0)
+          #foreach($order in $orders)
+          #if($!order.order_status==10)
+          #set($order_pay_count=$order_pay_count+1)
+          #end
+          #if($!order.order_status==20)
+          #set($order_ship_count=$order_ship_count+1)
+          #end
+          #if($!order.order_status==30)
+          #set($order_confirm_count=$order_confirm_count+1)
+          #end
+          #if($!order.order_status==40)
+          #set($order_evaluate_count=$order_evaluate_count+1)
+          #end
+          #end
+          
+            <h3><span>交易提示</span></h3>
+            <div class="seller_bleft_m"><span>近期销售：<a href="$!webPath/seller/order.htm">交易中的订单<b>($!{orders.size()})</b></a></span><span><a href="$!webPath/seller/order.htm?order_status=order_submit"><strong>待付款订单：</strong><b>($!{order_pay_count})</b></a></span><span><a href="$!webPath/seller/order.htm?order_status=order_evaluate"><strong>待评价订单：</strong><b>($!{order_evaluate_count})</b></a></span><span><a href="$!webPath/seller/order.htm?order_status=order_pay"><strong>待发货：</strong>已付款待发货<b>($!{order_ship_count})</b></a></span><span><a href="$!webPath/seller/order.htm?order_status=order_shipping"><strong>待买家收货：</strong><b>($!{order_confirm_count})</b></a></span><span><a href="$!webPath/seller/return.htm"><strong>退货申请：</strong><b>($!{returngoods.size()})</b></a></span></div>
+          </div>
+          <div class="seller_index_ranking">
+            <h3><span>商品销售排行</span></h3>
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" class="seller_rank_table">
+              <tr>
+                <th width="80">排行</th>
+                <th width="70%">商品名称</th>
+                <th>商品销量</th>
+              </tr>
+              #foreach($goods in $goods_sale_list)
+              <tr>
+                <td align="center">$!{velocityCount}</td>
+                 #if($!goods.goods_main_photo)
+                    #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+                 #else
+                    #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+                 #end
+                 
+                    #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+            #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+            #end 
+                <td align="center"><dl class="seller_shop"><dt><img src="$!img" width="50" height="50" /></dt><dd><a href="$!goods_url" target="_blank">$!{goods.goods_name}</a></dd></dl></td>
+                <td align="center">$!{goods.goods_salenum}</td>
+              </tr>
+             #end
+            </table>
+          </div>
+          <div class="seller_bleft_box">
+            <h3><span>商家运营推广</span></h3>
+            <div class="seller_bleft_o">
+              <ul class="seller_promotions">
+                <li><a href="$!webPath/seller/group.htm"><span><img src="$!webPath/resources/style/system/front/default/images/usercenter/promotions_a.jpg" width="70" height="60" /></span><b>商城团购</b><i>参与团购活动，商品销量快速飙升，赚钱真的容易</i></a></li>
+                <li><a href="$!webPath/seller/activity.htm"><span><img src="$!webPath/resources/style/system/front/default/images/usercenter/promotions_b.jpg" width="70" height="60" /></span><b>商城活动</b><i>千种商品，万种组合，最佳拍档，优惠多多</i></a></li>
+                <li><a href="$!webPath/seller/ztc_apply.htm"><span><img src="$!webPath/resources/style/system/front/default/images/usercenter/promotions_c.jpg" width="70" height="60" /></span><b>直通车</b><i>直通车会将您的商品推荐到买家最容易发现您的位置，效果确实无法估量</i></a></li>
+                <li><a href="$!webPath/seller/coupon.htm"><span><img src="$!webPath/resources/style/system/front/default/images/usercenter/promotions_d.jpg" width="70" height="60" /></span><b>优惠券</b><i>发布商铺优惠券，增加大量回头客，无需犹豫了</i></a></li>
+                <li><a href="$!webPath/seller/advert_list.htm"><span><img src="$!webPath/resources/style/system/front/default/images/usercenter/promotions_e.jpg" width="70" height="60" /></span><b>广告服务</b><i>参与商城广告，让更多买家找到你，不赚钱很难的哦</i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="seller_bottom_right">
+          <div class="seller_br_service">
+            <h3><span>平台客服</span></h3>
+            <ul>
+              <li><span>平台客服：</span><b>
+              #foreach($server in $CommUtil.str2list("$!config.service_qq_list"))
+              <a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=$!{server}&Site=$!{server}&Menu=yes"><i><img alt="发消息" src="http://wpa.qq.com/pa?p=2:$!{server}:52" /></i><i>泰式客服工号00$!{velocityCount}</i></a>
+              #end
+              </b></li>
+              #foreach($telphone in $CommUtil.str2list("$!config.service_telphone_list"))
+              <li><span>客服电话：</span><b>$!{telphone}</b></li>
+              #end
+            </ul>
+          </div>
+          <div class="seller_bright_one">
+            <h3><span>最新功能</span></h3>
+            <ul>
+              #foreach($article in $func_articles)
+              <li><a href="$!webPath/article_$!{article.id}.htm" target="_blank">$!{article.title}</a></li>
+              #end              
+            </ul>
+          </div>
+          <div class="seller_bright_one">
+            <h3><span>最新公告</span></h3>
+            <ul>
+              #foreach($article in $articles)
+              <li><a href="$!webPath/article_$!{article.id}.htm" target="_blank">$!{article.title}</a></li>
+              #end
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

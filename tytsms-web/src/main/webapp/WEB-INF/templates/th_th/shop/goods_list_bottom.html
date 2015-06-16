@@ -1,0 +1,93 @@
+﻿<script>
+jQuery(document).ready(function(){
+		var tempLengths = 0; //临时变量,当前移动的长度
+		var viewNums = 5; //设置每次显示图片的个数量
+		var moveNums = 4; //每次移动的数量
+		var moveTimes = 500; //移动速度,毫秒
+		var scrollDivs = jQuery(".bottom_rbox_position"); //进行移动动画的容器
+		var scrollItemss = jQuery(".bottom_rbox_position ul"); //移动容器里的集合
+		var moveLengths = scrollItemss.eq(0).width() * moveNums; //计算每次移动的长度
+		var countLengths = (scrollItemss.length - viewNums) * scrollItemss.eq(0).width(); //计算总长度,总个数*单个长度
+		var all_lengths=scrollItemss.eq(0).width()*scrollItemss.length;
+		jQuery(".bottom_rbox_position").css("width",all_lengths);
+		//下一张
+		jQuery("#left").bind("click",function(){
+			if(tempLengths < countLengths){
+				if((countLengths - tempLengths) > moveLengths){
+					scrollDivs.animate({left:"-=" + moveLengths + "px"}, moveTimes);
+					tempLengths += moveLengths;
+				}else{
+					scrollDivs.animate({left:"-=" + (countLengths - tempLengths) + "px"}, moveTimes);
+					tempLengths += (countLengths - tempLengths);
+				}
+			}
+		});
+		//上一张
+		jQuery("#right").bind("click",function(){
+			if(tempLengths > 0){
+				if(tempLengths > moveLengths){
+					scrollDivs.animate({left: "+=" + moveLengths + "px"}, moveTimes);
+					tempLengths -= moveLengths;
+				}else{
+					scrollDivs.animate({left: "+=" + tempLengths + "px"}, moveTimes);
+					tempLengths = 0;
+				}
+			}
+		});
+	});  
+</script>
+
+<div class="main_bottom">
+  <div class="main_bottom_left">
+    <h3><span>#springMessage("sms.goods_list_bottom.recent_browse")<!--最近浏览--></span></h3>
+    #foreach($goods in $goods_last)
+    #if($!goods.goods_main_photo)
+    #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_small.$!{goods.goods_main_photo.ext}")
+    #else
+    #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+    #end
+    
+     #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+            #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+            #end 
+    <dl>
+      <dt><a href="$!goods_url" target="_blank"><span class="img_cspan"><img src="$!{img}" width="50" height="50" /></span></a></dt>
+      <dd>
+        <h4><a href="$!goods_url" target="_blank">$!goods.goods_name</a></h4>
+        <b>฿$!{goods.goods_current_price}</b></dd>
+    </dl>
+    #end <span class="main_bleft_a"></span></div>
+  <div class="main_bottom_right">
+    <h3>#springMessage("sms.goods_list_bottom.guess_you_like")<!--根据浏览猜你喜欢--></h3>
+    <div class="main_bottom_rbox"> <span class="rbox_left"><a href="javascript:void(0);" id="right"></a> </span>
+      <div class="bottom_rbox">
+
+        <div  class="bottom_rbox_position"> #foreach($goods in $your_like_goods)
+          #if($!goods.goods_main_photo)
+          #set($img="$!imageWebServer/$!{goods.goods_main_photo.path}/$!{goods.goods_main_photo.name}_middle.$!{goods.goods_main_photo.ext}")
+          #else
+          #set($img="$!imageWebServer/$!{config.goodsImage.path}/$!{config.goodsImage.name}")
+          #end
+          
+            #set($goods_url="$!webPath/goods_$!{goods.id}.htm")
+            #if($!config.second_domain_open && $!goods.goods_type==1 && $!goods.goods_store.store_second_domain!="")
+            #set($goods_url="http://$!{goods.goods_store.store_second_domain}.$!{domainPath}/goods_$!{goods.id}.htm")
+            #end 
+          <ul class="rbox_ul" >
+            <li class="rbox_ul_img"><a href="$!goods_url" target="_blank"><span class="img_cspan">
+              <p><img src="$!{img}" width="150" height="150" /></p>
+              </span></a></li>
+            <li class="rbox_ul_name"><a href="$!goods_url" target="_blank">$!goods.goods_name</a></li>
+            #set($well_evaluate = $!CommUtil.null2Double($!{goods.well_evaluate})*100)
+            <li>
+              <div class="five_star" style="margin-left:40px"><b title="$!{well_evaluate}%" style="width:$!{well_evaluate}%;"></b></div>
+            </li>
+            <li class="rbox_ul_evaluate">(#springMessage("sms.goods_list_bottom.existing")<!--已有-->$!{goods.evaluates.size()}#springMessage("sms.goods_list_bottom.evaluate")<!--人评价-->)</li>
+            <li class="rbox_ul_price">฿$!{goods.goods_current_price}</li>
+          </ul>
+          #end </div>
+      </div>
+      <span class="rbox_right"><a href="javascript:void(0);" id="left"></a></span> </div>
+  </div>
+</div>

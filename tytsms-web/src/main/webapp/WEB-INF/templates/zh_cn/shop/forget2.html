@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>找回密码第二步 </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/login.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+var time=60;
+var time_id=""
+function countDown(){
+	--time;
+	jQuery("#code_get_result").html(time+"秒后可以重新获取,验证码30分钟有效");
+	if(time<=0){
+	   window.clearInterval(time_id);
+	   jQuery("#code_get_result").html("");
+	   jQuery("#code_get").show();
+     }
+}
+function reg_code_get(){
+   jQuery("#code_get").hide();	
+   var accept_type=jQuery("#accept_type").val();
+   jQuery.ajax({type:'POST',url:'$!webPath/reg_code_get.htm',data:{"accept_type":accept_type,"email":"$!{user.email}","mobile":"$!{user.mobile}","userName":"$!{user.userName}"},success:function(ret){
+     if(ret=="1"){
+	   time=60;
+	   jQuery("#code_get_result").show();
+	   jQuery("#code_get").hide();
+	   time_id=setInterval(countDown,1000);
+	 }else{
+       jQuery("#code_get_result").html("系统繁忙，发送失败").show();
+	   jQuery("#code_get_result").hide(3000); 
+	   jQuery("#code_get").show();
+	 }
+   }});
+}
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+<div class="login_head"> #if($!config.websiteLogo)
+  #set($img="$!imageWebServer/$!{config.websiteLogo.path}/$!{config.websiteLogo.name}")
+  #else
+  #set($img="$!webPath/resources/style/system/front/default/images/logo.jpg")
+  #end
+  <h1><span><a href="$!webPath"><img src="$!img" width="209" height="70" /></a></span><strong>找回密码</strong></h1>
+</div>
+<div class="forget_page">
+  <h3><span>找回密码</span></h3>
+  <div class="forget_page_box">
+    <ul class="forget_step">
+      <li class="forget_thised">填写账户名</li>
+      <li class="this">验证身份</li>
+      <li>设置新密码</li>
+      <li class="forget_last">完成</li>
+    </ul>
+    <form action="$!webPath/forget3.htm" method="post" id="theForm">
+    <div class="forget_common">
+      <table width="550" border="0" cellpadding="0" cellspacing="0" class="regist_common_table">
+        <tr>
+          <td width="179" align="right" valign="top" class="forget_tb">用户名：</td>
+          <td><b class="red">$!{user.userName}</b></td>
+        </tr>
+        <tr>
+          <td  align="right" valign="top" class="forget_tb">请选择验证码接收方式：</td>
+          <td valign="top"> 
+           <span class="forget_slt">
+              <select name="accept_type" id="accept_type">
+              #if($!CommUtil.null2String("$!user.email")!="")
+                <option value="email">邮箱接收</option>
+              #end
+               #if($!CommUtil.null2String("$!user.mobile")!="")
+                <option value="mobile">验证手机接收</option>
+              #end
+              </select>
+           </span>
+           <a href="javascript:void(0);" onclick="reg_code_get();" id="code_get">获得验证码</a><a href="javascript:void(0);" id="code_get_result" style="display:none;color:#F00;"></a></td>
+        </tr>
+        <tr>
+          <td  align="right" valign="top" class="forget_tb">收到的验证码：</td>
+          <td><input name="verify_code" type="text" class="regist_code" id="verify_code" />验证码30分钟有效</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td><input name="提交" type="submit"  class="forget_btn" value="下一步"/>
+            <input name="email" type="hidden" id="email" value="$!user.email" />
+            <input name="mobile" type="hidden" id="mobile" value="$!user.mobile" />    
+            <input name="userName" type="hidden" id="userName" value="$!user.userName" /></td>
+        </tr>
+      </table>
+    </div>
+    </form>
+  </div>
+</div>
+<div class="main"> $!httpInclude.include("/footer.htm") </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+  #if($!img_partners.size()>0 ||$!$text_partners.size()>0)
+	  <div class="friendlink">
+	    <h1>พันธมิตร#*合作伙伴*#</h1>
+	    <ul class="linkimg">
+	      #foreach($info in $img_partners)
+	      <li> <a href="$!info.url" target="_blank"><img src="$!imageWebServer/$!info.image.path/$!info.image.name" width="92" height="35" /></a></li>
+	      #end
+	    </ul>
+	    <div class="linka">#foreach($info in $text_partners)<a href="$!info.url" target="_blank">$!info.title</a>#end </div>
+	  </div>
+	  #end
+	  
+	  <div class="shopping">
+	  #foreach($ac in $acs)
+	    <div class="shopone">
+	      <h3>$!ac.className</h3>
+	      <ul>
+	        #foreach($article in $ac.articles)
+	        #if($!article.url!="")
+	        #set($url="$!article.url")
+	        #else
+	        #set($url="$!webPath/article_$!{article.id}.htm")
+	        #end
+	        <li><a  href="$!url" target="_blank">$!CommUtil.substring("$!article.title",12)</a></li>
+	        #end
+	      </ul>
+	    </div>
+	    #end 
+		
+		<div class="shopone">
+	      <h3>เจ้าหน้าที่บริการลูกค้าออนไลน์#*在线客服*#</h3>
+	      <ul>
+	      <li><a href="tencent://message/?Menu=yes&uin=2853082168
+&Service=300&sigT=45a1e5847943b64c6ff3990f8a9e644d2b31356cb0b4ac6b24663a3c8dd0f8aa12a595b1714f9d45
+" target="_blank">คลิกเข้าเพื่อสอบถามเพิ่มเติมออนไลน์#*点击进入在线咨询*#</a></li>
+	      <li><span style=" color:#333;font-weight: bold;">09:00-18:00(วันจันทร์ถึงวันเสาร์#*周一至周六*#)</span></li>
+
+	        	      </ul>
+	    </div>
+		
+	     <div class="shopone">
+         <h3>weibo ทางการ#*官方微信*#</h3>
+         <ul>
+           <li><img id="u62_img" class="img " src="$!webPath/th_th/resources/style/system/front/default/images/u62.jpg" width="100px"></li>
+           <li style="margin-top:0px;padding:5px;"><a href="http://weibo.com/taiyitao" target="_blank"><strong style="font-size:16px;color:#333;line-height:50px;">weibo ทางการ#*官方微博*#</strong><img id="u66_img" class="img " src="$!webPath/th_th/resources/style/system/front/default/images/u66.png" style="width:40px;margin-bottom:-6px;"></a></li>
+          </ul>
+        </div>
+	    </div>

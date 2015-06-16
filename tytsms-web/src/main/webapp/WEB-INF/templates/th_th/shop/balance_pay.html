@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>#springMessage("sms.balance_pay.advance_payment")<!--付款支付--></title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/th_th/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/th_th/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/goods_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/th_th/resources/style/system/front/default/css/layout.css" type="text/css" rel="stylesheet" />
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    rules:{
+		pay_msg:{required:true}
+	},
+	messages:{
+	    pay_msg:{
+			required:#springMessage("sms.balance_pay.advance_payment")//付款说明不能为空
+		}
+	}
+ });
+});
+</script>
+</head>
+<body>
+$!httpInclude.include("/top.htm")
+$!httpInclude.include("/head.htm")
+$!httpInclude.include("/nav1.htm")
+<div class="main">
+  <form action="$!webPath/order_pay_balance.htm" method="post" id="theForm">
+  <div class="payfor_box">
+    <h3>#springMessage("sms.balance_pay.advance_payment")<!--付款支付--></h3>
+    <h5 style="color:#F00;">#springMessage("sms.balance_pay.payment_amount")$!order_total_price</h5><!--付款金额:¥ -->
+    <h5>#springMessage("sms.balance_pay.enter_advance_message"):</h5>
+    <!-- 请输入预存款留言信息 (预存款留言有利于商家迅速辨别买家，您也可以稍后在用户中心“我的订单”中进行付款)：-->
+    <span class="payfor_textarea" style="color:#F00">
+    <textarea name="pay_msg" cols="" rows="6" id="pay_msg"></textarea>
+    </span> <span class="payfor_btn">
+    <input name="" type="submit"  value="#springMessage('sms.cart_address.submit')" style="cursor:pointer;"/><!-- 提交 -->
+     <input name="order_id" type="hidden" id="order_id" value="$!{order.id}" />
+            <input name="pay_session" type="hidden" id="pay_session" value="$!pay_session" />
+    </span> </div>
+    </form>
+   $!httpInclude.include("/footer.htm")
+</div>
+</body>
+</html>

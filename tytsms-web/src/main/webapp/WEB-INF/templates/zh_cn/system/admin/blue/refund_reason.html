@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+#macro ( genericTree $somelist ) 
+#foreach ( $some in $somelist )
+<option value="$!some.id">
+#if($!some.level>0)
+#foreach($count in [0..$!some.level])&nbsp;#end #end $!some.className</option>
+#genericTree($some.childs) 
+#end 
+#end
+</head>
+<link href="$!webPath/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.poshytip.min.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+<script src="$!webPath/resources/js/jquery.validate.min.js"></script>
+<script>
+jQuery(document).ready(function(){
+  jQuery("#theForm").validate({
+    rules:{
+	  amount:{
+	    required :true,number:true,min:0
+	  }
+	 },
+	messages:{
+	  amount:{required:"金额不能为空",number:"只能为数字",min:"金额只能正数"}
+	}
+  });
+  //
+  jQuery("#userName").blur(function(){
+	 var userName=jQuery(this).val();								
+     jQuery.post("$!webPath/admin/predeposit_user.htm",{"userName":userName},function(data){
+		  if(data.status=="success"){																			  
+	        jQuery("#user_balance_info").text("可用余额："+data.availableBalance+",冻结余额："+data.freezeBlance);
+			jQuery("#user_id").val(data.id);
+			jQuery("#user_balance_info_parent").show();
+		  }else{
+		     jQuery("#userName").val(""); 
+			 jQuery("#user_balance_info").text("不存在该会员");
+			 jQuery("#user_balance_info_parent").show();
+			 jQuery("#user_balance_info_parent").fadeOut(3000);
+		  }
+	 },"json");
+  });
+  //
+});
+
+function saveForm(){
+   jQuery("#theForm").submit();
+}
+</script>
+<body>
+<div class="cont">
+  <h1 class="seth">退款原因</h1>
+
+ <form name="theForm" id="theForm" action="$!webPath/admin/predeposit_modify_save.htm" method="post">
+  
+  
+  <div class="edit">
+  <div class="editul setcont">
+    <ul class="set1">
+      <li class="setcont_bg">退款原因：</li>
+      <li>
+        <span class="webname">$!obj.return_content</span>
+      </li>
+    </ul>
+    
+    <ul class="set1">
+      <li class="setcont_bg">退款金额：</li>
+      <li>
+       <span class="webname">$!refund_money</span>
+      </li>
+    </ul>
+    
+	<ul class="set1">
+      <li  class="setcont_bg">退货图片：</li>
+	</ul>
+
+    <ul class="set1">
+      <li>
+       #foreach($img in $imgs)
+          <img width="200" height="200" src="$!webPath/$img" alt="" />
+       #end
+      </li>
+    </ul>
+
+  </div>
+  </div>
+  <input type="hidden" id="refund_user_id" name="refund_user_id" value="$!user.id" />
+  <input type="hidden" id="obj_id" name="obj_id" value="$!obj.id" />
+    <input type="hidden" id="gi_id" name="gi_id" value="$!gi.id" />
+  </form>
+</div>
+</body>
+</html>

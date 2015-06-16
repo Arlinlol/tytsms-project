@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link href="$!webPath/th_th/resources/style/system/manage/$!{config.websiteCss}/template.css"  rel="stylesheet" type="text/css"/>
+<script src="$!webPath/th_th/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/th_th/resources/js/jquery.shop.common.js"></script>
+<script>
+function dele_ablum(mark,obj_id){
+	if(mark=="false"){
+		 if(confirm("删除相册将会影响到对应商品的显示图片，是否继续？")){
+		  window.location.href="$!webPath/admin/imageself_del.htm?mulitId="+obj_id;
+		 }
+		}else{
+	      alert("默认相册不能删除");		
+			}
+	};
+	
+/* 
+系统通用方法，根据参数来决定处理的url和参数
+*/
+function cmd2(){
+	var url=arguments[0];
+	var mulitId="";
+	jQuery(":checkbox:checked").each(function(){
+	  if(jQuery(this).val()!=""){	  
+	    mulitId=mulitId+","+jQuery(this).val();
+	  }
+	});
+	if(mulitId!=""){
+	  jQuery("#ListForm #mulitId").val(mulitId);
+	  if(confirm("删除相册将会影响到对应商品的显示图片，是否继续？")){
+	     jQuery("#ListForm").attr("action",url);
+	     jQuery("#ListForm").submit();
+	  }
+	}else{
+       alert("至少选择一条数据记录");
+	}
+}	
+</script>
+</head>
+<body>
+<div class="cont">
+  <h3 class="seth">图片管理</h3>
+  <div class="nav_list">
+  	<ul>
+    	<li><a href="javascript:void(0);" class="this"><b>相册列表</b></a></li>
+    </ul>
+  </div>
+  
+  <form id="queryForm" name="queryForm" method="post" action="$!webPath/admin/imageself_list.htm">
+    <div class="search">
+     <span style="font-weight:bold">自营管理员名称</span> <span class="size250">
+          <input name="user_name" type="text" value="$!user_name" />
+          </span><span >
+          <input name="" type="submit"  value="搜索" style="cursor:pointer" class="search_btn"/>
+          </span> 
+      
+    </div>
+  </form>
+  <form id="ListForm" name="ListForm" action="$!webPath/admin/imageself_list.htm" method="post">
+    <div class="fshoptb">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" class="fshop_table">
+        <tr>
+          <th width="52"  align="left"></th>
+          <th width="8%"  align="center"><span class="form_btna">封面</span></th>
+          <th width="42%"  align="center"><span class="form_btna">相册</span></th>
+          <th width="15%"  align="center"><span class="form_btna">自营管理员</span></th>
+          <th width="15%" align="center"><span class="form_btna">图片数</span></th>
+          <th align="center"><b class="form_btnb">操作</b></th>
+        </tr>
+        #foreach($obj in $objs)
+        <tr>
+          <td class="check_position"><input name="checkbox" type="checkbox" id="checkbox" value="$!obj.id" /></td>
+          <td align="center" ><span class="allmen size5"> #set($cover_img="$!webPath/th_th/resources/style/system/manage/blue/images/photo/photom.jpg")
+            #if($!obj.album_cover)
+            #set($cover_img ="$!webPath/$!obj.album_cover.path/$!obj.album_cover.name")
+            #end <a href="$!webPath/admin/selfpic_list.htm?aid=$!obj.id"><img src="$!cover_img" width="70" height="70" /></a> </span></td>
+          <td align="center"><span class="allmen size7">$!obj.album_name</span></td>
+          <td align="center"><span class="tpborder">$!obj.user.userName</span></td>
+          <td align="center">$!obj.photos.size()</td>
+          <td  align="center" class="hui oprate_con">
+          	<a onclick="dele_ablum('$!obj.album_default','$!obj.id')" href="javascript:void(0);" class="blue">删除</a>
+          </td>
+        </tr>
+        #end
+      </table>
+    </div>
+    
+ <div class="operate_bar">
+    <div class="fenye">
+    	<input id="currentPage" name="currentPage" value="$!currentPage" type="hidden"/>
+   		<input id="user_name" name="user_name" value="$!user_name" type="hidden"/>
+    	<input type="hidden" name="mulitId" id="mulitId" />
+    	$!gotoPageFormHTML
+    </div> 
+    <div class="oper_sp">
+    	<span class="oper_check">
+    		<input type="checkbox" name="all" id="all" value="" onclick="selectAll(this)"/>全部
+        </span>
+        <span class="oper_del">
+        	<input name="" type="button" value="删除" onclick="cmd2('$!webPath/admin/imageself_del.htm');"/>
+        </span>
+    </div>           
+ </div>
+  </form>
+</div>
+</body>
+</html>

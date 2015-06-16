@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商家后台-团购管理-$!config.title </title>
+<meta name="keywords" content="$!config.keywords" />
+<meta name="description" content="$!config.description" />
+<meta name="generator" content="$!{config.meta_generator}" />
+<meta name="author" content="$!{config.meta_author}">
+<meta name="copyright" content="$!{config.copyRight}">
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel=icon>
+<link href="$!webPath/resources/style/system/front/default/images/tyt_favicon.ico" type="image/x-icon" rel="shortcut icon">
+<link href="$!webPath/resources/style/system/front/default/css/public_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/user_new.css" type="text/css" rel="stylesheet" />
+<link href="$!webPath/resources/style/system/front/default/css/seller_center.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type="text/css" rel="stylesheet">
+<link href="$!webPath/resources/style/common/css/overlay.css" type="text/css" rel="stylesheet" />
+<link  href="$!webPath/resources/style/common/css/jquery-ui-1.8.22.custom.css" type=text/css rel=stylesheet>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/jquery.shop.common.js"></script>
+</head>
+<body>
+$!httpInclude.include("/seller/top.htm")
+<div class="main">
+  <div class="seller_center">
+  $!httpInclude.include("/seller/nav.htm?op=group")
+    <div class="seller_right">
+      <div class="seller_position"><span><b><a href="$!webPath/seller/index.htm">商家中心</a></b>><b>促销推广</b> ><b>团购管理</b></span></div>
+      <div class="seller_list">
+          <div class="seller_list_title">
+          <ul class="seller_title_ul">
+            <li class="this"><a href='$!webPath/seller/group.htm'><i></i>商品类团购商品列表</a></li>
+            <li><a href='$!webPath/seller/group.htm?type=life'><i></i>生活类团购商品列表</a></li>
+            <li><a href='$!webPath/seller/group_add.htm?type=goods'><i></i>新增商品类团购</a></li>
+             <li><a href='$!webPath/seller/grouplife_selforder.htm'><i></i>生活购订单列表</a></li>            
+            <li><a href='$!webPath/seller/group_add.htm?type=life'><i></i>新增生活类团购</a></li>
+             <li><a href='$!webPath/seller/grouplife_selfinfo.htm'><i></i>团购消费码列表</a></li>
+            <li><a href='$!webPath/seller/group_meal.htm'><i></i>团购套餐购买</a></li>
+          </ul>
+        </div>
+         <form action="$!webPath/seller/group.htm" method="post" id="queryForm">
+        <div class="user_sp_right"> <span class="user_title_sp">
+            <input name="gg_name" type="text" class="user_title_txt" id="gg_name" placeholder="商品名称" value="$!gg_name"/>
+            <input name="" type="submit" class="user_sear_btn" value="查询"/>
+        </span> </div>
+        </form>
+        <div class="user_list_box">
+          <form method="post" name="ListForm" id="ListForm" action="$!webPath/seller/group.htm">
+            <div class="operation">
+              <table width="100%" border="0" cellspacing="0" cellpadding="0" id="opertable" class="user_order_table">
+                <tr id="opertitle">
+                  <th width="139">商品名称</th>
+                  <th width="128">团购活动</th>
+                  <th width="125">团购状态</th>
+                  <th width="100" align="center">操作</th>
+                </tr>
+                #foreach($obj in $objs)
+                <tr > 
+                  <td align="center"><a href="$!webPath/group/view.htm?id=$!obj.id" target="_blank">$!obj.gg_name</a></td>
+                  <td align="center">$!obj.group.group_name</td>
+                  #if($!obj.gg_status==0)
+                    #set($status="待审核")
+                  #end
+                  #if($!obj.gg_status==1)
+                    #set($status="审核通过")
+                  #end
+                  #if($!obj.gg_status==-1)
+                    #set($status="审核拒绝")
+                  #end
+                  <td align="center">$!status</td>
+                  <td align="center" class="del_operate">#if($!obj.gg_status==0)<a href="$!webPath/seller/group_edit.htm?id=$!obj.id&currentPage=$!currentPage" class="del_a">编辑</a>|<a href="$!webPath/seller/group_del.htm?mulitId=$!obj.id&currentPage=$!currentPage" class="del_a">删除</a>#end</td>
+                </tr>
+                #end
+              </table>
+            </div>
+            <input id="gg_name" name="gg_name" type="hidden" value="$!gg_name"/>
+            <input id="currentPage" name="currentPage" type="hidden" value="$!currentPage"/>
+            <input id="type" name="type" type="hidden" value="$!type"/>
+            <div class="seller_list_page">
+              <div  class="seller_page_sp">$!gotoPageFormHTML</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+$!httpInclude.include("/footer.htm")
+</body>
+</html>

@@ -1,0 +1,44 @@
+/*活动页样式*/
+.mt-black_overlay {display:none;position: fixed;top: 0%;left: 0%;width: 100%;height: 100%;background-color:#000;z-index:1001;-moz-opacity: 0.80;opacity:0.80;filter: alpha(opacity=80);}
+.gj-close {width:28px;height:30px;right:5px;top:4px;display:block;position:absolute;z-index:1000000;text-indent: 999px;}
+
+/*活动主页*/
+.scratch-box{display:none; position:fixed; top:150px; right:0; height:400px; width:170px;  z-index:1000;}
+.zadan{width:160px; height:140px; text-align:center; line-height:140px;}
+.guajian{width:160px; height:140px; text-align:center; line-height:140px; margin-top:20px;cursor:pointer;}
+.zadan a{ font-size:22px; color:#C00; font-weight:bold;}
+.guajian a{font-size:22px; color:#C00; font-weight:bold;}
+.scratch_hint{width:1000px;height:500px;position:fixed;display:none;top:15%;left:50%;margin-left:-500px;z-index:1002;background:url(../images/active/scratch_bg.png);}
+
+/*砸蛋*/
+.div_egg{width:1000px;height:500px;position:fixed;display:none;top:10%;left:50%;margin-left:-500px;z-index:1002;background:url(../images/active/dm.png);overflow:hidden;}
+.img_close{position:absolute;right:0;margin:5px;cursor:pointer;}
+
+/*刮奖页*/
+.gj-box{display:none; width:600px; height:350px;background:#fff; position:fixed; top:20%; left:50%; margin-left:-300px; z-index:10000;background:url(../images/active/con_bg.png) center no-repeat; }
+.gj-box .gj-title{display:none; height:30px;padding-left:10px;line-height:30px;background: #F0F0F0; color:#000;}
+.gj-content{ height:168px;}
+#lotteryContainer { position:relative;top:20px;left:167px;width:244px;height:150px;text-align:center;background:url(../images/active/gj_bg.jpg) center top no-repeat;cursor:url("../images/active/hand_bg.ico"), default;}
+#drawPercent {color:#F60;}
+.gj-share{margin-top:30px;display: inline}
+.gj-tip{ padding:15px;line-height:50px; text-align:center; color:#f37103; font-size:18px; font-weight:bold;}
+.gj-btn{ text-align:center;}
+.gj-btn a{ padding:10px 20px; background:#C60; color:#fff; margin-left:20px;}
+.gj-btn a:hover{ background:#f37103;}
+
+.bdsharebuttonbox{float:left; margin-bottom:20px;}
+.bds_left{ float:left; margin-left:180px; line-height:36px;}
+.gj-share .bdsharebuttonbox .bds_tsina{position:absolute; top:221px; left:197px; width:96px; height:38px;text-indent: 999px; background:none;}
+.gj-share .bdsharebuttonbox .bds_weixin{position: absolute;top: 216px;left: 354px;width: 60px;height: 36px;text-indent: 999px; background:none;}
+
+/*提示框*/
+.gj_dialog{display:none; position:absolute;width: 360px;z-index:999;overflow: hidden;top:220px;left: 457px;border: 4px solid rgba(0,0,0,.1);}
+.gj_dialog_title{position: relative;padding: 0 10px; width:340px;height: 31px;line-height: 31px;background: #f3f3f3;font-size:16px;color: #666;font-family: "Microsoft YaHei";}
+.gj_dialog_content{ padding:10px; background:#fff;display:inline-block;}
+.gj_dialog_content .tip_box{padding: 10px 0px;margin: 15px 30px 0;min-height: 48px;_height: 48px;}
+.gj_dialog_content .tip_box .tip_box_h{margin: 0 0 5px;line-height: 25px;font-weight: 400;}
+.gj_dialog_content .tip_box .tip_box_h .tip_box_img{ width:100px; height:100px; float:left;margin-right:20px;}
+.gj_dialog_content .tip_box .tip_box_h .tip_box_txt{font-size: 18px;font-family: '\5FAE\8F6F\96C5\9ED1';}
+.gj_dialog_close{cursor: pointer;display: block;position: absolute;z-index:999;top: 10px;right: 10px;overflow: hidden;width: 16px;height: 16px;background:url(../images/usercenter/close.gif) no-repeat;font-size: 0;}
+.gj_dialog_close span {}
+#gj_mask{dislay:none; height:100%; width:100%; background-color:#000;-moz-opacity: 0.15;opacity:0.15;filter: alpha(opacity=15); position:absolute; left:0; top:0;z-index:998; display:none}

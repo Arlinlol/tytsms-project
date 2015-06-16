@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,inital-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta charset="utf-8">
+<link href="$!webPath/resources/style/mobileWap/css/style.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/phone.css" rel="stylesheet" type="text/css" />
+<link href="$!webPath/resources/style/mobileWap/css/platform.css" rel="stylesheet" type="text/css" />
+<title></title>
+<script src="$!webPath/resources/js/jquery-1.6.2.js"></script>
+<script src="$!webPath/resources/js/TouchSlide.1.1.js"></script>
+<script>
+
+function iosFun(cmd,para)
+{ 
+    document.location="objc://"+cmd+":/"+para;  //cmd代表objective-c中的的方法名，parameter1自然就是参数了
+}
+</script>
+<script>
+function save_search(){
+	jQuery("#searchForm").submit();
+}
+</script>
+</head>
+<body>
+
+ $!httpInclude.include("/mobileWap/h.htm")
+<div class="view-wp">
+ $!httpInclude.include("/mobileWap/advertInvoke.htm?advertPositionId=7")
+<div class="main_nav">
+  <ul>   
+    <li><a href="$!webPath/mobileWap/goods_cart1.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_j.png"></a><span id="asd">购物车</span></li>
+    <li><a href="$!webPath/mobileWap/buyer/index.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_h.png"></a><span>用户中心</span></li>
+    <li><a href="$!webPath/mobileWap/integral.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_t.png"></a><span>积分商城</span></li>
+    <li><a href="$!webPath/mobileWap/brand_list.htm"><img src="$!webPath/resources/style/mobileWap/images/nav_c.png"></a><span>推荐品牌</span></li>
+  </ul>
+</div>
+<div class="msg">
+      <div class="div_left">
+         <span style="margin:10px 0px 10px 0px;display:block;color:green;font-weight:bold;font-size:15px;">| 积分商城信息</span>
+     <img src="$!webPath/resources/style/mobileWap/images/sb.jpg"/>
+         
+      </div>
+      
+      <div class="div_right">
+         
+          <span><strong>积分：</strong><span>$!user.integral</span></span>
+          <span style="display:block;"><strong>等级：</strong>
+          #if($!level_name)
+          <img src="$!webPath/resources/style/mobileWap/images/dj.jpg" style="width:30px;vertical-align:middle;" />
+          <span>$!level_name</span></span>
+          #end
+      </div>
+   </div>
+   
+   <div class="gift">
+      <div class="div_left">
+        
+        <div style="position:relative;margin:7px 0px;">
+          <img src="$!webPath/resources/style/mobileWap/images/rt.jpg" style="position:absolute;top:-10px;right:-10px;width:20px;"/>
+          <img src="$!webPath/resources/style/mobileWap/images/sp.jpg" style="border:1px dashed #ccc; border-radius:0.2em;padding:0.5em;"/>
+        </div>
+         
+      </div>
+      
+      <div class="div_right">
+           <span class="span_qin"><img src="$!webPath/resources/style/mobileWap/images/sj.jpg" style="width:15px"/>亲，不要留情，赶紧把我领回家吧！</span>
+           
+           <span><strong>礼品名称：</strong><i class="span_i">精美U盘</i></span>
+           <span><strong>礼品价格：</strong><i class="span_i">￥36</i></span>
+           <span><strong>兑换积分：</strong><i class="span_i">1000</i></span>
+          
+          
+      </div>
+      
+      <div style="position:absolute;bottom:0px;right:5%;display:none;">
+         <img src="$!webPath/resources/style/mobileWap/images/dh.jpg"/>
+      </div>
+      
+   </div>
+
+
+</div>
+  $!httpInclude.include("/mobileWap/footer.htm")
+
+
+</body>
+</html>
+
+
